@@ -24,7 +24,7 @@ public class AllVariables {
     static String XPATH_PROPERTY_LISTING_TABLE_ADMIN = "//DIV[@id='content']/FORM[@id='form']/DIV[4]/TABLE/tbody/tr";
     static String CLASSNAME_PROPERTY_LINKFOR_WEBVIEW = "btn-icon-external";
     static String CSS_PROPERTY_ADDRESS_FRONTEND = "h2.address";
-    
+    static String ADMIN_ID_DISPLAYNAME_LISTING = "displayname";
     static String XPATH_CONTACTS_DIV_ADMIN = "//DIV[@id='contacts']/DIV[@class='contactDiv']";
     static String XPATH_CONTACTS_DIV_FRONTEND = "//div[@id='brokerInfo']/div[@class='contactDiv']";
     
@@ -40,6 +40,8 @@ public class AllVariables {
     static String ADMIN_ADDLISTING_ALERT2_SALE_BUTTON_ID = "1";
     static String ADMIN_ADDLISTING_ALERT12_BACK_XPATH = "//DIV[7]/DIV[3]/DIV/BUTTON[1]";
     static String ADMIN_ADDLISTING_ALERT12_CANCEL_XPATH = "//DIV[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable']/DIV[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']/DIV[@class='ui-dialog-buttonset']/button[2]";
+    static String ADMIN_ID_NEWLISTING_SAVE_BUTTON = "save";
+    static String ADMIN_ID_CLONE_BUTTON = "clone";
     
     //DIV[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable']/DIV[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']/DIV[@class='ui-dialog-buttonset']/button[1]
 }

@@ -159,7 +159,7 @@ public class propertyDetails extends AllVariables {
     Thread.sleep(2000);
     
     //admin end values FOR A LISTING being saved for future reference    
-    String DisplaynameAdmin = driver.findElement(By.id("displayname")).getAttribute("value"); //this is the name of the listing that will be seen at front end
+    String DisplaynameAdmin = driver.findElement(By.id(AllVariables.ADMIN_ID_DISPLAYNAME_LISTING)).getAttribute("value"); //this is the name of the listing that will be seen at front end
     System.out.println("ADMIN DISPLAY NAME OF LISTING: "+DisplaynameAdmin);
     
     String ListingTypeAdmin = driver.findElement(By.className("tagline")).getText(); //type of property, eg:retail for sale
