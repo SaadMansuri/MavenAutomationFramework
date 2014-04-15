@@ -1,11 +1,10 @@
-package agorafy_pkg1;
-
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * @author : Chandrani
+ * This class checks all the backend and front end values i.e admin and front end values reflected
+ * for properties and listings
  */
 
-//package com.example.tests;
+package agorafy.test.testcases;
 
 import java.util.Iterator;
 import java.util.List;
@@ -17,15 +16,13 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
-import agorafy_pkg1.AllVariables;
+import agorafy.test.testcases.VariableDeclarations;
 
-public class propertyDetails extends AllVariables {
+public class propertyDetails extends VariableDeclarations {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
-  //ProfilesIni allProfiles = new ProfilesIni();
-  //FirefoxProfile profile = allProfiles.getProfile("My_Profile");
   
   public String statusIfPublished;
   boolean imagePresent, CombinablesqftBit, isPublished;
@@ -46,7 +43,7 @@ public class propertyDetails extends AllVariables {
   @Test
   public void testPropertyDetails() throws Exception {
     driver.get(baseUrl + "login");
-    //driver.findElement(By.linkText(AllVariables.LOGIN_LINK)).click();
+
     //login in the system
     this.login();
     
@@ -55,9 +52,9 @@ public class propertyDetails extends AllVariables {
     //switching to admin end
     driver.findElement(By.xpath("//DIV[@id='mainHeader']/DIV[@id='mainNav']/UL/LI[4]/A")).click();
     driver.findElement(By.linkText("Switch to Admin")).click();
-    driver.findElement(By.linkText(AllVariables.NAME_PROPERTIES_TAB_ADMIN)).click();
-    driver.findElement(By.name(AllVariables.NAME_SEARCH_PROPERTY_STREET_ADMIN)).clear();
-    driver.findElement(By.name(AllVariables.NAME_SEARCH_PROPERTY_STREET_ADMIN)).sendKeys("West 95 Street");
+    driver.findElement(By.linkText(VariableDeclarations.NAME_PROPERTIES_TAB_ADMIN)).click();
+    driver.findElement(By.name(VariableDeclarations.NAME_SEARCH_PROPERTY_STREET_ADMIN)).clear();
+    driver.findElement(By.name(VariableDeclarations.NAME_SEARCH_PROPERTY_STREET_ADMIN)).sendKeys("West 95 Street");
     driver.findElement(By.name(NAME_PROPERTY_SEARCH_BUTTON)).click();
     // look for a property having listings count >0, click edit icon next to it
    //driver.findElement(By.xpath("//table[@id='listings_table']/tbody/tr[33]/td[5]/a")).click();
@@ -66,16 +63,16 @@ public class propertyDetails extends AllVariables {
     driver.get("http://preview.agorafy.com/manage/admin/property/18837");
   
     // save property address
-    PropertyAddressAdmin = driver.findElement(By.cssSelector(AllVariables.CSS_PROPERTY_ADDRESS_ADMIN)).getText();
+    PropertyAddressAdmin = driver.findElement(By.cssSelector(VariableDeclarations.CSS_PROPERTY_ADDRESS_ADMIN)).getText();
     
     // save listing address that will be seen on property detail page
-    ListingAddressAdmin = driver.findElement(By.linkText(AllVariables.LISTING_ADDRESS_LINK_ADMIN)).getText();
+    ListingAddressAdmin = driver.findElement(By.linkText(VariableDeclarations.LISTING_ADDRESS_LINK_ADMIN)).getText();
     
     // save the type of apartment 
-    TypeOfListingAdmin = driver.findElement(By.xpath(AllVariables.XPATH_LISTING_TYPE_ADMIN)).getText();
+    TypeOfListingAdmin = driver.findElement(By.xpath(VariableDeclarations.XPATH_LISTING_TYPE_ADMIN)).getText();
     
     // saving the status of listing from the table whether published or notin a variable
-    this.statusIfPublished = driver.findElement(By.xpath(AllVariables.XPATH_STATUS_INFO_ADMIN)).getText();
+    this.statusIfPublished = driver.findElement(By.xpath(VariableDeclarations.XPATH_STATUS_INFO_ADMIN)).getText();
     System.out.println("Listing is Published? : " +this.statusIfPublished);
     
     // save whether image is present
@@ -84,10 +81,10 @@ public class propertyDetails extends AllVariables {
          imagePresent = true;
     
     //calculate the number of rows in the listings table at back end
-    int PropertyListingsCountAdmin = (driver.findElements(By.xpath(AllVariables.XPATH_PROPERTY_LISTING_TABLE_ADMIN)).size());
+    int PropertyListingsCountAdmin = (driver.findElements(By.xpath(VariableDeclarations.XPATH_PROPERTY_LISTING_TABLE_ADMIN)).size());
     System.out.println("number of listings on property edit page: "+PropertyListingsCountAdmin);
   
-    driver.findElement(By.className(AllVariables.CLASSNAME_PROPERTY_LINKFOR_WEBVIEW)).click(); //opens the public property page
+    driver.findElement(By.className(VariableDeclarations.CLASSNAME_PROPERTY_LINKFOR_WEBVIEW)).click(); //opens the public property page
     
     Iterator<String> AllWindowsOpen= driver.getWindowHandles().iterator();  //get handles of all open windows, here 2 windows will be found
     String parent = AllWindowsOpen.next();
@@ -147,19 +144,12 @@ public class propertyDetails extends AllVariables {
   
   //verification of values for Listing detail page Admin-end and website
   public void testListingDetails() throws Exception {
-    /*driver.get(baseUrl + "about/");
-    driver.findElement(By.linkText("LOG IN")).click();
-    driver.findElement(By.name("_username")).clear();
-    driver.findElement(By.name("_username")).sendKeys("chandrani.bhagat@cuelogic.co.in");
-    
-    driver.findElement(By.name("_password")).clear();
-    driver.findElement(By.name("_password")).sendKeys("cuelogic77");
-    driver.findElement(By.cssSelector("input.btn-blue")).click();*/
+   
     driver.get(baseUrl + "manage/admin/listing/12983");
     Thread.sleep(2000);
     
     //admin end values FOR A LISTING being saved for future reference    
-    String DisplaynameAdmin = driver.findElement(By.id(AllVariables.ADMIN_ID_DISPLAYNAME_LISTING)).getAttribute("value"); //this is the name of the listing that will be seen at front end
+    String DisplaynameAdmin = driver.findElement(By.id(VariableDeclarations.ADMIN_ID_DISPLAYNAME_LISTING)).getAttribute("value"); //this is the name of the listing that will be seen at front end
     System.out.println("ADMIN DISPLAY NAME OF LISTING: "+DisplaynameAdmin);
     
     String ListingTypeAdmin = driver.findElement(By.className("tagline")).getText(); //type of property, eg:retail for sale
@@ -181,13 +171,14 @@ public class propertyDetails extends AllVariables {
         System.out.println("cOMBINABLE SQFT : "+CombinablesqftAdmin);
     } 
      System.out.println(this.statusIfPublished);   
-    //String statusPublished = driver.findElement(By.xpath("//DIV[@id='content_wrapper']/DIV[@id='content']/FORM[@id='listingsForm']/DIV[@id='formContainer']/DIV[3]/DIV[2]/DIV/DIV[@id='publishedDiv']/DL/DT/A/SPAN[1]")).getText();
-    if(this.statusIfPublished.equalsIgnoreCase("Published"))
+
+     if(this.statusIfPublished.equalsIgnoreCase("Published"))
        Assert.assertTrue(this.isElementPresent(By.className("subscriptionsAddLink")));
     
     //get the price, round off the decimals and eliminate comma
     long lngPriceAdmin = Math.round(Double.parseDouble(driver.findElement(By.id("price")).getAttribute("value").replaceAll("[^0-9.]", "")));
     System.out.println(lngPriceAdmin);
+    
     //get the per sq ft price, round off the decimals and eliminate comma
     long lngPricesqftAdmin = Math.round(Double.parseDouble(driver.findElement(By.id("priceSF")).getAttribute("value")));
     System.out.println(lngPricesqftAdmin);
@@ -200,9 +191,9 @@ public class propertyDetails extends AllVariables {
     List<WebElement> images = driver.findElements(By.className("dropzoneThumbnail"));
     System.out.println(images.size());
     int imgCountAdmin = images.size();
-    //for pdf files same logic will nopt work since even pdf belongs to the same class, separation using src will be required
+    //for pdf files same logic will not work since even pdf belongs to the same class, separation using src will be required
     
-    List<WebElement> contactList = driver.findElements(By.xpath(AllVariables.XPATH_CONTACTS_DIV_ADMIN));
+    List<WebElement> contactList = driver.findElements(By.xpath(VariableDeclarations.XPATH_CONTACTS_DIV_ADMIN));
     int intNoOfContactsAdmin = contactList.size();
    
     //String strFeaturesAdmin = driver.findElement(By.className("columnHeading")).getText(); 
@@ -210,7 +201,7 @@ public class propertyDetails extends AllVariables {
     if(this.isElementPresent(By.id("featuresDiv")))
     {
         featuresAddedAdmin = true;
-        List<WebElement> FeaturesAdminList = driver.findElements(By.xpath(AllVariables.FEATURES_DIV_ADMIN_LIST));
+        List<WebElement> FeaturesAdminList = driver.findElements(By.xpath(VariableDeclarations.FEATURES_DIV_ADMIN_LIST));
         countFeatursAdmin = FeaturesAdminList.size(); 
     }
     
@@ -224,12 +215,12 @@ public class propertyDetails extends AllVariables {
    
     driver.switchTo().window(child);
    
-    if(!driver.findElement(By.xpath(AllVariables.XPATH_DISPLAY_ADDRESS_FRONTEND)).getText().contains(DisplaynameAdmin))
+    if(!driver.findElement(By.xpath(VariableDeclarations.XPATH_DISPLAY_ADDRESS_FRONTEND)).getText().contains(DisplaynameAdmin))
        System.out.println("Does not match the address with admin address");
     
     //verifying price of listing 
     String ListingPriceFrontEnd = driver.findElement(By.xpath("//DIV[@id='main']/DIV[@class='section-header']/DIV[@class='header-content']/DIV[@class='price']/H2")).getText().replaceAll("^[0-9.]", "");
-    //Assert.assertEquals((Long.toString(lngPriceAdmin)), ListingPriceFrontEnd);
+
     System.out.println(ListingPriceFrontEnd);
    
     String strListingTypeWeb = driver.findElement(By.xpath("//div[@class='section-content']/div[@class='right-column']/h2")).getText();
@@ -240,10 +231,10 @@ public class propertyDetails extends AllVariables {
     Assert.assertTrue(spaceNameAreaWeb.contains(SpaceNameAdmin));
     if(spaceNameAreaWeb.contains(Long.toString(SpaceAreaAdmin)))
        System.out.println("area matches");
-    //Assert.assertTrue((driver.findElement(By.xpath("//div[@class='section-content']/div[@class='right-column']/div[@id='features']/dl/dd[2]")).getText()).equals(Divisibility));
+
     System.out.println(driver.findElement(By.xpath("//div[@class='section-content']/div[@class='right-column']/div[@id='features']/dl/dd[4]")).getText().replaceAll("[^0-9]", ""));
     Assert.assertTrue((driver.findElement(By.xpath("//div[@class='section-content']/div[@class='right-column']/div[@id='features']/dl/dd[4]")).getText().replaceAll("[^0-9]", "")).equals(Long.toString(lngPricesqftAdmin)));
-    //  Assert.assertTrue((driver.findElement(By.xpath("//div[@class='section-content']/div[@class='right-column']/div[@id='features']/dl/dd[5]")).getText()).equals(ElectricityAdmin));
+
     if(!(driver.findElement(By.xpath("//div[@class='section-content']/div[@class='right-column']/div[@id='features']/dl/dd[6]")).getText().replaceAll("[^0-9]", "")).equals(strCeilinghtAdmin))
        System.out.println("Error: Ceiling height not seen");
   
@@ -288,10 +279,10 @@ public class propertyDetails extends AllVariables {
   public void login()
   {
     driver.findElement(By.xpath(XPATH_USERNAME_FIELD)).clear();
-    driver.findElement(By.xpath(AllVariables.XPATH_USERNAME_FIELD)).sendKeys("chandrani.bhagat@cuelogic.co.in");
-    driver.findElement(By.xpath(AllVariables.XPATH_PASSWORD_FIELD)).clear();
-    driver.findElement(By.xpath(AllVariables.XPATH_PASSWORD_FIELD)).sendKeys("cuelogic77");
-    driver.findElement(By.className(AllVariables.NAME_LOGIN_BUTTON)).click();
+    driver.findElement(By.xpath(VariableDeclarations.XPATH_USERNAME_FIELD)).sendKeys("chandrani.bhagat@cuelogic.co.in");
+    driver.findElement(By.xpath(VariableDeclarations.XPATH_PASSWORD_FIELD)).clear();
+    driver.findElement(By.xpath(VariableDeclarations.XPATH_PASSWORD_FIELD)).sendKeys("cuelogic77");
+    driver.findElement(By.className(VariableDeclarations.NAME_LOGIN_BUTTON)).click();
   }
   private String closeAlertAndGetItsText() {
     try {
@@ -308,20 +299,4 @@ public class propertyDetails extends AllVariables {
     }
   }
   
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-  
-     
-    /*Iterator<String> alwin= driver.getWindowHandles().iterator();
-   
-   String parent=alwin.next();
-   String child= alwin.next();
-   
-   driver.switchTo().window(child);
-   
-   driver.close();*/
 }

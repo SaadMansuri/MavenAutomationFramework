@@ -1,20 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package agorafy_pkg1;
+
+package agorafy.test.testcases;
 
 /**
  *
- * @author comp-53
+ * @author : Chandrani
+ * All variables that would be required for the test cases will be here
+ * 
  */
-public class AllVariables {
+public class VariableDeclarations {
     
     static String LOGIN_LINK = "LOG IN";
-    static String XPATH_USERNAME_FIELD = "//DIV[@id='main']/DIV[2]/DIV[@id='login_form']/FORM/DIV[1]/INPUT[@name='_username']";
-    static String XPATH_PASSWORD_FIELD = "//DIV[@id='main']/DIV[2]/DIV[@id='login_form']/FORM/DIV[2]/INPUT[@name='_password']";
-    static String NAME_LOGIN_BUTTON = "btn-darkGreyRound";
-    static String NAME_PROPERTIES_TAB_ADMIN = "Properties";
+    public static String XPATH_USERNAME_FIELD = "//DIV[@id='main']/DIV[2]/DIV[@id='login_form']/FORM/DIV[1]/INPUT[@name='_username']";
+    public static String XPATH_PASSWORD_FIELD = "//DIV[@id='main']/DIV[2]/DIV[@id='login_form']/FORM/DIV[2]/INPUT[@name='_password']";
+    public static String NAME_LOGIN_BUTTON = "btn-darkGreyRound";
+    public static String NAME_PROPERTIES_TAB_ADMIN = "Properties";
     static String NAME_SEARCH_PROPERTY_STREET_ADMIN = "street";
     static String NAME_PROPERTY_SEARCH_BUTTON = "search";
     static String CSS_PROPERTY_ADDRESS_ADMIN = "#addressRow27936 > td";
