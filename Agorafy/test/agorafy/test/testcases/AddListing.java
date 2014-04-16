@@ -1,36 +1,29 @@
 
+/**
+ *
+ * @author : Chandrani
+ * This class is designed for testing Add listing functionality from the admin end 
+ * 
+ */
+
 package agorafy.test.testcases;
 
 
 import agorafy.test.utils.BaseUrl;
 import agorafy.test.utils.BrowserInstance;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import junit.framework.Assert;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import agorafy.test.testcases.VariableDeclarations.*;
-import agorafy.test.testcases.VariableDeclarations;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import agorafy.test.operations.Login;
 import agorafy.test.operations.Logout;
+import org.openqa.selenium.support.ui.Select;
 
-
-/**
- *
- * @author sharp com
- */
 
 public class AddListing {
     
@@ -58,6 +51,12 @@ public class AddListing {
     @After
     public void tearDown() {
         
+        driver.get(propertyPageUrl);
+        driver.findElement(By.xpath("//DIV[@id='content_wrapper']/DIV[@id='content']/FORM[@id='form']/DIV[4]/TABLE/THEAD/TR/TH[1]/INPUT[@id='checkAll']")).click();
+        driver.findElement(By.name("deleteButton")).click();
+        boolean isAlertFound = this.isAlertPresent();
+        System.out.println(isAlertFound);
+        driver.switchTo().alert().accept();
         Logout.LogoutAdmin(driver);
         driver.quit();
     }
@@ -74,7 +73,9 @@ public class AddListing {
         this.test_emptyListingStatusNotPublished();
         this.test_emptyNewListingIsOnMarket();
         this.test_verifyButtonDisabledForIncompleteListing();
-        test_mediaDecriptionPopup();
+        test_addResidentialListing();
+       // test_mediaDecriptionPopup();
+        
     }
     
    
@@ -141,6 +142,18 @@ public class AddListing {
           System.out.println("ERROR: verify button is not disabled");
     }
     
+    public void test_addResidentialListing()
+    {
+        driver.get("http://preview.agorafy.com/manage/admin/listing/13018");
+        driver.findElement(By.id(VariableDeclarations.ADMIN_ID_DISPLAYNAME_LISTING)).sendKeys("Residential R - Sale");
+        
+        Select dropdownSpaceType = new Select(driver.findElement(By.id("spaceType")));   //wrapping the web element in select object
+        dropdownSpaceType.selectByVisibleText("Unit");
+        driver.findElement(By.id("spaceName")).sendKeys("Apt #1");
+        
+        
+    }
+    
     public void test_mediaDecriptionPopup()
     {
         driver.get("http://preview.agorafy.com/manage/admin/listing/470");
@@ -150,6 +163,8 @@ public class AddListing {
         
         
     }
+    
+    
     
     
     
