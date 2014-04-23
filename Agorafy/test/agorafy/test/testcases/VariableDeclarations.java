@@ -33,14 +33,25 @@ public class VariableDeclarations {
     
     
       //AddListing variables
+    static String ADMIN_LOGOUT_ICON_XPATH = "//DIV[@id='content_wrapper']/DIV[@id='content']/FORM[@id='form']/DIV[4]/TABLE/THEAD/TR/TH[1]/INPUT[@id='checkAll']";
     static String ADMIN_ID_ADDLISTING_BUTTON = "addListingLink";
     static String ADMIN_ADDLISTING_ALERT1 = "//DIV[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable']/DIV[1]";
     static String ADMIN_ADDLISTING_ALERT1_RESIDENTIAL_BUTTON_ID = "residential";
+    static String ADMIN_ADDLISTING_ALERT1_OFFICE_BUTTON_ID = "office";
+    static String ADMIN_ADDLISTING_ALERT1_RETAIL_BUTTON_ID = "retail";
     static String ADMIN_ADDLISTING_ALERT2_SALE_BUTTON_ID = "1";
+    static String ADMIN_ADDLISTING_ALERT2_LEASE_BUTTON_ID = "2";
+    static String ADMIN_ADDLISTING_ALERT2_SUBLEASE_BUTTON_ID = "3";
     static String ADMIN_ADDLISTING_ALERT12_BACK_XPATH = "//DIV[7]/DIV[3]/DIV/BUTTON[1]";
     static String ADMIN_ADDLISTING_ALERT12_CANCEL_XPATH = "//DIV[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable']/DIV[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']/DIV[@class='ui-dialog-buttonset']/button[2]";
     static String ADMIN_ID_NEWLISTING_SAVE_BUTTON = "save";
     static String ADMIN_ID_CLONE_BUTTON = "clone";
+    static String ADMIN_ID_EDITLISTING_BUTTON = "editListing";
+    
+    static String ADMIN_SPACEADD_ID = "add_Space";
+    static String ADMIN_RESIDENTIAL_LISTING_SPACE_ID = "spaceName";
+    static String ADMIN_RESIDENTIAL_NUMBEROFBEDS_ID = "numBeds";
+    static String ADMIN_RESIDENTIAL_NUMBEROFBATHS_ID = "numBaths";
     
     //DIV[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable']/DIV[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']/DIV[@class='ui-dialog-buttonset']/button[1]
 }

@@ -52,7 +52,7 @@ public class AddListing {
     public void tearDown() {
         
         driver.get(propertyPageUrl);
-        driver.findElement(By.xpath("//DIV[@id='content_wrapper']/DIV[@id='content']/FORM[@id='form']/DIV[4]/TABLE/THEAD/TR/TH[1]/INPUT[@id='checkAll']")).click();
+        driver.findElement(By.xpath(VariableDeclarations.ADMIN_LOGOUT_ICON_XPATH)).click();
         driver.findElement(By.name("deleteButton")).click();
         boolean isAlertFound = this.isAlertPresent();
         System.out.println(isAlertFound);
@@ -141,17 +141,58 @@ public class AddListing {
           //aria-disabled is TRUE if verify button is disabled
           System.out.println("ERROR: verify button is not disabled");
     }
-    
-    public void test_addResidentialListing()
+      
+    public void test_addResidentialListing() throws InterruptedException
     {
-        driver.get("http://preview.agorafy.com/manage/admin/listing/13018");
+        
         driver.findElement(By.id(VariableDeclarations.ADMIN_ID_DISPLAYNAME_LISTING)).sendKeys("Residential R - Sale");
         
-        Select dropdownSpaceType = new Select(driver.findElement(By.id("spaceType")));   //wrapping the web element in select object
-        dropdownSpaceType.selectByVisibleText("Unit");
-        driver.findElement(By.id("spaceName")).sendKeys("Apt #1");
+        Select dropdownForSpaceType = new Select(driver.findElement(By.id("spaceType")));   //wrapping the web element in select object
+        dropdownForSpaceType.selectByVisibleText("Unit");      
         
+        driver.findElement(By.id(VariableDeclarations.ADMIN_RESIDENTIAL_LISTING_SPACE_ID)).clear();
+        driver.findElement(By.id(VariableDeclarations.ADMIN_RESIDENTIAL_LISTING_SPACE_ID)).sendKeys("Apt #1");
+        Thread.sleep(3000);
+        driver.findElement(By.id(VariableDeclarations.ADMIN_RESIDENTIAL_NUMBEROFBEDS_ID)).clear();
+        driver.findElement(By.id(VariableDeclarations.ADMIN_RESIDENTIAL_NUMBEROFBEDS_ID)).sendKeys("2");
+        Thread.sleep(3000);
+        driver.findElement(By.id(VariableDeclarations.ADMIN_RESIDENTIAL_NUMBEROFBATHS_ID)).clear();
+        driver.findElement(By.id(VariableDeclarations.ADMIN_RESIDENTIAL_NUMBEROFBATHS_ID)).sendKeys("2");
+        Thread.sleep(3000);
+        driver.findElement(By.name("form[unitPrice]")).clear();
+        driver.findElement(By.name("form[unitPrice]")).sendKeys("109,090");
         
+        driver.findElement(By.name("form[unitSquareFootage][]")).clear();
+        driver.findElement(By.name("form[unitSquareFootage][]")).sendKeys("800");
+        
+        driver.findElement(By.name("form[maintenance]")).clear();
+        driver.findElement(By.name("form[maintenance]")).sendKeys("250");
+        Thread.sleep(3000);
+        driver.findElement(By.id("addContactLink")).click();
+        Thread.sleep(3000);
+        System.out.println(this.isElementPresent(By.id("contactNewContainer")));
+        System.out.println(driver.findElement(By.id("contactNewContainer")));
+        
+        //for autocomplete this is how it is to be handled
+        WebElement popupContactSearch = driver.switchTo().activeElement().findElement(By.id("contactSearch"));
+        popupContactSearch.sendKeys("Pranoop R", Keys.PAUSE);
+        Thread.sleep(5000);
+        popupContactSearch.sendKeys( Keys.DOWN);
+        popupContactSearch.sendKeys( Keys.TAB);
+        Thread.sleep(5000);
+        driver.findElement(By.id("addContactButton")).click();
+        Thread.sleep(5000);
+        
+        if(driver.findElement(By.id("dropzone")).getAttribute("class").equalsIgnoreCase("redborder"))
+        {
+            System.out.println("Message: Incomplete residential form");
+            if(!driver.findElement(By.id("publishedDiv")).getText().equalsIgnoreCase("not published"))
+                System.out.println("ERROR: Form is incomplete but Not Published text is missing");
+                
+        }
+                              
+        
+        driver.findElement(By.id("save")).click();
     }
     
     public void test_mediaDecriptionPopup()
