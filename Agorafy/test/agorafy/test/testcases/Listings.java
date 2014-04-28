@@ -9,8 +9,7 @@
 package agorafy.test.testcases;
 
 
-import agorafy.test.utils.BaseUrl;
-import agorafy.test.utils.BrowserInstance;
+import agorafy.test.utils.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +24,7 @@ import agorafy.test.operations.Logout;
 import org.openqa.selenium.support.ui.Select;
 
 
-public class AddListing {
+public class Listings {
     
     WebDriver driver;
     public String baseUrl, propertyPageUrl;
@@ -42,7 +41,7 @@ public class AddListing {
             
             Login.LoginFrontend(driver, baseUrl); 
         } catch (Exception ex) {
-            Logger.getLogger(AddListing.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Listings.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         driver.get(baseUrl + "manage/admin/property/16921");
@@ -54,7 +53,7 @@ public class AddListing {
         driver.get(propertyPageUrl);
         driver.findElement(By.xpath(VariableDeclarations.ADMIN_LOGOUT_ICON_XPATH)).click();
         driver.findElement(By.name("deleteButton")).click();
-        boolean isAlertFound = this.isAlertPresent();
+        boolean isAlertFound = isAlertPresent.isAlertPresent(driver);
         System.out.println(isAlertFound);
         driver.switchTo().alert().accept();
         Logout.LogoutAdmin(driver);
@@ -83,24 +82,24 @@ public class AddListing {
     {
         propertyPageUrl = driver.getCurrentUrl();
         driver.findElement(By.id(VariableDeclarations.ADMIN_ID_ADDLISTING_BUTTON)).click();         //test case1 
-        if(!(this.isElementPresent(By.xpath(VariableDeclarations.ADMIN_ADDLISTING_ALERT1))))
+        if(!(isElementPresent.isElementPresent(By.xpath(VariableDeclarations.ADMIN_ADDLISTING_ALERT1) , driver)))
             System.out.println("ERROR: dialog box for selecting type of listing not seen");  
         
     }
     public void test_listingSaleTypePopup()    //creating new listing, check for pop-up
     {
         driver.findElement(By.id(VariableDeclarations.ADMIN_ADDLISTING_ALERT1_RESIDENTIAL_BUTTON_ID)).click();
-        if(!(this.isElementPresent(By.xpath(VariableDeclarations.ADMIN_ADDLISTING_ALERT1))))            //test case 2
+        if(!(isElementPresent.isElementPresent(By.xpath(VariableDeclarations.ADMIN_ADDLISTING_ALERT1) , driver)))            //test case 2
             System.out.println("ERROR: dialog box for selecting type of listing not seen");    
-        if(!(this.isElementPresent(By.id(VariableDeclarations.ADMIN_ADDLISTING_ALERT2_SALE_BUTTON_ID)))) 
+        if(!(isElementPresent.isElementPresent(By.id(VariableDeclarations.ADMIN_ADDLISTING_ALERT2_SALE_BUTTON_ID), driver))) 
             System.out.println("ERROR: dialog box for selecting type of listing not seen");  
         
     }
     public void test_cancelAndBackOnPopup()    //creating new listing, check for cancel and back buttons
     {
-        if(!(this.isElementPresent(By.xpath(VariableDeclarations.ADMIN_ADDLISTING_ALERT12_BACK_XPATH)))) //test 3
+        if(!(isElementPresent.isElementPresent(By.xpath(VariableDeclarations.ADMIN_ADDLISTING_ALERT12_BACK_XPATH), driver))) //test 3
             System.out.println("ERROR: back button on pop up not seen");  
-        if(!(this.isElementPresent(By.xpath(VariableDeclarations.ADMIN_ADDLISTING_ALERT12_CANCEL_XPATH)))) 
+        if(!(isElementPresent.isElementPresent(By.xpath(VariableDeclarations.ADMIN_ADDLISTING_ALERT12_CANCEL_XPATH), driver))) 
             System.out.println("ERROR: cancel button on pop up not seen");  
         
     }
@@ -117,7 +116,7 @@ public class AddListing {
     {
         String DisplayName = driver.findElement(By.id(VariableDeclarations.ADMIN_ID_DISPLAYNAME_LISTING)).getText();
         driver.findElement(By.id(VariableDeclarations.ADMIN_ID_NEWLISTING_SAVE_BUTTON)).click();
-        if(!this.isElementPresent(By.id(VariableDeclarations.ADMIN_ID_CLONE_BUTTON)))
+        if(!isElementPresent.isElementPresent(By.id(VariableDeclarations.ADMIN_ID_CLONE_BUTTON), driver))
             System.out.println("ERROR: Listing did not get saved");        
     }
     
@@ -170,7 +169,7 @@ public class AddListing {
         Thread.sleep(3000);
         driver.findElement(By.id("addContactLink")).click();
         Thread.sleep(3000);
-        System.out.println(this.isElementPresent(By.id("contactNewContainer")));
+        System.out.println(isElementPresent.isElementPresent(By.id("contactNewContainer"), driver));
         System.out.println(driver.findElement(By.id("contactNewContainer")));
         
         //for autocomplete this is how it is to be handled
@@ -199,34 +198,12 @@ public class AddListing {
     {
         driver.get("http://preview.agorafy.com/manage/admin/listing/470");
         driver.findElement(By.className("dropzoneThumbnail ui-draggable")).click();
-        if(!(this.isElementPresent(By.className("ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable"))))
+        if(!(isElementPresent.isElementPresent(By.className("ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable"), driver)))
             System.out.println("ERROR: Media description pop-up not seen");
         
         
     }
     
-    
-    
-    
-    
-    
-    private boolean isElementPresent(By by) {
-    try {
-      driver.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  private boolean isAlertPresent() {
-    try {
-      driver.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
   
  
 }
