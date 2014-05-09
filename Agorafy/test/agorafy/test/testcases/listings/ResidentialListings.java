@@ -46,13 +46,13 @@ public class ResidentialListings {
         System.out.println(driver.findElement(By.id("contactNewContainer")));
         
         //for autocomplete this is how it is to be handled
-        WebElement popupContactSearch = driver.switchTo().activeElement().findElement(By.id("contactSearch"));
+        WebElement popupContactSearch = driver.switchTo().activeElement().findElement(By.id(VariableDeclarations.ADMIN_SEARCHBOX_ADDCONTACT_TEXT_ID));
         popupContactSearch.sendKeys("Pranoop R", Keys.PAUSE);
         Thread.sleep(5000);
         popupContactSearch.sendKeys( Keys.DOWN);
         popupContactSearch.sendKeys( Keys.TAB);
         Thread.sleep(5000);
-        driver.findElement(By.id("addContactButton")).click();
+        driver.findElement(By.id(VariableDeclarations.ADMIN_ADD_BUTTON_ONPOPUP_ID)).click();
         Thread.sleep(5000);
         
         if(driver.findElement(By.id("dropzone")).getAttribute("class").equalsIgnoreCase("redborder"))

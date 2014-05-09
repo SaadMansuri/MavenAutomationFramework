@@ -54,6 +54,10 @@ public class VariableDeclarations {
     static String ADMIN_RESIDENTIAL_LISTING_SPACE_ID = "spaceName";
     static String ADMIN_RESIDENTIAL_NUMBEROFBEDS_ID = "numBeds";
     static String ADMIN_RESIDENTIAL_NUMBEROFBATHS_ID = "numBaths";
+    static String ADMIN_SEARCHBOX_ADDCONTACT_TEXT_ID = "contactSearch";
+    static String ADMIN_ADD_BUTTON_ONPOPUP_ID = "addContactButton";
+
+
     
     //DIV[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable']/DIV[@class='ui-dialog-buttonpane ui-widget-content ui-helper-clearfix']/DIV[@class='ui-dialog-buttonset']/button[1]
 }
