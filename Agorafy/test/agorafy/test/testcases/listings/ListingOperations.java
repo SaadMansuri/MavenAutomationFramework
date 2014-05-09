@@ -30,7 +30,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ListingOperations {
     
-    public String propertyPageUrl;
+    public static String propertyPageUrl;
     
    
     public void test_addListingTypePopup(WebDriver driver) //creating new listing, check for pop-up

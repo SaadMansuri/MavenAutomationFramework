@@ -46,7 +46,7 @@ public class testListingOperations {
     @After
     public void tearDown() {
         
-        driver.get(propertyPageUrl);
+        driver.get(ListingOperations.propertyPageUrl);
         driver.findElement(By.xpath(VariableDeclarations.ADMIN_LOGOUT_ICON_XPATH)).click();
         driver.findElement(By.name("deleteButton")).click();
         boolean isAlertFound = isAlertPresent.isAlertPresent(driver);
