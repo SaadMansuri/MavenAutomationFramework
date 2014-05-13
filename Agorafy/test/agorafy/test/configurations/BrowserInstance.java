@@ -4,7 +4,7 @@
  * Parameter passed to the method is the browser name and return type is the web driver instance
  */
 
-package agorafy.test.utils;
+package agorafy.test.configurations;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

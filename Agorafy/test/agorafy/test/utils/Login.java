@@ -3,8 +3,9 @@
  * This class is for the script to login the system
  */
 
-package agorafy.test.operations;
+package agorafy.test.utils;
 
+import agorafy.test.utils.VariableDeclarations;
 import org.openqa.selenium.*;
 
 

@@ -1,10 +1,10 @@
 
 package agorafy.test.testcases.listings;
 
-import agorafy.test.operations.Login;
-import agorafy.test.operations.Logout;
-import agorafy.test.utils.BaseUrl;
-import agorafy.test.utils.BrowserInstance;
+import agorafy.test.utils.Login;
+import agorafy.test.utils.Logout;
+import agorafy.test.configurations.BaseUrl;
+import agorafy.test.configurations.BrowserInstance;
 import agorafy.test.utils.isAlertPresent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,9 +22,9 @@ import org.openqa.selenium.WebDriver;
  */
 public class testListingOperations {
     
-    WebDriver driver;
+    
     public String baseUrl, propertyPageUrl;
-   
+    WebDriver driver;
        
     @Before
     public void setUp() throws InterruptedException {
@@ -60,6 +60,7 @@ public class testListingOperations {
     public void testAddListing() throws InterruptedException{
         
         ListingOperations ObjectOfOperations = new ListingOperations();
+        
         ObjectOfOperations.test_addListingTypePopup(driver);
         ObjectOfOperations.test_listingSaleTypePopup(driver);
         ObjectOfOperations.test_cancelAndBackOnPopup(driver);
@@ -71,6 +72,8 @@ public class testListingOperations {
         ObjectOfOperations.test_verifyButtonDisabledForIncompleteListing(driver);
         ResidentialListings.test_addResidentialListing(driver);
         ResidentialListings.test_editResidentialListingLeaseToSale(driver);
+        ObjectOfOperations.test_AddFeatures(driver);
+        ObjectOfOperations.test_deleteAddedFeatureContacts(driver);
        // test_mediaDecriptionPopup();
         
     }

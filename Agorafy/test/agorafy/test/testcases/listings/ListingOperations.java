@@ -21,8 +21,8 @@ import org.openqa.selenium.*;
 import agorafy.test.testcases.VariableDeclarations.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import agorafy.test.operations.Login;
-import agorafy.test.operations.Logout;
+import agorafy.test.utils.Login;
+import agorafy.test.utils.Logout;
 import agorafy.test.testcases.listings.*;
 import java.util.List;
 import org.openqa.selenium.support.ui.Select;
@@ -31,6 +31,8 @@ import org.openqa.selenium.support.ui.Select;
 public class ListingOperations {
     
     public static String propertyPageUrl;
+    private static WebElement ContactsList, FeaturesList;
+    
     
    
     public void test_addListingTypePopup(WebDriver driver) //creating new listing, check for pop-up
@@ -134,6 +136,32 @@ public class ListingOperations {
         
     }
     
+    public void test_deleteAddedFeatureContacts(WebDriver driver)
+    {
+        driver.get("http://preview.agorafy.com/manage/admin/listing/13032");
+        if(isElementPresent.isElementPresent(By.id("featuresListDiv"), driver))
+        {
+            FeaturesList = driver.findElement(By.id("featuresListDiv"));
+            String deleteFeature = FeaturesList.findElements(By.className("propertyFeature")).get(0).getText();
+            FeaturesList.findElements(By.className("btn-icon-del")).get(0).click(); //deletes the first feature from the list of features 
+            
+            if(FeaturesList.getText().contains(deleteFeature))
+            System.out.println("feature NOT deleted");
+        
+        
+        ContactsList = driver.findElement(By.id("contacts"));
+        WebElement DeleteContact = ContactsList.findElements(By.className("contactDiv")).get(0);
+        String contactName = DeleteContact.findElement(By.className("heading1")).getText();
+        System.out.println(contactName);
+
+        DeleteContact.findElement(By.className("btn-icon-del")).click();
+        if(ContactsList.getText().contains(contactName))
+            System.out.println("Contact NOT deleted");
+            
+        }
+        
+        
+    }
     
     public void test_mediaDecriptionPopup(WebDriver driver)
     {

@@ -1,5 +1,5 @@
 
-package agorafy.test.operations;
+package agorafy.test.utils;
 
 /**
  * @author : Chandrani

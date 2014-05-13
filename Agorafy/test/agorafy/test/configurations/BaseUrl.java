@@ -4,17 +4,14 @@
  */
 
 
-package agorafy.test.utils;
+package agorafy.test.configurations;
 
 
 public class BaseUrl {
-    
-    private static String baseUrl;
-    
+      
     public static String getBaseUrl()
     {
-        baseUrl = "https://preview.agorafy.com/"; 
-        return baseUrl;
+        return GlobalVariableDeclarations.BASE_URL;
     }
     
 }
