@@ -6,16 +6,16 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 
-public class Dashboard extends PageElement {
+public class Dashboard extends Page {
 
-	private static WebElement element = null;
+	private WebElement element = null;
 	
 	public Dashboard(WebDriver driver)
 	{
 		super(driver);
 	}
 	
-	public static WebElement link_EditProfile() throws Exception
+	public WebElement link_EditProfile() throws Exception
 	{
 		 try
 	        { 
@@ -31,4 +31,22 @@ public class Dashboard extends PageElement {
 	        return element;
 	 }
 	
+	
+	public OverviewTab editProfile() throws Exception
+	{
+	    OverviewTab element = null;
+	    try
+        { 
+	        link_EditProfile().click();
+	        element = new OverviewTab(driver);
+            AutomationLog.info("OverviewTab was opened successfully.");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Not able to navigate to overview tab");
+            throw(e);
+        }
+
+        return element;
+	}
 }

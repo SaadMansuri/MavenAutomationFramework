@@ -6,15 +6,16 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 
-public class LoginPage extends PageElement 
+public class LoginPage extends Page 
 {
-    private static WebElement element = null;
+    private WebElement element = null;
 
-    public LoginPage(WebDriver driver) {
+    public LoginPage(WebDriver driver) 
+    {
         super(driver);
     }
 
-    public static WebElement txtbx_UserName() throws Exception
+    public WebElement txtbx_UserName() throws Exception
     {
         try
         {
@@ -29,7 +30,7 @@ public class LoginPage extends PageElement
         return element;
     }
     
-    public static WebElement txtbx_Password() throws Exception
+    public WebElement txtbx_Password() throws Exception
     {
         try
         {
@@ -44,7 +45,7 @@ public class LoginPage extends PageElement
         return element;
     }
 
-    public static WebElement btn_LogIn() throws Exception
+    public WebElement btn_LogIn() throws Exception
     {
         try
         {
@@ -58,5 +59,58 @@ public class LoginPage extends PageElement
         }
         return element;
     }
+    
+    public Homepage doSuccessfulLogin(String username, String password) throws Exception
+    {
+        Homepage element = null;
+        try
+        {
+            doLoginWithCredentials(username, password);
+            element = Homepage.homePage();
+            AutomationLog.info("Login successful");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Loin failed.");
+            throw(e);
+        }
+        return element;
+    }
 
+    public LoginPage doInvalidLogin(String username, String password) throws Exception
+    {
+        LoginPage element = null;
+        try
+        {
+            doLoginWithCredentials(username, password);
+            element = new LoginPage(driver);
+            AutomationLog.info("Invalid Login Verified.");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Not able to do Invalid Login");
+            throw(e);
+        }
+        return element;
+    }
+
+    private void doLoginWithCredentials(String username, String password) throws Exception
+    {
+        try
+        {
+            WebElement userNameTextBox = txtbx_UserName();
+            userNameTextBox.clear();
+            userNameTextBox.sendKeys(username);
+            WebElement passwordTextBox = txtbx_Password();
+            passwordTextBox.clear();
+            passwordTextBox.sendKeys(password);
+            btn_LogIn().click();
+            AutomationLog.info("Login Done");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Not able to Login");
+            throw(e);
+        }
+    }
 }

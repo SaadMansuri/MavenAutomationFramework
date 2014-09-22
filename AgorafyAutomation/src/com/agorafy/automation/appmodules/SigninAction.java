@@ -3,61 +3,60 @@ package com.agorafy.automation.appmodules;
 
 import java.util.HashMap;
 
+import org.openqa.selenium.By;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCase;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.LoginPage;
+import com.agorafy.automation.pageobjects.Page;
 
 public class SigninAction  extends AutomationTestCase
 {
-    
+    private Homepage homePage = null;
+    private LoginPage loginpage = null;
+
+    public SigninAction()
+    {
+        super(SigninAction.class.getName());
+    }
+
     public void setup() 
     {
-    	super.setup();
+        super.setup();
+        homePage = Homepage.homePage();
     }
 
     public void cleanup() 
     {
-    	super.cleanup();
+        super.cleanup();
+        homePage = null;
+        loginpage = null;
     }
 
-    
-    public void doLogin() throws Exception
+    public void testSuccessfulLogin() throws Exception
     {
-    	LoginPage loginpage = Homepage.gotoLoginPage();
+        loginpage = homePage.gotoLoginPage();
         AutomationLog.info("Click action is perfromed on My login link");
 
-        // Storing the UserName in to a String variable and Getting the
-        // UserName from Test Data CSV
-   /*     HashMap<String, String> loginData =  data.get("Deepak");
-        String sUserName = loginData.get("userName");						*/
-        // Sending the UserName string to the UserName Textbox on the LogIN
-        // Page
-        LoginPage.txtbx_UserName().sendKeys("chandrani.bhagat@cuelogic.co.in");
+        // Get data from CSV
+//        HashMap<String, String> loginData =  testCaseData.get("Valid Profile");
+//        String sUserName = loginData.get("userName");
+//        String sPassword = loginData.get("password");;
+        homePage = loginpage.doSuccessfulLogin("chandrani.bhagat@cuelogic.co.in", "cuelogic77");
 
-        // Printing the logs for what we have just performed
-        AutomationLog.info("Username is entered in UserName text box");
-
-        String sPassword = "";
-        LoginPage.txtbx_Password().sendKeys("cuelogic77");
-        AutomationLog.info("Password is entered in Password text box");
-
-        LoginPage.btn_LogIn().click();
-        AutomationLog.info("Click action is performed on Submit button");
-
-        // Utils.waitForElement(Home_Page.lnk_LogOut());
-        AutomationLog.info("SignIn Action is successfully perfomred");
-        testcasePassed("SignIn Action is successfully perfomred");
-
+        WaitFor.presenceOfTheElement(Page.driver, homePage.getGreetingsLocator());
+        AutomationLog.info("testSuccessfulLogin is successfully perfomred");
     }
-    
-    
+
     public void Execute() throws Exception
     {
-        // Clicking on the login link on the Home Page
-        try {
-        	setup();
-        	doLogin();
+        try 
+        {
+            setup();
+            testSuccessfulLogin();
+            testcasePassed("testSuccessfulLogin is successfully perfomred");
         } 
         catch (Exception e) 
         {

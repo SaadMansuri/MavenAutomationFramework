@@ -2,28 +2,42 @@ package com.agorafy.automation.automationframework;
 
 import java.util.HashMap;
 
-import com.agorafy.automation.pageobjects.PageElement;
+import com.agorafy.automation.pageobjects.Page;
 
 public class AutomationTestCase 
 {
-	protected HashMap<String, HashMap<String, String>> data;
+    protected HashMap<String, HashMap<String, String>> testCaseData;
+    private static String TESTDATA_FILE_EXTENSION = ".csv";
+    
+    private String executingTestCaseName = null;
+
+    public AutomationTestCase(String testcaseName) 
+    {
+        executingTestCaseName = testcaseName;
+    }
 
     public void setup() 
     {
-    	PageElement.driver = AppDriver.getDriver();
+        AutomationLog.startTestCase(executingTestCaseName);
+        String browserToUse = Configuration.globalConfiguration().readConfigurationProperty("browser");
+        new Page(AppDriver.getDriver(browserToUse));
+       // populate test case data from csv
+        testCaseData = TestDataProvider.readTestDataFromCSV(executingTestCaseName + TESTDATA_FILE_EXTENSION);
     }
 
     public void cleanup() 
     {
-    	PageElement.driver.quit();
+        AutomationLog.endTestCase(executingTestCaseName);
+        Page.driver.quit();
     }
 
     public void testcasePassed(String customMessage) 
     {
+        AutomationLog.info(executingTestCaseName + customMessage);
     }
 
     public void testcaseFailed(String customMessage) 
     {
-        
+        AutomationLog.info(executingTestCaseName + customMessage);
     }
 }

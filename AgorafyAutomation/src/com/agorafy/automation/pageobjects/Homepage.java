@@ -3,23 +3,30 @@ package com.agorafy.automation.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 
 
-public class Homepage extends PageElement 
+public class Homepage extends Page 
 {
-    private static WebElement element = null;
+    private WebElement element = null;
 
     public Homepage(WebDriver driver)
     {
         super(driver);
     }
     
-    public static WebElement lnk_MyLogin() throws Exception
+    
+    public static Homepage homePage()
+    {
+        return PageFactory.initElements(driver, Homepage.class);
+    }
+
+    public WebElement lnk_MyLogin() throws Exception
     {
         try
-        { 
+        {
              element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/a/span"));
              AutomationLog.info("My login link found on the Home Page");
         }
@@ -31,8 +38,13 @@ public class Homepage extends PageElement
 
         return element;
     }
-    
-    public static LoginPage gotoLoginPage() throws Exception
+
+    public By getGreetingsLocator()
+    {
+        return By.xpath(".//*[@id='mainNav']/li[3]/a[1]/span[2]");
+    }
+
+    public LoginPage gotoLoginPage() throws Exception
     {
         LoginPage element = null;
         try
@@ -48,5 +60,10 @@ public class Homepage extends PageElement
         }
 
         return element;
+    }
+    
+    public Header header()
+    {
+        return PageFactory.initElements(driver, Header.class);
     }
 }

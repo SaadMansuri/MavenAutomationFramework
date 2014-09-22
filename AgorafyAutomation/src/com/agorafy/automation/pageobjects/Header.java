@@ -6,16 +6,16 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 
-public class Header extends PageElement {
+public class Header extends Page {
 
-	private static WebElement element = null;
+	private WebElement element = null;
 	
 	public Header(WebDriver driver)
 	{
 		super(driver);
 	}
 	
-	public static WebElement link_ProfileName() throws Exception
+	public WebElement link_ProfileName() throws Exception
 	{
 		 try
 	        { 
@@ -32,7 +32,7 @@ public class Header extends PageElement {
 	 }
 	
 	 
-	 public static WebElement link_Dashboard() throws Exception
+	 public WebElement link_Dashboard() throws Exception
 	 {
 		 try
 	        { 
@@ -48,4 +48,35 @@ public class Header extends PageElement {
 	        return element;
 	 }
 	 
+	 public void openActiveProfile() throws Exception
+	 {
+	     try
+         { 
+	         link_ProfileName().click();
+             AutomationLog.info("Opened drop down for active profile link");
+         }
+         catch (Exception e)
+         {
+             AutomationLog.error("Not able to open drop down for active profile link");
+             throw(e);
+         }
+
+	 }
+	 
+	 public Dashboard openDashboard() throws Exception
+     {
+	     Dashboard element = null;
+         try
+         { 
+             link_Dashboard().click();
+             element = new Dashboard(driver);
+             AutomationLog.info("Opened Dashboard successfully");
+         }
+         catch (Exception e)
+         {
+             AutomationLog.error("Not able to open Dashboard");
+             throw(e);
+         }
+         return element;
+     }
 }

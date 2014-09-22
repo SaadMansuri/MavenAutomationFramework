@@ -6,15 +6,15 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 
-public class OverviewTab extends PageElement {
+public class OverviewTab extends Page {
    
-	private static WebElement element= null;
+	private WebElement element= null;
+
 	public OverviewTab(WebDriver driver) {
 		super(driver);
-		
 	}
-	
-	public static WebElement txtbx_Name() throws Exception
+
+	public WebElement txtbx_Name() throws Exception
 	{
 	  try 
 	  {
@@ -32,7 +32,7 @@ public class OverviewTab extends PageElement {
 		return element;
 	}
 		
-	public static WebElement default_Email() throws Exception 
+	public WebElement default_Email() throws Exception 
 	{
 		try 
 		{
@@ -48,7 +48,7 @@ public class OverviewTab extends PageElement {
 			return element;
 	}	
 			
-	public static WebElement txtbx_CompanyName() throws Exception
+	public WebElement txtbx_CompanyName() throws Exception
 	{ 
 		try 
 		{
@@ -65,7 +65,7 @@ public class OverviewTab extends PageElement {
 		return element;
 	}
 	
-	public static WebElement txtbx_WorkNum() throws Exception
+	public WebElement txtbx_WorkNum() throws Exception
 	{
 		try 
 		{
@@ -80,7 +80,7 @@ public class OverviewTab extends PageElement {
 		return element;
 	}
 		
-	public static WebElement txtbx_MobilenNum() throws Exception
+	public WebElement txtbx_MobilenNum() throws Exception
 	{
 		try 
 		{	
@@ -96,7 +96,7 @@ public class OverviewTab extends PageElement {
 	}
 		
 		
-		public static WebElement txtbx_FirstAddressField() throws Exception
+		public WebElement txtbx_FirstAddressField() throws Exception
 		{
 			try 
 			{
@@ -111,7 +111,7 @@ public class OverviewTab extends PageElement {
 			return element;
 		}
 		
-	   public static WebElement txtbx_SecondAddressField() throws Exception
+	   public WebElement txtbx_SecondAddressField() throws Exception
 	   {
 		   try 
 		   {
@@ -126,7 +126,7 @@ public class OverviewTab extends PageElement {
 		return element;
 	   }
 	
-       public static WebElement txtbx_City() throws Exception
+       public WebElement txtbx_City() throws Exception
        { 
     	   try 
     	   {
@@ -142,7 +142,7 @@ public class OverviewTab extends PageElement {
 		return element;
        }
        
-       public static WebElement dropdown_State() throws Exception
+       public WebElement dropdown_State() throws Exception
        {
     	   try 
     	   {
@@ -158,7 +158,7 @@ public class OverviewTab extends PageElement {
 		return element;
        }
        
-       public static WebElement txtbx_Zip() throws Exception
+       public WebElement txtbx_Zip() throws Exception
        {
     	   try 
     	   {
@@ -175,7 +175,7 @@ public class OverviewTab extends PageElement {
 		return element;
        }
        
-       public static WebElement txtbx_DescribeYourself() throws Exception
+       public WebElement txtbx_DescribeYourself() throws Exception
        {
     	   try 
     	   {
@@ -190,7 +190,7 @@ public class OverviewTab extends PageElement {
 		return element;
        }
        
-       public static WebElement txtbx_Neigborhood() throws Exception
+       public WebElement txtbx_Neigborhood() throws Exception
        {
     	   try 
     	   {	
@@ -206,7 +206,7 @@ public class OverviewTab extends PageElement {
           
        }
        
-       public static WebElement btn_Save() throws Exception
+       public WebElement btn_Save() throws Exception
        {
     	   try 
     	   {
@@ -221,7 +221,7 @@ public class OverviewTab extends PageElement {
 		return element;
           }
 
-       public static WebElement link_Here() throws Exception
+       public WebElement link_Here() throws Exception
        {
     	   try 
     	   {
