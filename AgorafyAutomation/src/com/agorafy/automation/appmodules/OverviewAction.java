@@ -2,8 +2,6 @@ package com.agorafy.automation.appmodules;
 
 import java.util.Iterator;
 
-import org.openqa.selenium.By;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCase;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -14,6 +12,23 @@ import com.agorafy.automation.pageobjects.LoginPage;
 import com.agorafy.automation.pageobjects.OverviewTab;
 import com.agorafy.automation.pageobjects.Page;
 
+/**
+ * Preconditions: Home page is loaded and login done.
+ * 
+ * Verify Active profile link present.
+ * Click active profile link.
+ * Verify Dropdown present.
+ * Verify Dashboard link present.
+ * Click Dashboard link.
+ * Verify Page navigates to Dashboard page.
+ * Verify Edit profile link present.
+ * Click on Edit profile link.
+ * Verify Page navigates to Overview tab.
+ * Verify Overview tab elements present.
+ * Populate Overview tab elements with test data.
+ * Click on submit.
+ * Verify Profile is updated.
+ */
 public class OverviewAction extends AutomationTestCase 
 {
     private Homepage homePage = null;
@@ -21,7 +36,7 @@ public class OverviewAction extends AutomationTestCase
 
     public OverviewAction() 
     {
-        super(OverviewAction.class.getName());
+        super();
     }
 
 	public void setup() 
@@ -86,8 +101,5 @@ public class OverviewAction extends AutomationTestCase
 	    String parent = AllWindowsOpen.next();
 	    String child = AllWindowsOpen.next();
 	    Page.driver.switchTo().window(child);
-	    
-		
 	}
-
 }

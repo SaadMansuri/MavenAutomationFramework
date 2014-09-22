@@ -11,15 +11,15 @@ public class AutomationTestCase
     
     private String executingTestCaseName = null;
 
-    public AutomationTestCase(String testcaseName) 
+    public AutomationTestCase() 
     {
-        executingTestCaseName = testcaseName;
+        executingTestCaseName = this.getClass().getSimpleName();
     }
 
     public void setup() 
     {
         AutomationLog.startTestCase(executingTestCaseName);
-        String browserToUse = Configuration.globalConfiguration().readConfigurationProperty("browser");
+        String browserToUse = Configuration.getConfigurationValueForProperty("browser");
         new Page(AppDriver.getDriver(browserToUse));
        // populate test case data from csv
         testCaseData = TestDataProvider.readTestDataFromCSV(executingTestCaseName + TESTDATA_FILE_EXTENSION);

@@ -6,21 +6,26 @@ import java.util.Properties;
 
 public class Configuration 
 {
-    private Properties properties;
+    private Properties properties = new Properties();
     private static Configuration globalConfiguration = null;
-    private static String DEFAULT_CONFIG_FILE_PATH = "config.properties";
-    
-    protected Configuration(String configFilePath){
-        loadAllProperties(configFilePath);
+    private final static String DEFAULT_CONFIG_PATH = "src/com/agorafy/automation/automationframework/defaultconfig.properties";
+
+    protected Configuration()
+    {
+        // Load default configuration from framework specific location.
+        loadAllProperties(DEFAULT_CONFIG_PATH);
     }
-    
-    private void loadAllProperties(String configFilePath) {
+
+    private void loadAllProperties(String configFilePath) 
+    {
         properties = new Properties();
-        try {
-            String configFilePathToUse = (configFilePath != null) ? configFilePath : DEFAULT_CONFIG_FILE_PATH;
-            properties.load(new FileInputStream(configFilePathToUse));
-        } catch (IOException e) {
-          //  throw new RuntimeException("Could not read the properties file");
+        try 
+        {
+            properties.load(new FileInputStream(configFilePath));
+        }
+        catch (IOException e) 
+        {
+            throw new RuntimeException("Could not read the properties file");
         }
     }
 
@@ -28,7 +33,7 @@ public class Configuration
     {
         reloadAllProperties(configFile);
     }
-    
+
     private void reloadAllProperties(String configFile)
     {
         loadAllProperties(configFile);
@@ -38,14 +43,19 @@ public class Configuration
     {
         if (globalConfiguration == null)
         {
-            globalConfiguration = new Configuration(DEFAULT_CONFIG_FILE_PATH);
+            globalConfiguration = new Configuration();
         }
         return globalConfiguration;
     }
-    
-    public String readConfigurationProperty(String propertyName) 
+
+    private String readConfigurationProperty(String propertyName) 
     {
         String defaultValue = "";
         return properties.getProperty(propertyName, defaultValue);
+    }
+
+    public static String getConfigurationValueForProperty(String propertyName)
+    {
+        return Configuration.globalConfiguration().readConfigurationProperty(propertyName);
     }
 }

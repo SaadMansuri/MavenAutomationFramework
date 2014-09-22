@@ -13,14 +13,18 @@ import com.google.common.base.Function;
 
 public class WaitFor 
 {
-
     public static WebElement presenceOfTheElement(WebDriver driver, final By elementIdentifier) 
     {
         // Wait time and polling time get it from global configuration.
-        //return null;
+        String globalPageTimeoutProperty = Configuration.getConfigurationValueForProperty("global-page-timeout");
+        long globalPageTimeout = Long.parseLong(globalPageTimeoutProperty);
+
+        String globalPageElementPollingTimeoutProperty = Configuration.getConfigurationValueForProperty("global-page-element-polling-timeout");
+        long globalPageElementPollingTimeout = Long.parseLong(globalPageElementPollingTimeoutProperty);
+        
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(30, TimeUnit.SECONDS)
-                .pollingEvery(1, TimeUnit.SECONDS)
+                .withTimeout(globalPageTimeout, TimeUnit.SECONDS)
+                .pollingEvery(globalPageElementPollingTimeout, TimeUnit.SECONDS)
                 .ignoring(NoSuchElementException.class);
 
         return wait.until(new Function<WebDriver, WebElement>() {

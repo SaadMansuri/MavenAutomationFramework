@@ -1,10 +1,5 @@
 package com.agorafy.automation.appmodules;
 
-
-import java.util.HashMap;
-
-import org.openqa.selenium.By;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCase;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -12,6 +7,21 @@ import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.LoginPage;
 import com.agorafy.automation.pageobjects.Page;
 
+/**
+ * Preconditions: Home page is loaded.
+ *
+ * Get Login link in Home Page
+ * Click Login link in Home Page.
+ * Verify Login form is opened.
+ * Verify Username text box is present.
+ * Verify Password text box is present.
+ * Verify submit button is present.
+ * Populate Username text box with test user name.
+ * Populate Password text box with test password.
+ * Click submit.
+ * Verify Login was successful.
+ * Verify Home page greeting message is displayed.
+ */
 public class SigninAction  extends AutomationTestCase
 {
     private Homepage homePage = null;
@@ -19,7 +29,7 @@ public class SigninAction  extends AutomationTestCase
 
     public SigninAction()
     {
-        super(SigninAction.class.getName());
+        super();
     }
 
     public void setup() 

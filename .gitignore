@@ -1,3 +1,7 @@
 /Agorafy_Test1/build/
 /Agorafy/nbproject/private/
 /Agorafy/build/
+
+*.class
+*.html
+*.xml
