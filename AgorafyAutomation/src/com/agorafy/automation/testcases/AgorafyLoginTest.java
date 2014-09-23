@@ -10,7 +10,7 @@ import com.agorafy.automation.automationframework.AutomationLog;
 public class AgorafyLoginTest 
 {
     @BeforeSuite
-    public void Init()
+    public void Init() throws Exception
     {
         // TODO: Move this to some TestNg XML configuration file, so that we can set config file path
         // when running in headless mode.

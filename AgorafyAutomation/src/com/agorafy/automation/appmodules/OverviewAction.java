@@ -59,7 +59,7 @@ public class OverviewAction extends AutomationTestCase
 			loginpage = homePage.gotoLoginPage();
 			homePage = loginpage.doSuccessfulLogin("chandrani.bhagat@cuelogic.co.in", "cuelogic77");
 			// Verify this is the correct homepage.
-			WaitFor.presenceOfTheElement(Page.driver, homePage.getGreetingsLocator());
+			WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
 			Header header = homePage.header();
 			header.openActiveProfile();
 			// Verify Drowndown is displayed.

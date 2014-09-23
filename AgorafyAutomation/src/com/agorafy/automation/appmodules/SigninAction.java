@@ -1,5 +1,7 @@
 package com.agorafy.automation.appmodules;
 
+import java.util.HashMap;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCase;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -50,13 +52,32 @@ public class SigninAction  extends AutomationTestCase
         loginpage = homePage.gotoLoginPage();
         AutomationLog.info("Click action is perfromed on My login link");
 
-        // Get data from CSV
-//        HashMap<String, String> loginData =  testCaseData.get("Valid Profile");
-//        String sUserName = loginData.get("userName");
-//        String sPassword = loginData.get("password");;
-        homePage = loginpage.doSuccessfulLogin("chandrani.bhagat@cuelogic.co.in", "cuelogic77");
+        // Get Test data from CSV
+        HashMap<String, String> loginData =  testCaseData.get("validCredential");
+        String sUserName = loginData.get("username");
+        String sPassword = loginData.get("password");
 
-        WaitFor.presenceOfTheElement(Page.driver, homePage.getGreetingsLocator());
+        homePage = loginpage.doSuccessfulLogin(sUserName, sPassword);
+
+        // Wait for home page to appear after login
+        WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+
+        // Verify homepage is loaded correctly.
+        // First check title of home page.
+        HashMap<String, String> homepageData =  testCaseData.get("homepageData");
+        String homepageTitle = homepageData.get("homepageTitle");
+        if (!homepageTitle.equals(homePage.getTitle())) 
+        {
+            // Alternatively, we could navigate to the login page, perhaps logging out first
+            throw new IllegalStateException("This is not the correct home page after login. Home Page title is not correct");
+        }
+        
+        // Now check the url of Home page.
+        String homepageUrl = homepageData.get("homepageUrl");
+        if (!homepageUrl.equals(homePage.homepageUrl()))
+        {
+            throw new IllegalStateException("This is not the correct home page after login. Homepage url is not correct");
+        }
         AutomationLog.info("testSuccessfulLogin is successfully perfomred");
     }
 

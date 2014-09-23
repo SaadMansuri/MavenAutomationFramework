@@ -28,6 +28,10 @@ public class AutomationTestCase
     public void cleanup() 
     {
         AutomationLog.endTestCase(executingTestCaseName);
+
+        if (testCaseData != null)
+            testCaseData.clear();
+
         Page.driver.quit();
     }
 

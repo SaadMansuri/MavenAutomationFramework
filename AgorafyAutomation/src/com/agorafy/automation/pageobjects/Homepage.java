@@ -17,10 +17,24 @@ public class Homepage extends Page
         super(driver);
     }
     
-    
+    public String homepageUrl()
+    {
+        return applicationUrl() + "/home/";
+    }
+
     public static Homepage homePage()
     {
         return PageFactory.initElements(driver, Homepage.class);
+    }
+
+    public By getHomepageGreetingsLocator()
+    {
+        return By.xpath(".//*[@id='mainNav']/li[3]/a[1]/span[2]");
+    }
+    
+    public String getTitle()
+    {
+        return driver.getTitle();
     }
 
     public WebElement lnk_MyLogin() throws Exception
@@ -37,11 +51,6 @@ public class Homepage extends Page
         }
 
         return element;
-    }
-
-    public By getGreetingsLocator()
-    {
-        return By.xpath(".//*[@id='mainNav']/li[3]/a[1]/span[2]");
     }
 
     public LoginPage gotoLoginPage() throws Exception

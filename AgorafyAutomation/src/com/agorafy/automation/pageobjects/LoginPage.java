@@ -67,7 +67,6 @@ public class LoginPage extends Page
         {
             doLoginWithCredentials(username, password);
             element = Homepage.homePage();
-            AutomationLog.info("Login successful");
         }
         catch (Exception e)
         {
@@ -84,7 +83,6 @@ public class LoginPage extends Page
         {
             doLoginWithCredentials(username, password);
             element = new LoginPage(driver);
-            AutomationLog.info("Invalid Login Verified.");
         }
         catch (Exception e)
         {
