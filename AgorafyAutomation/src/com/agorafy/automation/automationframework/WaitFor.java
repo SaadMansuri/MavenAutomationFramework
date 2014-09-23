@@ -3,11 +3,14 @@ package com.agorafy.automation.automationframework;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Function;
 
@@ -33,4 +36,39 @@ public class WaitFor
             }
         });
     }
+    
+    
+    public static void waitForPageToLoad(WebDriver driver, final String textToBePresent, final By elementToBePresent) {
+	    ExpectedCondition < Boolean > pageLoad = new
+	    ExpectedCondition < Boolean > () {
+	        public Boolean apply(WebDriver driver) {
+	            boolean isPageLoaded = (((JavascriptExecutor) driver).executeScript("return document.readyState").equals("loaded") || ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+	        	if (!isPageLoaded)
+	        		return false;
+	            
+	            try {
+	        	 String actext = driver.findElement(elementToBePresent).getText();
+	        	 if (textToBePresent.equals(actext)) 
+		        		return true;
+	        	}catch (Exception e)
+	        	{
+	        		return false;
+	        	}
+	        	
+	        	
+	        	return false;
+	        }
+	    };
+	    
+	    String globalPageTimeoutProperty = Configuration.getConfigurationValueForProperty("global-page-timeout");
+        long globalPageTimeout = Long.parseLong(globalPageTimeoutProperty);
+
+	    Wait < WebDriver > wait = new WebDriverWait(driver, globalPageTimeout);
+	    try {
+	        wait.until(pageLoad);
+	    } catch (Throwable pageLoadWaitError) {
+	        //assertFalse("Timeout during page load", true);
+	    	AutomationLog.info("Timeout during page load");
+	    }
+	}
 }

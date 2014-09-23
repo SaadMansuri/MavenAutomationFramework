@@ -1,10 +1,9 @@
 package com.agorafy.automation.appmodules;
 
-import java.util.Iterator;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCase;
 import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.datamodel.profile.OverviewData;
 import com.agorafy.automation.pageobjects.Dashboard;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
@@ -33,6 +32,7 @@ public class OverviewAction extends AutomationTestCase
 {
     private Homepage homePage = null;
     private LoginPage loginpage = null;
+    OverviewTab overviewTab;
 
     public OverviewAction() 
     {
@@ -45,7 +45,7 @@ public class OverviewAction extends AutomationTestCase
 		homePage = Homepage.homePage();
 	}
 	
-	public void cleanup()
+	public void cleanup() 
 	{
 		super.cleanup();
 	}
@@ -67,7 +67,8 @@ public class OverviewAction extends AutomationTestCase
 			//Verify this is the correct dashboard.
 			OverviewTab overviewTab = dashboard.editProfile();
 			// Verify this is the correct OverviewTab tab.
-			toEnterNameEmailCompanyName(overviewTab);
+			populateAndVerifyOverviewDetails(overviewTab);
+
 			//OverviewTab.btn_Save().click();
 			testcasePassed("Test is successfully perfomred");
 		} catch (Exception e) {
@@ -80,26 +81,36 @@ public class OverviewAction extends AutomationTestCase
 		{
 			cleanup();
 		}
-		
+	}
+
+	public void populateAndVerifyOverviewDetails(OverviewTab overviewTab) throws Exception
+	{
+		// TODO: Get this data from CSV files
+		OverviewData overviewData = new OverviewData();
+		overviewData.setName("Bnju");
+		overviewData.setCompanyName("Titan");
+		overviewData.setWorkPhone("234-567-7890");
+		overviewData.setMobilePhone("779-585-5190");
+		overviewData.setAddress1("New Jersey");
+		overviewData.setAddress2("Los Angeles");
+		overviewData.setCity("california");
+		overviewData.setState("Georgia");
+		overviewData.setZipCode("12345");
+		overviewData.setDescribe("how are you?");
+		overviewData.setNeighbour("Little Italy");
+
+		overviewTab.populateOverviewDetails(overviewData);
+		overviewTab = overviewTab.saveOverviewDetails();
+		WaitFor.waitForPageToLoad(Page.driver, overviewData.getName(), overviewTab.getBannerTextLocater());
+		verifyBannerDetails(overviewTab, overviewData);
 	}
 	
-	public void toEnterNameEmailCompanyName(OverviewTab overviewTab) throws Exception
+	public void verifyBannerDetails(OverviewTab overviewTab, OverviewData overviewData) throws Exception 
 	{
-	    // Get overview data from CSV.
-	    overviewTab.txtbx_Name().clear();
-	    overviewTab.txtbx_Name().sendKeys("Anjan");
-	    overviewTab.txtbx_CompanyName().clear();
-	    overviewTab.txtbx_CompanyName().sendKeys("Cuelogic");
-	    overviewTab.txtbx_MobilenNum().clear();
-	    overviewTab.txtbx_MobilenNum().sendKeys("997-561-8858");
-	}
-	
-	public void toVerifyBannerDetails(OverviewTab overviewTab) throws Exception 
-	{
-	    overviewTab.link_Here().click();
-		Iterator<String> AllWindowsOpen= Page.driver.getWindowHandles().iterator();  //get handles of all open windows, here 2 windows will be found
-	    String parent = AllWindowsOpen.next();
-	    String child = AllWindowsOpen.next();
-	    Page.driver.switchTo().window(child);
+		String newBannerNameAfterSavingOverviewData = overviewTab.getBannerText();
+		if (!overviewData.getName().equals(newBannerNameAfterSavingOverviewData)) 
+		{
+			throw new IllegalStateException("This is not the correctBanner which we are looking for");
+		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.agorafy.automation.automationframework;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -50,7 +51,11 @@ public class TestDataProvider
                     testData.put(new String(keys[0]), data);
                 }
             }
-        } 
+        }
+        catch(FileNotFoundException fnfe)
+        {
+        	AutomationLog.info("Not able to read config file due to " + fnfe.toString() + " test data loading failed.");
+        }
         catch (Exception e) 
         {
             AutomationLog.info("Not able to read config file due to " + e.toString() + " test data loading failed.");
