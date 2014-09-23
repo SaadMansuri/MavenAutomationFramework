@@ -1,4 +1,4 @@
-package com.agorafy.automation.appmodules;
+package com.agorafy.automation.testcases;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCase;

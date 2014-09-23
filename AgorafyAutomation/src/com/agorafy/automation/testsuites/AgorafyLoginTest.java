@@ -1,11 +1,11 @@
-package com.agorafy.automation.testcases;
+package com.agorafy.automation.testsuites;
 
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import com.agorafy.automation.appmodules.SigninAction;
 import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.testcases.SigninAction;
 
 public class AgorafyLoginTest 
 {

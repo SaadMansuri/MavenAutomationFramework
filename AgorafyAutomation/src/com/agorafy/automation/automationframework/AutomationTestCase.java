@@ -8,7 +8,7 @@ public class AutomationTestCase
 {
     protected HashMap<String, HashMap<String, String>> testCaseData;
     private static String TESTDATA_FILE_EXTENSION = ".csv";
-    
+
     private String executingTestCaseName = null;
 
     public AutomationTestCase() 

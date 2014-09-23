@@ -1,4 +1,4 @@
-package com.agorafy.automation.appmodules;
+package com.agorafy.automation.testcases;
 
 import java.util.HashMap;
 
