@@ -9,8 +9,8 @@ import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.datamodel.profile.OverviewData;
 import com.agorafy.automation.pageobjects.Dashboard;
 import com.agorafy.automation.pageobjects.Header;
+import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
-import com.agorafy.automation.pageobjects.LoginPage;
 import com.agorafy.automation.pageobjects.OverviewBanner;
 import com.agorafy.automation.pageobjects.OverviewTab;
 import com.agorafy.automation.pageobjects.Page;
@@ -35,7 +35,7 @@ import com.agorafy.automation.pageobjects.Page;
 public class OverviewAction extends AutomationTestCase
 {
 	private Homepage homePage = null;
-	private LoginPage loginpage = null;
+	private HeaderLoginForm headerLoginForm = null;
 	static HashMap<String,String> stateAbbMap;
 
 	public OverviewAction() 
@@ -60,12 +60,12 @@ public class OverviewAction extends AutomationTestCase
 		{
 			setup();
 			// TODO: get this from CSV data.
-			loginpage = homePage.gotoLoginPage();
-			homePage = loginpage.doSuccessfulLogin("chandrani.bhagat@cuelogic.co.in", "cuelogic77");
+			headerLoginForm = homePage.openHeaderLoginForm();
+			homePage = headerLoginForm.doSuccessfulLogin("chandrani.bhagat@cuelogic.co.in", "cuelogic77");
 			// Verify this is the correct homepage.
 			WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
 
-			Header header = homePage.header();
+			Header header = Page.header();
 			header.openActiveProfile();
 
 			// Verify Drowndown is displayed.

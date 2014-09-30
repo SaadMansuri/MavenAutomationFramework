@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.testcases.LoginActionNegativeTestsHeaderForm;
 import com.agorafy.automation.testcases.SigninAction;
 
 public class AgorafyLoginTest 
@@ -18,21 +19,34 @@ public class AgorafyLoginTest
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-  @Test
-  public void Main() throws Exception
+
+  public void testSign() throws Exception
   {
       try
       {
-          new SigninAction().Execute();
+         new SigninAction().Execute();
       }
       catch (Exception e)
       {
-          //Utils.takeScreenshot(driver, sTestCaseName);
-          // This will print the error log message
           AutomationLog.error(e.getMessage());
           // Again throwing the exception to fail the test completely in the TestNG results
           throw (e);
       }
   }
 
+  @Test
+  public void testNegativeLoginScenarios() throws Exception
+  {
+      try
+      {
+          //new LoginActionNegativeTestsLoginPageForm().Execute();
+          new LoginActionNegativeTestsHeaderForm().Execute();
+      }
+      catch (Exception e)
+      {
+          AutomationLog.error(e.getMessage());
+          // Again throwing the exception to fail the test completely in the TestNG results
+          throw (e);
+      }
+  }
 }

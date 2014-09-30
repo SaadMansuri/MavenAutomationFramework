@@ -5,6 +5,9 @@ import java.util.HashMap;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCase;
 import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.Header;
+
+import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.LoginPage;
 import com.agorafy.automation.pageobjects.Page;
@@ -27,8 +30,7 @@ import com.agorafy.automation.pageobjects.Page;
 public class SigninAction  extends AutomationTestCase
 {
     private Homepage homePage = null;
-    private LoginPage loginpage = null;
-
+    private HeaderLoginForm headerLoginForm = null;
     public SigninAction()
     {
         super();
@@ -44,12 +46,12 @@ public class SigninAction  extends AutomationTestCase
     {
         super.cleanup();
         homePage = null;
-        loginpage = null;
+        headerLoginForm = null;
     }
 
     public void testSuccessfulLogin() throws Exception
     {
-        loginpage = homePage.gotoLoginPage();
+    	headerLoginForm = homePage.openHeaderLoginForm();
         AutomationLog.info("Click action is perfromed on My login link");
 
         // Get Test data from CSV
@@ -57,7 +59,7 @@ public class SigninAction  extends AutomationTestCase
         String sUserName = loginData.get("username");
         String sPassword = loginData.get("password");
 
-        homePage = loginpage.doSuccessfulLogin(sUserName, sPassword);
+        homePage = headerLoginForm.doSuccessfulLogin(sUserName, sPassword);
 
         // Wait for home page to appear after login
         WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());

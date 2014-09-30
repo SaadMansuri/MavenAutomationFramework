@@ -64,7 +64,11 @@ public class TestDataProvider
         {
             try 
             {
-                fileReader.close();
+            	if (fileReader != null)
+            	{
+            		 fileReader.close();
+            	}
+               
             }
             catch (IOException e) 
             {

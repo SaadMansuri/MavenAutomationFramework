@@ -37,7 +37,7 @@ public class Homepage extends Page
         return driver.getTitle();
     }
 
-    public WebElement lnk_MyLogin() throws Exception
+    public WebElement link_Login() throws Exception
     {
         try
         {
@@ -53,14 +53,14 @@ public class Homepage extends Page
         return element;
     }
 
-    public LoginPage gotoLoginPage() throws Exception
+    public HeaderLoginForm openHeaderLoginForm() throws Exception
     {
-        LoginPage element = null;
+        HeaderLoginForm element = null;
         try
-        { 
-             lnk_MyLogin().click();
-             element = new LoginPage(driver); 
-             AutomationLog.info("Successfully navigated to login page");
+        {
+            link_Login().click();
+            element = new HeaderLoginForm(driver);
+            AutomationLog.info("Successfully navigated to login page");
         }
         catch (Exception e)
         {
@@ -70,9 +70,5 @@ public class Homepage extends Page
 
         return element;
     }
-    
-    public Header header()
-    {
-        return PageFactory.initElements(driver, Header.class);
-    }
+
 }

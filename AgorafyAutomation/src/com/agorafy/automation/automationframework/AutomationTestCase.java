@@ -37,11 +37,11 @@ public class AutomationTestCase
 
     public void testcasePassed(String customMessage) 
     {
-        AutomationLog.info(executingTestCaseName + customMessage);
+        AutomationLog.info(executingTestCaseName + " " + customMessage);
     }
 
     public void testcaseFailed(String customMessage) 
     {
-        AutomationLog.info(executingTestCaseName + customMessage);
+        AutomationLog.info(executingTestCaseName + " " + customMessage);
     }
 }
