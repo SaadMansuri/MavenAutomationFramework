@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.testcases.LoginActionNegativeTestsHeaderForm;
+import com.agorafy.automation.testcases.LoginActionNegativeTestsLoginPageForm;
 import com.agorafy.automation.testcases.SigninAction;
 
 public class AgorafyLoginTest 
@@ -39,8 +39,8 @@ public class AgorafyLoginTest
   {
       try
       {
-          //new LoginActionNegativeTestsLoginPageForm().Execute();
-          new LoginActionNegativeTestsHeaderForm().Execute();
+          new LoginActionNegativeTestsLoginPageForm().Execute();
+          //new LoginActionNegativeTestsHeaderForm().Execute();
       }
       catch (Exception e)
       {

@@ -31,6 +31,22 @@ public class Dashboard extends Page {
 	        return element;
 	 }
 	
+	public WebElement link_AccountSettings() throws Exception
+	{
+		 try
+	        { 
+	             element = driver.findElement(By.linkText("Account Settings"));
+	             AutomationLog.info("My AccountSetting link found on the Dashboard");
+	        }
+	        catch (Exception e)
+	        {
+	            AutomationLog.error("My AccountSetting link not found on the Dashboard");
+	            throw(e);
+	        }
+
+	        return element;
+	 }
+	
 	
 	public OverviewTab editProfile() throws Exception
 	{
@@ -44,6 +60,24 @@ public class Dashboard extends Page {
         catch (Exception e)
         {
             AutomationLog.error("Not able to navigate to overview tab");
+            throw(e);
+        }
+
+        return element;
+	}
+	
+	public AccountSettings accountSettings() throws Exception
+	{
+	    AccountSettings element = null;
+	    try
+        { 
+	    	link_AccountSettings().click();
+	        element = new AccountSettings(driver);
+            AutomationLog.info("Succesfully Navigated to account Settings page");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Not able to Navigate to account Settings page");
             throw(e);
         }
 
