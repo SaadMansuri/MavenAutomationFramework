@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.footer.Footer;
 
 
 public class Homepage extends Page 

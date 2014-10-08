@@ -71,4 +71,30 @@ public class WaitFor
 	    	AutomationLog.info("Timeout during page load");
 	    }
 	}
+    
+    public static void waitForPageToLoad(WebDriver driver)
+    {
+        ExpectedCondition<Boolean> pageLoad = new ExpectedCondition<Boolean>()
+        {
+            @Override
+            public Boolean apply(WebDriver driver)
+            {
+                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("loaded")
+                		|| ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+            }
+        };
+
+        String globalPageTimeoutProperty = Configuration.getConfigurationValueForProperty("global-page-timeout");
+        long globalPageTimeout = Long.parseLong(globalPageTimeoutProperty);
+        Wait<WebDriver> wait = new WebDriverWait(driver, globalPageTimeout);
+        try 
+        {
+            wait.until(pageLoad);
+        }
+        catch (Throwable pageLoadWaitError) 
+        {
+            // assertFalse("Timeout during page load", true);
+            AutomationLog.info("Timeout during page load");
+        }
+    }
 }

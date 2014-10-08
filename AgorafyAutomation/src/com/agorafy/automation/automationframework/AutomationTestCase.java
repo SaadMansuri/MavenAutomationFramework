@@ -32,7 +32,7 @@ public class AutomationTestCase
         if (testCaseData != null)
             testCaseData.clear();
 
-        Page.driver.quit();
+        Page.driver.close();
     }
 
     public void testcasePassed(String customMessage) 
