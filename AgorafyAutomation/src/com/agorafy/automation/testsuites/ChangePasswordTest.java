@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
+import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.testcases.ChangePasswordNegativeAction;
 import com.agorafy.automation.testcases.ChangePasswordPositiveAction;
 
@@ -19,15 +20,30 @@ public class ChangePasswordTest
     }
 
     @Test
-    public void Test() 
+    public void ChangePasswordNegativeActionTest() throws Exception 
     {
         try
         {
            new ChangePasswordNegativeAction().Execute();
-           new ChangePasswordPositiveAction().Execute();
         }
-        catch (Exception e) {
-        // TODO: handle exception
+        catch (Exception e) 
+        {
+           AutomationLog.error(e.getMessage());
+           throw (e);
+        }
+    }
+    
+    @Test
+    public void ChangePasswordPositiveActionTest () throws Exception
+    {
+        try
+        {
+            new ChangePasswordPositiveAction().Execute();
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error(e.getMessage());
+            throw (e);
         }
     }
 }

@@ -19,7 +19,7 @@ public class AgorafyLoginTest
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-
+    @Test
   public void testSign() throws Exception
   {
       try
@@ -34,7 +34,7 @@ public class AgorafyLoginTest
       }
   }
 
-  @Test
+//  @Test
   public void testNegativeLoginScenarios() throws Exception
   {
       try

@@ -5,29 +5,28 @@ import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.testcases.OverviewAction;
+import com.agorafy.automation.testcases.ForgotPasswordAction;
 
-public class ProfileOverviewTest 
+public class ForgotPasswordTest 
 {
     @BeforeSuite
     public void Init()
-    {
-        // TODO: Move this to some TestNg XML configuration file, so that we can set config file path
-        // when running in headless mode.
+     {
         String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
-    }
+     }
+
     @Test
-    public void OverviewActionTest() throws Exception 
+    public void ForgotPasswordActionTest() throws Exception 
     {
-    try
-    {
-        new OverviewAction().Execute();
-    }
-    catch (Exception e) 
-    {
-        AutomationLog.error(e.getMessage());
-        throw (e);
-    }
+        try
+        {
+            new ForgotPasswordAction().Execute();
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error(e.getMessage());
+            throw (e);
+        }
     }
 }

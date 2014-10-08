@@ -5,11 +5,8 @@ import java.util.HashMap;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCase;
 import com.agorafy.automation.automationframework.WaitFor;
-import com.agorafy.automation.pageobjects.Header;
-
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
-import com.agorafy.automation.pageobjects.LoginPage;
 import com.agorafy.automation.pageobjects.Page;
 
 /**

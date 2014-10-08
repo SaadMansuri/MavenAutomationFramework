@@ -47,6 +47,23 @@ public class Header extends Page
         return element;
     }
 
+    public SignUp clickOnSignUpUpLink() throws Exception
+    {
+        SignUp signup = null;
+        try
+        {
+            link_SignUp().click();
+            signup = new SignUp(driver);
+            AutomationLog.info("Clicked on signup button");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Not clicked on signUp button");
+            throw(e);
+        }
+            return signup;
+    }
+
     public WebElement link_SubmitListing() throws Exception
     {
         try
