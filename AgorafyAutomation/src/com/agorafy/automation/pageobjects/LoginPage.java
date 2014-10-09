@@ -3,6 +3,7 @@ package com.agorafy.automation.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 
 public class LoginPage extends Page 
@@ -233,4 +234,21 @@ public class LoginPage extends Page
         AutomationLog.info("login page URL obtained");
         return loginPageUrl;
     }
+
+    public ForgotPassword clickOnForgotPassword() throws Exception
+    {
+        ForgotPassword forgotpasswordlink = null;
+        try
+        {
+            link_ForgotPassword().click();
+            forgotpasswordlink = new ForgotPassword(driver);
+            AutomationLog.info("Successfully clicked on forgotpassword button");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Not clicked on forgotpassword button");
+            throw(e);
+        }
+        return forgotpasswordlink;
+        }
 }
