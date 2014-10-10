@@ -13,4 +13,13 @@ public class AppDriver
         driver.get(Configuration.getConfigurationValueForProperty("applicationURL"));
         return driver;
     }
+
+    public static void clearBrowserContext(WebDriver driver)
+    {
+        if (driver != null)
+        {
+            driver.manage().deleteAllCookies();
+            driver.close();
+        }
+    }
 }

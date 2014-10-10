@@ -8,6 +8,7 @@ public class Configuration
 {
     private Properties properties = new Properties();
     private static Configuration globalConfiguration = null;
+    // TODO: figure out how we can have a default config file for framework specified.
     private final static String DEFAULT_CONFIG_PATH = "src/com/agorafy/automation/automationframework/defaultconfig.properties";
 
     protected Configuration()

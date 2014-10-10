@@ -40,33 +40,52 @@ public class AutomationLog
 
     public static void startTestCase(String sTestCaseName)
     {
-        getLogger().info("Begin Test case : " + sTestCaseName);
+        String logMessgaeFormat = formatMessageWithInvocationInformation("Begin Test case : " + sTestCaseName);
+        getLogger().info(logMessgaeFormat);
     }
 
     public static void endTestCase(String sTestCaseName)
     {
-        getLogger().info("End Test case : " + sTestCaseName);
+        String logMessgaeFormat = formatMessageWithInvocationInformation("End Test case : " + sTestCaseName +"\n");
+        getLogger().info(logMessgaeFormat);
     }
 
     public static void info(String message) 
     {
-        getLogger().info(message);
+        String logMessgaeFormat = formatMessageWithInvocationInformation(message);
+        getLogger().info(logMessgaeFormat);
     }
 
     public static void warn(String message) 
     {
-        getLogger().warning(message);
+        String logMessgaeFormat = formatMessageWithInvocationInformation(message);
+        getLogger().warning(logMessgaeFormat);
     }
 
     public static void error(String message) 
     {
-        getLogger().severe(message);
+        String logMessgaeFormat = formatMessageWithInvocationInformation(message);
+        getLogger().severe(logMessgaeFormat);
     }
 
     public static void fatal(String message) 
     {
-        getLogger().severe(message);
+        String logMessgaeFormat = formatMessageWithInvocationInformation(message);
+        getLogger().severe(logMessgaeFormat);
     }
+
+    private static String formatMessageWithInvocationInformation(String message)
+    {
+        // TODO: While running on some virtual machines, VM might have turned off Permission for 
+        // Getting stack trace. Add checks to make sure we do this only if VM allows.
+
+        // 0 is getStackTrace, 1 is log methods of this class, 2 is this method and 3 is invoking method.
+        int stackTraceDepth = 3;
+        String className = Thread.currentThread().getStackTrace()[stackTraceDepth].getClassName();
+        String methodName = Thread.currentThread().getStackTrace()[stackTraceDepth].getMethodName();
+        String simpleClassName = className.substring(className.lastIndexOf(".")+1, className.length());
+        return "[ " + simpleClassName + " : " + methodName + " ] " +  message;
+     }
 
     class LogFormatter extends Formatter
     {
@@ -74,14 +93,12 @@ public class AutomationLog
         // Create a DateFormat to format the logger timestamp.
         private final DateFormat df = new SimpleDateFormat(Configuration.getConfigurationValueForProperty("dateformat-logging"));
 
-        // TODO: Get this from global config.
         private final String applicationName = Configuration.getConfigurationValueForProperty("applicationName");
-     
+
         public String format(LogRecord record) {
             StringBuilder builder = new StringBuilder(1000);
             builder.append(df.format(new Date(record.getMillis()))).append(" - ");
-            builder.append("[").append(applicationName).append(" ");
-            builder.append(record.getSourceMethodName()).append("] - ");
+            builder.append("[").append(applicationName).append("] - ");
             builder.append("[").append(record.getLevel()).append("] - ");
             builder.append(formatMessage(record));
             builder.append("\n");

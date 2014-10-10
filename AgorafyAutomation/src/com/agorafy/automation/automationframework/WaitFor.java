@@ -24,54 +24,47 @@ public class WaitFor
 
         String globalPageElementPollingTimeoutProperty = Configuration.getConfigurationValueForProperty("global-page-element-polling-timeout");
         long globalPageElementPollingTimeout = Long.parseLong(globalPageElementPollingTimeoutProperty);
-        
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(globalPageTimeout, TimeUnit.SECONDS)
-                .pollingEvery(globalPageElementPollingTimeout, TimeUnit.SECONDS)
-                .ignoring(NoSuchElementException.class);
 
-        return wait.until(new Function<WebDriver, WebElement>() {
-            public WebElement apply(WebDriver driver) {
-                return driver.findElement(elementIdentifier);
-            }
-        });
+        Wait<WebDriver> wait =
+                new FluentWait<WebDriver>(driver).withTimeout(globalPageTimeout, TimeUnit.SECONDS)
+                                                 .pollingEvery(globalPageElementPollingTimeout, TimeUnit.SECONDS)
+                                                 .ignoring(NoSuchElementException.class);
+
+        return wait.until(new Function<WebDriver, WebElement>()
+                {
+                    public WebElement apply(WebDriver driver) {
+                           return driver.findElement(elementIdentifier);
+                    }
+                });
     }
-    
-    
-    public static void waitForPageToLoad(WebDriver driver, final String textToBePresent, final By elementToBePresent) {
-	    ExpectedCondition < Boolean > pageLoad = new
-	    ExpectedCondition < Boolean > () {
-	        public Boolean apply(WebDriver driver) {
-	            boolean isPageLoaded = (((JavascriptExecutor) driver).executeScript("return document.readyState").equals("loaded") || ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
-	        	if (!isPageLoaded)
-	        		return false;
-	            
-	            try {
-	        	 String actext = driver.findElement(elementToBePresent).getText();
-	        	 if (textToBePresent.equals(actext)) 
-		        		return true;
-	        	}catch (Exception e)
-	        	{
-	        		return false;
-	        	}
-	        	
-	        	
-	        	return false;
-	        }
-	    };
-	    
-	    String globalPageTimeoutProperty = Configuration.getConfigurationValueForProperty("global-page-timeout");
-        long globalPageTimeout = Long.parseLong(globalPageTimeoutProperty);
 
-	    Wait < WebDriver > wait = new WebDriverWait(driver, globalPageTimeout);
-	    try {
-	        wait.until(pageLoad);
-	    } catch (Throwable pageLoadWaitError) {
-	        //assertFalse("Timeout during page load", true);
-	    	AutomationLog.info("Timeout during page load");
-	    }
-	}
-    
+    public static void waitForPageToLoad(WebDriver driver, final String textToBePresent, final By elementToBePresent)
+    {
+        ExpectedCondition < Boolean > pageLoad = new ExpectedCondition < Boolean > () 
+        {
+            public Boolean apply(WebDriver driver)
+            {
+                boolean isPageLoaded = isloadComplete(driver);
+                if (!isPageLoaded)
+                    return false;
+
+                try
+                {
+                    String actext = driver.findElement(elementToBePresent).getText();
+                    if (textToBePresent.equals(actext))
+                        return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+                return false;
+            }
+        };
+
+        waitUntil(driver, pageLoad);
+    }
+
     public static void waitForPageToLoad(WebDriver driver)
     {
         ExpectedCondition<Boolean> pageLoad = new ExpectedCondition<Boolean>()
@@ -79,22 +72,32 @@ public class WaitFor
             @Override
             public Boolean apply(WebDriver driver)
             {
-                return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("loaded")
-                		|| ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+                return isloadComplete(driver);
             }
         };
 
+        waitUntil(driver, pageLoad);
+    }
+
+    private static void waitUntil(WebDriver driver, ExpectedCondition < Boolean > pageLoad)
+    {
         String globalPageTimeoutProperty = Configuration.getConfigurationValueForProperty("global-page-timeout");
         long globalPageTimeout = Long.parseLong(globalPageTimeoutProperty);
-        Wait<WebDriver> wait = new WebDriverWait(driver, globalPageTimeout);
-        try 
+
+        Wait < WebDriver > wait = new WebDriverWait(driver, globalPageTimeout);
+        try
         {
             wait.until(pageLoad);
         }
-        catch (Throwable pageLoadWaitError) 
+        catch (Throwable pageLoadWaitError)
         {
-            // assertFalse("Timeout during page load", true);
             AutomationLog.info("Timeout during page load");
         }
+    }
+
+    private static boolean isloadComplete(WebDriver driver)
+    {
+        return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("loaded")
+                || ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
     }
 }

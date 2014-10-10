@@ -9,10 +9,12 @@ import java.util.regex.Pattern;
 
 public class TestDataProvider 
 {
-    public static HashMap<String, HashMap<String, String>> readTestDataFromCSV(String testFilenameWithCSVExtension)
+    private static String TESTDATA_FILE_EXTENSION = ".csv";
+
+    public static HashMap<String, HashMap<String, String>> getTestData(String testFilename)
     {
         String testDataDir = Configuration.getConfigurationValueForProperty("test-data-directory");
-        String testDataFilePath = testDataDir + testFilenameWithCSVExtension;
+        String testDataFilePath = testDataDir + testFilename + TESTDATA_FILE_EXTENSION;
 
         HashMap<String, HashMap<String, String>> testData = new HashMap<String, HashMap<String,String>>();
         parseTestData(testDataFilePath, testData);
@@ -22,35 +24,12 @@ public class TestDataProvider
 
     private static void parseTestData(String testDataFilePath, HashMap<String, HashMap<String, String>> testData)
     {
-        final String KEY_DELIMITER = ",";
-        final String RECORD_DELIMITER = ";";
-        final String VALUE_DELIMITER = "=";
-        
         BufferedReader fileReader = null;
-        String line = "";
         //Create the file reader
-        try {
+        try
+        {
             fileReader = new BufferedReader(new FileReader(testDataFilePath));
-            while ((line = fileReader.readLine()) != null) 
-            {
-                //Get all keys available in line
-                String[] keys = parseCSVLine(line, KEY_DELIMITER);
-                if (keys.length > 0)
-                {
-                    HashMap<String,String> data = new HashMap<String, String>();
-                    String[] records = parseCSVLine(keys[1], RECORD_DELIMITER);
-                    for(String recordData : records)
-                    {
-                          String [] datavalues = parseCSVLine(recordData, VALUE_DELIMITER);
-                          if (datavalues.length > 0)
-                          {
-                              //data.put(datavalues[0], datavalues[1]);
-                              data.put(new String(datavalues[0]), new String(datavalues[1]));
-                          }
-                    }
-                    testData.put(new String(keys[0]), data);
-                }
-            }
+            convertCSVFileDataToHashMap(fileReader, testData);
         }
         catch(FileNotFoundException fnfe)
         {
@@ -59,16 +38,15 @@ public class TestDataProvider
         catch (Exception e) 
         {
             AutomationLog.info("Not able to read config file due to " + e.toString() + " test data loading failed.");
-        } 
+        }
         finally
         {
-            try 
+            try
             {
-            	if (fileReader != null)
-            	{
-            		 fileReader.close();
-            	}
-               
+                if (fileReader != null)
+                {
+                    fileReader.close();
+                }
             }
             catch (IOException e) 
             {
@@ -77,10 +55,83 @@ public class TestDataProvider
         }
     }
 
+    private static void convertCSVFileDataToHashMap(BufferedReader fileReader, 
+            HashMap<String, HashMap<String, String>> testData) throws IOException
+    {
+        String line = null;
+
+        while ((line = fileReader.readLine()) != null)
+        {
+            // we don't want to parse comments and blank empty line.
+            if (!isValidCSVLine(line))
+                continue;
+
+            addToHashMap(line, testData);
+         }
+     }
+
+    private static void addToHashMap(String csvLine, HashMap<String, HashMap<String, String>> testData)
+    {
+        // TODO: Check if these can be moved to global config. check first if it makes sense to move
+        // it in config.
+        final String KEY_DELIMITER = ",";
+        final String RECORD_DELIMITER = ";";
+        final String VALUE_DELIMITER = "=";
+        final int KEY = 0;
+        final int VALUE = 1;
+
+        //Get all keys available in line
+        String[] keys = parseCSVLine(csvLine, KEY_DELIMITER);
+        if (keys.length > 0)
+        {
+            HashMap<String,String> data = new HashMap<String, String>();
+            String[] records = parseCSVLine(keys[1], RECORD_DELIMITER);
+            for(String recordData : records)
+            {
+                  String [] datavalues = parseCSVLine(recordData, VALUE_DELIMITER);
+                  if (datavalues.length > 0)
+                  {
+                      data.put(new String(datavalues[KEY]), new String(datavalues[VALUE]));
+                  }
+            }
+            testData.put(new String(keys[0]), data);
+        }
+    }
+
+    private static boolean isValidCSVLine(String csvLine)
+    {
+        final String COMMENT_CHARACTER= "#";
+        if (csvLine != null && !csvLine.startsWith(COMMENT_CHARACTER) && csvLine.length() > 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * parseCSVLine function uses regex to skip delimiters that occur inside double quotes.
+     * The first matching group will match a quote, then carry that to the end of the match.
+     * so that we are assured to capture the entire value between but not including the quotes.
+     * we also don't capture the commas unless they were embedded a quote delimited substring.
+     *
+     * Regex pattern explanation for CSV parsing with double quotes and delimiters.
+     *
+     * ^ = The beginning of a line.
+     * ? =  Once or not at all.
+     * * = zero or more.
+     * [^\Ó]* = Any character except double quotes. zero or more time.
+     * \" = double quote character.
+     * () = create capture group.
+     * ?! = Negative lookahead - Assert that it's impossible to match the following regex.
+     * (?=  start zero length assertion look ahead.
+     *
+     * @param line String on which regex needs to be applied.
+     * @param delimiter delimeter that we use to split the line into tokens.
+     */
     public static String[] parseCSVLine(String line, String delimiter) {
         // Create a pattern to match breaks
-        Pattern p =
-            Pattern.compile(delimiter + "(?=([^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+        Pattern p = Pattern.compile(delimiter + "(?=([^\"]*\"[^\"]*\")*(?![^\"]*\"))");
         // Split input with the pattern
         String[] fields = p.split(line);
         for (int i = 0; i < fields.length; i++) {
@@ -88,64 +139,5 @@ public class TestDataProvider
             fields[i] = fields[i].replace("\"", "");
         }
         return fields;
-    }
-
-    /**
-     * Unused. Kept for Testing. TODO: Remove this function after CSV parsing is stable.
-     * @param testDataFilePath
-     * @param testData
-     */
-    private static void parseTestDataBySplitting(String testDataFilePath, HashMap<String, HashMap<String, String>> testData)
-    {
-        BufferedReader fileReader = null;
-
-        //TODO: if possible read the delimiters from config file.
-        // Delimiter used in CSV file.
-        final String KEY_DELIMITER = ",";
-        final String RECORD_DELIMITER = ";";
-        final String VALUE_DELIMITER = ":";
-        try
-        {
-            String line = "";
-            //Create the file reader
-            fileReader = new BufferedReader(new FileReader(testDataFilePath));
-
-            //Read the file line by line
-            while ((line = fileReader.readLine()) != null) 
-            {
-                //Get all keys available in line
-                String[] keys = line.split(KEY_DELIMITER);
-                if (keys.length > 0)
-                {
-                    HashMap<String,String> data = new HashMap<String, String>();
-                    String[] records = keys[1].split(RECORD_DELIMITER);
-                    for(String recordData : records)
-                      {
-                            String [] datavalues = recordData.split(VALUE_DELIMITER);
-                            if (datavalues.length > 0)
-                            {
-                                //data.put(datavalues[0], datavalues[1]);
-                                data.put(new String(datavalues[0]), new String(datavalues[1]));
-                            }
-                      }
-                    testData.put(new String(keys[0]), data);
-                }
-            }
-        } 
-        catch (Exception e) 
-        {
-            AutomationLog.info("Not able to read config file due to " + e.toString() + " test data loading failed.");
-        } 
-        finally
-        {
-            try 
-            {
-                fileReader.close();
-            }
-            catch (IOException e) 
-            {
-                AutomationLog.info("Not able to close config file due to " + e.toString() + " test data might not have loaded correctly.");
-            }
-        }
     }
 }

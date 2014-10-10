@@ -7,7 +7,6 @@ import com.agorafy.automation.pageobjects.Page;
 public class AutomationTestCase 
 {
     protected HashMap<String, HashMap<String, String>> testCaseData;
-    private static String TESTDATA_FILE_EXTENSION = ".csv";
 
     private String executingTestCaseName = null;
 
@@ -22,7 +21,7 @@ public class AutomationTestCase
         String browserToUse = Configuration.getConfigurationValueForProperty("browser");
         new Page(AppDriver.getDriver(browserToUse));
        // populate test case data from csv
-        testCaseData = TestDataProvider.readTestDataFromCSV(executingTestCaseName + TESTDATA_FILE_EXTENSION);
+        testCaseData = TestDataProvider.getTestData(executingTestCaseName);
     }
 
     public void cleanup() 
@@ -32,7 +31,7 @@ public class AutomationTestCase
         if (testCaseData != null)
             testCaseData.clear();
 
-        Page.driver.close();
+        AppDriver.clearBrowserContext(Page.driver);
     }
 
     public void testcasePassed(String customMessage) 
