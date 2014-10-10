@@ -3,8 +3,8 @@ package com.agorafy.automation.testcases.footer;
 import org.testng.Assert;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
+import com.agorafy.automation.pageobjects.contentpages.MembershipBenefit;
 import com.agorafy.automation.pageobjects.footer.FooterCompanyLinks;
-import com.agorafy.automation.pageobjects.footer.company.MembershipBenefit;
 
 public class FooterMembershipBenefitsAction extends FooterAction
 {

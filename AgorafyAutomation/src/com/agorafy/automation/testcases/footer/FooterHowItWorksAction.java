@@ -4,8 +4,8 @@ import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
+import com.agorafy.automation.pageobjects.contentpages.HowItWorks;
 import com.agorafy.automation.pageobjects.footer.FooterSupportLinks;
-import com.agorafy.automation.pageobjects.footer.support.HowItWorks;
 
 public class FooterHowItWorksAction extends FooterAction
 {

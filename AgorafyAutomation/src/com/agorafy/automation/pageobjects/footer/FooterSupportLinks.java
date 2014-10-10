@@ -6,10 +6,10 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.footer.support.Blog;
-import com.agorafy.automation.pageobjects.footer.support.FAQs;
+import com.agorafy.automation.pageobjects.contentpages.Blog;
+import com.agorafy.automation.pageobjects.contentpages.FAQs;
+import com.agorafy.automation.pageobjects.contentpages.HowItWorks;
 import com.agorafy.automation.pageobjects.footer.support.Feedback;
-import com.agorafy.automation.pageobjects.footer.support.HowItWorks;
 import com.agorafy.automation.pageobjects.footer.support.Press;
 
 public class FooterSupportLinks extends Page

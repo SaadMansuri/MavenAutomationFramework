@@ -6,10 +6,10 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.footer.company.AboutUs;
-import com.agorafy.automation.pageobjects.footer.company.Careers;
-import com.agorafy.automation.pageobjects.footer.company.Contact;
-import com.agorafy.automation.pageobjects.footer.company.MembershipBenefit;
+import com.agorafy.automation.pageobjects.contentpages.AboutUs;
+import com.agorafy.automation.pageobjects.contentpages.Careers;
+import com.agorafy.automation.pageobjects.contentpages.Contact;
+import com.agorafy.automation.pageobjects.contentpages.MembershipBenefit;
 import com.agorafy.automation.pageobjects.footer.company.Team;
 
 public class FooterCompanyLinks extends Page
