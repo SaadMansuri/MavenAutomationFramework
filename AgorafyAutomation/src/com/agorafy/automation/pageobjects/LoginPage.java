@@ -227,14 +227,6 @@ public class LoginPage extends Page
         return element;
     }
 
-    public String getLoginPageUrl()
-    {
-        String loginPageUrl ="";
-        loginPageUrl = driver.getCurrentUrl();
-        AutomationLog.info("login page URL obtained");
-        return loginPageUrl;
-    }
-
     public ForgotPassword clickOnForgotPassword() throws Exception
     {
         ForgotPassword forgotpasswordlink = null;
@@ -250,5 +242,10 @@ public class LoginPage extends Page
             throw(e);
         }
         return forgotpasswordlink;
-        }
+     }
+
+    public String getPageUrl()
+    {
+        return (applicationUrl()+"/login");
+    }
 }

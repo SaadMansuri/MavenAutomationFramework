@@ -8,15 +8,14 @@ import com.agorafy.automation.automationframework.AutomationLog;
 
 public class HeaderLoginForm extends Page
 {
-	WebElement element;
-	HeaderLoginForm headerlogin;
-	
-	public HeaderLoginForm(WebDriver driver)
-	{
-		super(driver);
-	}
-	
-	public WebElement txtbx_UserNameInHeaderDropdown() throws Exception
+    WebElement element;
+
+    public HeaderLoginForm(WebDriver driver)
+    {
+        super(driver);
+    }
+
+    public WebElement txtbx_UserNameInHeaderDropdown() throws Exception
     {
         try
         {
@@ -30,7 +29,7 @@ public class HeaderLoginForm extends Page
         }
         return element;
     }
-    
+
     public WebElement txtbx_PasswordInHeaderDropdown() throws Exception
     {
         try
@@ -60,60 +59,52 @@ public class HeaderLoginForm extends Page
         }
         return element;
     }
-    
+
     public WebElement checkbox_stayLoggedIn() throws Exception
     {
-    	try
-    	{
-			element = driver.findElement(By.id("remember_me"));
-			AutomationLog.info("Checkbox for 'Stay logged in' found");
-			
-		}
-    	catch (Exception e)
-    	{
-			AutomationLog.error("checkbox for 'Stay logged in' not found");
-			throw(e);
-		}
-    	return element;
+        try
+        {
+            element = driver.findElement(By.id("remember_me"));
+            AutomationLog.info("Checkbox for 'Stay logged in' found");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("checkbox for 'Stay logged in' not found");
+            throw(e);
+        }
+        return element;
     }
-    
+
     public WebElement label_stayLoggedIn() throws Exception
     {
-    	try
-    	{
-    		element = driver.findElement(By.xpath(".//*[@id='headerLoginForm']/div[3]/label"));
-    		AutomationLog.info("Label 'Stay logged in' found");
-		} 
-    	catch (Exception e)
-    	{
-			AutomationLog.error("Label 'Stay logged in' not found");
-		}
-    	return element;
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='headerLoginForm']/div[3]/label"));
+            AutomationLog.info("Label 'Stay logged in' found");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Label 'Stay logged in' not found");
+        }
+        return element;
     }
-    
-    public Homepage ValidSubmit() throws Exception
-    {
-    	btn_LogInHeaderDropdown().click();
-    	return new Homepage(driver);
-    }
-    
+
     public LoginPage doInvalidLogin(String email, String password) throws Exception
     {
-    	LoginPage element = null;
-    	try
-    	{
-    		doLoginWithCredentials(email, password);
-    		element = new LoginPage(driver);
-		} 
-    	catch (Exception e) 
-    	{
-			AutomationLog.error("There was an error in entering details in header login form");
-			throw(e);
-		}
-		return element;
-    	
+        LoginPage element = null;
+        try
+        {
+            doLoginWithCredentials(email, password);
+            element = new LoginPage(driver);
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("There was an error in entering details in header login form");
+            throw(e);
+        }
+        return element;
     }
-    
+
     public Homepage doSuccessfulLogin(String username, String password) throws Exception
     {
         Homepage element = null;
@@ -130,7 +121,7 @@ public class HeaderLoginForm extends Page
         }
         return element;
     }
-    
+
     private void doLoginWithCredentials(String username, String password) throws Exception
     {
         try
@@ -149,6 +140,4 @@ public class HeaderLoginForm extends Page
             throw(e);
         }
     }
-    
-    
 }

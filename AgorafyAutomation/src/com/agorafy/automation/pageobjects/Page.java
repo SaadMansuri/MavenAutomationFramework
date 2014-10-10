@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.Configuration;
 import com.agorafy.automation.pageobjects.footer.Footer;
+import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 
 public class Page 
 {
@@ -44,5 +45,15 @@ public class Page
     protected String getTextfromElement(WebElement element) throws Exception
     {
         return element.getText();
+    }
+
+    public static SubNavigation subNavigation()
+    {
+        return PageFactory.initElements(driver, SubNavigation.class);
+    }
+
+    public static void goToPreviousPage() throws Exception
+    {
+        Page.driver.navigate().back();
     }
 }
