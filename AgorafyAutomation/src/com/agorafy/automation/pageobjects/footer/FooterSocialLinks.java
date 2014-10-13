@@ -35,7 +35,7 @@ public class FooterSocialLinks extends Page
         return element;
     }
 
-    public AgorafyTwitterPage openTwitterPage() throws Exception
+    public AgorafyTwitterPage clickOnTwitterIconLink() throws Exception
     {
         AgorafyTwitterPage agorafyTwitter = null;
         try
@@ -46,7 +46,7 @@ public class FooterSocialLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Agorafy Twitter link is not clicked");
+            AutomationLog.error("Agorafy Twitter link could not be clicked");
             throw(e);
         }
         return agorafyTwitter;
@@ -67,7 +67,7 @@ public class FooterSocialLinks extends Page
         return element;
     }
 
-    public AgorafyFacebookPage openFacebookPage() throws Exception
+    public AgorafyFacebookPage clickOnFacebookIconLink() throws Exception
     {
         AgorafyFacebookPage agorafyFacebook = null;
         try
@@ -78,7 +78,7 @@ public class FooterSocialLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Agorafy Facebook link is not clicked");
+            AutomationLog.error("Agorafy Facebook link could not be clicked");
             throw(e);
         }
         return agorafyFacebook;
@@ -99,7 +99,7 @@ public class FooterSocialLinks extends Page
         return element;
     }
 
-    public AgorafyYoutubePage openYoutubePage() throws Exception
+    public AgorafyYoutubePage clickOnYoutubeIconLink() throws Exception
     {
         AgorafyYoutubePage agorafyYoutube = null;
         try
@@ -110,7 +110,7 @@ public class FooterSocialLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Agorafy Youtube page link is not clicked");
+            AutomationLog.error("Agorafy Youtube page link could not be clicked");
             throw(e);
         }
         return agorafyYoutube;
@@ -131,7 +131,7 @@ public class FooterSocialLinks extends Page
         return element;
     }
 
-    public AgorafyGooglePlusPage openGooglePlusPage() throws Exception
+    public AgorafyGooglePlusPage clickOnGooglePlusIconLink() throws Exception
     {
         AgorafyGooglePlusPage agorafyGooglePlus = null;
         try
@@ -142,7 +142,7 @@ public class FooterSocialLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Agorafy Google Plus link is not clicked");
+            AutomationLog.error("Agorafy Google Plus link could not be clicked");
             throw(e);
         }
         return agorafyGooglePlus;
@@ -163,7 +163,7 @@ public class FooterSocialLinks extends Page
         return element;
     }
 
-    public AgorafyLinkedInPage openLinkedInPage() throws Exception
+    public AgorafyLinkedInPage clickOnLinkedInIconLink() throws Exception
     {
         AgorafyLinkedInPage agorafyLinkedIn = null;
         try
@@ -174,7 +174,7 @@ public class FooterSocialLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Agorafy LinkedIn link is not clicked");
+            AutomationLog.error("Agorafy LinkedIn link could not be clicked");
             throw(e);
         }
         return agorafyLinkedIn;

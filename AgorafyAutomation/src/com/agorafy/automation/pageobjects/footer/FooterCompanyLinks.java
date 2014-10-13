@@ -35,7 +35,7 @@ public class FooterCompanyLinks extends Page
         return element;
     }
 
-    public AboutUs openAboutUs() throws Exception 
+    public AboutUs clickOnAboutUsLink() throws Exception 
     {
         AboutUs aboutUs = null;
         try
@@ -46,7 +46,7 @@ public class FooterCompanyLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("About Us link is not clicked");
+            AutomationLog.error("About Us link could not be clicked");
             throw(e);
         }
         return aboutUs;
@@ -67,7 +67,7 @@ public class FooterCompanyLinks extends Page
         return element;
     }
 
-    public MembershipBenefit openMembershipbenefit() throws Exception 
+    public MembershipBenefit clickOnMembershipBenefitLink() throws Exception 
     {
         MembershipBenefit membershipBenefit = null;
         try
@@ -78,7 +78,7 @@ public class FooterCompanyLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Membership Benefit link is not clicked");
+            AutomationLog.error("Membership Benefit link could not be clicked");
             throw(e);
         }
         return membershipBenefit;
@@ -99,7 +99,7 @@ public class FooterCompanyLinks extends Page
         return element;
     }
 
-    public Team openTeam() throws Exception
+    public Team clickOnTeamLink() throws Exception
     {
         Team team = null;
         try
@@ -110,7 +110,7 @@ public class FooterCompanyLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Team link is not clicked ");
+            AutomationLog.error("Team link could not be clicked ");
             throw(e);
         }
         return team;
@@ -131,7 +131,7 @@ public class FooterCompanyLinks extends Page
         return element;
     }
 
-    public Careers openCareers() throws Exception
+    public Careers clickOnCareersLink() throws Exception
     {
         Careers careers = null;
         try
@@ -142,7 +142,7 @@ public class FooterCompanyLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Careers link is not clicked");
+            AutomationLog.error("Careers link could not be clicked");
             throw(e);
         }
         return careers;
@@ -163,7 +163,7 @@ public class FooterCompanyLinks extends Page
         return element;
     }
 
-    public Contact openContact() throws Exception
+    public Contact clickOnContactLink() throws Exception
     {
         Contact contact = null;
         try
@@ -174,7 +174,7 @@ public class FooterCompanyLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Contact link is not clicked");
+            AutomationLog.error("Contact link could not be clicked");
             throw(e);
         }
         return contact;

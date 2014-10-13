@@ -3,10 +3,18 @@ package com.agorafy.automation.testcases.footer;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.FooterCompanyInfo;
 
-public class FooterCompanyInfoAction extends FooterAction
+/**
+ * Test Company Info Text on Footer
+ * Verify the Company Name, Address and Phone Number 
+ * Verify the support mail text and address
+ * Verify the title of Careers Page
+ * Verify the copyright text
+ */
+public class FooterCompanyInfoAction extends AutomationTestCaseVerification
 {
     FooterCompanyInfo companyInfo=null;
     public FooterCompanyInfoAction()
@@ -15,7 +23,7 @@ public class FooterCompanyInfoAction extends FooterAction
     }
 
     @Override
-    void testLink()
+    protected void verifyTestCases()
     {
         companyInfo = Page.footer().companyInfo();
         try
@@ -32,11 +40,11 @@ public class FooterCompanyInfoAction extends FooterAction
             Assert.assertEquals(companyInfo.text_CompanyPhoneNumber(), "(212) 401-4231", "Company Phone Number on footer is not valid");
             AutomationLog.info("Company Phone Number on footer is valid");
 
-            Assert.assertEquals(companyInfo.link_MailToText(), "hello@agorafy.com", "Mail To text on footer is not valid");
-            AutomationLog.info("Mail To text on footer is valid");
+            Assert.assertEquals(companyInfo.link_SupportEmailText(), "hello@agorafy.com", "Support Email Text on footer is not valid");
+            AutomationLog.info("Support Email Text on footer is valid");
 
-            Assert.assertEquals(companyInfo.link_MailToAdressText().startsWith("mailto:"), true, "Company support mail address does not confirm to mail to protocol");
-            AutomationLog.info("Company support mail address confirms to mail to protocol");
+            Assert.assertEquals(companyInfo.link_SupportEmailAddressText().startsWith("mailto:"), true, "Company support mail address does not confirm to mailto: protocol");
+            AutomationLog.info("Company support mail address confirms to mailto: protocol");
 
             Assert.assertEquals(companyInfo.text_Copyright(), "All Content Copyright © 2014 , Agorafy Inc.", "Copyright text on footer is not valid");
             AutomationLog.info("Copyright text on footer is valid");
@@ -48,13 +56,13 @@ public class FooterCompanyInfoAction extends FooterAction
     }
 
     @Override
-    String successMessage()
+    protected String successMessage()
     {
         return "Footer Company Info tested successfully";
     }
 
     @Override
-    String failureMessage()
+    protected String failureMessage()
     {
         return "Footer CompanyInfo Action failed";
     }

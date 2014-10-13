@@ -6,6 +6,7 @@ import java.util.List;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.FooterSocialLinks;
@@ -14,8 +15,15 @@ import com.agorafy.automation.pageobjects.footer.social.AgorafyGooglePlusPage;
 import com.agorafy.automation.pageobjects.footer.social.AgorafyLinkedInPage;
 import com.agorafy.automation.pageobjects.footer.social.AgorafyTwitterPage;
 import com.agorafy.automation.pageobjects.footer.social.AgorafyYoutubePage;
-
-public class FooterSocialLinksAction extends FooterAction
+/**
+ * Test SocialNetworking IconLinks on Footer
+ * Click Twitter iconlink on the Home Page, verify AgorafyTwitter Page is loaded by checking its URL and title
+ * Click Facebook iconlink on the Home Page, verify AgorafyFacebook Page is loaded by checking its URL and title 
+ * Click GooglePlus iconlink on the Home Page, verify AgorafyGooglePlus Page is loaded by checking its URL and title
+ * Click Youtube iconlink on the Home Page, verify AgorafyYoutube Page is loaded by checking its URL and title
+ * Click LinkedIn iconlink on the Home Page, verify AgorafyLinkedIn Page is loaded by checking its URL and title
+ */
+public class FooterSocialLinksAction extends AutomationTestCaseVerification
 {
     FooterSocialLinks socialLinks = null;
     String homePageHandle = "";
@@ -31,7 +39,7 @@ public class FooterSocialLinksAction extends FooterAction
     }
 
     @Override
-    void testLink()
+    protected void verifyTestCases()
     {
         socialLinks = Page.footer().socialLinks();
         homePageHandle = Page.driver.getWindowHandle();
@@ -53,7 +61,7 @@ public class FooterSocialLinksAction extends FooterAction
     {
         try
         {
-            agorafyLinkedIn = socialLinks.openLinkedInPage();
+            agorafyLinkedIn = socialLinks.clickOnLinkedInIconLink();
             AutomationLog.info("Agorafy LinkedIn Page opened successfully");
 
             switchToNewWindow();
@@ -76,7 +84,7 @@ public class FooterSocialLinksAction extends FooterAction
     {
         try
         {
-            agorafyGooglePlus = socialLinks.openGooglePlusPage();
+            agorafyGooglePlus = socialLinks.clickOnGooglePlusIconLink();
             AutomationLog.info("Agorafy Google Plus Page opened successfully");
 
             switchToNewWindow();
@@ -99,7 +107,7 @@ public class FooterSocialLinksAction extends FooterAction
     {
         try 
         {
-            agorafyYoutube = socialLinks.openYoutubePage();
+            agorafyYoutube = socialLinks.clickOnYoutubeIconLink();
             AutomationLog.info("Agorafy Youtube Page opened successfully");
 
             switchToNewWindow();
@@ -122,7 +130,7 @@ public class FooterSocialLinksAction extends FooterAction
     {
         try 
         {
-            agorafyFacebook = socialLinks.openFacebookPage();
+            agorafyFacebook = socialLinks.clickOnFacebookIconLink();
             AutomationLog.info("Agorafy Facebook Page opened successfully");
 
             switchToNewWindow();
@@ -145,7 +153,7 @@ public class FooterSocialLinksAction extends FooterAction
     {
         try
         {
-            agorafyTwitter = socialLinks.openTwitterPage();
+            agorafyTwitter = socialLinks.clickOnTwitterIconLink();
             AutomationLog.info("Agorafy Twitter Page opened successfully");
 
             switchToNewWindow();
@@ -168,7 +176,6 @@ public class FooterSocialLinksAction extends FooterAction
     {
         Page.driver.close();
         Page.driver.switchTo().window(homePageHandle);
-        WaitFor.waitForPageToLoad(Page.driver);
     }
 
     private void switchToNewWindow() throws Exception
@@ -180,13 +187,13 @@ public class FooterSocialLinksAction extends FooterAction
     }
 
     @Override
-    String successMessage()
+    protected String successMessage()
     {
         return "Footer Social Networking Links tested successfully";
     }
 
     @Override
-    String failureMessage()
+    protected String failureMessage()
     {
         return "Footer Social Links Action Failed";
     }

@@ -1,11 +1,8 @@
-package com.agorafy.automation.testcases.footer;
+package com.agorafy.automation.automationframework;
 
-import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCase;
-
-public abstract class FooterAction extends AutomationTestCase
+public abstract class AutomationTestCaseVerification extends AutomationTestCase
 {
-    public FooterAction()
+    public AutomationTestCaseVerification()
     {
         super();
     }
@@ -20,16 +17,16 @@ public abstract class FooterAction extends AutomationTestCase
         super.cleanup();
     }
 
-    abstract void testLink();
-    abstract String successMessage();
-    abstract String failureMessage();
+    protected abstract void verifyTestCases();
+    protected abstract String successMessage();
+    protected abstract String failureMessage();
 
     public void Execute() throws Exception
     {
         try
         {
             setup();
-            testLink();
+            verifyTestCases();
             testcasePassed(successMessage());
         }
         catch(Exception e)

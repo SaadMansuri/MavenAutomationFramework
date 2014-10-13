@@ -3,11 +3,18 @@ package com.agorafy.automation.testcases.footer;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.FooterLegalLinks;
 import com.agorafy.automation.pageobjects.footer.legal.TermsAndConditions;
-
-public class FooterTermsAndConditionAction extends FooterAction
+/**
+ * Test TermsAndCondition link on Footer
+ * Click TermsAndCondition link on the Home Page, verify TermsAndCondition Page is loaded 
+ * Verify the URL of TermsAndCondition Page
+ * Verify the title of TermsAndCondition Page
+ * Verify the Heading Text on TermsAndCondition Page
+ */
+public class FooterTermsAndConditionAction extends AutomationTestCaseVerification
 {
     public FooterTermsAndConditionAction()
     {
@@ -15,13 +22,13 @@ public class FooterTermsAndConditionAction extends FooterAction
     }
 
     @Override
-    void testLink()
+    protected void verifyTestCases()
     {		
         FooterLegalLinks legalLinks = Page.footer().legalLinks();
         TermsAndConditions termsAndConditions = null;
         try
         {
-            termsAndConditions = legalLinks.openTermsAndConditions();
+            termsAndConditions = legalLinks.clickOnTermsAndConditionsLink();
             AutomationLog.info("Terms And Conditions Page opened successfully");
 
             Assert.assertEquals(termsAndConditions.currentURL(), termsAndConditions.termsAndConditionsPageUrl(), "TermsAndConditions Link did not Navigate to correct pageUrl");
@@ -40,13 +47,13 @@ public class FooterTermsAndConditionAction extends FooterAction
     }
 
     @Override
-    String successMessage()
+    protected String successMessage()
     {
         return " Footer TermsAndConditions tested successfully";
     }
 
     @Override
-    String failureMessage()
+    protected String failureMessage()
     {
         return "Footer TermsAndConditions Action Failed ";
     }

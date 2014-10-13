@@ -32,7 +32,7 @@ public class FooterLegalLinks extends Page
         return element;
     }
 
-    public TermsAndConditions openTermsAndConditions() throws Exception
+    public TermsAndConditions clickOnTermsAndConditionsLink() throws Exception
     {
         TermsAndConditions termsAndConditions = null;
         try
@@ -43,7 +43,7 @@ public class FooterLegalLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Terms And Conditions link is not clicked");
+            AutomationLog.error("Terms And Conditions link could not be clicked");
             throw(e);
         }
         return termsAndConditions;
@@ -64,7 +64,7 @@ public class FooterLegalLinks extends Page
         return element;
     }
 
-    public PrivacyPolicy openPrivacyPolicy() throws Exception
+    public PrivacyPolicy clickOnPrivacyPolicyLink() throws Exception
     {
         PrivacyPolicy privacyPolicy = null;
         try
@@ -75,7 +75,7 @@ public class FooterLegalLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Privacy Policy link is not clicked");
+            AutomationLog.error("Privacy Policy link could not be clicked");
             throw(e);
         }
         return privacyPolicy;

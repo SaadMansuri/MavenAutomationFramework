@@ -3,11 +3,18 @@ package com.agorafy.automation.testcases.footer;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.AboutUs;
 import com.agorafy.automation.pageobjects.footer.FooterCompanyLinks;
-
-public class FooterAboutUsAction extends FooterAction
+/**
+ * Test About Us link on Footer
+ * Click About Us link on the Home Page, verify About Us Page is loaded 
+ * Verify the URL of About Us Page
+ * Verify the title of About Us Page
+ * Verify the Heading Text on About Us Page
+ */
+public class FooterAboutUsAction extends AutomationTestCaseVerification
 {
     public FooterAboutUsAction()
     {
@@ -15,13 +22,13 @@ public class FooterAboutUsAction extends FooterAction
     }
 
     @Override
-    void testLink()
+	protected void verifyTestCases()
     {
         FooterCompanyLinks companyLinks = Page.footer().companyLinks();
         AboutUs aboutUs=null;
         try
         {
-            aboutUs = companyLinks.openAboutUs();
+            aboutUs = companyLinks.clickOnAboutUsLink();
             AutomationLog.info("AboutUs Page opened successfully");
 
             Assert.assertEquals(aboutUs.currentURL(), aboutUs.aboutUsPageUrl(), "About Us Link did not Navigate to correct pageUrl");
@@ -40,13 +47,13 @@ public class FooterAboutUsAction extends FooterAction
     }
 
     @Override
-    String successMessage()
+	protected String successMessage()
     {
         return " Footer AboutUs tested successfully";
     }
 
     @Override
-    String failureMessage()
+	protected String failureMessage()
     {
         return "Footer AboutUs Action Failed ";
     }

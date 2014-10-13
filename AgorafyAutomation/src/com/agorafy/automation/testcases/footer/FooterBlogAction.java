@@ -3,11 +3,17 @@ package com.agorafy.automation.testcases.footer;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.Blog;
 import com.agorafy.automation.pageobjects.footer.FooterSupportLinks;
-
-public class FooterBlogAction extends FooterAction
+/**
+ * Test Blog link on Footer
+ * Click Blog link on the Home Page, verify Blog Page is loaded 
+ * Verify the URL of Blog Page
+ * Verify the title of Blog Page * 
+ */
+public class FooterBlogAction extends AutomationTestCaseVerification
 {
     public FooterBlogAction()
     {
@@ -15,13 +21,13 @@ public class FooterBlogAction extends FooterAction
     }
 
     @Override
-    void testLink()
+	protected void verifyTestCases()
     {
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
         Blog blog = null;
         try
         {
-            blog = supportLinks.openBlog();
+            blog = supportLinks.clickOnBlogLink();
             AutomationLog.info("Blog Page opened successfully");
 
             Assert.assertEquals(blog.currentURL(), blog.blogPageUrl(), "Blog Link did not Navigate to correct pageUrl");
@@ -37,13 +43,13 @@ public class FooterBlogAction extends FooterAction
     }
 
     @Override
-    String successMessage()
+	protected String successMessage()
     {
         return " Footer Blog tested successfully";
     }
 
     @Override
-    String failureMessage()
+	protected String failureMessage()
     {
         return "Footer Blog Action Failed ";
     }

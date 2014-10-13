@@ -3,11 +3,18 @@ package com.agorafy.automation.testcases.footer;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.FooterSupportLinks;
 import com.agorafy.automation.pageobjects.footer.support.Press;
-
-public class FooterPressAction extends FooterAction
+/**
+ * Test Press link on Footer
+ * Click Press link on the Home Page, verify Press Page is loaded 
+ * Verify the URL of Press Page
+ * Verify the title of Press Page
+ * Verify the Heading Text on Press Page
+ */
+public class FooterPressAction extends AutomationTestCaseVerification
 {
     public FooterPressAction()
     {
@@ -15,13 +22,13 @@ public class FooterPressAction extends FooterAction
     }
 
     @Override
-    void testLink()
+    protected void verifyTestCases()
     {
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
         Press press = null;
         try
         {
-            press = supportLinks.openPress();
+            press = supportLinks.clickOnPressLink();
             AutomationLog.info("Press Page opened successfully");
 
             Assert.assertEquals(press.currentURL(),press.pressPageUrl(), "Press Link did not Navigate to correct pageUrl");
@@ -40,13 +47,13 @@ public class FooterPressAction extends FooterAction
     }
 
     @Override
-    String successMessage()
+    protected String successMessage()
     {
         return " Footer Press tested successfully";
     }
 
     @Override
-    String failureMessage()
+    protected String failureMessage()
     {
         return "Footer Press Action Failed ";
     }

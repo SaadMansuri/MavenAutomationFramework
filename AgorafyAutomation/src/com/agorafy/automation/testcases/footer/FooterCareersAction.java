@@ -3,11 +3,18 @@ package com.agorafy.automation.testcases.footer;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.Careers;
 import com.agorafy.automation.pageobjects.footer.FooterCompanyLinks;
-
-public class FooterCareersAction extends FooterAction
+/**
+ * Test Careers link on Footer
+ * Click Careers link on the Home Page, verify Careers Page is loaded 
+ * Verify the URL of Careers Page
+ * Verify the title of Careers Page
+ * Verify the Heading Text on Careers Page
+ */
+public class FooterCareersAction extends AutomationTestCaseVerification
 {
     public FooterCareersAction()
     {
@@ -15,13 +22,13 @@ public class FooterCareersAction extends FooterAction
     }
 
     @Override
-    void testLink()
+    protected void verifyTestCases()
     {
         FooterCompanyLinks companyLinks = Page.footer().companyLinks();
         Careers career = null;
         try
         {
-            career = companyLinks.openCareers();
+            career = companyLinks.clickOnCareersLink();
             AutomationLog.info("Careers Page opened successfully");
 
             Assert.assertEquals(career.currentURL(), career.careersPageUrl(), "Careers Link did not Navigate to correct pageUrl");
@@ -40,13 +47,13 @@ public class FooterCareersAction extends FooterAction
     }
 
     @Override
-    String successMessage()
+    protected String successMessage()
     {
         return " Footer Careers tested successfully";
     }
 
     @Override
-    String failureMessage()
+    protected String failureMessage()
     {
         return "Footer Careers Action Failed ";
     }

@@ -3,11 +3,18 @@ package com.agorafy.automation.testcases.footer;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.FooterSupportLinks;
 import com.agorafy.automation.pageobjects.footer.support.Feedback;
-
-public class FooterFeedbackAction extends FooterAction
+/**
+ * Test Feedback link on Footer
+ * Click Feedback link on the Home Page, verify Feedback Page is loaded 
+ * Verify the URL of Feedback Page
+ * Verify the title of Feedback Page
+ * Verify the Heading Text on Feedback Page
+ */
+public class FooterFeedbackAction extends AutomationTestCaseVerification
 {
     public FooterFeedbackAction()
     {
@@ -15,13 +22,13 @@ public class FooterFeedbackAction extends FooterAction
     }
 
     @Override
-    void testLink()
+    protected void verifyTestCases()
     {
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
         Feedback feedback = null;
         try
         {
-            feedback = supportLinks.openFeedback();
+            feedback = supportLinks.clickOnFeedbackLink();
             AutomationLog.info("Feedback Page opened successfully");
 
             Assert.assertEquals(feedback.currentURL(), feedback.feedbackPageUrl(), "Feedback Link did not Navigate to correct pageUrl");
@@ -40,13 +47,13 @@ public class FooterFeedbackAction extends FooterAction
     }
 
     @Override
-    String successMessage()
+    protected String successMessage()
     {
         return " Footer Feedback tested successfully";
     }
 
     @Override
-    String failureMessage()
+    protected String failureMessage()
     {
         return "Footer Feedback Action Failed ";
     }

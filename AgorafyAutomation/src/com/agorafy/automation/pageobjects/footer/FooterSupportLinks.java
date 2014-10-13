@@ -35,7 +35,7 @@ public class FooterSupportLinks extends Page
         return element;
     }
 
-    public HowItWorks openHowItWorks() throws Exception
+    public HowItWorks clickOnHowItWorksLink() throws Exception
     {
         HowItWorks howItWorks = null;
         try
@@ -46,7 +46,7 @@ public class FooterSupportLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("How It Works link is not clicked");
+            AutomationLog.error("How It Works link could not be clicked");
             throw(e);
         }
         return howItWorks;
@@ -67,7 +67,7 @@ public class FooterSupportLinks extends Page
         return element;
     }
 
-    public Blog openBlog() throws Exception
+    public Blog clickOnBlogLink() throws Exception
     {
         Blog blog = null;
         try
@@ -78,7 +78,7 @@ public class FooterSupportLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Blog link is not clicked");
+            AutomationLog.error("Blog link could not be clicked");
             throw(e);
         }
         return blog;
@@ -99,7 +99,7 @@ public class FooterSupportLinks extends Page
         return element;
     }
 
-    public Press openPress() throws Exception
+    public Press clickOnPressLink() throws Exception
     {
         Press press = null;
         try
@@ -110,7 +110,7 @@ public class FooterSupportLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Press link is not clicked");
+            AutomationLog.error("Press link could not be clicked");
             throw(e);
         }
         return press;
@@ -131,7 +131,7 @@ public class FooterSupportLinks extends Page
         return element;
     }
 
-    public FAQs openFAQs() throws Exception
+    public FAQs clickOnFAQsLink() throws Exception
     {
         FAQs fAQs = null;
         try
@@ -142,7 +142,7 @@ public class FooterSupportLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("FAQs link is not clicked");
+            AutomationLog.error("FAQs link could not be clicked");
             throw(e);
         }
         return fAQs;
@@ -163,7 +163,7 @@ public class FooterSupportLinks extends Page
         return element;
     }
 
-    public Feedback openFeedback() throws Exception
+    public Feedback clickOnFeedbackLink() throws Exception
     {
         Feedback feedback = null;
         try
@@ -174,7 +174,7 @@ public class FooterSupportLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Feedback link is not clicked");
+            AutomationLog.error("Feedback link could not be clicked");
             throw(e);
         }
         return feedback;

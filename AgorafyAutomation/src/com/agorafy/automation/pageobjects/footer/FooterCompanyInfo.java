@@ -79,51 +79,51 @@ public class FooterCompanyInfo extends Page
         return companyPhoneNumber;
     }
 
-    public WebElement link_MailTo() throws Exception
+    public WebElement link_SupportEmail() throws Exception
     {
         try
         {
             element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[3]/p[2]/a"));
-            AutomationLog.info("Mail To link found on the footer");
+            AutomationLog.info("Support Email link found on the footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Mail To link not found on the footer");
+            AutomationLog.error("Support Email link not found on the footer");
             throw(e);
         }
         return element;
     }
 
-    public String link_MailToText() throws Exception
+    public String link_SupportEmailText() throws Exception
     {
-        String mailToText = "";
+        String supportEmailText = "";
         try
         {
-            mailToText = link_MailTo().getText();
-            AutomationLog.info("MailTo text found on Footer");
+            supportEmailText = link_SupportEmail().getText();
+            AutomationLog.info("Support Email text found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("MailTo text not found on Footer");
+            AutomationLog.error("Support Email text not found on Footer");
             throw(e);
         }
-        return mailToText;
+        return supportEmailText;
     }
 
-    public String link_MailToAdressText() throws Exception
+    public String link_SupportEmailAddressText() throws Exception
     {
-        String mailToAddress = "";
+        String supportEmailAddress = "";
         try
         {
-            mailToAddress = link_MailTo().getAttribute("href");
-            AutomationLog.info("MailTo Address found");
+            supportEmailAddress =link_SupportEmail().getAttribute("href");
+            AutomationLog.info("Support Email Address found");
         }
         catch(Exception e)
         {
-            AutomationLog.error("MailTo Address not found");
+            AutomationLog.error("Support Email Address not found");
             throw(e);
         }
-        return mailToAddress;
+        return supportEmailAddress;
     }
 
     public String text_Copyright() throws Exception
