@@ -1,5 +1,7 @@
 package com.agorafy.automation.testcases.footer;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -26,6 +28,7 @@ public class FooterPressAction extends AutomationTestCaseVerification
     {
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
         Press press = null;
+        HashMap<String, String> pressMap = testCaseData.get("Press");
         try
         {
             press = supportLinks.clickOnPressLink();
@@ -34,10 +37,10 @@ public class FooterPressAction extends AutomationTestCaseVerification
             Assert.assertEquals(press.currentURL(),press.pressPageUrl(), "Press Link did not Navigate to correct pageUrl");
             AutomationLog.info("Press Link navigates to Press URL");
 
-            Assert.assertEquals(press.currentPageTitle(), "AGORAFY - Press", "Press page does not show correct PageTitle");
+            Assert.assertEquals(press.currentPageTitle(), pressMap.get("title").trim(), "Press page does not show correct PageTitle");
             AutomationLog.info("Press page shows correct page title");
 
-            Assert.assertEquals(press.headingText(), "Press","Press page does not show correct page Heading");
+            Assert.assertEquals(press.headingText(), pressMap.get("pageheading").trim(),"Press page does not show correct page Heading");
             AutomationLog.info("Press page shows correct page Heading");
         }
         catch (Exception e)

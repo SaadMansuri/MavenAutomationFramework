@@ -1,5 +1,7 @@
 package com.agorafy.automation.testcases.footer;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -26,6 +28,7 @@ public class FooterMembershipBenefitsAction extends AutomationTestCaseVerificati
     {
         FooterCompanyLinks companyLinks = Page.footer().companyLinks();
         MembershipBenefit membershipBenefit = null;
+        HashMap<String, String> membershipBenefitsMap = testCaseData.get("Benefits");
         try
         {
             membershipBenefit = companyLinks.clickOnMembershipBenefitLink();
@@ -34,10 +37,10 @@ public class FooterMembershipBenefitsAction extends AutomationTestCaseVerificati
             Assert.assertEquals(membershipBenefit.currentURL(), membershipBenefit.membershipBenefitPageUrl(), "Membership Benefit Link did not Navigate to correct pageUrl");
             AutomationLog.info("Membership Benefit Link navigates to Membership Benefit URL");
 
-            Assert.assertEquals(membershipBenefit.currentPageTitle(), "AGORAFY - Members' Benefits", "Membership benefit page does not show correct PageTitle");
+            Assert.assertEquals(membershipBenefit.currentPageTitle(), membershipBenefitsMap.get("title").trim(), "Membership benefit page does not show correct PageTitle");
             AutomationLog.info("Membership Benefit page shows correct page title");
 
-            Assert.assertEquals(membershipBenefit.headingText(), "Members' Benefits","Membership Benefit page does not show correct page Heading");
+            Assert.assertEquals(membershipBenefit.headingText(), membershipBenefitsMap.get("pageheading").trim(),"Membership Benefit page does not show correct page Heading");
             AutomationLog.info("Membership Benefit page shows correct page Heading");
         }
         catch (Exception e)

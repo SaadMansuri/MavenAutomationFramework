@@ -1,5 +1,7 @@
 package com.agorafy.automation.testcases.footer;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -25,6 +27,7 @@ public class FooterCareersAction extends AutomationTestCaseVerification
     protected void verifyTestCases()
     {
         FooterCompanyLinks companyLinks = Page.footer().companyLinks();
+        HashMap<String, String> careersMap = testCaseData.get("Careers");
         Careers career = null;
         try
         {
@@ -34,10 +37,10 @@ public class FooterCareersAction extends AutomationTestCaseVerification
             Assert.assertEquals(career.currentURL(), career.careersPageUrl(), "Careers Link did not Navigate to correct pageUrl");
             AutomationLog.info("Careers Link navigates to Careers URL");
 
-            Assert.assertEquals(career.currentPageTitle(), "AGORAFY - Careers", "Careers page does not show correct PageTitle");
+            Assert.assertEquals(career.currentPageTitle(), careersMap.get("title").trim(), "Careers page does not show correct PageTitle");
             AutomationLog.info("Careers page shows correct page title");
 
-            Assert.assertEquals(career.headingText(), "Careers","Careers page does not show correct page Heading");
+            Assert.assertEquals(career.headingText(), careersMap.get("pageheading").trim(),"Careers page does not show correct page Heading");
             AutomationLog.info("Careers page shows correct page Heading");
         }
         catch (Exception e)

@@ -1,6 +1,7 @@
 package com.agorafy.automation.testcases.footer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.testng.Assert;
@@ -32,6 +33,7 @@ public class FooterSocialLinksAction extends AutomationTestCaseVerification
     AgorafyYoutubePage agorafyYoutube = null;
     AgorafyLinkedInPage agorafyLinkedIn = null;
     AgorafyGooglePlusPage agorafyGooglePlus = null;
+    HashMap<String, String> socialLinksMap = null;
 
     public FooterSocialLinksAction()
     {
@@ -65,11 +67,12 @@ public class FooterSocialLinksAction extends AutomationTestCaseVerification
             AutomationLog.info("Agorafy LinkedIn Page opened successfully");
 
             switchToNewWindow();
+            socialLinksMap = testCaseData.get("LinkedIn");
 
             Assert.assertEquals(agorafyLinkedIn.currentURL(),agorafyLinkedIn.agorafyLinkedInPageUrl(),"LinkedIn Icon Link did not navigate to correct page Url");
             AutomationLog.info("LinkedIn icon link navigates to LinkedIn Url");
 
-            Assert.assertEquals(agorafyLinkedIn.currentPageTitle(), "Agorafy | LinkedIn","Agorafy LinkedIn Page does not show correct page title");
+            Assert.assertEquals(agorafyLinkedIn.currentPageTitle(), socialLinksMap.get("title").trim(),"Agorafy LinkedIn Page does not show correct page title");
             AutomationLog.info("Agorafy LinkedIn Page shows correct page Title");
 
             switchToHomePage();
@@ -88,11 +91,12 @@ public class FooterSocialLinksAction extends AutomationTestCaseVerification
             AutomationLog.info("Agorafy Google Plus Page opened successfully");
 
             switchToNewWindow();
+            socialLinksMap = testCaseData.get("GooglePlus");
 
             Assert.assertEquals(agorafyGooglePlus.currentURL(),agorafyGooglePlus.agorafyGooglePlusPageUrl(),"GooglePlus Icon Link did not navigate to correct page Url");
             AutomationLog.info("GooglePlus icon link navigates to GooglePlus Url");
 
-            Assert.assertEquals(agorafyGooglePlus.currentPageTitle(), "Agorafy - Google+","Agorafy GooglePlus Page does not show correct page title");
+            Assert.assertEquals(agorafyGooglePlus.currentPageTitle(), socialLinksMap.get("title").trim(),"Agorafy GooglePlus Page does not show correct page title");
             AutomationLog.info("Agorafy GooglePlus Page shows correct page Title");
 
             switchToHomePage();
@@ -111,11 +115,12 @@ public class FooterSocialLinksAction extends AutomationTestCaseVerification
             AutomationLog.info("Agorafy Youtube Page opened successfully");
 
             switchToNewWindow();
+            socialLinksMap = testCaseData.get("Youtube");
 
             Assert.assertEquals(agorafyYoutube.currentURL(),agorafyYoutube.agorafyYoutubePageUrl(),"YouTube Icon Link did not navigate to correct page Url");
             AutomationLog.info("Youtube icon link navigates to Youtube Url");
 
-            Assert.assertEquals(agorafyYoutube.currentPageTitle(), "agorafy - YouTube","Agorafy Youtube Page does not show correct page title");
+            Assert.assertEquals(agorafyYoutube.currentPageTitle(),  socialLinksMap.get("title").trim(),"Agorafy Youtube Page does not show correct page title");
             AutomationLog.info("Agorafy Youtube Page shows correct page Title");
 
             switchToHomePage();
@@ -134,11 +139,12 @@ public class FooterSocialLinksAction extends AutomationTestCaseVerification
             AutomationLog.info("Agorafy Facebook Page opened successfully");
 
             switchToNewWindow();
+            socialLinksMap = testCaseData.get("Facebook");
 
             Assert.assertEquals(agorafyFacebook.currentURL(),agorafyFacebook.agorafyFacebookPageUrl(),"Facebook Icon Link did not navigate to correct page Url");
             AutomationLog.info("Facebook icon link navigates to Facebook Url");
 
-            Assert.assertEquals(agorafyFacebook.currentPageTitle(), "Agorafy - New York, New York - Real Estate | Facebook","Agorafy Facebook Page does not show correct page title");
+            Assert.assertEquals(agorafyFacebook.currentPageTitle(), socialLinksMap.get("title").trim(),"Agorafy Facebook Page does not show correct page title");
             AutomationLog.info("Agorafy Facebook Page shows correct page Title");
 
             switchToHomePage();
@@ -157,11 +163,12 @@ public class FooterSocialLinksAction extends AutomationTestCaseVerification
             AutomationLog.info("Agorafy Twitter Page opened successfully");
 
             switchToNewWindow();
+            socialLinksMap = testCaseData.get("Twitter");
 
             Assert.assertEquals(agorafyTwitter.currentURL(), agorafyTwitter.agorafyTwitterPageUrl(), "Twitter Icon Link did not navigate to correct page Url");
             AutomationLog.info("Twitter icon link navigates to Twitter Url");
 
-            Assert.assertEquals(agorafyTwitter.currentPageTitle(), "Agorafy (@agorafy) | Twitter","Agorafy Twitter Page does not show correct page title");
+            Assert.assertEquals(agorafyTwitter.currentPageTitle(),  socialLinksMap.get("title").trim(),"Agorafy Twitter Page does not show correct page title");
             AutomationLog.info("Agorafy Twitter Page shows correct page Title");
 
             switchToHomePage();

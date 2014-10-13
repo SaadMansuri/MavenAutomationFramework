@@ -1,5 +1,7 @@
 package com.agorafy.automation.testcases.footer;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -26,6 +28,7 @@ public class FooterHowItWorksAction extends AutomationTestCaseVerification
     {
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
         HowItWorks howItWorks = null;
+        HashMap<String, String> howItWorksMap = testCaseData.get("HowItWorks");
         try
         {
             howItWorks = supportLinks.clickOnHowItWorksLink();
@@ -34,10 +37,10 @@ public class FooterHowItWorksAction extends AutomationTestCaseVerification
             Assert.assertEquals(howItWorks.currentURL(), howItWorks.howItWorksPageUrl(), "HowItWorks Link did not Navigate to correct pageUrl");
             AutomationLog.info("HowItWorks Link navigates to HowItWorks URL");
 
-            Assert.assertEquals(howItWorks.currentPageTitle(), "AGORAFY - Tips and How-Tos", "HowItWorks page does not show correct PageTitle");
+            Assert.assertEquals(howItWorks.currentPageTitle(), howItWorksMap.get("title").trim(), "HowItWorks page does not show correct PageTitle");
             AutomationLog.info("HowItWorks page shows correct page title");
 
-            Assert.assertEquals(howItWorks.headingText(), "How It Works","HowItWorks page does not show correct page Heading");
+            Assert.assertEquals(howItWorks.headingText(), howItWorksMap.get("pageheading").trim(),"HowItWorks page does not show correct page Heading");
             AutomationLog.info("HowItWorks page shows correct page Heading");
         }
         catch (Exception e)

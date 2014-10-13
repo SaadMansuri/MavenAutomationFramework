@@ -1,5 +1,7 @@
 package com.agorafy.automation.testcases.footer;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -25,6 +27,7 @@ public class FooterBlogAction extends AutomationTestCaseVerification
     {
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
         Blog blog = null;
+        HashMap<String, String> blogMap = testCaseData.get("Blog");
         try
         {
             blog = supportLinks.clickOnBlogLink();
@@ -33,7 +36,7 @@ public class FooterBlogAction extends AutomationTestCaseVerification
             Assert.assertEquals(blog.currentURL(), blog.blogPageUrl(), "Blog Link did not Navigate to correct pageUrl");
             AutomationLog.info("Blog Link navigates to Blog URL");
 
-            Assert.assertEquals(blog.currentPageTitle(), "Agorafy - Home", "Blog page does not show correct PageTitle");
+            Assert.assertEquals(blog.currentPageTitle(), blogMap.get("title").trim(), "Blog page does not show correct PageTitle");
             AutomationLog.info("Blog page shows correct page title");
         }
         catch (Exception e)

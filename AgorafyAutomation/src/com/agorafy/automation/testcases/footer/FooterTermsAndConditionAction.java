@@ -1,5 +1,7 @@
 package com.agorafy.automation.testcases.footer;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -26,6 +28,7 @@ public class FooterTermsAndConditionAction extends AutomationTestCaseVerificatio
     {		
         FooterLegalLinks legalLinks = Page.footer().legalLinks();
         TermsAndConditions termsAndConditions = null;
+        HashMap<String, String> termsAndConditionsMap = testCaseData.get("Terms");
         try
         {
             termsAndConditions = legalLinks.clickOnTermsAndConditionsLink();
@@ -34,10 +37,10 @@ public class FooterTermsAndConditionAction extends AutomationTestCaseVerificatio
             Assert.assertEquals(termsAndConditions.currentURL(), termsAndConditions.termsAndConditionsPageUrl(), "TermsAndConditions Link did not Navigate to correct pageUrl");
             AutomationLog.info("TermsAndConditions Link navigates to TermsAndConditions URL");
 
-            Assert.assertEquals(termsAndConditions.currentPageTitle(), "AGORAFY - Terms and Conditions", "TermsAndConditions page does not show correct PageTitle");
+            Assert.assertEquals(termsAndConditions.currentPageTitle(),termsAndConditionsMap.get("title").trim(), "TermsAndConditions page does not show correct PageTitle");
             AutomationLog.info("TermsAndConditions page shows correct page title");
 
-            Assert.assertEquals(termsAndConditions.headingText(), "Terms and Conditions","TermsAndConditions page does not show correct page Heading");
+            Assert.assertEquals(termsAndConditions.headingText(), termsAndConditionsMap.get("pageheading").trim(),"TermsAndConditions page does not show correct page Heading");
             AutomationLog.info("TermsAndConditions page shows correct page Heading");
         }
         catch (Exception e)

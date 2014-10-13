@@ -1,5 +1,7 @@
 package com.agorafy.automation.testcases.footer;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -26,6 +28,7 @@ public class FooterPrivacyPolicyAction extends AutomationTestCaseVerification
     {
         FooterLegalLinks legalLinks = Page.footer().legalLinks();
         PrivacyPolicy privacyPolicy = null;
+        HashMap<String, String> privacyPolicyMap = testCaseData.get("PrivacyPolicy"); 
         try
         {
             privacyPolicy = legalLinks.clickOnPrivacyPolicyLink();
@@ -34,10 +37,10 @@ public class FooterPrivacyPolicyAction extends AutomationTestCaseVerification
             Assert.assertEquals(privacyPolicy.currentURL(), privacyPolicy.privacyPolicyPageUrl(), "PrivacyPolicy Link did not Navigate to correct pageUrl");
             AutomationLog.info("PrivacyPolicy Link navigates to PrivacyPolicy URL");
 
-            Assert.assertEquals(privacyPolicy.currentPageTitle(), "AGORAFY - Privacy Policy", "PrivacyPolicy page does not show correct PageTitle");
+            Assert.assertEquals(privacyPolicy.currentPageTitle(), privacyPolicyMap.get("title").trim(), "PrivacyPolicy page does not show correct PageTitle");
             AutomationLog.info("PrivacyPolicy page shows correct page title");
 
-            Assert.assertEquals(privacyPolicy.headingText(), "Privacy Policy","PrivacyPolicy page does not show correct page Heading");
+            Assert.assertEquals(privacyPolicy.headingText(), privacyPolicyMap.get("pageheading").trim(),"PrivacyPolicy page does not show correct page Heading");
             AutomationLog.info("PrivacyPolicy page shows correct page Heading");
         }
         catch (Exception e)

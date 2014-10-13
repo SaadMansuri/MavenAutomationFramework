@@ -1,5 +1,7 @@
 package com.agorafy.automation.testcases.footer;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -26,6 +28,7 @@ public class FooterFeedbackAction extends AutomationTestCaseVerification
     {
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
         Feedback feedback = null;
+        HashMap<String, String> feedbackMap = testCaseData.get("Feedback");
         try
         {
             feedback = supportLinks.clickOnFeedbackLink();
@@ -34,10 +37,10 @@ public class FooterFeedbackAction extends AutomationTestCaseVerification
             Assert.assertEquals(feedback.currentURL(), feedback.feedbackPageUrl(), "Feedback Link did not Navigate to correct pageUrl");
             AutomationLog.info("Feedback Link navigates to Feedback URL");
 
-            Assert.assertEquals(feedback.currentPageTitle(), "AGORAFY - Feedback", "Feedback page does not show correct PageTitle");
+            Assert.assertEquals(feedback.currentPageTitle(), feedbackMap.get("title").trim(), "Feedback page does not show correct PageTitle");
             AutomationLog.info("Feedback page shows correct page title");
 
-            Assert.assertEquals(feedback.headingText(), "Feedback","Feedback page does not show correct page Heading");
+            Assert.assertEquals(feedback.headingText(), feedbackMap.get("pageheading").trim(),"Feedback page does not show correct page Heading");
             AutomationLog.info("Feedback page shows correct page Heading");
         }
         catch (Exception e)

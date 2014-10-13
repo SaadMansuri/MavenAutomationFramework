@@ -1,5 +1,7 @@
 package com.agorafy.automation.testcases.footer;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -26,6 +28,7 @@ public class FooterTeamAction extends AutomationTestCaseVerification
     {
         FooterCompanyLinks companyLinks = Page.footer().companyLinks();
         Team team = null;
+        HashMap<String, String> teamMap = testCaseData.get("Team");
         try
         {
             team = companyLinks.clickOnTeamLink();
@@ -34,10 +37,10 @@ public class FooterTeamAction extends AutomationTestCaseVerification
             Assert.assertEquals(team.currentURL(), team.teamPageUrl(), "Team Link did not Navigate to correct pageUrl");
             AutomationLog.info("Team Link navigates to Team URL");
 
-            Assert.assertEquals(team.currentPageTitle(), "AGORAFY - Team", "Team page does not show correct PageTitle");
+            Assert.assertEquals(team.currentPageTitle(), teamMap.get("title").trim(), "Team page does not show correct PageTitle");
             AutomationLog.info("Team page shows correct page title");
 
-            Assert.assertEquals(team.headingText(), "Team","Team page does not show correct page Heading");
+            Assert.assertEquals(team.headingText(), teamMap.get("pageheading").trim(),"Team page does not show correct page Heading");
             AutomationLog.info("Team page shows correct page Heading");
         }
         catch (Exception e)
