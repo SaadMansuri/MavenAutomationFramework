@@ -7,7 +7,7 @@ import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.testcases.SignUpNegativeAction;
 
-public class SignUpTest 
+public class SignUpTest
 {
      @BeforeSuite
      public void Init()
@@ -23,7 +23,7 @@ public class SignUpTest
          {
               new SignUpNegativeAction().Execute();
          }
-         catch (Exception e) 
+         catch (Exception e)
          {
               AutomationLog.error(e.getMessage());
               throw (e);

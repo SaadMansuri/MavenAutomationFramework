@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.testcases.AccountSettingAction;
+import com.agorafy.automation.testcases.ChangePasswordNegativeAction;
+import com.agorafy.automation.testcases.ChangePasswordPositiveAction;
 
 public class AccountSettingsTest
 {
@@ -29,6 +31,34 @@ public class AccountSettingsTest
         {
             AutomationLog.error(e.getMessage());
             throw(e);
+        }
+    }
+
+    @Test
+    public void testChangePasswordNegativeTestcases() throws Exception
+    {
+        try
+        {
+           new ChangePasswordNegativeAction().Execute();
+        }
+        catch (Exception e)
+        {
+           AutomationLog.error(e.getMessage());
+           throw (e);
+        }
+    }
+
+    @Test
+    public void testChangePasswordPositiveTestcases () throws Exception
+    {
+        try
+        {
+            new ChangePasswordPositiveAction().Execute();
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error(e.getMessage());
+            throw (e);
         }
     }
 }

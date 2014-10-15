@@ -137,6 +137,8 @@ public class TestDataProvider
         for (int i = 0; i < fields.length; i++) {
             // Get rid of residual double quotes
             fields[i] = fields[i].replace("\"", "");
+            // Replace newline character.
+            fields[i] = fields[i].replace("\\n", "\n");
         }
         return fields;
     }

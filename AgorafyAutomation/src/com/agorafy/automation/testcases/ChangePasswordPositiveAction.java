@@ -1,5 +1,7 @@
 package com.agorafy.automation.testcases;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -41,7 +43,12 @@ public class ChangePasswordPositiveAction extends AutomationTestCase
             setup();
            //TODO: get this from CSV data.
             headerLoginForm = homePage.openHeaderLoginForm();
-            homePage = headerLoginForm.doSuccessfulLogin("chandrani.bhagat@cuelogic.co.in", "cuelogic");
+
+            HashMap<String, String> loginData =  testCaseData.get("validCredential");
+            String UserName = loginData.get("username");
+            String Password = loginData.get("password");
+
+            homePage = headerLoginForm.doSuccessfulLogin(UserName, Password);
           //Verify this is the correct homepage.
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             Header header = Page.header();
@@ -76,14 +83,20 @@ public class ChangePasswordPositiveAction extends AutomationTestCase
     public void verifyIfAllTheValidFieldsAreEntered(ChangePasswordTab changePasswordTab) throws Exception
     {
         ChangePasswordData changepassworddata = new ChangePasswordData();
-        changepassworddata.setOldPassword("cuelogic77");
-        changepassworddata.setNewPassword("cuelogic");
-        changepassworddata.setRetypeNewPassword("cuelogic");
+
+        HashMap<String, String> ValidTestData = testCaseData.get("AllTheValidFieldsAreEntered");
+
+        changepassworddata.setOldPassword(ValidTestData.get("ValidOldPassword"));
+
+        changepassworddata.setNewPassword(ValidTestData.get("ValidNewPassword"));
+
+        changepassworddata.setRetypeNewPassword(ValidTestData.get("ValidRetypeNewPassword"));
+
         changePasswordTab.populateChangePasswordData(changepassworddata);
-            
+
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
         String verifySuccesfullPasswordMessage = changePasswordTab.passwordChangedSuccessfully().getText();
-        Assert.assertEquals(verifySuccesfullPasswordMessage, "Your password has been changed.", "Password not Changed successfully when valid credentials are entered");
+        Assert.assertEquals(verifySuccesfullPasswordMessage, ValidTestData.get("validMsg"), "Password not Changed successfully when valid credentials are entered");
         AutomationLog.info("The Password Changed successfully when all the Valid Credintials Are Entered");
     }
 

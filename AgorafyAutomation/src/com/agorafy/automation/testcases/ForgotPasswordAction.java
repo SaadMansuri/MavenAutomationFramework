@@ -1,5 +1,7 @@
 package com.agorafy.automation.testcases;
 
+import java.util.HashMap;
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -21,28 +23,28 @@ public class ForgotPasswordAction extends AutomationTestCase
         super();
     }
 
-    public void setup() 
+    public void setup()
     {
         super.setup();
         homePage = Homepage.homePage();
     }
 
-    public void cleanup() 
+    public void cleanup()
     {
         super.cleanup();
     }
 
     public void Execute() throws Exception
     {
-        try 
+        try
         {
              setup();
              headerlogin =  homePage.openHeaderLoginForm();
              loginPage = headerlogin.doInvalidLogin("", "");
              ForgotPassword forgotPassword = loginPage.clickOnForgotPassword();
              verifyIfTheUserEnteredWrongEmailAddress(forgotPassword);
-        } 
-        catch (Exception e) 
+        }
+        catch (Exception e)
         {
              testcaseFailed("For forpassword when user enter wrong email address");
              throw(e);
@@ -52,21 +54,23 @@ public class ForgotPasswordAction extends AutomationTestCase
             testcaseFailed("For forpassword when user enter wrong email address");
             throw(new Exception(throwable.getMessage()));
         }
-        finally 
+        finally
         {
-            cleanup(); 
+            cleanup();
         }
     }
 
     public void verifyIfTheUserEnteredWrongEmailAddress(ForgotPassword forgotpassword) throws Exception
     {
         ForgotPasswordData forgotpassworddata = new ForgotPasswordData();
-        forgotpassworddata.setEmailAddress("anjan1234");
+
+        HashMap<String, String> invalidEmailData = testCaseData.get("UserEnteredWrongEmailAddress");
+        forgotpassworddata.setEmailAddress(invalidEmailData.get("invalidEmail"));
 
         forgotpassword.populateForgotPasswordData(forgotpassworddata);
         forgotpassword = forgotpassword.clickOnRequestNewPassword();
         String invalidEmailAddress = forgotpassword.errorMessageEnterValidMail().getText();
-        Assert.assertEquals(invalidEmailAddress, "Please enter valid email address.", "The proper error message please enter valid email address is not displayed");
+        Assert.assertEquals(invalidEmailAddress, invalidEmailData.get("errorMsg"), "The proper error message please enter valid email address is not displayed");
         AutomationLog.info("The Appropriate error message please enter valid email is displayed");
-    }           
+    }
 }
