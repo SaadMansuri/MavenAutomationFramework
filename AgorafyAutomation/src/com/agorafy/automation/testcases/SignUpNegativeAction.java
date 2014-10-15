@@ -1,4 +1,5 @@
 package com.agorafy.automation.testcases;
+import java.util.HashMap;
 
 import org.testng.Assert;
 
@@ -9,22 +10,22 @@ import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.SignUp;
 
-public class SignUpNegativeAction extends AutomationTestCase 
+public class SignUpNegativeAction extends AutomationTestCase
 {
     private Header header = null;
 
-    public SignUpNegativeAction() 
+    public SignUpNegativeAction()
     {
         super();
     }
 
-    public void setup() 
+    public void setup()
     {
         super.setup();
         header = Homepage.header();
     }
 
-    public void cleanup() 
+    public void cleanup()
     {
         super.cleanup();
     }
@@ -38,7 +39,7 @@ public class SignUpNegativeAction extends AutomationTestCase
             populateAndVerifyEmailDetails(signUp);
             verifyIfEmailAlreadyExist(signUp);
         }
-        catch (Exception e) 
+        catch (Exception e)
         {
             handleTestCaseFailure(e.getMessage());
         }
@@ -46,13 +47,13 @@ public class SignUpNegativeAction extends AutomationTestCase
         {
             handleTestCaseFailure(throwable.getMessage());
         }
-            finally 
+            finally
         {
             cleanup();
         }
     }
 
-    private void handleTestCaseFailure(String message) throws Exception 
+    private void handleTestCaseFailure(String message) throws Exception
     {
         AutomationLog.error("InValid Test Cases SignUp Action  Failed: " + message);
         throw (new Exception("InValid Test Cases SignUp Action  Failed" + message));
@@ -61,24 +62,28 @@ public class SignUpNegativeAction extends AutomationTestCase
     public void populateAndVerifyEmailDetails(SignUp signup) throws Exception
     {
         SignUpData signupdata = new SignUpData();
-        signupdata.setEmail("rtyu");
+
+        HashMap<String, String> InvalidEmailData = testCaseData.get("VerifyEmailDetails");
+        signupdata.setEmail(InvalidEmailData.get("invalidEmail"));
         signup.populateSignUpData(signupdata);
-        signup =  signup.clickOnSignUpAccountButton();
+        signup = signup.clickOnSignUpAccountButton();
         String wrongEmailAddress = signup.errorMessageInvalidEmailEntered().getText();
-        Assert.assertEquals(wrongEmailAddress, "* Invalid email address", "The proper error message for invalid email is not displayed");
+        Assert.assertEquals(wrongEmailAddress, InvalidEmailData.get("errorMsg"), "The proper error message for invalid email is not displayed");
         AutomationLog.info("The Appropriate error message for invalid emails is displayed");
     }
 
     public void verifyIfEmailAlreadyExist(SignUp signup) throws Exception
     {
         SignUpData signupdata = new SignUpData();
-        signupdata.setEmail("anjan.kumar@cuelogic.co.in");
+
+        HashMap<String, String> ValidEmailData = testCaseData.get("VerifyEmailDetails");
+        signupdata.setEmail(ValidEmailData.get("validEmail"));
         signup.populateSignUpData(signupdata);
-        
-        signup =  signup.clickOnSignUpAccountButton();
-        
+
+        signup = signup.clickOnSignUpAccountButton();
+
         String validEmailAddress = signup.emailAlreadyRegistered().getText();
-        Assert.assertEquals(validEmailAddress, "", "The proper message for valid mail is not displayed");
+        Assert.assertEquals(validEmailAddress, ValidEmailData.get("validMsg"), "The proper message for valid mail is not displayed");
         AutomationLog.info("The Appropriate message Email already registered is displayed");
     }
 }

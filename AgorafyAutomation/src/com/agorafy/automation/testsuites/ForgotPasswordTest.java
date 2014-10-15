@@ -7,7 +7,7 @@ import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.testcases.ForgotPasswordAction;
 
-public class ForgotPasswordTest 
+public class ForgotPasswordTest
 {
     @BeforeSuite
     public void Init()
@@ -17,7 +17,7 @@ public class ForgotPasswordTest
      }
 
     @Test
-    public void ForgotPasswordActionTest() throws Exception 
+    public void ForgotPasswordActionTest() throws Exception
     {
         try
         {
