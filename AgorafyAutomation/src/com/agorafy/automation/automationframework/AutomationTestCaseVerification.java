@@ -17,7 +17,7 @@ public abstract class AutomationTestCaseVerification extends AutomationTestCase
         super.cleanup();
     }
 
-    protected abstract void verifyTestCases();
+    protected abstract void verifyTestCases() throws Exception;
     protected abstract String successMessage();
     protected abstract String failureMessage();
 
@@ -45,8 +45,7 @@ public abstract class AutomationTestCaseVerification extends AutomationTestCase
 
     private void handleTestCaseFailure(String message) throws Exception
     {
-        AutomationLog.error(failureMessage() + message);
-        testcaseFailed(failureMessage() + message);
-        throw (new Exception(failureMessage() + message));
+        testcaseFailed(failureMessage());
+        throw (new Exception(message));
     }
 }

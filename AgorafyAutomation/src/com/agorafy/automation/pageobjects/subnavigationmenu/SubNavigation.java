@@ -1,10 +1,9 @@
 package com.agorafy.automation.pageobjects.subnavigationmenu;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.AboutUs;
@@ -24,7 +23,7 @@ public class SubNavigation extends Page
         super(driver);
     }
 
-    public WebElement SubNavigationBar() throws Exception
+    public WebElement subNavigationBar() throws Exception
     {
         try
         {
@@ -43,7 +42,7 @@ public class SubNavigation extends Page
     {
         try
         {
-            element = SubNavigationBar().findElement(By.linkText("Contact"));
+            element = subNavigationBar().findElement(By.linkText("Contact"));
             AutomationLog.info("Contact Link found in Subnavigation bar");
         }
         catch (Exception e)
@@ -56,24 +55,26 @@ public class SubNavigation extends Page
 
     public Contact clickLinkContact() throws Exception
     {
+        Contact contact;
         try
         {
             link_Contact().click();
+            contact = new Contact(Page.driver);
             AutomationLog.info("Contact link clicked");
         }
         catch (Exception e)
         {
-        	AutomationLog.error("Contact link is not found");
+        	AutomationLog.error("Contact link click operation is not successful");
             throw(e);
         }
-        return new Contact(Page.driver);
+        return contact;
     }
 
     public WebElement link_SearchProfessionals() throws Exception
     {
         try
         {
-            element = SubNavigationBar().findElement(By.linkText("Search Professionals"));
+            element = subNavigationBar().findElement(By.linkText("Search Professionals"));
             AutomationLog.info("Search professionals link found in Subnavigation bar");
         }
         catch (Exception e)
@@ -86,9 +87,11 @@ public class SubNavigation extends Page
 
     public SearchProfessionalsPage clickLinkSearchProfessionals() throws Exception
     {
+        SearchProfessionalsPage searchprofessionals;
         try
         {
             link_SearchProfessionals().click();
+            searchprofessionals = new SearchProfessionalsPage(Page.driver);
             AutomationLog.info("Search Professionals link is clicked");
         }
         catch (Exception e)
@@ -96,14 +99,14 @@ public class SubNavigation extends Page
         	AutomationLog.error("Search Professionals link click operation not successful");
             throw(e);
         }
-        return new SearchProfessionalsPage(Page.driver);
+        return searchprofessionals;
     }
 
     public WebElement link_HowItWorks() throws Exception
     {
         try
         {
-            element = SubNavigationBar().findElement(By.linkText("How It Works"));
+            element = subNavigationBar().findElement(By.linkText("How It Works"));
             AutomationLog.info("How it Works link found in Subnavigation bar");
         }
         catch (Exception e)
@@ -116,9 +119,11 @@ public class SubNavigation extends Page
 
     public HowItWorks clickLinkHowitWorks() throws Exception
     {
+        HowItWorks howitworks;
         try
         {
             link_HowItWorks().click();
+            howitworks = new HowItWorks(Page.driver);
             AutomationLog.info("How it Works link is clicked");
         }
         catch(Exception e)
@@ -126,14 +131,14 @@ public class SubNavigation extends Page
         	AutomationLog.error("How it Works link click operation not successful");
             throw(e);
         }
-        return new HowItWorks(Page.driver);
+        return howitworks;
     }
 
     public WebElement link_MemberBenefits() throws Exception
     {
         try
         {
-            element = SubNavigationBar().findElement(By.linkText("Members' Benefits"));
+            element = subNavigationBar().findElement(By.linkText("Members' Benefits"));
             AutomationLog.info("Members Benefits link found in Subnavigation bar");
         }
         catch (Exception e)
@@ -146,9 +151,11 @@ public class SubNavigation extends Page
 
     public MembershipBenefit clickLinkMemberBenefits() throws Exception
     {
+    	MembershipBenefit membership;
         try
         {
             link_MemberBenefits().click();
+            membership = new MembershipBenefit(Page.driver);
             AutomationLog.info("Member Benefits link clicked");
         }
         catch(Exception e)
@@ -156,14 +163,14 @@ public class SubNavigation extends Page
         	AutomationLog.error("Member Benefits link could not be clicked");
             throw(e);
         }
-        return new MembershipBenefit(Page.driver);
+        return membership;
     }
 
     public WebElement link_SearchProperties() throws Exception
     {
         try
         {
-            element = SubNavigationBar().findElement(By.linkText("Search Properties"));
+            element = subNavigationBar().findElement(By.linkText("Search Properties"));
             AutomationLog.info("Search Properties link found in Subnavigation bar");
         }
         catch (Exception e)
@@ -176,9 +183,11 @@ public class SubNavigation extends Page
 
     public SearchPropertiesPage clickLinkSearchProperties() throws Exception
     {
-    	try
+        SearchPropertiesPage searchproperties;
+        try
         {
             link_SearchProperties().click();
+            searchproperties = new SearchPropertiesPage(Page.driver);
             AutomationLog.info("Search Properties link is clicked");
         }
         catch (Exception e)
@@ -186,14 +195,14 @@ public class SubNavigation extends Page
         	AutomationLog.error("Search Properties link click operation not successful");
             throw(e);
         }
-        return new SearchPropertiesPage(Page.driver);
+        return searchproperties;
     }
 
     public WebElement link_Careers() throws Exception
     {
         try
         {
-            element = SubNavigationBar().findElement(By.linkText("Careers"));
+            element = subNavigationBar().findElement(By.linkText("Careers"));
             AutomationLog.info("Careers link found in Subnavigation bar");
         }
         catch (Exception e)
@@ -206,24 +215,26 @@ public class SubNavigation extends Page
 
     public Careers clickLinkCareers() throws Exception
     {
-    	try
+    	Careers career;
+        try
         {
             link_Careers().click();
+            career = new Careers(Page.driver);
             AutomationLog.info("Careers page link is clicked");
         }
         catch (Exception e)
         {
-        	AutomationLog.error("Careers page link click operation not successful");
+            AutomationLog.error("Careers page link click operation not successful");
             throw(e);
         }
-        return new Careers(Page.driver);
+        return career;
     }
 
     public WebElement link_AboutUs() throws Exception
     {
         try
         {
-            element = SubNavigationBar().findElement(By.linkText("About Us"));
+            element = subNavigationBar().findElement(By.linkText("About Us"));
             AutomationLog.info("About Us link found in Subnavigation bar");
         }
         catch (Exception e)
@@ -236,9 +247,11 @@ public class SubNavigation extends Page
 
     public AboutUs clickLinkAboutUs() throws Exception
     {
+        AboutUs aboutus;
         try
         {
             link_AboutUs().click();
+            aboutus = new AboutUs(Page.driver);
             AutomationLog.info("About Us link is clicked");
         }
         catch (Exception e)
@@ -246,14 +259,14 @@ public class SubNavigation extends Page
             AutomationLog.error("About Us link click operation not successful");
             throw(e);
         }
-        return new AboutUs(Page.driver);
+        return aboutus;
     }
 
     public WebElement link_Blog() throws Exception
     {
         try
         {
-            element = SubNavigationBar().findElement(By.linkText("Blog"));
+            element = subNavigationBar().findElement(By.linkText("Blog"));
             AutomationLog.info("Blog link found in Subnavigation bar");
         }
         catch (Exception e)
@@ -266,10 +279,11 @@ public class SubNavigation extends Page
 
     public Blog clickLinkBlog() throws Exception
     {
+        Blog blog;
         try
         {
             link_Blog().click();
-            Page.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+            blog = new Blog(Page.driver);
             AutomationLog.info("Blog link is clicked");
         }
         catch (Exception e)
@@ -277,14 +291,14 @@ public class SubNavigation extends Page
             AutomationLog.error("Blog link could not be clicked");
             throw(e);
         }
-        return new Blog(Page.driver);
+        return blog;
     }
 
     public WebElement link_FAQ() throws Exception
     {
         try
         {
-            element = SubNavigationBar().findElement(By.linkText("FAQs"));
+            element = subNavigationBar().findElement(By.linkText("FAQs"));
             AutomationLog.info("FAQs link found in Subnavigation bar");
         }
         catch (Exception e)
@@ -297,9 +311,11 @@ public class SubNavigation extends Page
 
     public FAQs clickLinkFAQ() throws Exception
     {
+        FAQs faq;
         try
         {
             link_FAQ().click();
+            faq = new FAQs(Page.driver);
             AutomationLog.info("FAQs link is clicked");
         }
         catch (Exception e)
@@ -307,6 +323,6 @@ public class SubNavigation extends Page
             AutomationLog.error("FAQs link could not be clicked");
             throw(e);
         }
-        return new FAQs(Page.driver);
+        return faq;
     }
 }
