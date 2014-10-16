@@ -17,7 +17,7 @@ public class ForgotPasswordTest
      }
 
     @Test
-    public void ForgotPasswordActionTest() throws Exception
+    public void testForgotPasswordActionTestCases() throws Exception
     {
         try
         {

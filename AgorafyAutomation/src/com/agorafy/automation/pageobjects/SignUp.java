@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.datamodel.profile.SignUpData;
+import com.agorafy.automation.datamodel.profile.EmailData;
 
 public class SignUp extends Page
 {
@@ -20,11 +20,11 @@ public class SignUp extends Page
         try
         {
             element=driver.findElement(By.id("registrationEmailInput"));
-            AutomationLog.info("Email text box found inside the SignUp page");
+            AutomationLog.info("Email text box found in the SignUp page");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Email text box not found inside the SignUp page");
+            AutomationLog.error("Could not found email text box");
             throw(e);
         }
         return element;
@@ -35,11 +35,11 @@ public class SignUp extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='registrationSubmitForm']/div[1]/div/div"));
-            AutomationLog.info("Actual Error message found in the email text box");
+            AutomationLog.info("Appropriate Error message for invalid email shown");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Error message found in the email text box");
+            AutomationLog.error("could not found the error message for invalid email");
             throw(e);
         }
         return element;
@@ -71,23 +71,23 @@ public class SignUp extends Page
         }
             catch(Exception e)
         {
-            AutomationLog.error("Not clicked on Signup button");
+            AutomationLog.error(" could not clicked on Signup button");
             throw(e);
         }
         return signup;
     }
 
-    public void populateSignUpData(SignUpData data) throws Exception
+    public void populateSignUpData(EmailData signupdata) throws Exception
     {
         try
         {
             txtbox_Email().clear();
-            txtbox_Email().sendKeys(data.getEmail());
+            txtbox_Email().sendKeys(signupdata.getEmailAddress());
             AutomationLog.info("Data populated in the email text field");
         }
             catch(Exception e)
         {
-            AutomationLog.error("Not able to populate email details");
+            AutomationLog.error("could not populate email details");
         throw(e);
         }
     }
@@ -96,7 +96,7 @@ public class SignUp extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='registration_result_2']/p[1]"));
+            element=driver.findElement(emailAlreadyRegisteredLink());
             AutomationLog.info("Email Already Registered");
         }
         catch(Exception e)
@@ -105,6 +105,11 @@ public class SignUp extends Page
             throw(e);
         }
         return element;
+    }
+
+    public By emailAlreadyRegisteredLink()
+    {
+        return By.xpath(".//*[@id='registration_result_2']/p[1]");
     }
 }
  

@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.testcases.OverviewAction;
+import com.agorafy.automation.testcases.OverviewTabAction;
 import com.agorafy.automation.testcases.OverviewTabNegativeAction;
 
 public class ProfileOverviewTest
@@ -18,12 +18,13 @@ public class ProfileOverviewTest
         String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
-    //@Test
-    public void OverviewActionTest() throws Exception
+
+    @Test
+    public void testOverviewTabPositiveTestCases() throws Exception
     {
         try
         {
-            new OverviewAction().Execute();
+            new OverviewTabAction().Execute();
         }
         catch (Exception e)
         {
@@ -33,7 +34,7 @@ public class ProfileOverviewTest
     }
 
     @Test
-    public void OverviewTabNegativeActionTest() throws Exception
+    public void testOverviewTabNegativeTestCases() throws Exception
     {
         try
         {

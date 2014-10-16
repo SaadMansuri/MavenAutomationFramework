@@ -32,7 +32,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e) 
         {
-            AutomationLog.error("username text box not found  in overview page");
+            AutomationLog.error("could not found username text box ");
             throw (e);
         }
         return element;
@@ -47,7 +47,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("email text not box found in overview page");
+            AutomationLog.error("could not found email text box");
             throw (e);
         }
         return element;
@@ -62,7 +62,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("company-name not found in overview page");
+            AutomationLog.error("could not found company name text box");
             throw (e);
         }
         return element;
@@ -77,7 +77,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("work-phone nos found in overview page");
+            AutomationLog.error("could not found work phone text box");
             throw (e);
         }
         return element;
@@ -92,7 +92,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("mobile nos found in overview page");
+            AutomationLog.error("could not found mobile number text box");
             throw (e);
         }
         return element;
@@ -107,7 +107,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-           AutomationLog.error("address1 found in overview page");
+           AutomationLog.error("could not found address1 text box");
            throw (e);
         }
         return element;
@@ -122,7 +122,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("address2 not found in overview page");
+            AutomationLog.error("could not found address2 text box");
             throw (e);
         }
         return element;
@@ -137,7 +137,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("City not found in over view page");
+            AutomationLog.error("could not found city text box");
             throw (e);
         }
         return element;
@@ -152,7 +152,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("State not found in over view page");
+            AutomationLog.error("could not found state text box");
             throw (e);
         }
         return element;
@@ -167,7 +167,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Zip not found in over view page");
+            AutomationLog.error("could not found zip text box");
             throw (e);
         }
         return element;
@@ -178,11 +178,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.id("aboutText"));
-            AutomationLog.info(" Describe yoursef found in over view page");
+            AutomationLog.info(" Describe yourself found in over view page");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Describe yoursef not found in over view page");
+            AutomationLog.error("could not found Describe yourself text box");
             throw (e);
         }
         return element;
@@ -197,7 +197,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Neigborhood not found in over view page");
+            AutomationLog.error("could not found Describe yoursef text box");
             throw (e);
         }
         return element;
@@ -212,7 +212,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("save button not found on overview tab");
+            AutomationLog.error("could not found save button");
             throw (e);
         }
         return element;
@@ -227,7 +227,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("link text 'here' not found on overview tab");
+            AutomationLog.error("could not found link here text ");
             throw (e);
         }
         return element;
@@ -242,7 +242,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("name field not found on overview tab");
+            AutomationLog.error(" could not found name in overview tab ");
             throw (e);
         }
     }
@@ -256,7 +256,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("companyfield not found on overview tab");
+            AutomationLog.error("could not found company name in overview tab");
             throw (e);
         }
     }
@@ -270,7 +270,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Workphonefield not found on overview tab ");
+            AutomationLog.error("could not found workphone number in overview tab ");
             throw (e);
         }
     }
@@ -284,7 +284,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Mobilephonefield not found on overview tab");
+            AutomationLog.error("could not found mobilephone number in overview tab ");
             throw (e);
         }
     }
@@ -298,7 +298,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("AddressField1 not found on overview tab");
+            AutomationLog.error("could not found Address1 in overview tab");
             throw (e);
         }
     }
@@ -312,7 +312,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-           AutomationLog.error("AddressField2 not found on overview tab");
+           AutomationLog.error("could not found Address2 in overview tab");
            throw (e);
         }
     }
@@ -326,7 +326,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("City not found on overview tab");
+            AutomationLog.error("could not found city name in overview tab");
             throw (e);
         }
     }
@@ -340,7 +340,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("State not found on overview tab");
+            AutomationLog.error("could not found state in overview tab");
             throw (e);
         }
     }
@@ -354,7 +354,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("zip Code not found on overview tab");
+            AutomationLog.error("could not found zipcode in overview tab");
             throw (e);
         }
     }
@@ -368,7 +368,7 @@ public class OverviewTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("count of character not found in overview tab");
+            AutomationLog.error("could not found count of character in overview tab");
             throw(e);
         }
     }
@@ -400,7 +400,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Not able to populate Overview tab with Details.");
+            AutomationLog.error("could not populate overview details in overview tab");
             throw (e);
         }
     }
@@ -415,7 +415,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-           AutomationLog.error("link text 'here' is found on overview tab");
+           AutomationLog.error("could not save overview details in overview tab");
            throw (e);
         }
         return tab;
@@ -571,7 +571,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Describe Yourself Not found in Text Box");
+            AutomationLog.error("Neighborhood Not found in Text Box");
         }
         return multipleSelectNeighborhood;
     }
@@ -581,12 +581,10 @@ public class OverviewTab extends Page
        try
        {
            element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[1]/div/div"));
-           AutomationLog.info("Actual error message found in OverviewTab Name text field");
        }
        catch(Exception e)
        {
-           AutomationLog.error("error message not fond in OverviewTab Name text field");
-           throw(e);
+       throw(e);
        }
        return element;
     }
@@ -597,11 +595,11 @@ public class OverviewTab extends Page
         try
         {
             name = errorMessageWhenNameFieldIsEmpty().getText();
-            AutomationLog.info("Error message found in name");
+            AutomationLog.info("Appropriate error message for name is shown");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Error message not found in name");
+            AutomationLog.error("error message for name is not shown");
             throw(e);
         }
         return name;
@@ -612,12 +610,10 @@ public class OverviewTab extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[4]/div/div[1]/div/div"));
-            AutomationLog.info("Actual error message found in OverviewTab when invalid Work phone is given in Workphone text field");
         }
         catch(Exception e)
         {
-            AutomationLog.error("error message not fond in OverviewTab when invalid Work phone is given in Workphone text field");
-            throw(e);
+        throw(e);
         }
         return element;
     }
@@ -628,11 +624,11 @@ public class OverviewTab extends Page
         try
         {
             phoneNum = errorMessageWhenInvalidPhoneNumberIsFGiven().getText();
-            AutomationLog.info("Error message found of invalid phone number");
+            AutomationLog.info("Appropriate error message for phone number is shown");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Error message not found of invalid number");
+            AutomationLog.error("error message for phone number is not shown");
             throw(e);
         }
         return phoneNum;
@@ -643,12 +639,10 @@ public class OverviewTab extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[4]/div/div[2]/div/div"));
-            AutomationLog.info("Actual error message found in OverviewTab when invalid Work phone is given in Workphone text field");
         }
         catch(Exception e)
         {
-            AutomationLog.error("error message not fond in OverviewTab when invalid Work phone is given in Workphone text field");
-            throw(e);
+        throw(e);
         }
         return element;
     }
@@ -659,11 +653,11 @@ public class OverviewTab extends Page
         try
         {
             mobileNum = errorMessageWhenInvalidMobileNumberIsGiven().getText();
-            AutomationLog.info("Error message found of invalid mobile number");
+            AutomationLog.info("Appropriate error message for mobile number is shown");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Error message not found of invalid mobile number");
+            AutomationLog.error("error message for mobile number is not shown");
             throw(e);
         }
         return mobileNum;
@@ -674,12 +668,10 @@ public class OverviewTab extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[5]/div/div"));
-            AutomationLog.info("Actual error message found in OverviewTab when AddressField is left empty");
         }
         catch(Exception e)
         {
-            AutomationLog.error("error message not fond in OverviewTab when AddressField is left empty");
-            throw(e);
+        throw(e);
         }
         return element;
     }
@@ -690,11 +682,11 @@ public class OverviewTab extends Page
         try
         {
             addressField = errorMessageWhenAddressFieldIsLeftEmpty().getText();
-            AutomationLog.info("Error message found of invalid mobile number");
+            AutomationLog.info("Appropriate error message for Address1 is shown");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Error message not found of invalid mobile number");
+            AutomationLog.error("error message for Address1 is not shown");
             throw(e);
         }
         return addressField;
@@ -705,12 +697,10 @@ public class OverviewTab extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[6]/div/div"));
-            AutomationLog.info("Actual error message found in OverviewTab when Invalid data entered in AddressField2");
         }
         catch(Exception e)
         {
-            AutomationLog.error("error message not fond in OverviewTab when Invalid data entered in AddressField2");
-            throw(e);
+        throw(e);
         }
     return element;
     }
@@ -721,11 +711,11 @@ public class OverviewTab extends Page
         try
         {
             addressField2 = errorMessageWhenInvalidAddressField2IsEntered().getText();
-            AutomationLog.info("Error message found of invalid AddressField2");
+            AutomationLog.info("Appropriate error message for Address2 is shown");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Error message not found of invalid AddressField2");
+            AutomationLog.error("error message for Address2 is not shown");
             throw(e);
         }
         return addressField2;
@@ -736,12 +726,10 @@ public class OverviewTab extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[7]/div/div"));
-            AutomationLog.info("Actual error message found in OverviewTab when City is left empty");
         }
         catch(Exception e)
         {
-            AutomationLog.error("error message not fond in OverviewTab when City is left empty");
-            throw(e);
+        throw(e);
         }
     return element;
     }
@@ -752,11 +740,11 @@ public class OverviewTab extends Page
         try
         {
             city = errorMessageWhenCityIsLeftEmpty().getText();
-            AutomationLog.info("Error message found of invalid City");
+            AutomationLog.info("Appropriate error message for city is shown");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Error message not found of invalid City");
+            AutomationLog.error("error message for city is not shown");
             throw(e);
         }
         return city;
@@ -767,12 +755,10 @@ public class OverviewTab extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[8]/span/div/div"));
-            AutomationLog.info("Actual error message found in OverviewTab when State is left empty");
         }
         catch(Exception e)
         {
-            AutomationLog.error("error message not fond in OverviewTab when State is left empty");
-            throw(e);
+        throw(e);
         }
     return element;
     }
@@ -783,11 +769,11 @@ public class OverviewTab extends Page
         try
         {
             state = errorMessageWhenStateIsLeftEmpty().getText();
-            AutomationLog.info("Error message found when State is Empty");
+            AutomationLog.info("Appropriate error message for state is shown");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Error message not found when State is Empty");
+            AutomationLog.error("error message for state is not shown");
             throw(e);
         }
         return state;
@@ -798,12 +784,10 @@ public class OverviewTab extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[9]/div/div"));
-            AutomationLog.info("Actual error message found in OverviewTab when Zip is left empty");
         }
         catch(Exception e)
         {
-            AutomationLog.error("error message not fond in OverviewTab when Zip is left empty");
-            throw(e);
+        throw(e);
         }
     return element;
     }
@@ -814,11 +798,11 @@ public class OverviewTab extends Page
         try
         {
             zip = errorMessageWhenZipIsLeftEmpty().getText();
-            AutomationLog.info("Error message found of invalid zip");
+            AutomationLog.info("Appropriate error message for zip is shown");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Error message not found of invalid zip");
+            AutomationLog.error("error message for state is not shown");
             throw(e);
         }
         return zip;
@@ -829,12 +813,10 @@ public class OverviewTab extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[2]/div[1]/label/span"));
-            AutomationLog.info("To display the nos of characters left");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Did not Find the nos of characters left");
-            throw(e);
+        throw(e);
         }
     return element;
     }
@@ -845,11 +827,11 @@ public class OverviewTab extends Page
         try
         {
             countOfChar = txtbx_countCharInDecribeYourself().getText();
-            AutomationLog.info("Actual count of character found");
+            AutomationLog.info("Appropriate error message for count of character is shown");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Did not Find the count of character");
+            AutomationLog.error("error message for count of character is not shown");
             throw(e);
         }
         return countOfChar;

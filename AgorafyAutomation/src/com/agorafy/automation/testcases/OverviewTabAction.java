@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCase;
+import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.datamodel.profile.OverviewData;
 import com.agorafy.automation.pageobjects.Dashboard;
@@ -33,34 +33,27 @@ import com.agorafy.automation.pageobjects.Page;
  * Click on submit. Verify Profile is updated.
  * Verify Banner is updated.
  */
-public class OverviewAction extends AutomationTestCase
+public class OverviewTabAction extends AutomationTestCaseVerification
 {
     private Homepage homePage = null;
     private HeaderLoginForm headerLoginForm = null;
+    private Header header = null;
+    private Dashboard dashboard = null;
+    private OverviewTab overviewTab = null;
     static HashMap<String,String> stateAbbMap;
 
-    public OverviewAction()
+    public OverviewTabAction()
     {
         super();
     }
 
+    @Override
     public void setup()
     {
         super.setup();
         homePage = Homepage.homePage();
-    }
-
-    public void cleanup()
-    {
-        super.cleanup();
-    }
-
-    public void Execute() throws Exception
-    {
         try
         {
-            setup();
-            // TODO: get this from CSV data.
             headerLoginForm = homePage.openHeaderLoginForm();
 
             HashMap<String, String> loginData =  testCaseData.get("validCredential");
@@ -71,42 +64,23 @@ public class OverviewAction extends AutomationTestCase
             // Verify this is the correct homepage.
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
 
-            Header header = Page.header();
+            header = Page.header();
             header.openActiveProfile();
 
-            // Verify Drowndown is displayed.
-            Dashboard dashboard = header.openDashboard();
+             // Verify Drowndown is displayed.
+            dashboard = header.openDashboard();
 
             // Verify this is the correct dashboard.
-            OverviewTab overviewTab = dashboard.editProfile();
-
-            // Verify this is the correct OverviewTab tab.
-            populateAndVerifyOverviewDetails(overviewTab);
-
-            testcasePassed("Overview Action perfomed successfully.");
+            overviewTab = dashboard.editProfile();
         }
-        catch (Exception e)
+        catch(Exception e)
         {
-            handleTestCaseFailure(e.getMessage());
-        }
-        catch(Throwable throwable)
-        {
-            handleTestCaseFailure(throwable.getMessage());
-        }
-        finally
-        {
-            cleanup();
+            AutomationLog.error("Overview tab not found");
         }
     }
 
-    private void handleTestCaseFailure(String message) throws Exception
-    {
-        AutomationLog.error("Overview Action  Failed: " + message);
-        testcaseFailed("Overview Action  Failed" + message);
-        throw (new Exception("Overview Action  Failed" + message));
-    }
-
-    public void populateAndVerifyOverviewDetails(OverviewTab overviewTab) throws Exception
+    @Override
+    protected void verifyTestCases() throws Exception
     {
         OverviewData overviewData = getTestOverviewData();
 
@@ -122,30 +96,19 @@ public class OverviewAction extends AutomationTestCase
 
     private OverviewData getTestOverviewData()
     {
-        OverviewData overviewData = new OverviewData();
-
         HashMap<String, String> overviewTestData = testCaseData.get("OverviewData");
 
+        OverviewData overviewData = new OverviewData();
         overviewData.setName(overviewTestData.get("validName"));
-
         overviewData.setCompanyName(overviewTestData.get("companyName"));
-
         overviewData.setWorkPhone(overviewTestData.get("validWorkPhone"));
-
         overviewData.setMobilePhone(overviewTestData.get("validMobileNumber"));
-
         overviewData.setAddress1(overviewTestData.get("validAddress1"));
-
         overviewData.setAddress2(overviewTestData.get("validAddress2"));
-
         overviewData.setCity(overviewTestData.get("validCity"));
-
         overviewData.setState(overviewTestData.get("validState"));
-
         overviewData.setZipCode(overviewTestData.get("validZip"));
-
         overviewData.setDescribe(overviewTestData.get("character"));
-
         overviewData.setNeighbour(overviewTestData.get("validNeighbour"));
 
         return overviewData;
@@ -179,109 +142,109 @@ public class OverviewAction extends AutomationTestCase
     public void verifyBannerDetails(OverviewBanner banner, OverviewData overviewData) throws Exception
     {
         String newBannerNameAfterSavingOverviewData = banner.getBannerText();
-        Assert.assertEquals(newBannerNameAfterSavingOverviewData, overviewData.getName(), "This is not the correct Name which we are looking for");
-        AutomationLog.info("Updated Name Displayed succesffully on Banner");
+        Assert.assertEquals(newBannerNameAfterSavingOverviewData, overviewData.getName(), "The correct name is not displayed in banner");
+        AutomationLog.info("Updated Name Displayed successfully on Banner");
     }
 
     public void verifyTextBoxName(OverviewTab overviewTab,OverviewData overviewData) throws Exception
     {
-        String verifyNamePresentInTextBox=overviewTab.getTextBoxName();
-        Assert.assertEquals(verifyNamePresentInTextBox, overviewData.getName(), "This is not the correct Name which we are looking for");
-        AutomationLog.info("Name found As per the Text Box");
+        String verifyNamePresentInTextBox = overviewTab.getTextBoxName();
+        Assert.assertEquals(verifyNamePresentInTextBox, overviewData.getName(), "Name not found");
+        AutomationLog.info(" Appropriate Name found As per the Text Box");
     }
 
     public void verifyTextBoxComapnyName(OverviewTab overviewTab,OverviewData overviewData) throws Exception
     {
-        String verifyComapnyNamePresentInTextBox=overviewTab.getTextBoxCompanyName();
-        Assert.assertEquals(verifyComapnyNamePresentInTextBox, overviewData.getCompanyName(), "This is not the correct ComapnyName which we are looking for");
-        AutomationLog.info("CompanyName found As per the Text Box");
+        String verifyComapnyNamePresentInTextBox = overviewTab.getTextBoxCompanyName();
+        Assert.assertEquals(verifyComapnyNamePresentInTextBox, overviewData.getCompanyName(), "company name not found");
+        AutomationLog.info(" Appropriate CompanyName found As per the Text Box");
     }
 
     public void verifyTextBoxMobilePhoneNumber(OverviewTab overviewTab,OverviewData overviewData) throws Exception
     {
-        String verifyWorkMobileNumberPresentInTextBox=overviewTab.getTextBoxMobileNumber();
-        Assert.assertEquals(verifyWorkMobileNumberPresentInTextBox, overviewData.getMobilePhone(), "This is not the correct MobileNumber which we are looking for");
-        AutomationLog.info("MobileNumber found As per the Text Box");
+        String verifyWorkMobileNumberPresentInTextBox = overviewTab.getTextBoxMobileNumber();
+        Assert.assertEquals(verifyWorkMobileNumberPresentInTextBox, overviewData.getMobilePhone(), "Mobile nos not found");
+        AutomationLog.info(" Appropriate MobileNumber found As per the Text Box");
     }
 
     public void verifyTextBoxWorkPhoneNumber(OverviewTab overviewTab,OverviewData overviewData) throws Exception
     {
-        String verifyWorkPhoneNumberPresentInTextBox=overviewTab.getTextBoxWorkPhoneNumber();
-        Assert.assertEquals(verifyWorkPhoneNumberPresentInTextBox, overviewData.getWorkPhone(), "This is not the correct WorkPhoneNumber which we are looking for");
-        AutomationLog.info("WorkPhoneNumber found As per the Text Box");
+        String verifyWorkPhoneNumberPresentInTextBox = overviewTab.getTextBoxWorkPhoneNumber();
+        Assert.assertEquals(verifyWorkPhoneNumberPresentInTextBox, overviewData.getWorkPhone(), "Workphone nos not found");
+        AutomationLog.info(" Appropriate WorkPhoneNumber found As per the Text Box");
     }
 
     public void verifyTextBoxAddress1(OverviewTab overviewTab,OverviewData overviewData) throws Exception
     {
-        String verifyAddress1PresentInTextBox=overviewTab.getTextBoxAddress1();
-        Assert.assertEquals(verifyAddress1PresentInTextBox, overviewData.getAddress1(), "This is not the correct Address1 which we are looking for");
-        AutomationLog.info("Address1 found As per the Text Box");
+        String verifyAddress1PresentInTextBox = overviewTab.getTextBoxAddress1();
+        Assert.assertEquals(verifyAddress1PresentInTextBox, overviewData.getAddress1(), "Address1 not found");
+        AutomationLog.info(" Appropriate Address1 found As per the Text Box");
     }
 
     public void verifyTextBoxAddress2(OverviewTab overviewTab,OverviewData overviewData) throws Exception
     {
-        String verifyAddress2PresentInTextBox=overviewTab.getTextBoxAddress2();
-        Assert.assertEquals(verifyAddress2PresentInTextBox, overviewData.getAddress2(), "This is not the correct Address2 which we are looking for");
-        AutomationLog.info("Address2 found As per the Text Box");
+        String verifyAddress2PresentInTextBox = overviewTab.getTextBoxAddress2();
+        Assert.assertEquals(verifyAddress2PresentInTextBox, overviewData.getAddress2(), "Address2 not found");
+        AutomationLog.info("Appropriate Address2 found As per the Text Box");
     }
 
     public void verifyTextBoxCity(OverviewTab overviewTab,OverviewData overviewData) throws Exception
     {
-        String verifyCityPresentInTextBox=overviewTab.getTextBoxCity();
-        Assert.assertEquals(verifyCityPresentInTextBox, overviewData.getCity(), "This is not the correct City which we are looking for");
-        AutomationLog.info("City found As per the Text Box");
+        String verifyCityPresentInTextBox = overviewTab.getTextBoxCity();
+        Assert.assertEquals(verifyCityPresentInTextBox, overviewData.getCity(), "City not found");
+        AutomationLog.info("Appropriate City found As per the Text Box");
     }
 
     public void verifyTextBoxState(OverviewTab overviewTab,OverviewData overviewData) throws Exception
     {
-        String verifyStatePresentInTextBox=overviewTab.getDropdownState();
-        Assert.assertEquals(verifyStatePresentInTextBox, overviewData.getState(), "This is not the correct State which we are looking for");
-        AutomationLog.info("State found As per the Text Box");
+        String verifyStatePresentInTextBox = overviewTab.getDropdownState();
+        Assert.assertEquals(verifyStatePresentInTextBox, overviewData.getState(), "State not found");
+        AutomationLog.info("Appropriate State found As per the Text Box");
     }
 
     public void verifyTextBoxZip(OverviewTab overviewTab,OverviewData overviewData) throws Exception
     {
-        String verifyZipPresentInTextBox=overviewTab.getTextBoxZip();
-        Assert.assertEquals(verifyZipPresentInTextBox, overviewData.getZipCode(), "This is not the correct Zip which we are looking for");
-        AutomationLog.info("Zip found As per the Text Box");
+        String verifyZipPresentInTextBox = overviewTab.getTextBoxZip();
+        Assert.assertEquals(verifyZipPresentInTextBox, overviewData.getZipCode(), "Zip not found");
+        AutomationLog.info("Appropriate Zip found As per the Text Box");
     }
 
     public void verifyTextBoxDescribeYourself(OverviewTab overviewTab,OverviewData overviewData) throws Exception
     {
-        String verifydescribeYourselfPresentInTextBox=overviewTab.getTextBoxDescribeYorself();
-        Assert.assertEquals(verifydescribeYourselfPresentInTextBox, overviewData.getDescribe(), "This is not the description which we are looking for");
-        AutomationLog.info("Description found As per the Text Box");
+        String verifydescribeYourselfPresentInTextBox = overviewTab.getTextBoxDescribeYorself();
+        Assert.assertEquals(verifydescribeYourselfPresentInTextBox, overviewData.getDescribe(), "Describe yourself not found");
+        AutomationLog.info("Appropriate Description found As per the Text Box");
     }
 
     public void verifyTextBoxNeigborhood(OverviewTab overviewTab,OverviewData overviewData) throws Exception
     {
-        String verifyNeighborhoodPresentInTextBox=overviewTab.getMultipleSelectNeighborhood();
-        Assert.assertEquals(verifyNeighborhoodPresentInTextBox, overviewData.getNeighbour(), "This is not the correct Neighborhood which we are looking for");
-        AutomationLog.info("Neighborhood found As per the Text Box");
+        String verifyNeighborhoodPresentInTextBox = overviewTab.getMultipleSelectNeighborhood();
+        Assert.assertEquals(verifyNeighborhoodPresentInTextBox, overviewData.getNeighbour(), "Neigborhood not found");
+        AutomationLog.info("Appropriate Neighborhood found As per the Text Box");
     }
 
     public void testBannerAddressDetails(OverviewBanner banner, OverviewData overviewData) throws Exception
     {
         String addressDetails = banner.getBannerAddressText();
         String addressToken[] = addressDetails.split(", ");
-        Assert.assertEquals(addressToken[0], overviewData.getAddress1(), "This is not the correct adrees1 in banner which we are looking for");
-        AutomationLog.info(" address1 found in banner");
+        Assert.assertEquals(addressToken[0], overviewData.getAddress1(), "The correct Address1 is not displayed in banner");
+        AutomationLog.info("Updated address1 found in banner");
 
-        Assert.assertEquals(addressToken[1], overviewData.getAddress2(), "This is not the correct adrees2 in banner which we are looking for");
-        AutomationLog.info(" address2  found in banner");
+        Assert.assertEquals(addressToken[1], overviewData.getAddress2(), "The correct Address2 is not displayed in banner");
+        AutomationLog.info("Updated address2  found in banner");
 
-        Assert.assertEquals(addressToken[2], overviewData.getCity(), "This is not the correct City in banner which we are looking for");
-        AutomationLog.info(" City  found in banner");
+        Assert.assertEquals(addressToken[2], overviewData.getCity(), "The correct City is not displayed in banner");
+        AutomationLog.info("Updated City found in banner");
 
         createStateAbbreviationMap();
 
         String stateAndZipcode[] = addressToken[3].split(" ");
         String abbreviation = getStateAbbreviation(overviewData.getState());
-        Assert.assertEquals(stateAndZipcode[0], abbreviation, "This is not the correct State in banner which we are looking for");
-        AutomationLog.info(" State  found in banner");
+        Assert.assertEquals(stateAndZipcode[0], abbreviation, "The correct state is not displayed in banner");
+        AutomationLog.info("Updated State found in banner");
 
-        Assert.assertEquals(stateAndZipcode[1], overviewData.getZipCode(), "This is not the correct Zip in banner which we are looking for");
-        AutomationLog.info(" Zip  found in banner");
+        Assert.assertEquals(stateAndZipcode[1], overviewData.getZipCode(), "The correct Zipcode is not displayed in banner");
+        AutomationLog.info("Updated Zip found in banner");
     }
 
     public void testBannerPhoneDetails(OverviewBanner banner, OverviewData overviewData) throws Exception
@@ -289,8 +252,8 @@ public class OverviewAction extends AutomationTestCase
         String phoneDetails = banner.getBannerWorkPhoneText();
         String phoneToken[] = phoneDetails.split(": ");
         String formattedPhoneNumber = formatPhoneNumber(overviewData.getWorkPhone());
-        Assert.assertEquals(phoneToken[1], formattedPhoneNumber, "This is not the correct WorkPhone in banner which we are looking for");
-        AutomationLog.info("WorkPhone found in banner");
+        Assert.assertEquals(phoneToken[1], formattedPhoneNumber, "The correct Workphone is not displayed in banner");
+        AutomationLog.info("Updated WorkPhone found in banner");
     }
 
     public void testBannerMobileDetails(OverviewBanner banner,OverviewData overviewData) throws Exception
@@ -298,8 +261,8 @@ public class OverviewAction extends AutomationTestCase
         String mobileDetails = banner.getBannerMobilePhoneText();
         String mobileToken[] = mobileDetails.split(": ");
         String formattedMobileNumber=formatPhoneNumber(overviewData.getMobilePhone());
-        Assert.assertEquals(mobileToken[1], formattedMobileNumber, "This is not the MobilePhone in banner which we are looking for");
-        AutomationLog.info("MobilePhone found in banner");
+        Assert.assertEquals(mobileToken[1], formattedMobileNumber, "The correct Mobile number is not displayed in banner");
+        AutomationLog.info(" Updated MobileNumber found in banner");
     }
 
     public static void createStateAbbreviationMap()
@@ -323,5 +286,17 @@ public class OverviewAction extends AutomationTestCase
     {
         String phoneToken[] = phoneNumber.split("-");
         return "(" + phoneToken[0] +") "+phoneToken[1]+"-"+phoneToken[2];
+    }
+
+    @Override
+    protected String successMessage()
+    {
+        return "Overview tab action tested successfully";
+    }
+
+    @Override
+    protected String failureMessage()
+    {
+        return "Overview tab action failed";
     }
 }

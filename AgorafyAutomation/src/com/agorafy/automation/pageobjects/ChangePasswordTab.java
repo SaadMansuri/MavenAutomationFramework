@@ -19,11 +19,11 @@ public class ChangePasswordTab extends Page
         try
         { 
             element = driver.findElement(By.id("oldPassword"));
-            AutomationLog.info("Old Password text box found in change Password tab");
+            AutomationLog.info("Old Password text box found");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Old Password text box not found in change Password tab");
+            AutomationLog.error("Could not found old password text box");
             throw(e);
         }
         return element;
@@ -34,11 +34,11 @@ public class ChangePasswordTab extends Page
         try
         { 
             element = driver.findElement(By.id("password1"));
-            AutomationLog.info("New Password text box found in change Password tab");
+            AutomationLog.info("New Password text box found ");
         }
         catch (Exception e)
         {
-            AutomationLog.error("New Password text box not found in change Password tab");
+            AutomationLog.error("Could not found New password text box");
             throw(e);
         }
         return element;
@@ -49,11 +49,11 @@ public class ChangePasswordTab extends Page
         try
         { 
             element = driver.findElement(By.id("password2"));
-            AutomationLog.info("Retype New Password text box found in change Password tab");
+            AutomationLog.info("Retype New Password text box found ");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Retype New Password text box not found in change Password tab");
+            AutomationLog.error("Could not found retype new password text box");
             throw(e);
         }
         return element;
@@ -64,11 +64,11 @@ public class ChangePasswordTab extends Page
         try
         { 
             element = driver.findElement(By.id("passwordChangeSubmit"));
-            AutomationLog.info("ChangePassword button found in change Password tab");
+            AutomationLog.info("ChangePassword button found.");
         }
         catch (Exception e)
         {
-            AutomationLog.error("ChangePassword button not found in change Password tab");
+            AutomationLog.error("Could not found ChangePassword button");
             throw(e);
         }
         return element;
@@ -81,11 +81,11 @@ public class ChangePasswordTab extends Page
         {
             submitButtonChangePassword().click();
             changePasswordTab = new ChangePasswordTab(driver);
-            AutomationLog.info("Clicked on submit button password changed successfully");
+            AutomationLog.info("Successfully Clicked on change password button");
         }
         catch(Exception e)
         {
-            AutomationLog.info("not clicked on submit change password button");
+            AutomationLog.error("Could not Clicked on change password button");
             throw(e);
         }
         return changePasswordTab;
@@ -104,7 +104,7 @@ public class ChangePasswordTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.info("not able to populate password details");
+            AutomationLog.error("Could not populate change password details");
             throw(e);
         }
     }
@@ -114,11 +114,11 @@ public class ChangePasswordTab extends Page
        try
        {
            element=driver.findElement(By.xpath(".//*[@id='changePasswordForm']/div[2]/div/div/div"));
-           AutomationLog.info("Actual error message found in OldPassword text field");
+           AutomationLog.info("Appropriate error message for old password shown");
        }
        catch(Exception e)
        {
-           AutomationLog.error("error message not fond in OldPassword button");
+           AutomationLog.error("error message for old password not shown");
            throw(e);
        }
        return element;
@@ -129,11 +129,11 @@ public class ChangePasswordTab extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='changePasswordForm']/div[3]/div/div/div"));
-            AutomationLog.info("Actual error message found in NewPassword button");
+            AutomationLog.info("Appropriate error message for New password shown");
         }
         catch(Exception e)
         {
-            AutomationLog.error("error message not found in NewPassword button");
+            AutomationLog.error("error message for New password not shown");
             throw(e);
         }
         return element;
@@ -144,11 +144,11 @@ public class ChangePasswordTab extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='changePasswordForm']/div[4]/div/div/div"));
-            AutomationLog.info("Actual error message found in Retype NewPassword button");
+            AutomationLog.info("Appropriate error message for Retype New password shown");
         }
         catch(Exception e)
         {
-            AutomationLog.error("error message not found in Retype NewPassword button");
+            AutomationLog.error("error message for Retype New password not shown");
             throw(e);
         }
         return element;
@@ -159,11 +159,11 @@ public class ChangePasswordTab extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='changePasswordMessage']"));
-            AutomationLog.info("Password Changed Successfully");
+            AutomationLog.info("Success message for change password shown");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Password Not Changed Successfully");
+            AutomationLog.error("Success message for change password not shown");
             throw(e);
         }
         return element;

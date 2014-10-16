@@ -20,7 +20,7 @@ public class AccountSettingsTest
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-    @Test
+    //@Test
     public void testAccountSettingsPage() throws Exception
     {
         try
@@ -48,8 +48,8 @@ public class AccountSettingsTest
         }
     }
 
-    @Test
-    public void testChangePasswordPositiveTestcases () throws Exception
+    //@Test
+    public void testChangePasswordPositiveTestcases() throws Exception
     {
         try
         {

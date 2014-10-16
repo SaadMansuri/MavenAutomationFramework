@@ -1,6 +1,6 @@
 package com.agorafy.automation.datamodel.profile;
 
-public class ForgotPasswordData 
+public class EmailData 
 {
         private String emailAddress;
         public String getEmailAddress() 

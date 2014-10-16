@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCase;
+import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.datamodel.profile.ChangePasswordData;
 import com.agorafy.automation.pageobjects.AccountSettings;
@@ -16,32 +16,33 @@ import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 
-public class ChangePasswordPositiveAction extends AutomationTestCase
+/**
+ * Precondition:Open header login form and Naviagte to Account Setting Page
+ * Go to change password tab
+ * verify on giving valid inputs password is changing or not
+ * verify password changed successfully message should be displayed
+ */
+public class ChangePasswordPositiveAction extends AutomationTestCaseVerification
 {
     private Homepage homePage = null;
-    private HeaderLoginForm headerLoginForm;
-    public ChangePasswordPositiveAction() 
+    private HeaderLoginForm headerLoginForm = null;
+    private Header header = null;
+    private Dashboard dashboard = null;
+    private AccountSettings accountSettings = null;
+    private ChangePasswordTab changePasswordTab = null;
+
+    public ChangePasswordPositiveAction()
     {
         super();
     }
 
-    public void setup() 
+    @Override
+    public void setup()
     {
         super.setup();
         homePage = Homepage.homePage();
-    }
-
-    public void cleanup()
-    {
-        super.cleanup();
-    }
-
-    public void Execute() throws Exception
-    {
         try
         {
-            setup();
-           //TODO: get this from CSV data.
             headerLoginForm = homePage.openHeaderLoginForm();
 
             HashMap<String, String> loginData =  testCaseData.get("validCredential");
@@ -49,62 +50,57 @@ public class ChangePasswordPositiveAction extends AutomationTestCase
             String Password = loginData.get("password");
 
             homePage = headerLoginForm.doSuccessfulLogin(UserName, Password);
-          //Verify this is the correct homepage.
+            // Verify this is the correct homepage.
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
-            Header header = Page.header();
+            header= Page.header();
             header.openActiveProfile();
-          // Navigation to account setting page
-            Dashboard dashboard = header.openDashboard();
-            AccountSettings accountSettings = dashboard.accountSettings();
-            ChangePasswordTab changePasswordTab = accountSettings.clickOnChangePasswordTab();
-            verifyIfChangePasswordTabActive(accountSettings);
-            verifyIfAllTheValidFieldsAreEntered(changePasswordTab);
-        } 
-        catch (Exception e) 
-        {
-           handleTestCaseFailure(e.getMessage());
+            //Navigation To AccountSetting page.
+            dashboard = header.openDashboard();
+            accountSettings = dashboard.accountSettings();
+            changePasswordTab = accountSettings.clickOnChangePasswordTab();
+
         }
-        catch(Throwable throwable)
+        catch (Exception e)
         {
-           handleTestCaseFailure(throwable.getMessage());
-        }
-           finally 
-        {
-           cleanup();
+            AutomationLog.error("The change password tab not found");
         }
     }
 
-    private void handleTestCaseFailure(String message) throws Exception 
+    @Override
+    protected void verifyTestCases() throws Exception
     {
-        AutomationLog.error("Valid Test Cases Change Password Action  Failed: " + message);
-        throw (new Exception("Valid Test Cases Change Password Action  Failed" + message));
+        verifyIfAllTheValidFieldsAreEntered(changePasswordTab);
     }
-      
+
     public void verifyIfAllTheValidFieldsAreEntered(ChangePasswordTab changePasswordTab) throws Exception
     {
         ChangePasswordData changepassworddata = new ChangePasswordData();
 
-        HashMap<String, String> ValidTestData = testCaseData.get("AllTheValidFieldsAreEntered");
+        HashMap<String, String> validTestData = testCaseData.get("AllTheValidFieldsAreEntered");
 
-        changepassworddata.setOldPassword(ValidTestData.get("ValidOldPassword"));
+        changepassworddata.setOldPassword(validTestData.get("ValidOldPassword"));
 
-        changepassworddata.setNewPassword(ValidTestData.get("ValidNewPassword"));
+        changepassworddata.setNewPassword(validTestData.get("ValidNewPassword"));
 
-        changepassworddata.setRetypeNewPassword(ValidTestData.get("ValidRetypeNewPassword"));
+        changepassworddata.setRetypeNewPassword(validTestData.get("ValidRetypeNewPassword"));
 
         changePasswordTab.populateChangePasswordData(changepassworddata);
 
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
         String verifySuccesfullPasswordMessage = changePasswordTab.passwordChangedSuccessfully().getText();
-        Assert.assertEquals(verifySuccesfullPasswordMessage, ValidTestData.get("validMsg"), "Password not Changed successfully when valid credentials are entered");
-        AutomationLog.info("The Password Changed successfully when all the Valid Credintials Are Entered");
+        Assert.assertEquals(verifySuccesfullPasswordMessage, validTestData.get("validMsg"), "Password not Changed successfully when valid credentials are entered");
+        AutomationLog.info("Appropriate message for change password is displayed");
     }
 
-    public void verifyIfChangePasswordTabActive(AccountSettings accountSettings) throws Exception  
+    @Override
+    protected String successMessage()
     {
-        //changePasswordTab = changePasswordTab.clickOnChangePasswordTabLoads();
-        String verifyChangePasswordTabLoads = accountSettings.link_ChangePasswordTab().getAttribute("class");
-        Assert.assertEquals(verifyChangePasswordTabLoads, "active", "active class is not found when the page gets loaded");
-        AutomationLog.info("ChangePassword Tab is active and gets loaded");
+        return "The Positive test cases for change password tab passed";
+    }
+
+    @Override
+    protected String failureMessage()
+    {
+        return "The positive test cases for change password tab failed";
     }
 }

@@ -17,7 +17,7 @@ public class SignUpTest
      }
 
      @Test
-     public void signUpNegativeTest() throws Exception
+     public void testsignUpNegativeTestCases() throws Exception
      {
          try
          {

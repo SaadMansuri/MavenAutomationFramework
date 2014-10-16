@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.datamodel.profile.ForgotPasswordData;
+import com.agorafy.automation.datamodel.profile.EmailData;
 
 public class ForgotPassword extends Page
 {
@@ -20,11 +20,11 @@ public class ForgotPassword extends Page
         try
         {
             element=driver.findElement(By.id("forgotPassInput"));
-            AutomationLog.info("Email Address found inside the Forgot Password Page");
+            AutomationLog.info("Email Address found in the Forgot Password Page");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Email Address not found inside the Forgot Password Page");
+            AutomationLog.error("Could not found the email address");
             throw(e);
         }
             return element;
@@ -35,11 +35,11 @@ public class ForgotPassword extends Page
         try
         {
             element=driver.findElement(By.id("forgotPassSubmit"));
-            AutomationLog.info("RequestNewPassword found inside the Forgot Password Page");
+            AutomationLog.info("RequestNewPassword button found in the Forgot Password Page");
         }
         catch(Exception e)
         {
-            AutomationLog.error("RequestNewPassword not found inside the Forgot Password Page");
+            AutomationLog.error("Could not found the RequestNewPassword button");
             throw(e);
         }
             return element;
@@ -50,11 +50,11 @@ public class ForgotPassword extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='forgotPassError']"));
-            AutomationLog.info("The error message please enter valid email successfully dispalyed");
+            AutomationLog.info("Appropriate error message shown");
         }
         catch(Exception e)
         {
-            AutomationLog.error("The error message please enter valid email not dispalyed");
+            AutomationLog.error("Error message not shown");
             throw(e);
         }
            return element;
@@ -71,13 +71,13 @@ public class ForgotPassword extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not clicked on RequestNewPassword button");
+            AutomationLog.error("Could not clicked on RequestNewPassword button ");
             throw(e);
         }
         return forgotpassword;
     }
 
-    public void populateForgotPasswordData(ForgotPasswordData forgotpassworddata) throws Exception
+    public void populateForgotPasswordData(EmailData forgotpassworddata) throws Exception
     {
         try
         {
@@ -86,7 +86,7 @@ public class ForgotPassword extends Page
         }
             catch(Exception e)
         {
-            AutomationLog.info("Not able to populate email address details");
+            AutomationLog.info("Successfully populated email address details");
             throw(e);
         }
     }
