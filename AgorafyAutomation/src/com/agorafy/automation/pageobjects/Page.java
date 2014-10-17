@@ -32,6 +32,11 @@ public class Page
         return PageFactory.initElements(driver, Footer.class);
     }
 
+    public static ContentPagesLeftMenu contentPagesLeftMenu()
+    {
+        return PageFactory.initElements(driver, ContentPagesLeftMenu.class);
+    }
+
     public String currentURL() throws Exception
     {
         return driver.getCurrentUrl();
@@ -52,8 +57,9 @@ public class Page
         return PageFactory.initElements(driver, SubNavigation.class);
     }
 
-    public static void goToPreviousPage() throws Exception
+    public String pageHeading() throws Exception
     {
-        Page.driver.navigate().back();
+        // TODO: To throw Expection for pages that do not have Page Headings 
+        return "";
     }
 }

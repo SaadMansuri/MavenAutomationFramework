@@ -5,17 +5,18 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.Blog;
 import com.agorafy.automation.pageobjects.footer.FooterSupportLinks;
+import com.agorafy.automation.testcases.ContentPagesVerification;
+
 /**
  * Test Blog link on Footer
  * Click Blog link on the Home Page, verify Blog Page is loaded 
  * Verify the URL of Blog Page
  * Verify the title of Blog Page * 
  */
-public class FooterBlogAction extends AutomationTestCaseVerification
+public class FooterBlogAction extends ContentPagesVerification
 {
     public FooterBlogAction()
     {
@@ -23,26 +24,19 @@ public class FooterBlogAction extends AutomationTestCaseVerification
     }
 
     @Override
-	protected void verifyTestCases()
+	protected void verifyTestCases() throws Exception
     {
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
-        Blog blog = null;
-        HashMap<String, String> blogMap = testCaseData.get("Blog");
-        try
-        {
-            blog = supportLinks.clickOnBlogLink();
-            AutomationLog.info("Blog Page opened successfully");
+        Blog blog = supportLinks.clickOnBlogLink();;
 
-            Assert.assertEquals(blog.currentURL(), blog.blogPageUrl(), "Blog Link did not Navigate to correct pageUrl");
-            AutomationLog.info("Blog Link navigates to Blog URL");
+        Assert.assertEquals(blog.currentURL(), blog.blogPageUrl(), "Link did not redirect to correct Page Url");
+        AutomationLog.info("Link redirects to correct Page Url");
 
-            Assert.assertEquals(blog.currentPageTitle(), blogMap.get("title").trim(), "Blog page does not show correct PageTitle");
-            AutomationLog.info("Blog page shows correct page title");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Either Blog page did not open successfully or Blog page verification failed" + e.getMessage());
-        }
+        HashMap<String, String> expectedBlogData = testCaseData.get("Blog");
+        Assert.assertEquals(blog.currentPageTitle(), expectedBlogData.get("title"), "Page does not show correct PageTitle");
+        AutomationLog.info("Page shows correct Page Title");
+
+        AutomationLog.info("Blog Page is correctly loaded");
     }
 
     @Override

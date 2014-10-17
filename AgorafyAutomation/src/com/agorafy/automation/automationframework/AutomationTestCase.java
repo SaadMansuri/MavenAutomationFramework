@@ -9,10 +9,18 @@ public class AutomationTestCase
     protected HashMap<String, HashMap<String, String>> testCaseData;
 
     private String executingTestCaseName = null;
+    private String executingTestCaseFileName = null;
 
     public AutomationTestCase() 
     {
-        executingTestCaseName = this.getClass().getSimpleName();
+        this.executingTestCaseName = this.getClass().getSimpleName();
+        this.executingTestCaseFileName = executingTestCaseName;
+    }
+
+    protected AutomationTestCase(String executingTestCaseName) 
+    {
+        this.executingTestCaseName = this.getClass().getSimpleName();
+        this.executingTestCaseFileName = executingTestCaseName;
     }
 
     public void setup() 
@@ -21,7 +29,7 @@ public class AutomationTestCase
         String browserToUse = Configuration.getConfigurationValueForProperty("browser");
         new Page(AppDriver.getDriver(browserToUse));
        // populate test case data from csv
-        testCaseData = TestDataProvider.getTestData(executingTestCaseName);
+        testCaseData = TestDataProvider.getTestData(executingTestCaseFileName);
     }
 
     public void cleanup() 

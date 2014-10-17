@@ -5,10 +5,11 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.HowItWorks;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.testcases.ContentPagesVerification;
 
 /**
  * Test whether 'How It Works' link appears in the subnavigation bar
@@ -18,7 +19,7 @@ import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
  * Test whether actual Page Heading and expected Heading match 
  */
 
-public class SubnavigationHowItWorksAction extends AutomationTestCaseVerification
+public class SubnavigationHowItWorksAction extends ContentPagesVerification
 {
     public SubnavigationHowItWorksAction()
     {
@@ -29,13 +30,17 @@ public class SubnavigationHowItWorksAction extends AutomationTestCaseVerificatio
     protected void verifyTestCases() throws Exception
     {
         SubNavigation subnavigation = Page.subNavigation();
-        HashMap<String, String> howItWorksExpectedData = testCaseData.get("HowItWorks");
-
         HowItWorks howItWorks = subnavigation.clickLinkHowitWorks();
-        Assert.assertEquals(howItWorks.currentURL(), howItWorks.howItWorksPageUrl(), "How it Works Page URL is not as expected after clicking the link.");
-        Assert.assertEquals(howItWorks.currentPageTitle(), howItWorksExpectedData.get("title"), "How it Works Page title does not match to the expected");
-        Assert.assertEquals(howItWorks.headingText(), howItWorksExpectedData.get("heading"), "How it Works Page is not loaded with correct Heading");
-        AutomationLog.info("How it Works page is correctly loaded");
+
+        HashMap<String, String> expectedHowItWorksData = testCaseData.get("HowItWorks");
+        expectedHowItWorksData.put("url", howItWorks.howItWorksPageUrl());
+        verifyLink(howItWorks, expectedHowItWorksData);
+
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.howItWorksLinkText(),"Left menu does not show How It Works link as Active Link");
+        AutomationLog.info("Left menu shows How It Works link as Active Link");
+
+        AutomationLog.info("How It Works Page is correctly loaded");
     }
 
     @Override

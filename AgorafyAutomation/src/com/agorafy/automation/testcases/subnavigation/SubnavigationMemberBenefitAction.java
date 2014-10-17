@@ -5,10 +5,11 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.MembershipBenefit;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.testcases.ContentPagesVerification;
 
 /**
  * Test whether 'Members' Benefit' link appears in the subnavigation bar
@@ -18,7 +19,7 @@ import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
  * Test whether actual Page Heading and expected Heading match 
  */
 
-public class SubnavigationMemberBenefitAction extends AutomationTestCaseVerification
+public class SubnavigationMemberBenefitAction extends ContentPagesVerification
 {
     public SubnavigationMemberBenefitAction()
     {
@@ -29,13 +30,17 @@ public class SubnavigationMemberBenefitAction extends AutomationTestCaseVerifica
     protected void verifyTestCases() throws Exception
     {
         SubNavigation subnavigation = Page.subNavigation();
-        HashMap<String, String> memberExpectedData = testCaseData.get("Member");
-
         MembershipBenefit memberBenefit = subnavigation.clickLinkMemberBenefits();
-        Assert.assertEquals(memberBenefit.currentURL(), memberBenefit.membershipBenefitPageUrl(), "Member Benefits Page URL is not as expected after clicking the link.");
-        Assert.assertEquals(memberBenefit.currentPageTitle(), memberExpectedData.get("title"), "Member Benefits Page title does not match to the expected");
-        Assert.assertEquals(memberBenefit.headingText(), memberExpectedData.get("heading"), "Member Benefits Page is not loaded with correct Heading");
-        AutomationLog.info("Member Benefits page is correctly loaded");
+
+        HashMap<String, String> expectedMembershipBenefitData = testCaseData.get("Member");
+        expectedMembershipBenefitData.put("url", memberBenefit.membershipBenefitPageUrl());
+        verifyLink(memberBenefit, expectedMembershipBenefitData);
+
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.membershipBenefitLinkText(),"Left menu does not show Membership Benefit link as Active Link");
+        AutomationLog.info("Left menu shows Membership Benefit link as Active Link");
+
+        AutomationLog.info("Membership Benefit is correctly loaded");
     }
 
     @Override

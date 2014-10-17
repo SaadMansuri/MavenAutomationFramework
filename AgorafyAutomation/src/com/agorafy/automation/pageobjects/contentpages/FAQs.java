@@ -20,7 +20,7 @@ public class FAQs extends Page
         return "http://blog.agorafy.com/faq/";
     }
 
-    public WebElement pageHeading() throws Exception
+    public WebElement pageHeadingElement() throws Exception
     {
         try
         {
@@ -35,8 +35,9 @@ public class FAQs extends Page
         return element;
     }
 
-    public String headingText() throws Exception
+    @Override
+    public String pageHeading() throws Exception
     {
-        return getTextfromElement(pageHeading());
+        return pageHeadingElement().getText();
     }
 }

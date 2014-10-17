@@ -5,10 +5,12 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.FooterSupportLinks;
 import com.agorafy.automation.pageobjects.footer.support.Press;
+import com.agorafy.automation.testcases.ContentPagesVerification;
+
 /**
  * Test Press link on Footer
  * Click Press link on the Home Page, verify Press Page is loaded 
@@ -16,7 +18,7 @@ import com.agorafy.automation.pageobjects.footer.support.Press;
  * Verify the title of Press Page
  * Verify the Heading Text on Press Page
  */
-public class FooterPressAction extends AutomationTestCaseVerification
+public class FooterPressAction extends ContentPagesVerification
 {
     public FooterPressAction()
     {
@@ -24,29 +26,20 @@ public class FooterPressAction extends AutomationTestCaseVerification
     }
 
     @Override
-    protected void verifyTestCases()
+    protected void verifyTestCases() throws Exception
     {
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
-        Press press = null;
-        HashMap<String, String> pressMap = testCaseData.get("Press");
-        try
-        {
-            press = supportLinks.clickOnPressLink();
-            AutomationLog.info("Press Page opened successfully");
+        Press press = supportLinks.clickOnPressLink();
 
-            Assert.assertEquals(press.currentURL(),press.pressPageUrl(), "Press Link did not Navigate to correct pageUrl");
-            AutomationLog.info("Press Link navigates to Press URL");
+        HashMap<String, String> expectedPressData = testCaseData.get("Press");
+        expectedPressData.put("url", press.pressPageUrl());
+        verifyLink(press, expectedPressData);
 
-            Assert.assertEquals(press.currentPageTitle(), pressMap.get("title").trim(), "Press page does not show correct PageTitle");
-            AutomationLog.info("Press page shows correct page title");
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.pressLinkText(), "Left menu does not show Press link as Active Link");
+        AutomationLog.info("Left menu shows Press link as Active Link");
 
-            Assert.assertEquals(press.headingText(), pressMap.get("pageheading").trim(),"Press page does not show correct page Heading");
-            AutomationLog.info("Press page shows correct page Heading");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Either Press page did not open successfully or Press page verification failed" + e.getMessage());
-        }
+        AutomationLog.info("Press page is correctly loaded");
     }
 
     @Override

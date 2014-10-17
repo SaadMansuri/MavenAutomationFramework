@@ -5,10 +5,11 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.Careers;
 import com.agorafy.automation.pageobjects.footer.FooterCompanyLinks;
+import com.agorafy.automation.testcases.ContentPagesVerification;
 /**
  * Test Careers link on Footer
  * Click Careers link on the Home Page, verify Careers Page is loaded 
@@ -16,7 +17,7 @@ import com.agorafy.automation.pageobjects.footer.FooterCompanyLinks;
  * Verify the title of Careers Page
  * Verify the Heading Text on Careers Page
  */
-public class FooterCareersAction extends AutomationTestCaseVerification
+public class FooterCareersAction extends ContentPagesVerification
 {
     public FooterCareersAction()
     {
@@ -24,29 +25,20 @@ public class FooterCareersAction extends AutomationTestCaseVerification
     }
 
     @Override
-    protected void verifyTestCases()
+    protected void verifyTestCases() throws Exception
     {
         FooterCompanyLinks companyLinks = Page.footer().companyLinks();
-        HashMap<String, String> careersMap = testCaseData.get("Careers");
-        Careers career = null;
-        try
-        {
-            career = companyLinks.clickOnCareersLink();
-            AutomationLog.info("Careers Page opened successfully");
+        Careers career = companyLinks.clickOnCareersLink();
 
-            Assert.assertEquals(career.currentURL(), career.careersPageUrl(), "Careers Link did not Navigate to correct pageUrl");
-            AutomationLog.info("Careers Link navigates to Careers URL");
+        HashMap<String, String> expectedCareersData = testCaseData.get("Careers");
+        expectedCareersData.put("url", career.careersPageUrl());
+        verifyLink(career, expectedCareersData);
 
-            Assert.assertEquals(career.currentPageTitle(), careersMap.get("title").trim(), "Careers page does not show correct PageTitle");
-            AutomationLog.info("Careers page shows correct page title");
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.careersLinkText(), "Left menu does not show Careers link as Active Link");
+        AutomationLog.info("Left menu shows Careers link as Active Link");
 
-            Assert.assertEquals(career.headingText(), careersMap.get("pageheading").trim(),"Careers page does not show correct page Heading");
-            AutomationLog.info("Careers page shows correct page Heading");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Either Careers page did not open successfully or Careers page verification failed" + e.getMessage());
-        }
+        AutomationLog.info("Careers page is correctly loaded");
     }
 
     @Override

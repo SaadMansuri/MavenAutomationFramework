@@ -14,7 +14,7 @@ public class SearchPropertiesPage extends Page
         super(driver);
     }
 
-    public WebElement text_pageHeading() throws Exception
+    public WebElement pageHeadingElement() throws Exception
     {
         WebElement element;
         try
@@ -30,9 +30,10 @@ public class SearchPropertiesPage extends Page
         return element;
     }
 
+    @Override
     public String pageHeading() throws Exception
     {
-        return getTextfromElement(text_pageHeading());
+        return pageHeadingElement().getText();
     }
 
     public String getURL()

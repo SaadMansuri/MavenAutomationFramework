@@ -5,12 +5,12 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.FAQs;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.testcases.ContentPagesVerification;
 
-public class SubnavigationFaqAction extends AutomationTestCaseVerification
+public class SubnavigationFaqAction extends ContentPagesVerification
 {
     public SubnavigationFaqAction()
     {
@@ -21,14 +21,16 @@ public class SubnavigationFaqAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception
     {
         SubNavigation subnavigation = Page.subNavigation();
-        HashMap<String, String> blogExpectedData = testCaseData.get("faq");
-        
         FAQs faqs = subnavigation.clickLinkFAQ();
 
-        Assert.assertEquals(faqs.currentURL(), faqs.faqsPageUrl(), "FAQ Page URL is not as expected after clicking the link.");
-        Assert.assertEquals(faqs.currentPageTitle(), blogExpectedData.get("title"), "Careers Page title does not match to the expected");
-        AutomationLog.info("FAQ page is correctly loaded");
+        Assert.assertEquals(faqs.currentURL(),faqs.faqsPageUrl(), "Link did not redirect to correct PageUrl ");
+        AutomationLog.info("Link redirects to correct PageUrl");
 
+        HashMap<String, String> expectedFAQsData = testCaseData.get("FAQ");
+        Assert.assertEquals(faqs.currentPageTitle(), expectedFAQsData.get("title"), "Page does not show correct Page Title");
+        AutomationLog.info("Page shows correct page Title");
+
+        AutomationLog.info("FAQ Page is correctly loaded");
     }
 
     @Override

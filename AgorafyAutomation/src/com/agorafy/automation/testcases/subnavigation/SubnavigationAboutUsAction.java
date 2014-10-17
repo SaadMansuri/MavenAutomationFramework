@@ -5,10 +5,11 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.AboutUs;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.testcases.ContentPagesVerification;
 
 /**
  * Test whether 'About Us' link appears in the subnavigation bar
@@ -19,7 +20,7 @@ import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
  *
  */
 
-public class SubnavigationAboutUsAction extends AutomationTestCaseVerification
+public class SubnavigationAboutUsAction extends ContentPagesVerification
 {
     public SubnavigationAboutUsAction()
     {
@@ -30,13 +31,17 @@ public class SubnavigationAboutUsAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception
     {
         SubNavigation subnavigation = Page.subNavigation();
-        HashMap<String, String> aboutusExpectedData = testCaseData.get("Aboutus");
-
         AboutUs aboutUs = subnavigation.clickLinkAboutUs();
-        Assert.assertEquals(aboutUs.currentURL(), aboutUs.aboutUsPageUrl(), "About Us Page URL is not as expected after clicking the link.");
-        Assert.assertEquals(aboutUs.currentPageTitle(), aboutusExpectedData.get("title"), "About Us Page title does not match to the expected");
-        Assert.assertEquals(aboutUs.headingText(), aboutusExpectedData.get("heading"), "About Us Page is not loaded with correct Heading");
-        AutomationLog.info("About Us page is correctly loaded");
+
+        HashMap<String, String> expectedAboutUsData = testCaseData.get("AboutUs");
+        expectedAboutUsData.put("url", aboutUs.aboutUsPageUrl());
+        verifyLink(aboutUs, expectedAboutUsData);
+
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.aboutUsLinkText(),"Left menu does not show About Us link as Active Link");
+        AutomationLog.info("Left menu shows About Us link as Active Link");
+
+        AutomationLog.info("AboutUs page is correctly loaded");
     }
 
     @Override

@@ -2,13 +2,11 @@ package com.agorafy.automation.testcases.subnavigation;
 
 import java.util.HashMap;
 
-import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SearchPropertiesPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.testcases.ContentPagesVerification;
 
 /**
  * Test whether 'Search Properties' link appears in the subnavigation bar
@@ -18,7 +16,7 @@ import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
  * Test whether actual Page Heading and expected Heading match 
  */
 
-public class SubnavigationSearchPropertiesAction extends AutomationTestCaseVerification
+public class SubnavigationSearchPropertiesAction extends ContentPagesVerification
 {
     public SubnavigationSearchPropertiesAction()
     {
@@ -29,13 +27,13 @@ public class SubnavigationSearchPropertiesAction extends AutomationTestCaseVerif
     protected void verifyTestCases() throws Exception
     {
         SubNavigation subnavigation = Page.subNavigation();
-        HashMap<String, String> propertySearchExpectedData = testCaseData.get("SearchProp");
-
         SearchPropertiesPage searchProperties = subnavigation.clickLinkSearchProperties();
-        Assert.assertEquals(searchProperties.currentURL(), searchProperties.getURL(), "Search Properties Page URL is not as expected after clicking the link.");
-        Assert.assertEquals(searchProperties.currentPageTitle(), propertySearchExpectedData.get("title"), "Search Properties Page title does not match to the expected");
-        Assert.assertEquals(searchProperties.pageHeading(), propertySearchExpectedData.get("heading"), "Search Properties Page is not loaded with correct Heading");
-        AutomationLog.info("Search Properties page is correctly loaded");
+
+        HashMap<String, String> expectedSearchPropData = testCaseData.get("SearchProperties");
+        expectedSearchPropData.put("url", searchProperties.getURL());
+        verifyLink(searchProperties, expectedSearchPropData);
+
+        AutomationLog.info("Search Properties Page is correctly loaded");
     }
 
     @Override

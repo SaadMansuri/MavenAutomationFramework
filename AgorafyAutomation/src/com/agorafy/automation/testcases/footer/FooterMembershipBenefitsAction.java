@@ -5,10 +5,12 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.MembershipBenefit;
 import com.agorafy.automation.pageobjects.footer.FooterCompanyLinks;
+import com.agorafy.automation.testcases.ContentPagesVerification;
+
 /**
  * Test MembershipBenefit link on Footer
  * Click MembershipBenefit link on the Home Page, verify MembershipBenefit Page is loaded 
@@ -16,7 +18,7 @@ import com.agorafy.automation.pageobjects.footer.FooterCompanyLinks;
  * Verify the title of MembershipBenefit Page
  * Verify the Heading Text on MembershipBenefit Page
  */
-public class FooterMembershipBenefitsAction extends AutomationTestCaseVerification
+public class FooterMembershipBenefitsAction extends ContentPagesVerification
 {
     public FooterMembershipBenefitsAction()
     {
@@ -24,29 +26,20 @@ public class FooterMembershipBenefitsAction extends AutomationTestCaseVerificati
     }
 
     @Override
-    protected void verifyTestCases()
+    protected void verifyTestCases() throws Exception
     {
         FooterCompanyLinks companyLinks = Page.footer().companyLinks();
-        MembershipBenefit membershipBenefit = null;
-        HashMap<String, String> membershipBenefitsMap = testCaseData.get("Benefits");
-        try
-        {
-            membershipBenefit = companyLinks.clickOnMembershipBenefitLink();
-            AutomationLog.info("Membership Benefit Page opened successfully");
+        MembershipBenefit membershipBenefit = companyLinks.clickOnMembershipBenefitLink();
 
-            Assert.assertEquals(membershipBenefit.currentURL(), membershipBenefit.membershipBenefitPageUrl(), "Membership Benefit Link did not Navigate to correct pageUrl");
-            AutomationLog.info("Membership Benefit Link navigates to Membership Benefit URL");
+        HashMap<String, String> expectedMembershipBenefitData = testCaseData.get("Member");
+        expectedMembershipBenefitData.put("url", membershipBenefit.membershipBenefitPageUrl());
+        verifyLink(membershipBenefit, expectedMembershipBenefitData);
 
-            Assert.assertEquals(membershipBenefit.currentPageTitle(), membershipBenefitsMap.get("title").trim(), "Membership benefit page does not show correct PageTitle");
-            AutomationLog.info("Membership Benefit page shows correct page title");
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.membershipBenefitLinkText(), "Left menu does not show Membership Benefit link as Active Link");
+        AutomationLog.info("Left menu shows Membership Benefit link as Active Link");
 
-            Assert.assertEquals(membershipBenefit.headingText(), membershipBenefitsMap.get("pageheading").trim(),"Membership Benefit page does not show correct page Heading");
-            AutomationLog.info("Membership Benefit page shows correct page Heading");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Either MembershipBenefit page did not open successfully or MembershipBenefit page verification failed" + e.getMessage());
-        }
+        AutomationLog.info("Membership Benefit is correctly loaded");
     }
 
     @Override

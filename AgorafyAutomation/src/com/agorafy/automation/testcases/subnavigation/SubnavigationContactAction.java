@@ -5,10 +5,11 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.Contact;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.testcases.ContentPagesVerification;
 
 /**
  * Test whether 'Contact' link appears in the subnavigation bar
@@ -18,7 +19,7 @@ import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
  * Test whether actual Page Heading and expected Heading match 
  */
 
-public class SubnavigationContactAction extends AutomationTestCaseVerification
+public class SubnavigationContactAction extends ContentPagesVerification
 {
     public SubnavigationContactAction()
     {
@@ -29,12 +30,16 @@ public class SubnavigationContactAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception
     {
         SubNavigation subnavigation = Page.subNavigation();
-        HashMap<String, String> contactExpectedData = testCaseData.get("Contact");
-
         Contact contactPage = subnavigation.clickLinkContact();
-        Assert.assertEquals(contactPage.currentURL(), contactPage.contactPageUrl(), "Contact page URL is not as expected after clicking the link");
-        Assert.assertEquals(contactPage.currentPageTitle(), contactExpectedData.get("title"), "Contact page title does not match to the expected");
-        Assert.assertEquals(contactPage.headingText(), contactExpectedData.get("heading"), "Contact page is not loaded with correct Heading");
+
+        HashMap<String, String> expectedContactData = testCaseData.get("Contact");
+        expectedContactData.put("url", contactPage.contactPageUrl());
+        verifyLink(contactPage, expectedContactData);
+
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.contactLinkText(),"Left menu does not show Contact link as Active Link");
+        AutomationLog.info("Left menu shows Contact link as Active Link");
+
         AutomationLog.info("Contact page is correctly loaded");
     }
 

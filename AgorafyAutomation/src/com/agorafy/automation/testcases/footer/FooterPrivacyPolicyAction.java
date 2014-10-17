@@ -2,13 +2,12 @@ package com.agorafy.automation.testcases.footer;
 
 import java.util.HashMap;
 
-import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.FooterLegalLinks;
 import com.agorafy.automation.pageobjects.footer.legal.PrivacyPolicy;
+import com.agorafy.automation.testcases.ContentPagesVerification;
+
 /**
  * Test PrivacyPolicy link on Footer
  * Click PrivacyPolicy link on the Home Page, verify PrivacyPolicy Page is loaded 
@@ -16,7 +15,7 @@ import com.agorafy.automation.pageobjects.footer.legal.PrivacyPolicy;
  * Verify the title of PrivacyPolicy Page
  * Verify the Heading Text on PrivacyPolicy Page
  */
-public class FooterPrivacyPolicyAction extends AutomationTestCaseVerification
+public class FooterPrivacyPolicyAction extends ContentPagesVerification
 {
     public FooterPrivacyPolicyAction()
     {
@@ -24,29 +23,16 @@ public class FooterPrivacyPolicyAction extends AutomationTestCaseVerification
     }
 
     @Override
-    protected void verifyTestCases()
+    protected void verifyTestCases() throws Exception
     {
         FooterLegalLinks legalLinks = Page.footer().legalLinks();
-        PrivacyPolicy privacyPolicy = null;
-        HashMap<String, String> privacyPolicyMap = testCaseData.get("PrivacyPolicy"); 
-        try
-        {
-            privacyPolicy = legalLinks.clickOnPrivacyPolicyLink();
-            AutomationLog.info("PrivacyPolicy Page opened successfully");
+        PrivacyPolicy privacyPolicy = legalLinks.clickOnPrivacyPolicyLink();
 
-            Assert.assertEquals(privacyPolicy.currentURL(), privacyPolicy.privacyPolicyPageUrl(), "PrivacyPolicy Link did not Navigate to correct pageUrl");
-            AutomationLog.info("PrivacyPolicy Link navigates to PrivacyPolicy URL");
+        HashMap<String, String> expectedPrivacyPolicyData = testCaseData.get("PrivacyPolicy");
+        expectedPrivacyPolicyData.put("url", privacyPolicy.privacyPolicyPageUrl());
+        verifyLink(privacyPolicy, expectedPrivacyPolicyData);
 
-            Assert.assertEquals(privacyPolicy.currentPageTitle(), privacyPolicyMap.get("title").trim(), "PrivacyPolicy page does not show correct PageTitle");
-            AutomationLog.info("PrivacyPolicy page shows correct page title");
-
-            Assert.assertEquals(privacyPolicy.headingText(), privacyPolicyMap.get("pageheading").trim(),"PrivacyPolicy page does not show correct page Heading");
-            AutomationLog.info("PrivacyPolicy page shows correct page Heading");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Either PrivacyPolicy page did not open successfully or PrivacyPolicy page verification failed" + e.getMessage());
-        }
+        AutomationLog.info("Privacy Policy Page is correctly loaded");
     }
 
     @Override

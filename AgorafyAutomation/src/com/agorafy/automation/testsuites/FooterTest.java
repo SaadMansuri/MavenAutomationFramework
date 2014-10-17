@@ -2,8 +2,8 @@ package com.agorafy.automation.testsuites;
 
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.testcases.footer.FooterAboutUsAction;
 import com.agorafy.automation.testcases.footer.FooterBlogAction;
 import com.agorafy.automation.testcases.footer.FooterCareersAction;
@@ -39,7 +39,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -53,9 +52,6 @@ public class FooterTest
         }
         catch (Exception e)
         {
-            // This will print the error log message
-            AutomationLog.error(e.getMessage());
-            // Again throwing the exception to fail the test completely in the TestNG results
             throw (e);
         }
     }
@@ -69,7 +65,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -83,7 +78,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -97,7 +91,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -111,7 +104,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -125,7 +117,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -139,7 +130,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -153,7 +143,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -167,7 +156,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -181,7 +169,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -195,7 +182,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -209,7 +195,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -223,7 +208,6 @@ public class FooterTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }

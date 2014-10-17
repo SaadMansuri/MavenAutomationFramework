@@ -5,10 +5,12 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.FooterSupportLinks;
 import com.agorafy.automation.pageobjects.footer.support.Feedback;
+import com.agorafy.automation.testcases.ContentPagesVerification;
+
 /**
  * Test Feedback link on Footer
  * Click Feedback link on the Home Page, verify Feedback Page is loaded 
@@ -16,7 +18,7 @@ import com.agorafy.automation.pageobjects.footer.support.Feedback;
  * Verify the title of Feedback Page
  * Verify the Heading Text on Feedback Page
  */
-public class FooterFeedbackAction extends AutomationTestCaseVerification
+public class FooterFeedbackAction extends ContentPagesVerification
 {
     public FooterFeedbackAction()
     {
@@ -24,29 +26,20 @@ public class FooterFeedbackAction extends AutomationTestCaseVerification
     }
 
     @Override
-    protected void verifyTestCases()
+    protected void verifyTestCases() throws Exception
     {
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
-        Feedback feedback = null;
-        HashMap<String, String> feedbackMap = testCaseData.get("Feedback");
-        try
-        {
-            feedback = supportLinks.clickOnFeedbackLink();
-            AutomationLog.info("Feedback Page opened successfully");
+        Feedback feedback = supportLinks.clickOnFeedbackLink();
 
-            Assert.assertEquals(feedback.currentURL(), feedback.feedbackPageUrl(), "Feedback Link did not Navigate to correct pageUrl");
-            AutomationLog.info("Feedback Link navigates to Feedback URL");
+        HashMap<String, String> expectedFeedbackData = testCaseData.get("Feedback");
+        expectedFeedbackData.put("url", feedback.feedbackPageUrl());
+        verifyLink(feedback, expectedFeedbackData);
 
-            Assert.assertEquals(feedback.currentPageTitle(), feedbackMap.get("title").trim(), "Feedback page does not show correct PageTitle");
-            AutomationLog.info("Feedback page shows correct page title");
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.feedbackLinkText(), "Left menu does not show Feedback link as Active Link");
+        AutomationLog.info("Left menu shows Feedback link as Active Link");
 
-            Assert.assertEquals(feedback.headingText(), feedbackMap.get("pageheading").trim(),"Feedback page does not show correct page Heading");
-            AutomationLog.info("Feedback page shows correct page Heading");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Either Feedback page did not open successfully or Feedback page verification failed" + e.getMessage());
-        }
+        AutomationLog.info("Feedback page is correctly loaded");
     }
 
     @Override

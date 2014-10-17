@@ -5,10 +5,12 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.FooterCompanyLinks;
 import com.agorafy.automation.pageobjects.footer.company.Team;
+import com.agorafy.automation.testcases.ContentPagesVerification;
+
 /**
  * Test Team link on Footer
  * Click Team link on the Home Page, verify Team Page is loaded 
@@ -16,7 +18,7 @@ import com.agorafy.automation.pageobjects.footer.company.Team;
  * Verify the title of Team Page
  * Verify the Heading Text on Team Page
  */
-public class FooterTeamAction extends AutomationTestCaseVerification
+public class FooterTeamAction extends ContentPagesVerification
 {
     public FooterTeamAction()
     {
@@ -24,29 +26,20 @@ public class FooterTeamAction extends AutomationTestCaseVerification
     }
 
     @Override
-    protected void verifyTestCases()
+    protected void verifyTestCases() throws Exception
     {
         FooterCompanyLinks companyLinks = Page.footer().companyLinks();
-        Team team = null;
-        HashMap<String, String> teamMap = testCaseData.get("Team");
-        try
-        {
-            team = companyLinks.clickOnTeamLink();
-            AutomationLog.info("Team Page opened successfully");
+        Team team = companyLinks.clickOnTeamLink();;
 
-            Assert.assertEquals(team.currentURL(), team.teamPageUrl(), "Team Link did not Navigate to correct pageUrl");
-            AutomationLog.info("Team Link navigates to Team URL");
+        HashMap<String, String> expectedTeamData = testCaseData.get("Team");
+        expectedTeamData.put("url", team.teamPageUrl());
+        verifyLink(team, expectedTeamData);
 
-            Assert.assertEquals(team.currentPageTitle(), teamMap.get("title").trim(), "Team page does not show correct PageTitle");
-            AutomationLog.info("Team page shows correct page title");
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.teamLinkText(), "Left menu does not show Team link as Active Link");
+        AutomationLog.info("Left menu shows Team link as Active Link");
 
-            Assert.assertEquals(team.headingText(), teamMap.get("pageheading").trim(),"Team page does not show correct page Heading");
-            AutomationLog.info("Team page shows correct page Heading");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Either Team page did not open successfully or Team page verification failed" + e.getMessage());
-        }
+        AutomationLog.info("Team page is correctly loaded");
     }
 
     @Override

@@ -4,7 +4,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.testcases.subnavigation.SubnavigationAboutUsAction;
 import com.agorafy.automation.testcases.subnavigation.SubnavigationBlogAction;
 import com.agorafy.automation.testcases.subnavigation.SubnavigationCareersAction;
@@ -37,7 +36,6 @@ public class SubNavigationTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -51,7 +49,6 @@ public class SubNavigationTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -65,7 +62,6 @@ public class SubNavigationTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -79,7 +75,6 @@ public class SubNavigationTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -93,7 +88,6 @@ public class SubNavigationTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -107,7 +101,7 @@ public class SubNavigationTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
+            //AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -121,7 +115,6 @@ public class SubNavigationTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -135,7 +128,6 @@ public class SubNavigationTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -149,7 +141,6 @@ public class SubNavigationTest
         }
         catch(Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }

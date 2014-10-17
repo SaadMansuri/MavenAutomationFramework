@@ -20,7 +20,7 @@ public class HowItWorks extends Page
         return applicationUrl() + "/tips/";
     }
 
-    public WebElement pageHeading() throws Exception
+    public WebElement pageHeadingElement() throws Exception
     {
         try
         {
@@ -35,8 +35,8 @@ public class HowItWorks extends Page
         return element;
     }
 
-    public String headingText() throws Exception
+    public String pageHeading() throws Exception
     {
-        return getTextfromElement(pageHeading());
+        return pageHeadingElement().getText();
     }
 }

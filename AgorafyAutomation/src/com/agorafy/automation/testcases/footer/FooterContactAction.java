@@ -5,10 +5,12 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.Contact;
 import com.agorafy.automation.pageobjects.footer.FooterCompanyLinks;
+import com.agorafy.automation.testcases.ContentPagesVerification;
+
 /**
  * Test Contact link on Footer
  * Click Contact link on the Home Page, verify Contact Page is loaded 
@@ -16,7 +18,7 @@ import com.agorafy.automation.pageobjects.footer.FooterCompanyLinks;
  * Verify the title of Contact Page
  * Verify the Heading Text on Contact Page
  */
-public class FooterContactAction extends AutomationTestCaseVerification
+public class FooterContactAction extends ContentPagesVerification
 {
     public FooterContactAction()
     {
@@ -24,29 +26,20 @@ public class FooterContactAction extends AutomationTestCaseVerification
     }
 
     @Override
-    protected void verifyTestCases()
+    protected void verifyTestCases() throws Exception
     {
         FooterCompanyLinks companyLinks = Page.footer().companyLinks();
-        Contact contact = null;
-        HashMap<String, String> contactMap = testCaseData.get("Contact");
-        try
-        {
-            contact = companyLinks.clickOnContactLink();
-            AutomationLog.info("Contact Page opened successfully");
+        Contact contact = companyLinks.clickOnContactLink();
 
-            Assert.assertEquals(contact.currentURL(), contact.contactPageUrl(), "Contact Link did not Navigate to correct pageUrl");
-            AutomationLog.info("Contact Link navigates to Team URL");
+        HashMap<String, String> expectedContactData = testCaseData.get("Contact");
+        expectedContactData.put("url", contact.contactPageUrl());
+        verifyLink(contact, expectedContactData);
 
-            Assert.assertEquals(contact.currentPageTitle(), contactMap.get("title").trim(), "Contact page does not show correct PageTitle");
-            AutomationLog.info("Contact page shows correct page title");
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.contactLinkText(), "Left menu does not show Contact link as Active Link");
+        AutomationLog.info("Left menu shows Contact link as Active Link");
 
-            Assert.assertEquals(contact.headingText(), contactMap.get("pageheading").trim(),"Contact page does not show correct page Heading");
-            AutomationLog.info("Contact page shows correct page Heading");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Either Contact page did not open successfully or Contact page verification failed" + e.getMessage());
-        }
+        AutomationLog.info("Contact page is correctly loaded");
     }
 
     @Override

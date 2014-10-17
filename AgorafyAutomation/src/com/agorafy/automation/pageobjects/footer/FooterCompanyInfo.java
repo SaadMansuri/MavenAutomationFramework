@@ -15,7 +15,7 @@ public class FooterCompanyInfo extends Page
         super(driver);
     }
 
-    public String text_CompanyName() throws Exception
+    public String companyName() throws Exception
     {
         String companyName = "";
         try
@@ -31,7 +31,7 @@ public class FooterCompanyInfo extends Page
         return companyName;
     }
 
-    public String text_CompanyAddress1() throws Exception
+    public String companyAddress1() throws Exception
     {
         String companyAddress1 = "";
         try
@@ -47,7 +47,7 @@ public class FooterCompanyInfo extends Page
         return companyAddress1;
     }
 
-    public String text_CompanyAddress2() throws Exception 
+    public String companyAddress2() throws Exception 
     {
         String companyAddress2 = "";
         try
@@ -63,7 +63,7 @@ public class FooterCompanyInfo extends Page
         return companyAddress2;
     }
 
-    public String text_CompanyPhoneNumber() throws Exception
+    public String companyPhoneNumber() throws Exception
     {
         String companyPhoneNumber = "";
         try
@@ -94,7 +94,7 @@ public class FooterCompanyInfo extends Page
         return element;
     }
 
-    public String link_SupportEmailText() throws Exception
+    public String supportEmailText() throws Exception
     {
         String supportEmailText = "";
         try
@@ -110,7 +110,7 @@ public class FooterCompanyInfo extends Page
         return supportEmailText;
     }
 
-    public String link_SupportEmailAddressText() throws Exception
+    public String supportEmailAddressText() throws Exception
     {
         String supportEmailAddress = "";
         try
@@ -126,7 +126,7 @@ public class FooterCompanyInfo extends Page
         return supportEmailAddress;
     }
 
-    public String text_Copyright() throws Exception
+    public String copyrightText() throws Exception
     {
         String copyrightText = "";
         try

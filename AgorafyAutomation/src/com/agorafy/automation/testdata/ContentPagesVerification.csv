@@ -1,0 +1,23 @@
+# This is a comment
+
+AboutUs,title="AGORAFY - About Us";heading="About Us"
+Blog,title="Agorafy - Home"
+Careers,title="AGORAFY - Careers";heading=Careers
+Contact,title="AGORAFY - Contact";heading=Contact
+FAQ,title="Agorafy - FAQ",
+HowItWorks,title="AGORAFY - Tips and How-Tos";heading="How It Works"
+Member,title="AGORAFY - Members' Benefits";heading="Members' Benefits"
+SearchProfessionals,title="AGORAFY - Agent and Company Search";heading="Agent and Company Search"
+SearchProperties,title="AGORAFY - Search";heading="Search Properties in New York City"
+
+CompanyInfo,companyname="Agorafy, Inc.";companyaddr1="235 West 23rd Street, 5th Floor";companyaddr2="New York, NY 10011";companyphoneNo=(212) 401-4231;supportemail=hello@agorafy.com;copyright="All Content Copyright © 2014 , Agorafy Inc."
+Feedback,title="AGORAFY - Feedback";heading=Feedback
+Press,title="AGORAFY - Press";heading=Press
+PrivacyPolicy,title="AGORAFY - Privacy Policy";heading="Privacy Policy"
+Twitter,title="Agorafy (@agorafy) | Twitter"
+Facebook,title="Agorafy - New York, New York - Real Estate | Facebook"
+Youtube,title="agorafy - YouTube"
+GooglePlus,title="Agorafy - Google+"
+LinkedIn,title="Agorafy | LinkedIn"
+Team,title="AGORAFY - Team";heading=Team
+Terms,title="AGORAFY - Terms and Conditions";heading="Terms and Conditions"

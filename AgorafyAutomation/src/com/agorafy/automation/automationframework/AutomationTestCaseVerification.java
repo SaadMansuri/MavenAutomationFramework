@@ -6,6 +6,11 @@ public abstract class AutomationTestCaseVerification extends AutomationTestCase
     {
         super();
     }
+    
+    protected AutomationTestCaseVerification(String executingTestCase)
+    {
+        super(executingTestCase);
+    }
 
     public void setup()
     {
@@ -45,6 +50,7 @@ public abstract class AutomationTestCaseVerification extends AutomationTestCase
 
     private void handleTestCaseFailure(String message) throws Exception
     {
+        AutomationLog.error(message);
         testcaseFailed(failureMessage());
         throw (new Exception(message));
     }

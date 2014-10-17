@@ -5,10 +5,11 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.FAQs;
 import com.agorafy.automation.pageobjects.footer.FooterSupportLinks;
+import com.agorafy.automation.testcases.ContentPagesVerification;
+
 /**
  * Test FAQs link on Footer
  * Click FAQs link on the Home Page, verify FAQs Page is loaded 
@@ -16,7 +17,7 @@ import com.agorafy.automation.pageobjects.footer.FooterSupportLinks;
  * Verify the title of FAQs Page
  * Verify the Heading Text on FAQs Page
  */
-public class FooterFAQsAction extends AutomationTestCaseVerification
+public class FooterFAQsAction extends ContentPagesVerification
 {
     public FooterFAQsAction()
     {
@@ -24,29 +25,19 @@ public class FooterFAQsAction extends AutomationTestCaseVerification
     }
 
     @Override
-    protected void verifyTestCases()
+    protected void verifyTestCases() throws Exception
     {
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
-        FAQs fAQs = null;
-        HashMap<String, String> faqMap = testCaseData.get("FAQs");
-        try
-        {
-            fAQs = supportLinks.clickOnFAQsLink();
-            AutomationLog.info("FAQs Page opened successfully");
+        FAQs fAQs = supportLinks.clickOnFAQsLink();
 
-            Assert.assertEquals(fAQs.currentURL(),fAQs.faqsPageUrl(), "FAQs Link did not Navigate to correct pageUrl");
-            AutomationLog.info("FAQs Link navigates to FAQs URL");
+        Assert.assertEquals(fAQs.currentURL(),fAQs.faqsPageUrl(), "Link did not redirect to correct Page Url");
+        AutomationLog.info("Page redirects to correct Page Url");
 
-            Assert.assertEquals(fAQs.currentPageTitle(), faqMap.get("title").trim(), "FAQs page does not show correct PageTitle");
-            AutomationLog.info("FAQs page shows correct page title");
+        HashMap<String, String> expectedFAQsData = testCaseData.get("FAQ");
+        Assert.assertEquals(fAQs.currentPageTitle(), expectedFAQsData.get("title"), "Page does not show correct PageTitle");
+        AutomationLog.info("Page shows correct Page Title");
 
-            Assert.assertEquals(fAQs.headingText(), faqMap.get("pageheading").trim(),"FAQs page does not show correct page Heading");
-            AutomationLog.info("FAQs page shows correct page Heading");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Either FAQs page did not open successfully or FAQs page verification failed" + e.getMessage());
-        }
+        AutomationLog.info("FAQ Page is correctly loaded");
     }
 
     @Override

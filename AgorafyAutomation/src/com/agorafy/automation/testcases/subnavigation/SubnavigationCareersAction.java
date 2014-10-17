@@ -1,12 +1,15 @@
 package com.agorafy.automation.testcases.subnavigation;
 
 import java.util.HashMap;
+
 import org.testng.Assert;
+
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.Careers;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.testcases.ContentPagesVerification;
 
 /**
  * Test whether 'Careers' link appears in the subnavigation bar
@@ -16,7 +19,7 @@ import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
  * Test whether actual Page Heading and expected Heading match 
  */
 
-public class SubnavigationCareersAction extends AutomationTestCaseVerification
+public class SubnavigationCareersAction extends ContentPagesVerification
 {
     public SubnavigationCareersAction()
     {
@@ -27,12 +30,16 @@ public class SubnavigationCareersAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception
     {
         SubNavigation subnavigation = Page.subNavigation();
-        HashMap<String, String> careerExpectedData = testCaseData.get("Careers");
-
         Careers careerPage = subnavigation.clickLinkCareers();
-        Assert.assertEquals(careerPage.currentURL(), careerPage.careersPageUrl(), "Careers Page URL is not as expected after clicking the link.");
-        Assert.assertEquals(careerPage.currentPageTitle(), careerExpectedData.get("title"), "Careers Page title does not match to the expected");
-        Assert.assertEquals(careerPage.headingText(), careerExpectedData.get("heading"), "Careers Page is not loaded with correct Heading");
+
+        HashMap<String, String> expectedCareersData = testCaseData.get("Careers");
+        expectedCareersData.put("url", careerPage.careersPageUrl());
+        verifyLink(careerPage, expectedCareersData);
+
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.careersLinkText(),"Left menu does not show Careers link as Active Link");
+        AutomationLog.info("Left menu shows Careers link as Active Link");
+
         AutomationLog.info("Careers page is correctly loaded");
     }
 

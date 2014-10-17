@@ -5,10 +5,10 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.Blog;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.testcases.ContentPagesVerification;
 
 /**
  * Test whether 'Blog' link appears in the subnavigation bar
@@ -19,7 +19,7 @@ import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
  *
  */
 
-public class SubnavigationBlogAction extends AutomationTestCaseVerification
+public class SubnavigationBlogAction extends ContentPagesVerification
 {
     public SubnavigationBlogAction()
     {
@@ -30,12 +30,16 @@ public class SubnavigationBlogAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception
     {
         SubNavigation subnavigation = Page.subNavigation();
-        HashMap<String, String> blogExpectedData = testCaseData.get("blog");
-        
         Blog blog = subnavigation.clickLinkBlog();
-        Assert.assertEquals(blog.currentURL(), blog.blogPageUrl(), "Agorafy Blog URL is not as expected after clicking the link.");
-        Assert.assertEquals(blog.currentPageTitle(), blogExpectedData.get("title"), "Agorafy Blog title does not match to the expected");
-        AutomationLog.info("Agorafy Blog is correctly loaded");
+
+        Assert.assertEquals(blog.currentURL(), blog.blogPageUrl(), "Link did not redirect to correct Page Url");
+        AutomationLog.info("Link redirects to correct Page Url");
+
+        HashMap<String, String> expectedBlogData = testCaseData.get("Blog");
+        Assert.assertEquals(blog.currentPageTitle(), expectedBlogData.get("title"), "Page does not show correct Page Title");
+        AutomationLog.info("Page shows correct Page Title");
+
+        AutomationLog.info("Blog Page is correctly loaded");
     }
 
     @Override

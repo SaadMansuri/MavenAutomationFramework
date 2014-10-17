@@ -5,10 +5,12 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.HowItWorks;
 import com.agorafy.automation.pageobjects.footer.FooterSupportLinks;
+import com.agorafy.automation.testcases.ContentPagesVerification;
+
 /**
  * Test HowItWorks link on Footer
  * Click HowItWorks link on the Home Page, verify HowItWorks Page is loaded 
@@ -16,7 +18,7 @@ import com.agorafy.automation.pageobjects.footer.FooterSupportLinks;
  * Verify the title of HowItWorks Page
  * Verify the Heading Text on HowItWorks Page
  */
-public class FooterHowItWorksAction extends AutomationTestCaseVerification
+public class FooterHowItWorksAction extends ContentPagesVerification
 {
     public FooterHowItWorksAction()
     {
@@ -24,29 +26,20 @@ public class FooterHowItWorksAction extends AutomationTestCaseVerification
     }
 
     @Override
-    protected void verifyTestCases()
+    protected void verifyTestCases() throws Exception
     {
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
-        HowItWorks howItWorks = null;
-        HashMap<String, String> howItWorksMap = testCaseData.get("HowItWorks");
-        try
-        {
-            howItWorks = supportLinks.clickOnHowItWorksLink();
-            AutomationLog.info("HowItWorks Page opened successfully");
+        HowItWorks howItWorks = supportLinks.clickOnHowItWorksLink();
 
-            Assert.assertEquals(howItWorks.currentURL(), howItWorks.howItWorksPageUrl(), "HowItWorks Link did not Navigate to correct pageUrl");
-            AutomationLog.info("HowItWorks Link navigates to HowItWorks URL");
+        HashMap<String, String> expectedHowItWorksData = testCaseData.get("HowItWorks");
+        expectedHowItWorksData.put("url", howItWorks.howItWorksPageUrl());
+        verifyLink(howItWorks, expectedHowItWorksData);
 
-            Assert.assertEquals(howItWorks.currentPageTitle(), howItWorksMap.get("title").trim(), "HowItWorks page does not show correct PageTitle");
-            AutomationLog.info("HowItWorks page shows correct page title");
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.howItWorksLinkText(), "Left menu does not show How It Works link as Active Link");
+        AutomationLog.info("Left menu shows How It Works link as Active Link");
 
-            Assert.assertEquals(howItWorks.headingText(), howItWorksMap.get("pageheading").trim(),"HowItWorks page does not show correct page Heading");
-            AutomationLog.info("HowItWorks page shows correct page Heading");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Either HowItWorks page did not open successfully or HowItWorks page verification failed" + e.getMessage());
-        }
+        AutomationLog.info("How It Works Page is correctly loaded");
     }
 
     @Override

@@ -2,13 +2,12 @@ package com.agorafy.automation.testcases.footer;
 
 import java.util.HashMap;
 
-import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.FooterLegalLinks;
 import com.agorafy.automation.pageobjects.footer.legal.TermsAndConditions;
+import com.agorafy.automation.testcases.ContentPagesVerification;
+
 /**
  * Test TermsAndCondition link on Footer
  * Click TermsAndCondition link on the Home Page, verify TermsAndCondition Page is loaded 
@@ -16,7 +15,7 @@ import com.agorafy.automation.pageobjects.footer.legal.TermsAndConditions;
  * Verify the title of TermsAndCondition Page
  * Verify the Heading Text on TermsAndCondition Page
  */
-public class FooterTermsAndConditionAction extends AutomationTestCaseVerification
+public class FooterTermsAndConditionAction extends ContentPagesVerification
 {
     public FooterTermsAndConditionAction()
     {
@@ -24,29 +23,16 @@ public class FooterTermsAndConditionAction extends AutomationTestCaseVerificatio
     }
 
     @Override
-    protected void verifyTestCases()
-    {		
+    protected void verifyTestCases() throws Exception
+    {
         FooterLegalLinks legalLinks = Page.footer().legalLinks();
-        TermsAndConditions termsAndConditions = null;
-        HashMap<String, String> termsAndConditionsMap = testCaseData.get("Terms");
-        try
-        {
-            termsAndConditions = legalLinks.clickOnTermsAndConditionsLink();
-            AutomationLog.info("Terms And Conditions Page opened successfully");
+        TermsAndConditions termsAndConditions = legalLinks.clickOnTermsAndConditionsLink();;
 
-            Assert.assertEquals(termsAndConditions.currentURL(), termsAndConditions.termsAndConditionsPageUrl(), "TermsAndConditions Link did not Navigate to correct pageUrl");
-            AutomationLog.info("TermsAndConditions Link navigates to TermsAndConditions URL");
+        HashMap<String, String> expectedTermsData = testCaseData.get("Terms");
+        expectedTermsData.put("url", termsAndConditions.termsAndConditionsPageUrl());
+        verifyLink(termsAndConditions, expectedTermsData);
 
-            Assert.assertEquals(termsAndConditions.currentPageTitle(),termsAndConditionsMap.get("title").trim(), "TermsAndConditions page does not show correct PageTitle");
-            AutomationLog.info("TermsAndConditions page shows correct page title");
-
-            Assert.assertEquals(termsAndConditions.headingText(), termsAndConditionsMap.get("pageheading").trim(),"TermsAndConditions page does not show correct page Heading");
-            AutomationLog.info("TermsAndConditions page shows correct page Heading");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Either TermsAndConditions page did not open successfully or TermsAndConditions page verification failed" + e.getMessage());
-        }
+        AutomationLog.info("Terms And Conditions Page is correctly loaded");
     }
 
     @Override
