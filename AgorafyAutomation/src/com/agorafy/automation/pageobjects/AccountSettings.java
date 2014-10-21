@@ -15,10 +15,11 @@ public class AccountSettings extends Page
 
     public String accountSettingsPageUrl()
     {
-        return applicationUrl() + "/account/";
+    	//TODO: 
+        return "https://www.agorafy.com/account/";
     }
 
-    public WebElement pageHeading() throws Exception
+    public WebElement pageHeadingElement() throws Exception
     {
         try
         {
@@ -33,9 +34,10 @@ public class AccountSettings extends Page
         return element;
     }
 
-    public String headingText() throws Exception
+    @Override
+    public String pageHeading() throws Exception
     {
-        return getTextfromElement(pageHeading());
+        return pageHeadingElement().getText();
     }
 
     public WebElement link_personalInfo() throws Exception

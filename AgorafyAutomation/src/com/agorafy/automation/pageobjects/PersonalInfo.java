@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.datamodel.profile.UserProfile;
 
 public class PersonalInfo extends Page
 {
@@ -30,7 +31,7 @@ public class PersonalInfo extends Page
         return element;
     }
 
-    public String textBox_NameValue() throws Exception
+    public String nameTextValue() throws Exception
     {
         String name = "";
         try
@@ -61,7 +62,7 @@ public class PersonalInfo extends Page
         return element;
     }
 
-    public String textbox_EmailValue() throws Exception
+    public String emailTextValue() throws Exception
     {
         String email = "";
         try
@@ -77,9 +78,9 @@ public class PersonalInfo extends Page
         return email;
     }
 
-    public boolean checkEnablityofEmailTextField() throws Exception
+    public boolean checkEnablityofTextField(WebElement element) throws Exception
     {
-        return textBox_Email().isEnabled();
+        return element.isEnabled();
     }
 
     public WebElement textBox_Company() throws Exception
@@ -97,7 +98,7 @@ public class PersonalInfo extends Page
         return element;
     }
 
-    public String textbox_CompanyValue() throws Exception
+    public String companyTextValue() throws Exception
     {
         String company = "";
         try
@@ -128,7 +129,7 @@ public class PersonalInfo extends Page
         return element;
     }
 
-    public String textbox_Address1Value() throws Exception
+    public String address1() throws Exception
     {
         String address1 = "";
         try
@@ -159,7 +160,7 @@ public class PersonalInfo extends Page
         return element;        
     }
 
-    public String textbox_Address2Value() throws Exception
+    public String address2() throws Exception
     {
         String address2 = "";
         try
@@ -190,7 +191,7 @@ public class PersonalInfo extends Page
         return element;
     }
 
-    public String textbox_CityValue() throws Exception
+    public String cityTextValue() throws Exception
     {
         String city = "";
         try
@@ -253,7 +254,7 @@ public class PersonalInfo extends Page
         return element;
     }
 
-    public String textbox_ZipValue() throws Exception
+    public String zipTextValue() throws Exception
     {
         String zip = "";
         try
@@ -412,7 +413,7 @@ public class PersonalInfo extends Page
         return element;
     }
 
-    public String textBox_PhoneNum1Value() throws Exception
+    public String phoneNum1() throws Exception
     {
         String phNo1 = "";
         try
@@ -443,7 +444,7 @@ public class PersonalInfo extends Page
         return element;
     }
 
-    public String textBox_PhoneNum2Value() throws Exception
+    public String phoneNum2() throws Exception
     {
         String phNo2 = "";
         try
@@ -474,7 +475,7 @@ public class PersonalInfo extends Page
         return element;
     }
 
-    public String textBox_PhoneNum3Value() throws Exception
+    public String phoneNum3() throws Exception
     {
         String phNo3 = "";
         try
@@ -505,7 +506,7 @@ public class PersonalInfo extends Page
         return element;
     }
 
-    public String textBox_PhoneNum4Value() throws Exception
+    public String phoneNum4() throws Exception
     {
         String phNo4 = "";
         try
@@ -542,7 +543,7 @@ public class PersonalInfo extends Page
         try
         {
             btn_SaveChanges().click();
-            info = new PersonalInfo(driver);            
+            info = new PersonalInfo(driver);
             AutomationLog.info("Save Changes Button clicked");
         }
         catch(Exception e)
@@ -551,5 +552,78 @@ public class PersonalInfo extends Page
             throw (e);
         }
         return info;
+    }
+
+    public WebElement text_NameError() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='userEditForm']/div[1]/div/div/div"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Error Message for invalid name is not shown");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String nameError() throws Exception
+    {
+        String errorMessage = "";
+        try
+        {
+            errorMessage = text_NameError().getText();
+            AutomationLog.info("Error Message for invalid name is shown");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Error Message for invalid name is not shown");
+            throw(e);
+        }
+        return errorMessage;
+    }
+
+    public void populateData(UserProfile profileData) throws Exception
+    {
+        try
+        {
+            textBox_Name().clear();
+            textBox_Name().sendKeys(profileData.getName());
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not Populate Data in Name field");
+        }
+    }
+
+    public WebElement text_successMessage() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("personalDetailsChangedMessage"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Success Message is not shown");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String successMessage() throws Exception
+    {
+        String successMessage = "";
+        try
+        {
+        	successMessage = text_successMessage().getText();
+            AutomationLog.info("Success Message is shown");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Success Message is not shown");
+            throw(e);
+        }
+        return successMessage;
     }
 }

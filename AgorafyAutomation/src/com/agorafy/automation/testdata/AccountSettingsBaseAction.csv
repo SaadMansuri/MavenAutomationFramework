@@ -1,3 +1,10 @@
+# Account Settings TestData
+AccountSettings,title="AGORAFY";heading="Account Settings";status="active"
+
+# Personal Information TestData
+PersonalInfo,name="Chandrani Bhagat";successMessage="Your personal details has been changed.";failureMessage="* This field is required";headerProfileName="Hello,\nChandrani!"
+
+# Change Password Negative Scenario 
 validCredential,username=chandrani.bhagat@cuelogic.co.in;password=cuelogic77
 populateAndVerifyIfAllFieldsAreEmpty,errorMsg1="* This field is required\n* Invalid Password";errorMsg2="* This field is required\n* Minimum 8 characters required\n* Invalid Password";errorMsg3="* This field is required"
 oldPasswordLeftBlank,invalidNewPassword="12345678a";invalidRetypeNewPassword="12345678a";errorMsg="* This field is required\n* Invalid Password"
@@ -6,3 +13,6 @@ retypeNewPasswordLeftBlank,invalidOldPassword="anjan9195";invalidNewPassword="an
 WrongOldPasswordEntered,invalidOldPassword="anjan991";errorMsg1="* This field is required\n* Minimum 8 characters required\n* Invalid Password";errorMsg2="* This field is required"
 NewAndRetypeNewPasswordIsLessThenEightChar,validOldPassword="cuelogic77";invalidNewPassword="anjan1";invalidRetypeNewPassword="anjan1";errorMsg1="* This field is required\n* Fields do not match";errorMsg2="* Minimum 8 characters required"
 NewpasswordAndRetypeNewpasswordAreNotSame,validOldPassword="cuelogic77";invalidNewPassword="anjan1";invalidRetypeNewPassword="anjan2";errorMsg1="* Minimum 8 characters required";errorMsg2="* Fields do not match";errorMsg3="* Fields do not match"
+
+# Change Password Positive Scenario
+AllTheValidFieldsAreEntered,ValidOldPassword="cuelogic77";ValidNewPassword="cuelogic";ValidRetypeNewPassword="cuelogic";validMsg="Your password has been changed."

@@ -3,6 +3,7 @@ package com.agorafy.automation.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 
@@ -123,5 +124,10 @@ public class Dashboard extends Page
             AutomationLog.error("Left Menu does not show any link active");
         }
         return activeLinkText;
+    }
+
+    public PageBanner pageBanner()
+    {
+        return PageFactory.initElements(driver, PageBanner.class);
     }
 }

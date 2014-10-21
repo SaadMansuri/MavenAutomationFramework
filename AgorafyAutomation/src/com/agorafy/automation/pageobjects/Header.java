@@ -156,4 +156,34 @@ public class Header extends Page
          }
          return element;
      }
+
+    public WebElement text_ProfileName() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[4]/a[1]/span[2]"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("ProfileName not found on header");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String profileName() throws Exception
+    {
+        String profileName = "";
+        try
+        {
+            profileName = text_ProfileName().getText();
+            AutomationLog.info("Name of LoggedIn user found on header");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not retrieve Profile Name");
+            throw(e);
+        }
+        return profileName;
+    }
 }

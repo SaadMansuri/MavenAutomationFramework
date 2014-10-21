@@ -3,11 +3,10 @@ package com.agorafy.automation.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.datamodel.profile.OverviewData;
+import com.agorafy.automation.datamodel.profile.UserProfile;
 
 public class OverviewTab extends Page 
 {
@@ -16,11 +15,6 @@ public class OverviewTab extends Page
     public OverviewTab(WebDriver driver)
     {
         super(driver);
-    }
-
-    public OverviewBanner banner()
-    {
-        return PageFactory.initElements(driver, OverviewBanner.class);
     }
 
     public WebElement txtbx_Name() throws Exception
@@ -373,7 +367,7 @@ public class OverviewTab extends Page
         }
     }
 
-    public void populateOverviewDetails(OverviewData data) throws Exception
+    public void populateOverviewDetails(UserProfile data) throws Exception
     {
         try
         {

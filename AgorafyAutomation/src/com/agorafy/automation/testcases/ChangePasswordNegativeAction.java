@@ -5,16 +5,8 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
-import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.datamodel.profile.ChangePasswordData;
-import com.agorafy.automation.pageobjects.AccountSettings;
 import com.agorafy.automation.pageobjects.ChangePasswordTab;
-import com.agorafy.automation.pageobjects.Dashboard;
-import com.agorafy.automation.pageobjects.Header;
-import com.agorafy.automation.pageobjects.HeaderLoginForm;
-import com.agorafy.automation.pageobjects.Homepage;
-import com.agorafy.automation.pageobjects.Page;
 
 /**
  * Precondition:Open header login form and Navigate to Account Setting Page
@@ -27,13 +19,9 @@ import com.agorafy.automation.pageobjects.Page;
  * verifyIfNewAndRetypeNewPasswordIsLessThenEightChar
  * verifyIfNewpasswordAndRetypeNewpasswordAreNotSame
  */
-public class ChangePasswordNegativeAction extends AutomationTestCaseVerification
+
+public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
 {
-    private Homepage homePage = null;
-    private HeaderLoginForm headerLoginForm = null;
-    private Header header = null;
-    private Dashboard dashboard = null;
-    private AccountSettings accountSettings = null;
     private ChangePasswordTab changePasswordTab = null;
     private HashMap<String, String> invalidTestData = null;
 
@@ -43,39 +31,9 @@ public class ChangePasswordNegativeAction extends AutomationTestCaseVerification
     }
 
     @Override
-    public void setup()
-    {
-        super.setup();
-        try
-        {
-            homePage = Homepage.homePage();
-            headerLoginForm = homePage.openHeaderLoginForm();
-
-            HashMap<String, String> loginData = testCaseData.get("validCredential");
-            String UserName = loginData.get("username");
-            String Password = loginData.get("password");
-
-            homePage = headerLoginForm.doSuccessfulLogin(UserName, Password);
-            // Verify this is the correct homepage.
-            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
-
-            header= Page.header();
-            header.openActiveProfile();
-
-            //Navigation To AccountSetting page.
-            dashboard = header.openDashboard();
-            accountSettings = dashboard.accountSettings();
-            changePasswordTab = accountSettings.clickOnChangePasswordTab();
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("The change password tab not found");
-        }
-    }
-
-    @Override
     protected void verifyTestCases() throws Exception
     {
+        changePasswordTab = accountSettings.clickOnChangePasswordTab();
         populateAndVerifyIfAllFieldsAreEmpty(changePasswordTab);
         verifyOldPassowrdLeftBlank(changePasswordTab);
         verifyNewPassowrdLeftBlank(changePasswordTab);
@@ -89,7 +47,6 @@ public class ChangePasswordNegativeAction extends AutomationTestCaseVerification
     public void populateAndVerifyIfAllFieldsAreEmpty(ChangePasswordTab changePasswordTab) throws Exception
     {
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
-
         invalidTestData = testCaseData.get("populateAndVerifyIfAllFieldsAreEmpty");
 
         String oldErrorPasswordMessage = changePasswordTab.errorMessageOldPassword().getText();
