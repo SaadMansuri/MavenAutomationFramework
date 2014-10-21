@@ -1,4 +1,4 @@
-package com.agorafy.automation.testcases.footer;
+package com.agorafy.automation.testcases.contentpages.footer;
 
 import java.util.HashMap;
 
@@ -9,7 +9,7 @@ import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.Careers;
 import com.agorafy.automation.pageobjects.footer.FooterCompanyLinks;
-import com.agorafy.automation.testcases.ContentPagesVerification;
+import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 /**
  * Test Careers link on Footer
  * Click Careers link on the Home Page, verify Careers Page is loaded 

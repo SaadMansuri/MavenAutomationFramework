@@ -1,4 +1,4 @@
-package com.agorafy.automation.testcases.subnavigation;
+package com.agorafy.automation.testcases.contentpages.subnavigation;
 
 import java.util.HashMap;
 
@@ -8,7 +8,7 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.FAQs;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
-import com.agorafy.automation.testcases.ContentPagesVerification;
+import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 public class SubnavigationFaqAction extends ContentPagesVerification
 {

@@ -1,4 +1,4 @@
-package com.agorafy.automation.testcases.subnavigation;
+package com.agorafy.automation.testcases.contentpages.subnavigation;
 
 import java.util.HashMap;
 
@@ -9,7 +9,7 @@ import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.MembershipBenefit;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
-import com.agorafy.automation.testcases.ContentPagesVerification;
+import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 /**
  * Test whether 'Members' Benefit' link appears in the subnavigation bar

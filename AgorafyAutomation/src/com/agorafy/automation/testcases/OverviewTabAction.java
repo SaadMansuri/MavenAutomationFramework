@@ -7,14 +7,14 @@ import org.testng.Assert;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
-import com.agorafy.automation.datamodel.profile.OverviewData;
+import com.agorafy.automation.datamodel.profile.UserProfile;
 import com.agorafy.automation.pageobjects.Dashboard;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
-import com.agorafy.automation.pageobjects.OverviewBanner;
 import com.agorafy.automation.pageobjects.OverviewTab;
 import com.agorafy.automation.pageobjects.Page;
+import com.agorafy.automation.pageobjects.PageBanner;
 
 /**
  * Preconditions: Home page is loaded and login done.
@@ -41,6 +41,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
     private Dashboard dashboard = null;
     private OverviewTab overviewTab = null;
     static HashMap<String,String> stateAbbMap;
+    PageBanner pageBanner = null;
 
     public OverviewTabAction()
     {
@@ -59,18 +60,11 @@ public class OverviewTabAction extends AutomationTestCaseVerification
             HashMap<String, String> loginData =  testCaseData.get("validCredential");
             String UserName = loginData.get("username");
             String Password = loginData.get("password");
-
             homePage = headerLoginForm.doSuccessfulLogin(UserName, Password);
-            // Verify this is the correct homepage.
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
-
             header = Page.header();
             header.openActiveProfile();
-
-             // Verify Drowndown is displayed.
             dashboard = header.openDashboard();
-
-            // Verify this is the correct dashboard.
             overviewTab = dashboard.editProfile();
         }
         catch(Exception e)
@@ -82,39 +76,39 @@ public class OverviewTabAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception
     {
-        OverviewData overviewData = getTestOverviewData();
+        UserProfile userData = getTestOverviewData();
 
-        overviewTab.populateOverviewDetails(overviewData);
+        overviewTab.populateOverviewDetails(userData);
         overviewTab = overviewTab.saveOverviewDetails();
 
-        OverviewBanner banner = overviewTab.banner();
-        WaitFor.waitForPageToLoad(Page.driver, overviewData.getName(),banner.getBannerTextLocater());
+        pageBanner = dashboard.pageBanner();
+        WaitFor.waitForPageToLoad(Page.driver, userData.getName(),pageBanner.getBannerTextLocater());
 
-        verifyUpdatedOverviewBanner(banner, overviewData);
-        verifyUpdatedOverviewTabForm(overviewTab, overviewData);
+        verifyUpdatedOverviewBanner(pageBanner, userData);
+        verifyUpdatedOverviewTabForm(overviewTab, userData);
     }
 
-    private OverviewData getTestOverviewData()
+    private UserProfile getTestOverviewData()
     {
         HashMap<String, String> overviewTestData = testCaseData.get("OverviewData");
 
-        OverviewData overviewData = new OverviewData();
-        overviewData.setName(overviewTestData.get("validName"));
-        overviewData.setCompanyName(overviewTestData.get("companyName"));
-        overviewData.setWorkPhone(overviewTestData.get("validWorkPhone"));
-        overviewData.setMobilePhone(overviewTestData.get("validMobileNumber"));
-        overviewData.setAddress1(overviewTestData.get("validAddress1"));
-        overviewData.setAddress2(overviewTestData.get("validAddress2"));
-        overviewData.setCity(overviewTestData.get("validCity"));
-        overviewData.setState(overviewTestData.get("validState"));
-        overviewData.setZipCode(overviewTestData.get("validZip"));
-        overviewData.setDescribe(overviewTestData.get("character"));
-        overviewData.setNeighbour(overviewTestData.get("validNeighbour"));
+        UserProfile userData = new UserProfile();
+        userData.setName(overviewTestData.get("validName"));
+        userData.setCompanyName(overviewTestData.get("companyName"));
+        userData.setWorkPhone(overviewTestData.get("validWorkPhone"));
+        userData.setMobilePhone(overviewTestData.get("validMobileNumber"));
+        userData.setAddress1(overviewTestData.get("validAddress1"));
+        userData.setAddress2(overviewTestData.get("validAddress2"));
+        userData.setCity(overviewTestData.get("validCity"));
+        userData.setState(overviewTestData.get("validState"));
+        userData.setZipCode(overviewTestData.get("validZip"));
+        userData.setDescribe(overviewTestData.get("character"));
+        userData.setNeighbour(overviewTestData.get("validNeighbour"));
 
-        return overviewData;
+        return userData;
     }
 
-    private void verifyUpdatedOverviewBanner(OverviewBanner banner, OverviewData overviewData) throws Exception
+    private void verifyUpdatedOverviewBanner(PageBanner banner, UserProfile overviewData) throws Exception
     {
         verifyBannerDetails(banner, overviewData);
         testBannerAddressDetails(banner, overviewData);
@@ -122,7 +116,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         testBannerMobileDetails(banner, overviewData);
     }
 
-    private void verifyUpdatedOverviewTabForm(OverviewTab overviewTab, OverviewData overviewData) throws Exception
+    private void verifyUpdatedOverviewTabForm(OverviewTab overviewTab, UserProfile overviewData) throws Exception
     {
         verifyTextBoxName(overviewTab, overviewData);
         verifyTextBoxComapnyName(overviewTab, overviewData);
@@ -139,91 +133,91 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         //verifyTextBoxNeigborhood(overviewTab, overviewData);
     }
 
-    public void verifyBannerDetails(OverviewBanner banner, OverviewData overviewData) throws Exception
+    public void verifyBannerDetails(PageBanner banner, UserProfile overviewData) throws Exception
     {
         String newBannerNameAfterSavingOverviewData = banner.getBannerText();
         Assert.assertEquals(newBannerNameAfterSavingOverviewData, overviewData.getName(), "The correct name is not displayed in banner");
         AutomationLog.info("Updated Name Displayed successfully on Banner");
     }
 
-    public void verifyTextBoxName(OverviewTab overviewTab,OverviewData overviewData) throws Exception
+    public void verifyTextBoxName(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyNamePresentInTextBox = overviewTab.getTextBoxName();
         Assert.assertEquals(verifyNamePresentInTextBox, overviewData.getName(), "Name not found");
         AutomationLog.info(" Appropriate Name found As per the Text Box");
     }
 
-    public void verifyTextBoxComapnyName(OverviewTab overviewTab,OverviewData overviewData) throws Exception
+    public void verifyTextBoxComapnyName(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyComapnyNamePresentInTextBox = overviewTab.getTextBoxCompanyName();
         Assert.assertEquals(verifyComapnyNamePresentInTextBox, overviewData.getCompanyName(), "company name not found");
         AutomationLog.info(" Appropriate CompanyName found As per the Text Box");
     }
 
-    public void verifyTextBoxMobilePhoneNumber(OverviewTab overviewTab,OverviewData overviewData) throws Exception
+    public void verifyTextBoxMobilePhoneNumber(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyWorkMobileNumberPresentInTextBox = overviewTab.getTextBoxMobileNumber();
         Assert.assertEquals(verifyWorkMobileNumberPresentInTextBox, overviewData.getMobilePhone(), "Mobile nos not found");
         AutomationLog.info(" Appropriate MobileNumber found As per the Text Box");
     }
 
-    public void verifyTextBoxWorkPhoneNumber(OverviewTab overviewTab,OverviewData overviewData) throws Exception
+    public void verifyTextBoxWorkPhoneNumber(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyWorkPhoneNumberPresentInTextBox = overviewTab.getTextBoxWorkPhoneNumber();
         Assert.assertEquals(verifyWorkPhoneNumberPresentInTextBox, overviewData.getWorkPhone(), "Workphone nos not found");
         AutomationLog.info(" Appropriate WorkPhoneNumber found As per the Text Box");
     }
 
-    public void verifyTextBoxAddress1(OverviewTab overviewTab,OverviewData overviewData) throws Exception
+    public void verifyTextBoxAddress1(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyAddress1PresentInTextBox = overviewTab.getTextBoxAddress1();
         Assert.assertEquals(verifyAddress1PresentInTextBox, overviewData.getAddress1(), "Address1 not found");
         AutomationLog.info(" Appropriate Address1 found As per the Text Box");
     }
 
-    public void verifyTextBoxAddress2(OverviewTab overviewTab,OverviewData overviewData) throws Exception
+    public void verifyTextBoxAddress2(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyAddress2PresentInTextBox = overviewTab.getTextBoxAddress2();
         Assert.assertEquals(verifyAddress2PresentInTextBox, overviewData.getAddress2(), "Address2 not found");
         AutomationLog.info("Appropriate Address2 found As per the Text Box");
     }
 
-    public void verifyTextBoxCity(OverviewTab overviewTab,OverviewData overviewData) throws Exception
+    public void verifyTextBoxCity(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyCityPresentInTextBox = overviewTab.getTextBoxCity();
         Assert.assertEquals(verifyCityPresentInTextBox, overviewData.getCity(), "City not found");
         AutomationLog.info("Appropriate City found As per the Text Box");
     }
 
-    public void verifyTextBoxState(OverviewTab overviewTab,OverviewData overviewData) throws Exception
+    public void verifyTextBoxState(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyStatePresentInTextBox = overviewTab.getDropdownState();
         Assert.assertEquals(verifyStatePresentInTextBox, overviewData.getState(), "State not found");
         AutomationLog.info("Appropriate State found As per the Text Box");
     }
 
-    public void verifyTextBoxZip(OverviewTab overviewTab,OverviewData overviewData) throws Exception
+    public void verifyTextBoxZip(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyZipPresentInTextBox = overviewTab.getTextBoxZip();
         Assert.assertEquals(verifyZipPresentInTextBox, overviewData.getZipCode(), "Zip not found");
         AutomationLog.info("Appropriate Zip found As per the Text Box");
     }
 
-    public void verifyTextBoxDescribeYourself(OverviewTab overviewTab,OverviewData overviewData) throws Exception
+    public void verifyTextBoxDescribeYourself(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifydescribeYourselfPresentInTextBox = overviewTab.getTextBoxDescribeYorself();
         Assert.assertEquals(verifydescribeYourselfPresentInTextBox, overviewData.getDescribe(), "Describe yourself not found");
         AutomationLog.info("Appropriate Description found As per the Text Box");
     }
 
-    public void verifyTextBoxNeigborhood(OverviewTab overviewTab,OverviewData overviewData) throws Exception
+    public void verifyTextBoxNeigborhood(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyNeighborhoodPresentInTextBox = overviewTab.getMultipleSelectNeighborhood();
         Assert.assertEquals(verifyNeighborhoodPresentInTextBox, overviewData.getNeighbour(), "Neigborhood not found");
         AutomationLog.info("Appropriate Neighborhood found As per the Text Box");
     }
 
-    public void testBannerAddressDetails(OverviewBanner banner, OverviewData overviewData) throws Exception
+    public void testBannerAddressDetails(PageBanner banner, UserProfile overviewData) throws Exception
     {
         String addressDetails = banner.getBannerAddressText();
         String addressToken[] = addressDetails.split(", ");
@@ -247,7 +241,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         AutomationLog.info("Updated Zip found in banner");
     }
 
-    public void testBannerPhoneDetails(OverviewBanner banner, OverviewData overviewData) throws Exception
+    public void testBannerPhoneDetails(PageBanner banner, UserProfile overviewData) throws Exception
     {
         String phoneDetails = banner.getBannerWorkPhoneText();
         String phoneToken[] = phoneDetails.split(": ");
@@ -256,7 +250,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         AutomationLog.info("Updated WorkPhone found in banner");
     }
 
-    public void testBannerMobileDetails(OverviewBanner banner,OverviewData overviewData) throws Exception
+    public void testBannerMobileDetails(PageBanner banner,UserProfile overviewData) throws Exception
     {
         String mobileDetails = banner.getBannerMobilePhoneText();
         String mobileToken[] = mobileDetails.split(": ");

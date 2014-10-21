@@ -4,15 +4,15 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.subnavigation.SubnavigationAboutUsAction;
-import com.agorafy.automation.testcases.subnavigation.SubnavigationBlogAction;
-import com.agorafy.automation.testcases.subnavigation.SubnavigationCareersAction;
-import com.agorafy.automation.testcases.subnavigation.SubnavigationContactAction;
-import com.agorafy.automation.testcases.subnavigation.SubnavigationFaqAction;
-import com.agorafy.automation.testcases.subnavigation.SubnavigationHowItWorksAction;
-import com.agorafy.automation.testcases.subnavigation.SubnavigationMemberBenefitAction;
-import com.agorafy.automation.testcases.subnavigation.SubnavigationSearchProfessionalsAction;
-import com.agorafy.automation.testcases.subnavigation.SubnavigationSearchPropertiesAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationAboutUsAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationBlogAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationCareersAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationContactAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationFaqAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationHowItWorksAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationMemberBenefitAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationSearchProfessionalsAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationSearchPropertiesAction;
 
 /**
  * Test the links present in the subnavigation bar

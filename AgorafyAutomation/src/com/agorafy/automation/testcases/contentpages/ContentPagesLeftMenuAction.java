@@ -1,4 +1,4 @@
-package com.agorafy.automation.testcases;
+package com.agorafy.automation.testcases.contentpages;
 
 import java.util.HashMap;
 

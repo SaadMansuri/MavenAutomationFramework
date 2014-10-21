@@ -1,4 +1,4 @@
-package com.agorafy.automation.testcases.footer;
+package com.agorafy.automation.testcases.contentpages.footer;
 
 import java.util.HashMap;
 
@@ -9,7 +9,7 @@ import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.FooterCompanyLinks;
 import com.agorafy.automation.pageobjects.footer.company.Team;
-import com.agorafy.automation.testcases.ContentPagesVerification;
+import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 /**
  * Test Team link on Footer

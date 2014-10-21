@@ -1,4 +1,4 @@
-package com.agorafy.automation.testcases.footer;
+package com.agorafy.automation.testcases.contentpages.footer;
 
 import java.util.HashMap;
 
@@ -6,7 +6,7 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.FooterLegalLinks;
 import com.agorafy.automation.pageobjects.footer.legal.TermsAndConditions;
-import com.agorafy.automation.testcases.ContentPagesVerification;
+import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 /**
  * Test TermsAndCondition link on Footer

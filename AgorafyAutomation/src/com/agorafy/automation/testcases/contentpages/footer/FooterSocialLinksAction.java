@@ -1,4 +1,4 @@
-package com.agorafy.automation.testcases.footer;
+package com.agorafy.automation.testcases.contentpages.footer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +15,7 @@ import com.agorafy.automation.pageobjects.footer.social.AgorafyGooglePlusPage;
 import com.agorafy.automation.pageobjects.footer.social.AgorafyLinkedInPage;
 import com.agorafy.automation.pageobjects.footer.social.AgorafyTwitterPage;
 import com.agorafy.automation.pageobjects.footer.social.AgorafyYoutubePage;
-import com.agorafy.automation.testcases.ContentPagesVerification;
+import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 /**
  * Test SocialNetworking IconLinks on Footer
