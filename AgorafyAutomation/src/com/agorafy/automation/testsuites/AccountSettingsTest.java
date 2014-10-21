@@ -4,10 +4,11 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.testcases.AccountSettingAction;
 import com.agorafy.automation.testcases.ChangePasswordNegativeAction;
 import com.agorafy.automation.testcases.ChangePasswordPositiveAction;
+import com.agorafy.automation.testcases.PersonalInfoNegativeAction;
+import com.agorafy.automation.testcases.PersonalInfoPositiveAction;
 
 public class AccountSettingsTest
 {
@@ -20,7 +21,7 @@ public class AccountSettingsTest
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-    //@Test
+    @Test
     public void testAccountSettingsPage() throws Exception
     {
         try
@@ -29,7 +30,6 @@ public class AccountSettingsTest
         }
         catch (Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -43,7 +43,6 @@ public class AccountSettingsTest
         }
         catch (Exception e)
         {
-           AutomationLog.error(e.getMessage());
            throw (e);
         }
     }
@@ -57,8 +56,33 @@ public class AccountSettingsTest
         }
         catch (Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw (e);
+        }
+    }
+
+    @Test
+    public void testPersonalInfoPositive() throws Exception
+    {
+        try
+        {
+            new PersonalInfoPositiveAction().Execute();
+        }
+        catch (Exception e)
+        {
+            throw(e);
+        }
+    }
+
+    @Test
+    public void testPersonalInfoNegative() throws Exception
+    {
+        try
+        {
+            new PersonalInfoNegativeAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
         }
     }
 }
