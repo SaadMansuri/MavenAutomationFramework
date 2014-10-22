@@ -1,11 +1,6 @@
 package com.agorafy.automation.testcases;
 
-import org.testng.Assert;
-import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.AutomationTestCase;
-import com.agorafy.automation.pageobjects.HeaderLoginForm;
-import com.agorafy.automation.pageobjects.Homepage;
-import com.agorafy.automation.pageobjects.LoginPage;
+import java.util.HashMap;
 
 /**
  * Precondition: home page is loaded
@@ -19,102 +14,74 @@ import com.agorafy.automation.pageobjects.LoginPage;
  * Not writing scripts for Captcha tests
  */
 
-public class LoginNegativeTestsPageFormAction extends AutomationTestCase
+public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
 {
-    private Homepage homePage;
-    private LoginPage loginPage;
-    private HeaderLoginForm headerlogin;
-    
     public LoginNegativeTestsPageFormAction()
     {
         super();
     }
 
-    public void setup()
+    @Override
+    protected void verifyTestCases() throws Exception
     {
-        super.setup();
-        homePage = Homepage.homePage();
-        
-    }
-
-    public void cleanup()
-    {
-        super.cleanup();
-    }
-
-    public void Execute() throws Exception
-    {
-        try
-        {
-            setup();
-            headerlogin =  homePage.openHeaderLoginForm();
-            loginPage = headerlogin.doInvalidLogin("", "");
-
-            testWrongEmailRightPassword();
-            testRightEmailWrongPassword();
-            testWrongEmailPassword();
-            testEmptyEmail();
-            testEmptyEmailPassword();
-            testMismatchValidCredentials();
-        }
-        catch (Exception e)
-        {
-            testcaseFailed("For wrong login details Login page is not loaded");
-            throw(e);
-        }
-        catch(Throwable throwable)
-        {
-            testcaseFailed("For wrong login details Login page is not loaded");
-            throw(new Exception(throwable.getMessage()));
-        }
-        finally
-        {
-            cleanup();
-        }
+        testWrongEmailRightPassword();
+        testRightEmailWrongPassword();
+        testWrongEmailPassword();
+        testEmptyEmail();
+        testEmptyEmailPassword();
+        testMismatchValidCredentials();
     }
 
     public void testWrongEmailRightPassword() throws Exception
     {
-        loginPage = loginPage.doInvalidLogin("chandrani.bhaga@cuelogic.co.in", "cuelogic77");
-        verifyInvalidLogin(loginPage);
+        HashMap<String, String> logindata = testCaseData.get("testWrongEmailRightPassword");
+        loginPage = loginPage.doInvalidLogin(logindata.get("username1"), logindata.get("password1"));
+        verifyUrlAndErrorMessage(loginPage);
     }
 
     public void testRightEmailWrongPassword() throws Exception
     {
-        loginPage = loginPage.doInvalidLogin("rohan.dixit@cuelogic.co.in", "12345678");
-        verifyInvalidLogin(loginPage);
+        HashMap<String, String> logindata = testCaseData.get("testRightEmailWrongPassword");
+        loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
+        verifyUrlAndErrorMessage(loginPage);
     }
 
     public void testWrongEmailPassword() throws Exception
     {
-        loginPage = loginPage.doInvalidLogin("abc@cuelogic.co.in", "12345678");
-        verifyInvalidLogin(loginPage);
+        HashMap<String, String> logindata = testCaseData.get("testWrongEmailPassword");
+        loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
+        verifyUrlAndErrorMessage(loginPage);
     }
 
     public void testEmptyEmailPassword() throws Exception
     {
         loginPage = loginPage.doInvalidLogin("", "");
-        verifyInvalidLogin(loginPage);
+        verifyUrlAndErrorMessage(loginPage);
     }
 
     public void testEmptyEmail() throws Exception
     {
-        loginPage = loginPage.doInvalidLogin("", "cuelogic77");
-        verifyInvalidLogin(loginPage);
+        HashMap<String, String> logindata = testCaseData.get("testEmptyEmail");
+        loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
+        verifyUrlAndErrorMessage(loginPage);
     }
 
     public void testMismatchValidCredentials() throws Exception
     {
-        loginPage = loginPage.doInvalidLogin("rohan.dixit@cuelogic.co.in", "cuelogic77");
-        verifyInvalidLogin(loginPage);
+        HashMap<String, String> logindata = testCaseData.get("testMismatchValidCredentials");
+        loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
+        verifyUrlAndErrorMessage(loginPage);
     }
 
-    public void verifyInvalidLogin(LoginPage loginPage) throws Exception
+    @Override
+    protected String successMessage()
     {
-        Assert.assertEquals(loginPage.currentURL(), loginPage.getPageUrl(), "Login Page is not seen after failed login attempt");
-        AutomationLog.info("Login Page is seen after failed login attempt");
-        Assert.assertEquals(loginPage.message_InvalidEmailPassword().getText(), "Invalid email or password", "Error message displayed is incorrect");
+        return "Negative Scenario for Page Login Action tested successfully";
+    }
 
-        // TODO: Check for login attempts before captcha appears 
+    @Override
+    protected String failureMessage()
+    {
+        return "Negative Scenario for Page Login Action Failed";
     }
 }

@@ -186,4 +186,20 @@ public class Header extends Page
         }
         return profileName;
     }
+
+    public String greeting() throws Exception
+    {
+        String greeting="";
+        try
+        {
+            greeting = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/a[1]/span[2]")).getText();
+            AutomationLog.info("Greeting found after successful Login");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Not able to find Greeting after successful Login");
+            throw(e);
+        }
+        return greeting;
+    }
 }

@@ -15,7 +15,7 @@ public class Homepage extends Page
     {
         super(driver);
     }
-    
+
     public String homepageUrl()
     {
         return applicationUrl() + "/home/";
@@ -30,11 +30,6 @@ public class Homepage extends Page
     {
         return By.xpath(".//*[@id='mainNav']/li[3]/a[1]/span[2]");
     }
-    
-    public String getTitle()
-    {
-        return driver.getTitle();
-    }
 
     public WebElement link_Login() throws Exception
     {
@@ -48,7 +43,6 @@ public class Homepage extends Page
             AutomationLog.error("My login link was not found on the Home Page");
             throw(e);
         }
-
         return element;
     }
 
@@ -59,15 +53,13 @@ public class Homepage extends Page
         {
             link_Login().click();
             element = new HeaderLoginForm(driver);
-            AutomationLog.info("Successfully navigated to login page");
+            AutomationLog.info("Header login form appears");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Not Able to navigate to login page");
+            AutomationLog.error("Header login form does not appear");
             throw(e);
         }
-
         return element;
     }
-
 }

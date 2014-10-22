@@ -1,0 +1,6 @@
+testWrongEmailRightPassword,username="chandrani.bhaga@cuelogic.co.in";password="cuelogic77"
+testRightEmailWrongPassword,username="rohan.dixit@cuelogic.co.in";password="12345678"
+testWrongEmailPassword,username="abc@cuelogic.co.in";password="12345678"
+testEmptyEmail,password="cuelogic77"
+testMismatchValidCredentials,username="rohan.dixit@cuelogic.co.in";password="cuelogic77"
+verifyUrlAndErrorMessage,message="Invalid email or password"
