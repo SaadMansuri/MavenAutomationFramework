@@ -1,1 +1,1 @@
-VerifyEmailDetails,invalidEmail="rtyu";validEmail="chandrani.bhagat@cuelogic.co.in";errorMsg="* Invalid email address";validMsg="That email is already registered."
+VerifyEmailDetails,invalidEmail="rtyu";validEmail="chandrani.bhagat@cuelogic.co.in";errorMsg="* Invalid email address";validMsg="That email is already registered.";errorMsg1="* This field is required\n* Invalid email address"

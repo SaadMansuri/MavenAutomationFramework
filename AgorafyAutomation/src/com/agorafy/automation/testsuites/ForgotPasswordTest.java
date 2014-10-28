@@ -4,7 +4,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.testcases.ForgotPasswordAction;
 
 public class ForgotPasswordTest
@@ -25,7 +24,6 @@ public class ForgotPasswordTest
         }
         catch (Exception e) 
         {
-            AutomationLog.error(e.getMessage());
             throw (e);
         }
     }

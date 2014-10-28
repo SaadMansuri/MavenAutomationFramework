@@ -112,4 +112,3 @@ public class SignUp extends Page
         return By.xpath(".//*[@id='registration_result_2']/p[1]");
     }
 }
- 

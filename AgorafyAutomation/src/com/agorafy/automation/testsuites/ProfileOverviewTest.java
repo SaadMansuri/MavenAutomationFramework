@@ -4,7 +4,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.testcases.OverviewTabAction;
 import com.agorafy.automation.testcases.OverviewTabNegativeAction;
 
@@ -28,8 +27,7 @@ public class ProfileOverviewTest
         }
         catch (Exception e)
         {
-            AutomationLog.error(e.getMessage());
-        throw (e);
+            throw (e);
         }
     }
 
@@ -42,7 +40,6 @@ public class ProfileOverviewTest
         }
         catch (Exception e)
         {
-            AutomationLog.error(e.getMessage());
             throw (e);
         }
     }

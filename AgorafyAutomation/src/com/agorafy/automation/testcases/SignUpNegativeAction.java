@@ -22,6 +22,7 @@ public class SignUpNegativeAction extends AutomationTestCaseVerification
     private Header header = null;
     SignUp signUp = null;
     EmailData signupdata = null;
+    private HashMap<String, String> invalidEmailData = null;
 
     public SignUpNegativeAction()
     {
@@ -47,6 +48,7 @@ public class SignUpNegativeAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception
     {
         populateAndVerifyEmailDetails(signUp);
+        verifyIfEmailIsLeftEmpty(signUp);
         verifyIfEmailAlreadyExist(signUp);
     }
 
@@ -54,15 +56,30 @@ public class SignUpNegativeAction extends AutomationTestCaseVerification
     {
         signupdata = new EmailData();
 
-        HashMap<String, String> InvalidEmailData = testCaseData.get("VerifyEmailDetails");
-        signupdata.setEmailAddress(InvalidEmailData.get("invalidEmail"));
+        invalidEmailData = testCaseData.get("VerifyEmailDetails");
+        signupdata.setEmailAddress(invalidEmailData.get("invalidEmail"));
         signup.populateSignUpData(signupdata);
 
         signup = signup.clickOnSignUpAccountButton();
 
         String wrongEmailAddress = signup.errorMessageInvalidEmailEntered().getText();
-        Assert.assertEquals(wrongEmailAddress, InvalidEmailData.get("errorMsg"), "The proper error message for invalid email is not displayed");
+        Assert.assertEquals(wrongEmailAddress, invalidEmailData.get("errorMsg"), "The proper error message for invalid email is not displayed");
         AutomationLog.info("The Appropriate error message for invalid email is displayed");
+    }
+
+    public void verifyIfEmailIsLeftEmpty(SignUp signup) throws Exception
+    {
+        signupdata = new EmailData();
+
+        invalidEmailData = testCaseData.get("VerifyEmailDetails");
+        signupdata.setEmailAddress("");
+        signup.populateSignUpData(signupdata);
+
+        signup = signup.clickOnSignUpAccountButton();
+
+        String emptyEmailAddress = signup.errorMessageInvalidEmailEntered().getText();
+        Assert.assertEquals(emptyEmailAddress, invalidEmailData.get("errorMsg1"), "The proper error message for empty email is not displayed");
+        AutomationLog.info("The Appropriate error message for empty email is displayed");
     }
 
     public void verifyIfEmailAlreadyExist(SignUp signup) throws Exception

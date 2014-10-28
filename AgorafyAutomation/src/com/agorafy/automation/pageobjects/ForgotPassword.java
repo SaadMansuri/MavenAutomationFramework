@@ -60,6 +60,36 @@ public class ForgotPassword extends Page
            return element;
     }
 
+    public WebElement messageEnterValidMail() throws Exception
+    {
+        try
+        {
+            element=driver.findElement(By.xpath(".//*[@id='forgot_confirm_error']/h5"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Error message not shown");
+            throw(e);
+        }
+           return element;
+    }
+
+    public WebElement messageEnterValidRegisteredMail() throws Exception
+    {
+        try
+        {
+            element=driver.findElement(By.xpath(".//*[@id='forgot_confirm']/h5"));
+            AutomationLog.info("Appropriate error message shown");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Error message not shown");
+            throw(e);
+        }
+           return element;
+    }
+
+
     public ForgotPassword clickOnRequestNewPassword() throws Exception
     {
         ForgotPassword forgotpassword = null;
