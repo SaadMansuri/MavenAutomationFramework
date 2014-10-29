@@ -15,6 +15,11 @@ public class SignUp extends Page
         super(driver);
     }
 
+    protected boolean isSecured()
+    {
+        return true;
+    }
+
     public String registerPageUrl()
     {
         return applicationUrl() + "/register";
