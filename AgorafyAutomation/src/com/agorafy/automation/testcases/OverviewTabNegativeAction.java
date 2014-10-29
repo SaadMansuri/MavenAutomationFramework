@@ -130,8 +130,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String emptyNameField = overviewTab.getErrorMessageOfInvalidName();
-        Assert.assertEquals(emptyNameField, invalidTestData.get("errorMsg3"), "The proper error message for empty name field is not displayed");
-        AutomationLog.info("The appropriate error message found in overview tab when the name field is left empty");
+        Assert.assertEquals(emptyNameField, invalidTestData.get("errorMsg3"), "Expected error message for empty name field is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for empty name field is displayed in Overview Tab");
     }
 
     public void verifyIfInvalidNameIsGiven(OverviewTab overviewTab) throws Exception
@@ -141,8 +141,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String invalidNameField = overviewTab.getErrorMessageOfInvalidName();
-        Assert.assertEquals(invalidNameField, invalidTestData.get("errorMsg1"), "The proper error message for invalid name is not displayed");
-        AutomationLog.info("The appropriate error message found in overview tab when the invalid name is entered");
+        Assert.assertEquals(invalidNameField, invalidTestData.get("errorMsg1"), "Expected error message for invalid name field is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for invalid name field is displayed in Overview Tab");
     }
 
     public void verifyIfNameDigitIsGiven(OverviewTab overviewTab) throws Exception
@@ -152,8 +152,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String invalidNameOrder = overviewTab.getErrorMessageOfInvalidName();
-        Assert.assertEquals(invalidNameOrder, invalidTestData.get("errorMsg2"), "The proper error message for invalid name is not displayed when name with digit is entered");
-        AutomationLog.info("The appropriate error message found in overview tab when name with digit is entered");
+        Assert.assertEquals(invalidNameOrder, invalidTestData.get("errorMsg2"), "Expected error message for invalid name with digit is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for invalid name with digit is displayed in Overview Tab");
     }
 
     public void verifyIfCompanyNameIsEmpty(OverviewTab overviewTab) throws Exception
@@ -162,8 +162,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String emptyCompanyName = overviewTab.getTextBoxCompanyName();
-        Assert.assertEquals(emptyCompanyName, "" , "There is no error message when company is empty");
-        AutomationLog.info("Company name do not show any error message when left empty");
+        Assert.assertEquals(emptyCompanyName, "" , " No error message when company is empty in Overview Tab");
+        AutomationLog.info("Company name do not show any error message when left empty in Overview Tab");
     }
 
     public void verifyIfCompanyNameIsEntered(OverviewTab overviewTab) throws Exception
@@ -173,8 +173,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String emptyCompanyName = overviewTab.getTextBoxCompanyName();
-        Assert.assertEquals(emptyCompanyName, invalidTestData.get("alphanumeric") , "The proper error message for company name is not displayed when the company name is entered");
-        AutomationLog.info("The appropriate error message found in overview tab when the company name is entered");
+        Assert.assertEquals(emptyCompanyName, invalidTestData.get("alphanumeric") , "Expected error message for invalid company name is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for invalid company name is displayed in Overview Tab");
     }
 
     public void verifyIfInvalidWorkPhoneIsEntered(OverviewTab overviewTab) throws Exception
@@ -184,8 +184,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterWorkPhoneNum = overviewTab.getErrorMessageOfInvalidPhoneNum();
-        Assert.assertEquals(enterWorkPhoneNum, invalidTestData.get("errorMsg1"), "The proper error message for Invalid Workphone is not displayed when the invalid Workphone is entered");
-        AutomationLog.info("The appropriate error message found in overview tab when the Invalid workphone number is entered");
+        Assert.assertEquals(enterWorkPhoneNum, invalidTestData.get("errorMsg1"), "Expected error message for Invalid work phone is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for Invalid work phone is displayed in Overview Tab");
     }
 
     public void verifyInvalidCharacterInWorkPhoneIsEntered(OverviewTab overviewTab) throws Exception
@@ -195,8 +195,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterInvalidCharWorkPhoneNum = overviewTab.getErrorMessageOfInvalidPhoneNum();
-        Assert.assertEquals(enterInvalidCharWorkPhoneNum, invalidTestData.get("errorMsg1"), "The proper error message for Invalid Workphone is not displayed when the special Character is entered");
-        AutomationLog.info("The appropriate error message found in overview tab for WorkPhone when Special character is entered");
+        Assert.assertEquals(enterInvalidCharWorkPhoneNum, invalidTestData.get("errorMsg1"), "Expected error message for Invalid work phone with character is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for Invalid work phone with character is displayed in Overview Tab");
     }
 
     public void verifyIfWorkPhoneIsEmpty(OverviewTab overviewTab) throws Exception
@@ -205,8 +205,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterWorkphoneEmpty = overviewTab.getTextBoxWorkPhoneNumber();
-        Assert.assertEquals(enterWorkphoneEmpty, "", "The proper error message for Empty Workphone is not displayed when the workphone is empty");
-        AutomationLog.info("No error message was shown when the Work Phone is left empty");
+        Assert.assertEquals(enterWorkphoneEmpty, "", "Expected error message for Empty work phone is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for empty work phone is displayed in Overview Tab");
     }
 
     public void verifyIfInvalidMobilePhoneIsEntered(OverviewTab overviewTab) throws Exception
@@ -216,8 +216,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterMobilePhoneNum = overviewTab.getErrorMessageOfInvalidMobileNum();
-        Assert.assertEquals(enterMobilePhoneNum, invalidTestData.get("errorMsg1"), "The proper error message for mobile number is not displayed when the Invalid mobile number is entered");
-        AutomationLog.info("The appropriate error message found in overview tab when the Invalid mobile number is entered");
+        Assert.assertEquals(enterMobilePhoneNum, invalidTestData.get("errorMsg1"), "Expected error message for Invalid mobile phone is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for Invalid mobile phone is displayed in Overview Tab");
     }
 
     public void verifyInvalidCharacterInMobileNumIsEntered(OverviewTab overviewTab) throws Exception
@@ -227,8 +227,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterInvalidCharMobileNum = overviewTab.getErrorMessageOfInvalidMobileNum();
-        Assert.assertEquals(enterInvalidCharMobileNum, invalidTestData.get("errorMsg1"), "The proper error message for Invalid mobile number is not displayed when the character is entered");
-        AutomationLog.info("The appropriate error message found in overview tab when the Invalid mobile number character is entered");
+        Assert.assertEquals(enterInvalidCharMobileNum, invalidTestData.get("errorMsg1"), "Expected error message for Invalid mobile phone with character is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for Invalid mobile phone with character is displayed in Overview Tab");
     }
 
     public void verifyIfMobileNumIsEmpty(OverviewTab overviewTab) throws Exception
@@ -237,8 +237,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterWorkphoneEmpty = overviewTab.getTextBoxMobileNumber();
-        Assert.assertEquals(enterWorkphoneEmpty, "", "The proper error message for Empty Mobile number is not displayed when the Mobile number is empty");
-        AutomationLog.info("No error message was shown when the Mobile number is left empty");
+        Assert.assertEquals(enterWorkphoneEmpty, "", "Expected error message for empty mobile phone is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for empty mobile phone is displayed in Overview Tab");
     }
 
     public void verifyIfAddressFieldIsEmpty(OverviewTab overviewTab) throws Exception
@@ -248,8 +248,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterEmptyAddress1 = overviewTab.getErrorMessageOfEmptyAddressField();
-        Assert.assertEquals(enterEmptyAddress1, invalidTestData.get("emptyErrorAddressMsg"), "The proper error message for AddressField1 is not displayed when the AddressField1 is empty");
-        AutomationLog.info("The appropriate error message found in overview tab when the Addressfield1 is left empty");
+        Assert.assertEquals(enterEmptyAddress1, invalidTestData.get("emptyErrorAddressMsg"), "Expected error message for empty Address1 is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for empty Address1 is displayed in Overview Tab");
     }
 
     public void verifyIfInvalidDataEnteredInAddress1(OverviewTab overviewTab) throws Exception
@@ -259,8 +259,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterInvalidAddress1 = overviewTab.getErrorMessageOfEmptyAddressField();
-        Assert.assertEquals(enterInvalidAddress1, invalidTestData.get("invalidDataErrorMsg2"), "The proper error message for AddressField1 is not displayed when the invalid data is entered in AddressField1");
-        AutomationLog.info("The appropriate error message found in overview tab when the invalid data is entered in Addressfield1");
+        Assert.assertEquals(enterInvalidAddress1, invalidTestData.get("invalidDataErrorMsg2"), "Expected error message for Address1 with invalid data is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for Address1 with invalid data is displayed in Overview Tab");
     }
 
     public void verifyIfAddressField2IsEmpty(OverviewTab overviewTab) throws Exception
@@ -269,8 +269,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterEmptyAddress2 = overviewTab.getTextBoxAddress2();
-        Assert.assertEquals(enterEmptyAddress2, "", "The proper error message for AddressField2 is not displayed when the AddressField1 is empty");
-        AutomationLog.info("No error message was found when AddressField 2 is left empty");
+        Assert.assertEquals(enterEmptyAddress2, "", "Expected error message for empty Address2 is not displayed in Overview Tab");
+        AutomationLog.info("No error message displayed for empty Address2 field in Overview Tab");
     }
 
     public void verifyIfInvalidAddressField2IsEntered(OverviewTab overviewTab) throws Exception
@@ -280,8 +280,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterInvalidAddress2 = overviewTab.getErrorMessageOfAddressField2();
-        Assert.assertEquals(enterInvalidAddress2, invalidTestData.get("invalidErrorMsg"), "The proper error message for AddressField2 is not displayed when the invalid AddressField2 is entered");
-        AutomationLog.info("The appropriate error message found in overview tab when the invalid AddressField2 is entered");
+        Assert.assertEquals(enterInvalidAddress2, invalidTestData.get("invalidErrorMsg"), "Expected error message for Address2 with invalid data is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for Address2 with invalid data is displayed in Overview Tab");
     }
 
     public void verifyIfCityIsLeftEmpty(OverviewTab overviewTab) throws Exception
@@ -291,8 +291,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterEmptyCity = overviewTab.getErrorMessageOfCityWhenLeftEmpty();
-        Assert.assertEquals(enterEmptyCity, invalidTestData.get("errorMsg1"), "The proper error message for city is not displayed when the city is left empty");
-        AutomationLog.info("The appropriate error message found in overview tab when the city is left empty ");
+        Assert.assertEquals(enterEmptyCity, invalidTestData.get("errorMsg1"), "Expected error message for Empty City is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for Empty City is displayed in Overview Tab");
     }
 
     public void verifyIfInvalidCityDataIsEntered(OverviewTab overviewTab) throws Exception
@@ -302,8 +302,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterInvalidCity = overviewTab.getErrorMessageOfCityWhenLeftEmpty();
-        Assert.assertEquals(enterInvalidCity, invalidTestData.get("errorMsg2"), "The proper error message for city is not displayed when the invalid city name is entered");
-        AutomationLog.info("The appropriate error message found in overview tab when the the invalid city name is entered ");
+        Assert.assertEquals(enterInvalidCity, invalidTestData.get("errorMsg2"), "Expected error message for City with invalid data is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for City with invalid data is displayed in Overview Tab");
     }
 
     public void verifyIfStateIsEmpty(OverviewTab overviewTab) throws Exception
@@ -313,8 +313,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterEmptyState = overviewTab.getErrorMessageOfStateWhenLeftEmpty();
-        Assert.assertEquals(enterEmptyState, invalidTestData.get("errorMsg"), "The proper error message for State is not displayed when the State is empty");
-        AutomationLog.info("The appropriate error message found in overview tab when the when the State is empty");
+        Assert.assertEquals(enterEmptyState, invalidTestData.get("errorMsg"), "Expected error message for Empty State is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for Empty State is displayed in Overview Tab");
     }
 
     public void verifyIfZipCodeLeftEmpty(OverviewTab overviewTab) throws Exception
@@ -324,8 +324,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterEmptyZip = overviewTab.getErrorMessageOfZip();
-        Assert.assertEquals(enterEmptyZip, invalidTestData.get("errorMsg1"), "The proper error message for Zip code is not displayed when the Zip code is left empty");
-        AutomationLog.info("The appropriate error message found in overview tab when the Zip code is left empty ");
+        Assert.assertEquals(enterEmptyZip, invalidTestData.get("errorMsg1"), "Expected error message for Empty Zip code is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for Empty Zip code is displayed in Overview Tab");
     }
 
     public void verifyIfInvalidZipCodeIsEntered(OverviewTab overviewTab) throws Exception
@@ -335,8 +335,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterInvalidZip = overviewTab.getErrorMessageOfZip();
-        Assert.assertEquals(enterInvalidZip, invalidTestData.get("errorMsg2"), "The proper error message for Zip code is not displayed when the invalid Zip code is entered");
-        AutomationLog.info("The appropriate error message found in overview tab when the invalid Zip code is entered ");
+        Assert.assertEquals(enterInvalidZip, invalidTestData.get("errorMsg2"), "Expected error message for Zip code with invalid data is not displayed in Overview Tab");
+        AutomationLog.info("Expected error message for Zip code with invalid data is displayed in Overview Tab");
     }
 
     public void verifyCountOfCharInDescYoursef(OverviewTab overviewTab) throws Exception
@@ -346,8 +346,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterTotalCount = overviewTab.getTheCountOfDescYourself();
-        Assert.assertEquals(enterTotalCount, invalidTestData.get("countMsgData"), "The proper count of character of describe yourself not found");
-        AutomationLog.info("The appropriate count of character of describe yourself found ");
+        Assert.assertEquals(enterTotalCount, invalidTestData.get("countMsgData"), "Expected count of character is not displayed in Overview Tab");
+        AutomationLog.info("Expected count of character is displayed in Overview Tab");
     }
 
     public void verifyIfCharactersAreMoreThanLimit(OverviewTab overviewTab) throws Exception
@@ -357,8 +357,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String enterTotalCountExceeds = overviewTab.getTheCountOfDescYourself();
-        Assert.assertEquals(enterTotalCountExceeds, invalidTestData.get("countMsgData"), "The proper count of character of describe yourself not found when the character excceds then the limit");
-        AutomationLog.info("The appropriate count of character of describe yourself found when the character excceds then the limit ");
+        Assert.assertEquals(enterTotalCountExceeds, invalidTestData.get("countMsgData"), "Expected count of character is not displayed when the character exceeds the limit in Overview Tab");
+        AutomationLog.info("Expected count of character is displayed when the character exceeds the limit in Overview Tab");
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.agorafy.automation.pageobjects.SignUp;
 /**
  * Navigate to sign up page present in the header
  * verify the error message by entering invalid email details
+ * verify the error message by entering empty email.
  * verify the email by entering valid email(existing email) and check whether the user is registered or not
  */
 public class SignUpNegativeAction extends AutomationTestCaseVerification
@@ -47,9 +48,19 @@ public class SignUpNegativeAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception
     {
+        verifyURLandTitle();
         populateAndVerifyEmailDetails(signUp);
         verifyIfEmailIsLeftEmpty(signUp);
         verifyIfEmailAlreadyExist(signUp);
+    }
+
+    private void verifyURLandTitle() throws Exception
+    {
+        Assert.assertEquals(signUp.currentURL(), signUp.registerPageUrl(),"Sign Up link did not navigate to correct page URL");
+        AutomationLog.info("Sign Up link navigates to Sign Up page URL");
+
+        Assert.assertEquals(signUp.currentPageTitle(), testCaseData.get("SignUp").get("title"), "Sign Up Page does not show correct Page Title");
+        AutomationLog.info("Sign Up Page shows correct Page Title");
     }
 
     public void populateAndVerifyEmailDetails(SignUp signup) throws Exception
@@ -62,9 +73,9 @@ public class SignUpNegativeAction extends AutomationTestCaseVerification
 
         signup = signup.clickOnSignUpAccountButton();
 
-        String wrongEmailAddress = signup.errorMessageInvalidEmailEntered().getText();
-        Assert.assertEquals(wrongEmailAddress, invalidEmailData.get("errorMsg"), "The proper error message for invalid email is not displayed");
-        AutomationLog.info("The Appropriate error message for invalid email is displayed");
+        String wrongEmailAddress = signup.getErrorMessageOfInvalidEmail();
+        Assert.assertEquals(wrongEmailAddress, invalidEmailData.get("invalidEmailErrorMsg"), "Expected error message for invalid email is not displayed in SignUp page");
+        AutomationLog.info("Expected error message for invalid email is displayed in SignUp page");
     }
 
     public void verifyIfEmailIsLeftEmpty(SignUp signup) throws Exception
@@ -77,9 +88,9 @@ public class SignUpNegativeAction extends AutomationTestCaseVerification
 
         signup = signup.clickOnSignUpAccountButton();
 
-        String emptyEmailAddress = signup.errorMessageInvalidEmailEntered().getText();
-        Assert.assertEquals(emptyEmailAddress, invalidEmailData.get("errorMsg1"), "The proper error message for empty email is not displayed");
-        AutomationLog.info("The Appropriate error message for empty email is displayed");
+        String emptyEmailAddress = signup.getErrorMessageOfInvalidEmail();
+        Assert.assertEquals(emptyEmailAddress, invalidEmailData.get("emptyEmailErrorMsg"), "Expected error message for empty email is not displayed in SignUp page");
+        AutomationLog.info("Expected error message for empty email is displayed in SignUp page");
     }
 
     public void verifyIfEmailAlreadyExist(SignUp signup) throws Exception
@@ -93,20 +104,20 @@ public class SignUpNegativeAction extends AutomationTestCaseVerification
         signup = signup.clickOnSignUpAccountButton();
         WaitFor.waitForPageToLoad(Page.driver, ValidEmailData.get("validMsg"), signup.emailAlreadyRegisteredLink());
 
-        String validEmailAddress = signup.emailAlreadyRegistered().getText();
-        Assert.assertEquals(validEmailAddress, ValidEmailData.get("validMsg"), "The proper message for valid mail is not displayed");
-        AutomationLog.info("The Appropriate message for valid displayed");
+        String validEmailAddress = signup.getMessageForAlreadyRegEmail();
+        Assert.assertEquals(validEmailAddress, ValidEmailData.get("validMsg"), "Expected error message for valid registered email is not displayed in SignUp page");
+        AutomationLog.info("Expected error message for valid registered email is displayed in SignUp page");
     }
 
     @Override
     protected String successMessage()
     {
-        return "The Negative test cases for Sign Up link passed";
+        return "Negative test cases for Sign Up link passed";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "The Negative test cases for Sign Up link failed";
+        return "Negative test cases for Sign Up link failed";
     }
 }

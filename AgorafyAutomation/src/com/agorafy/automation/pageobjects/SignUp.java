@@ -15,6 +15,11 @@ public class SignUp extends Page
         super(driver);
     }
 
+    public String registerPageUrl()
+    {
+        return applicationUrl() + "/register";
+    }
+
     public WebElement txtbox_Email() throws Exception
     {
         try
@@ -35,15 +40,28 @@ public class SignUp extends Page
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='registrationSubmitForm']/div[1]/div/div"));
-            AutomationLog.info("Appropriate Error message for invalid email shown");
         }
         catch(Exception e)
         {
-            AutomationLog.error("could not found the error message for invalid email");
             throw(e);
         }
         return element;
     }
+
+    public String getErrorMessageOfInvalidEmail() throws Exception
+    {
+        String invalidEmail = "";
+        try
+        {
+            invalidEmail = errorMessageInvalidEmailEntered().getText();
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("error message for invalid email not found");
+            throw(e);
+        }
+        return invalidEmail;
+     }
 
     public WebElement btn_SignUp() throws Exception
     {
@@ -79,10 +97,12 @@ public class SignUp extends Page
 
     public void populateSignUpData(EmailData signupdata) throws Exception
     {
+        WebElement signupEmail;
         try
         {
-            txtbox_Email().clear();
-            txtbox_Email().sendKeys(signupdata.getEmailAddress());
+            signupEmail = txtbox_Email();
+            signupEmail.clear();
+            signupEmail.sendKeys(signupdata.getEmailAddress());
             AutomationLog.info("Data populated in the email text field");
         }
             catch(Exception e)
@@ -97,15 +117,28 @@ public class SignUp extends Page
         try
         {
             element=driver.findElement(emailAlreadyRegisteredLink());
-            AutomationLog.info("Email Already Registered");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Email not Registered");
             throw(e);
         }
         return element;
     }
+
+    public String getMessageForAlreadyRegEmail() throws Exception
+    {
+        String regEmail = "";
+        try
+        {
+            regEmail = emailAlreadyRegistered().getText();
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Proper message for registered mail not found");
+            throw(e);
+        }
+        return regEmail;
+     }
 
     public By emailAlreadyRegisteredLink()
     {

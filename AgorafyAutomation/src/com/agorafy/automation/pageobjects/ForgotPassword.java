@@ -45,22 +45,35 @@ public class ForgotPassword extends Page
             return element;
     }
 
-    public WebElement errorMessageEnterValidMail() throws Exception
+    public WebElement errorMessageEnterInvalidEMail() throws Exception
     {
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='forgotPassError']"));
-            AutomationLog.info("Appropriate error message shown");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Error message not shown");
             throw(e);
         }
            return element;
     }
 
-    public WebElement messageEnterValidMail() throws Exception
+    public String getErrorMessageOfInvalidEmail() throws Exception
+    {
+        String invalidEmail = "";
+        try
+        {
+            invalidEmail = errorMessageEnterInvalidEMail().getText();
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("error message for invalid email is not shown");
+            throw(e);
+        }
+        return invalidEmail;
+     }
+
+    public WebElement messageEnterValidEmailNotReg() throws Exception
     {
         try
         {
@@ -68,11 +81,25 @@ public class ForgotPassword extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Error message not shown");
             throw(e);
         }
            return element;
     }
+
+    public String getMessageOfValidEmailNotReg() throws Exception
+    {
+        String validEmailNotReg = "";
+        try
+        {
+            validEmailNotReg = messageEnterValidEmailNotReg().getText();
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("error message for valid registered email is not shown");
+            throw(e);
+        }
+        return validEmailNotReg;
+     }
 
     public WebElement messageEnterValidRegisteredMail() throws Exception
     {
@@ -88,7 +115,6 @@ public class ForgotPassword extends Page
         }
            return element;
     }
-
 
     public ForgotPassword clickOnRequestNewPassword() throws Exception
     {
@@ -109,10 +135,12 @@ public class ForgotPassword extends Page
 
     public void populateForgotPasswordData(EmailData forgotpassworddata) throws Exception
     {
+        WebElement emailField;
         try
         {
-            txtbox_EmailAddress().clear();
-            txtbox_EmailAddress().sendKeys(forgotpassworddata.getEmailAddress());
+            emailField = txtbox_EmailAddress();
+            emailField.clear();
+            emailField.sendKeys(forgotpassworddata.getEmailAddress());
         }
             catch(Exception e)
         {

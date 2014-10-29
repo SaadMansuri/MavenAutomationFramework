@@ -66,9 +66,9 @@ public class ForgotPasswordAction extends AutomationTestCaseVerification
         forgotpassworddata.setEmailAddress("");
         forgotpassword = forgotpassword.clickOnRequestNewPassword();
 
-        String emptyEmailAddress = forgotpassword.errorMessageEnterValidMail().getText();
-        Assert.assertEquals(emptyEmailAddress, invalidEmailData.get("emptyEmailErrorMsg"), "The proper error message please enter your email address is not displayed");
-        AutomationLog.info("The Appropriate error message for empty email is shown");
+        String emptyEmailAddress = forgotpassword.getErrorMessageOfInvalidEmail();
+        Assert.assertEquals(emptyEmailAddress, invalidEmailData.get("emptyEmailErrorMsg"), "Expected error message for empty email is not displayed in Forgot Password page");
+        AutomationLog.info("Expected error message for empty email is displayed in Forgot Password page");
     }
 
     public void verifyIfTheUserEnteredInvalidEmailAddress(ForgotPassword forgotpassword) throws Exception
@@ -78,9 +78,9 @@ public class ForgotPasswordAction extends AutomationTestCaseVerification
         forgotpassword.populateForgotPasswordData(forgotpassworddata);
         forgotpassword = forgotpassword.clickOnRequestNewPassword();
 
-        String invalidEmailAddress = forgotpassword.errorMessageEnterValidMail().getText();
-        Assert.assertEquals(invalidEmailAddress, invalidEmailData.get("invalidEmailErrorMsg"), "The proper error message please enter valid email address is not displayed");
-        AutomationLog.info("The Appropriate error message for invalid email is shown");
+        String invalidEmailAddress = forgotpassword.getErrorMessageOfInvalidEmail();
+        Assert.assertEquals(invalidEmailAddress, invalidEmailData.get("invalidEmailErrorMsg"), "Expected error message for invalid email is not displayed in Forgot Password page");
+        AutomationLog.info("Expected error message for invalid email is not displayed in Forgot Password page");
     }
 
     public void verifyIfTheUserEnteredValidEmailAddress(ForgotPassword forgotpassword) throws Exception
@@ -92,20 +92,20 @@ public class ForgotPasswordAction extends AutomationTestCaseVerification
         forgotpassword = forgotpassword.clickOnRequestNewPassword();
         WaitFor.waitForPageToLoad(Page.driver);
 
-        String validEmailAddress = forgotpassword.messageEnterValidMail().getText();
-        Assert.assertEquals(validEmailAddress, validEmailData.get("validMailNotReg"),"The proper message is not dispalyed when valid email is given");
-        AutomationLog.info("The Appropriate message for valid email is shown");
+        String validEmailAddress = forgotpassword.getMessageOfValidEmailNotReg();
+        Assert.assertEquals(validEmailAddress, validEmailData.get("validMailNotReg"),"Expected error message for valid email is not displayed in Forgot Password page");
+        AutomationLog.info("Expected error message for valid email is displayed in Forgot Password page");
     }
 
     @Override
     protected String successMessage()
     {
-        return "The test cases for forgot password passed";
+        return "Test cases for forgot password passed";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "The test cases for forgot password failed";
+        return "Test cases for forgot password failed";
     }
 }
