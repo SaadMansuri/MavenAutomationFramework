@@ -41,7 +41,7 @@ public class PageBanner extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Company name not found in Overview page");
+            AutomationLog.error("Company name not found in Overview tab form");
             throw(e);
         }
         return companyText;
@@ -56,7 +56,7 @@ public class PageBanner extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("WorkPhone number  not found in Overview page");
+            AutomationLog.error("WorkPhone number  not found in Overview tab form");
             throw(e);
         }
         return workPhoneText;
@@ -71,7 +71,7 @@ public class PageBanner extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Mobile number  not found in Overview page");
+            AutomationLog.error("Mobile number  not found in Overview tab form");
             throw(e);
         }
         return mobileText;
@@ -86,7 +86,7 @@ public class PageBanner extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Address not found in Overview page");
+            AutomationLog.error("Address not found in Overview tab form");
             throw(e);
         }
         return addressText;

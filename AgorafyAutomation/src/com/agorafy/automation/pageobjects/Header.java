@@ -81,16 +81,16 @@ public class Header extends Page
 
     //Links below are seen when user is logged in
 
-    public WebElement link_ProfileName() throws Exception
+    public WebElement link_ProfileNameOnDashboardAfterLogin() throws Exception
     {
         try
         {
             element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/a[1]/span[2]"));
-            AutomationLog.info("My profile link found in the Header");
+            AutomationLog.info("Profile name found in the Header");
         }
         catch (Exception e)
         {
-            AutomationLog.error("My profile link was not found in the Header");
+            AutomationLog.error("Profile name was not found in the Header");
             throw(e);
         }
         return element;
@@ -101,11 +101,11 @@ public class Header extends Page
         try
         {
             element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/ul/li[1]/a"));
-            AutomationLog.info("My Dashboard link found in the Header");
+            AutomationLog.info("My Dashboard link found when Profile name is clicked");
         }
         catch (Exception e)
         {
-            AutomationLog.error("My Dashboard link was not found in the Header");
+            AutomationLog.error("My Dashboard link not found when Profile name is clicked");
             throw(e);
         }
         return element;
@@ -120,7 +120,7 @@ public class Header extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("My Dashboard link was not found in the Header");
+            AutomationLog.error("Logout link Not found in the Header");
             throw(e);
         }
         return element;
@@ -130,7 +130,7 @@ public class Header extends Page
     {
         try
         {
-            link_ProfileName().click();
+            link_ProfileNameOnDashboardAfterLogin().click();
             AutomationLog.info("Opened drop down for active profile link");
         }
         catch (Exception e)
@@ -165,7 +165,7 @@ public class Header extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("ProfileName not found on header");
+            AutomationLog.error("Profile Name not found on header");
             throw(e);
         }
         return element;

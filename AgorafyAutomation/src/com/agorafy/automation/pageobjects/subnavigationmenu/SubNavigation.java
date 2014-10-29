@@ -324,4 +324,36 @@ public class SubNavigation extends Page
         }
         return faq;
     }
+
+    public WebElement link_AdvancedSearch() throws Exception
+    {
+        try
+        {
+            element = subNavigationBar().findElement(By.linkText("Advanced Search"));
+            AutomationLog.info("Advanced Search link found in Subnavigation bar");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Advanced Search link not found in Subnavigation bar");
+            throw(e);
+        }
+        return element;
+    }
+
+    public AdvancedSearchPage clickLinkAdvancedSearch() throws Exception
+    {
+    	AdvancedSearchPage advancedSearch;
+        try
+        {
+        	link_AdvancedSearch().click();
+            advancedSearch = new AdvancedSearchPage(Page.driver);
+            AutomationLog.info("Advanced Search link is clicked");
+        }
+        catch (Exception e)
+        {
+        	AutomationLog.error("Advanced Search link click operation not successful");
+            throw(e);
+        }
+        return advancedSearch;
+    }
 }

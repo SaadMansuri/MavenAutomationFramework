@@ -136,85 +136,85 @@ public class OverviewTabAction extends AutomationTestCaseVerification
     public void verifyBannerDetails(PageBanner banner, UserProfile overviewData) throws Exception
     {
         String newBannerNameAfterSavingOverviewData = banner.getBannerText();
-        Assert.assertEquals(newBannerNameAfterSavingOverviewData, overviewData.getName(), "The correct name is not displayed in banner");
-        AutomationLog.info("Updated Name Displayed successfully on Banner");
+        Assert.assertEquals(newBannerNameAfterSavingOverviewData, overviewData.getName(), "Expected name is not displayed in banner");
+        AutomationLog.info("Updated Name displayed on Banner");
     }
 
     public void verifyTextBoxName(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyNamePresentInTextBox = overviewTab.getTextBoxName();
-        Assert.assertEquals(verifyNamePresentInTextBox, overviewData.getName(), "Name not found");
-        AutomationLog.info(" Appropriate Name found As per the Text Box");
+        Assert.assertEquals(verifyNamePresentInTextBox, overviewData.getName(), "Expected name not found");
+        AutomationLog.info("Expected Name found As per the Text Box");
     }
 
     public void verifyTextBoxComapnyName(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyComapnyNamePresentInTextBox = overviewTab.getTextBoxCompanyName();
         Assert.assertEquals(verifyComapnyNamePresentInTextBox, overviewData.getCompanyName(), "company name not found");
-        AutomationLog.info(" Appropriate CompanyName found As per the Text Box");
+        AutomationLog.info("Expected Company Name found As per the Text Box");
     }
 
     public void verifyTextBoxMobilePhoneNumber(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyWorkMobileNumberPresentInTextBox = overviewTab.getTextBoxMobileNumber();
         Assert.assertEquals(verifyWorkMobileNumberPresentInTextBox, overviewData.getMobilePhone(), "Mobile nos not found");
-        AutomationLog.info(" Appropriate MobileNumber found As per the Text Box");
+        AutomationLog.info("Expected Mobile Number found As per the Text Box");
     }
 
     public void verifyTextBoxWorkPhoneNumber(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyWorkPhoneNumberPresentInTextBox = overviewTab.getTextBoxWorkPhoneNumber();
         Assert.assertEquals(verifyWorkPhoneNumberPresentInTextBox, overviewData.getWorkPhone(), "Workphone nos not found");
-        AutomationLog.info(" Appropriate WorkPhoneNumber found As per the Text Box");
+        AutomationLog.info("Expected Work Phone number found As per the Text Box");
     }
 
     public void verifyTextBoxAddress1(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyAddress1PresentInTextBox = overviewTab.getTextBoxAddress1();
         Assert.assertEquals(verifyAddress1PresentInTextBox, overviewData.getAddress1(), "Address1 not found");
-        AutomationLog.info(" Appropriate Address1 found As per the Text Box");
+        AutomationLog.info("Expected Address1 found As per the Text Box");
     }
 
     public void verifyTextBoxAddress2(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyAddress2PresentInTextBox = overviewTab.getTextBoxAddress2();
         Assert.assertEquals(verifyAddress2PresentInTextBox, overviewData.getAddress2(), "Address2 not found");
-        AutomationLog.info("Appropriate Address2 found As per the Text Box");
+        AutomationLog.info("Expected Address2 found As per the Text Box");
     }
 
     public void verifyTextBoxCity(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyCityPresentInTextBox = overviewTab.getTextBoxCity();
         Assert.assertEquals(verifyCityPresentInTextBox, overviewData.getCity(), "City not found");
-        AutomationLog.info("Appropriate City found As per the Text Box");
+        AutomationLog.info("Expected City found As per the Text Box");
     }
 
     public void verifyTextBoxState(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyStatePresentInTextBox = overviewTab.getDropdownState();
         Assert.assertEquals(verifyStatePresentInTextBox, overviewData.getState(), "State not found");
-        AutomationLog.info("Appropriate State found As per the Text Box");
+        AutomationLog.info("Expected State found As per the Text Box");
     }
 
     public void verifyTextBoxZip(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyZipPresentInTextBox = overviewTab.getTextBoxZip();
         Assert.assertEquals(verifyZipPresentInTextBox, overviewData.getZipCode(), "Zip not found");
-        AutomationLog.info("Appropriate Zip found As per the Text Box");
+        AutomationLog.info("Expected Zip found As per the Text Box");
     }
 
     public void verifyTextBoxDescribeYourself(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifydescribeYourselfPresentInTextBox = overviewTab.getTextBoxDescribeYorself();
         Assert.assertEquals(verifydescribeYourselfPresentInTextBox, overviewData.getDescribe(), "Describe yourself not found");
-        AutomationLog.info("Appropriate Description found As per the Text Box");
+        AutomationLog.info("Expected Description found As per the Text Box");
     }
 
     public void verifyTextBoxNeigborhood(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
         String verifyNeighborhoodPresentInTextBox = overviewTab.getMultipleSelectNeighborhood();
         Assert.assertEquals(verifyNeighborhoodPresentInTextBox, overviewData.getNeighbour(), "Neigborhood not found");
-        AutomationLog.info("Appropriate Neighborhood found As per the Text Box");
+        AutomationLog.info("Expected Neighborhood found As per the Text Box");
     }
 
     public void testBannerAddressDetails(PageBanner banner, UserProfile overviewData) throws Exception

@@ -48,7 +48,7 @@ public class ChangePasswordPositiveAction extends AccountSettingsBaseAction
 
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
         String verifySuccesfullPasswordMessage = changePasswordTab.passwordChangedSuccessfully().getText();
-        Assert.assertEquals(verifySuccesfullPasswordMessage, validTestData.get("validMsg"), "Password not Changed successfully when valid credentials are entered");
+        Assert.assertEquals(verifySuccesfullPasswordMessage, validTestData.get("validMsg"), "Appropriate message for change password is Not displayed");
         AutomationLog.info("Appropriate message for change password is displayed");
     }
 

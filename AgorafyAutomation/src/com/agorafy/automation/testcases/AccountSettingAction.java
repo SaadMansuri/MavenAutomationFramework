@@ -41,12 +41,12 @@ public class AccountSettingAction extends AccountSettingsBaseAction
         String expectedActiveElementCssClass = expectedAccountSettingsData.get("status");
         String actualActiveElementCssClass = accountSettings.isPersonalInfoTabActive();
         Assert.assertEquals(actualActiveElementCssClass, expectedActiveElementCssClass, "Clicking Personal Information Tab did not open Personal Information page");
-        AutomationLog.info("Clicking Personal Information Tab opened Personal Information Page");
+        AutomationLog.info("Clicking Personal Information Tab opened Personal Information Form");
 
         accountSettings.clickOnChangePasswordTab();
         actualActiveElementCssClass = accountSettings.isChangePasswordTabActive();
         Assert.assertEquals(actualActiveElementCssClass, expectedActiveElementCssClass, "Clicking Change Password Tab did not open Change Password page");
-        AutomationLog.info("Clicking Change Password Tab opened Personal Information Page");
+        AutomationLog.info("Clicking Change Password Tab opened Change Password Form");
 
         AutomationLog.info("Account Settings Page is correctly loaded");
     }

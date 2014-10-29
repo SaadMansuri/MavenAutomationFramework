@@ -13,10 +13,14 @@ public class AccountSettings extends Page
         super(driver);
     }
 
+    protected boolean isSecured()
+    {
+        return true;
+    }
+
     public String accountSettingsPageUrl()
     {
-    	//TODO: 
-        return "https://www.agorafy.com/account/";
+        return applicationUrl() + "/account/";
     }
 
     public WebElement pageHeadingElement() throws Exception
@@ -24,11 +28,11 @@ public class AccountSettings extends Page
         try
         {
             element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
-            AutomationLog.info("Account Settings page Heading found on page");
+            AutomationLog.info("Account Settings page Heading found");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Not able to find Account Settings Page Heading");
+            AutomationLog.error("Account Settings page Heading Not found on page");
             throw (e);
         }
         return element;
@@ -45,11 +49,11 @@ public class AccountSettings extends Page
         try
         {
             element = driver.findElement(By.id("personalInfoLink"));
-            AutomationLog.info("Personal Info tab found on Account Settings");
+            AutomationLog.info("Personal Information tab found on Account Settings");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Not able to find Personal Info Tab on Account Settings Page");
+            AutomationLog.error("Personal Information tab Not found on Account Settings");
             throw (e);
         }
         return element;
@@ -62,11 +66,11 @@ public class AccountSettings extends Page
         {
             link_personalInfo().click();
             personalInfo = new PersonalInfo(driver);
-            AutomationLog.info("Clicked on PersonalInfo Tab");
+            AutomationLog.info("Clicked Personal Information Tab");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Not clicked on PersonalInfo Tab");
+            AutomationLog.error("Unable to click Personal Information Tab");
             throw (e);
         }
         return personalInfo;
@@ -77,11 +81,11 @@ public class AccountSettings extends Page
         try
         {
             element = driver.findElement(By.id("changePasswordLink"));
-            AutomationLog.info("Change Password tab found in AccountSettings Page");
+            AutomationLog.info("Change Password tab found in Account Settings Page");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Change Password tab not found in AccountSettings Page");
+            AutomationLog.error("Change Password tab Not found in Account Settings Page");
             throw (e);
         }
         return element;
@@ -94,11 +98,11 @@ public class AccountSettings extends Page
         {
             link_ChangePasswordTab().click();
             changePasswordTab = new ChangePasswordTab(driver);
-            AutomationLog.info("clicked on change password tab");
+            AutomationLog.info("Clicked Change Password tab");
         }
         catch (Exception e)
         {
-            AutomationLog.info("not clicked on change password tab");
+            AutomationLog.info("Unable to click Change Password tab");
             throw (e);
         }
         return changePasswordTab;

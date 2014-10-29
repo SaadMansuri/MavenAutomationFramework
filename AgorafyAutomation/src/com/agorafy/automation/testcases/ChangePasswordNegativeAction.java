@@ -34,7 +34,7 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
     protected void verifyTestCases() throws Exception
     {
         changePasswordTab = accountSettings.clickOnChangePasswordTab();
-        populateAndVerifyIfAllFieldsAreEmpty(changePasswordTab);
+        verifyIfAllFieldsAreEmpty(changePasswordTab);
         verifyOldPassowrdLeftBlank(changePasswordTab);
         verifyNewPassowrdLeftBlank(changePasswordTab);
         verifyRetypeNewPasswordLeftBlank(changePasswordTab);
@@ -44,22 +44,22 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
         testcasePassed("Invalid Test Cases Change Password Action performed successfully.");
     }
 
-    public void populateAndVerifyIfAllFieldsAreEmpty(ChangePasswordTab changePasswordTab) throws Exception
+    public void verifyIfAllFieldsAreEmpty(ChangePasswordTab changePasswordTab) throws Exception
     {
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
-        invalidTestData = testCaseData.get("populateAndVerifyIfAllFieldsAreEmpty");
+        invalidTestData = testCaseData.get("verifyIfAllFieldsAreEmpty");
 
         String oldErrorPasswordMessage = changePasswordTab.errorMessageOldPassword().getText();
-        Assert.assertEquals(oldErrorPasswordMessage, invalidTestData.get("errorMsg1"), "The proper error messgae for old password is not displayed ");
-        AutomationLog.info("The appropriate error message for old password is displayed when no input is provided");
+        Assert.assertEquals(oldErrorPasswordMessage, invalidTestData.get("errorMsg1"), "Expected error message for old password is Not displayed ");
+        AutomationLog.info("Expected error message for old password is displayed");
 
         String newErrorPasswordMessage = changePasswordTab.errorMessageNewPassword().getText();
-        Assert.assertEquals(newErrorPasswordMessage, invalidTestData.get("errorMsg2") , "The proper error messgae for new password is not displayed ");
-        AutomationLog.info("The appropriate error message for new password is displayed when no input is provided");
+        Assert.assertEquals(newErrorPasswordMessage, invalidTestData.get("errorMsg2") , "Expected error message for new password is Not displayed ");
+        AutomationLog.info("Expected error message for new password is displayed");
 
         String retypeNewErrorPasswordMessage=changePasswordTab.errorRetypeNewPassword().getText();
-        Assert.assertEquals(retypeNewErrorPasswordMessage, invalidTestData.get("errorMsg3") , "The proper error messgae for retype new password is not displayed");
-        AutomationLog.info("The appropriate error message for retype new password is displayed when no input is provided");
+        Assert.assertEquals(retypeNewErrorPasswordMessage, invalidTestData.get("errorMsg3") , "Expected error message for retype new password is Not displayed");
+        AutomationLog.info("Expected error message for retype new password is displayed");
     }
 
     public void verifyOldPassowrdLeftBlank(ChangePasswordTab changePasswordTab) throws Exception
@@ -78,10 +78,10 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
 
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
 
-        String newErrorOldMesagePassword = changePasswordTab.errorMessageOldPassword().getText();
+        String actualErrorMessageOldPassword = changePasswordTab.errorMessageOldPassword().getText();
         String expectedOldPasswordErrorMessage = invalidTestData.get("errorMsg");
-        Assert.assertEquals(newErrorOldMesagePassword, expectedOldPasswordErrorMessage, "The proper error message for new password is not displayed when OldPassword is left empty");
-        AutomationLog.info("The appropriate error message for old password is displayed when old password is empty and other text fields are entered");
+        Assert.assertEquals(actualErrorMessageOldPassword, expectedOldPasswordErrorMessage, "Expected error message for new password is not displayed when OldPassword is left empty");
+        AutomationLog.info("Expected error message for old password is displayed when old password is empty and other text fields are entered");
     }
 
     public void verifyNewPassowrdLeftBlank(ChangePasswordTab changePasswordTab) throws Exception
@@ -101,12 +101,12 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
 
         String verifynewPasswordErrorMessage = changePasswordTab.errorMessageNewPassword().getText();
-        Assert.assertEquals(verifynewPasswordErrorMessage, invalidTestData.get("errorMsg1"), "The proper error message for new password is not displayed when NewPassword is left empty" );
-        AutomationLog.info("The appropriate error message for New password is displayed when new password is empty and other text fields are entered");
+        Assert.assertEquals(verifynewPasswordErrorMessage, invalidTestData.get("errorMsg1"), "Expected error message for new password is not displayed when NewPassword is left empty" );
+        AutomationLog.info("Expected error message for New password is displayed when new password is empty and other text fields are entered");
 
         String verifyretypeNewPasswordErrorMessage = changePasswordTab.errorRetypeNewPassword().getText();
-        Assert.assertEquals(verifyretypeNewPasswordErrorMessage,  invalidTestData.get("errorMsg2"),  "The proper error messgae for new password is not displayed when NewPassword is left empty" );
-        AutomationLog.info("The appropriate error message for Retype New password is displayed when new password is empty other text fields are entered");
+        Assert.assertEquals(verifyretypeNewPasswordErrorMessage,  invalidTestData.get("errorMsg2"),  "Expected error messgae for new password is not displayed when NewPassword is left empty" );
+        AutomationLog.info("Expected error message for Retype New password is displayed when new password is empty other text fields are entered");
     }
 
     public void verifyRetypeNewPasswordLeftBlank(ChangePasswordTab changePasswordTab) throws Exception
@@ -126,8 +126,8 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
 
         String verifyNewPassworderrorMessage = changePasswordTab.errorRetypeNewPassword().getText();
-        Assert.assertEquals(verifyNewPassworderrorMessage, invalidTestData.get("errorMsg"), "The proper error messgae for Retype new password is not displayed when NewPassword is left empty" );
-        AutomationLog.info("The appropriate error message for Retype New password is displayed when retype new password is empty and other text fields are entered");
+        Assert.assertEquals(verifyNewPassworderrorMessage, invalidTestData.get("errorMsg"), "Expected error messgae for Retype new password is not displayed when NewPassword is left empty" );
+        AutomationLog.info("Expected error message for Retype New password is displayed when retype new password is empty and other text fields are entered");
     }
 
     public void verifyIfWrongOldPasswordEntered(ChangePasswordTab changePasswordTab) throws Exception
@@ -147,12 +147,12 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
 
         String verifyNewPasswordMessage = changePasswordTab.errorMessageNewPassword().getText();
-        Assert.assertEquals(verifyNewPasswordMessage, invalidTestData.get("errorMsg1"), "The proper error message for new password is not displayed when OldPassword is entered wrong");
-        AutomationLog.info("The appropriate error message for New password is displayed when Old password is Entered wrong");
+        Assert.assertEquals(verifyNewPasswordMessage, invalidTestData.get("errorMsg1"), "Expected error message for new password is not displayed when OldPassword is entered wrong");
+        AutomationLog.info("Expected error message for New password is displayed when Old password is Entered wrong");
 
         String verifyRetypeNewPassword = changePasswordTab.errorRetypeNewPassword().getText();
-        Assert.assertEquals(verifyRetypeNewPassword, invalidTestData.get("errorMsg2"), "The proper error messgae for Retype new password is not displayed when OldPassword is entered wrong" );
-        AutomationLog.info("The appropriate error message for Retype New password is displayed when Old password is Entered wrong");
+        Assert.assertEquals(verifyRetypeNewPassword, invalidTestData.get("errorMsg2"), "Expected error messgae for Retype new password is not displayed when OldPassword is entered wrong" );
+        AutomationLog.info("Expected error message for Retype New password is displayed when Old password is Entered wrong");
     }
 
     public void verifyIfNewAndRetypeNewPasswordIsLessThenEightChar(ChangePasswordTab changePasswordTab) throws Exception
@@ -172,8 +172,8 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
 
         String verifyOldPasswordMessage = changePasswordTab.errorMessageNewPassword().getText();
-        Assert.assertEquals(verifyOldPasswordMessage, invalidTestData.get("errorMsg2"), "The proper error message for Old password is not displayed when new password and Retype New Password is less than eight Character");
-        AutomationLog.info("The appropriate error message for New password is displayed when New Password And retype New Password is less then Eight Character");
+        Assert.assertEquals(verifyOldPasswordMessage, invalidTestData.get("errorMsg2"), "Expected error message for Old password is not displayed when new password and Retype New Password is less than eight Character");
+        AutomationLog.info("Expected error message for New password is displayed when New Password And retype New Password is less then Eight Character");
 
     }
 
@@ -194,12 +194,12 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
 
         String verifyOldPasswordMessage = changePasswordTab.errorMessageNewPassword().getText();
-        Assert.assertEquals(verifyOldPasswordMessage, invalidTestData.get("errorMsg1"), "The proper error message for Old password is not displayed when new password and Retype New Password is not same");
-        AutomationLog.info("The appropriate error message for New password is displayed when New Password And retype New Password is not same");
+        Assert.assertEquals(verifyOldPasswordMessage, invalidTestData.get("errorMsg1"), "Expected error message for Old password is not displayed when new password and Retype New Password is not same");
+        AutomationLog.info("Expected error message for New password is displayed when New Password And retype New Password is not same");
 
         String verifyNewPasswordMessage = changePasswordTab.errorRetypeNewPassword().getText();
-        Assert.assertEquals(verifyNewPasswordMessage, invalidTestData.get("errorMsg2"), "The proper error message for New password is not displayed when new password and Retype New Password is not same");
-        AutomationLog.info("The appropriate error message for Retype New password is displayed when New Password And retype New Password is not same");
+        Assert.assertEquals(verifyNewPasswordMessage, invalidTestData.get("errorMsg2"), "Expected error message for New password is not displayed when new password and Retype New Password is not same");
+        AutomationLog.info("Expected error message for Retype New password is displayed when New Password And retype New Password is not same");
 
     }
 

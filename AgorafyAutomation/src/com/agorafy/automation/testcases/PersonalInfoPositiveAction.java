@@ -49,21 +49,21 @@ public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
     private void verifyEmailinEmailField() throws Exception
     {
         expectedpersonalInfoData = testCaseData.get("validCredential");
-        Assert.assertEquals(personalInfo.emailTextValue(), expectedpersonalInfoData.get("username"),"Email in email text field is not the one provided during account creation ");
-        AutomationLog.info("Email in email text field is the one provided during account creation ");
+        Assert.assertEquals(personalInfo.emailTextValue(), expectedpersonalInfoData.get("username"),"Email in email text field is not as expected");
+        AutomationLog.info("Email in email text field is as expected");
     }
 
     private void verifyIfEmailFieldEditable() throws Exception
     {
         WebElement element = personalInfo.textBox_Email();
-        Assert.assertEquals(personalInfo.checkEnablityofTextField(element), false,"Email Text field is Editable");
+        Assert.assertEquals(personalInfo.checkEnablityofTextField(element), false,"Email Text field is Editable; it should not be editable");
         AutomationLog.info("Email Text Field is not editable");
     }
 
     private void verifyNameAfterSavingForm(UserProfile profileData) throws Exception
     {
         Assert.assertEquals(personalInfo.nameTextValue(), profileData.getName(), "Name in Personal Info form did not get replaced with the new name");
-        AutomationLog.info("Name in Personal Info form gets replaced with the new name");
+        AutomationLog.info("Name in Personal Information form gets replaced with the new name");
     }
 
     private void verifyIfNameFieldEditable() throws Exception
@@ -77,15 +77,15 @@ public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
     {
         String nameOnHeader = header.profileName();
         Assert.assertEquals(nameOnHeader, expectedpersonalInfoData.get("headerProfileName"), "Name does not get reflected on header");
-        AutomationLog.info("Name in Personal Info form gets reflected on header");
+        AutomationLog.info("Name in Personal Information form gets reflected on header");
     }
 
-    private void populateFields(PersonalInfo pInfo, UserProfile profileData) throws Exception
+    private void populateFields(PersonalInfo personalInfo, UserProfile profileData) throws Exception
     {
-        pInfo.populateData(profileData);
-        pInfo = pInfo.clickOnSaveChangesBtn();
+        personalInfo.populateData(profileData);
+        personalInfo = personalInfo.clickOnSaveChangesBtn();
         WaitFor.waitForPageToLoad(Page.driver);
-        Assert.assertEquals(pInfo.successMessage(),expectedpersonalInfoData.get("successMessage"),"Success Message is not shown after changed have been made");
+        Assert.assertEquals(personalInfo.successMessage(),expectedpersonalInfoData.get("successMessage"),"Success Message is not shown after valid changes have been made");
         AutomationLog.info("Success Message is shown after valid changes have been made");
     }
 
@@ -105,6 +105,6 @@ public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
     @Override
     protected String failureMessage()
     {
-        return "Personal Info Positive Action Failed";
+        return "Personal Information Positive Action Failed";
     }
 }

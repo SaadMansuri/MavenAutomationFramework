@@ -20,11 +20,11 @@ public class Dashboard extends Page
         try
         {
             element = driver.findElement(By.linkText("Edit / View My Profile"));
-            AutomationLog.info("My Edit profile link found on the Home Page");
+            AutomationLog.info("Edit/View profile link found");
         }
         catch (Exception e)
         {
-            AutomationLog.error("My Edit profile link was not found on the Home Page");
+            AutomationLog.error("Edit/View profile link Not found the Home Page");
             throw (e);
         }
         return element;
@@ -52,11 +52,11 @@ public class Dashboard extends Page
         {
             link_EditProfile().click();
             element = new OverviewTab(driver);
-            AutomationLog.info("OverviewTab was opened successfully.");
+            AutomationLog.info("Edit profile OverviewTab form loaded");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Not able to navigate to overview tab");
+            AutomationLog.error("Edit profile OverviewTab form Not loaded");
             throw (e);
         }
         return element;

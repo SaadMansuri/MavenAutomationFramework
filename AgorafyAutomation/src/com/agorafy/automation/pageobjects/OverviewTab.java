@@ -11,6 +11,7 @@ import com.agorafy.automation.datamodel.profile.UserProfile;
 public class OverviewTab extends Page 
 {
     private WebElement element = null;
+    private WebElement formField = null;
 
     public OverviewTab(WebDriver driver)
     {
@@ -22,11 +23,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.id("name"));
-            AutomationLog.info("username text box found in overview page");
+            AutomationLog.info("username text box found in Overview tab form");
         }
         catch (Exception e) 
         {
-            AutomationLog.error("could not found username text box ");
+            AutomationLog.error("Username text box Not found on Overview tab form");
             throw (e);
         }
         return element;
@@ -37,11 +38,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.id("email"));
-            AutomationLog.info("email text box found in overview page");
+            AutomationLog.info("Email text box found in Overview tab form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found email text box");
+            AutomationLog.error("Email text box Not found in Overview tab form");
             throw (e);
         }
         return element;
@@ -52,11 +53,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.id("company-name"));
-            AutomationLog.info("company-name found in overview page");
+            AutomationLog.info("Company-name found in Overview tab form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found company name text box");
+            AutomationLog.error("Company-name Not found in Overview tab form");
             throw (e);
         }
         return element;
@@ -67,11 +68,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.id("work"));
-            AutomationLog.info("work-phone nos found in overview page");
+            AutomationLog.info("Work-phone number found in Overview tab form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found work phone text box");
+            AutomationLog.error("Work-phone number Not found in Overview tab form");
             throw (e);
         }
         return element;
@@ -82,11 +83,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.id("mobile"));
-            AutomationLog.info("mobile nos found in overview page");
+            AutomationLog.info("Mobile number found in Overview tab form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found mobile number text box");
+            AutomationLog.error("Mobile number Not found in Overview tab form");
             throw (e);
         }
         return element;
@@ -97,11 +98,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.name("address[address1]"));
-            AutomationLog.info("address1 found in overview page");
+            AutomationLog.info("Address1 found in Overview tab form");
         }
         catch (Exception e)
         {
-           AutomationLog.error("could not found address1 text box");
+           AutomationLog.error("Address1 Not found in Overview tab form");
            throw (e);
         }
         return element;
@@ -112,11 +113,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.name("address[address2]"));
-            AutomationLog.info("address2 found in overview page");
+            AutomationLog.info("Address2 found in Overview tab form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found address2 text box");
+            AutomationLog.error("Address2 Not found in Overview tab form");
             throw (e);
         }
         return element;
@@ -127,11 +128,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.id("city"));
-            AutomationLog.info("City found in over view page");
+            AutomationLog.info("City found in Overview tab form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found city text box");
+            AutomationLog.error("City Not found in Overview tab form");
             throw (e);
         }
         return element;
@@ -142,11 +143,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.id("state"));
-            AutomationLog.info("State found in over view page");
+            AutomationLog.info("State found in Overview tab form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found state text box");
+            AutomationLog.error("State Not found in Overview tab form");
             throw (e);
         }
         return element;
@@ -157,11 +158,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.id("zip"));
-            AutomationLog.info("Zip found in over view page");
+            AutomationLog.info("Zip Code found in Overview tab form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found zip text box");
+            AutomationLog.error("Zip Code Not found in Overview tab form");
             throw (e);
         }
         return element;
@@ -172,11 +173,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.id("aboutText"));
-            AutomationLog.info(" Describe yourself found in over view page");
+            AutomationLog.info("Describe yourself found in Overview tab form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found Describe yourself text box");
+            AutomationLog.error("Describe yourself Not found in Overview tab form");
             throw (e);
         }
         return element;
@@ -187,11 +188,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.className("default"));
-            AutomationLog.info(" Neigborhood found in over view page");
+            AutomationLog.info(" Neigborhood found in Overview tab form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found Describe yoursef text box");
+            AutomationLog.error("Neigborhood Not found in Overview tab form");
             throw (e);
         }
         return element;
@@ -202,11 +203,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.id("overviewSubmit"));
-            AutomationLog.info("save button found in overview page");
+            AutomationLog.info("Save button found in Overview tab form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found save button");
+            AutomationLog.error("Save button Not found in Overview tab form");
             throw (e);
         }
         return element;
@@ -217,11 +218,11 @@ public class OverviewTab extends Page
         try
         {
             element = driver.findElement(By.linkText("here"));
-            AutomationLog.info("link text 'here' is found on overview tab");
+            AutomationLog.info("link text 'here' is found on Overview tab form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found link here text ");
+            AutomationLog.error("link text 'here' is Not found on Overview tab form");
             throw (e);
         }
         return element;
@@ -231,12 +232,13 @@ public class OverviewTab extends Page
     {
         try
         {
-            txtbx_Name().clear();
-            txtbx_Name().sendKeys(namefield);
+            formField = txtbx_Name();
+            formField.clear();
+            formField.sendKeys(namefield);
         }
         catch (Exception e)
         {
-            AutomationLog.error(" could not found name in overview tab ");
+            AutomationLog.error(" could not find name in Overview tab form ");
             throw (e);
         }
     }
@@ -245,12 +247,13 @@ public class OverviewTab extends Page
     {
         try
         {
-            txtbx_CompanyName().clear();
-            txtbx_CompanyName().sendKeys(companyfield);
+            formField = txtbx_CompanyName();
+            formField.clear();
+            formField.sendKeys(companyfield);
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found company name in overview tab");
+            AutomationLog.error("could not found company name in Overview tab form");
             throw (e);
         }
     }
@@ -259,12 +262,13 @@ public class OverviewTab extends Page
     {
         try
         {
-            txtbx_WorkNum().clear();
-            txtbx_WorkNum().sendKeys(Workphonefield);
+            formField = txtbx_WorkNum();
+            formField.clear();
+            formField.sendKeys(Workphonefield);
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found workphone number in overview tab ");
+            AutomationLog.error("could not found workphone number in Overview tab form ");
             throw (e);
         }
     }
@@ -273,12 +277,13 @@ public class OverviewTab extends Page
     {
         try
         {
-            txtbx_MobilenNum().clear();
-            txtbx_MobilenNum().sendKeys(Mobilephonefield);
+            formField = txtbx_MobilenNum();
+            formField.clear();
+            formField.sendKeys(Mobilephonefield);
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found mobilephone number in overview tab ");
+            AutomationLog.error("could not found mobilephone number in Overview tab form ");
             throw (e);
         }
     }
@@ -287,12 +292,13 @@ public class OverviewTab extends Page
     {
         try
         {
-            txtbx_FirstAddressField().clear();
-            txtbx_FirstAddressField().sendKeys(addressField1);
+            formField = txtbx_FirstAddressField();
+            formField.clear();
+            formField.sendKeys(addressField1);
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found Address1 in overview tab");
+            AutomationLog.error("could not found Address1 in Overview tab form");
             throw (e);
         }
     }
@@ -301,12 +307,13 @@ public class OverviewTab extends Page
     {
         try
         {
-            txtbx_SecondAddressField().clear();
-            txtbx_SecondAddressField().sendKeys(addressField2);
+            formField = txtbx_SecondAddressField();
+            formField.clear();
+            formField.sendKeys(addressField2);
         }
         catch (Exception e)
         {
-           AutomationLog.error("could not found Address2 in overview tab");
+           AutomationLog.error("could not found Address2 in Overview tab form");
            throw (e);
         }
     }
@@ -315,12 +322,13 @@ public class OverviewTab extends Page
     {
         try
         {
-            txtbx_City().clear();
-            txtbx_City().sendKeys(city);
+            formField = txtbx_City();
+            formField.clear();
+            formField.sendKeys(city);
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found city name in overview tab");
+            AutomationLog.error("could not found city name in Overview tab form");
             throw (e);
         }
     }
@@ -334,7 +342,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found state in overview tab");
+            AutomationLog.error("could not found state in Overview tab form");
             throw (e);
         }
     }
@@ -343,12 +351,13 @@ public class OverviewTab extends Page
     {
         try
         {
-            txtbx_Zip().clear();
-            txtbx_Zip().sendKeys(zipCode);
+            formField = txtbx_Zip();
+            formField.clear();
+            formField.sendKeys(zipCode);
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found zipcode in overview tab");
+            AutomationLog.error("could not found zipcode in Overview tab form");
             throw (e);
         }
     }
@@ -357,44 +366,64 @@ public class OverviewTab extends Page
     {
         try
         {
-            txtbx_DescribeYourself().clear();
-            txtbx_DescribeYourself().sendKeys(countCharacter);
+            formField = txtbx_DescribeYourself();
+            formField.clear();
+            formField.sendKeys(countCharacter);
         }
         catch(Exception e)
         {
-            AutomationLog.error("could not found count of character in overview tab");
+            AutomationLog.error("could not found count of character in Overview tab form");
             throw(e);
         }
     }
 
     public void populateOverviewDetails(UserProfile data) throws Exception
     {
+        WebElement name, companyName, mobileNum, workNum, address1, address2, city, zipCode, describe;
         try
         {
-            txtbx_Name().clear();
-            txtbx_Name().sendKeys(data.getName());
-            txtbx_CompanyName().clear();
-            txtbx_CompanyName().sendKeys(data.getCompanyName());
-            txtbx_MobilenNum().clear();
-            txtbx_MobilenNum().sendKeys(data.getMobilePhone());
-            txtbx_WorkNum().clear();
-            txtbx_WorkNum().sendKeys(data.getWorkPhone());
-            txtbx_FirstAddressField().clear();
-            txtbx_FirstAddressField().sendKeys(data.getAddress1());
-            txtbx_SecondAddressField().clear();
-            txtbx_SecondAddressField().sendKeys(data.getAddress2());
-            txtbx_City().clear();
-            txtbx_City().sendKeys(data.getCity());
-            txtbx_Zip().clear();
-            txtbx_Zip().sendKeys(data.getZipCode());
+            name = txtbx_Name();
+            name.clear();
+            name.sendKeys(data.getName());
+
+            companyName = txtbx_CompanyName();
+            companyName.clear();
+            companyName.sendKeys(data.getCompanyName());
+
+            mobileNum = txtbx_MobilenNum();
+            mobileNum.clear();
+            mobileNum.sendKeys(data.getMobilePhone());
+
+            workNum = txtbx_WorkNum();
+            workNum.clear();
+            workNum.sendKeys(data.getWorkPhone());
+
+            address1 = txtbx_FirstAddressField();
+            address1.clear();
+            address1.sendKeys(data.getAddress1());
+
+            address2 = txtbx_SecondAddressField();
+            address2.clear();
+            address2.sendKeys(data.getAddress2());
+
+            city = txtbx_City();
+            city.clear();
+            city.sendKeys(data.getCity());
+
+            zipCode = txtbx_Zip();
+            zipCode.clear();
+            zipCode.sendKeys(data.getZipCode());
+
             Select select = new Select(dropdown_State());
             select.selectByVisibleText(data.getState());
-            txtbx_DescribeYourself().clear();
-            txtbx_DescribeYourself().sendKeys(data.getDescribe());
+
+            describe = txtbx_DescribeYourself();
+            describe.clear();
+            describe.sendKeys(data.getDescribe());
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not populate overview details in overview tab");
+            AutomationLog.error("could not populate overview details in Overview tab form");
             throw (e);
         }
     }
@@ -409,7 +438,7 @@ public class OverviewTab extends Page
         }
         catch (Exception e)
         {
-           AutomationLog.error("could not save overview details in overview tab");
+           AutomationLog.error("could not save overview details in Overview tab form");
            throw (e);
         }
         return tab;

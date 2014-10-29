@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import org.testng.Assert;
 
-import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.datamodel.profile.UserProfile;
 import com.agorafy.automation.pageobjects.Page;
@@ -36,8 +35,7 @@ public class PersonalInfoNegativeAction extends AccountSettingsBaseAction
 
     private void verifyIfNameFieldLeftBlank() throws Exception
     {
-        Assert.assertEquals(personalInfo.nameError(), expectedPersonalInfoData.get("failureMessage"),"No Error Message is shown");
-        AutomationLog.info("Appropriate Error Message is shown");
+        Assert.assertEquals(personalInfo.nameError(), expectedPersonalInfoData.get("failureMessage"),"Appropriate Error Message is not shown");
     }
 
     private void populateFields(PersonalInfo pInfo) throws Exception

@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationAboutUsAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationAdvancedSearchAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationBlogAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationCareersAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationContactAction;
@@ -101,7 +102,6 @@ public class SubNavigationTest
         }
         catch(Exception e)
         {
-            //AutomationLog.error(e.getMessage());
             throw(e);
         }
     }
@@ -138,6 +138,19 @@ public class SubNavigationTest
         try
         {
             new SubnavigationSearchPropertiesAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
+
+    @Test
+    public void testAdvancedSearchLink() throws Exception
+    {
+        try
+        {
+            new SubnavigationAdvancedSearchAction().Execute();
         }
         catch(Exception e)
         {
