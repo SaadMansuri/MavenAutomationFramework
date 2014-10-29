@@ -25,11 +25,11 @@ public class PrivacyPolicy extends Page
         try
         {
             element = driver.findElement(By.xpath("html/body/div[2]/div/div/div[1]/div[1]/h2"));
-            AutomationLog.info("About Us Page Heading found on page");
+            AutomationLog.info("Privacy Policy Page Heading found on page");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not able to find About Us Page Heading");
+            AutomationLog.error("Privacy Policy Page Heading Not found");
             throw(e);
         }
         return element;

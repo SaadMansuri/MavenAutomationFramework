@@ -23,7 +23,7 @@ public class SearchProfessionalsPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Search Professionals page heading does not match with expected heading");
+            AutomationLog.error("Search Professionals page heading Not found");
             throw(e);
         }
         return element;

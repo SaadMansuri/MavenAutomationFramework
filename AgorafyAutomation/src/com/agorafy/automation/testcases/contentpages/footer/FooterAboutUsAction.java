@@ -46,12 +46,12 @@ public class FooterAboutUsAction extends ContentPagesVerification
     @Override
 	protected String successMessage()
     {
-        return " Footer AboutUs tested successfully";
+        return "About Us link on Footer tested successfully";
     }
 
     @Override
 	protected String failureMessage()
     {
-        return "Footer AboutUs Action Failed ";
+        return "About Us link Test Failed";
     }
 }

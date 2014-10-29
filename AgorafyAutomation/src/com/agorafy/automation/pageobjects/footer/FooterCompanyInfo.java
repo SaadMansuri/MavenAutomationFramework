@@ -21,11 +21,11 @@ public class FooterCompanyInfo extends Page
         try
         {
             companyName = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/h5")).getText();
-            AutomationLog.info("Company Name found on the Footer");		
+            AutomationLog.info("Company Name found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Company Name not found on the Footer");
+            AutomationLog.error("Company Name not found on Footer");
             throw(e);
         }
         return companyName;
@@ -37,11 +37,11 @@ public class FooterCompanyInfo extends Page
         try
         {
             companyAddress1 = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[1]/p[1]")).getText();
-            AutomationLog.info("Company Address1 found on the Footer");			
+            AutomationLog.info("Company Address1 found on Footer");			
         }
         catch(Exception e)
         {
-            AutomationLog.error("Company Address1 not found on the Footer");
+            AutomationLog.error("Company Address1 not found on Footer");
             throw(e);
         }
         return companyAddress1;
@@ -53,11 +53,11 @@ public class FooterCompanyInfo extends Page
         try
         {
             companyAddress2 = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[1]/p[2]")).getText();
-            AutomationLog.info("Company Address2 found on the Footer");			
+            AutomationLog.info("Company Address2 found on Footer");			
         }
         catch(Exception e)
         {
-            AutomationLog.error("Company Address2 not found on the Footer");
+            AutomationLog.error("Company Address2 not found on Footer");
             throw(e);
         }
         return companyAddress2;
@@ -69,11 +69,11 @@ public class FooterCompanyInfo extends Page
         try
         {
             companyPhoneNumber = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[3]/p[1]")).getText();
-            AutomationLog.info("Company Phone Number found on the Footer");
+            AutomationLog.info("Company Phone Number found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Phone Number not found on the Footer");
+            AutomationLog.error("Phone Number not found on Footer");
             throw(e);
         }
         return companyPhoneNumber;
@@ -84,11 +84,10 @@ public class FooterCompanyInfo extends Page
         try
         {
             element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[3]/p[2]/a"));
-            AutomationLog.info("Support Email link found on the footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Support Email link not found on the footer");
+            AutomationLog.error("Support Email link not found on footer");
             throw(e);
         }
         return element;
@@ -132,7 +131,7 @@ public class FooterCompanyInfo extends Page
         try
         {
             copyrightText = driver.findElement(By.xpath(".//*[@id='footer']/div/div[2]/div/span")).getText();
-            AutomationLog.info("Copyright Text found on the footer");
+            AutomationLog.info("Copyright Text found on footer");
         }
         catch(Exception e)
         {

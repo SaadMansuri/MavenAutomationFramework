@@ -38,12 +38,12 @@ public class FooterTermsAndConditionAction extends ContentPagesVerification
     @Override
     protected String successMessage()
     {
-        return " Footer TermsAndConditions tested successfully";
+        return "TermsAndConditions link on Footer tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Footer TermsAndConditions Action Failed ";
+        return "TermsAndConditions link Test Failed ";
     }
 }

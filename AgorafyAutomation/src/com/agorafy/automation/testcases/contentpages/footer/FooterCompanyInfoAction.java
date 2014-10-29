@@ -54,12 +54,12 @@ public class FooterCompanyInfoAction extends ContentPagesVerification
     @Override
     protected String successMessage()
     {
-        return "Footer Company Info tested successfully";
+        return "Company Information on Footer tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Footer CompanyInfo Action failed";
+        return "Company Information Test Failed";
     }
 }

@@ -25,11 +25,11 @@ public class TermsAndConditions extends Page
         try
         {
             element = driver.findElement(By.xpath("html/body/div[2]/div/div/div[1]/div[1]/h2"));
-            AutomationLog.info("About Us Page Heading found on page");
+            AutomationLog.info("Terms And Conditions Page Heading found on page");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not able to find About Us Page Heading");
+            AutomationLog.error("Terms And Conditions Page Heading Not found");
             throw(e);
         }
         return element;

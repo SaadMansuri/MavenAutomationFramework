@@ -29,7 +29,7 @@ public class Press extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not able to find Press Page Heading");
+            AutomationLog.error("Press Page Heading Not found");
             throw(e);
         }
         return element;

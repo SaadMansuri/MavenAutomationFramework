@@ -45,12 +45,12 @@ public class FooterFeedbackAction extends ContentPagesVerification
     @Override
     protected String successMessage()
     {
-        return " Footer Feedback tested successfully";
+        return "Feedback link on Footer tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Footer Feedback Action Failed ";
+        return "Feedback link Test Failed";
     }
 }

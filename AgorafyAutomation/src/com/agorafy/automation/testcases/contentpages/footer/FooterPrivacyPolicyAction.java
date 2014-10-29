@@ -38,12 +38,12 @@ public class FooterPrivacyPolicyAction extends ContentPagesVerification
     @Override
     protected String successMessage()
     {
-        return " Footer PrivacyPolicy tested successfully";
+        return "PrivacyPolicy link on Footer tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Footer PrivacyPolicy Action Failed ";
+        return "PrivacyPolicy link Test Failed ";
     }
 }

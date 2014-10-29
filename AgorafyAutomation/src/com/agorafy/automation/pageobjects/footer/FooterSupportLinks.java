@@ -24,12 +24,12 @@ public class FooterSupportLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[1]/div/div[2]/ul/li[1]/a"));
-            AutomationLog.info("How It Works link found on the Footer");
+            element = driver.findElement(By.linkText("How It Works"));
+            AutomationLog.info("How It Works link found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("How It Works link not found on the Footer");
+            AutomationLog.error("How It Works link not found on Footer");
             throw(e);
         }
         return element;
@@ -56,12 +56,12 @@ public class FooterSupportLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[1]/div/div[2]/ul/li[2]/a"));
-            AutomationLog.info("Blog link found on the Footer");
+            element = driver.findElement(By.linkText("Blog"));
+            AutomationLog.info("Blog link found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Blog link not found on the Footer");
+            AutomationLog.error("Blog link not found on Footer");
             throw(e);
         }
         return element;
@@ -88,12 +88,12 @@ public class FooterSupportLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[1]/div/div[2]/ul/li[3]/a"));
-            AutomationLog.info("Press link found on the Footer");
+            element = driver.findElement(By.linkText("Press"));
+            AutomationLog.info("Press link found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Press link not found on the Footer");
+            AutomationLog.error("Press link not found on Footer");
             throw(e);
         }
         return element;
@@ -120,12 +120,12 @@ public class FooterSupportLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[1]/div/div[2]/ul/li[4]/a"));
-            AutomationLog.info("FAQs link found on the Footer");
+            element = driver.findElement(By.linkText("FAQs"));
+            AutomationLog.info("FAQs link found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("FAQs link not found on the Footer");
+            AutomationLog.error("FAQs link not found on Footer");
             throw(e);
         }
         return element;
@@ -152,12 +152,12 @@ public class FooterSupportLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[1]/div/div[2]/ul/li[5]/a"));
-            AutomationLog.info("Feedback link found on the Footer");
+            element = driver.findElement(By.linkText("Feedback"));
+            AutomationLog.info("Feedback link found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Feedback link not found on the Footer");
+            AutomationLog.error("Feedback link not found on Footer");
             throw(e);
         }
         return element;

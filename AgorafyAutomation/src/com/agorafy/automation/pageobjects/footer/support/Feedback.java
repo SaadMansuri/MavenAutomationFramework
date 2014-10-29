@@ -29,7 +29,7 @@ public class Feedback extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not able to find Feedback Page Heading");
+            AutomationLog.error("Feedback Page Heading Not found");
             throw(e);
         }
         return element;
@@ -39,5 +39,79 @@ public class Feedback extends Page
     public String pageHeading() throws Exception
     {
         return pageHeadingElement().getText();
+    }
+
+    WebElement textBox_Name() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("name"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Not able to find Name Text Field on Feedback form");
+            throw(e);
+        }
+        return element;
+    }
+
+    String textBox_NameValue() throws Exception
+    {
+        String name = "";
+        try
+        {
+            textBox_Name().getAttribute("value");
+            AutomationLog.info("Name found in Name text field");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find name in name field");
+            throw(e);
+        }
+        return name;
+    }
+
+    WebElement textBox_Email() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("exampleInputEmail1"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Not able to find Email Text Field on Feedback form");
+            throw(e);
+        }
+        return element;
+    }
+
+    String textBox_EmailValue() throws Exception
+    {
+        String email = "";
+        try
+        {
+            textBox_Email().getAttribute("value");
+            AutomationLog.info("Email found in email text field");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find email in Email field");
+            throw(e);
+        }
+        return email;
+    }
+
+    WebElement dropdown_Subject() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("subject"));
+            AutomationLog.info("Subject Dropdown found on Feedback form");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Subject dropdown on feedback form");
+        }
+        return element;
     }
 }

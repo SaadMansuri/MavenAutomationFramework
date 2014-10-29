@@ -25,11 +25,11 @@ public class MembershipBenefit extends Page
         try
         {
             element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
-            AutomationLog.info("Membership Benefit Page Heading found on the page");
+            AutomationLog.info("Members' Benefit Page Heading found on the page");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not able to find Membership benefit page Heading");
+            AutomationLog.error("Members' Benefit Page Heading Not found");
             throw(e);
         }
         return element;

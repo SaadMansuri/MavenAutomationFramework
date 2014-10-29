@@ -115,8 +115,8 @@ public class ContentPagesLeftMenuAction extends ContentPagesVerification
         verifyLink(benefits, testData);
 
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.membershipBenefitLinkText(), "Left menu does not show Membership Benefit link as Active Link");
-        AutomationLog.info("Left menu shows Membership Benefit link as Active Link");
-        AutomationLog.info("Membership Benefit is correctly loaded");
+        AutomationLog.info("Left menu shows Members' Benefit link as Active Link");
+        AutomationLog.info("Members' Benefit is correctly loaded");
     }
 
     private void verifyHowItWorksLinkOnLeftMenu() throws Exception
@@ -146,12 +146,12 @@ public class ContentPagesLeftMenuAction extends ContentPagesVerification
     @Override
     protected String successMessage()
     {
-        return "Content Pages Left Menu tested successfully";
+        return "Links on Content Pages Left Menu tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Content Pages Left Menu Failed";
+        return "Testing Links on Content Pages Left Menu Failed";
     }
 }

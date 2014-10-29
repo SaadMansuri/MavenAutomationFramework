@@ -21,12 +21,12 @@ public class FooterLegalLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[1]/div/div[3]/ul/li[1]/a"));
-            AutomationLog.info("Terms And Conditions link found on the Footer");
+            element = driver.findElement(By.linkText("Terms and Conditions"));
+            AutomationLog.info("Terms And Conditions link found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Terms And Conditions link not found on the Footer");
+            AutomationLog.error("Terms And Conditions link not found on Footer");
             throw(e);
         }
         return element;
@@ -53,12 +53,12 @@ public class FooterLegalLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[1]/div/div[3]/ul/li[2]/a"));
-            AutomationLog.info("Privacy Policy link found on the Footer");
+            element = driver.findElement(By.linkText("Privacy Policy"));
+            AutomationLog.info("Privacy Policy link found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Privacy Policy link not found on the Footer");
+            AutomationLog.error("Privacy Policy link not found on Footer");
             throw(e);
         }
         return element;

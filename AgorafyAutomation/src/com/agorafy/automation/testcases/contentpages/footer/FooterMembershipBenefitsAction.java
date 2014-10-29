@@ -36,21 +36,21 @@ public class FooterMembershipBenefitsAction extends ContentPagesVerification
         verifyLink(membershipBenefit, expectedMembershipBenefitData);
 
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
-        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.membershipBenefitLinkText(), "Left menu does not show Membership Benefit link as Active Link");
-        AutomationLog.info("Left menu shows Membership Benefit link as Active Link");
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.membershipBenefitLinkText(), "Left menu does not show Members' Benefits link as Active Link");
+        AutomationLog.info("Left menu shows Members' Benefits link as Active Link");
 
-        AutomationLog.info("Membership Benefit is correctly loaded");
+        AutomationLog.info("Members' Benefits Page is correctly loaded");
     }
 
     @Override
     protected String successMessage()
     {
-        return " Footer Membership Benefit tested successfully";
+        return "Members' Benefits link on Footer tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Footer MembershipBenefit Action Failed";
+        return "Members' Benefits link Test Failed";
     }
 }

@@ -29,7 +29,7 @@ public class Careers extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not able to find Careers Page Heading");
+            AutomationLog.error("Careers Page Heading Not found");
             throw(e);
         }
         return element;

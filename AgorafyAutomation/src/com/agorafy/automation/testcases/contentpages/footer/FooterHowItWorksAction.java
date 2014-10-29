@@ -45,12 +45,12 @@ public class FooterHowItWorksAction extends ContentPagesVerification
     @Override
     protected String successMessage()
     {
-        return " Footer HowItWorks tested successfully";
+        return "HowItWorks link on Footer tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Footer HowItWorks Action Failed ";
+        return "HowItWorks link Test Failed ";
     }
 }

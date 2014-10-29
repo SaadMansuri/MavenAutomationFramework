@@ -31,7 +31,7 @@ public class ContentPagesLeftMenu extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("About Us Link not found on Content Pages Left Menu");
+            AutomationLog.error("About Us Link Not found on Content Pages Left Menu");
             throw(e);
         }
         return element;
@@ -68,7 +68,7 @@ public class ContentPagesLeftMenu extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("How It Works link not found on Content Pages Left Menu");
+            AutomationLog.error("How It Works link Not found on Content Pages Left Menu");
             throw(e);
         }
         return element;
@@ -101,11 +101,11 @@ public class ContentPagesLeftMenu extends Page
         try
         {
             element = driver.findElement(By.linkText("Members' Benefits"));
-            AutomationLog.info("Membership's Benefit link found on Content Pages Left Menu");
+            AutomationLog.info("Members' Benefits link found on Content Pages Left Menu");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Membership's Benefit link not found on Content Pages Left Menu");
+            AutomationLog.error("Members' Benefits link Not found on Content Pages Left Menu");
             throw(e);
         }
         return element;
@@ -123,11 +123,11 @@ public class ContentPagesLeftMenu extends Page
         {
             link_MembershipBenefit().click();
             membershipBenefit = new MembershipBenefit(driver);
-            AutomationLog.info("Membership Benefit link clicked");
+            AutomationLog.info("Members'Benefits link clicked");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Membership Benefit link could not be clicked");
+            AutomationLog.error("Members' Benefits link could not be clicked");
             throw(e);
         }
         return membershipBenefit;
@@ -142,7 +142,7 @@ public class ContentPagesLeftMenu extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Press link not found on Content Pages Left Menu");
+            AutomationLog.error("Press link Not found on Content Pages Left Menu");
             throw(e);
         }
         return element;
@@ -179,7 +179,7 @@ public class ContentPagesLeftMenu extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Team link not found on Content Pages Left Menu");
+            AutomationLog.error("Team link Not found on Content Pages Left Menu");
             throw(e);
         }
         return element;
@@ -216,7 +216,7 @@ public class ContentPagesLeftMenu extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Careers link not found on Content Pages Left Menu");
+            AutomationLog.error("Careers link Not found on Content Pages Left Menu");
             throw(e);
         }
         return element;
@@ -253,7 +253,7 @@ public class ContentPagesLeftMenu extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Feedback link not found on Content Pages Left Menu");
+            AutomationLog.error("Feedback link Not found on Content Pages Left Menu");
             throw(e);
         }
         return element;
@@ -290,7 +290,7 @@ public class ContentPagesLeftMenu extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Contact link not found on Content Pages Left Menu");
+            AutomationLog.error("Contact link Not found on Content Pages Left Menu");
             throw(e);
         }
         return element;

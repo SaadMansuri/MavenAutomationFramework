@@ -44,12 +44,12 @@ public class FooterCareersAction extends ContentPagesVerification
     @Override
     protected String successMessage()
     {
-        return " Footer Careers tested successfully";
+        return "Careers link on Footer tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Footer Careers Action Failed ";
+        return "Careers link Test Failed";
     }
 }

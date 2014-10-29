@@ -20,11 +20,11 @@ public class SearchPropertiesPage extends Page
         try
         {
             element = driver.findElement(By.xpath("html/body/div[2]/div/div/div/div[1]/h2"));
-            AutomationLog.info("Search Properties page - heading is found");
+            AutomationLog.info("Search Properties page Heading is found");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Search Properties page - heading is not found");
+            AutomationLog.error("Search Properties page Heading is not found");
             throw(e);
         }
         return element;

@@ -29,7 +29,7 @@ public class HowItWorks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not able to find How It Works Page Heading");
+            AutomationLog.error("How It Works Page Heading Not found");
             throw(e);
         }
         return element;

@@ -29,7 +29,7 @@ public class Team extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not able to find Team page Heading");
+            AutomationLog.error("Team page Heading Not found");
             throw(e);
         }
         return element;

@@ -32,7 +32,7 @@ public class AboutUs extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not able to find About Us Page Heading");
+            AutomationLog.error("About Us Page Heading Not found");
             throw(e);
         }
         return element;

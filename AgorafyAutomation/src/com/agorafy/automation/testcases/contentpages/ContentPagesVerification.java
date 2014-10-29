@@ -22,13 +22,13 @@ public abstract class ContentPagesVerification extends AutomationTestCaseVerific
         try
         {
             Assert.assertEquals(verificationPage.currentURL(), expectedData.get("url"), "Page URL is not as expected after clicking the link.");
-            AutomationLog.info("Link redirects to correct Page URL");
+            AutomationLog.info("Link redirects to Expected Page URL");
 
             Assert.assertEquals(verificationPage.currentPageTitle(), expectedData.get("title"), "Page title does not match to the expected");
-            AutomationLog.info("Page shows correct Page Title");
+            AutomationLog.info("Page shows Expected Page Title");
 
-            Assert.assertEquals(verificationPage.pageHeading(), expectedData.get("heading"), "Page is not loaded with correct Heading");
-            AutomationLog.info("Page shows correct Page Heading");
+            Assert.assertEquals(verificationPage.pageHeading(), expectedData.get("heading"), "Page is not loaded with Expected Heading");
+            AutomationLog.info("Page is loaded with Expected Heading");
         }
         catch (Exception e)
         {

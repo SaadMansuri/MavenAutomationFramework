@@ -45,12 +45,12 @@ public class FooterPressAction extends ContentPagesVerification
     @Override
     protected String successMessage()
     {
-        return " Footer Press tested successfully";
+        return "Press link on Footer tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Footer Press Action Failed ";
+        return "Press link Test Failed ";
     }
 }

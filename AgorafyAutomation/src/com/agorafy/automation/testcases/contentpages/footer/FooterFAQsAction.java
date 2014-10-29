@@ -43,12 +43,12 @@ public class FooterFAQsAction extends ContentPagesVerification
     @Override
     protected String successMessage()
     {
-        return " Footer FAQs tested successfully";
+        return "FAQs link on Footer tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Footer FAQs Action Failed ";
+        return "FAQs link Test Failed ";
     }
 }

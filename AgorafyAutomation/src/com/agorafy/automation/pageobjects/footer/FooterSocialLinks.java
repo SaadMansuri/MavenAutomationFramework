@@ -29,7 +29,7 @@ public class FooterSocialLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Twitter Logo Not found on the Footer");
+            AutomationLog.error("Twitter Logo Not found on Footer");
             throw(e);
         }
         return element;
@@ -42,11 +42,11 @@ public class FooterSocialLinks extends Page
         {
             link_TwitterLogo().click();
             agorafyTwitter = new AgorafyTwitterPage(driver);
-            AutomationLog.info("Agorafy Twitter link is clicked");
+            AutomationLog.info("Twitter IconLink is clicked");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Agorafy Twitter link could not be clicked");
+            AutomationLog.error("Twitter IconLink could not be clicked");
             throw(e);
         }
         return agorafyTwitter;
@@ -61,7 +61,7 @@ public class FooterSocialLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Facebook Logo Not found on the Footer");
+            AutomationLog.error("Facebook Logo Not found on Footer");
             throw(e);
         }
         return element;
@@ -74,11 +74,11 @@ public class FooterSocialLinks extends Page
         {
             link_FacebookLogo().click();
             agorafyFacebook = new AgorafyFacebookPage(driver);
-            AutomationLog.info("Agorafy Facebook link is clicked");
+            AutomationLog.info("Facebook IconLink is clicked");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Agorafy Facebook link could not be clicked");
+            AutomationLog.error("Facebook IconLink could not be clicked");
             throw(e);
         }
         return agorafyFacebook;
@@ -93,7 +93,7 @@ public class FooterSocialLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Youtube Logo Not found on the Footer");
+            AutomationLog.error("Youtube Logo Not found on Footer");
             throw(e);
         }
         return element;
@@ -106,11 +106,11 @@ public class FooterSocialLinks extends Page
         {
             link_YoutubeLogo().click();
             agorafyYoutube = new AgorafyYoutubePage(driver);
-            AutomationLog.info("Agorafy Youtube page link is clicked");
+            AutomationLog.info("Youtube IconLink is clicked");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Agorafy Youtube page link could not be clicked");
+            AutomationLog.error("Youtube IconLink could not be clicked");
             throw(e);
         }
         return agorafyYoutube;
@@ -125,7 +125,7 @@ public class FooterSocialLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("GooglePlus Logo Not found on the Footer");
+            AutomationLog.error("GooglePlus Logo Not found on Footer");
             throw(e);
         }
         return element;
@@ -138,11 +138,11 @@ public class FooterSocialLinks extends Page
         {
             link_GooglePlusLogo().click();
             agorafyGooglePlus = new AgorafyGooglePlusPage(driver);
-            AutomationLog.info("Agorafy Google Plus link is clicked");
+            AutomationLog.info("Google Plus IconLink is clicked");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Agorafy Google Plus link could not be clicked");
+            AutomationLog.error("Google Plus IconLink could not be clicked");
             throw(e);
         }
         return agorafyGooglePlus;
@@ -157,7 +157,7 @@ public class FooterSocialLinks extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("LinkedIn Logo Not found on the Footer");
+            AutomationLog.error("LinkedIn Logo Not found on Footer");
             throw(e);
         }
         return element;
@@ -170,11 +170,11 @@ public class FooterSocialLinks extends Page
         {
             link_LinkedInLogo().click();
             agorafyLinkedIn = new AgorafyLinkedInPage(driver);
-            AutomationLog.info("Agorafy LinkedIn link is clicked");
+            AutomationLog.info("LinkedIn IconLink is clicked");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Agorafy LinkedIn link could not be clicked");
+            AutomationLog.error("LinkedIn IconLink could not be clicked");
             throw(e);
         }
         return agorafyLinkedIn;

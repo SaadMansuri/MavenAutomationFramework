@@ -45,12 +45,12 @@ public class FooterTeamAction extends ContentPagesVerification
     @Override
     protected String successMessage()
     {
-        return " Footer Team tested successfully";
+        return "Team link on Footer tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Footer Team Action Failed ";
+        return "Team link Test Failed ";
     }
 }

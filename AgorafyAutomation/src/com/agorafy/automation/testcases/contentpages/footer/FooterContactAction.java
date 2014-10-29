@@ -39,18 +39,19 @@ public class FooterContactAction extends ContentPagesVerification
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.contactLinkText(), "Left menu does not show Contact link as Active Link");
         AutomationLog.info("Left menu shows Contact link as Active Link");
 
+        //verifyContactPage(contact);
         AutomationLog.info("Contact page is correctly loaded");
     }
 
     @Override
     protected String successMessage()
     {
-        return " Footer Contact tested successfully";
+        return "Contact link on Footer tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Footer Contact Action Failed ";
+        return "Contact link Test Failed ";
     }
 }

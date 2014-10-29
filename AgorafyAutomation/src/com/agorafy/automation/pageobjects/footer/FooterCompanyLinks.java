@@ -24,12 +24,12 @@ public class FooterCompanyLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[1]/div/div[1]/ul/li[1]/a"));
-            AutomationLog.info(" About us link found on the Footer");
+            element = driver.findElement(By.linkText("About Us"));
+            AutomationLog.info(" About Us link found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("About us link not found on the Footer");
+            AutomationLog.error("About Us link not found on Footer");
             throw(e);
         }
         return element;
@@ -56,12 +56,12 @@ public class FooterCompanyLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[1]/div/div[1]/ul/li[2]/a"));
-            AutomationLog.info("Membership's Benefit link found on the Footer");
+            element = driver.findElement(By.linkText("Members' Benefits"));
+            AutomationLog.info("Members' Benefits link found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Membership's Benefit link not found on the Footer");
+            AutomationLog.error("Members' Benefits link not found on Footer");
             throw(e);
         }
         return element;
@@ -74,11 +74,11 @@ public class FooterCompanyLinks extends Page
         {
             link_MembershipBenefit().click();
             membershipBenefit = new MembershipBenefit(driver);
-            AutomationLog.info("Membership Benefit link clicked");
+            AutomationLog.info("Members' Benefits link clicked");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Membership Benefit link could not be clicked");
+            AutomationLog.error("Members' Benefits link could not be clicked");
             throw(e);
         }
         return membershipBenefit;
@@ -88,12 +88,12 @@ public class FooterCompanyLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[1]/div/div[1]/ul/li[3]/a"));
-            AutomationLog.info("Team link found on the Footer");
+            element = driver.findElement(By.linkText("Team"));
+            AutomationLog.info("Team link found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Team link not found on the Footer");
+            AutomationLog.error("Team link not found on Footer");
             throw(e);
         }
         return element;
@@ -120,12 +120,12 @@ public class FooterCompanyLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[1]/div/div[1]/ul/li[4]/a"));
-            AutomationLog.info("Careers link found on the Footer");
+            element = driver.findElement(By.linkText("Careers"));
+            AutomationLog.info("Careers link found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Careers link not found on the Footer");
+            AutomationLog.error("Careers link not found on Footer");
             throw(e);
         }
         return element;
@@ -152,12 +152,12 @@ public class FooterCompanyLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[1]/div/div[1]/ul/li[5]/a"));
-            AutomationLog.info("Contact link found on the Footer");
+            element = driver.findElement(By.linkText("Contact"));
+            AutomationLog.info("Contact link found on Footer");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Contact link not found on the Footer");
+            AutomationLog.error("Contact link not found on Footer");
             throw(e);
         }
         return element;
