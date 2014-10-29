@@ -36,11 +36,11 @@ public class Homepage extends Page
         try
         {
              element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/a/span"));
-             AutomationLog.info("My login link found on the Home Page");
+             AutomationLog.info("Log In link found on the Home Page");
         }
         catch (Exception e)
         {
-            AutomationLog.error("My login link was not found on the Home Page");
+            AutomationLog.error("Log In link was Not found on the Home Page");
             throw(e);
         }
         return element;
@@ -57,7 +57,7 @@ public class Homepage extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Header login form does not appear");
+            AutomationLog.error("Header login form does Not appear");
             throw(e);
         }
         return element;

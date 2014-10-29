@@ -15,6 +15,11 @@ public class LoginPage extends Page
         super(driver);
     }
 
+    protected boolean isSecured()
+    {
+        return true;
+    }
+
     public Homepage doSuccessfulLogin(String username, String password) throws Exception
     {
         Homepage element = null;
@@ -41,7 +46,7 @@ public class LoginPage extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Not able to do Invalid Login");
+            AutomationLog.error("Invalid Login Failed");
             throw(e);
         }
         return element;
@@ -62,7 +67,7 @@ public class LoginPage extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Not able to Login");
+            AutomationLog.error("Login Failed");
             throw(e);
         }
     }
@@ -234,11 +239,11 @@ public class LoginPage extends Page
         {
             link_ForgotPassword().click();
             forgotpasswordlink = new ForgotPassword(driver);
-            AutomationLog.info("Successfully clicked on forgotpassword button");
+            AutomationLog.info("Forgot Password Link is clicked");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not clicked on forgotpassword button");
+            AutomationLog.error("Forgot Password Link could Not be clicked");
             throw(e);
         }
         return forgotpasswordlink;

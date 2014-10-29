@@ -5,16 +5,12 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.Page;
 
-/**
- * Verify Login was successful.
- * Verify Home Page is loaded with correct Title
- * Verify Home Page redirects to correct URL
- * Verify Home Page Greeting Text
- */
-public class HomepageAction extends LoginBaseAction
+public class LoginPositiveTestPageFormAction extends NegativeLoginBaseAction
 {
-    public HomepageAction()
+    public LoginPositiveTestPageFormAction()
     {
         super();
     }
@@ -22,6 +18,11 @@ public class HomepageAction extends LoginBaseAction
     @Override
     protected void verifyTestCases() throws Exception
     {
+        verifyUrlAndErrorMessage(loginPage);
+        HashMap<String, String> loginData =  testCaseData.get("validCredential");
+        homePage = loginPage.doSuccessfulLogin(loginData.get("username"), loginData.get("password"));
+        WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+
         HashMap<String, String> homepageData =  testCaseData.get("homepageData");
         Assert.assertEquals(homePage.currentPageTitle(), homepageData.get("homepageTitle"), "This is not the correct home page after login. Home Page title is Not as Expected");
         AutomationLog.info("Home Page title is as Expected");
@@ -38,12 +39,12 @@ public class HomepageAction extends LoginBaseAction
     @Override
     protected String successMessage()
     {
-        return "Home Page Verification After Login tested successfully";
+        return "Postive Scenario for Login from Login Page tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Home Page Verification After Login Failed";
+        return "Positive Scenario for Login from Login Page failed";
     }
 }

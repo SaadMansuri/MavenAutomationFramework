@@ -19,7 +19,17 @@ public class Page
 
     protected String applicationUrl()
     {
-        return Configuration.getConfigurationValueForProperty("applicationURL");
+        String protocol = "http://";
+        if(isSecured())
+        {
+            protocol = "https://";
+        }
+        return (protocol + Configuration.getConfigurationValueForProperty("applicationURL"));
+    }
+
+    protected boolean isSecured()
+    {
+        return false;
     }
 
     public static Header header()

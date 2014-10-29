@@ -85,12 +85,12 @@ public class LoginNegativeTestsHeaderFormAction extends NegativeLoginBaseAction
     @Override
     protected String successMessage()
     {
-        return "Negative Scenario for Header Login Action tested successfully";
+        return "Negative Scenario for Header Login tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Negative Scenario for Header Login Action Failed";
+        return "Negative Scenario for Header Login Failed";
     }
 }

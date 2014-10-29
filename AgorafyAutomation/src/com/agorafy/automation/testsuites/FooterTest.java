@@ -30,7 +30,7 @@ public class FooterTest
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-    //@Test
+    @Test
     public void testFooterAboutUs() throws Exception
     {
         try
@@ -43,7 +43,7 @@ public class FooterTest
         }
     }
 
-    //@Test
+    @Test
     public void testFooterMembershipBenefits() throws Exception
     {
         try
@@ -56,7 +56,7 @@ public class FooterTest
         }
     }
 
-    //@Test
+    @Test
     public void testFooterTeam() throws Exception
     {
         try
@@ -69,7 +69,7 @@ public class FooterTest
         }
     }
 
-    //@Test
+    @Test
     public void testFooterCareers() throws Exception
     {
         try
@@ -108,7 +108,7 @@ public class FooterTest
         }
     }
 
-    //@Test
+    @Test
     public void testFooterBlog() throws Exception
     {
         try

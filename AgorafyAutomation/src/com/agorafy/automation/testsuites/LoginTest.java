@@ -7,6 +7,7 @@ import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.testcases.HomepageAction;
 import com.agorafy.automation.testcases.LoginNegativeTestsHeaderFormAction;
 import com.agorafy.automation.testcases.LoginNegativeTestsPageFormAction;
+import com.agorafy.automation.testcases.LoginPositiveTestPageFormAction;
 
 public class LoginTest 
 {
@@ -19,7 +20,7 @@ public class LoginTest
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 3)
     public void testSignIn() throws Exception
     {
         try
@@ -32,7 +33,7 @@ public class LoginTest
         }
     }
 
-    @Test(priority = 1)
+    @Test(priority = 2)
     public void testNegativeTestsLoginPageForm() throws Exception
     {
         try
@@ -45,7 +46,7 @@ public class LoginTest
         }
     }
 
-    @Test(priority = 3)
+    @Test(priority = 4)
     public void testNegativeTestsHeaderLoginPageForm() throws Exception
     {
         try
@@ -55,6 +56,19 @@ public class LoginTest
         catch (Exception e)
         {
             throw (e);
+        }
+    }
+
+    @Test(priority = 1)
+    public void testPositiveTestLoginPageForm() throws Exception
+    {
+        try
+        {
+            new LoginPositiveTestPageFormAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
         }
     }
 }

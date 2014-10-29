@@ -24,6 +24,7 @@ public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
     @Override
     protected void verifyTestCases() throws Exception
     {
+        verifyUrlAndErrorMessage(loginPage);
         testWrongEmailRightPassword();
         testRightEmailWrongPassword();
         testWrongEmailPassword();
@@ -76,12 +77,12 @@ public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
     @Override
     protected String successMessage()
     {
-        return "Negative Scenario for Page Login Action tested successfully";
+        return "Negative Scenario for Page Login tested successfully";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "Negative Scenario for Page Login Action Failed";
+        return "Negative Scenario for Page Login Failed";
     }
 }

@@ -24,7 +24,7 @@ public class HeaderLoginForm extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("UserName text box was not found on Header Login Form");
+            AutomationLog.error("UserName text box was Not found on Header Login Form");
             throw(e);
         }
         return element;
@@ -39,7 +39,7 @@ public class HeaderLoginForm extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Password text box was not found on Header Login Form");
+            AutomationLog.error("Password text box was Not found on Header Login Form");
             throw(e);
          }
         return element;
@@ -54,7 +54,7 @@ public class HeaderLoginForm extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Submit button was not found on Header Login Form");
+            AutomationLog.error("Submit button was Not found on Header Login Form");
             throw(e);
         }
         return element;
@@ -69,7 +69,7 @@ public class HeaderLoginForm extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("checkbox for 'Stay logged in' not found");
+            AutomationLog.error("checkbox for 'Stay logged in' Not found");
             throw(e);
         }
         return element;
@@ -84,7 +84,7 @@ public class HeaderLoginForm extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Label 'Stay logged in' not found");
+            AutomationLog.error("Label 'Stay logged in' Not found");
         }
         return element;
     }
@@ -99,7 +99,7 @@ public class HeaderLoginForm extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("There was an error in entering details in header login form");
+            AutomationLog.error("There was an error in entering credentials in the header login form");
             throw(e);
         }
         return element;

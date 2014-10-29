@@ -59,4 +59,9 @@ public class Configuration
     {
         return Configuration.globalConfiguration().readConfigurationProperty(propertyName);
     }
+
+    public static String applicationUnderTestURL()
+    {
+    	return "http://" + Configuration.getConfigurationValueForProperty("applicationURL");
+    }
 }
