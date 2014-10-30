@@ -59,7 +59,8 @@ public class SignUpNegativeAction extends AutomationTestCaseVerification
         Assert.assertEquals(signUp.currentURL(), signUp.registerPageUrl(),"Sign Up link did not navigate to correct page URL");
         AutomationLog.info("Sign Up link navigates to Sign Up page URL");
 
-        Assert.assertEquals(signUp.currentPageTitle(), testCaseData.get("SignUp").get("title"), "Sign Up Page does not show correct Page Title");
+        HashMap<String, String> signUpData = testCaseData.get("SignUp");
+        Assert.assertEquals(signUp.currentPageTitle(), signUpData.get("title"), "Sign Up Page does not show correct Page Title");
         AutomationLog.info("Sign Up Page shows correct Page Title");
     }
 

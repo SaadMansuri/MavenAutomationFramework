@@ -47,7 +47,7 @@ public class AccountSettingsTest
         }
     }
 
-    //@Test
+    @Test
     public void testChangePasswordPositiveTestcases() throws Exception
     {
         try

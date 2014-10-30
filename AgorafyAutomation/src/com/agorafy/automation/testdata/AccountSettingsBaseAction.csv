@@ -15,4 +15,6 @@ NewAndRetypeNewPasswordIsLessThenEightChar,validOldPassword="cuelogic77";invalid
 NewpasswordAndRetypeNewpasswordAreNotSame,validOldPassword="cuelogic77";invalidNewPassword="anjan1";invalidRetypeNewPassword="anjan2";errorMsg1="* Minimum 8 characters required";errorMsg2="* Fields do not match";errorMsg3="* Fields do not match"
 
 # Change Password Positive Scenario
-AllTheValidFieldsAreEntered,ValidOldPassword="cuelogic77";ValidNewPassword="cuelogic";ValidRetypeNewPassword="cuelogic";validMsg="Your password has been changed."
+ChangePassword,ValidOldPassword="cuelogic77";ValidNewPassword="cuelogic";ValidRetypeNewPassword="cuelogic";
+ChangePasswordAgain,ValidOldPassword="cuelogic";ValidNewPassword="cuelogic77";ValidRetypeNewPassword="cuelogic77";
+SuccessMessage,validMsg="Your password has been changed.";

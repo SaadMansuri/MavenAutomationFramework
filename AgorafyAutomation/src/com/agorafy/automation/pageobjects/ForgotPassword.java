@@ -77,7 +77,7 @@ public class ForgotPassword extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='forgot_confirm_error']/h5"));
+            element=driver.findElement(validEmailNotRegistered());
         }
         catch(Exception e)
         {
@@ -101,21 +101,6 @@ public class ForgotPassword extends Page
         return validEmailNotReg;
      }
 
-    public WebElement messageEnterValidRegisteredMail() throws Exception
-    {
-        try
-        {
-            element=driver.findElement(By.xpath(".//*[@id='forgot_confirm']/h5"));
-            AutomationLog.info("Appropriate error message shown");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Error message not shown");
-            throw(e);
-        }
-           return element;
-    }
-
     public ForgotPassword clickOnRequestNewPassword() throws Exception
     {
         ForgotPassword forgotpassword = null;
@@ -127,7 +112,7 @@ public class ForgotPassword extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not clicked on RequestNewPassword button ");
+            AutomationLog.error("Could not click on RequestNewPassword button ");
             throw(e);
         }
         return forgotpassword;
@@ -147,5 +132,10 @@ public class ForgotPassword extends Page
             AutomationLog.info("Successfully populated email address details");
             throw(e);
         }
+    }
+
+    public By validEmailNotRegistered()
+    {
+        return By.xpath(".//*[@id='forgot_confirm_error']/h5");
     }
 }

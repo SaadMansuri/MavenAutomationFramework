@@ -26,9 +26,7 @@ public class ForgotPasswordAction extends AutomationTestCaseVerification
     private Homepage homePage;
     private LoginPage loginPage;
     private HeaderLoginForm headerlogin;
-    ForgotPassword forgotPassword = null;
-    private HashMap<String, String> invalidEmailData = null;
-    private HashMap<String, String> validEmailData = null;
+    private ForgotPassword forgotPassword = null;
 
     public ForgotPasswordAction()
     {
@@ -54,46 +52,48 @@ public class ForgotPasswordAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception
     {
-        verifyIfTheUserEnteredEmptyEmailAddress(forgotPassword);
-        verifyIfTheUserEnteredInvalidEmailAddress(forgotPassword);
-        verifyIfTheUserEnteredValidEmailAddress(forgotPassword);
+        HashMap<String, String> expectedEmailData = testCaseData.get("EmptyEmail");
+        verifyIfTheUserEnteredEmptyEmailAddress(forgotPassword,expectedEmailData);
+
+        expectedEmailData = testCaseData.get("InvalidEmail");
+        verifyIfTheUserEnteredInvalidEmailAddress(forgotPassword,expectedEmailData);
+
+        expectedEmailData = testCaseData.get("UnRegisteredValidEmail");
+        verifyIfTheUserEnteredValidEmailAddress(forgotPassword, expectedEmailData);
     }
 
-    public void verifyIfTheUserEnteredEmptyEmailAddress(ForgotPassword forgotpassword) throws Exception
+    private ForgotPassword populateEmailFieldAndRequestNewPassword(HashMap<String, String> expectedEmailData) throws Exception
     {
         EmailData forgotpassworddata = new EmailData();
-        invalidEmailData = testCaseData.get("UserEnteredWrongEmailAddress");
-        forgotpassworddata.setEmailAddress("");
-        forgotpassword = forgotpassword.clickOnRequestNewPassword();
+        forgotpassworddata.setEmailAddress(expectedEmailData.get("email"));
+        forgotPassword.populateForgotPasswordData(forgotpassworddata);
+        forgotPassword = forgotPassword.clickOnRequestNewPassword();
+        return forgotPassword;
+    }
 
-        String emptyEmailAddress = forgotpassword.getErrorMessageOfInvalidEmail();
-        Assert.assertEquals(emptyEmailAddress, invalidEmailData.get("emptyEmailErrorMsg"), "Expected error message for empty email is not displayed in Forgot Password page");
+    public void verifyIfTheUserEnteredEmptyEmailAddress(ForgotPassword forgotPassword, HashMap<String, String> expectedEmailData) throws Exception
+    {
+        forgotPassword = populateEmailFieldAndRequestNewPassword(expectedEmailData);
+        String emptyEmailAddress = forgotPassword.getErrorMessageOfInvalidEmail();
+        Assert.assertEquals(emptyEmailAddress, expectedEmailData.get("emptyEmailErrorMsg"), "Expected error message for empty email is not displayed in Forgot Password page");
         AutomationLog.info("Expected error message for empty email is displayed in Forgot Password page");
     }
 
-    public void verifyIfTheUserEnteredInvalidEmailAddress(ForgotPassword forgotpassword) throws Exception
+    public void verifyIfTheUserEnteredInvalidEmailAddress(ForgotPassword forgotpassword, HashMap<String, String> expectedEmailData) throws Exception
     {
-        EmailData forgotpassworddata = new EmailData();
-        forgotpassworddata.setEmailAddress(invalidEmailData.get("invalidEmail"));
-        forgotpassword.populateForgotPasswordData(forgotpassworddata);
-        forgotpassword = forgotpassword.clickOnRequestNewPassword();
-
+        forgotpassword = populateEmailFieldAndRequestNewPassword(expectedEmailData);
         String invalidEmailAddress = forgotpassword.getErrorMessageOfInvalidEmail();
-        Assert.assertEquals(invalidEmailAddress, invalidEmailData.get("invalidEmailErrorMsg"), "Expected error message for invalid email is not displayed in Forgot Password page");
+        Assert.assertEquals(invalidEmailAddress, expectedEmailData.get("invalidEmailErrorMsg"), "Expected error message for invalid email is not displayed in Forgot Password page");
         AutomationLog.info("Expected error message for invalid email is not displayed in Forgot Password page");
     }
 
-    public void verifyIfTheUserEnteredValidEmailAddress(ForgotPassword forgotpassword) throws Exception
+    public void verifyIfTheUserEnteredValidEmailAddress(ForgotPassword forgotpassword, HashMap<String, String> expectedEmailData) throws Exception
     {
-        EmailData forgotpassworddata = new EmailData();
-        validEmailData = testCaseData.get("UserEnteredValidEmailAddress");
-        forgotpassworddata.setEmailAddress(validEmailData.get("validEmail"));
-        forgotpassword.populateForgotPasswordData(forgotpassworddata);
-        forgotpassword = forgotpassword.clickOnRequestNewPassword();
-        WaitFor.waitForPageToLoad(Page.driver);
+        forgotpassword = populateEmailFieldAndRequestNewPassword(expectedEmailData);
+        WaitFor.waitForPageToLoad(Page.driver, expectedEmailData.get("validMailNotReg"), forgotpassword.validEmailNotRegistered());
 
         String validEmailAddress = forgotpassword.getMessageOfValidEmailNotReg();
-        Assert.assertEquals(validEmailAddress, validEmailData.get("validMailNotReg"),"Expected error message for valid email is not displayed in Forgot Password page");
+        Assert.assertEquals(validEmailAddress, expectedEmailData.get("validMailNotReg"),"Expected error message for valid email is not displayed in Forgot Password page");
         AutomationLog.info("Expected error message for valid email is displayed in Forgot Password page");
     }
 

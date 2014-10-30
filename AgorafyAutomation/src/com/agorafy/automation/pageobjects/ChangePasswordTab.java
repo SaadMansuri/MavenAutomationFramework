@@ -3,6 +3,7 @@ package com.agorafy.automation.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.datamodel.profile.ChangePasswordData;
 
@@ -163,9 +164,23 @@ public class ChangePasswordTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Success message for change password not shown");
             throw(e);
         }
         return element;
     }
+
+    public String getSuccessMessageOfChangePasswordTab() throws Exception
+    {
+        String successMessage = "";
+        try
+        {
+            successMessage = passwordChangedSuccessfully().getText();
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("error message for name is not shown");
+            throw(e);
+        }
+        return successMessage;
+     }
 }

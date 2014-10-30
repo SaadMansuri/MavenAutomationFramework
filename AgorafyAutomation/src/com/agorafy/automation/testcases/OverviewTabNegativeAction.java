@@ -162,7 +162,7 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
 
         String emptyCompanyName = overviewTab.getTextBoxCompanyName();
-        Assert.assertEquals(emptyCompanyName, "" , " No error message when company is empty in Overview Tab");
+        Assert.assertEquals(emptyCompanyName, "" , " No error message is displayed when company field is left empty in Overview Tab");
         AutomationLog.info("Company name do not show any error message when left empty in Overview Tab");
     }
 
@@ -172,9 +172,9 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         overviewTab.setCompanyName(invalidTestData.get("alphanumeric"));
         overviewTab = overviewTab.saveOverviewDetails();
 
-        String emptyCompanyName = overviewTab.getTextBoxCompanyName();
-        Assert.assertEquals(emptyCompanyName, invalidTestData.get("alphanumeric") , "Expected error message for invalid company name is not displayed in Overview Tab");
-        AutomationLog.info("Expected error message for invalid company name is displayed in Overview Tab");
+        String companyName = overviewTab.getTextBoxCompanyName();
+        Assert.assertEquals(companyName, invalidTestData.get("alphanumeric") , "Error message is displayed when company name with alphanumeric characters is entered in Overview Tab");
+        AutomationLog.info("Company name does not show any error message when alphanumeric character is entered in Overview Tab");
     }
 
     public void verifyIfInvalidWorkPhoneIsEntered(OverviewTab overviewTab) throws Exception

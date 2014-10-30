@@ -18,7 +18,6 @@ import com.agorafy.automation.pageobjects.ChangePasswordTab;
 public class ChangePasswordPositiveAction extends AccountSettingsBaseAction
 {
     private ChangePasswordTab changePasswordTab = null;
-    HashMap<String, String> validTestData = null;
 
     public ChangePasswordPositiveAction()
     {
@@ -28,28 +27,31 @@ public class ChangePasswordPositiveAction extends AccountSettingsBaseAction
     @Override
     protected void verifyTestCases() throws Exception
     {
-    	changePasswordTab = accountSettings.clickOnChangePasswordTab();
-        verifyIfAllTheValidFieldsAreEntered(changePasswordTab);
+        changePasswordTab = accountSettings.clickOnChangePasswordTab();
+        HashMap<String, String> validTestData = testCaseData.get("ChangePassword");;
+        changePasswordWithValidCredentials(validTestData);
+        verifyIfPasswordChanged();
+        validTestData = testCaseData.get("ChangePasswordAgain");
+        changePasswordWithValidCredentials(validTestData);
+        verifyIfPasswordChanged();
     }
 
-    public void verifyIfAllTheValidFieldsAreEntered(ChangePasswordTab changePasswordTab) throws Exception
+    private void verifyIfPasswordChanged() throws Exception
+    {
+        HashMap<String, String> messagedata = testCaseData.get("SuccessMessage");
+        String verifySuccesfullPasswordMessage = changePasswordTab.getSuccessMessageOfChangePasswordTab();
+        Assert.assertEquals(verifySuccesfullPasswordMessage, messagedata.get("validMsg"), "Expected success message for ChangePasswordTab not found");
+        AutomationLog.info("Expected success message for ChangePasswordTab found");
+    }
+
+    private void changePasswordWithValidCredentials(HashMap<String, String> validTestData) throws Exception
     {
         ChangePasswordData changepassworddata = new ChangePasswordData();
-
-        validTestData = testCaseData.get("AllTheValidFieldsAreEntered");
-
         changepassworddata.setOldPassword(validTestData.get("ValidOldPassword"));
-
         changepassworddata.setNewPassword(validTestData.get("ValidNewPassword"));
-
         changepassworddata.setRetypeNewPassword(validTestData.get("ValidRetypeNewPassword"));
-
         changePasswordTab.populateChangePasswordData(changepassworddata);
-
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
-        String verifySuccesfullPasswordMessage = changePasswordTab.passwordChangedSuccessfully().getText();
-        Assert.assertEquals(verifySuccesfullPasswordMessage, validTestData.get("validMsg"), "Appropriate message for change password is Not displayed");
-        AutomationLog.info("Appropriate message for change password is displayed");
     }
 
     @Override
