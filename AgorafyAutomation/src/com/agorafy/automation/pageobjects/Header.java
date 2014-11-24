@@ -202,4 +202,65 @@ public class Header extends Page
         }
         return greeting;
     }
+    
+    public WebElement dropbox_searchInputBox() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("advancedSearch"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Search Input dropbox is not present");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public SignUp clickOndropbox_searchInputBox() throws Exception
+    {
+    	SignUp signup = null;
+        try
+        {
+        	dropbox_searchInputBox().click();
+        	signup = new SignUp(driver);
+            AutomationLog.info("Successfully clicked on dropbox_searchInputBox");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on dropbox_searchInputBox ");
+            throw(e);
+        }
+        return signup;
+    }
+    
+    public WebElement advancedSearchFormId() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("advancedSearchForm"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Search advancedSearchForm is not present");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public boolean verifyAdvancedSearchFormVisibity() throws Exception
+    {
+    	boolean Heading;
+        try
+        {
+        	Heading=advancedSearchFormId().isDisplayed();
+            AutomationLog.info("visbility of Advanced Search Form");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Heading of LoginPage not found");
+            throw(e);
+        }
+        return Heading;
+     }
 }
