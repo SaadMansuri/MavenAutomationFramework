@@ -118,7 +118,7 @@ public class ForgotPassword extends Page
         return forgotpassword;
     }
 
-    public void populateForgotPasswordData(EmailData forgotpassworddata) throws Exception
+    public WebElement populateForgotPasswordData(EmailData forgotpassworddata) throws Exception
     {
         WebElement emailField;
         try
@@ -132,7 +132,40 @@ public class ForgotPassword extends Page
             AutomationLog.info("Successfully populated email address details");
             throw(e);
         }
-    }
+        return element;
+    } 
+      public WebElement BackToLoginLink() throws Exception
+        {
+            try
+            {
+                element=driver.findElement(By.id("showLogin"));
+                AutomationLog.info("Found the BackToLoginLink on the ForgotPasswordPage");
+            }
+            catch(Exception e)
+            {
+                AutomationLog.error("Could not found the BackToLoginLink");
+                throw(e);
+            }
+                return element;
+        }
+    
+      public LoginPage clickOnBackToLoginLink() throws Exception
+      {
+          LoginPage forgotpassword = null;
+          try
+          {
+              BackToLoginLink().click();
+              forgotpassword = new LoginPage(driver);
+              AutomationLog.info("Successfully clicked and Redirected To Landing Page");
+          }
+          catch(Exception e)
+          {
+              AutomationLog.error("Could not click on BackToLoginLink");
+              throw(e);
+          }
+          return forgotpassword;
+      }
+     
 
     public By validEmailNotRegistered()
     {

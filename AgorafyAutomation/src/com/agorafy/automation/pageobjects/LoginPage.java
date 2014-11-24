@@ -249,6 +249,34 @@ public class LoginPage extends Page
         return forgotpasswordlink;
      }
 
+    public String LoginPageHeading_BackToLoginLink() throws Exception
+    {
+        String PageHeader="";
+        try
+        {
+            PageHeader =driver.findElement(By.xpath("//*[@id='page-title']")).getText();
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("LoginPageHeading_BackToLoginLink PageHeading not found in login page");
+            throw(e);
+        }
+        return PageHeader;
+    }
+    public WebElement LoginPageFormId_BackToLoginLink() throws Exception
+    {
+        try
+        {
+        	element =driver.findElement(By.id("login_form"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("LoginPageFormId not found in login page");
+            throw(e);
+        }
+        return element;
+    }
+
     public String getPageUrl()
     {
         return (applicationUrl()+"/login");
