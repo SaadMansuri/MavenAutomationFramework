@@ -60,6 +60,9 @@ public class ForgotPasswordAction extends AutomationTestCaseVerification
 
         expectedEmailData = testCaseData.get("UnRegisteredValidEmail");
         verifyIfTheUserEnteredValidEmailAddress(forgotPassword, expectedEmailData);
+
+        verifyBackToLoginLinkInForgotPasswordPage();
+
     }
 
     private ForgotPassword populateEmailFieldAndRequestNewPassword(HashMap<String, String> expectedEmailData) throws Exception
@@ -84,7 +87,7 @@ public class ForgotPasswordAction extends AutomationTestCaseVerification
         forgotpassword = populateEmailFieldAndRequestNewPassword(expectedEmailData);
         String invalidEmailAddress = forgotpassword.getErrorMessageOfInvalidEmail();
         Assert.assertEquals(invalidEmailAddress, expectedEmailData.get("invalidEmailErrorMsg"), "Expected error message for invalid email is not displayed in Forgot Password page");
-        AutomationLog.info("Expected error message for invalid email is not displayed in Forgot Password page");
+        AutomationLog.info("Expected error message for invalid email is not displayed in Forgot Password page");   
     }
 
     public void verifyIfTheUserEnteredValidEmailAddress(ForgotPassword forgotpassword, HashMap<String, String> expectedEmailData) throws Exception
@@ -95,6 +98,19 @@ public class ForgotPasswordAction extends AutomationTestCaseVerification
         String validEmailAddress = forgotpassword.getMessageOfValidEmailNotReg();
         Assert.assertEquals(validEmailAddress, expectedEmailData.get("validMailNotReg"),"Expected error message for valid email is not displayed in Forgot Password page");
         AutomationLog.info("Expected error message for valid email is displayed in Forgot Password page");
+    }
+    
+    public void verifyBackToLoginLinkInForgotPasswordPage() throws Exception
+    {
+    	LoginPage BackToLogin = forgotPassword.clickOnBackToLoginLink();
+        Assert.assertEquals(BackToLogin.currentURL(),"https://www.agorafy.com/login","The CurrentURL is not been not found");
+        AutomationLog.info("The CurrentURL is been found");
+
+        Assert.assertEquals(loginPage.LoginPageFormId_BackToLoginLink().isDisplayed(),true, "After cliking BackToLoginLink, Agorafy forgotpassword page not found the form id");
+        AutomationLog.info("After cliking BackToLoginLink, Agorafy forgotpassword page found the form id");
+
+        Assert.assertEquals(loginPage.LoginPageHeading_BackToLoginLink(),"Log in", "After clicking BackToLoginLink ,Agorafy Password Page does not show correct page title");
+        AutomationLog.info("After clicking BackToLoginLink ,Agorafy Password Page shows correct page Title");
     }
 
     @Override
