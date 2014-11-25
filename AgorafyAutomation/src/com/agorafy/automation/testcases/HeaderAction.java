@@ -9,12 +9,10 @@ import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.LoginPopUp;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.SignUp;
 
 public class HeaderAction extends AutomationTestCaseVerification 
 {
 	private Header header;
-	private SignUp signup;
     private LoginPopUp loginpopup;
 
 	public HeaderAction()
@@ -29,7 +27,7 @@ public class HeaderAction extends AutomationTestCaseVerification
 	        try
 	        {
 	            header = Homepage.header();
-	            signup = header.clickOnSignUpUpLink();
+	            header.clickOnSignUpUpLink();
 	       
 	        }
 	        catch(Exception e)
