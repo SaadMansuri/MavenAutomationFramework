@@ -29,8 +29,6 @@ public class HeaderAction extends AutomationTestCaseVerification
 	        try
 	        {
 	            header = Homepage.header();
-	            loginpopup=header.clickOnSubmitListingLink();
-                Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	            signup = header.clickOnSignUpUpLink();
 	       
 	        }
@@ -41,22 +39,23 @@ public class HeaderAction extends AutomationTestCaseVerification
 	    }
 
 	@Override
-	protected void verifyTestCases() throws Exception {
-		verifyIfLoginPopUpIsDisplayed();
-		verifyIFAdvancedSearchFormPresent(header);
-		
-	}
+    protected void verifyTestCases() throws Exception
+    {
+        verifyIFAdvancedSearchFormPresent(header);
+        verifyIfLoginPopUpIsDisplayed();
+    }
 
 	public void verifyIfLoginPopUpIsDisplayed() throws Exception
     {
+        loginpopup=header.clickOnSubmitListingLink();
+        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(header.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
         AutomationLog.info("Clicking on submit listing link in header displays Login popup ");
     }
 
-	
     public void verifyIFAdvancedSearchFormPresent(Header header) throws Exception
     {
-    	header.clickOndropbox_searchInputBox();
+        header.clickOndropbox_searchInputBox();
         Assert.assertEquals(header.verifyAdvancedSearchFormVisibity(), true, "Expected error message when the Advanced Search Form is not Visible");
         AutomationLog.info("Advanced Search Form is Visible");
     }
