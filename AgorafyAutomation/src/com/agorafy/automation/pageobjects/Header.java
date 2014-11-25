@@ -79,6 +79,38 @@ public class Header extends Page
         return element;
     }
 
+    public LoginPopUp clickOnSubmitListingLink() throws Exception
+    {
+        LoginPopUp loginpopup=null;
+        try
+        {
+            link_SubmitListing().click();
+            loginpopup=new LoginPopUp(driver);
+            AutomationLog.info("Successfully clicked on submit listing link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not click on submit listing link");
+            throw(e);
+        }
+        return loginpopup;
+    }
+    
+    public boolean loginPopUpIsDisplayed(LoginPopUp loginpopup) throws Exception
+    {
+        try
+        {
+            loginpopup.popUp_Login().isDisplayed();
+            AutomationLog.info("login pop up is displayed");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Login pop up is not displayed");
+            throw(e);
+        }
+        return true;
+    }
+
     //Links below are seen when user is logged in
 
     public WebElement link_ProfileNameOnDashboardAfterLogin() throws Exception

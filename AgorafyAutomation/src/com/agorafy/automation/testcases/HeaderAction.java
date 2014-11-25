@@ -1,21 +1,21 @@
 package com.agorafy.automation.testcases;
 
-import java.util.HashMap;
 
+import java.util.concurrent.TimeUnit;
 import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
-import com.agorafy.automation.datamodel.profile.EmailData;
-import com.agorafy.automation.pageobjects.ForgotPassword;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
+import com.agorafy.automation.pageobjects.LoginPopUp;
+import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SignUp;
 
 public class HeaderAction extends AutomationTestCaseVerification 
 {
 	private Header header;
 	private SignUp signup;
+    private LoginPopUp loginpopup;
 
 	public HeaderAction()
     {
@@ -29,6 +29,8 @@ public class HeaderAction extends AutomationTestCaseVerification
 	        try
 	        {
 	            header = Homepage.header();
+	            loginpopup=header.clickOnSubmitListingLink();
+                Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	            signup = header.clickOnSignUpUpLink();
 	       
 	        }
@@ -40,9 +42,17 @@ public class HeaderAction extends AutomationTestCaseVerification
 
 	@Override
 	protected void verifyTestCases() throws Exception {
+		verifyIfLoginPopUpIsDisplayed();
 		verifyIFAdvancedSearchFormPresent(header);
 		
 	}
+
+	public void verifyIfLoginPopUpIsDisplayed() throws Exception
+    {
+        Assert.assertEquals(header.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
+        AutomationLog.info("Clicking on submit listing link in header displays Login popup ");
+    }
+
 	
     public void verifyIFAdvancedSearchFormPresent(Header header) throws Exception
     {

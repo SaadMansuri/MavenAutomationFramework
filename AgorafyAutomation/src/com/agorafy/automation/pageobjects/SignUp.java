@@ -52,7 +52,38 @@ public class SignUp extends Page
         }
         return element;
     }
+    
+    public WebElement link_Login() throws Exception
+    {
+        try
+        {
+            element=driver.findElement(By.xpath(".//*[@id='description']/p/a"));
+            AutomationLog.info("login link found on Signup page");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("login link not found on signup page");
+            throw(e);
+        }
+        return element;
+    }
 
+    public LoginPopUp clickOnLoginLink() throws Exception
+    {
+        LoginPopUp loginpopup=null;
+        try
+        {
+            link_Login().click();
+            loginpopup=new LoginPopUp(driver);
+            AutomationLog.info("Successfully clicked on login link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not clicked on login link");
+            throw(e);
+        }
+        return loginpopup;
+    }
     public String getErrorMessageOfInvalidEmail() throws Exception
     {
         String invalidEmail = "";
