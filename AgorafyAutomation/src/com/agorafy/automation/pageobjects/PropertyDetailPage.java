@@ -6,21 +6,21 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 
-public class PropertyDetailPage extends Page {
-
-	private WebElement element = null;
-	
-	public PropertyDetailPage(WebDriver driver) {
-		super(driver);
-	}
-	
-	public PropertyDetailPage() {
-		super(driver);
-	}
-	
-	public PropertyDetailPage redirectedToPropertyPage() throws Exception
+public class PropertyDetailPage extends Page 
+{
+    private WebElement element = null;
+    
+    public PropertyDetailPage(WebDriver driver) {
+        super(driver);
+    }
+    
+    public PropertyDetailPage() {
+        super(driver);
+    }
+    
+    public PropertyDetailPage redirectedToPropertyPage() throws Exception
     {
-		 PropertyDetailPage propertydetail= null;
+        PropertyDetailPage propertydetail= null;
         try
         {
             driver.get("http://www.agorafy.com/property/826093/11-Madison-Avenue-Madison-Square-New-York");
@@ -34,7 +34,7 @@ public class PropertyDetailPage extends Page {
         }
         return propertydetail;
     }
-	
+    
     public WebElement PropertyRecordSignUpLink_element() throws Exception
     {
         try 
@@ -56,7 +56,7 @@ public class PropertyDetailPage extends Page {
         PropertyDetailPage propertydetail = null;
         try
         {
-        	PropertyRecordSignUpLink_element().click();
+            PropertyRecordSignUpLink_element().click();
             propertydetail = new PropertyDetailPage(driver);
             AutomationLog.info("Clicked on signup button");
         }
@@ -72,7 +72,7 @@ public class PropertyDetailPage extends Page {
     {
         try 
         {
-        	element = driver.findElement(By.xpath("//form[@class='upsellLoginForm']"));
+            element = driver.findElement(By.xpath("//form[@class='upsellLoginForm']"));
             AutomationLog.info("Getting Id Of Login popup ");
             }
         catch (Exception e)
@@ -85,10 +85,10 @@ public class PropertyDetailPage extends Page {
     
     public boolean CheckingLogInPopOnPropertyPage() throws Exception
     {
-    	boolean bool;
+        boolean bool;
         try
         {
-        	bool=getIdOfLoginPop_element().isDisplayed();
+            bool=getIdOfLoginPop_element().isDisplayed();
             AutomationLog.info("Login pop up is displaying on Property Page");
         }
         catch(Exception e)
@@ -103,7 +103,7 @@ public class PropertyDetailPage extends Page {
     {
         try 
         {
-        	element = driver.findElement(By.xpath("//span[@class='ui-dialog-title']"));
+            element = driver.findElement(By.xpath("//span[@class='ui-dialog-title']"));
             AutomationLog.info("Login popup Title webelement in the Property Detail");
             }
         catch (Exception e)
@@ -114,13 +114,13 @@ public class PropertyDetailPage extends Page {
 
         return element;
     }
-	
+    
     public String getTitleOfLogInPopUp() throws Exception
     {
         String Titlename;
         try
         {
-        	Titlename=logInPopTextTitle_element().getText();
+            Titlename=logInPopTextTitle_element().getText();
             AutomationLog.info("Getting title text of Login popup");
         }
         catch(Exception e)
@@ -130,13 +130,12 @@ public class PropertyDetailPage extends Page {
         }
         return Titlename;
      }
-	
+    
     public WebElement emailTextBox_element() throws Exception
     {
         try 
         {
-        	//element = driver.findElement(By.name("_username"));
-        	element = driver.findElement(By.xpath("//div[@class='form-group']/input[@value='']"));
+            element = driver.findElement(By.xpath("//div[@class='form-group']/input[@value='']"));
             AutomationLog.info("Email locator is done");
             }
         catch (Exception e)
@@ -152,8 +151,7 @@ public class PropertyDetailPage extends Page {
     {
         try 
         {
-        	//element = driver.findElement(By.name("_password"));
-        	element = driver.findElement(By.xpath("//div[@class='form-group']/input[@placeholder='Enter Password']"));
+            element = driver.findElement(By.xpath("//div[@class='form-group']/input[@placeholder='Enter Password']"));
             AutomationLog.info("Password locator is done");
             }
         catch (Exception e)
@@ -169,7 +167,7 @@ public class PropertyDetailPage extends Page {
     {
         try 
         {
-        	element = driver.findElement(By.xpath("//input[@value='Log in to my account']"));
+            element = driver.findElement(By.xpath("//input[@value='Log in to my account']"));
             AutomationLog.info("Password text is entered in texbox successully");
             }
         catch (Exception e)
@@ -186,7 +184,7 @@ public class PropertyDetailPage extends Page {
         PropertyDetailPage propertydetail = null;
         try
         {
-        	emailTextBox_element().sendKeys(email);
+            emailTextBox_element().sendKeys(email);
             propertydetail = new PropertyDetailPage(driver);
             AutomationLog.info("Email id is entered in textbox successfully");
             passwordTextBox_element().sendKeys(Password);
@@ -200,5 +198,99 @@ public class PropertyDetailPage extends Page {
         }
             return propertydetail;
     }
-
+    
+    public WebElement propertyRecordSection_element() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.xpath("//div[@class='property-record-col row']"));
+            AutomationLog.info("Property Record Section is found");
+            }
+        catch (Exception e)
+        {
+            AutomationLog.error("Property Record Section is not found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public boolean CheckingPropertyRecordSection() throws Exception
+    {
+        boolean bool;
+        try
+        {
+            bool=propertyRecordSection_element().isDisplayed();
+            AutomationLog.info("Property Record Section is displaying on Property Page");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Property Record Section is not displaying on Property Page");
+            throw(e);
+        }
+        return bool;
+     }
+    
+    public WebElement signInToContactInformation_element() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.xpath("//a[@data-ga-label='ViewContactInformation']"));
+            AutomationLog.info("Sign in to contact information is found");
+            }
+        catch (Exception e)
+        {
+            AutomationLog.error("Sign in to contact information is not found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public PropertyDetailPage clickOnSignInToContactInformation() throws Exception
+    {
+        PropertyDetailPage propertydetail = null;
+        try
+        {
+            signInToContactInformation_element().click();
+            propertydetail = new PropertyDetailPage(driver);
+            AutomationLog.info("Clicked on Sign in to contact information");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Not clicked on Sign in to contact information");
+            throw(e);
+        }
+            return propertydetail;
+    }
+    
+    public WebElement userNameElementAfterLogIn_element() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.cssSelector(".profile-name"));
+            
+            AutomationLog.info("User Name element is found Successfully");
+            }
+        catch (Exception e)
+        {
+            AutomationLog.error("User Name element is found Successfully is not found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public String getTheUserNameAfterLogIn() throws Exception
+    {
+        String username;
+        try
+        {
+            username=userNameElementAfterLogIn_element().getText();
+            AutomationLog.info("Getting User Name Successfully");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Getting User Name Failed");
+            throw(e);
+        }
+        return username;
+     }
 }

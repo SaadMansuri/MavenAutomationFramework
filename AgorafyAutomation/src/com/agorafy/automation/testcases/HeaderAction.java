@@ -12,38 +12,38 @@ import com.agorafy.automation.pageobjects.Page;
 
 public class HeaderAction extends AutomationTestCaseVerification 
 {
-	private Header header;
+    private Header header;
     private LoginPopUp loginpopup;
 
-	public HeaderAction()
+    public HeaderAction()
     {
         super();
     }
 
-	    @Override
-	    public void setup()
-	    {
-	        super.setup();
-	        try
-	        {
-	            header = Homepage.header();
-	            header.clickOnSignUpUpLink();
-	       
-	        }
-	        catch(Exception e)
-	        {
-	            AutomationLog.error("Could not navigate to Sign Up Page");
-	        }
-	    }
+        @Override
+        public void setup()
+        {
+            super.setup();
+            try
+            {
+                header = Homepage.header();
+                header.clickOnSignUpUpLink();
+           
+            }
+            catch(Exception e)
+            {
+                AutomationLog.error("Could not navigate to Sign Up Page");
+            }
+        }
 
-	@Override
+    @Override
     protected void verifyTestCases() throws Exception
     {
         verifyIFAdvancedSearchFormPresent(header);
         verifyIfLoginPopUpIsDisplayed();
     }
 
-	public void verifyIfLoginPopUpIsDisplayed() throws Exception
+    public void verifyIfLoginPopUpIsDisplayed() throws Exception
     {
         loginpopup=header.clickOnSubmitListingLink();
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -58,14 +58,13 @@ public class HeaderAction extends AutomationTestCaseVerification
         AutomationLog.info("Advanced Search Form is Visible");
     }
 
-	@Override
-	protected String successMessage() {
-		return "Test cases passed for Header ";
-	}
+    @Override
+    protected String successMessage() {
+        return "Test cases passed for Header ";
+    }
 
-	@Override
-	protected String failureMessage() {
-		return "Test cases failed for Header";
-	}
-
+    @Override
+    protected String failureMessage() {
+        return "Test cases failed for Header";
+    }
 }

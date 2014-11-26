@@ -167,8 +167,8 @@ public class Header extends Page
         }
         catch (Exception e)
         {
-        	AutomationLog.error("Not able to open drop down for active profile link");
-        	throw(e);
+            AutomationLog.error("Not able to open drop down for active profile link");
+            throw(e);
         }
     }
 
@@ -251,11 +251,11 @@ public class Header extends Page
     
     public SignUp clickOndropbox_searchInputBox() throws Exception
     {
-    	SignUp signup = null;
+        SignUp signup = null;
         try
         {
-        	dropbox_searchInputBox().click();
-        	signup = new SignUp(driver);
+            dropbox_searchInputBox().click();
+            signup = new SignUp(driver);
             AutomationLog.info("Successfully clicked on dropbox_searchInputBox");
         }
         catch(Exception e)
@@ -282,11 +282,11 @@ public class Header extends Page
     
     public boolean verifyAdvancedSearchFormVisibity() throws Exception
     {
-    	boolean Heading;
+        boolean Heading;
         try
         {
-        	Heading=advancedSearchFormId().isDisplayed();
-            AutomationLog.info("visbility of Advanced Search Form");
+            Heading=advancedSearchFormId().isDisplayed();
+            AutomationLog.info("visbility of Advanced Search Form is successful");
         }
         catch(Exception e)
         {
@@ -295,4 +295,52 @@ public class Header extends Page
         }
         return Heading;
      }
+    
+    public WebElement arrowToNavigateForLogout_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//b[@class='caret']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Arrow to navigate for Logout is not  found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public WebElement logoutXpathonPropertyPage_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//ul[@class='userDropdown dropdown-menu']//a[@href='/logout']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Arrow to navigate for Logout is not  found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public PropertyDetailPage logOutProceessOnPropertyDetailPage() throws Exception
+    {
+        PropertyDetailPage propertydetailpage = null;
+        try
+        {
+            arrowToNavigateForLogout_element().click();
+            AutomationLog.info("Successfully click on arrow to navigate to logout");
+            logoutXpathonPropertyPage_element().click();
+            propertydetailpage = new PropertyDetailPage(driver);
+            AutomationLog.info("Successfully Logout from Property Page");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to Logout from Property Page");
+            throw(e);
+        }
+        return propertydetailpage;
+    }
+    
 }
