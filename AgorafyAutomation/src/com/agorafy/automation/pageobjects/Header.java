@@ -343,4 +343,96 @@ public class Header extends Page
         return propertydetailpage;
     }
     
+    public WebElement closeLoginPopUp_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//a[@role='button']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Logout Pop Up close button is not  found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public Header clickOnCloseLoginPopUp() throws Exception
+    {
+        Header header = null;
+        try
+        {
+            closeLoginPopUp_element().click();
+            header = new Header(driver);
+            AutomationLog.info("Successfully click on Logout close icon");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to click on Logout close icon");
+            throw(e);
+        }
+        return header;
+    }
+    
+    public WebElement searchFormButton_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("searchFormButton"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Search from button is not found on header");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public Header clickOnSearchFormButton() throws Exception
+    {
+        Header header = null;
+        try
+        {
+            searchFormButton_element().click();
+            header = new Header(driver);
+            AutomationLog.info("Successfully click on Search Form button");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to click on Search Form button");
+            throw(e);
+        }
+        return header;
+    }
+    
+    public WebElement tooltipMessageOnclickingOnEmptySearch_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//div[@class='Zebra_Tooltip_Message']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Tool Tip Message is not found on Header after clicking on empty search button");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public boolean verifyZebraTooltipMessageComesAfterClickingEmptySearchbuttonVisibity() throws Exception
+    {
+        boolean tooltip;
+        try
+        {
+            tooltip=tooltipMessageOnclickingOnEmptySearch_element().isDisplayed();
+            AutomationLog.info("visbility of Tool Tip After clicking on Empty Search button is captured");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Tool Tip After clicking on Empty Search button is failed");
+            throw(e);
+        }
+        return tooltip;
+     }
+    
 }

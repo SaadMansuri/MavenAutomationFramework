@@ -41,6 +41,7 @@ public class HeaderAction extends AutomationTestCaseVerification
     {
         verifyIFAdvancedSearchFormPresent(header);
         verifyIfLoginPopUpIsDisplayed();
+        verifyIFTooltipMessageComesAfterClickingOnSearchButton(header);
     }
 
     public void verifyIfLoginPopUpIsDisplayed() throws Exception
@@ -56,6 +57,14 @@ public class HeaderAction extends AutomationTestCaseVerification
         header.clickOndropbox_searchInputBox();
         Assert.assertEquals(header.verifyAdvancedSearchFormVisibity(), true, "Expected error message when the Advanced Search Form is not Visible");
         AutomationLog.info("Advanced Search Form is Visible");
+    }
+    
+    public void verifyIFTooltipMessageComesAfterClickingOnSearchButton(Header header) throws Exception
+    {
+        header.clickOnCloseLoginPopUp();
+        header.clickOnSearchFormButton();
+        Assert.assertEquals(header.verifyZebraTooltipMessageComesAfterClickingEmptySearchbuttonVisibity(), true, "Expected error message when Tool Tip is not Visible which should come after clicking on empty search button");
+        AutomationLog.info("Tool Tip is Visible which comes after clicking on empty search button");
     }
 
     @Override
