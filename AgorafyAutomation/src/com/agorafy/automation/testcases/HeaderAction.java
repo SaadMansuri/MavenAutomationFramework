@@ -1,10 +1,9 @@
 package com.agorafy.automation.testcases;
 
-
-import java.util.concurrent.TimeUnit;
 import org.testng.Assert;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.LoginPopUp;
@@ -46,7 +45,7 @@ public class HeaderAction extends AutomationTestCaseVerification
 	public void verifyIfLoginPopUpIsDisplayed() throws Exception
     {
         loginpopup=header.clickOnSubmitListingLink();
-        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
         Assert.assertEquals(header.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
         AutomationLog.info("Clicking on submit listing link in header displays Login popup ");
     }
