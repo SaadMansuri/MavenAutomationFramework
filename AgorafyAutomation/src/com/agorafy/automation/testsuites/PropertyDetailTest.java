@@ -16,7 +16,7 @@ public class PropertyDetailTest
      }
 
     @Test
-    public void testHeaderActionTestCases() throws Exception
+    public void testPropertyDetailActionTestCases() throws Exception
     {
         try
         {
@@ -24,7 +24,7 @@ public class PropertyDetailTest
         }
         catch (Exception e) 
         {
-        	System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
             throw (e);
         }
     }

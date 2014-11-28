@@ -11,38 +11,39 @@ import com.agorafy.automation.pageobjects.Page;
 
 public class HeaderAction extends AutomationTestCaseVerification 
 {
-	private Header header;
+    private Header header;
     private LoginPopUp loginpopup;
 
-	public HeaderAction()
+    public HeaderAction()
     {
         super();
     }
 
-	    @Override
-	    public void setup()
-	    {
-	        super.setup();
-	        try
-	        {
-	            header = Homepage.header();
-	            header.clickOnSignUpUpLink();
-	       
-	        }
-	        catch(Exception e)
-	        {
-	            AutomationLog.error("Could not navigate to Sign Up Page");
-	        }
-	    }
+        @Override
+        public void setup()
+        {
+            super.setup();
+            try
+            {
+                header = Homepage.header();
+                header.clickOnSignUpUpLink();
+           
+            }
+            catch(Exception e)
+            {
+                AutomationLog.error("Could not navigate to Sign Up Page");
+            }
+        }
 
-	@Override
+    @Override
     protected void verifyTestCases() throws Exception
     {
         verifyIFAdvancedSearchFormPresent(header);
         verifyIfLoginPopUpIsDisplayed();
+        verifyIFTooltipMessageComesAfterClickingOnSearchButton(header);
     }
 
-	public void verifyIfLoginPopUpIsDisplayed() throws Exception
+    public void verifyIfLoginPopUpIsDisplayed() throws Exception
     {
         loginpopup=header.clickOnSubmitListingLink();
         WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
@@ -56,15 +57,22 @@ public class HeaderAction extends AutomationTestCaseVerification
         Assert.assertEquals(header.verifyAdvancedSearchFormVisibity(), true, "Expected error message when the Advanced Search Form is not Visible");
         AutomationLog.info("Advanced Search Form is Visible");
     }
+    
+    public void verifyIFTooltipMessageComesAfterClickingOnSearchButton(Header header) throws Exception
+    {
+        header.clickOnCloseLoginPopUp();
+        header.clickOnSearchFormButton();
+        Assert.assertEquals(header.verifyZebraTooltipMessageComesAfterClickingEmptySearchbuttonVisibity(), true, "Expected error message when Tool Tip is not Visible which should come after clicking on empty search button");
+        AutomationLog.info("Tool Tip is Visible which comes after clicking on empty search button");
+    }
 
-	@Override
-	protected String successMessage() {
-		return "Test cases passed for Header ";
-	}
+    @Override
+    protected String successMessage() {
+        return "Test cases passed for Header ";
+    }
 
-	@Override
-	protected String failureMessage() {
-		return "Test cases failed for Header";
-	}
-
+    @Override
+    protected String failureMessage() {
+        return "Test cases failed for Header";
+    }
 }

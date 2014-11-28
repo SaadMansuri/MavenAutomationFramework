@@ -168,8 +168,8 @@ public class Header extends Page
         }
         catch (Exception e)
         {
-        	AutomationLog.error("Not able to open drop down for active profile link");
-        	throw(e);
+            AutomationLog.error("Not able to open drop down for active profile link");
+            throw(e);
         }
     }
 
@@ -252,11 +252,11 @@ public class Header extends Page
     
     public SignUp clickOndropbox_searchInputBox() throws Exception
     {
-    	SignUp signup = null;
+        SignUp signup = null;
         try
         {
-        	dropbox_searchInputBox().click();
-        	signup = new SignUp(driver);
+            dropbox_searchInputBox().click();
+            signup = new SignUp(driver);
             AutomationLog.info("Successfully clicked on dropbox_searchInputBox");
         }
         catch(Exception e)
@@ -283,11 +283,11 @@ public class Header extends Page
 
     public boolean verifyAdvancedSearchFormVisibity() throws Exception
     {
-    	boolean Heading;
+        boolean Heading;
         try
         {
-        	Heading=advancedSearchFormId().isDisplayed();
-            AutomationLog.info("visbility of Advanced Search Form");
+            Heading=advancedSearchFormId().isDisplayed();
+            AutomationLog.info("visbility of Advanced Search Form is successful");
         }
         catch(Exception e)
         {
@@ -296,4 +296,144 @@ public class Header extends Page
         }
         return Heading;
      }
+    
+    public WebElement arrowToNavigateForLogout_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//b[@class='caret']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Arrow to navigate for Logout is not  found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public WebElement logoutXpathonPropertyPage_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//ul[@class='userDropdown dropdown-menu']//a[@href='/logout']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Arrow to navigate for Logout is not  found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public PropertyDetailPage logOutProceessOnPropertyDetailPage() throws Exception
+    {
+        PropertyDetailPage propertydetailpage = null;
+        try
+        {
+            arrowToNavigateForLogout_element().click();
+            AutomationLog.info("Successfully click on arrow to navigate to logout");
+            logoutXpathonPropertyPage_element().click();
+            propertydetailpage = new PropertyDetailPage(driver);
+            AutomationLog.info("Successfully Logout from Property Page");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to Logout from Property Page");
+            throw(e);
+        }
+        return propertydetailpage;
+    }
+    
+    public WebElement closeLoginPopUp_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//a[@role='button']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Logout Pop Up close button is not  found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public Header clickOnCloseLoginPopUp() throws Exception
+    {
+        Header header = null;
+        try
+        {
+            closeLoginPopUp_element().click();
+            header = new Header(driver);
+            AutomationLog.info("Successfully click on Logout close icon");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to click on Logout close icon");
+            throw(e);
+        }
+        return header;
+    }
+    
+    public WebElement searchFormButton_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("searchFormButton"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Search from button is not found on header");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public Header clickOnSearchFormButton() throws Exception
+    {
+        Header header = null;
+        try
+        {
+            searchFormButton_element().click();
+            header = new Header(driver);
+            AutomationLog.info("Successfully click on Search Form button");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to click on Search Form button");
+            throw(e);
+        }
+        return header;
+    }
+    
+    public WebElement tooltipMessageOnclickingOnEmptySearch_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//div[@class='Zebra_Tooltip_Message']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Tool Tip Message is not found on Header after clicking on empty search button");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public boolean verifyZebraTooltipMessageComesAfterClickingEmptySearchbuttonVisibity() throws Exception
+    {
+        boolean tooltip;
+        try
+        {
+            tooltip=tooltipMessageOnclickingOnEmptySearch_element().isDisplayed();
+            AutomationLog.info("visbility of Tool Tip After clicking on Empty Search button is captured");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Tool Tip After clicking on Empty Search button is failed");
+            throw(e);
+        }
+        return tooltip;
+     }
+    
 }
