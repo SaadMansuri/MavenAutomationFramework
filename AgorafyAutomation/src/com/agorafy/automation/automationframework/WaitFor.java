@@ -65,6 +65,32 @@ public class WaitFor
         waitUntil(driver, pageLoad);
     }
 
+    public static void ElementToBeDisplayed(WebDriver driver, final By elementToBePresent)
+    {
+        ExpectedCondition < Boolean > pageLoad = new ExpectedCondition < Boolean > () 
+        {
+            public Boolean apply(WebDriver driver)
+            {
+                boolean isPageLoaded = isloadComplete(driver);
+                if (!isPageLoaded)
+                    return false;
+
+                try
+                {
+                	boolean val = driver.findElement(elementToBePresent).isDisplayed();
+                    if(val==true)
+                    	return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+                return false;
+            }
+        };
+
+        waitUntil(driver, pageLoad);
+    }
     public static void waitForPageToLoad(WebDriver driver)
     {
         ExpectedCondition<Boolean> pageLoad = new ExpectedCondition<Boolean>()
