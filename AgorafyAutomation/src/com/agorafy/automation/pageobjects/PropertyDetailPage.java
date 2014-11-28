@@ -114,7 +114,7 @@ public class PropertyDetailPage extends Page {
 
         return element;
     }
-	
+
     public String getTitleOfLogInPopUp() throws Exception
     {
         String Titlename;
@@ -135,10 +135,9 @@ public class PropertyDetailPage extends Page {
     {
         try 
         {
-        	//element = driver.findElement(By.name("_username"));
-        	element = driver.findElement(By.xpath("//div[@class='form-group']/input[@value='']"));
+            element = driver.findElement(By.xpath("//div[@class='form-group']/input[@value='']"));
             AutomationLog.info("Email locator is done");
-            }
+        }
         catch (Exception e)
         {
             AutomationLog.error("Email locator is not done");
@@ -152,10 +151,9 @@ public class PropertyDetailPage extends Page {
     {
         try 
         {
-        	//element = driver.findElement(By.name("_password"));
-        	element = driver.findElement(By.xpath("//div[@class='form-group']/input[@placeholder='Enter Password']"));
+            element = driver.findElement(By.xpath("//div[@class='form-group']/input[@placeholder='Enter Password']"));
             AutomationLog.info("Password locator is done");
-            }
+        }
         catch (Exception e)
         {
             AutomationLog.error("Password locator is not done");
