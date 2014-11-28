@@ -33,14 +33,14 @@ public class LoginPopUp extends Page
 
     public By getLoginPopUpLocator()
     {
-        return By.xpath(".//*[@id='upsellPopup']");
+        return By.id("upsellPopup");
     }
 
     public WebElement popUp_Login() throws Exception
     {
         try
         {
-            element=driver.findElement(By.id("upsellPopup"));
+            element=driver.findElement(getLoginPopUpLocator());
             AutomationLog.info("Login pop up is found");
         }
         catch(Exception e)
@@ -96,6 +96,22 @@ public class LoginPopUp extends Page
         return element;
     }
 
+    public WebElement title_LoginPopUp() throws Exception
+    {
+        try
+        {
+            element=driver.findElement(By.id("ui-dialog-title-upsellPopup"));
+            AutomationLog.info("Title found on login pop up");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not found title on login pop up");
+            throw(e);
+        }
+        return element;
+    }
+
+    
     public WebElement checkbox_StayLoggedIn() throws Exception
     {
         try
@@ -116,7 +132,6 @@ public class LoginPopUp extends Page
         homepage=new Homepage(driver);
         try
         {
-            //WaitFor.presenceOfTheElement(Page.driver,getLoginPopUpLocator());
             Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             txtbx_Email().clear();
             txtbx_Email().sendKeys(email);
