@@ -9,6 +9,7 @@ import com.agorafy.automation.automationframework.AutomationLog;
 public class Header extends Page
 {
     private WebElement element = null;
+    private boolean val=false;
 
     public Header(WebDriver driver)
     {
@@ -100,7 +101,7 @@ public class Header extends Page
     {
         try
         {
-            loginpopup.popUp_Login().isDisplayed();
+            val=loginpopup.popUp_Login().isDisplayed();
             AutomationLog.info("login pop up is displayed");
         }
         catch(Exception e)
@@ -108,7 +109,7 @@ public class Header extends Page
             AutomationLog.error("Login pop up is not displayed");
             throw(e);
         }
-        return true;
+        return val;
     }
 
     //Links below are seen when user is logged in
@@ -279,7 +280,7 @@ public class Header extends Page
         }
         return element;
     }
-    
+
     public boolean verifyAdvancedSearchFormVisibity() throws Exception
     {
     	boolean Heading;
