@@ -62,8 +62,8 @@ public class HeaderAction extends AutomationTestCaseVerification
     {
         header.clickOnCloseLoginPopUp();
         header.clickOnSearchFormButton();
-        Assert.assertEquals(header.verifyZebraTooltipMessageComesAfterClickingEmptySearchbuttonVisibity(), true, "Expected error message when Tool Tip is not Visible which should come after clicking on empty search button");
-        AutomationLog.info("Tool Tip is Visible which comes after clicking on empty search button");
+        Assert.assertEquals(header.verifyZebraTooltipMessageComesAfterClickingEmptySearchbuttonVisibity(), true, "Expected error message when Tool Tip is not Visible which should come after clicking on search button with empty text");
+        AutomationLog.info("Tool Tip is Visible which comes after clicking on search button with empty text");
     }
 
     @Override

@@ -119,7 +119,6 @@ public class Header extends Page
         try
         {
             element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/a[1]/span[2]"));
-            AutomationLog.info("Profile name found in the Header");
         }
         catch (Exception e)
         {
@@ -134,7 +133,6 @@ public class Header extends Page
         try
         {
             element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/ul/li[1]/a"));
-            AutomationLog.info("My Dashboard link found when Profile name is clicked");
         }
         catch (Exception e)
         {
@@ -149,7 +147,6 @@ public class Header extends Page
         try
         {
             element = driver.findElement(By.linkText("Logout"));
-            AutomationLog.info("Logout link found in the Header");
         }
         catch (Exception e)
         {
@@ -352,7 +349,7 @@ public class Header extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Logout Pop Up close button is not  found");
+            AutomationLog.error("Login Pop Up close button is not found");
             throw(e);
         }
         return element;
@@ -365,11 +362,11 @@ public class Header extends Page
         {
             closeLoginPopUp_element().click();
             header = new Header(driver);
-            AutomationLog.info("Successfully click on Logout close icon");
+            AutomationLog.info("Successfully click on Login close icon");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Failed to click on Logout close icon");
+            AutomationLog.error("Failed to click on Login close icon");
             throw(e);
         }
         return header;
@@ -426,7 +423,6 @@ public class Header extends Page
         try
         {
             tooltip=tooltipMessageOnclickingOnEmptySearch_element().isDisplayed();
-            AutomationLog.info("visbility of Tool Tip After clicking on Empty Search button is captured");
         }
         catch(Exception e)
         {

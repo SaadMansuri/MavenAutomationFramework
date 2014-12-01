@@ -51,11 +51,11 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
     public void isLoginPopUpPresentVerification(PropertyDetailPage propertydetails) throws Exception
     {
         propertydetails.clickOnSignUpUpLink();
-        AutomationLog.info("SignUp Link Click Successfully");
+        AutomationLog.info("SignUp Link Clicked Successfully");
         Page.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        Assert.assertEquals(propertydetails.CheckingLogInPopOnPropertyPage(),true,"Expected form is not present");
+        Assert.assertEquals(propertydetails.checkingLogInPopUpOnPropertyPage(),true,"Expected form is not present");
         AutomationLog.info("Login in Page is present");
-        Assert.assertEquals(propertydetails.getTitleOfLogInPopUp(),"Log in","Expected Title is not present on Login Pop Up");
+        Assert.assertEquals(propertydetails.getTitleOfLogInPopUp(),"Log in","Expected Title is not present on Login Pop-Up");
         AutomationLog.info("Login Title on Pop-up is verified");
     }
     
@@ -64,9 +64,9 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
         String beforeloginUrl=Page.driver.getCurrentUrl();
         propertydetails.loginProcessOnPropertyPage(getvalidcrendial.get("username"), getvalidcrendial.get("password"));
         Assert.assertEquals(Page.driver.getCurrentUrl(),beforeloginUrl,"Expected Url is differnt then expected Url");
-        AutomationLog.info("User after login redirected to same page successfully");
-        Assert.assertEquals(propertydetails.CheckingPropertyRecordSection(),true,"Expected Property Record section is not present on Property Page");
-        AutomationLog.info("Verification of Property Record section present on Property Page is successful");
+        AutomationLog.info("User after login stays on a same page");
+        Assert.assertEquals(propertydetails.checkingPropertyRecordSection(),true,"Expected Property Record section is not present on Property Page");
+        AutomationLog.info("Property Record section is present on property page");
     }
     
     public void contactInformationLogInAndCheckUserInformation(PropertyDetailPage propertydetails,HashMap<String, String> getvalidcrendial) throws Exception
@@ -75,15 +75,15 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
         propertydetails.redirectedToPropertyPage();
         String beforeloginUrl=Page.driver.getCurrentUrl();
         propertydetails.clickOnSignInToContactInformation();
-        Assert.assertEquals(propertydetails.CheckingLogInPopOnPropertyPage(),true,"Expected form is not present");
-        AutomationLog.info("Login in Page is present");
-        Assert.assertEquals(propertydetails.getTitleOfLogInPopUp(),"Log in","Expected Title is not present on Login Pop Up");
-        AutomationLog.info("Login Title on Pop-up is verified");
+        Assert.assertEquals(propertydetails.checkingLogInPopUpOnPropertyPage(),true,"Expected Login Pop form is not present");
+        AutomationLog.info("Login pop-up is displayed");
+        Assert.assertEquals(propertydetails.getTitleOfLogInPopUp(),"Log in","Expected Title is not present on Login Pop-Up");
+        AutomationLog.info("Login Title on Pop-up is found successfully");
         propertydetails.loginProcessOnPropertyPage(getvalidcrendial.get("username"), getvalidcrendial.get("password"));
         Assert.assertEquals(Page.driver.getCurrentUrl(),beforeloginUrl,"Expected Url is differnt then expected Url");
-        AutomationLog.info("User after login redirected to same page successfully");
+        AutomationLog.info("User after login stays on a same page");
         Assert.assertEquals(propertydetails.getTheUserNameAfterLogIn(),getvalidcrendial.get("information"),"Expected username is different then actual getting username");
-        AutomationLog.info("User after sign in staying on the same page and user information is also visible");
+        AutomationLog.info("User after sign in stays on the same page and user information is also visible");
     }
 
     @Override
