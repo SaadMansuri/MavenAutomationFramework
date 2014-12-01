@@ -284,7 +284,6 @@ public class Header extends Page
         try
         {
             Heading=advancedSearchFormId().isDisplayed();
-            AutomationLog.info("visbility of Advanced Search Form is successful");
         }
         catch(Exception e)
         {
@@ -362,11 +361,11 @@ public class Header extends Page
         {
             closeLoginPopUp_element().click();
             header = new Header(driver);
-            AutomationLog.info("Successfully click on Login close icon");
+            AutomationLog.info("Successfully click on Login pop-up close icon");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Failed to click on Login close icon");
+            AutomationLog.error("Failed to click on Login pop-up close icon");
             throw(e);
         }
         return header;

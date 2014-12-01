@@ -54,7 +54,7 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
         AutomationLog.info("SignUp Link Clicked Successfully");
         Page.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         Assert.assertEquals(propertydetails.checkingLogInPopUpOnPropertyPage(),true,"Expected form is not present");
-        AutomationLog.info("Login in Page is present");
+        AutomationLog.info("Login form is present on page");
         Assert.assertEquals(propertydetails.getTitleOfLogInPopUp(),"Log in","Expected Title is not present on Login Pop-Up");
         AutomationLog.info("Login Title on Pop-up is verified");
     }
@@ -83,7 +83,7 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
         Assert.assertEquals(Page.driver.getCurrentUrl(),beforeloginUrl,"Expected Url is differnt then expected Url");
         AutomationLog.info("User after login stays on a same page");
         Assert.assertEquals(propertydetails.getTheUserNameAfterLogIn(),getvalidcrendial.get("information"),"Expected username is different then actual getting username");
-        AutomationLog.info("User after sign in stays on the same page and user information is also visible");
+        AutomationLog.info("Username is verified");
     }
 
     @Override

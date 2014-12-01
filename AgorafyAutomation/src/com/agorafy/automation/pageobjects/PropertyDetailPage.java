@@ -57,11 +57,11 @@ public class PropertyDetailPage extends Page
         {
             propertyRecordSignUpLink_element().click();
             propertydetail = new PropertyDetailPage(driver);
-            AutomationLog.info("Clicked on signup link");
+            AutomationLog.info("Clicked on signup link from property record section");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not clicked on signUp link");
+            AutomationLog.error("Failed to clicked on signUp link from property record section");
             throw(e);
         }
             return propertydetail;
@@ -181,7 +181,9 @@ public class PropertyDetailPage extends Page
             propertydetail = new PropertyDetailPage(driver);
             AutomationLog.info("Email id is entered in textbox successfully");
             passwordTextBox_element().sendKeys(Password);
+            AutomationLog.info("Password is entered in textbox successfully");
             loginPopUpSubmitButton_element().click();
+            AutomationLog.info("Cliked on 'Log in to my account' button");
             AutomationLog.info("Login Done");
         }
         catch(Exception e)
