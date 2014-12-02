@@ -65,7 +65,6 @@ public class PropertySearch extends Page
         try
         {
             title=title_LoginPopUp().getText();
-            AutomationLog.info("get title is Successfull");
         }
         catch(Exception e)
         {

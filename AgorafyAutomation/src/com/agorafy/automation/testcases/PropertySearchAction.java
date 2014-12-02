@@ -52,21 +52,21 @@ public class PropertySearchAction extends AutomationTestCaseVerification
     {
         propertysearch.clickOnSubscribeToThisSearchLink();
         WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
-        Assert.assertEquals(propertysearch.getTitleForLoginPopUp(), "Log in", "Could not Get login pop up title");
         Assert.assertEquals(propertysearch.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
+        Assert.assertEquals(propertysearch.getTitleForLoginPopUp(), "Log in", "Could not Get login pop up title");
         AutomationLog.info("Clicking on Subscribe to this search link displays Login popup ");
     }
 
     @Override
     protected String successMessage() 
     {
-    	return "Test case for Property Search passed";
+    	return "Test case for LoginPopUp on PropertySearch passed";
     }
 
     @Override
     protected String failureMessage() 
     {
-    	return "Test case for Property Search failed";
+    	return "Test case for LoginPopUp on PropertySearch failed";
     }
 
 }

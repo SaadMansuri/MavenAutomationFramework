@@ -55,11 +55,11 @@ public class Header extends Page
         {
             link_SignUp().click();
             signup = new SignUp(driver);
-            AutomationLog.info("Clicked on signup button");
+            AutomationLog.info("Successfully clicked on signup Link");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Not clicked on signUp button");
+            AutomationLog.error("Could not click on signUp Link");
             throw(e);
         }
             return signup;

@@ -16,7 +16,7 @@ public class LoginPopUpTest
      }
 
     @Test
-    public void testForgotPasswordActionTestCases() throws Exception
+    public void testForLoginPopUp() throws Exception
     {
         try
         {

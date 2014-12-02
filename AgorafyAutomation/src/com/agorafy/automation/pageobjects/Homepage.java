@@ -94,7 +94,6 @@ public class Homepage extends Page
         try
         {
             element= driver.findElement(By.xpath(".//*[@id='listingCategorySelect']/ul/li[2]/a"));
-            AutomationLog.info("Found residential category in dropdown");
         }
         catch(Exception e)
         {

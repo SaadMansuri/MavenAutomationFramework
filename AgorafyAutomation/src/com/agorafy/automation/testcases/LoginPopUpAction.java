@@ -33,7 +33,6 @@ public class LoginPopUpAction extends AutomationTestCaseVerification
             header=Homepage.header();
             signup=header.clickOnSignUpUpLink();
             loginpopup=signup.clickOnLoginLink();
-            //WaitFor.presenceOfTheElement(Page.driver, loginpopup.getLoginPopUpLocator());
         }
         catch(Exception e)
         {

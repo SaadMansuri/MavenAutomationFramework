@@ -127,16 +127,18 @@ public class LoginPopUp extends Page
         return element;
     }
 
-    public Homepage populateLoginPopUpData(String email, String Password ) throws Exception
+    public Homepage populateLoginPopUpData(String Email, String Password ) throws Exception
     {
         homepage=new Homepage(driver);
         try
         {
             Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            txtbx_Email().clear();
-            txtbx_Email().sendKeys(email);
-            txtbx_Password().clear();
-            txtbx_Password().sendKeys(Password);
+            WebElement email = txtbx_Email();
+            WebElement pass  = txtbx_Password();
+            email.clear();
+            email.sendKeys(Email);
+            pass.clear();
+            pass.sendKeys(Password);
             btn_LogIntoMyAccount().click();
             AutomationLog.info("Successfully populated data in login pop up");
         }
