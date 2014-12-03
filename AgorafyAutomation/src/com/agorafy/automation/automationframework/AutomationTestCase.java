@@ -32,6 +32,14 @@ public class AutomationTestCase
         testCaseData = TestDataProvider.getTestData(executingTestCaseFileName);
     }
 
+    public Credentials userCredentials()
+    {
+        String email = Configuration.getConfigurationValueForProperty("email");
+        String password = Configuration.getConfigurationValueForProperty("password");
+        Credentials credential =new Credentials(email, password);
+        return credential;
+    }
+
     public void cleanup() 
     {
         AutomationLog.endTestCase(executingTestCaseName);
