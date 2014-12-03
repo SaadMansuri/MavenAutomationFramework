@@ -34,7 +34,7 @@ public class ProfessionalProfilePage extends Page
             {
                 AutomationLog.error("Send Email button not found on Professional Profile Page");
                 throw(e);
-             }
+            }
              return element;
         }
 
