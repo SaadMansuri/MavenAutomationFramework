@@ -37,13 +37,23 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification {
         
         HashMap<String, String> agentName = testCaseData.get("agentName");
         isExclusivesCountPresentOnAgentListing(searchprofessional,agentName);
+        
+        HashMap<String, String> companyName = testCaseData.get("companySearch");
+        isExclusivesCountPresentOnCompanyListing(searchprofessional, companyName);
     }
     
     public void isExclusivesCountPresentOnAgentListing(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentName) throws Exception
     {
-        searchprofessional.enterAgentNameinAgentSearchAndClickonSearchButton(agentName.get("name"));
+        searchprofessional.enterAgentOrCompanyNameinAgentSearchAndClickonSearchButton(agentName.get("name"));
         AutomationLog.info("Agent Search is successful and its Exclusive Count = "+searchprofessional.getTheCountOFAgentTerryExclusives());
-        
+    }
+    
+    public void isExclusivesCountPresentOnCompanyListing(SearchProfessionalsPage searchprofessional,HashMap<String, String> companyName) throws Exception
+    {
+        searchprofessional.agentSearchTextBox_element().clear();
+        searchprofessional.enterAgentOrCompanyNameinAgentSearchAndClickonSearchButton(companyName.get("name"));
+        searchprofessional.clickOnCompaniesTabOnSearchProfessionals();
+        AutomationLog.info("Company Search is successful and its Exclusive Count = "+searchprofessional.getTheCountOFCompanyDumannExclusive());
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.agorafy.automation.pageobjects.Page;
 
 public class SearchProfessionalsPage extends Page
 {
-    WebElement element=null;
+    private WebElement element = null;
     public SearchProfessionalsPage(WebDriver driver)
     {
         super(driver);
@@ -93,7 +93,7 @@ public class SearchProfessionalsPage extends Page
         return element;
     }
     
-    public SearchProfessionalsPage enterAgentNameinAgentSearchAndClickonSearchButton(String agentname) throws Exception
+    public SearchProfessionalsPage enterAgentOrCompanyNameinAgentSearchAndClickonSearchButton(String agentname) throws Exception
     {
         SearchProfessionalsPage searchprofessional = null;
         try
@@ -138,6 +138,65 @@ public class SearchProfessionalsPage extends Page
             throw(e);
         }
         return Countofagentexclusives;
+    }
+    
+    public WebElement companiesTabOnSearchProfessionals_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//a[@href='#companies']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Companies Tab is not found on Search Professionals Page");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public SearchProfessionalsPage clickOnCompaniesTabOnSearchProfessionals() throws Exception
+    {
+        SearchProfessionalsPage searchprofessional = null;
+        try
+        {
+            companiesTabOnSearchProfessionals_element().click();
+            searchprofessional = new SearchProfessionalsPage(driver);
+            AutomationLog.info("Clicked on Companies Tab On SearchProfessionals Page");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to Clicked on Companies Tab On SearchProfessionals Page");
+            throw(e);
+        }
+            return searchprofessional;
+    }
+    
+    public WebElement companyDumannExclusive_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//div[@class='agent-details'][a[contains(text(),'Dumann Realty')]]/p[contains(text(),'exclusive')]"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Company Dumann Realty is Not found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public String getTheCountOFCompanyDumannExclusive()  throws Exception
+    {
+        String Countofcompanyexclusive="";
+        try{
+            Countofcompanyexclusive = companyDumannExclusive_element().getText();
+         }
+        catch(Exception e)
+        {
+            AutomationLog.error("Company Dumann Realty Exclusive is Not found");
+            throw(e);
+        }
+        return Countofcompanyexclusive;
     }
 
     @Override
