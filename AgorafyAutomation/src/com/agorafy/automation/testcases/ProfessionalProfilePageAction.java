@@ -11,7 +11,7 @@ import com.agorafy.automation.pageobjects.ProfessionalProfilePage;
 
 public class ProfessionalProfilePageAction extends AutomationTestCaseVerification 
 {
-    private ProfessionalProfilePage professionalProfilePage = null;;
+    private ProfessionalProfilePage professionalProfilePage = null;
 
     public ProfessionalProfilePageAction()
     {

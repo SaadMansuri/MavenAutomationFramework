@@ -64,4 +64,16 @@ public class Configuration
     {
     	return "http://" + Configuration.getConfigurationValueForProperty("applicationURL");
     }
+
+    public static String getValidEmail()
+    {
+         String email = Configuration.getConfigurationValueForProperty("email");
+        return email;
+    }
+
+    public static String getPassword()
+    {
+        String password = Configuration.getConfigurationValueForProperty("password");
+        return password;
+    }
 }

@@ -7,7 +7,8 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SearchProfessionalsPage;
 
-public class SearchProfessionalsAction extends AutomationTestCaseVerification {
+public class SearchProfessionalsAction extends AutomationTestCaseVerification 
+{
     
     SearchProfessionalsPage searchprofessional = new SearchProfessionalsPage();
     
@@ -31,8 +32,8 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification {
     }
 
     @Override
-    protected void verifyTestCases() throws Exception {
-        
+    protected void verifyTestCases() throws Exception 
+    {
         HashMap<String, String> agentName = testCaseData.get("agentName");
         isExclusivesCountPresentOnAgentListing(searchprofessional,agentName);
         

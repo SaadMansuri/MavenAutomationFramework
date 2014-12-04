@@ -122,7 +122,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath("//div[@class='agent-details'][a[contains(text(),'Terry Bater')]]/p[contains(text(),'exclusives')]"));
+            element = driver.findElement(By.xpath("//div[@class='agent-details'][a[contains(text(),'Terry Bater')]]/p[contains(text(),'exclusive')]"));
         }
         catch(Exception e)
         {
