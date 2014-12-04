@@ -87,6 +87,24 @@ public class SearchProfessionalsPage extends Page
         return element;
     }
     
+    public SearchProfessionalsPage sendDataToAgentSearchTextBox(String agentname) throws Exception
+    {
+        SearchProfessionalsPage searchprofessional = null;
+        try
+        {
+            agentSearchTextBox_element().sendKeys(agentname);
+            searchprofessional = new SearchProfessionalsPage(driver);
+            AutomationLog.info("Agent name is successfully enterted in textbox");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to fill agent name and click on search button");
+            throw(e);
+        }
+            return searchprofessional;
+    }
+    
+    
     public WebElement agentSearchSearchButton_element() throws Exception
     {
         try
@@ -258,6 +276,20 @@ public class SearchProfessionalsPage extends Page
         try
         {
             element = driver.findElement(By.xpath("//div[@id='commercial_neighborhoodSelect_chosen']//input[@value='Select neighborhoods']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Neighborhoods Search TextBox Not found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public WebElement clickOnNeighborhoodsSearchDropBox() throws Exception
+    {
+        try
+        {
+            neighborhoodsSearchDropBox_element().click();
             AutomationLog.info("Successfully click on Neighborhoods Search DropBox");
         }
         catch(Exception e)
@@ -344,7 +376,131 @@ public class SearchProfessionalsPage extends Page
         }
         return bool;
      }
+    
+    public WebElement checkboxOfOfficeLeasingInExpertise_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//input[@id='exp_office']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Checkbox of Office Leasing In Expertise Not found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public SearchProfessionalsPage clickingOncheckboxOfOfficeLeasingInExpertise() throws Exception
+    {
+        SearchProfessionalsPage searchprofessional = null;
+        try
+        {
+            checkboxOfOfficeLeasingInExpertise_element().click();
+            searchprofessional = new SearchProfessionalsPage(driver);
+            AutomationLog.info("Clicked on Checkbox of Office Leasing In Expertise");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to Clicked on Checkbox of Office Leasing In Expertise");
+            throw(e);
+        }
+            return searchprofessional;
+    }
 
+    public WebElement checkboxOfRetailLeasingInExpertise_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//input[@id='exp_retail']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Checkbox of Retail Leasing In Expertise Not found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public SearchProfessionalsPage clickingOncheckboxOfRetailLeasingInExpertise() throws Exception
+    {
+        SearchProfessionalsPage searchprofessional = null;
+        try
+        {
+            checkboxOfRetailLeasingInExpertise_element().click();
+            searchprofessional = new SearchProfessionalsPage(driver);
+            AutomationLog.info("Clicked on Checkbox of RetailLeasing In Expertise");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to Clicked on Checkbox of Retail Leasing In Expertise");
+            throw(e);
+        }
+            return searchprofessional;
+    }
+    
+    public WebElement checkboxOfLandlordRepresentationInConcentration_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("rep_landlord"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Checkbox of Landlord Representation In Concentration Not found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public SearchProfessionalsPage clickingOnLandlordRepresentationInConcentration() throws Exception
+    {
+        SearchProfessionalsPage searchprofessional = null;
+        try
+        {
+            checkboxOfLandlordRepresentationInConcentration_element().click();
+            searchprofessional = new SearchProfessionalsPage(driver);
+            AutomationLog.info("Clicked on Checkbox of Landlord Representation In Concentration");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to Clicked on Checkbox of Landlord Representation In Expertise");
+            throw(e);
+        }
+            return searchprofessional;
+    }
+    
+    public WebElement checkboxOfTenantRepresentationInConcentration_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("rep_tenant"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Checkbox of Tenant Representation In Concentration Not found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public SearchProfessionalsPage clickingOncheckboxOfTenantRepresentationInConcentration() throws Exception
+    {
+        SearchProfessionalsPage searchprofessional = null;
+        try
+        {
+            checkboxOfTenantRepresentationInConcentration_element().click();
+            searchprofessional = new SearchProfessionalsPage(driver);
+            AutomationLog.info("Clicked on Checkbox of Tenant Representation In Concentration");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to Clicked on Checkbox of Tenant Representation In Concentration");
+            throw(e);
+        }
+            return searchprofessional;
+    }
+    
     @Override
     public String pageHeading() throws Exception
     {
