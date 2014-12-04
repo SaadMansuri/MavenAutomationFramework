@@ -8,6 +8,7 @@ import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
@@ -42,10 +43,12 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
     {
         isLoginPopUpPresentVerification(propertydetails);
         
-        HashMap<String, String> getvalidcrendial = testCaseData.get("validCredential");
-        isAfterLoginSameUrlAndPropertyRecordVerification(propertydetails,getvalidcrendial);
+        Credentials ValidCredentials = userCredentials();
+        //HashMap<String, String> getvalidcrendial = testCaseData.get("validCredential");
+        isAfterLoginSameUrlAndPropertyRecordVerification(propertydetails,ValidCredentials);
         
-        contactInformationLogInAndCheckUserInformation(propertydetails,getvalidcrendial);
+        HashMap<String, String> getvalidcrendial = testCaseData.get("validCredential");
+        contactInformationLogInAndCheckUserInformation(propertydetails,ValidCredentials,getvalidcrendial);
     }
     
     public void isLoginPopUpPresentVerification(PropertyDetailPage propertydetails) throws Exception
@@ -59,17 +62,17 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
         AutomationLog.info("Login Title on Pop-up is verified");
     }
     
-    public void isAfterLoginSameUrlAndPropertyRecordVerification(PropertyDetailPage propertydetails,HashMap<String, String> getvalidcrendial) throws Exception
+    public void isAfterLoginSameUrlAndPropertyRecordVerification(PropertyDetailPage propertydetails,Credentials validCredentials) throws Exception
     {
         String beforeloginUrl=Page.driver.getCurrentUrl();
-        propertydetails.loginProcessOnPropertyPage(getvalidcrendial.get("username"), getvalidcrendial.get("password"));
+        propertydetails.loginProcessOnPropertyPage(validCredentials.getEmail(), validCredentials.getPassword());
         Assert.assertEquals(Page.driver.getCurrentUrl(),beforeloginUrl,"Expected Url is differnt then expected Url");
         AutomationLog.info("User after login stays on a same page");
         Assert.assertEquals(propertydetails.checkingPropertyRecordSection(),true,"Expected Property Record section is not present on Property Page");
         AutomationLog.info("Property Record section is present on property page");
     }
     
-    public void contactInformationLogInAndCheckUserInformation(PropertyDetailPage propertydetails,HashMap<String, String> getvalidcrendial) throws Exception
+    public void contactInformationLogInAndCheckUserInformation(PropertyDetailPage propertydetails,Credentials validCredentials, HashMap<String, String> getvalidcrendial) throws Exception
     {
         propertydetails=header.logOutProceessOnPropertyDetailPage();
         propertydetails.redirectedToPropertyPage();
@@ -79,7 +82,7 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
         AutomationLog.info("Login pop-up is displayed");
         Assert.assertEquals(propertydetails.getTitleOfLogInPopUp(),"Log in","Expected Title is not present on Login Pop-Up");
         AutomationLog.info("Login Title on Pop-up is found successfully");
-        propertydetails.loginProcessOnPropertyPage(getvalidcrendial.get("username"), getvalidcrendial.get("password"));
+        propertydetails.loginProcessOnPropertyPage(validCredentials.getEmail(), validCredentials.getPassword());
         Assert.assertEquals(Page.driver.getCurrentUrl(),beforeloginUrl,"Expected Url is differnt then expected Url");
         AutomationLog.info("User after login stays on a same page");
         Assert.assertEquals(propertydetails.getTheUserNameAfterLogIn(),getvalidcrendial.get("information"),"Expected username is different then actual getting username");
