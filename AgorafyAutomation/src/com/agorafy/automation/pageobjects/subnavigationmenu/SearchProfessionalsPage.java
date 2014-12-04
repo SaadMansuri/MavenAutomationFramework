@@ -1,8 +1,10 @@
 package com.agorafy.automation.pageobjects.subnavigationmenu;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -23,7 +25,7 @@ public class SearchProfessionalsPage extends Page
 
     public By getAgentLocator() throws Exception
     {
-    	return By.xpath(".//*[@id='brokerResults']/li[6]/div[1]/img");
+        return By.xpath(".//*[@id='brokerResults']/li[6]/div[1]/img");
     }
     public WebElement pageHeadingElement() throws Exception
     {
@@ -250,6 +252,98 @@ public class SearchProfessionalsPage extends Page
         }
         return Countofcompanyexclusive;
     }
+    
+    public WebElement neighborhoodsSearchDropBox_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//div[@id='commercial_neighborhoodSelect_chosen']//input[@value='Select neighborhoods']"));
+            AutomationLog.info("Successfully click on Neighborhoods Search DropBox");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Neighborhoods Search TextBox Not found");
+            throw(e);
+        }
+        return element;
+    }
+        
+    public WebElement neighborhoodsOptionListing_element(String neighbor) throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//li[@class='active-result group-option'][contains(text(),'"+neighbor+"')]"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Neighborhoods Search Button Not found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public SearchProfessionalsPage clickOnneighborhoodsOptionListing(String neighbor) throws Exception
+    {
+        SearchProfessionalsPage searchprofessional = null;
+        try
+        {
+            neighborhoodsOptionListing_element(neighbor).click();
+            searchprofessional = new SearchProfessionalsPage(driver);
+            AutomationLog.info("Clicked on neighborhoods "+neighbor+" Option from Listing");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to Clicked on neighborhoods Option Listing");
+            throw(e);
+        }
+            return searchprofessional;
+    }
+    
+    public WebElement focusOnNeighborhoodsListOfOptions_element() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//div[@class='chosen-drop']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Neighborhoods List Of Options Not found");
+            throw(e);
+        }
+        return element;
+    }
+        
+    public SearchProfessionalsPage ActionToProvideFocusOnDropBox() throws Exception
+    {
+        SearchProfessionalsPage searchprofessional = null;
+        try
+        {
+            new Actions(driver).moveToElement(focusOnNeighborhoodsListOfOptions_element()).perform();
+            searchprofessional = new SearchProfessionalsPage(driver);
+            AutomationLog.info("Focus Provided to Neighborhoods dropbox is successful");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to Provide Focus to Neighborhoods dropbox");
+            throw(e);
+        }
+            return searchprofessional;
+    }
+    
+    public boolean checkingNeighborhoodsDropBoxVisibility() throws Exception
+    {
+        boolean bool;
+        try
+        {
+            bool=focusOnNeighborhoodsListOfOptions_element().isDisplayed();
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Fail to check Neighborhoods DropBox Visibility");
+            throw(e);
+        }
+        return bool;
+     }
 
     @Override
     public String pageHeading() throws Exception

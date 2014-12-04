@@ -44,11 +44,10 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
         isLoginPopUpPresentVerification(propertydetails);
         
         Credentials ValidCredentials = userCredentials();
-        //HashMap<String, String> getvalidcrendial = testCaseData.get("validCredential");
         isAfterLoginSameUrlAndPropertyRecordVerification(propertydetails,ValidCredentials);
         
-        HashMap<String, String> getvalidcrendial = testCaseData.get("validCredential");
-        contactInformationLogInAndCheckUserInformation(propertydetails,ValidCredentials,getvalidcrendial);
+        HashMap<String, String> userName = testCaseData.get("userName");
+        contactInformationLogInAndCheckUserInformation(propertydetails,ValidCredentials,userName);
     }
     
     public void isLoginPopUpPresentVerification(PropertyDetailPage propertydetails) throws Exception
@@ -72,7 +71,7 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
         AutomationLog.info("Property Record section is present on property page");
     }
     
-    public void contactInformationLogInAndCheckUserInformation(PropertyDetailPage propertydetails,Credentials validCredentials, HashMap<String, String> getvalidcrendial) throws Exception
+    public void contactInformationLogInAndCheckUserInformation(PropertyDetailPage propertydetails,Credentials validCredentials, HashMap<String, String> userName) throws Exception
     {
         propertydetails=header.logOutProceessOnPropertyDetailPage();
         propertydetails.redirectedToPropertyPage();
@@ -85,7 +84,7 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
         propertydetails.loginProcessOnPropertyPage(validCredentials.getEmail(), validCredentials.getPassword());
         Assert.assertEquals(Page.driver.getCurrentUrl(),beforeloginUrl,"Expected Url is differnt then expected Url");
         AutomationLog.info("User after login stays on a same page");
-        Assert.assertEquals(propertydetails.getTheUserNameAfterLogIn(),getvalidcrendial.get("information"),"Expected username is different then actual getting username");
+        Assert.assertEquals(propertydetails.getTheUserNameAfterLogIn(),userName.get("information"),"Expected username is different then actual getting username");
         AutomationLog.info("Username is verified");
     }
 
