@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
 
 public class SearchProfessionalsPage extends Page
@@ -20,6 +21,10 @@ public class SearchProfessionalsPage extends Page
         super(driver);
     }
 
+    public By getAgentLocator() throws Exception
+    {
+    	return By.xpath(".//*[@id='brokerResults']/li[6]/div[1]/img");
+    }
     public WebElement pageHeadingElement() throws Exception
     {
         try
@@ -55,6 +60,7 @@ public class SearchProfessionalsPage extends Page
         {
             searchProfessionalsElement().click();
             searchprofessional = new SearchProfessionalsPage(driver);
+            WaitFor.waitForPageToLoad(driver);
             AutomationLog.info("Clicked on Search Professionals link");
         }
         catch(Exception e)
@@ -184,7 +190,53 @@ public class SearchProfessionalsPage extends Page
         }
         return element;
     }
-    
+
+    public WebElement searchAgentResultMessage() throws Exception 
+    {
+        try
+        {
+            element =driver.findElement(By.id("resultsLineItemsAgents"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not found Agent Search Result text");
+            throw(e);
+        }
+        return element;
+        
+    }
+
+    public WebElement searchCompaniesResultMessage() throws Exception 
+    {
+        try
+        {
+            element =driver.findElement(By.id("resultsLineItemsCompanies"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not found Company Search Result text");
+            throw(e);
+        }
+        return element;
+        
+    }
+    public String getTextForSearch(WebElement element) throws Exception
+    {
+        String searchmsg=null;
+        WebElement searchelement=element;
+        try
+        {
+            searchmsg=searchelement.getText();
+            AutomationLog.info("Get search result message successfull");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not get search result message");
+            throw(e);
+        }
+        return searchmsg;
+    }
+
     public String getTheCountOFCompanyDumannExclusive()  throws Exception
     {
         String Countofcompanyexclusive="";

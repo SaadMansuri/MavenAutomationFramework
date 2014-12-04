@@ -1,10 +1,8 @@
 package com.agorafy.automation.testcases;
 
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
-
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SearchProfessionalsPage;
@@ -40,6 +38,9 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification {
         
         HashMap<String, String> companyName = testCaseData.get("companySearch");
         isExclusivesCountPresentOnCompanyListing(searchprofessional, companyName);
+        
+        HashMap<String, String> agentCompanySearch = testCaseData.get("agentCompanySearch");
+        verifyIFSearchResultMessageIsShown(searchprofessional,agentCompanySearch);
     }
     
     public void isExclusivesCountPresentOnAgentListing(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentName) throws Exception
@@ -54,6 +55,18 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification {
         searchprofessional.enterAgentOrCompanyNameinAgentSearchAndClickonSearchButton(companyName.get("name"));
         searchprofessional.clickOnCompaniesTabOnSearchProfessionals();
         AutomationLog.info("Company Search is successful and its Exclusive Count = "+searchprofessional.getTheCountOFCompanyDumannExclusive());
+    }
+
+    public void verifyIFSearchResultMessageIsShown(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentCompanySearch) throws Exception
+    {
+    	WebElement element=null;
+        searchprofessional.agentSearchTextBox_element().clear();
+        searchprofessional.enterAgentOrCompanyNameinAgentSearchAndClickonSearchButton(agentCompanySearch.get("text"));
+        element=searchprofessional.searchAgentResultMessage();
+        Assert.assertEquals(searchprofessional.getTextForSearch(element),"No agents found", "Expected Search result message not found");
+        searchprofessional.clickOnCompaniesTabOnSearchProfessionals();
+        element=searchprofessional.searchCompaniesResultMessage();
+        Assert.assertEquals(searchprofessional.getTextForSearch(element),"No companies found", "Expected Search result message not found");
     }
 
     @Override
