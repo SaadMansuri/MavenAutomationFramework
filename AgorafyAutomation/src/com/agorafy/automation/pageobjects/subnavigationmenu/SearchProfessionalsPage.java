@@ -41,7 +41,7 @@ public class SearchProfessionalsPage extends Page
         return element;
     }
     
-    public WebElement searchProfessionalsElement() throws Exception
+    public WebElement link_searchProfessionalsElement() throws Exception
     {
         try
         {
@@ -60,7 +60,7 @@ public class SearchProfessionalsPage extends Page
         SearchProfessionalsPage searchprofessional = null;
         try
         {
-            searchProfessionalsElement().click();
+        	link_searchProfessionalsElement().click();
             searchprofessional = new SearchProfessionalsPage(driver);
             WaitFor.waitForPageToLoad(driver);
             AutomationLog.info("Clicked on Search Professionals link");
@@ -73,7 +73,7 @@ public class SearchProfessionalsPage extends Page
             return searchprofessional;
     }
     
-    public WebElement agentSearchTextBox_element() throws Exception
+    public WebElement txtbx_agentSearch_element() throws Exception
     {
         try
         {
@@ -92,7 +92,7 @@ public class SearchProfessionalsPage extends Page
         SearchProfessionalsPage searchprofessional = null;
         try
         {
-            agentSearchTextBox_element().sendKeys(agentname);
+        	txtbx_agentSearch_element().sendKeys(agentname);
             searchprofessional = new SearchProfessionalsPage(driver);
             AutomationLog.info("Agent name is successfully enterted in textbox");
         }
@@ -105,7 +105,7 @@ public class SearchProfessionalsPage extends Page
     }
     
     
-    public WebElement agentSearchSearchButton_element() throws Exception
+    public WebElement btn_AgentSearchSearch_element() throws Exception
     {
         try
         {
@@ -124,10 +124,10 @@ public class SearchProfessionalsPage extends Page
         SearchProfessionalsPage searchprofessional = null;
         try
         {
-            agentSearchTextBox_element().sendKeys(agentname);
+        	txtbx_agentSearch_element().sendKeys(agentname);
             searchprofessional = new SearchProfessionalsPage(driver);
             AutomationLog.info("Agent name is successfully enterted in textbox");
-            agentSearchSearchButton_element().click();
+            btn_AgentSearchSearch_element().click();
             AutomationLog.info("Clicked on Agent Search- search button");
         }
         catch(Exception e)
@@ -182,7 +182,7 @@ public class SearchProfessionalsPage extends Page
         return Countofagentexclusives;
     }
     
-    public WebElement companiesTabOnSearchProfessionals_element() throws Exception
+    public WebElement link_companiesTabOnSearchProfessionals_element() throws Exception
     {
         try
         {
@@ -201,7 +201,7 @@ public class SearchProfessionalsPage extends Page
         SearchProfessionalsPage searchprofessional = null;
         try
         {
-            companiesTabOnSearchProfessionals_element().click();
+        	link_companiesTabOnSearchProfessionals_element().click();
             searchprofessional = new SearchProfessionalsPage(driver);
             AutomationLog.info("Clicked on Companies Tab On SearchProfessionals Page");
         }
@@ -287,7 +287,7 @@ public class SearchProfessionalsPage extends Page
         return Countofcompanyexclusive;
     }
     
-    public WebElement neighborhoodsSearchDropBox_element() throws Exception
+    public WebElement dropBox_NeighborhoodsSearch_element() throws Exception
     {
         try
         {
@@ -305,7 +305,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-            neighborhoodsSearchDropBox_element().click();
+        	dropBox_NeighborhoodsSearch_element().click();
             AutomationLog.info("Successfully click on Neighborhoods Search DropBox");
         }
         catch(Exception e)
@@ -316,7 +316,7 @@ public class SearchProfessionalsPage extends Page
         return element;
     }
         
-    public WebElement neighborhoodsOptionListing_element(String neighbor) throws Exception
+    public WebElement dropboxOptionListing_neighborhoods_element(String neighbor) throws Exception
     {
         try
         {
@@ -335,7 +335,7 @@ public class SearchProfessionalsPage extends Page
         SearchProfessionalsPage searchprofessional = null;
         try
         {
-            neighborhoodsOptionListing_element(neighbor).click();
+        	dropboxOptionListing_neighborhoods_element(neighbor).click();
             searchprofessional = new SearchProfessionalsPage(driver);
             AutomationLog.info("Clicked on neighborhoods "+neighbor+" Option from Listing");
         }
@@ -347,7 +347,7 @@ public class SearchProfessionalsPage extends Page
             return searchprofessional;
     }
     
-    public WebElement focusOnNeighborhoodsListOfOptions_element() throws Exception
+    public WebElement dropbox_autocompleteMenu_Of_NeighborhoodsList_element() throws Exception
     {
         try
         {
@@ -366,7 +366,7 @@ public class SearchProfessionalsPage extends Page
         SearchProfessionalsPage searchprofessional = null;
         try
         {
-            new Actions(driver).moveToElement(focusOnNeighborhoodsListOfOptions_element()).perform();
+            new Actions(driver).moveToElement(dropbox_autocompleteMenu_Of_NeighborhoodsList_element()).perform();
             searchprofessional = new SearchProfessionalsPage(driver);
             AutomationLog.info("Focus Provided to Neighborhoods dropbox is successful");
         }
@@ -383,7 +383,7 @@ public class SearchProfessionalsPage extends Page
         boolean bool;
         try
         {
-            bool=focusOnNeighborhoodsListOfOptions_element().isDisplayed();
+            bool=dropbox_autocompleteMenu_Of_NeighborhoodsList_element().isDisplayed();
         }
         catch(Exception e)
         {
@@ -393,7 +393,7 @@ public class SearchProfessionalsPage extends Page
         return bool;
      }
     
-    public WebElement checkboxOfOfficeLeasingInExpertise_element() throws Exception
+    public WebElement checkbox_OfOfficeLeasingInExpertise_element() throws Exception
     {
         try
         {
@@ -412,7 +412,7 @@ public class SearchProfessionalsPage extends Page
         SearchProfessionalsPage searchprofessional = null;
         try
         {
-            checkboxOfOfficeLeasingInExpertise_element().click();
+        	checkbox_OfOfficeLeasingInExpertise_element().click();
             searchprofessional = new SearchProfessionalsPage(driver);
             AutomationLog.info("Clicked on Checkbox of Office Leasing In Expertise");
         }
@@ -424,7 +424,7 @@ public class SearchProfessionalsPage extends Page
             return searchprofessional;
     }
 
-    public WebElement checkboxOfRetailLeasingInExpertise_element() throws Exception
+    public WebElement checkbox_OfRetailLeasingInExpertise_element() throws Exception
     {
         try
         {
@@ -443,7 +443,7 @@ public class SearchProfessionalsPage extends Page
         SearchProfessionalsPage searchprofessional = null;
         try
         {
-            checkboxOfRetailLeasingInExpertise_element().click();
+        	checkbox_OfRetailLeasingInExpertise_element().click();
             searchprofessional = new SearchProfessionalsPage(driver);
             AutomationLog.info("Clicked on Checkbox of RetailLeasing In Expertise");
         }
@@ -455,7 +455,7 @@ public class SearchProfessionalsPage extends Page
             return searchprofessional;
     }
     
-    public WebElement checkboxOfLandlordRepresentationInConcentration_element() throws Exception
+    public WebElement checkbox_OfLandlordRepresentationInConcentration_element() throws Exception
     {
         try
         {
@@ -474,7 +474,7 @@ public class SearchProfessionalsPage extends Page
         SearchProfessionalsPage searchprofessional = null;
         try
         {
-            checkboxOfLandlordRepresentationInConcentration_element().click();
+        	checkbox_OfLandlordRepresentationInConcentration_element().click();
             searchprofessional = new SearchProfessionalsPage(driver);
             AutomationLog.info("Clicked on Checkbox of Landlord Representation In Concentration");
         }
@@ -486,7 +486,7 @@ public class SearchProfessionalsPage extends Page
             return searchprofessional;
     }
     
-    public WebElement checkboxOfTenantRepresentationInConcentration_element() throws Exception
+    public WebElement checkbox_OfTenantRepresentationInConcentration_element() throws Exception
     {
         try
         {
@@ -505,7 +505,7 @@ public class SearchProfessionalsPage extends Page
         SearchProfessionalsPage searchprofessional = null;
         try
         {
-            checkboxOfTenantRepresentationInConcentration_element().click();
+        	checkbox_OfTenantRepresentationInConcentration_element().click();
             searchprofessional = new SearchProfessionalsPage(driver);
             AutomationLog.info("Clicked on Checkbox of Tenant Representation In Concentration");
         }
