@@ -137,7 +137,23 @@ public class SearchProfessionalsPage extends Page
         }
             return searchprofessional;
     }
-    
+
+    public void enterSearchcontentInAgentCompanySearchTextBox(String searchtext) throws Exception
+    {
+        try
+        {
+            agentSearchTextBox_element().clear();
+            agentSearchTextBox_element().sendKeys(searchtext);
+            AutomationLog.info("Successfully entered search text for agent company search");
+            
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to enter search text for agent company search ");
+            throw(e);
+        }
+    }
+
     public WebElement agentTerryExclusives_element() throws Exception
     {
         try

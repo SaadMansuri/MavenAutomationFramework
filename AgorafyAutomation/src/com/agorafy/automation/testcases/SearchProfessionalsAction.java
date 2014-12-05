@@ -51,6 +51,9 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         verifyNeighborHoodDropBoxDoNotAddMoreThen5Neighbor(searchprofessional,neighborName);
         
         userSwitchBackFromSearchingExpertiseToAgentAndCompanySearch(searchprofessional,agentName);
+        
+        HashMap<String, String> search = testCaseData.get("agentName");
+        verifyIfSearchByExpertiseClearsAgentCompanySearchText(searchprofessional,search); 
     }
     
     public void isExclusivesCountPresentOnAgentListing(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentName) throws Exception
@@ -122,6 +125,14 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         AutomationLog.info("All Checkbox is successfully uncheck and text on neighborhoods Search DropBox is also removed");
     }
 
+    public void verifyIfSearchByExpertiseClearsAgentCompanySearchText(SearchProfessionalsPage searchprofessional,HashMap<String, String> search) throws Exception
+    {
+    	WebElement element=null;
+        searchprofessional.enterSearchcontentInAgentCompanySearchTextBox(search.get("name"));
+        searchprofessional.clickingOncheckboxOfOfficeLeasingInExpertise();
+        element=searchprofessional.agentSearchTextBox_element();
+        Assert.assertEquals(element.getText(), "", "Expected Agent search textbox is not cleard ");
+    }
     @Override
     protected String successMessage() {
         return "Test cases passed for Search Professionals";
