@@ -142,8 +142,8 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-            agentSearchTextBox_element().clear();
-            agentSearchTextBox_element().sendKeys(searchtext);
+            txtbx_agentSearch_element().clear();
+            txtbx_agentSearch_element().sendKeys(searchtext);
             AutomationLog.info("Successfully entered search text for agent company search");
             
         }

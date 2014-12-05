@@ -130,7 +130,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     	WebElement element=null;
         searchprofessional.enterSearchcontentInAgentCompanySearchTextBox(search.get("name"));
         searchprofessional.clickingOncheckboxOfOfficeLeasingInExpertise();
-        element=searchprofessional.agentSearchTextBox_element();
+        element=searchprofessional.txtbx_agentSearch_element();
         Assert.assertEquals(element.getText(), "", "Expected Agent search textbox is not cleard ");
     }
     @Override
