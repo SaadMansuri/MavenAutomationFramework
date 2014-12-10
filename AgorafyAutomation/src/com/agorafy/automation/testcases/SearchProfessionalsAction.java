@@ -54,6 +54,9 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         
         HashMap<String, String> search = testCaseData.get("agentName");
         verifyIfSearchByExpertiseClearsAgentCompanySearchText(searchprofessional,search); 
+        
+        verifyIfClickingOnClearButtonClearsFieldsOnExpertiseSearchPanel(searchprofessional);
+    
     }
     
     public void isExclusivesCountPresentOnAgentListing(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentName) throws Exception
@@ -127,12 +130,24 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
 
     public void verifyIfSearchByExpertiseClearsAgentCompanySearchText(SearchProfessionalsPage searchprofessional,HashMap<String, String> search) throws Exception
     {
-    	WebElement element=null;
+        WebElement element=null;
         searchprofessional.enterSearchcontentInAgentCompanySearchTextBox(search.get("name"));
         searchprofessional.clickingOncheckboxOfOfficeLeasingInExpertise();
         element=searchprofessional.txtbx_agentSearch_element();
         Assert.assertEquals(element.getText(), "", "Expected Agent search textbox is not cleard ");
     }
+
+    public void verifyIfClickingOnClearButtonClearsFieldsOnExpertiseSearchPanel(SearchProfessionalsPage searchProfessional) throws Exception
+    {
+       searchprofessional.markCheckboxesInExpertiseAndConcentration();
+       HashMap<String, String> neighbor = testCaseData.get("Neighborhoods");
+       searchprofessional.enterNeighborhoodsForNeighborhoods(neighbor.get("neighbor1"), neighbor.get("neighbor2"),neighbor.get("neighbor3"),neighbor.get("neighbor4"),neighbor.get("neighbor5"));
+       searchProfessional.clickOnClearButtonOnExpertiesSearchPanel();
+       Assert.assertEquals(searchProfessional.isCheckboxSelected(), false, "Expected checkboxes are not cleared");
+       Assert.assertEquals(searchProfessional.checkingNeighborhoodsDropBoxVisibility(), false, "Expected empty dropbox is not empty");
+       AutomationLog.info("Clicking clear button clears checkboxes and boroughs");
+    }
+
     @Override
     protected String successMessage() {
         return "Test cases passed for Search Professionals";

@@ -1,6 +1,9 @@
 package com.agorafy.automation.pageobjects.subnavigationmenu;
 
 
+
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,7 +43,36 @@ public class SearchProfessionalsPage extends Page
         }
         return element;
     }
-    
+
+    public WebElement btn_ClearOnExpertiseSearch() throws Exception
+    {
+        try
+        {
+            element=driver.findElement(By.id("brokerClearButton"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find clear button on expertise search panel");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnClearButtonOnExpertiesSearchPanel() throws Exception
+    {
+        try
+        {
+            btn_ClearOnExpertiseSearch().click();
+            AutomationLog.info("Successfully clicked on Clear button on Expertise search panel");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could no click on Clear button");
+            throw(e);
+        }
+        
+        
+    }
     public WebElement link_searchProfessionalsElement() throws Exception
     {
         try
@@ -516,7 +548,132 @@ public class SearchProfessionalsPage extends Page
         }
             return searchprofessional;
     }
+
+    public WebElement checkbox_BuildingManagament() throws Exception
+    {
+        try
+        {
+            element=driver.findElement(By.id("exp_building"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find checkbox for Building managament");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnBuildingManagementCheckBox() throws Exception
+    {
+        try
+        {
+            checkbox_BuildingManagament().click();
+            AutomationLog.info("Successfully clicked on Building management checkbox");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Building management checkbox");
+            throw(e);
+        }
+    }
+    public WebElement checkbox_InvestmentSales() throws Exception
+    {
+        try
+        {
+            element=driver.findElement(By.id("exp_investment"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find checkbox for InvestmentSales");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnInvestmentSalesCheckBox() throws Exception
+    {
+        try
+        {
+            checkbox_InvestmentSales().click();
+            AutomationLog.info("Successfully clicked on InvestmentSales checkbox");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on InvestmentSales checkbox");
+            throw(e);
+        }
+    }
+
+    public void markCheckboxesInExpertiseAndConcentration() throws Exception
+    {
+        try
+        {
+            WebElement select = driver.findElement(By.id("commercialBrokerage"));
+            List<WebElement> options = select.findElements(By.className("checkbox"));
+            for(WebElement option:options)
+            {
+                option.click();
+            }
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could no mark all checkboxes in ExpertiseAndConcentration ");
+            throw(e);
+        }
+    }
+
+    public boolean isCheckboxSelected() throws Exception
+    {
+        boolean val = false,finalval = false;
+        int count=0;
+        try
+        {
+        	WebElement select = driver.findElement(By.id("commercialBrokerage"));
+            List<WebElement> options = select.findElements(By.className("checkbox"));
+            for(WebElement option:options)
+            {
+                val=option.isSelected();
+                if(!val)
+                {
+                   count++;
+                }
+            }
+            if(count==6)
+            {
+                finalval=val;
+            }
+            else
+            {
+                finalval=true;
+            }
+        }
+        catch(Exception e)
+        {
+            
+        }
+        return finalval;
+    }
+
+    public void enterNeighborhoodsForNeighborhoods(String one,String two,String three,String four,String five) throws Exception
+    {
+        clickOnNeighborhoodsSearchDropBox();
+        ActionToProvideFocusOnDropBox();
+        clickOnneighborhoodsOptionListing(one);
+        clickOnNeighborhoodsSearchDropBox();
+        ActionToProvideFocusOnDropBox();
+        clickOnneighborhoodsOptionListing(two);
+        clickOnNeighborhoodsSearchDropBox();
+        ActionToProvideFocusOnDropBox();
+        clickOnneighborhoodsOptionListing(three);
+        clickOnNeighborhoodsSearchDropBox();
+        ActionToProvideFocusOnDropBox();
+        clickOnneighborhoodsOptionListing(four);
+        clickOnNeighborhoodsSearchDropBox();
+        ActionToProvideFocusOnDropBox();
+        clickOnneighborhoodsOptionListing(five);
+    }
     
+
     @Override
     public String pageHeading() throws Exception
     {

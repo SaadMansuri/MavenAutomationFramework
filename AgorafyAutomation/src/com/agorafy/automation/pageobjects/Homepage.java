@@ -1,5 +1,7 @@
 package com.agorafy.automation.pageobjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -61,17 +63,41 @@ public class Homepage extends Page
         return element;
     }
 
-    public WebElement dropdown_SelectListingCategoryIcon() throws Exception 
+    public WebElement dropdown_SelectBoroughIcon() throws Exception
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='listingCategorySelect']/div/span"));
-            AutomationLog.info("Select Listing Catrgory Icon found ");
+            element = driver.findElement(By.xpath(".//*[@id='boroughSelect']/div/span"));
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Select Listing Catrgory Icon ");
-            throw(e);
+            AutomationLog.error("Could not find Select Borough Icon ");
+        }
+        return element;
+    }
+
+    public void clickOnSelectBoroughIcon() throws Exception
+    {
+        try
+        {
+            dropdown_SelectBoroughIcon().click();
+            AutomationLog.info("Successfully clicked on Select Borough Icon");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Select Borough Icon");
+        }
+    }
+
+    public WebElement dropdown_SelectListingCategoryIcon() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='listingCategorySelect']/div/span"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Select Borough Icon ");
         }
         return element;
     }
@@ -81,41 +107,43 @@ public class Homepage extends Page
         try
         {
             dropdown_SelectListingCategoryIcon().click();
-            AutomationLog.info("Successfully clicked on SelectListingCategoryIcon");
+            AutomationLog.info("Successfully clicked on Select Listing CategoryIcon");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not click on SelectListingCategoryIcon");
-            throw(e);
+            AutomationLog.error("Could not click on Select Listing Category Icon");
         }
     }
-    public WebElement dropdownOption_Residential() throws Exception
+
+    public WebElement dropdown_SelectListingCategory() throws Exception 
     {
         try
         {
-            element= driver.findElement(By.xpath(".//*[@id='listingCategorySelect']/ul/li[2]/a"));
+            element = driver.findElement(By.id("listingCategorySelect"));
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Residential category in dropdown");
+            AutomationLog.error("Could not found Select Listing Catrgory Icon ");
             throw(e);
         }
         return element;
     }
 
-    public void selectResidentialListingCategory() throws Exception
+    public WebElement dropdown_Borough() throws Exception
     {
         try
         {
-            dropdownOption_Residential().click();
-            AutomationLog.info("Successfully selected residential category option ");
+            element = driver.findElement(By.id("boroughSelect"));
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not select Residential category option");
+            AutomationLog.error("Could not found Boroughs dropdown");
             throw(e);
         }
+        return element;
     }
+
+
     public WebElement btn_Search() throws Exception 
     {
         try
@@ -145,13 +173,59 @@ public class Homepage extends Page
         }
     }
 
+    public void selectListingCategory(String selectcategory) throws Exception
+    {
+        try
+        {
+            WebElement select = driver.findElement(By.id("listingCategorySelect"));
+            List<WebElement> listingcategories = select.findElements(By.className("dd-option-text"));
+            for(WebElement listingcategory:listingcategories)
+            {
+                if((listingcategory.getText()).equalsIgnoreCase(selectcategory))
+                {
+                    listingcategory.click();
+                }
+            }
+            AutomationLog.info("Successfully selected listing category");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not select listing category");
+            throw(e);
+        }
+    }
+
+    public void selectBorough(String selectborough) throws Exception
+    {
+        try
+        {
+            WebElement select = driver.findElement(By.id("boroughSelect"));
+            List<WebElement> boroughs = select.findElements(By.className("dd-option-text"));
+            for(WebElement borough:boroughs)
+            {
+                if((borough.getText()).equalsIgnoreCase(selectborough))
+                {
+                    borough.click();
+                }
+            }
+            AutomationLog.info("Successfully selected borough");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not select borough");
+            throw(e);
+        }
+    }
+
     public PropertySearch populateSearchTermTextBox() throws Exception
     {
         PropertySearch propertysearch=null;
         try
         {
+            clickOnSelectBoroughIcon();
+            selectBorough("Manhattan");
             clickOnSelectListingCategoryIcon();
-            selectResidentialListingCategory();
+            selectListingCategory("Residential");
             txtbx_SearchTerm().sendKeys("Rentals in 10010");
             clickOnSearchButtton();
             propertysearch=new PropertySearch(driver);
