@@ -17,6 +17,7 @@ import com.agorafy.automation.pageobjects.PropertyDetailPage;
 public class PropertyDetailAction extends AutomationTestCaseVerification
 {
     PropertyDetailPage propertydetails=new PropertyDetailPage();
+    Homepage homepage=new Homepage();
     Header header=Homepage.header();;
     
     public PropertyDetailAction()
@@ -41,24 +42,31 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        isLoginPopUpPresentVerification(propertydetails);
+    	isClickOnloginlinkfrompropertyrecord(propertydetails);
         
         Credentials ValidCredentials = userCredentials();
         isAfterLoginSameUrlAndPropertyRecordVerification(propertydetails,ValidCredentials);
+        
+        logout();
         
         HashMap<String, String> userName = testCaseData.get("userName");
         contactInformationLogInAndCheckUserInformation(propertydetails,ValidCredentials,userName);
     }
     
-    public void isLoginPopUpPresentVerification(PropertyDetailPage propertydetails) throws Exception
+    public void isLoginPopUpPresentVerification() throws Exception
     {
-        propertydetails.clickOnSignUpUpLink();
-        AutomationLog.info("SignUp Link Clicked Successfully");
         Page.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         Assert.assertEquals(propertydetails.checkingLogInPopUpOnPropertyPage(),true,"Expected form is not present");
         AutomationLog.info("Login form is present on page");
         Assert.assertEquals(propertydetails.getTitleOfLogInPopUp(),"Log in","Expected Title is not present on Login Pop-Up");
         AutomationLog.info("Login Title on Pop-up is verified");
+    }
+    
+    public void isClickOnloginlinkfrompropertyrecord(PropertyDetailPage propertydetails) throws Exception
+    {
+        propertydetails.clickOnLogInLink();
+        AutomationLog.info("SignUp Link Clicked Successfully");
+        isLoginPopUpPresentVerification();
     }
     
     public void isAfterLoginSameUrlAndPropertyRecordVerification(PropertyDetailPage propertydetails,Credentials validCredentials) throws Exception
@@ -71,16 +79,17 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
         AutomationLog.info("Property Record section is present on property page");
     }
     
+    public void logout() throws Exception
+    {
+    	homepage=header.logOutProceessOnPropertyDetailPage();
+    }
+    
     public void contactInformationLogInAndCheckUserInformation(PropertyDetailPage propertydetails,Credentials validCredentials, HashMap<String, String> userName) throws Exception
     {
-        propertydetails=header.logOutProceessOnPropertyDetailPage();
         propertydetails.redirectedToPropertyPage();
         String beforeloginUrl=Page.driver.getCurrentUrl();
         propertydetails.clickOnSignInToContactInformation();
-        Assert.assertEquals(propertydetails.checkingLogInPopUpOnPropertyPage(),true,"Expected Login Pop form is not present");
-        AutomationLog.info("Login pop-up is displayed");
-        Assert.assertEquals(propertydetails.getTitleOfLogInPopUp(),"Log in","Expected Title is not present on Login Pop-Up");
-        AutomationLog.info("Login Title on Pop-up is found successfully");
+        isLoginPopUpPresentVerification();
         propertydetails.loginProcessOnPropertyPage(validCredentials.getEmail(), validCredentials.getPassword());
         Assert.assertEquals(Page.driver.getCurrentUrl(),beforeloginUrl,"Expected Url is differnt then expected Url");
         AutomationLog.info("User after login stays on a same page");

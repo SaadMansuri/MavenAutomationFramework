@@ -233,7 +233,7 @@ public class Header extends Page
         return greeting;
     }
     
-    public WebElement dropbox_searchInputBox() throws Exception
+    public WebElement dropbox_navigateArrowsearchInputBox() throws Exception
     {
         try
         {
@@ -247,21 +247,18 @@ public class Header extends Page
         return element;
     }
     
-    public SignUp clickOndropbox_searchInputBox() throws Exception
+    public void clickOndropbox_searchInputBox() throws Exception
     {
-        SignUp signup = null;
         try
         {
-            dropbox_searchInputBox().click();
-            signup = new SignUp(driver);
-            AutomationLog.info("Successfully clicked on dropbox_searchInputBox");
+        	dropbox_navigateArrowsearchInputBox().click();
+            AutomationLog.info("Successfully clicked on navigate arrow of dropbox_searchInputBox");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not click on dropbox_searchInputBox ");
+            AutomationLog.error("Could not clicked on navigate arrow of dropbox_searchInputBox ");
             throw(e);
         }
-        return signup;
     }
     
     public WebElement advancedSearchFormId() throws Exception
@@ -293,7 +290,7 @@ public class Header extends Page
         return Heading;
      }
     
-    public WebElement arrowToNavigateForLogout_element() throws Exception
+    public WebElement arrowToNavigateForLogout() throws Exception
     {
         try
         {
@@ -307,7 +304,7 @@ public class Header extends Page
         return element;
     }
     
-    public WebElement logoutXpathonPropertyPage_element() throws Exception
+    public WebElement logoutXpathonPropertyPage() throws Exception
     {
         try
         {
@@ -321,15 +318,15 @@ public class Header extends Page
         return element;
     }
     
-    public PropertyDetailPage logOutProceessOnPropertyDetailPage() throws Exception
+    public Homepage logOutProceessOnPropertyDetailPage() throws Exception
     {
-        PropertyDetailPage propertydetailpage = null;
+    	Homepage homepage = null;
         try
         {
-            arrowToNavigateForLogout_element().click();
+        	arrowToNavigateForLogout().click();
             AutomationLog.info("Successfully click on arrow to navigate to logout");
-            logoutXpathonPropertyPage_element().click();
-            propertydetailpage = new PropertyDetailPage(driver);
+            logoutXpathonPropertyPage().click();
+            homepage = new Homepage(driver);
             AutomationLog.info("Successfully Logout from Property Page");
         }
         catch(Exception e)
@@ -337,10 +334,10 @@ public class Header extends Page
             AutomationLog.error("Failed to Logout from Property Page");
             throw(e);
         }
-        return propertydetailpage;
+        return homepage;
     }
     
-    public WebElement closeLoginPopUp_element() throws Exception
+    public WebElement closeLoginPopUp() throws Exception
     {
         try
         {
@@ -354,13 +351,11 @@ public class Header extends Page
         return element;
     }
     
-    public Header clickOnCloseLoginPopUp() throws Exception
+    public void clickOnCloseLoginPopUp() throws Exception
     {
-        Header header = null;
         try
         {
-            closeLoginPopUp_element().click();
-            header = new Header(driver);
+        	closeLoginPopUp().click();
             AutomationLog.info("Successfully click on Login pop-up close icon");
         }
         catch(Exception e)
@@ -368,10 +363,9 @@ public class Header extends Page
             AutomationLog.error("Failed to click on Login pop-up close icon");
             throw(e);
         }
-        return header;
     }
     
-    public WebElement searchFormButton_element() throws Exception
+    public WebElement btn_searchForm() throws Exception
     {
         try
         {
@@ -385,13 +379,11 @@ public class Header extends Page
         return element;
     }
     
-    public Header clickOnSearchFormButton() throws Exception
+    public void clickOnSearchFormButton() throws Exception
     {
-        Header header = null;
         try
         {
-            searchFormButton_element().click();
-            header = new Header(driver);
+        	btn_searchForm().click();
             AutomationLog.info("Successfully click on Search Form button");
         }
         catch(Exception e)
@@ -399,10 +391,9 @@ public class Header extends Page
             AutomationLog.error("Failed to click on Search Form button");
             throw(e);
         }
-        return header;
     }
     
-    public WebElement tooltipMessageOnclickingOnEmptySearch_element() throws Exception
+    public WebElement tooltipMessageOnclickingOnEmptySearch() throws Exception
     {
         try
         {
@@ -421,7 +412,7 @@ public class Header extends Page
         boolean tooltip;
         try
         {
-            tooltip=tooltipMessageOnclickingOnEmptySearch_element().isDisplayed();
+            tooltip=tooltipMessageOnclickingOnEmptySearch().isDisplayed();
         }
         catch(Exception e)
         {
@@ -429,6 +420,63 @@ public class Header extends Page
             throw(e);
         }
         return tooltip;
+     }
+    
+    public WebElement dropbox_NeighborhoodStreetAddressZipcodeSearch() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("searchInput"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Neighborhood Street Address Zipcode dropbox is not found");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public void sendDataToNeighborhoodStreetAddressZipcodeSearchDropbox(String data) throws Exception
+    {
+        try
+        {
+        	dropbox_NeighborhoodStreetAddressZipcodeSearch().sendKeys(data);
+            AutomationLog.info("Successfully enter data in Neighborhood Street Address Zipcode Search Dropbox");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to enter data in Neighborhood Street Address Zipcode Search Dropbox");
+            throw(e);
+        }
+    }
+    
+    public WebElement autocompleteMenu_ComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearchDropbox() throws Exception
+    {
+        try
+        {
+        	element = driver.findElement(By.xpath("//li[@class='ui-autocomplete-category']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to Autocomplete Menu which Comes After Typing Text On Neighborhood Street Address Search");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public boolean checkingAutoCompleteMenuComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearchVisibility() throws Exception
+    {
+        boolean bool;
+        try
+        {
+            bool=autocompleteMenu_ComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearchDropbox().isDisplayed();
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Fail to check Neighborhoods DropBox Visibility");
+            throw(e);
+        }
+        return bool;
      }
     
 }

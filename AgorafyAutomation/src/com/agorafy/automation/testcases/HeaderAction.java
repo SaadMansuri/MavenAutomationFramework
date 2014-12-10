@@ -1,6 +1,10 @@
 package com.agorafy.automation.testcases;
 
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
+
 import org.testng.Assert;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -41,6 +45,9 @@ public class HeaderAction extends AutomationTestCaseVerification
         verifyIFAdvancedSearchFormPresent(header);
         verifyIfLoginPopUpIsDisplayed();
         verifyIFTooltipMessageComesAfterClickingOnSearchButton(header);
+        
+        HashMap<String, String> textInZipAddressSearch = testCaseData.get("searchData");
+        verifyIFAutoCompleteMenuComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearch(header,textInZipAddressSearch);
     }
 
     public void verifyIfLoginPopUpIsDisplayed() throws Exception
@@ -64,6 +71,14 @@ public class HeaderAction extends AutomationTestCaseVerification
         header.clickOnSearchFormButton();
         Assert.assertEquals(header.verifyZebraTooltipMessageComesAfterClickingEmptySearchbuttonVisibity(), true, "Expected error message when Tool Tip is not Visible which should come after clicking on search button with empty text");
         AutomationLog.info("Tool Tip is Visible which comes after clicking on search button with empty text");
+    }
+    
+    public void verifyIFAutoCompleteMenuComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearch(Header header, HashMap<String, String> textInZipAddressSearch) throws Exception
+    {
+    	header.sendDataToNeighborhoodStreetAddressZipcodeSearchDropbox(textInZipAddressSearch.get("data"));
+    	Page.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    	Assert.assertEquals(header.checkingAutoCompleteMenuComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearchVisibility(), true, "Expected error message when AutoCompleteMenu is not found which Comes After Typing Text On Neighborhood Street Address Zipcode Search");
+        AutomationLog.info("Sucessfully found AutoCompleteMenu which Comes After Typing Text On Neighborhood Street Address Zipcode Search");
     }
 
     @Override

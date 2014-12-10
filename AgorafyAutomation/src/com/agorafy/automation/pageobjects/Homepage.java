@@ -18,7 +18,11 @@ public class Homepage extends Page
         super(driver);
     }
 
-    public String homepageUrl()
+    public Homepage() {
+    	super(driver);
+	}
+
+	public String homepageUrl()
     {
         return applicationUrl() + "/home/";
     }
