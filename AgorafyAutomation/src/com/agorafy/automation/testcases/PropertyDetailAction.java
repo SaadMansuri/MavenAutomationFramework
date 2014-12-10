@@ -42,7 +42,7 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
-    	isClickOnloginlinkfrompropertyrecord(propertydetails);
+        isClickOnloginlinkfrompropertyrecord(propertydetails);
         
         Credentials ValidCredentials = userCredentials();
         isAfterLoginSameUrlAndPropertyRecordVerification(propertydetails,ValidCredentials);
@@ -81,7 +81,7 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
     
     public void logout() throws Exception
     {
-    	homepage=header.logOutProceessOnPropertyDetailPage();
+        homepage=header.logOutProceessOnPropertyDetailPage();
     }
     
     public void contactInformationLogInAndCheckUserInformation(PropertyDetailPage propertydetails,Credentials validCredentials, HashMap<String, String> userName) throws Exception

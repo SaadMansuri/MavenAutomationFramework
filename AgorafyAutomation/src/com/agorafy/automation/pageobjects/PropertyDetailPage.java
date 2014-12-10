@@ -35,7 +35,7 @@ public class PropertyDetailPage extends Page
         return propertydetail;
     }
     
-    public WebElement propertyRecordLogInLink() throws Exception
+    public WebElement link_propertyRecordLogIn() throws Exception
     {
         try 
         {
@@ -52,11 +52,11 @@ public class PropertyDetailPage extends Page
     
     public LoginPopUp clickOnLogInLink() throws Exception
     {
-    	LoginPopUp loginpopup = null;
+        LoginPopUp loginpopup = null;
         try
         {
-        	propertyRecordLogInLink().click();
-        	loginpopup = new LoginPopUp(driver);
+        	link_propertyRecordLogIn().click();
+            loginpopup = new LoginPopUp(driver);
             AutomationLog.info("Clicked on login link from property record section");
         }
         catch(Exception e)
@@ -127,7 +127,7 @@ public class PropertyDetailPage extends Page
         return Titlename;
      }
     
-    public WebElement emailTextBox() throws Exception
+    public WebElement txtbx_email() throws Exception
     {
         try 
         {
@@ -142,7 +142,7 @@ public class PropertyDetailPage extends Page
         return element;
     }
     
-    public WebElement passwordTextBox() throws Exception
+    public WebElement txtbx_password() throws Exception
     {
         try 
         {
@@ -157,7 +157,7 @@ public class PropertyDetailPage extends Page
         return element;
     }
     
-    public WebElement loginPopUpSubmitButton() throws Exception
+    public WebElement btn_loginPopUpSubmit() throws Exception
     {
         try 
         {
@@ -174,14 +174,14 @@ public class PropertyDetailPage extends Page
     
     public PropertyDetailPage loginProcessOnPropertyPage(String email, String Password ) throws Exception
     {
-    	PropertyDetailPage propertypage=null;
+        PropertyDetailPage propertypage=null;
         try
         {
-        	emailTextBox().sendKeys(email);
+        	txtbx_email().sendKeys(email);
             AutomationLog.info("Email id is entered in textbox successfully");
-            passwordTextBox().sendKeys(Password);
+            txtbx_password().sendKeys(Password);
             AutomationLog.info("Password is entered in textbox successfully");
-            loginPopUpSubmitButton().click();
+            btn_loginPopUpSubmit().click();
             AutomationLog.info("Cliked on 'Log in to my account' button");
             AutomationLog.info("Login Done");
             propertypage = new PropertyDetailPage();
@@ -239,11 +239,11 @@ public class PropertyDetailPage extends Page
     
     public LoginPopUp clickOnSignInToContactInformation() throws Exception
     {
-    	LoginPopUp loginpopup = null;
+        LoginPopUp loginpopup = null;
         try
         {
-        	signInToContactInformation().click();
-        	loginpopup = new LoginPopUp(driver);
+            signInToContactInformation().click();
+            loginpopup = new LoginPopUp(driver);
             AutomationLog.info("Clicked on 'Sign in to see contact information' link");
         }
         catch(Exception e)

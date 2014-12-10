@@ -75,9 +75,9 @@ public class HeaderAction extends AutomationTestCaseVerification
     
     public void verifyIFAutoCompleteMenuComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearch(Header header, HashMap<String, String> textInZipAddressSearch) throws Exception
     {
-    	header.sendDataToNeighborhoodStreetAddressZipcodeSearchDropbox(textInZipAddressSearch.get("data"));
-    	Page.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    	Assert.assertEquals(header.checkingAutoCompleteMenuComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearchVisibility(), true, "Expected error message when AutoCompleteMenu is not found which Comes After Typing Text On Neighborhood Street Address Zipcode Search");
+        header.sendDataToNeighborhoodStreetAddressZipcodeSearchDropbox(textInZipAddressSearch.get("data"));
+        Page.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        Assert.assertEquals(header.checkingAutoCompleteMenuComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearchVisibility(), true, "Expected error message when AutoCompleteMenu is not found which Comes After Typing Text On Neighborhood Street Address Zipcode Search");
         AutomationLog.info("Sucessfully found AutoCompleteMenu which Comes After Typing Text On Neighborhood Street Address Zipcode Search");
     }
 

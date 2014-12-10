@@ -92,7 +92,7 @@ public class SearchProfessionalsPage extends Page
         SearchProfessionalsPage searchprofessional = null;
         try
         {
-        	link_searchProfessionalsElement().click();
+            link_searchProfessionalsElement().click();
             searchprofessional = new SearchProfessionalsPage(driver);
             WaitFor.waitForPageToLoad(driver);
             AutomationLog.info("Clicked on Search Professionals link");
@@ -123,7 +123,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-        	txtbx_agentSearch().sendKeys(agentname);
+            txtbx_agentSearch().sendKeys(agentname);
             AutomationLog.info("Agent name is successfully enterted in textbox");
         }
         catch(Exception e)
@@ -152,7 +152,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-        	txtbx_agentSearch().sendKeys(agentname);
+            txtbx_agentSearch().sendKeys(agentname);
             AutomationLog.info("Agent name is successfully enterted in textbox");
             btn_AgentSearchSearch().click();
             AutomationLog.info("Clicked on Agent Search- search button");
@@ -168,8 +168,8 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-        	txtbx_agentSearch().clear();
-        	txtbx_agentSearch().sendKeys(searchtext);
+            txtbx_agentSearch().clear();
+            txtbx_agentSearch().sendKeys(searchtext);
             AutomationLog.info("Successfully entered search text for agent company search");
             
         }
@@ -226,7 +226,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-        	link_companiesTabOnSearchProfessionals().click();
+            link_companiesTabOnSearchProfessionals().click();
             AutomationLog.info("Clicked on Companies Tab On SearchProfessionals Page");
         }
         catch(Exception e)
@@ -328,7 +328,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-        	dropBox_NeighborhoodsSearch().click();
+            dropBox_NeighborhoodsSearch().click();
             AutomationLog.info("Successfully click on Neighborhoods Search DropBox");
         }
         catch(Exception e)
@@ -356,7 +356,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-        	dropboxOptionListing_neighborhoods(neighbor).click();
+            dropboxOptionListing_neighborhoods(neighbor).click();
             AutomationLog.info("Clicked on neighborhoods "+neighbor+" Option from Listing");
         }
         catch(Exception e)
@@ -427,7 +427,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-        	checkbox_OfOfficeLeasingInExpertise().click();
+            checkbox_OfOfficeLeasingInExpertise().click();
             AutomationLog.info("Clicked on Checkbox of Office Leasing In Expertise");
         }
         catch(Exception e)
@@ -455,7 +455,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-        	checkbox_OfRetailLeasingInExpertise().click();
+            checkbox_OfRetailLeasingInExpertise().click();
             AutomationLog.info("Clicked on Checkbox of RetailLeasing In Expertise");
         }
         catch(Exception e)
@@ -483,7 +483,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-        	checkbox_OfLandlordRepresentationInConcentration().click();
+            checkbox_OfLandlordRepresentationInConcentration().click();
             AutomationLog.info("Clicked on Checkbox of Landlord Representation In Concentration");
         }
         catch(Exception e)
@@ -511,7 +511,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-        	checkbox_OfTenantRepresentationInConcentration().click();
+            checkbox_OfTenantRepresentationInConcentration().click();
             AutomationLog.info("Clicked on Checkbox of Tenant Representation In Concentration");
         }
         catch(Exception e)
@@ -600,7 +600,7 @@ public class SearchProfessionalsPage extends Page
         int count=0;
         try
         {
-        	WebElement select = driver.findElement(By.id("commercialBrokerage"));
+            WebElement select = driver.findElement(By.id("commercialBrokerage"));
             List<WebElement> options = select.findElements(By.className("checkbox"));
             for(WebElement option:options)
             {

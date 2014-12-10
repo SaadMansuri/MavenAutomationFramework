@@ -251,7 +251,7 @@ public class Header extends Page
     {
         try
         {
-        	dropbox_navigateArrowsearchInputBox().click();
+            dropbox_navigateArrowsearchInputBox().click();
             AutomationLog.info("Successfully clicked on navigate arrow of dropbox_searchInputBox");
         }
         catch(Exception e)
@@ -320,10 +320,10 @@ public class Header extends Page
     
     public Homepage logOutProceessOnPropertyDetailPage() throws Exception
     {
-    	Homepage homepage = null;
+        Homepage homepage = null;
         try
         {
-        	arrowToNavigateForLogout().click();
+            arrowToNavigateForLogout().click();
             AutomationLog.info("Successfully click on arrow to navigate to logout");
             logoutXpathonPropertyPage().click();
             homepage = new Homepage(driver);
@@ -355,7 +355,7 @@ public class Header extends Page
     {
         try
         {
-        	closeLoginPopUp().click();
+            closeLoginPopUp().click();
             AutomationLog.info("Successfully click on Login pop-up close icon");
         }
         catch(Exception e)
@@ -383,7 +383,7 @@ public class Header extends Page
     {
         try
         {
-        	btn_searchForm().click();
+            btn_searchForm().click();
             AutomationLog.info("Successfully click on Search Form button");
         }
         catch(Exception e)
@@ -440,7 +440,7 @@ public class Header extends Page
     {
         try
         {
-        	dropbox_NeighborhoodStreetAddressZipcodeSearch().sendKeys(data);
+            dropbox_NeighborhoodStreetAddressZipcodeSearch().sendKeys(data);
             AutomationLog.info("Successfully enter data in Neighborhood Street Address Zipcode Search Dropbox");
         }
         catch(Exception e)
@@ -454,7 +454,7 @@ public class Header extends Page
     {
         try
         {
-        	element = driver.findElement(By.xpath("//li[@class='ui-autocomplete-category']"));
+            element = driver.findElement(By.xpath("//li[@class='ui-autocomplete-category']"));
         }
         catch(Exception e)
         {
