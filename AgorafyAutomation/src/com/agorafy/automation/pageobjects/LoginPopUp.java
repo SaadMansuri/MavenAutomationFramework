@@ -96,6 +96,20 @@ public class LoginPopUp extends Page
         return element;
     }
 
+    public WebElement icon_CloseOnLoginPopUp() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("html/body/div[5]/div[1]/a"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Close icon on login popup");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement title_LoginPopUp() throws Exception
     {
         try
