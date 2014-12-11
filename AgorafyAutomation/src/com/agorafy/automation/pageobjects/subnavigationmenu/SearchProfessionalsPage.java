@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -643,6 +644,49 @@ public class SearchProfessionalsPage extends Page
         clickOnNeighborhoodsSearchDropBox();
         ActionToProvideFocusOnDropBox();
         clickOnneighborhoodsOptionListing(five);
+    }
+    
+    public WebElement dropbox_selectBrokerageCustomSelect() throws Exception
+    {
+        try
+        {
+            element=driver.findElement(By.name("context"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find dropbox brokerage custom select");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public void clickOnSelectBrokerageCustomSelect() throws Exception
+    {
+        try
+        {
+            dropbox_selectBrokerageCustomSelect().click();
+            AutomationLog.info("Successfully clicked on dropbox brokerage custom select");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on dropbox brokerage custom select");
+            throw(e);
+        }
+    }
+        
+    public void clickOnSelectOptions(String title) throws Exception
+    {
+        try
+        {
+            Select droplist = new Select(driver.findElement(By.name("context")));   
+            droplist.selectByVisibleText(title);
+            AutomationLog.info("Successfully clicked on Select Option Commercial");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Select Option Commercial");
+            throw(e);
+        }
     }
     
 
