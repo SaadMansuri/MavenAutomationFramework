@@ -680,11 +680,11 @@ public class SearchProfessionalsPage extends Page
         {
             Select droplist = new Select(driver.findElement(By.name("context")));   
             droplist.selectByVisibleText(title);
-            AutomationLog.info("Successfully clicked on Select Option Commercial");
+            AutomationLog.info("Successfully click on Select Option "+title+"");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not click on Select Option Commercial");
+            AutomationLog.error("Could not click on Select Option "+title+"");
             throw(e);
         }
     }

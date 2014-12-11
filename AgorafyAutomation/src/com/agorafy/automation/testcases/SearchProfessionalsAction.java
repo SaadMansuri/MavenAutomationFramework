@@ -57,9 +57,10 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         
         verifyIfClickingOnClearButtonClearsFieldsOnExpertiseSearchPanel(searchprofessional);
         
-        verifyDetailsEnteredShouldNotPersist(searchprofessional);
+        HashMap<String, String> propertyType = testCaseData.get("propertyType");
+        verifyDetailsEnteredShouldNotPersist(searchprofessional,propertyType);
         
-        verifyNeighborhoodsEnteredShouldNotPersist(searchprofessional,neighborName);
+        verifyNeighborhoodsEnteredShouldNotPersist(searchprofessional,neighborName,propertyType);
     
     }
     
@@ -167,19 +168,19 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
        AutomationLog.info("Clicking clear button clears checkboxes and boroughs");
     }
     
-    public void verifyDetailsEnteredShouldNotPersist(SearchProfessionalsPage searchProfessional) throws Exception
+    public void verifyDetailsEnteredShouldNotPersist(SearchProfessionalsPage searchProfessional, HashMap<String, String> propertyType) throws Exception
     {
         clickingCheckboxOFExpertiseAndConcentration();
-        searchprofessional.clickOnSelectOptions("Residential");
-        searchprofessional.clickOnSelectOptions("Commercial");
+        searchprofessional.clickOnSelectOptions(propertyType.get("res"));
+        searchprofessional.clickOnSelectOptions(propertyType.get("com"));
         AssertToVerifyThatCheckboxOFExpertiseAndConcentrationMustBeUncheck();
     }
     
-    public void verifyNeighborhoodsEnteredShouldNotPersist(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighborName) throws Exception
+    public void verifyNeighborhoodsEnteredShouldNotPersist(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighborName, HashMap<String, String> propertyType) throws Exception
     {
         putDataInNeighborHoodDropBox(neighborName);
-        searchprofessional.clickOnSelectOptions("Residential");
-        searchprofessional.clickOnSelectOptions("Commercial");
+        searchprofessional.clickOnSelectOptions(propertyType.get("res"));
+        searchprofessional.clickOnSelectOptions(propertyType.get("com"));
         AssertToVerifyThatCheckboxOFExpertiseAndConcentrationMustBeUncheck();
     }
 
