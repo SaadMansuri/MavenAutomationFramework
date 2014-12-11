@@ -1,5 +1,6 @@
 package com.agorafy.automation.pageobjects;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,6 +31,106 @@ public class PropertySearch extends Page
         return element;
     }
 
+    public WebElement icon_AdvanceSearchDropDown() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("advancedSearch"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find AdvanceSearch Dropdown icon ");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnAdvanceSearchDropDownIcon() throws Exception
+    {
+        try
+        {
+            icon_AdvanceSearchDropDown().click();
+            AutomationLog.info("Successfully clicked on AdvanceSearch DropDown icon");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on AdvanceSearch DropDown icon");
+        }
+        
+    }
+
+    public WebElement txtbx_BedsInAdvanceSearchForm() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("bedsInput"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Textbox for beds in advance search form	");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement btn_SearchOnAdvanceSearchForm() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("searchFormAdvancedButton"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find search button on advance search form");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnSearchButtonOnAdvanceSearchform() throws Exception
+    {
+
+        try
+        {
+            btn_SearchOnAdvanceSearchForm().click();
+            AutomationLog.info("Successfully clicked on Search button on Advanced search form");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not click on Search button on Advanced search form");
+            throw(e);
+        }
+    }
+
+    public void searchByNoOfBeds(String val) throws Exception
+    {
+        clickOnAdvanceSearchDropDownIcon();
+        txtbx_BedsInAdvanceSearchForm().sendKeys(val);
+        clickOnSearchButtonOnAdvanceSearchform();
+    }
+
+    public WebElement FilterText_Beds() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("filterText"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Filter text for advance search(Beds)");
+            throw(e);
+        }
+        return element;
+    }
+ 
+    public String NoOfBedsInPropertiesSearch() throws Exception
+    {
+        String number = null;
+        number = FilterText_Beds().getText();
+        return number;
+        
+    }
+
     public void clickOnSubscribeToThisSearchLink() throws Exception
     {
         try
@@ -40,6 +141,21 @@ public class PropertySearch extends Page
         catch(Exception e)
         {
             AutomationLog.error("Could not clicked on Subscribe to this search link");
+            throw(e);
+        }
+    }
+
+    public void closeLoginPoPup(LoginPopUp loginpopup) throws Exception
+    {
+        try
+        {
+            element = loginpopup.icon_CloseOnLoginPopUp();
+            element.click();
+            AutomationLog.info("Successfully closed Login Pop up");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not close Login Pop up ");
             throw(e);
         }
     }
@@ -73,6 +189,7 @@ public class PropertySearch extends Page
         }
         return title;
     }
+
     public boolean loginPopUpIsDisplayed(LoginPopUp loginpopup) throws Exception
     {
         boolean val;

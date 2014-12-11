@@ -31,7 +31,7 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         {
             homepage=Homepage.homePage();
             Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            propertysearch=homepage.populateSearchTermTextBox();
+            propertysearch=homepage.populateSearchTermTextBox("Manhattan","Residential","Rentals in 10010");
             loginpopup=new LoginPopUp(Page.driver);
             AutomationLog.info("Redirected to Property Search page ");
         }
@@ -46,6 +46,7 @@ public class PropertySearchAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception 
     {
         verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink();
+        verifyIfSearchByBedsShowsPropertiesWithNoOfBeds();
     }
 
     public void verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink() throws Exception
@@ -55,6 +56,15 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         Assert.assertEquals(propertysearch.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
         Assert.assertEquals(propertysearch.getTitleForLoginPopUp(), "Log in", "Could not Get login pop up title");
         AutomationLog.info("Clicking on Subscribe to this search link displays Login popup ");
+    }
+
+    public void verifyIfSearchByBedsShowsPropertiesWithNoOfBeds() throws Exception
+    {
+        String result = null;
+        propertysearch.closeLoginPoPup(loginpopup);
+        propertysearch.searchByNoOfBeds("2");
+        result = propertysearch.NoOfBedsInPropertiesSearch();
+        Assert.assertEquals(result, "2", "Expected Properties with specified beds is not shown");
     }
 
     @Override
