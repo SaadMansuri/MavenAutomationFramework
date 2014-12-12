@@ -56,6 +56,11 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         verifyIfSearchByExpertiseClearsAgentCompanySearchText(searchprofessional,search); 
         */
         verifyIfClickingOnClearButtonClearsFieldsOnExpertiseSearchPanel(searchprofessional);
+        
+        HashMap<String, String> propertyType = testCaseData.get("propertyType");
+        verifyDetailsEnteredShouldNotPersist(searchprofessional,propertyType);
+        
+        verifyNeighborhoodsEnteredShouldNotPersist(searchprofessional,neighborName,propertyType);
     
     }
     
@@ -85,8 +90,8 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         Assert.assertEquals(searchprofessional.getTextForSearch(element),"No companies found", "Expected Search result message not found");
     }
     
-    public void verifyNeighborHoodDropBoxDoNotAddMoreThen5Neighbor(SearchProfessionalsPage searchprofessional, HashMap<String, String> neighborName) throws Exception
-    {
+     public void putDataInNeighborHoodDropBox(HashMap<String, String> neighborName) throws Exception
+     {
         searchprofessional.clickOnNeighborhoodsSearchDropBox();
         searchprofessional.ActionToProvideFocusOnDropBox();
         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor1"));
@@ -102,19 +107,26 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         searchprofessional.clickOnNeighborhoodsSearchDropBox();
         searchprofessional.ActionToProvideFocusOnDropBox();
         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor5"));
+     }
+        
+    public void verifyNeighborHoodDropBoxDoNotAddMoreThen5Neighbor(SearchProfessionalsPage searchprofessional, HashMap<String, String> neighborName) throws Exception
+    {
+        putDataInNeighborHoodDropBox(neighborName);
         searchprofessional.clickOnNeighborhoodsSearchDropBox();
         Assert.assertEquals(searchprofessional.checkingNeighborhoodsDropBoxVisibility(),false ,"Neighborhoods DropBox must not be visible");
         AutomationLog.info("5 Neighborhood is added successful and user is successfully not able to add further Neighbors as Droxbox is not longer visible after adding 5 Neighbors");
     }
     
-    public void userSwitchBackFromSearchingExpertiseToAgentAndCompanySearch(SearchProfessionalsPage searchprofessional, HashMap<String, String> agentName) throws Exception
+    public void clickingCheckboxOFExpertiseAndConcentration() throws Exception
     {
         searchprofessional.clickingOncheckboxOfOfficeLeasingInExpertise();
         searchprofessional.clickingOncheckboxOfRetailLeasingInExpertise();
         searchprofessional.clickingOncheckboxOfTenantRepresentationInConcentration();
         searchprofessional.clickingOnLandlordRepresentationInConcentration();
-        Page.driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
-        searchprofessional.sendDataToAgentSearchTextBox(agentName.get("name"));
+    }
+    
+    public void AssertToVerifyThatCheckboxOFExpertiseAndConcentrationMustBeUncheck() throws Exception
+    {
         Assert.assertEquals(searchprofessional.dropBox_NeighborhoodsSearch().getText(),"" ,"Excepted result is the neighborhoods Search DropBox must get empty");
         AutomationLog.info("neighborhoods Search DropBox all text gets removed successfully");
         Assert.assertEquals(searchprofessional.checkbox_OfOfficeLeasingInExpertise().isSelected(),false ,"Excepted result is false and checkbox must not be clicked");
@@ -126,6 +138,14 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         Assert.assertEquals(searchprofessional.checkbox_OfLandlordRepresentationInConcentration().isSelected(),false ,"Excepted result is false and checkbox must not be clicked");
         AutomationLog.info("successfully verified that checkbox Of Landlord Representation In Concentration is uncheck");
         AutomationLog.info("All Checkbox is successfully uncheck and text on neighborhoods Search DropBox is also removed");
+    }
+    
+    public void userSwitchBackFromSearchingExpertiseToAgentAndCompanySearch(SearchProfessionalsPage searchprofessional, HashMap<String, String> agentName) throws Exception
+    {
+        clickingCheckboxOFExpertiseAndConcentration();
+        Page.driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
+        searchprofessional.sendDataToAgentSearchTextBox(agentName.get("name"));
+        AssertToVerifyThatCheckboxOFExpertiseAndConcentrationMustBeUncheck();
     }
 
     public void verifyIfSearchByExpertiseClearsAgentCompanySearchText(SearchProfessionalsPage searchprofessional,HashMap<String, String> search) throws Exception
@@ -146,6 +166,22 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
        Assert.assertEquals(searchProfessional.isCheckboxSelected(), false, "Expected checkboxes are not cleared");
        Assert.assertEquals(searchProfessional.checkingNeighborhoodsDropBoxVisibility(), false, "Expected empty dropbox is not empty");
        AutomationLog.info("Clicking clear button clears checkboxes and boroughs");
+    }
+    
+    public void verifyDetailsEnteredShouldNotPersist(SearchProfessionalsPage searchProfessional, HashMap<String, String> propertyType) throws Exception
+    {
+        clickingCheckboxOFExpertiseAndConcentration();
+        searchprofessional.clickOnSelectOptions(propertyType.get("res"));
+        searchprofessional.clickOnSelectOptions(propertyType.get("com"));
+        AssertToVerifyThatCheckboxOFExpertiseAndConcentrationMustBeUncheck();
+    }
+    
+    public void verifyNeighborhoodsEnteredShouldNotPersist(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighborName, HashMap<String, String> propertyType) throws Exception
+    {
+        putDataInNeighborHoodDropBox(neighborName);
+        searchprofessional.clickOnSelectOptions(propertyType.get("res"));
+        searchprofessional.clickOnSelectOptions(propertyType.get("com"));
+        AssertToVerifyThatCheckboxOFExpertiseAndConcentrationMustBeUncheck();
     }
 
     @Override
