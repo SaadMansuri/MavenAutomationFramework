@@ -90,25 +90,25 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         Assert.assertEquals(searchprofessional.getTextForSearch(element),"No companies found", "Expected Search result message not found");
     }
     
-    public void putDataInNeighborHoodDropBox(HashMap<String, String> neighborName) throws Exception
-    {
-         searchprofessional.clickOnNeighborhoodsSearchDropBox();
-         searchprofessional.ActionToProvideFocusOnDropBox();
-         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor1"));
-         searchprofessional.clickOnNeighborhoodsSearchDropBox();
-         searchprofessional.ActionToProvideFocusOnDropBox();
-         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor2"));
-         searchprofessional.clickOnNeighborhoodsSearchDropBox();
-         searchprofessional.ActionToProvideFocusOnDropBox();
-         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor3"));
-         searchprofessional.clickOnNeighborhoodsSearchDropBox();
-         searchprofessional.ActionToProvideFocusOnDropBox();
-         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor4"));
-         searchprofessional.clickOnNeighborhoodsSearchDropBox();
-         searchprofessional.ActionToProvideFocusOnDropBox();
-         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor5"));
-    }
-    
+     public void putDataInNeighborHoodDropBox(HashMap<String, String> neighborName) throws Exception
+     {
+        searchprofessional.clickOnNeighborhoodsSearchDropBox();
+        searchprofessional.ActionToProvideFocusOnDropBox();
+        searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor1"));
+        searchprofessional.clickOnNeighborhoodsSearchDropBox();
+        searchprofessional.ActionToProvideFocusOnDropBox();
+        searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor2"));
+        searchprofessional.clickOnNeighborhoodsSearchDropBox();
+        searchprofessional.ActionToProvideFocusOnDropBox();
+        searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor3"));
+        searchprofessional.clickOnNeighborhoodsSearchDropBox();
+        searchprofessional.ActionToProvideFocusOnDropBox();
+        searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor4"));
+        searchprofessional.clickOnNeighborhoodsSearchDropBox();
+        searchprofessional.ActionToProvideFocusOnDropBox();
+        searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor5"));
+     }
+        
     public void verifyNeighborHoodDropBoxDoNotAddMoreThen5Neighbor(SearchProfessionalsPage searchprofessional, HashMap<String, String> neighborName) throws Exception
     {
         putDataInNeighborHoodDropBox(neighborName);

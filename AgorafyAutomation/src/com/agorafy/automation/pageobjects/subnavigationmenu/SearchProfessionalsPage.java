@@ -645,35 +645,7 @@ public class SearchProfessionalsPage extends Page
         ActionToProvideFocusOnDropBox();
         clickOnneighborhoodsOptionListing(five);
     }
-    
-    public WebElement dropbox_selectBrokerageCustomSelect() throws Exception
-    {
-        try
-        {
-            element=driver.findElement(By.name("context"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not find dropbox brokerage custom select");
-            throw(e);
-        }
-        return element;
-    }
-    
-    public void clickOnSelectBrokerageCustomSelect() throws Exception
-    {
-        try
-        {
-            dropbox_selectBrokerageCustomSelect().click();
-            AutomationLog.info("Successfully clicked on dropbox brokerage custom select");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not click on dropbox brokerage custom select");
-            throw(e);
-        }
-    }
-        
+           
     public void clickOnSelectOptions(String title) throws Exception
     {
         try
