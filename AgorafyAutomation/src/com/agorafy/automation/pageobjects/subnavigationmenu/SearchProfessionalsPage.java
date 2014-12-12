@@ -644,24 +644,6 @@ public class SearchProfessionalsPage extends Page
         return finalval;
     }
 
-    public void enterNeighborhoodsForNeighborhoods(String one,String two,String three,String four,String five) throws Exception
-    {
-        clickOnNeighborhoodsSearchDropBox();
-        ActionToProvideFocusOnDropBox();
-        clickOnneighborhoodsOptionListing(one);
-        clickOnNeighborhoodsSearchDropBox();
-        ActionToProvideFocusOnDropBox();
-        clickOnneighborhoodsOptionListing(two);
-        clickOnNeighborhoodsSearchDropBox();
-        ActionToProvideFocusOnDropBox();
-        clickOnneighborhoodsOptionListing(three);
-        clickOnNeighborhoodsSearchDropBox();
-        ActionToProvideFocusOnDropBox();
-        clickOnneighborhoodsOptionListing(four);
-        clickOnNeighborhoodsSearchDropBox();
-        ActionToProvideFocusOnDropBox();
-        clickOnneighborhoodsOptionListing(five);
-    }
            
     public void clickOnSelectOptions(String title) throws Exception
     {

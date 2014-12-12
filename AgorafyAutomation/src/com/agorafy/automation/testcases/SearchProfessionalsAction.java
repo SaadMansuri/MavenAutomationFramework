@@ -53,15 +53,15 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         userSwitchBackFromSearchingExpertiseToAgentAndCompanySearch(searchprofessional,agentName);
         
         HashMap<String, String> search = testCaseData.get("agentName");
-        verifyIfSearchByExpertiseClearsAgentCompanySearchText(searchprofessional,search); 
+        verifyIfSearchByExpertiseClearsAgentCompanySearchText(searchprofessional,search);
         
-        verifyIfClickingOnClearButtonClearsFieldsOnExpertiseSearchPanel(searchprofessional);
+        HashMap<String, String> neighbor = testCaseData.get("Neighborhoods");
+        verifyIfClickingOnClearButtonClearsFieldsOnExpertiseSearchPanel(searchprofessional,neighbor);
         
         HashMap<String, String> propertyType = testCaseData.get("propertyType");
         verifyDetailsEnteredShouldNotPersist(searchprofessional,propertyType);
         
         verifyNeighborhoodsEnteredShouldNotPersist(searchprofessional,neighborName,propertyType);
-    
     }
     
     public void isExclusivesCountPresentOnAgentListing(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentName) throws Exception
@@ -157,11 +157,10 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         Assert.assertEquals(element.getText(), "", "Expected Agent search textbox is not cleard ");
     }
 
-    public void verifyIfClickingOnClearButtonClearsFieldsOnExpertiseSearchPanel(SearchProfessionalsPage searchProfessional) throws Exception
+    public void verifyIfClickingOnClearButtonClearsFieldsOnExpertiseSearchPanel(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighbor) throws Exception
     {
        searchprofessional.markCheckboxesInExpertiseAndConcentration();
-       HashMap<String, String> neighbor = testCaseData.get("Neighborhoods");
-       searchprofessional.enterNeighborhoodsForNeighborhoods(neighbor.get("neighbor1"), neighbor.get("neighbor2"),neighbor.get("neighbor3"),neighbor.get("neighbor4"),neighbor.get("neighbor5"));
+       putDataInNeighborHoodDropBox(neighbor);
        searchProfessional.clickOnClearButtonOnExpertiesSearchPanel();
        Assert.assertEquals(searchProfessional.isCheckboxSelected(), false, "Expected checkboxes are not cleared");
        Assert.assertEquals(searchProfessional.checkingNeighborhoodsDropBoxVisibility(), false, "Expected empty dropbox is not empty");
