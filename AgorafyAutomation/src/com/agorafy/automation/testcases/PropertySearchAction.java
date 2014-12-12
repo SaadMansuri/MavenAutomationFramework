@@ -48,6 +48,7 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink();
         verifyIfSearchByBedsShowsPropertiesWithNoOfBeds();
         verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations();
+        verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound();
     }
 
     public void verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink() throws Exception
@@ -74,19 +75,32 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         propertysearch.BedsInAdvanceSearchForm("2");
         propertysearch.clickOnSearchButtonOnAdvanceSearchform();
         Assert.assertEquals(propertysearch.NoOfBedsInPropertiesSearch(), "2", "Expected Properties with specified beds is not shown");
-        Assert.assertEquals(propertysearch.FilterText_Bath().getText(), "2", "Expected Properties with specified beds is not shown");
+        Assert.assertEquals(propertysearch.FilterText_Bath().getText(), "2", "Expected Properties with specified bath is not shown");
+        AutomationLog.info("Properties with X baths And Y Beds And Different Combinations is verified");
+    }
+    
+    public void verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound() throws Exception
+    {
+        propertysearch.clickOnAdvanceSearchDropDownIcon();
+        propertysearch.txtbx_BedsInAdvanceSearchForm().clear();
+        propertysearch.txtbx_BathInAdvanceSearchForm().clear();
+        propertysearch.txtbx_BedsInAdvanceSearchForm().sendKeys("0");
+        propertysearch.BedsInAdvanceSearchForm("0");
+        propertysearch.clickOnSearchButtonOnAdvanceSearchform();
+        Assert.assertEquals(propertysearch.loadingMessage().getText(), "NO RESULTS FOUND.", "Expected message which is no result found is displaying");
+        AutomationLog.info("Successfully verified that by searching with 0 bath and 0 bed, appropiate message comes up");
     }
 
     @Override
     protected String successMessage() 
     {
-    	return "Test case for LoginPopUp on PropertySearch passed";
+        return "Test case for LoginPopUp on PropertySearch passed";
     }
 
     @Override
     protected String failureMessage() 
     {
-    	return "Test case for LoginPopUp on PropertySearch failed";
+        return "Test case for LoginPopUp on PropertySearch failed";
     }
 
 }

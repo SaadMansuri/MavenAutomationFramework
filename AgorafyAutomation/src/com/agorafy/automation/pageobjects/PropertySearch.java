@@ -67,7 +67,7 @@ public class PropertySearch extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not find Textbox for beds in advance search form	");
+            AutomationLog.error("Could not find Textbox for beds in advance search form    ");
             throw(e);
         }
         return element;
@@ -214,7 +214,7 @@ public class PropertySearch extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not find Textbox for beds in advance search form	");
+            AutomationLog.error("Could not find Textbox for beds in advance search form    ");
             throw(e);
         }
         return element;
@@ -224,8 +224,8 @@ public class PropertySearch extends Page
     {
         try
         {
-        	txtbx_BathInAdvanceSearchForm().sendKeys(bathNo);
-        	AutomationLog.error("Could put the "+bathNo+"number of both");
+            txtbx_BathInAdvanceSearchForm().sendKeys(bathNo);
+            AutomationLog.error("Could put the "+bathNo+"number of both");
         }
         catch(Exception e)
         {
@@ -242,7 +242,21 @@ public class PropertySearch extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not find Textbox for beds in advance search form	");
+            AutomationLog.error("Could not find Textbox for bath in advance search form    ");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public WebElement loadingMessage() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//div[@class='loadingMessage'][contains(text(),'No results found')]"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not loadingMessage om Property Search section");
             throw(e);
         }
         return element;
