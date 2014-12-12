@@ -105,6 +105,7 @@ public class PropertySearch extends Page
     public void searchByNoOfBeds(String val) throws Exception
     {
         clickOnAdvanceSearchDropDownIcon();
+        txtbx_BedsInAdvanceSearchForm().clear();
         txtbx_BedsInAdvanceSearchForm().sendKeys(val);
         clickOnSearchButtonOnAdvanceSearchform();
     }
@@ -131,6 +132,21 @@ public class PropertySearch extends Page
         
     }
 
+    public void searchByNoOfBaths(String val) throws Exception
+    {
+        clickOnAdvanceSearchDropDownIcon();
+        txtbx_BathInAdvanceSearchForm().clear();
+        txtbx_BathInAdvanceSearchForm().sendKeys(val);
+        clickOnSearchButtonOnAdvanceSearchform();
+    }
+
+    public String NoOfBathsInPropertiesSearch() throws Exception
+    {
+        String number = null;
+        number = FilterText_Bath().getText();
+        return number;
+        
+    }
     public void clickOnSubscribeToThisSearchLink() throws Exception
     {
         try

@@ -47,6 +47,7 @@ public class PropertySearchAction extends AutomationTestCaseVerification
     {
         verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink();
         verifyIfSearchByBedsShowsPropertiesWithNoOfBeds();
+        verifyIfSearchByBathsShowsPropertiesWithNoOfBaths();
         verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations();
         verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound();
     }
@@ -58,15 +59,16 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         Assert.assertEquals(propertysearch.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
         Assert.assertEquals(propertysearch.getTitleForLoginPopUp(), "Log in", "Could not Get login pop up title");
         AutomationLog.info("Clicking on Subscribe to this search link displays Login popup ");
+        propertysearch.closeLoginPoPup(loginpopup);
     }
 
     public void verifyIfSearchByBedsShowsPropertiesWithNoOfBeds() throws Exception
     {
         String result = null;
-        propertysearch.closeLoginPoPup(loginpopup);
         propertysearch.searchByNoOfBeds("2");
         result = propertysearch.NoOfBedsInPropertiesSearch();
         Assert.assertEquals(result, "2", "Expected Properties with specified beds is not shown");
+        AutomationLog.info("Successfully shown Properties with x beds");
     }
 
     public void verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations() throws Exception
@@ -89,6 +91,16 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         propertysearch.clickOnSearchButtonOnAdvanceSearchform();
         Assert.assertEquals(propertysearch.loadingMessage().getText(), "NO RESULTS FOUND.", "Expected message which is no result found is displaying");
         AutomationLog.info("Successfully verified that by searching with 0 bath and 0 bed, appropiate message comes up");
+    }
+
+    
+    public void verifyIfSearchByBathsShowsPropertiesWithNoOfBaths() throws Exception
+    {
+        String result = null;
+        propertysearch.searchByNoOfBaths("2");
+        result = propertysearch.NoOfBathsInPropertiesSearch();
+        Assert.assertEquals(result, "2", "Expected Properties with specified baths is not shown");
+        AutomationLog.info("Successfully shown Properties with x baths");
     }
 
     @Override
