@@ -236,7 +236,7 @@ public class PropertySearch extends Page
         return element;
     }
     
-    public void BedsInAdvanceSearchForm(String bathNo) throws Exception
+    public void BathInAdvanceSearchForm(String bathNo) throws Exception
     {
         try
         {
@@ -276,5 +276,19 @@ public class PropertySearch extends Page
             throw(e);
         }
         return element;
+    }
+    
+    public void BedsInAdvanceSearchForm(String badNo) throws Exception
+    {
+        try
+        {
+        	txtbx_BedsInAdvanceSearchForm().sendKeys(badNo);
+            AutomationLog.error("Could put the "+badNo+"number of both");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not put the "+badNo+"number of both");
+            throw(e);
+        }
     }
 }

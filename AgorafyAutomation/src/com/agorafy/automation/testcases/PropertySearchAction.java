@@ -74,10 +74,13 @@ public class PropertySearchAction extends AutomationTestCaseVerification
     public void verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations() throws Exception
     {
         propertysearch.clickOnAdvanceSearchDropDownIcon();
-        propertysearch.BedsInAdvanceSearchForm("2");
+        propertysearch.txtbx_BedsInAdvanceSearchForm().clear();
+        propertysearch.txtbx_BathInAdvanceSearchForm().clear();
+        propertysearch.BedsInAdvanceSearchForm("3");
+        propertysearch.BathInAdvanceSearchForm("3");
         propertysearch.clickOnSearchButtonOnAdvanceSearchform();
-        Assert.assertEquals(propertysearch.NoOfBedsInPropertiesSearch(), "2", "Expected Properties with specified beds is not shown");
-        Assert.assertEquals(propertysearch.FilterText_Bath().getText(), "2", "Expected Properties with specified bath is not shown");
+        Assert.assertEquals(propertysearch.NoOfBedsInPropertiesSearch(), "3", "Expected Properties with specified beds is not shown");
+        Assert.assertEquals(propertysearch.FilterText_Bath().getText(), "3", "Expected Properties with specified bath is not shown");
         AutomationLog.info("Properties with X baths And Y Beds And Different Combinations is verified");
     }
     
@@ -86,8 +89,8 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         propertysearch.clickOnAdvanceSearchDropDownIcon();
         propertysearch.txtbx_BedsInAdvanceSearchForm().clear();
         propertysearch.txtbx_BathInAdvanceSearchForm().clear();
-        propertysearch.txtbx_BedsInAdvanceSearchForm().sendKeys("0");
         propertysearch.BedsInAdvanceSearchForm("0");
+        propertysearch.BathInAdvanceSearchForm("0");
         propertysearch.clickOnSearchButtonOnAdvanceSearchform();
         Assert.assertEquals(propertysearch.loadingMessage().getText(), "NO RESULTS FOUND.", "Expected message which is no result found is displaying");
         AutomationLog.info("Successfully verified that by searching with 0 bath and 0 bed, appropiate message comes up");
