@@ -19,7 +19,7 @@ public class AppDriver
         if (driver != null)
         {
             driver.manage().deleteAllCookies();
-            //driver.close();
+            driver.close();
         }
     }
 }

@@ -205,4 +205,46 @@ public class PropertySearch extends Page
         }
         return val;
     }
+    
+    public WebElement txtbx_BathInAdvanceSearchForm() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("bathsInput"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Textbox for beds in advance search form	");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public void BedsInAdvanceSearchForm(String bathNo) throws Exception
+    {
+        try
+        {
+        	txtbx_BathInAdvanceSearchForm().sendKeys(bathNo);
+        	AutomationLog.error("Could put the "+bathNo+"number of both");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not put the "+bathNo+"number of both");
+            throw(e);
+        }
+    }
+    
+    public WebElement FilterText_Bath() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("//a[@data-filtertarget='numBaths']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Textbox for beds in advance search form	");
+            throw(e);
+        }
+        return element;
+    }
 }

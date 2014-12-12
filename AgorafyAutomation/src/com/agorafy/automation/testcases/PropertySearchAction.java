@@ -30,7 +30,7 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         try
         {
             homepage=Homepage.homePage();
-            Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            Page.driver.manage().timeouts().implicitlyWait(2, TimeUnit.MINUTES);
             propertysearch=homepage.populateSearchTermTextBox("Manhattan","Residential","Rentals in 10010");
             loginpopup=new LoginPopUp(Page.driver);
             AutomationLog.info("Redirected to Property Search page ");
@@ -47,6 +47,7 @@ public class PropertySearchAction extends AutomationTestCaseVerification
     {
         verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink();
         verifyIfSearchByBedsShowsPropertiesWithNoOfBeds();
+        verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations();
     }
 
     public void verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink() throws Exception
@@ -65,6 +66,15 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         propertysearch.searchByNoOfBeds("2");
         result = propertysearch.NoOfBedsInPropertiesSearch();
         Assert.assertEquals(result, "2", "Expected Properties with specified beds is not shown");
+    }
+
+    public void verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations() throws Exception
+    {
+        propertysearch.clickOnAdvanceSearchDropDownIcon();
+        propertysearch.BedsInAdvanceSearchForm("2");
+        propertysearch.clickOnSearchButtonOnAdvanceSearchform();
+        Assert.assertEquals(propertysearch.NoOfBedsInPropertiesSearch(), "2", "Expected Properties with specified beds is not shown");
+        Assert.assertEquals(propertysearch.FilterText_Bath().getText(), "2", "Expected Properties with specified beds is not shown");
     }
 
     @Override
