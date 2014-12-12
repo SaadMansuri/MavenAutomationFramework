@@ -38,7 +38,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        HashMap<String, String> agentName = testCaseData.get("agentName");
+       /* HashMap<String, String> agentName = testCaseData.get("agentName");
         isExclusivesCountPresentOnAgentListing(searchprofessional,agentName);
         
         HashMap<String, String> companyName = testCaseData.get("companySearch");
@@ -54,7 +54,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         
         HashMap<String, String> search = testCaseData.get("agentName");
         verifyIfSearchByExpertiseClearsAgentCompanySearchText(searchprofessional,search); 
-        
+        */
         verifyIfClickingOnClearButtonClearsFieldsOnExpertiseSearchPanel(searchprofessional);
     
     }

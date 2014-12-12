@@ -16,6 +16,7 @@ import com.agorafy.automation.pageobjects.Page;
 public class SearchProfessionalsPage extends Page
 {
     private WebElement element = null;
+    private List<WebElement> options=null;
     public SearchProfessionalsPage(WebDriver driver)
     {
         super(driver);
@@ -581,11 +582,18 @@ public class SearchProfessionalsPage extends Page
         try
         {
             WebElement select = driver.findElement(By.id("commercialBrokerage"));
-            List<WebElement> options = select.findElements(By.className("checkbox"));
+            options = select.findElements(By.name("expertises[]"));
             for(WebElement option:options)
             {
                 option.click();
             }
+
+            options = select.findElements(By.name("representations[]"));
+            for(WebElement option:options)
+            {
+                option.click();
+            }
+            AutomationLog.info("Successfully marked all the checkboxes  ");
         }
         catch(Exception e)
         {
@@ -600,11 +608,20 @@ public class SearchProfessionalsPage extends Page
         int count=0;
         try
         {
-            WebElement select = driver.findElement(By.id("commercialBrokerage"));
-            List<WebElement> options = select.findElements(By.className("checkbox"));
+        	WebElement select = driver.findElement(By.id("commercialBrokerage"));
+            options = select.findElements(By.name("expertises[]"));
             for(WebElement option:options)
             {
-                val=option.isSelected();
+                val = option.isSelected();
+                if(!val)
+                {
+                   count++;
+                }
+            }
+            options = select.findElements(By.name("representations[]"));
+            for(WebElement option:options)
+            {
+                val = option.isSelected();
                 if(!val)
                 {
                    count++;
