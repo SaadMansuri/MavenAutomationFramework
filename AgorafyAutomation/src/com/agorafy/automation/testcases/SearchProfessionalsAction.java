@@ -11,6 +11,11 @@ import com.agorafy.automation.automationframework.AutomationTestCaseVerification
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SearchProfessionalsPage;
 
+/**
+ * Precondition:Navigate to Search Professionals Page 
+ * Verify if Random Search is performed shows proper Result Message
+ * verify if Search By Expertise Clears Agent/Company Search Text
+ */
 public class SearchProfessionalsAction extends AutomationTestCaseVerification 
 {
     

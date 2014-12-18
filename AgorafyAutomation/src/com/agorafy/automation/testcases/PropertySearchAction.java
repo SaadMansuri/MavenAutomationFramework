@@ -12,6 +12,12 @@ import com.agorafy.automation.pageobjects.LoginPopUp;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.PropertySearch;
 
+/**
+ * Precondition:Do search for property 
+ * Verify if Login PopUp Is Shown Clicking On  Subscribe To This Search Link
+ * verify if Search By Beds Shows Properties With No Of Beds
+ * verify if Search By Baths Shows Properties With No Of Baths
+ */
 public class PropertySearchAction extends AutomationTestCaseVerification
 {
     private Homepage homepage;
