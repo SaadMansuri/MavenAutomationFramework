@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 
 
 public class CommercialTab extends Page
@@ -46,11 +47,38 @@ public class CommercialTab extends Page
         return element;
     }
 
-    public WebElement text_CharactersRemaining() throws Exception
+    public WebElement txtbx_TenantRequirements() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("requirementsText"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not found textbox for Tenant Requirements");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement txt_CharactersRemainingExclusiveTenant() throws Exception
     {
         try
         {
             element = driver.findElement(By.id("tenantCharLimit"));
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement txt_CharactersRemainingTenantRequirement() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("tenantReqCharLimit"));
         }
         catch(Exception e)
         {
@@ -73,11 +101,31 @@ public class CommercialTab extends Page
         return element;
     }
 
+    public By successMessageLocator() throws Exception
+    {
+        return By.xpath("//div[@style='display: block;']");
+    }
+
+    public WebElement msg_Success() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(successMessageLocator());
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find success message");
+            throw(e);
+        }
+        return element;
+    }
+
     public void clickOnSaveButton() throws Exception
     {
         try
         {
             btn_save().click();
+            WaitFor.waitForPageToLoad(driver, "Success!", successMessageLocator());
             AutomationLog.info("Successfully clicked on save button");
         }
         catch(Exception e)
@@ -115,6 +163,20 @@ public class CommercialTab extends Page
         }
     }
 
+    public void enterTextInTenantRequirementsTextBox(String text) throws Exception
+    {
+        try
+        {
+            txtbx_TenantRequirements().sendKeys(text);
+            AutomationLog.info("successfully entered text in TenantRequirements text box");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not enter text in TenantRequirements text box");
+            throw(e);
+        }
+    }
+
     public void RemoveCharactersFromExclusiveTenantRepresentationTextBox(int number) throws Exception
     {
         try
@@ -122,12 +184,29 @@ public class CommercialTab extends Page
            for(int i=0;i<number;i++)
            {
                txtbx_ExclusiveTenantRepresentation().sendKeys(Keys.BACK_SPACE);
-               AutomationLog.info("Successfully removed specified no of characters  ");
+               AutomationLog.info("Successfully removed specified no of characters from Exclusive Tenant Representation TextBox ");
            }
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could no remove specified no of characters");
+            AutomationLog.error("Could no remove specified no of characters from Exclusive Tenant Representation TextBox");
+            throw(e);
+        }
+    }
+
+    public void RemoveCharactersFromTenantRequirementsTextBox(int number) throws Exception
+    {
+        try
+        {
+           for(int i=0;i<number;i++)
+           {
+               txtbx_TenantRequirements().sendKeys(Keys.BACK_SPACE);
+               AutomationLog.info("Successfully removed specified no of characters from Tenant Requirements TextBox");
+           }
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could no remove specified no of characters from Tenant Requirements TextBox");
             throw(e);
         }
     }
