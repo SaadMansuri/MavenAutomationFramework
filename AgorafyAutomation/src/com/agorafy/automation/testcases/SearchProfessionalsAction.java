@@ -192,16 +192,16 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     
     public void verifyAfterSearchIsPerformedThereShouldBeFiveNeighborhoodsAfterDeletingOneAndAddingOneAgain(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighborName, HashMap<String, String> propertyType) throws Exception
     {
-    	putDataInNeighborHoodDropBox(neighborName);
-    	Assert.assertEquals(searchprofessional.gettingNeighborhoodsSearchSelectedData(), searchprofessional.convertingDataFromListToStringArray(neighborName.get("neighbor1"),neighborName.get("neighbor2"),neighborName.get("neighbor3"),neighborName.get("neighbor4"),neighborName.get("neighbor5")), "Expected neighbours details is not found/match");
-    	searchprofessional.clickOnNeighborhoodsSearchSelectedDataCloseSign();
+        putDataInNeighborHoodDropBox(neighborName);
+        Assert.assertEquals(searchprofessional.gettingNeighborhoodsSearchSelectedData(), searchprofessional.convertingDataFromListToStringArray(neighborName.get("neighbor1"),neighborName.get("neighbor2"),neighborName.get("neighbor3"),neighborName.get("neighbor4"),neighborName.get("neighbor5")), "Expected neighbours details is not found/match");
+        searchprofessional.clickOnNeighborhoodsSearchSelectedDataCloseSign();
         searchprofessional.clickOnNeighborhoodsSearchDropBox();
         searchprofessional.ActionToProvideFocusOnDropBox();
         Page.driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor6"));
         searchprofessional.clickOnbrokerNeighborSearchButton();
         Page.driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
-    	Assert.assertEquals(searchprofessional.gettingNeighborhoodsSearchSelectedData(), searchprofessional.convertingDataFromListToStringArray(neighborName.get("neighbor2"),neighborName.get("neighbor3"),neighborName.get("neighbor5"),neighborName.get("neighbor4"),neighborName.get("neighbor6")), "Expected neighbours details is not found/match");
+        Assert.assertEquals(searchprofessional.gettingNeighborhoodsSearchSelectedData(), searchprofessional.convertingDataFromListToStringArray(neighborName.get("neighbor2"),neighborName.get("neighbor3"),neighborName.get("neighbor5"),neighborName.get("neighbor4"),neighborName.get("neighbor6")), "Expected neighbours details is not found/match");
     }
 
     @Override

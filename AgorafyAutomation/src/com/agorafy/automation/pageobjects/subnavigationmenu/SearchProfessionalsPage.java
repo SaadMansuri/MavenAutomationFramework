@@ -611,7 +611,7 @@ public class SearchProfessionalsPage extends Page
         int count=0;
         try
         {
-        	WebElement select = driver.findElement(By.id("commercialBrokerage"));
+            WebElement select = driver.findElement(By.id("commercialBrokerage"));
             options = select.findElements(By.name("expertises[]"));
             for(WebElement option:options)
             {
@@ -680,7 +680,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-        	selectbox_NeighborhoodsSearchSelectedDataCloseSign().click();
+            selectbox_NeighborhoodsSearchSelectedDataCloseSign().click();
             AutomationLog.info("Successfully click cross sign on First seleced option of Neighborhoods");
         }
         catch(Exception e)
@@ -692,7 +692,7 @@ public class SearchProfessionalsPage extends Page
     
     public List<String> gettingNeighborhoodsSearchSelectedData() throws Exception
     {
-    	List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         try
         {
             List<WebElement> list1=driver.findElements(By.xpath("//div[@id='commercial_neighborhoodSelect_chosen']/ul//span"));
@@ -707,16 +707,16 @@ public class SearchProfessionalsPage extends Page
             AutomationLog.error("Could not data from Neighborhoods Search Selected box");
             throw(e);
         }
-		return list;
+        return list;
     }
     
     public List<String> convertingDataFromListToStringArray(String neigh1,String neigh2,String neigh3,String neigh4,String neigh5) throws Exception
     {
-    	List<String> wordList;
+        List<String> wordList;
         try
         {
-        	String[] words= {neigh1, neigh2, neigh3, neigh4, neigh5};
-        	wordList = Arrays.asList(words);
+            String[] words= {neigh1, neigh2, neigh3, neigh4, neigh5};
+            wordList = Arrays.asList(words);
             AutomationLog.info("Successfully prepare previous and latest data");
         }
         catch(Exception e)
@@ -724,7 +724,7 @@ public class SearchProfessionalsPage extends Page
             AutomationLog.error("Could not prepare previous and latest data");
             throw(e);
         }
-		return wordList;
+        return wordList;
     }
 
     public WebElement btn_brokerNeighborSearchButton() throws Exception
@@ -745,7 +745,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-        	btn_brokerNeighborSearchButton().click();
+            btn_brokerNeighborSearchButton().click();
             AutomationLog.info("Successfully click Neighbor Search Button button");
         }
         catch(Exception e)
