@@ -727,6 +727,34 @@ public class SearchProfessionalsPage extends Page
 		return wordList;
     }
 
+    public WebElement btn_brokerNeighborSearchButton() throws Exception
+    {
+        try
+        {
+            element=driver.findElement(By.id("brokerSearchButton"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Neighbor Search Button button");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public void clickOnbrokerNeighborSearchButton() throws Exception
+    {
+        try
+        {
+        	btn_brokerNeighborSearchButton().click();
+            AutomationLog.info("Successfully click Neighbor Search Button button");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click Neighbor Search Button button");
+            throw(e);
+        }
+    }
+    
     @Override
     public String pageHeading() throws Exception
     {

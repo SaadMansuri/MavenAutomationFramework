@@ -199,7 +199,9 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         searchprofessional.ActionToProvideFocusOnDropBox();
         Page.driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor6"));
-    	Assert.assertEquals(searchprofessional.gettingNeighborhoodsSearchSelectedData(), searchprofessional.convertingDataFromListToStringArray(neighborName.get("neighbor2"),neighborName.get("neighbor3"),neighborName.get("neighbor4"),neighborName.get("neighbor5"),neighborName.get("neighbor6")), "Expected neighbours details is not found/match");
+        searchprofessional.clickOnbrokerNeighborSearchButton();
+        Page.driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
+    	Assert.assertEquals(searchprofessional.gettingNeighborhoodsSearchSelectedData(), searchprofessional.convertingDataFromListToStringArray(neighborName.get("neighbor2"),neighborName.get("neighbor3"),neighborName.get("neighbor5"),neighborName.get("neighbor4"),neighborName.get("neighbor6")), "Expected neighbours details is not found/match");
     }
 
     @Override
