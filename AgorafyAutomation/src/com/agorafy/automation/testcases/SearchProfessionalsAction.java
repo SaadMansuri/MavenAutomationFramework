@@ -67,6 +67,8 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         verifyDetailsEnteredShouldNotPersist(searchprofessional,propertyType);
         
         verifyNeighborhoodsEnteredShouldNotPersist(searchprofessional,neighborName,propertyType);
+        
+        verifyAfterSearchIsPerformedThereShouldBeFiveNeighborhoodsAfterDeletingOneAndAddingOneAgain(searchprofessional, neighborName, propertyType);
     }
     
     public void isExclusivesCountPresentOnAgentListing(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentName) throws Exception
@@ -186,6 +188,18 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         searchprofessional.clickOnSelectOptions(propertyType.get("res"));
         searchprofessional.clickOnSelectOptions(propertyType.get("com"));
         AssertToVerifyThatCheckboxOFExpertiseAndConcentrationMustBeUncheck();
+    }
+    
+    public void verifyAfterSearchIsPerformedThereShouldBeFiveNeighborhoodsAfterDeletingOneAndAddingOneAgain(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighborName, HashMap<String, String> propertyType) throws Exception
+    {
+    	putDataInNeighborHoodDropBox(neighborName);
+    	Assert.assertEquals(searchprofessional.gettingNeighborhoodsSearchSelectedData(), searchprofessional.convertingDataFromListToStringArray(neighborName.get("neighbor1"),neighborName.get("neighbor2"),neighborName.get("neighbor3"),neighborName.get("neighbor4"),neighborName.get("neighbor5")), "Expected neighbours details is not found/match");
+    	searchprofessional.clickOnNeighborhoodsSearchSelectedDataCloseSign();
+        searchprofessional.clickOnNeighborhoodsSearchDropBox();
+        searchprofessional.ActionToProvideFocusOnDropBox();
+        Page.driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
+        searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor6"));
+    	Assert.assertEquals(searchprofessional.gettingNeighborhoodsSearchSelectedData(), searchprofessional.convertingDataFromListToStringArray(neighborName.get("neighbor2"),neighborName.get("neighbor3"),neighborName.get("neighbor4"),neighborName.get("neighbor5"),neighborName.get("neighbor6")), "Expected neighbours details is not found/match");
     }
 
     @Override

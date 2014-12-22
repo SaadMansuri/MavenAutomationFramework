@@ -2,6 +2,8 @@ package com.agorafy.automation.pageobjects.subnavigationmenu;
 
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -659,7 +661,71 @@ public class SearchProfessionalsPage extends Page
             throw(e);
         }
     }
+
+    public WebElement selectbox_NeighborhoodsSearchSelectedDataCloseSign() throws Exception
+    {
+        try
+        {
+            element=driver.findElement(By.xpath("//div[@id='commercial_neighborhoodSelect_chosen']//a[@data-option-array-index='1']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find close sign on data Neighborhoods Search");
+            throw(e);
+        }
+        return element;
+    }
     
+    public void clickOnNeighborhoodsSearchSelectedDataCloseSign() throws Exception
+    {
+        try
+        {
+        	selectbox_NeighborhoodsSearchSelectedDataCloseSign().click();
+            AutomationLog.info("Successfully click cross sign on First seleced option of Neighborhoods");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click cross sign on First seleced option of Neighborhoods");
+            throw(e);
+        }
+    }
+    
+    public List<String> gettingNeighborhoodsSearchSelectedData() throws Exception
+    {
+    	List<String> list = new ArrayList<String>();
+        try
+        {
+            List<WebElement> list1=driver.findElements(By.xpath("//div[@id='commercial_neighborhoodSelect_chosen']/ul//span"));
+            for (WebElement resultItem : list1){
+                String tabname=resultItem.getText();
+                list.add(tabname);
+        }
+            AutomationLog.info("Successfully getting data from Neighborhoods Search Selected box");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not data from Neighborhoods Search Selected box");
+            throw(e);
+        }
+		return list;
+    }
+    
+    public List<String> convertingDataFromListToStringArray(String neigh1,String neigh2,String neigh3,String neigh4,String neigh5) throws Exception
+    {
+    	List<String> wordList;
+        try
+        {
+        	String[] words= {neigh1, neigh2, neigh3, neigh4, neigh5};
+        	wordList = Arrays.asList(words);
+            AutomationLog.info("Successfully prepare previous and latest data");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not prepare previous and latest data");
+            throw(e);
+        }
+		return wordList;
+    }
 
     @Override
     public String pageHeading() throws Exception
