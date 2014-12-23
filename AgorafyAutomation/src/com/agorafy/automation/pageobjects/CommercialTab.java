@@ -184,8 +184,8 @@ public class CommercialTab extends Page
            for(int i=0;i<number;i++)
            {
                txtbx_ExclusiveTenantRepresentation().sendKeys(Keys.BACK_SPACE);
-               AutomationLog.info("Successfully removed specified no of characters from Exclusive Tenant Representation TextBox ");
            }
+           AutomationLog.info("Successfully removed specified no of characters from Exclusive Tenant Representation TextBox ");
         }
         catch(Exception e)
         {
@@ -201,8 +201,8 @@ public class CommercialTab extends Page
            for(int i=0;i<number;i++)
            {
                txtbx_TenantRequirements().sendKeys(Keys.BACK_SPACE);
-               AutomationLog.info("Successfully removed specified no of characters from Tenant Requirements TextBox");
            }
+           AutomationLog.info("Successfully removed specified no of characters from Tenant Requirements TextBox");
         }
         catch(Exception e)
         {

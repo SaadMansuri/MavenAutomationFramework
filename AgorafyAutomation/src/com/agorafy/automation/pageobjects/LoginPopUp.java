@@ -41,7 +41,6 @@ public class LoginPopUp extends Page
         try
         {
             element=driver.findElement(getLoginPopUpLocator());
-            AutomationLog.info("Login pop up is found");
         }
         catch(Exception e)
         {

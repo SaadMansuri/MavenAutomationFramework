@@ -6,6 +6,7 @@ import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.LoginPopUp;
@@ -56,6 +57,7 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         verifyIfSearchByBathsShowsPropertiesWithNoOfBaths();
         verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations();
         verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound();
+        verifyIfLoginPopUpIsShownOnClickOfCreateYourProfileButton();
     }
 
     public void verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink() throws Exception
@@ -110,6 +112,20 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         result = propertysearch.NoOfBathsInPropertiesSearch();
         Assert.assertEquals(result, "2", "Expected Properties with specified baths is not shown");
         AutomationLog.info("Successfully shown Properties with x baths");
+    }
+
+    public void verifyIfLoginPopUpIsShownOnClickOfCreateYourProfileButton() throws Exception
+    {
+        String beforURL = propertysearch.currentURL();
+        propertysearch.clickOnCreateProfileButton();
+        WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
+        Assert.assertEquals(propertysearch.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
+        Assert.assertEquals(propertysearch.getTitleForLoginPopUp(), "Log in", "Could not Get login pop up title");
+        Credentials ValidCredentials = userCredentials();
+        loginpopup.populateLoginPopUpData(ValidCredentials.getEmail(), ValidCredentials.getPassword());
+        String afterURL = propertysearch.currentURL();
+        Assert.assertEquals(beforURL, afterURL, "Expected url match failed");
+        AutomationLog.info("Clicking on Create Your Profile button displays Login popup and when logged in using valid credentials same page is shown");
     }
 
     @Override

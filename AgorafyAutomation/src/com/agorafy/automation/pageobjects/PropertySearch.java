@@ -45,6 +45,34 @@ public class PropertySearch extends Page
         return element;
     }
 
+    public WebElement btn_CreateYourProfile() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("createProfileButton"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Create Profile Button");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnCreateProfileButton() throws Exception
+    {
+        try
+        {
+            btn_CreateYourProfile().click();
+            AutomationLog.info("Successfully clicked on Create Profile Button");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Create Profile Button");
+            throw(e);
+        }
+    }
+
     public void clickOnAdvanceSearchDropDownIcon() throws Exception
     {
         try
@@ -107,6 +135,7 @@ public class PropertySearch extends Page
         clickOnAdvanceSearchDropDownIcon();
         txtbx_BedsInAdvanceSearchForm().clear();
         txtbx_BedsInAdvanceSearchForm().sendKeys(val);
+        AutomationLog.info("Successfully entered Search text for no of beds ");
         clickOnSearchButtonOnAdvanceSearchform();
     }
 
@@ -137,6 +166,7 @@ public class PropertySearch extends Page
         clickOnAdvanceSearchDropDownIcon();
         txtbx_BathInAdvanceSearchForm().clear();
         txtbx_BathInAdvanceSearchForm().sendKeys(val);
+        AutomationLog.info("Successfully entered Search text for no of baths ");
         clickOnSearchButtonOnAdvanceSearchform();
     }
 
@@ -181,7 +211,6 @@ public class PropertySearch extends Page
         try
         {
             element=driver.findElement(By.id("ui-dialog-title-upsellPopup"));
-            AutomationLog.info("Title found on login pop up");
         }
         catch(Exception e)
         {
