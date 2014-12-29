@@ -36,9 +36,9 @@ public class LoginPopUpAction extends AutomationTestCaseVerification
 
         try
         {
-            header=Homepage.header();
-            signup=header.clickOnSignUpUpLink();
-            loginpopup=signup.clickOnLoginLink();
+            header = Homepage.header();
+            signup = header.clickOnSignUpUpLink();
+            loginpopup = signup.clickOnLoginLink();
         }
         catch(Exception e)
         {
@@ -57,7 +57,7 @@ public class LoginPopUpAction extends AutomationTestCaseVerification
     {
         try
         {
-            homepage=loginpopup.populateLoginPopUpData(getvalidcrendial.get("username"),getvalidcrendial.get("password"));
+            homepage = loginpopup.populateLoginPopUpData(getvalidcrendial.get("username"),getvalidcrendial.get("password"));
             Assert.assertEquals(homepage.currentURL(),homepage.homepageUrl(),"unsuccessfull login" );
             AutomationLog.info("expected page is loaded after login");
         }

@@ -86,6 +86,8 @@ public class OverviewTabAction extends AutomationTestCaseVerification
 
         verifyUpdatedOverviewBanner(pageBanner, userData);
         verifyUpdatedOverviewTabForm(overviewTab, userData);
+
+        verifyIfEmailFieldIsEditable(); 
     }
 
     private UserProfile getTestOverviewData()
@@ -114,6 +116,12 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         testBannerAddressDetails(banner, overviewData);
         testBannerPhoneDetails(banner, overviewData);
         testBannerMobileDetails(banner, overviewData);
+    }
+
+    private void verifyIfEmailFieldIsEditable() throws Exception
+    {
+        Assert.assertEquals(overviewTab.default_Email().isEnabled(), false, "Field is editable");
+        AutomationLog.info("Email field is not editable is Successful");
     }
 
     private void verifyUpdatedOverviewTabForm(OverviewTab overviewTab, UserProfile overviewData) throws Exception

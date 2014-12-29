@@ -142,7 +142,7 @@ public class LoginPopUp extends Page
 
     public Homepage populateLoginPopUpData(String Email, String Password ) throws Exception
     {
-        homepage=new Homepage(driver);
+
         try
         {
             Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -153,6 +153,7 @@ public class LoginPopUp extends Page
             pass.clear();
             pass.sendKeys(Password);
             btn_LogIntoMyAccount().click();
+            homepage=new Homepage(driver);
             AutomationLog.info("Successfully populated data in login pop up");
         }
         catch(Exception e)

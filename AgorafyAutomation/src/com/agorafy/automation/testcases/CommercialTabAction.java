@@ -44,6 +44,8 @@ public class CommercialTabAction extends OverviewTabAction
     protected void verifyTestCases() throws Exception
     {
         HashMap<String, String> tenantText = testCaseData.get("TenantText");
+        verifyIfSuccessMessageShownOnMarkingCheckboxesInAreasOfExpertiseAndClickedOnSaveButton();
+        verifyIfSuccessMessageShownOnMarkingCheckboxesInAreasOfFocusAndClickedOnSaveButton();
         verifyIfMoreThanThousandCharactersCanbeAddedInExclusiveTenantTextBox(commercial,tenantText);
         verifyIfLessThanThousandCharactesInExclusiveTenantTextBoxAddsRemainingCharacters(commercial,tenantText);
         verifyIfMoreThanThousandCharactersCanbeAddedInTenantRequirementsTextBox(commercial,tenantText);
@@ -52,6 +54,7 @@ public class CommercialTabAction extends OverviewTabAction
         verifyIfAddOrRemoveCharacterFromTenantRequirementsTextBoxChangesCharactersRemaining(commercial,tenantText);
         verifyIfCharacterRemainingShowsSameNoOfRemainingCharactersForExclusiveTenantAndSuccessMessageAfterSave(commercial,tenantText);
         verifyIfCharacterRemainingShowsSameNoOfRemainingCharactersForTenantRequirementAndSuccessMessageAfterSave(commercial,tenantText);
+        
     }
 
     public void verifyIfMoreThanThousandCharactersCanbeAddedInExclusiveTenantTextBox(CommercialTab commercial,HashMap<String, String> tenantText) throws Exception
@@ -160,5 +163,22 @@ public class CommercialTabAction extends OverviewTabAction
         Assert.assertEquals(msg, "Success!", "Expected Success Message is not shown");
         AutomationLog.info("Characters remaining is same after save for Tenant Requirements is Successfull");
         AutomationLog.info("Success message is shown After save ");
+    }
+
+    public void verifyIfSuccessMessageShownOnMarkingCheckboxesInAreasOfExpertiseAndClickedOnSaveButton() throws Exception
+    {
+        commercial.markCheckBoxInAreasOFExpertise();
+        commercial.clickOnSaveButton();
+        String msg = commercial.msg_Success().getText();
+        Assert.assertEquals(msg, "Success!", "Expected Success Message is not shown");
+        AutomationLog.info("Success message is shown After marking checkboxes in areas of expertise and clicked on save button ");
+    }
+    public void verifyIfSuccessMessageShownOnMarkingCheckboxesInAreasOfFocusAndClickedOnSaveButton() throws Exception
+    {
+        commercial.markCheckBoxInAreasOFFocus();
+        commercial.clickOnSaveButton();
+        String msg = commercial.msg_Success().getText();
+        Assert.assertEquals(msg, "Success!", "Expected Success Message is not shown");
+        AutomationLog.info("Success message is shown After marking checkboxes in areas of focus and clicked on save button ");
     }
 }

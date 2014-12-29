@@ -1,5 +1,7 @@
 package com.agorafy.automation.pageobjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +14,7 @@ import com.agorafy.automation.automationframework.WaitFor;
 public class CommercialTab extends Page
 {
     private WebElement element = null;
+    private List<WebElement> options;
 
     public CommercialTab(WebDriver driver) 
     {
@@ -135,6 +138,46 @@ public class CommercialTab extends Page
         }
     }
 
+    public void markCheckBoxInAreasOFExpertise() throws Exception
+    {
+        try
+        {
+            WebElement select = driver.findElement(By.xpath(".//*[@id='commercialForm']/div[1]/div"));
+            options = select.findElements(By.name("expertises[]"));
+            for(WebElement option:options)
+            {
+                option.click();
+            }
+            AutomationLog.info("Successfully marked checkboxes under Areas Of Expertise");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not mark all checkboxes in areas of expertise");
+            throw(e);
+        }
+        
+    }
+
+    public void markCheckBoxInAreasOFFocus() throws Exception
+    {
+        try
+        {
+            WebElement select = driver.findElement(By.xpath(".//*[@id='commercialForm']/div[2]/div"));
+            options = select.findElements(By.name("representations[]"));
+            for(WebElement option:options)
+            {
+                option.click();
+            }
+            AutomationLog.info("Successfully marked checkboxes under Areas Of Focus");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not mark all checkboxes in areas of focus");
+            throw(e);
+        }
+        
+    }
+    
     public void clickOnCommercialTab() throws Exception
     {
         try
