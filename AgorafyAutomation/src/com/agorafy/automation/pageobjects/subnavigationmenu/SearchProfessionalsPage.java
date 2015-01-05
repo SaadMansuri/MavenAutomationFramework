@@ -689,7 +689,7 @@ public class SearchProfessionalsPage extends Page
             throw(e);
         }
     }
-    
+        
     public List<String> gettingNeighborhoodsSearchSelectedData() throws Exception
     {
         List<String> list = new ArrayList<String>();

@@ -18,6 +18,8 @@ import com.agorafy.automation.pageobjects.PropertySearch;
  * Verify if Login PopUp Is Shown Clicking On  Subscribe To This Search Link
  * verify if Search By Beds Shows Properties With No Of Beds
  * verify if Search By Baths Shows Properties With No Of Baths
+ * verify that Only properties with 'x+' baths and 'y+' beds and different combinations of those only displayed on results page
+ * verify if user searches for zero baths and zero beds shows no results found
  */
 public class PropertySearchAction extends AutomationTestCaseVerification
 {

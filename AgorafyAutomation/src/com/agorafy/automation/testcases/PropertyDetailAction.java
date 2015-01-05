@@ -14,6 +14,13 @@ import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.PropertyDetailPage;
 
+/**
+ * verify if user after sign in stays on the same page and broker information should be visible
+ * verify if clicking on 'Sign in to see NYC Department of Buildings and Finance records.' from property record section and click if Log-in pop-Up appears
+ * verify if user after sign in stays on the same page and user information should be visible
+ * verify if click on 'Sign in to see contact information' and click if Log-in pop-Up appears or not
+ * verify if 
+ */
 public class PropertyDetailAction extends AutomationTestCaseVerification
 {
     PropertyDetailPage propertydetails=new PropertyDetailPage();
