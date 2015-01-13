@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
-import com.agorafy.automation.pageobjects.upsellpopups.PropertyDetailPage;
 
 public class Header extends Page
 {

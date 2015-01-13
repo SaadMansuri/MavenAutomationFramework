@@ -1,16 +1,12 @@
 package com.agorafy.automation.testcases.upsellpopups;
 
-import java.util.HashMap;
 import java.util.Set;
 
-import org.bouncycastle.jcajce.provider.asymmetric.dsa.DSASigner.noneDSA;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.Credentials;
-import com.agorafy.automation.automationframework.WaitFor;
-import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.PropertySearch;

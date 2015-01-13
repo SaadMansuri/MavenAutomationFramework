@@ -1,8 +1,6 @@
 package com.agorafy.automation.pageobjects.upsellpopups;
 
 //import java.awt.List;
-import java.lang.Character.UnicodeScript;
-import java.util.concurrent.TimeUnit;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -12,8 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
-import com.agorafy.automation.pageobjects.Header;
-import com.agorafy.automation.pageobjects.Page;
 
 public class ListingDetailPage extends LoginPopUp
 {
@@ -50,7 +46,7 @@ public class ListingDetailPage extends LoginPopUp
         try
         {
             SubscribeToListingLinkInListingDetailPage().click();
-            WaitFor.presenceOfTheElement(driver, getLoginPopUpLocator());
+            WaitFor.ElementToBeDisplayed(driver, getLoginPopUpLocator());
             subscribeToListingPopUp = new LoginPopUp(driver);
             AutomationLog.info("Click action performed on SubscribeToListingLink on Listing Detail Page");
         }

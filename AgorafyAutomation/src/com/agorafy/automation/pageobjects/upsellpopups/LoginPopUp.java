@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.PropertySearch;
@@ -167,7 +166,6 @@ public class LoginPopUp extends Page
         Homepage homepage;
         try
         {
-            
             Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             WebElement email = txtbx_Email();
             WebElement pass  = txtbx_Password();
@@ -191,7 +189,6 @@ public class LoginPopUp extends Page
     {
         try
         {
-            
             Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             WebElement email = txtbx_Email();
             WebElement pass  = txtbx_Password();
@@ -215,7 +212,7 @@ public class LoginPopUp extends Page
         String [] urlOfPage = null;
         objectOfPage = driver.getCurrentUrl();
         urlOfPage = objectOfPage.split("/");
-        //objectOfPage = urlOfPage[1];
+
         switch (urlOfPage[3])
         {
             case "search":
@@ -231,16 +228,14 @@ public class LoginPopUp extends Page
         default:
             break;
         }
-        
         return pageObject;
     }
-    
+
     public boolean checkingLogInPopUp() throws Exception
     {
         boolean bool;
         try
         {
-            //bool=getLoginPopUp_element().isDisplayed();
             bool = popUp_Login().isDisplayed();
         }
         catch(Exception e)
@@ -250,6 +245,4 @@ public class LoginPopUp extends Page
         }
         return bool;
      }
-
-    
 }
