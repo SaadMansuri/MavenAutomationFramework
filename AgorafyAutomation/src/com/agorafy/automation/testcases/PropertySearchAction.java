@@ -8,9 +8,9 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Homepage;
-import com.agorafy.automation.pageobjects.LoginPopUp;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
 public class PropertySearchAction extends AutomationTestCaseVerification
 {
@@ -31,7 +31,7 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         {
             homepage=Homepage.homePage();
             Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            propertysearch=homepage.populateSearchTermTextBox();
+            propertysearch=homepage.populateSearchTermTextBox("Manhattan", "Residential", "Rentals on East 22nd Street");
             loginpopup=new LoginPopUp(Page.driver);
             AutomationLog.info("Redirected to Property Search page ");
         }

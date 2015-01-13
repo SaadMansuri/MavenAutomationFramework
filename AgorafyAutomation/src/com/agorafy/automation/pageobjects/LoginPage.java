@@ -63,7 +63,6 @@ public class LoginPage extends Page
             passwordTextBox.clear();
             passwordTextBox.sendKeys(password);
             button_LoginToAccount().click();
-            AutomationLog.info("Login Done");
         }
         catch (Exception e)
         {

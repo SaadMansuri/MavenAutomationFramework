@@ -10,7 +10,7 @@ import com.agorafy.automation.automationframework.AutomationTestCaseVerification
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
-import com.agorafy.automation.pageobjects.LoginPopUp;
+import com.agorafy.automation.pageobjects.upsellpopups.*;
 import com.agorafy.automation.pageobjects.Page;
 
 public class HeaderAction extends AutomationTestCaseVerification 

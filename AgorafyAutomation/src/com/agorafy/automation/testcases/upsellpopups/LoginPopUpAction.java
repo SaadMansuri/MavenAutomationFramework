@@ -1,4 +1,4 @@
-package com.agorafy.automation.testcases;
+package com.agorafy.automation.testcases.upsellpopups;
 
 import java.util.HashMap;
 
@@ -8,8 +8,8 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
-import com.agorafy.automation.pageobjects.LoginPopUp;
 import com.agorafy.automation.pageobjects.SignUp;
+import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
 public class LoginPopUpAction extends AutomationTestCaseVerification
 {
@@ -51,7 +51,7 @@ public class LoginPopUpAction extends AutomationTestCaseVerification
     {
         try
         {
-            homepage=loginpopup.populateLoginPopUpData(getvalidcrendial.get("username"),getvalidcrendial.get("password"));
+            homepage= loginpopup.populateHomePageLoginPopUpData(getvalidcrendial.get("username"),getvalidcrendial.get("password"));
             Assert.assertEquals(homepage.currentURL(),homepage.homepageUrl(),"unsuccessfull login" );
             AutomationLog.info("expected page is loaded after login");
         }
@@ -72,4 +72,6 @@ public class LoginPopUpAction extends AutomationTestCaseVerification
     {
         return "loginpopup test case failed";
     }
+    
+    //TODO verify if login popup is present on click
 }

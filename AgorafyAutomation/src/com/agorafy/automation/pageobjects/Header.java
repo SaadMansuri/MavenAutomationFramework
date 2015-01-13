@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
+import com.agorafy.automation.pageobjects.upsellpopups.PropertyDetailPage;
 
 public class Header extends Page
 {
@@ -62,7 +64,7 @@ public class Header extends Page
             AutomationLog.error("Could not click on signUp Link");
             throw(e);
         }
-            return signup;
+        return signup;
     }
 
     public WebElement link_SubmitListing() throws Exception
@@ -114,11 +116,25 @@ public class Header extends Page
 
     //Links below are seen when user is logged in
 
-    public WebElement link_ProfileNameOnDashboardAfterLogin() throws Exception
+    public WebElement link_ProfileNameOnHomepageAfterLogin() throws Exception
     {
         try
         {
             element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/a[1]/span[2]"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Profile name was not found in the Header");
+            throw(e);
+        }
+        return element;
+     }
+
+    public WebElement link_ProfileNameOnDashboardAfterLogin() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[4]/a[1]/span[2]"));
         }
         catch (Exception e)
         {
@@ -160,7 +176,7 @@ public class Header extends Page
     {
         try
         {
-            link_ProfileNameOnDashboardAfterLogin().click();
+            link_ProfileNameOnHomepageAfterLogin().click();
             AutomationLog.info("Opened drop down for active profile link");
         }
         catch (Exception e)
@@ -320,13 +336,13 @@ public class Header extends Page
     
     public Homepage logOutProceessOnPropertyDetailPage() throws Exception
     {
-        Homepage homepage = null;
+    	Homepage homepage = null;
         try
         {
             arrowToNavigateForLogout().click();
             AutomationLog.info("Successfully click on arrow to navigate to logout");
             logoutXpathonPropertyPage().click();
-            homepage = new Homepage(driver);
+            homepage = new Homepage();
             AutomationLog.info("Successfully Logout from Property Page");
         }
         catch(Exception e)
