@@ -20,6 +20,7 @@ import com.agorafy.automation.pageobjects.Page;
  * Verify if empty mail has entered
  * verify if invalid email entered
  * verify if valid email entered which is not registered
+ * verify if clicking Back to Log in link redirects to login page
  */
 public class ForgotPasswordAction extends AutomationTestCaseVerification
 {

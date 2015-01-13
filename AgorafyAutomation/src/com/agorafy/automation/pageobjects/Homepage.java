@@ -221,16 +221,17 @@ public class Homepage extends Page
         }
     }
 
-    public PropertySearch populateSearchTermTextBox(String borough, String listingType,String searchTerm) throws Exception
+    public PropertySearch populateSearchTermTextBox(String boroughname,String listingcategory,String searchstring) throws Exception
     {
         PropertySearch propertysearch=null;
         try
         {
             clickOnSelectBoroughIcon();
-            selectBorough(borough);
+
+            selectBorough(boroughname);
             clickOnSelectListingCategoryIcon();
-            selectListingCategory(listingType);
-            txtbx_SearchTerm().sendKeys(searchTerm);
+            selectListingCategory(listingcategory);
+            txtbx_SearchTerm().sendKeys(searchstring);
             clickOnSearchButtton();
             propertysearch=new PropertySearch(driver);
             AutomationLog.info("Search is performed successfully");

@@ -4,28 +4,27 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.PropertySearchAction;
+import com.agorafy.automation.testcases.ResidentialTabAction;
 
-public class PropertySearchTest 
+public class ResidentialTabTest 
 {
-    @BeforeSuite
+   @BeforeSuite
     public void Init()
-     {
+    {
         String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
-     }
+    }
 
     @Test
-    public void propertySearchActionTestCases() throws Exception
+    public void testResidentialTabTestCase() throws Exception
     {
         try
         {
-            new PropertySearchAction().Execute();
+            new ResidentialTabAction().Execute();
         }
-        catch (Exception e) 
+        catch(Exception e)
         {
-            System.out.println(e.getMessage());
-            throw (e);
+            throw(e);
         }
     }
 }

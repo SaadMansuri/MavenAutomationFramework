@@ -2,12 +2,15 @@ package com.agorafy.automation.pageobjects.subnavigationmenu;
 
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -16,6 +19,7 @@ import com.agorafy.automation.pageobjects.Page;
 public class SearchProfessionalsPage extends Page
 {
     private WebElement element = null;
+    private List<WebElement> options=null;
     public SearchProfessionalsPage(WebDriver driver)
     {
         super(driver);
@@ -581,11 +585,18 @@ public class SearchProfessionalsPage extends Page
         try
         {
             WebElement select = driver.findElement(By.id("commercialBrokerage"));
-            List<WebElement> options = select.findElements(By.className("checkbox"));
+            options = select.findElements(By.name("expertises[]"));
             for(WebElement option:options)
             {
                 option.click();
             }
+
+            options = select.findElements(By.name("representations[]"));
+            for(WebElement option:options)
+            {
+                option.click();
+            }
+            AutomationLog.info("Successfully marked all the checkboxes  ");
         }
         catch(Exception e)
         {
@@ -601,10 +612,19 @@ public class SearchProfessionalsPage extends Page
         try
         {
             WebElement select = driver.findElement(By.id("commercialBrokerage"));
-            List<WebElement> options = select.findElements(By.className("checkbox"));
+            options = select.findElements(By.name("expertises[]"));
             for(WebElement option:options)
             {
-                val=option.isSelected();
+                val = option.isSelected();
+                if(!val)
+                {
+                   count++;
+                }
+            }
+            options = select.findElements(By.name("representations[]"));
+            for(WebElement option:options)
+            {
+                val = option.isSelected();
                 if(!val)
                 {
                    count++;
@@ -626,26 +646,115 @@ public class SearchProfessionalsPage extends Page
         return finalval;
     }
 
-    public void enterNeighborhoodsForNeighborhoods(String one,String two,String three,String four,String five) throws Exception
+           
+    public void clickOnSelectOptions(String title) throws Exception
     {
-        clickOnNeighborhoodsSearchDropBox();
-        ActionToProvideFocusOnDropBox();
-        clickOnneighborhoodsOptionListing(one);
-        clickOnNeighborhoodsSearchDropBox();
-        ActionToProvideFocusOnDropBox();
-        clickOnneighborhoodsOptionListing(two);
-        clickOnNeighborhoodsSearchDropBox();
-        ActionToProvideFocusOnDropBox();
-        clickOnneighborhoodsOptionListing(three);
-        clickOnNeighborhoodsSearchDropBox();
-        ActionToProvideFocusOnDropBox();
-        clickOnneighborhoodsOptionListing(four);
-        clickOnNeighborhoodsSearchDropBox();
-        ActionToProvideFocusOnDropBox();
-        clickOnneighborhoodsOptionListing(five);
+        try
+        {
+            Select droplist = new Select(driver.findElement(By.name("context")));   
+            droplist.selectByVisibleText(title);
+            AutomationLog.info("Successfully click on Select Option "+title+"");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Select Option "+title+"");
+            throw(e);
+        }
+    }
+
+    public WebElement selectbox_NeighborhoodsSearchSelectedDataCloseSign() throws Exception
+    {
+        try
+        {
+            element=driver.findElement(By.xpath("//div[@id='commercial_neighborhoodSelect_chosen']//a[@data-option-array-index='1']"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find close sign on data Neighborhoods Search");
+            throw(e);
+        }
+        return element;
     }
     
+    public void clickOnNeighborhoodsSearchSelectedDataCloseSign() throws Exception
+    {
+        try
+        {
+            selectbox_NeighborhoodsSearchSelectedDataCloseSign().click();
+            AutomationLog.info("Successfully click cross sign on First seleced option of Neighborhoods");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click cross sign on First seleced option of Neighborhoods");
+            throw(e);
+        }
+    }
+        
+    public List<String> gettingNeighborhoodsSearchSelectedData() throws Exception
+    {
+        List<String> list = new ArrayList<String>();
+        try
+        {
+            List<WebElement> list1=driver.findElements(By.xpath("//div[@id='commercial_neighborhoodSelect_chosen']/ul//span"));
+            for (WebElement resultItem : list1){
+                String tabname=resultItem.getText();
+                list.add(tabname);
+        }
+            AutomationLog.info("Successfully getting data from Neighborhoods Search Selected box");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not data from Neighborhoods Search Selected box");
+            throw(e);
+        }
+        return list;
+    }
+    
+    public List<String> convertingDataFromListToStringArray(String neigh1,String neigh2,String neigh3,String neigh4,String neigh5) throws Exception
+    {
+        List<String> wordList;
+        try
+        {
+            String[] words= {neigh1, neigh2, neigh3, neigh4, neigh5};
+            wordList = Arrays.asList(words);
+            AutomationLog.info("Successfully prepare previous and latest data");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not prepare previous and latest data");
+            throw(e);
+        }
+        return wordList;
+    }
 
+    public WebElement btn_brokerNeighborSearchButton() throws Exception
+    {
+        try
+        {
+            element=driver.findElement(By.id("brokerSearchButton"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Neighbor Search Button button");
+            throw(e);
+        }
+        return element;
+    }
+    
+    public void clickOnbrokerNeighborSearchButton() throws Exception
+    {
+        try
+        {
+            btn_brokerNeighborSearchButton().click();
+            AutomationLog.info("Successfully click Neighbor Search Button button");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click Neighbor Search Button button");
+            throw(e);
+        }
+    }
+    
     @Override
     public String pageHeading() throws Exception
     {

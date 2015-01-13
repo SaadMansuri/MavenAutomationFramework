@@ -34,6 +34,11 @@ public class Header extends Page
         return element;
     }
 
+    public By getProfileNameLocator() 
+    {
+        return  (By.className("profile-name"));
+    }
+
     public WebElement link_SignUp() throws Exception
     {
         try
@@ -98,7 +103,24 @@ public class Header extends Page
         }
         return loginpopup;
     }
-    
+
+    public Page clickSubmitListing(Boolean loginStatus) throws Exception
+    {
+        Page page= null;
+        link_SubmitListing().click();
+
+        if(loginStatus)
+        {
+            page = new SubmitListingLocationFormPage(driver);
+            return page;
+        }
+        else
+        {
+            page = new LoginPopUp(driver);
+            return page;
+        }
+    }
+
     public boolean loginPopUpIsDisplayed(LoginPopUp loginpopup) throws Exception
     {
         try

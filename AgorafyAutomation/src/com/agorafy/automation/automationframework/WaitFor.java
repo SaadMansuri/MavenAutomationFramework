@@ -8,6 +8,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -126,4 +127,13 @@ public class WaitFor
         return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("loaded")
                 || ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
     }
+
+    public static void waitUntilElementIsLoaded(WebDriver driver, By elementLocator)
+    {
+    		Integer elementwaitTimeout = Integer.parseInt(Configuration.getConfigurationValueForProperty("global-page-element-polling-timeout"));
+        	WebDriverWait wait = new WebDriverWait(driver, elementwaitTimeout);
+        	wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
+        	
+    }
+
 }

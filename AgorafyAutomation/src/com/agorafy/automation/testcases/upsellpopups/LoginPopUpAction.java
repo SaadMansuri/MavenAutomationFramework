@@ -9,8 +9,16 @@ import com.agorafy.automation.automationframework.AutomationTestCaseVerification
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.SignUp;
+
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
+/**
+ * To Test Login Pop up
+ * Precondition : SignUp page is loaded
+ * Login link is present on SignUp page
+ * verify Clicking on Login Link shows login Pop Up
+ * verify if valid credentials are entered in login pop up then page redirected to Homepage
+ */
 public class LoginPopUpAction extends AutomationTestCaseVerification
 {
     private SignUp signup=null;
@@ -30,9 +38,9 @@ public class LoginPopUpAction extends AutomationTestCaseVerification
 
         try
         {
-            header=Homepage.header();
-            signup=header.clickOnSignUpUpLink();
-            loginpopup=signup.clickOnLoginLink();
+            header = Homepage.header();
+            signup = header.clickOnSignUpUpLink();
+            loginpopup = signup.clickOnLoginLink();
         }
         catch(Exception e)
         {
@@ -52,6 +60,7 @@ public class LoginPopUpAction extends AutomationTestCaseVerification
         try
         {
             homepage= loginpopup.populateHomePageLoginPopUpData(getvalidcrendial.get("username"),getvalidcrendial.get("password"));
+
             Assert.assertEquals(homepage.currentURL(),homepage.homepageUrl(),"unsuccessfull login" );
             AutomationLog.info("expected page is loaded after login");
         }
