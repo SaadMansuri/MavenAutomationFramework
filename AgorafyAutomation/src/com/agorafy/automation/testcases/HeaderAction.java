@@ -10,9 +10,14 @@ import com.agorafy.automation.automationframework.AutomationTestCaseVerification
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
-import com.agorafy.automation.pageobjects.LoginPopUp;
+import com.agorafy.automation.pageobjects.upsellpopups.*;
 import com.agorafy.automation.pageobjects.Page;
 
+/**
+ * verify if clicking the arrow shows advanced search options
+ * validate and display an alert message asking for a search text if user does not type any search item, clicks search
+ * verify if autoComplete menu comes after typing text on neighborhood street address zipcode search
+ */
 public class HeaderAction extends AutomationTestCaseVerification 
 {
     private Header header;

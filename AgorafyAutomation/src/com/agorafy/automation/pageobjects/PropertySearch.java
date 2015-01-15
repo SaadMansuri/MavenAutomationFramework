@@ -1,15 +1,20 @@
 package com.agorafy.automation.pageobjects;
 
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
+import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
 public class PropertySearch extends Page
 {
     private WebElement element=null;
+    private List<WebElement> elements = null;
 
     public PropertySearch(WebDriver driver)
     {
@@ -320,4 +325,18 @@ public class PropertySearch extends Page
             throw(e);
         }
     }
+
+    public ListingDetailPage clickSearchResult()
+    {
+        element = resultSet().get(0).findElement(By.className("caption")).findElement(By.tagName("a"));
+        element.click();
+        return new ListingDetailPage(driver);
+    }
+
+    public List<WebElement> resultSet()
+    {
+        elements = driver.findElement(By.className("resultsSet")).findElements(By.tagName("li"));
+        return elements;
+    }
+
 }

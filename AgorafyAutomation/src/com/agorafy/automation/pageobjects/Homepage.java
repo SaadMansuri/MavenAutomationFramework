@@ -258,6 +258,7 @@ public class Homepage extends Page
         try
         {
             clickOnSelectBoroughIcon();
+
             selectBorough(boroughname);
             clickOnSelectListingCategoryIcon();
             selectListingCategory(listingcategory);

@@ -4,7 +4,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.PropertyDetailAction;
+import com.agorafy.automation.testcases.upsellpopups.PropertyDetailAction;
 
 public class PropertyDetailTest 
 {

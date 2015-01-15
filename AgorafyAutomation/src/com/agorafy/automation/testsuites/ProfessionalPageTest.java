@@ -4,7 +4,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.ProfessionalProfilePageAction;
+import com.agorafy.automation.testcases.upsellpopups.ProfessionalProfilePageAction;
 
 public class ProfessionalPageTest {
 

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.datamodel.profile.EmailData;
+import com.agorafy.automation.pageobjects.upsellpopups.*;
 
 public class SignUp extends Page
 {

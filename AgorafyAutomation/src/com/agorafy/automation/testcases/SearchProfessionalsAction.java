@@ -15,6 +15,13 @@ import com.agorafy.automation.pageobjects.subnavigationmenu.SearchProfessionalsP
  * Precondition:Navigate to Search Professionals Page 
  * Verify if Random Search is performed shows proper Result Message
  * verify if Search By Expertise Clears Agent/Company Search Text
+ * verify that agents returned the 'exclusive' count of listings they hold
+ * verify that companies in search result have 'exclusive' count of listings against their names
+ * verify that user searches by expertise or neighborhood and switches back to search by agent/company name then Neighborhoods selected (if any) or the checkboxes is getting clear
+ * verify that Maximum 5 neighborhoods should be allowed from the dropdown for Neighborhoods
+ * verify if auto complete menu comes after typing text on neighborhood street address zipcode search area
+ * verify that if User enters neighborhoods under Commercial brokerage tab and toggles to Residential brokerage, togles back to commercial then checkbox of expertise and concentration must be uncheck
+ * verify that if user add five neighborhoods and then deleting one and adding one another and click on search then only same five latest neighborhoods is shown.
  */
 public class SearchProfessionalsAction extends AutomationTestCaseVerification 
 {

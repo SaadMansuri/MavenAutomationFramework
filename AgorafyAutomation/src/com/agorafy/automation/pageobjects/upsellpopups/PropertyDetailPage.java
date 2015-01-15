@@ -1,11 +1,11 @@
-package com.agorafy.automation.pageobjects;
+package com.agorafy.automation.pageobjects.upsellpopups;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
+import com.agorafy.automation.pageobjects.Page;
 
 public class PropertyDetailPage extends Page 
 {
@@ -30,13 +30,13 @@ public class PropertyDetailPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Redirected to property Page is failed");
+            AutomationLog.error("Redirect to property Page is failed");
             throw(e);
         }
         return propertydetail;
     }
     
-    public WebElement link_propertyRecordLogIn() throws Exception
+    public WebElement propertyRecordSignUpLink_element() throws Exception
     {
         try 
         {
@@ -51,24 +51,24 @@ public class PropertyDetailPage extends Page
         return element;
     }
     
-    public LoginPopUp clickOnLogInLink() throws Exception
+    public PropertyDetailPage clickOnSignUpUpLink() throws Exception
     {
-        LoginPopUp loginpopup = null;
+        PropertyDetailPage propertydetail = null;
         try
         {
-        	link_propertyRecordLogIn().click();
-            loginpopup = new LoginPopUp(driver);
-            AutomationLog.info("Clicked on login link from property record section");
+            propertyRecordSignUpLink_element().click();
+            propertydetail = new PropertyDetailPage(driver);
+            AutomationLog.info("Clicked on signup link from property record section");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Failed to click on login link from property record section");
+            AutomationLog.error("Failed to clicked on signUp link from property record section");
             throw(e);
         }
-            return loginpopup;
+            return propertydetail;
     }
     
-    public WebElement getLoginPopUp() throws Exception
+    public WebElement getLoginPopUp_element() throws Exception
     {
         try 
         {
@@ -87,7 +87,7 @@ public class PropertyDetailPage extends Page
         boolean bool;
         try
         {
-            bool=getLoginPopUp().isDisplayed();
+            bool=getLoginPopUp_element().isDisplayed();
         }
         catch(Exception e)
         {
@@ -97,7 +97,7 @@ public class PropertyDetailPage extends Page
         return bool;
      }
     
-    public WebElement logInPopUpHeadingText() throws Exception
+    public WebElement logInPopUpHeadingText_element() throws Exception
     {
         try 
         {
@@ -117,7 +117,7 @@ public class PropertyDetailPage extends Page
         String Titlename;
         try
         {
-            Titlename=logInPopUpHeadingText().getText();
+            Titlename=logInPopUpHeadingText_element().getText();
             AutomationLog.info("Fetching the title of login pop-up");
         }
         catch(Exception e)
@@ -128,7 +128,7 @@ public class PropertyDetailPage extends Page
         return Titlename;
      }
     
-    public WebElement txtbx_email() throws Exception
+    public WebElement emailTextBox_element() throws Exception
     {
         try 
         {
@@ -143,7 +143,7 @@ public class PropertyDetailPage extends Page
         return element;
     }
     
-    public WebElement txtbx_password() throws Exception
+    public WebElement passwordTextBox_element() throws Exception
     {
         try 
         {
@@ -158,7 +158,7 @@ public class PropertyDetailPage extends Page
         return element;
     }
     
-    public WebElement btn_loginPopUpSubmit() throws Exception
+    public WebElement loginPopUpSubmitButton_element() throws Exception
     {
         try 
         {
@@ -175,27 +175,27 @@ public class PropertyDetailPage extends Page
     
     public PropertyDetailPage loginProcessOnPropertyPage(String email, String Password ) throws Exception
     {
-        PropertyDetailPage propertypage=null;
+        PropertyDetailPage propertydetail = null;
         try
         {
-        	txtbx_email().sendKeys(email);
+            emailTextBox_element().sendKeys(email);
+            propertydetail = new PropertyDetailPage(driver);
             AutomationLog.info("Email id is entered in textbox successfully");
-            txtbx_password().sendKeys(Password);
+            passwordTextBox_element().sendKeys(Password);
             AutomationLog.info("Password is entered in textbox successfully");
-            btn_loginPopUpSubmit().click();
+            loginPopUpSubmitButton_element().click();
             AutomationLog.info("Cliked on 'Log in to my account' button");
             AutomationLog.info("Login Done");
-            propertypage = new PropertyDetailPage();
         }
         catch(Exception e)
         {
             AutomationLog.error("Login process was not done");
             throw(e);
         }
-        return propertypage;
+            return propertydetail;
     }
     
-    public WebElement propertyRecordSection() throws Exception
+    public WebElement propertyRecordSection_element() throws Exception
     {
         try 
         {
@@ -214,7 +214,7 @@ public class PropertyDetailPage extends Page
         boolean bool;
         try
         {
-            bool=propertyRecordSection().isDisplayed();
+            bool=propertyRecordSection_element().isDisplayed();
         }
         catch(Exception e)
         {
@@ -224,7 +224,7 @@ public class PropertyDetailPage extends Page
         return bool;
      }
     
-    public WebElement signInToContactInformation() throws Exception
+    public WebElement signInToContactInformation_element() throws Exception
     {
         try 
         {
@@ -238,13 +238,13 @@ public class PropertyDetailPage extends Page
         return element;
     }
     
-    public LoginPopUp clickOnSignInToContactInformation() throws Exception
+    public PropertyDetailPage clickOnSignInToContactInformation() throws Exception
     {
-        LoginPopUp loginpopup = null;
+        PropertyDetailPage propertydetail = null;
         try
         {
-            signInToContactInformation().click();
-            loginpopup = new LoginPopUp(driver);
+            signInToContactInformation_element().click();
+            propertydetail = new PropertyDetailPage(driver);
             AutomationLog.info("Clicked on 'Sign in to see contact information' link");
         }
         catch(Exception e)
@@ -252,10 +252,10 @@ public class PropertyDetailPage extends Page
             AutomationLog.error("Failed to Click on 'Sign in to see contact information' link");
             throw(e);
         }
-            return loginpopup;
+            return propertydetail;
     }
     
-    public WebElement userNameElementAfterLogIn() throws Exception
+    public WebElement userNameElementAfterLogIn_element() throws Exception
     {
         try 
         {
@@ -274,7 +274,7 @@ public class PropertyDetailPage extends Page
         String username;
         try
         {
-            username=userNameElementAfterLogIn().getText();
+            username=userNameElementAfterLogIn_element().getText();
             AutomationLog.info("Getting User Name Successfully");
         }
         catch(Exception e)
