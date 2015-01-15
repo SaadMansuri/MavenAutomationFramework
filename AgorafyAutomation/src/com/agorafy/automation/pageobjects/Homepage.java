@@ -221,6 +221,37 @@ public class Homepage extends Page
         }
     }
 
+    public WebElement link_MyDashboard() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='mainHeader']/div[3]/div/ul/li[2]/a"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not found link My Dashboard");
+            throw(e);
+        }
+        return element;
+    }
+
+    public Dashboard clickOnMyDashboardLink() throws Exception 
+    {
+        Dashboard dashboard = null; 
+        try
+        {
+            link_MyDashboard().click();
+            dashboard = new Dashboard(driver);
+            AutomationLog.info("Successfully clicked on My Dashboard link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on My dashboard link");
+            throw(e);
+        }
+        return dashboard;
+    }
+     
     public PropertySearch populateSearchTermTextBox(String boroughname,String listingcategory,String searchstring) throws Exception
     {
         PropertySearch propertysearch=null;
