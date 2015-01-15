@@ -2,7 +2,7 @@ validCredential,username=chandrani.bhagat@cuelogic.co.in;password=cuelogic77
 name,invalid="@#SD!2as";withDigit="anjan123";errorMsg1="* Letters only";errorMsg2="* Letters only";errorMsg3="* This field is required\n* Letters only"
 company,alphanumeric="abclimited12";
 workPhone,invalidWorkPhone="12345678";withAlphaChar="123ab@#";errorMsg1="* Invalid phone number\nex. 212-555-5555 x123"
-mobilePhone,invalidMobileNumber="9988776655";withAlphaNumChar="556abcdf";errorMsg1="* Invalid phone number\nex. 212-555-5555 x123"
+mobilePhone,invalidMobileNumber="998877665";withAlphaNumChar="556abcdf";errorMsg1="* Invalid phone number\nex. 212-555-5555 x123"
 address1,invalidAddress1="abcv12@#";emptyErrorAddressMsg="* You must fill out all address fields\n* No special characters allowed";invalidDataErrorMsg2="* No special characters allowed"
 address2,invalidAddress2="newyork1@3";invalidErrorMsg="* No special characters allowed"
 city,invalidCity="losangeles1@";errorMsg1="* You must fill out all address fields\n* Letters only";errorMsg2="* Letters only"

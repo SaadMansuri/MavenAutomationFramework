@@ -129,7 +129,6 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         verifyTextBoxName(overviewTab, overviewData);
         verifyTextBoxComapnyName(overviewTab, overviewData);
         verifyTextBoxMobilePhoneNumber(overviewTab, overviewData);
-        verifyTextBoxMobilePhoneNumber(overviewTab, overviewData);
         verifyTextBoxWorkPhoneNumber(overviewTab, overviewData);
         verifyTextBoxAddress1(overviewTab, overviewData);
         verifyTextBoxAddress2(overviewTab, overviewData);
@@ -164,14 +163,16 @@ public class OverviewTabAction extends AutomationTestCaseVerification
 
     public void verifyTextBoxMobilePhoneNumber(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
-        String verifyWorkMobileNumberPresentInTextBox = overviewTab.getTextBoxMobileNumber();
+        String mobile = overviewTab.getTextBoxMobileNumber();
+        String verifyWorkMobileNumberPresentInTextBox = mobile.replaceAll("-", "");
         Assert.assertEquals(verifyWorkMobileNumberPresentInTextBox, overviewData.getMobilePhone(), "Mobile nos not found");
         AutomationLog.info("Expected Mobile Number found As per the Text Box");
     }
 
     public void verifyTextBoxWorkPhoneNumber(OverviewTab overviewTab,UserProfile overviewData) throws Exception
     {
-        String verifyWorkPhoneNumberPresentInTextBox = overviewTab.getTextBoxWorkPhoneNumber();
+        String work = overviewTab.getTextBoxWorkPhoneNumber();
+        String verifyWorkPhoneNumberPresentInTextBox = work.replaceAll("-", "");
         Assert.assertEquals(verifyWorkPhoneNumberPresentInTextBox, overviewData.getWorkPhone(), "Workphone nos not found");
         AutomationLog.info("Expected Work Phone number found As per the Text Box");
     }
@@ -286,8 +287,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
 
     public static String formatPhoneNumber(String phoneNumber)
     {
-        String phoneToken[] = phoneNumber.split("-");
-        return "(" + phoneToken[0] +") "+phoneToken[1]+"-"+phoneToken[2];
+        return "(" +phoneNumber.substring(0, 3) +") "+phoneNumber.substring(3, 6)+"-"+phoneNumber.substring(6,10);
     }
 
     @Override
