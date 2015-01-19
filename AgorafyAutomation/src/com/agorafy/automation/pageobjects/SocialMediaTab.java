@@ -143,7 +143,6 @@ public class SocialMediaTab extends Page
     {
         txtbx_ConnectYourTwitterProfile().clear();
         txtbx_ConnectYourTwitterProfile().sendKeys(name);
-        clickOnSaveButton();
         AutomationLog.info("Successfully entered text in ConnectYourTwitterProfile text box");
     }
 }

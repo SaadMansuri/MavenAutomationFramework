@@ -45,6 +45,38 @@ public class Dashboard extends Page
         return element;
     }
 
+    public WebElement btn_SubmitListing() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/a"));
+            AutomationLog.info("Submit Listing button found");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Submit Listing Button Not found ");
+            throw (e);
+        }
+        return element;
+    }
+
+    public SubmitListingMediaFormPage clickOnSubmitListingButton() throws Exception 
+    {
+        SubmitListingMediaFormPage obj = null;
+        try
+        {
+            btn_SubmitListing().click();
+            obj = new SubmitListingMediaFormPage(driver);
+            AutomationLog.info("Successfully clicked on Submit listing button");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not clicked on submit listing button");
+            throw(e);
+        }
+        return obj;
+    }
+
     public OverviewTab editProfile() throws Exception
     {
         OverviewTab element = null;

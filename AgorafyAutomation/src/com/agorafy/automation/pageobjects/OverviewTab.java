@@ -1,5 +1,7 @@
 package com.agorafy.automation.pageobjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -194,6 +196,75 @@ public class OverviewTab extends Page
         {
             AutomationLog.error("Neigborhood Not found in Overview tab form");
             throw (e);
+        }
+        return element;
+    }
+
+    public WebElement txtbx_NeigborhoodDropDown() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='s2id_autogen1']"));
+            AutomationLog.info(" Neigborhood found in Overview tab form");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Neigborhood Not found in Overview tab form");
+            throw (e);
+        }
+        return element;
+    }
+
+    public void clickOnNeighborhoodDropdown() throws Exception
+    {
+        try
+        {
+            txtbx_NeigborhoodDropDown().click();
+            AutomationLog.info("Successfully clicked on Neighorhood dropdown textbox");
+           
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not clicked on neighborhood drop down ");
+            throw(e);
+        }
+        
+    }
+
+    public void selectNeighborhood(String neighor) throws Exception
+    {
+        WebElement select = driver.findElement(By.className("select2-results"));
+        List<WebElement> options = select.findElements(By.className("select2-result-label"));
+        for(WebElement optionElement : options)
+        {
+            if(optionElement.getText().equalsIgnoreCase(neighor))
+            {
+                System.out.println(optionElement.getText());
+                optionElement.click();
+                break;
+            }
+        }
+        
+    }
+
+    public List<WebElement> addedNeighborhoods() throws Exception
+    {
+        WebElement select = driver.findElement(By.className("select2-choices"));
+        List<WebElement> options = select.findElements(By.className("select2-search-choice"));
+        
+        return options;
+    }
+
+    public WebElement msg_SelectionLimit() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.className("select2-selection-limit"));
+        } 
+        catch (Exception e) 
+        {
+            AutomationLog.error("Could not found Selection limit message");
+            
         }
         return element;
     }

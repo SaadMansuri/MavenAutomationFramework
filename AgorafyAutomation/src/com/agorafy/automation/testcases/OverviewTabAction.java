@@ -1,7 +1,10 @@
 package com.agorafy.automation.testcases;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -88,6 +91,9 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         verifyUpdatedOverviewTabForm(overviewTab, userData);
 
         verifyIfEmailFieldIsEditable(); 
+        
+        verifyIfClickingSpecializedNeighborhoodsShowsDropDownToSelectNeighborhoods();
+        verifyIfMoreThanFiveNeighborhoodsCanBeAddedInSpecializedNeighborhoods();
     }
 
     private UserProfile getTestOverviewData()
@@ -137,7 +143,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         verifyTextBoxZip(overviewTab, overviewData);
         verifyTextBoxDescribeYourself(overviewTab, overviewData);
         // TODO: Add test to verify neighborhood as it is a complex ui
-        //verifyTextBoxNeigborhood(overviewTab, overviewData);
+        verifyTextBoxNeigborhood(overviewTab, overviewData);
     }
 
     public void verifyBannerDetails(PageBanner banner, UserProfile overviewData) throws Exception
@@ -288,6 +294,44 @@ public class OverviewTabAction extends AutomationTestCaseVerification
     public static String formatPhoneNumber(String phoneNumber)
     {
         return "(" +phoneNumber.substring(0, 3) +") "+phoneNumber.substring(3, 6)+"-"+phoneNumber.substring(6,10);
+    }
+
+    public void verifyIfClickingSpecializedNeighborhoodsShowsDropDownToSelectNeighborhoods() throws Exception
+    {
+        HashMap<String, String> getNeighborhood = testCaseData.get("NeighborHoods");
+        addNeighborhoodsInSpecializedNeighborhoods(getNeighborhood);
+        List<String> neighbors = new ArrayList<String>();
+        List<WebElement > elements = overviewTab.addedNeighborhoods();
+        for(WebElement ele : elements)
+        {
+            neighbors.add(ele.getText());
+        }
+        Assert.assertEquals(neighbors.contains(getNeighborhood.get("neighbor1")), true, "Excpected neighborhood is not added");
+        AutomationLog.info("Clicking Specialized neighborhoods shows drop down to selects neighborhoods successfully");
+    }
+
+    public void verifyIfMoreThanFiveNeighborhoodsCanBeAddedInSpecializedNeighborhoods() throws Exception
+    {
+       /* HashMap<String, String> getNeighborhood = testCaseData.get("NeighborHoods");
+        addNeighborhoodsInSpecializedNeighborhoods(getNeighborhood);*/
+        overviewTab.clickOnNeighborhoodDropdown();
+        Assert.assertEquals(overviewTab.msg_SelectionLimit().getText(), "You can only select 5 items", "Expected message is not shown");
+        AutomationLog.info("Message is shown if try to add more than 5 neighborhoods ");
+    }
+
+    public void addNeighborhoodsInSpecializedNeighborhoods(HashMap<String, String> getNeighborhood) throws Exception
+    {
+        overviewTab.clickOnNeighborhoodDropdown();
+        overviewTab.selectNeighborhood(getNeighborhood.get("neighbor1"));
+        overviewTab.clickOnNeighborhoodDropdown();
+        overviewTab.selectNeighborhood(getNeighborhood.get("neighbor2"));
+        overviewTab.clickOnNeighborhoodDropdown();
+        overviewTab.selectNeighborhood(getNeighborhood.get("neighbor3"));
+        overviewTab.clickOnNeighborhoodDropdown();
+        overviewTab.selectNeighborhood(getNeighborhood.get("neighbor4"));
+        overviewTab.clickOnNeighborhoodDropdown();
+        overviewTab.selectNeighborhood(getNeighborhood.get("neighbor5"));
+        AutomationLog.info("Successfully added Neighborhoods in Specialized Neighborhoods ");
     }
 
     @Override

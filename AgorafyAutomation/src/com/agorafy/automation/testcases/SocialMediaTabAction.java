@@ -34,6 +34,7 @@ public class SocialMediaTabAction extends OverviewTabAction
     @Override
     protected void verifyTestCases() throws Exception
     {
+        verifyIfTweeterProfileTextBoxAcceptAllCharactersAsInput();
         verifyIfSuccessMessageShownOnEnteringTwitterProfileAndClickedOnSaveButton();
     }
 
@@ -42,9 +43,19 @@ public class SocialMediaTabAction extends OverviewTabAction
     {
         HashMap<String, String> profile = testCaseData.get("validTwitterProfile");
         socialmedia.validTwitterProfileName(profile.get("profileName"));
+        socialmedia.clickOnSaveButton();
         String msg = socialmedia.msg_Success().getText();
         Assert.assertEquals(msg, "Success!", "Expected Success Message is not shown");
         AutomationLog.info("Success message is shown on entering twitter profile and clicked on save button ");
     }
 
+    public void verifyIfTweeterProfileTextBoxAcceptAllCharactersAsInput() throws Exception
+    {
+    	HashMap<String, String> profile = testCaseData.get("TweeterInput");
+        socialmedia.validTwitterProfileName(profile.get("username"));
+        socialmedia.clickOnSaveButton();
+        String msg = socialmedia.msg_Success().getText();
+        Assert.assertEquals(msg, "Success!", "Expected Success Message is not shown");
+        AutomationLog.info("Twitter profile text box accepts all characters as input");
+    }
 }
