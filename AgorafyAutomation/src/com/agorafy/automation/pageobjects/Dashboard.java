@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.submitlisting.SubmitListingLocationFormPage;
 
 public class Dashboard extends Page
 {
@@ -60,13 +61,13 @@ public class Dashboard extends Page
         return element;
     }
 
-    public SubmitListingMediaFormPage clickOnSubmitListingButton() throws Exception 
+    public SubmitListingLocationFormPage clickOnSubmitListingButton() throws Exception 
     {
-        SubmitListingMediaFormPage obj = null;
+        SubmitListingLocationFormPage location = null;
         try
         {
             btn_SubmitListing().click();
-            obj = new SubmitListingMediaFormPage(driver);
+            location = new SubmitListingLocationFormPage(driver);
             AutomationLog.info("Successfully clicked on Submit listing button");
         }
         catch(Exception e)
@@ -74,7 +75,7 @@ public class Dashboard extends Page
             AutomationLog.error("could not clicked on submit listing button");
             throw(e);
         }
-        return obj;
+        return location;
     }
 
     public OverviewTab editProfile() throws Exception

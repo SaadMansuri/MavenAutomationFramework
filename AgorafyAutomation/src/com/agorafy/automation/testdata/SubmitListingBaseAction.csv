@@ -1,0 +1,85 @@
+
+#Location page data
+
+LocationCombination2,zipcode="55555"
+LocationCombination3,state="NewYork"
+LocationCombination4,state="NewYork";zipcode="55555"
+LocationCombination5,city="Manhatten"
+LocationCombination6,city="Manhatten";zipcode="55555"
+LocationCombination7,city="Manhatten";state="NewYork"
+LocationCombination8,city="Manhatten";state="NewYork";zipcode="55555"
+LocationCombination9,address="Wellington street"
+LocationCombination10,address="Wellington street";zipcode="55555"
+LocationCombination11,address="Wellington street";state="NewYork"
+LocationCombination12,address="Wellington street";state="NewYork";zipcode="55555"
+LocationCombination13,address="Wellington street";city="Manhatten"
+LocationCombination14,address="Wellington street";city="Manhatten";zipcode="55555"
+LocationCombination15,address="Wellington street";city="Manhatten";state="NewYork"
+LocationCombination16,address="Wellington street";city="Manhatten";state="NewYork";zipcode="55555"
+
+
+#Details-Retail page data
+
+ListingTypes,ListingType1="Retail";ListingType2="Office";ListingType3="Residential";ListingType4="Property"
+ListingOffersForRetail,ListingOffer1="Lease";ListingOffer2="Sublease"
+SpaceSize,SpaceSize1="1000"
+AskingPrice,AskingPrice1="10000"
+AskingPriceUnit,AskingPriceUnit1="per month";AskingPriceUnit2="per sqft";AskingPriceUnit3="total"
+CompulsoryRetailFormData,AskingPrice="10000";AddSpace="Yes";SpaceSize1="1000"
+TotalRetailFormData,ListingOffer="Lease";AddSpace="Yes";AskingPrice="10000";SpaceSize1="1000";AskingPriceUnit="total";Frontage="500";CeilingHeight="55";FoodAllowed="Yes";CookingAllowed="Yes";Description="This is details-Retail page"
+NegativeRetailFormDataWithAddSpaceOnly,AddSpace="Yes";SpaceSize1="1000"
+NegativeRetailFormDataWithAskingPriceOnly,AskingPrice="10000"
+NegativeRetailFormDataWithoutCompulsoryfields,ListingOffer="Lease";AskingPriceUnit="total";Frontage="500";CeilingHeight="55";FoodAllowed="Yes";CookingAllowed="Yes";Description="This is details-Retail page"
+RetailFormDataCrossCheck,AskingPrice="10000";Frontage="500";CeilingHeight="55";Description="This is details-Retail page"
+
+
+
+#Details-Office page data
+
+AddSpacePositiveCombination1,SpaceType="Full floor";SpaceName="Yes";SpaceSize="1000"
+AddSpacePositiveCombination2,SpaceType="Partial Floor";SpaceName="Yes";SpaceSize="1000"
+AddSpacePositiveCombination3,SpaceType="Unit";SpaceName="Yes";SpaceSize="1000"
+AddSpaceNegativeCombination2,SpaceSize="1000"
+AddSpaceNegativeCombination3,SpaceType="Unit";SpaceSize="1000"
+AddSpaceNegativeCombination4,SpaceType="Unit";SpaceName="Yes"
+SpaceType,SpaceType1="Full floor";SpaceType2="Partial Floor";SpaceType3="Unit"
+ListingOffersForOffice,ListingOffer1="Lease";ListingOffer2="Sublease"
+CompulsoryOfficeFormData,AddSpace="Yes";AskingPrice="5000";AskingPriceUnit="total"
+TotalOfficeFormData,ListingOffer="Lease";AddSpace="Yes";AskingPrice="5000";AskingPriceUnit="total";CeilingHeight="50";Combinable="100";Electricity="Direct Metered";Description="This is details-Office page"
+NegativeOfficeFormDataWithAddSpaceOnly,AddSpace="Yes"
+NegativeOfficeFormDataWithAskingPriceOnly,AskingPrice="5000";AskingPriceUnit="total"
+NegativeOfficeFormDataWithoutCompulsoryFields,CeilingHeight="50";Combinable="100";Electricity="Direct Metered";Description="This is details-Office page"
+
+
+
+#Details-Property page data
+
+ListingOffersForProperty,ListingOffer1="Sale"
+PropertyTypes,PropertyType1="Retail Condo";PropertyType2="Office Condo";PropertyType3="Mixed-Use";PropertyType4="Multi-Family";PropertyType5="Office Building";PropertyType6="Development Site";PropertyType7="Conversion Site";PropertyType8="Hotel";PropertyType9="Townhouse";PropertyType10="Single-Family Home"
+CompulsoryPropertyFormData,Price="100000";Block="First";Lot="second";Description="This is details-Property page"
+TotalPropertyFormData,ListingOffer="Sale";PropertyType="Hotel";Price="100000";PriceUnit="total";Block="First";Lot="second";ListingLink="https://www.agorafy.com";Description="This is details-Property page"
+NegativePropertyFormDataWithoutCompulsoryFields,ListingLink="https://www.agorafy.com"
+
+
+#Details-Residential page data
+
+ListingOffersForResidential,ListingOffer1="Lease";ListingOffer2="Sublease";ListingOffer3="Sale"
+ResidentialTypes,ResidentialType1="Apartment";ResidentialType2="Condo";ResidentialType3="Coop";ResidentialType4="Condop";ResidentialType5="Multi-Family";
+NoOfUnits,NoOfUnit1="Single unit";NoOfUnit2="Multiple units"
+CompulsoryResidentialFormData,SpaceSizeMin="5000";Bedrooms="3";Bathrooms="3";PriceMin="50000"
+TotalResidentialFormDataHavingSingleUnit,ListingOffer="Sale";ResidentialType="Apartment";NoOfUnits="Single unit";PropertyName="Lucy's Villa";SpaceSizeMin="1000";Bedrooms="3";Bathrooms="3";PriceMin="100000";PriceUnit="total";Description="This is details-residential page"
+TotalResidentialFormDataHavingMultipleUnits,ListingOffer="Sale";ResidentialType="Apartment";NoOfUnits="Multiple units";PropertyName="Lucy's Villa";SpaceSizeMin="1000";SpaceSizeMax="1500";Bedrooms="3";Bathrooms="3";PriceMin="100000";PriceMax="150000";PriceUnit="total";Description="This is details-residential page"
+NegativeResidentialFormDataWithoutCompulsoryFields,PropertyName="Lucy's Villa";Description="This is details-residential page"
+
+
+
+#Media Page Data
+
+MediaFormData,imageName="image.jpg";highResFile="upload.exe";lowResFile="lowresupload.exe"
+
+
+#Contacts Page Data
+
+ContactOwner,Name="Pierre Nanterme";RepresentingAs="Owner";Company="Accenture";Email="pierren@gmail.com";Phone="9895423561";Address="22 West NewYork"
+ContactBroker,Name="Jason Borne";RepresentingAs="Broker";Company="Oracle";Email="jasonb@gmail.com";Phone="9999999999";Address="44 East DC"
+ContactPropertyManager,Name="Stuart Broad";RepresentingAs="Property Manager";Company="Amdocs";Email="stuartb@gmail.com";Phone="5453348286";Address="21 B west"

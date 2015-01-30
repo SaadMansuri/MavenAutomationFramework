@@ -22,7 +22,7 @@ import com.agorafy.automation.pageobjects.PersonalInfo;
 public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
 {
     PersonalInfo personalInfo = null;
-    HashMap<String, String> expectedpersonalInfoData  = null;
+    HashMap<String, String> expectedpersonalInfoData = null;
 
     public PersonalInfoPositiveAction()
     {
@@ -44,6 +44,8 @@ public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
 
         verifyIfEmailFieldEditable();
         verifyEmailinEmailField();
+
+        verifyIfCompanyFieldMandatory();
     }
 
     private void verifyEmailinEmailField() throws Exception
@@ -83,7 +85,8 @@ public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
     private void populateFields(PersonalInfo personalInfo, UserProfile profileData) throws Exception
     {
         personalInfo.populateData(profileData);
-        personalInfo = personalInfo.clickOnSaveChangesBtn();
+        //personalInfo = personalInfo.clickOnSaveChangesBtn();
+        personalInfo.clickOnSaveChangesBtn();
         WaitFor.waitForPageToLoad(Page.driver);
         Assert.assertEquals(personalInfo.successMessage(),expectedpersonalInfoData.get("successMessage"),"Success Message is not shown after valid changes have been made");
         AutomationLog.info("Success Message is shown after valid changes have been made");
@@ -94,6 +97,15 @@ public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
         UserProfile profile = new UserProfile();
         profile.setName(expectedpersonalInfoData.get("name"));
         return profile;
+    }
+
+    public void verifyIfCompanyFieldMandatory() throws Exception
+    {
+        expectedpersonalInfoData = testCaseData.get("PersonalInfo");
+        personalInfo.textBox_Company().clear();
+        personalInfo.clickOnSaveChangesBtn();
+        Assert.assertEquals(personalInfo.successMessage(), expectedpersonalInfoData.get("successMessage"), "Expected Success Message is not shown");
+        AutomationLog.info("Company field is not mandatory");
     }
 
     @Override

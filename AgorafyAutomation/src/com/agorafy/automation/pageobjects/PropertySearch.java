@@ -36,6 +36,21 @@ public class PropertySearch extends Page
         return element;
     }
 
+    public WebElement title_SearchResult() throws Exception 
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div/div/ul/li[1]/div/h2"));
+            AutomationLog.info("title found on Search Result page");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not found title on Search result page");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement icon_AdvanceSearchDropDown() throws Exception
     {
         try

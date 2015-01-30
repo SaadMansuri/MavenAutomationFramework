@@ -554,6 +554,7 @@ public class PersonalInfo extends Page
         return info;
     }
 
+
     public WebElement text_NameError() throws Exception
     {
         try

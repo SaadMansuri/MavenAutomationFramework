@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.submitlisting.SubmitListingLocationFormPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
 public class Header extends Page
