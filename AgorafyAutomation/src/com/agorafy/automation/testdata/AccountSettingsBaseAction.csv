@@ -4,6 +4,13 @@ AccountSettings,title="AGORAFY";heading="Account Settings";status="active"
 # Personal Information TestData
 PersonalInfo,name="Chandrani Bhagat";successMessage="Your personal details has been changed.";failureMessage="* This field is required";headerProfileName="Hello,\nChandrani!"
 
+# Address Fields TestData
+AddressData,address="415 State Street";city="Brooklyn";state="New York";zipcode="11217"
+WrongAddressData,invalidAddress="West@#$%&";errorMsg1="* You must fill out all address fields";errorMsg2="* No special characters allowed"
+WrongCityData,invalidCity="NewYork23";errorMsg1="* You must fill out all address fields";errorMsg2="* Letters only"
+WrongStateData,errorMsg="* You must fill out all address fields"
+WrongZipCodeData,invalidZip="abc#1";errorMsg1="* You must fill out all address fields";errorMsg2="* Invalid Zipcode"
+
 # Change Password Negative Scenario 
 validCredential,username=chandrani.bhagat@cuelogic.co.in;password=cuelogic77
 verifyIfAllFieldsAreEmpty,errorMsg1="* This field is required\n* Invalid Password";errorMsg2="* This field is required\n* Minimum 8 characters required\n* Invalid Password";errorMsg3="* This field is required"

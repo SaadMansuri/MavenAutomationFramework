@@ -88,7 +88,6 @@ public class PersonalInfo extends Page
         try
         {
             element = driver.findElement(By.id("company"));
-            AutomationLog.info("Company Text field found on Personal Information form");
         }
         catch(Exception e)
         {
@@ -119,7 +118,6 @@ public class PersonalInfo extends Page
         try
         {
             element = driver.findElement(By.id("address1"));
-            AutomationLog.info("Address1 Text field found on Personal Information form");
         }
         catch(Exception e)
         {
@@ -181,7 +179,6 @@ public class PersonalInfo extends Page
         try
         {
             element = driver.findElement(By.id("city"));
-            AutomationLog.info("City Text field found on Personal Information form");
         }
         catch(Exception e)
         {
@@ -222,6 +219,21 @@ public class PersonalInfo extends Page
         return element;
     }
 
+    public void selectState(String state) throws Exception
+    {
+        try
+        {
+            Select select = new Select(dropdown_State());
+            select.selectByVisibleText(state);
+            AutomationLog.info("selected state from State Dropdown");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not select State from Dropdown");
+            throw (e);
+        }
+    }
+
     public String getDropdownSelectedState() throws Exception
     {
         String selectedState = "";
@@ -244,7 +256,6 @@ public class PersonalInfo extends Page
         try
         {
             element = driver.findElement(By.id("zip"));
-            AutomationLog.info("Zip Text field found on Personal Information form");
         }
         catch(Exception e)
         {
@@ -580,6 +591,125 @@ public class PersonalInfo extends Page
         catch(Exception e)
         {
             AutomationLog.error("Error Message for invalid name is not shown");
+            throw(e);
+        }
+        return errorMessage;
+    }
+
+    public WebElement text_AddressError() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='userEditForm']/div[4]/div/div/div"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not found Error Message for Invalid Address");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String addressError() throws Exception
+    {
+        String errorMessage = "";
+        try
+        {
+            errorMessage = text_AddressError().getText();
+            AutomationLog.info("Error Message for invalid address is shown");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Error Message for invalid address is not shown");
+            throw(e);
+        }
+        return errorMessage;
+    }
+    public WebElement text_CityError() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='userEditForm']/div[6]/div/div/div"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not found Error Message for Invalid City");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String cityError() throws Exception
+    {
+        String errorMessage = "";
+        try
+        {
+            errorMessage = text_CityError().getText();
+            AutomationLog.info("Error Message for invalid city is shown");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Error Message for invalid city is not shown");
+            throw(e);
+        }
+        return errorMessage;
+    }
+
+    public WebElement text_ZipError() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='userEditForm']/div[8]/div/div/div"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not found Error Message for Invalid Zipcode");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String zipError() throws Exception
+    {
+        String errorMessage = "";
+        try
+        {
+            errorMessage = text_ZipError().getText();
+            AutomationLog.info("Error Message for invalid zipcode is shown");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Error Message for invalid zipcode is not shown");
+            throw(e);
+        }
+        return errorMessage;
+    }
+
+    public WebElement text_StateError() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='userEditForm']/div[7]/div/span/div/div"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not found Error Message for Invalid State");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String stateError() throws Exception
+    {
+        String errorMessage = "";
+        try
+        {
+            errorMessage = text_StateError().getText();
+            AutomationLog.info("Error Message for invalid State is shown");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Error Message for invalid State is not shown");
             throw(e);
         }
         return errorMessage;

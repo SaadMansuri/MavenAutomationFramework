@@ -60,7 +60,7 @@ public class AccountSettingsTest
         }
     }
 
-    @Test
+    //@Test
     public void testPersonalInfoPositive() throws Exception
     {
         try
@@ -73,7 +73,7 @@ public class AccountSettingsTest
         }
     }
 
-   // @Test
+    @Test
     public void testPersonalInfoNegative() throws Exception
     {
         try
