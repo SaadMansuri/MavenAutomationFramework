@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.datamodel.profile.UserProfile;
 
 public class OverviewTab extends Page 
@@ -200,12 +201,16 @@ public class OverviewTab extends Page
         return element;
     }
 
+    public By neighborhoodlocator() throws Exception
+    {
+        return By.id("s2id_autogen1");
+    }
+
     public WebElement txtbx_NeigborhoodDropDown() throws Exception
     {
         try
         {
             element = driver.findElement(By.xpath(".//*[@id='s2id_autogen1']"));
-            AutomationLog.info(" Neigborhood found in Overview tab form");
         }
         catch (Exception e)
         {
@@ -220,8 +225,6 @@ public class OverviewTab extends Page
         try
         {
             txtbx_NeigborhoodDropDown().click();
-            AutomationLog.info("Successfully clicked on Neighorhood dropdown textbox");
-           
         }
         catch(Exception e)
         {
@@ -229,6 +232,17 @@ public class OverviewTab extends Page
             throw(e);
         }
         
+    }
+
+    public void clearSpecializedNeighborhoodsTextBox() throws Exception
+    {
+        WebElement select = driver.findElement(By.className("select2-choices"));
+        List<WebElement> options = select.findElements(By.className("select2-search-choice-close"));
+        for(WebElement optionElement : options)
+        {
+             optionElement.click();
+        }
+        WaitFor.waitForPageToLoad(driver);
     }
 
     public void selectNeighborhood(String neighor) throws Exception
@@ -239,12 +253,11 @@ public class OverviewTab extends Page
         {
             if(optionElement.getText().equalsIgnoreCase(neighor))
             {
-                System.out.println(optionElement.getText());
                 optionElement.click();
                 break;
             }
         }
-        
+        AutomationLog.info("Neighborhood Added Successfully");
     }
 
     public List<WebElement> addedNeighborhoods() throws Exception
@@ -505,6 +518,7 @@ public class OverviewTab extends Page
         try
         {
             btn_Save().click();
+            WaitFor.waitForPageToLoad(driver);
             tab = new OverviewTab(driver);
         }
         catch (Exception e)

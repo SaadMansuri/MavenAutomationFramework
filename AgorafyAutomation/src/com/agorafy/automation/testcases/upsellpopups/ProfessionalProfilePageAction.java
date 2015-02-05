@@ -24,7 +24,7 @@ public class ProfessionalProfilePageAction extends AutomationTestCaseVerificatio
     	try
         {
             super.setup();
-            Page.driver.get("http://www.agorafy.com/profile/44386/rajesh-titan");
+            Page.driver.get("http://www.agorafy.com/profile/44386/rajesh-Titan");
             professionalProfilePage.clickSendEmailbtnInProfessionalProfilePage();
             AutomationLog.info("Able to Navigate to Professional Page popup");
             
@@ -47,7 +47,7 @@ public class ProfessionalProfilePageAction extends AutomationTestCaseVerificatio
         try
         {
             professionalPopUp.populateLoginPopUpDataForProfessionalPage(getvalidcrendial.get("username"),getvalidcrendial.get("password"));
-            Assert.assertEquals(professionalPopUp.currentURL(),"http://www.agorafy.com/profile/44386/rajesh-titan","unsuccessfull login after entering valid credentials for Professional Page" );
+            Assert.assertEquals(professionalPopUp.currentURL(),"http://www.agorafy.com/profile/44386/rajesh-Titan","unsuccessfull login after entering valid credentials for Professional Page" );
             AutomationLog.info("successfull login after entering valid credentials for Professional Page");
         }
         catch(Exception e)

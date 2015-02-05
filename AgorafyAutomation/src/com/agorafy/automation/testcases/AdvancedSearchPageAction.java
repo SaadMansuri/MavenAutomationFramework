@@ -86,9 +86,8 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         advancedsearch.txtbx_SearchInput().sendKeys(searchData.get("searchTerm"));
         propsearch = advancedsearch.clickOnSearchButton();
         String titleText = "Results for Retail in "+ searchData.get("searchTerm");
-        System.out.println(titleText);
-        System.out.println(propsearch.title_SearchResult().getText());
-        Assert.assertEquals(propsearch.title_SearchResult().getText(), titleText, "not same");
+        Assert.assertEquals(propsearch.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
+        AutomationLog.info("Search Result page title is same as search term ");
     }
 
     @Override

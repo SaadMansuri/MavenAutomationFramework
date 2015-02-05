@@ -21,7 +21,7 @@ public class AccountSettingsTest
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-   // @Test
+    @Test
     public void testAccountSettingsPage() throws Exception
     {
         try
@@ -34,7 +34,7 @@ public class AccountSettingsTest
         }
     }
 
-    //@Test
+    @Test
     public void testChangePasswordNegativeTestcases() throws Exception
     {
         try
@@ -47,7 +47,7 @@ public class AccountSettingsTest
         }
     }
 
-  //  @Test
+    @Test
     public void testChangePasswordPositiveTestcases() throws Exception
     {
         try
@@ -60,7 +60,7 @@ public class AccountSettingsTest
         }
     }
 
-    //@Test
+    @Test
     public void testPersonalInfoPositive() throws Exception
     {
         try

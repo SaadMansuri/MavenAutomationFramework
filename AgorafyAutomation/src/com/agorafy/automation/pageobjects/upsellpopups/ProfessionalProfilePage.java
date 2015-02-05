@@ -39,9 +39,8 @@ public class ProfessionalProfilePage extends Page
              return element;
         }
 
-        public String clickSendEmailbtnInProfessionalProfilePage() throws Exception
+        public void clickSendEmailbtnInProfessionalProfilePage() throws Exception
         {
-            String AfterClickPopUp="";
             try
             {
                 btnSendEmailInProfessionalProfilePage().click();
@@ -52,7 +51,6 @@ public class ProfessionalProfilePage extends Page
                 AutomationLog.error("Click action not performed on Send Email button on Professional Profile Page");
                 throw(e);
              }
-             return AfterClickPopUp;
         }
 
         public WebElement userNameInPopupAfterclickSendEmailbtnInProfessionalProfilePage() throws Exception

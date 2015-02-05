@@ -125,6 +125,7 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         Assert.assertEquals(propertysearch.getTitleForLoginPopUp(), "Log in", "Could not Get login pop up title");
         Credentials ValidCredentials = userCredentials();
         loginpopup.populateLoginPopUpData(ValidCredentials.getEmail(), ValidCredentials.getPassword());
+        propertysearch = (PropertySearch) loginpopup.clickLoginButtonOnUpsell();
         String afterURL = propertysearch.currentURL();
         Assert.assertEquals(beforURL, afterURL, "Expected url match failed");
         AutomationLog.info("Clicking on Create Your Profile button displays Login popup and when logged in using valid credentials same page is shown");

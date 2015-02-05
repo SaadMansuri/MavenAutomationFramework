@@ -31,7 +31,7 @@ public class ProfileOverviewTest
         }
     }
 
-    @Test
+    //@Test
     public void testOverviewTabNegativeTestCases() throws Exception
     {
         try

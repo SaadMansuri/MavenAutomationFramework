@@ -25,7 +25,7 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
 
     public void setup()
     {
-        listingDetailPage = ListingDetailPage.listingDetailPage();
+        //listingDetailPage = ListingDetailPage.listingDetailPage();
         try
         {
             super.setup();

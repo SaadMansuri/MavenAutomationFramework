@@ -40,6 +40,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         try
         {
             searchprofessional.clickOnSearchProfessionalsLink();
+            Thread.sleep(1000);
         }
         catch(Exception e)
         {
@@ -81,7 +82,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     public void isExclusivesCountPresentOnAgentListing(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentName) throws Exception
     {
         searchprofessional.enterAgentOrCompanyNameinAgentSearchAndClickonSearchButton(agentName.get("name"));
-        AutomationLog.info("Agent Search is successful and its Exclusive Count = "+searchprofessional.getTheCountOFAgentTerryExclusives());
+        AutomationLog.info("Agent Search is successful and its Exclusive Count = "+searchprofessional.getTheCountOFExclusives(agentName.get("name")));
     }
     
     public void isExclusivesCountPresentOnCompanyListing(SearchProfessionalsPage searchprofessional,HashMap<String, String> companyName) throws Exception
@@ -89,7 +90,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         searchprofessional.txtbx_agentSearch().clear();
         searchprofessional.enterAgentOrCompanyNameinAgentSearchAndClickonSearchButton(companyName.get("name"));
         searchprofessional.clickOnCompaniesTabOnSearchProfessionals();
-        AutomationLog.info("Company Search is successful and its Exclusive Count = "+searchprofessional.getTheCountOFCompanyDumannExclusive());
+        AutomationLog.info("Company Search is successful and its Exclusive Count = "+searchprofessional.getTheCountOFCompanyExclusive(companyName.get("name")));
     }
 
     public void verifyIFSearchResultMessageIsShown(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentCompanySearch) throws Exception
@@ -98,28 +99,29 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         searchprofessional.txtbx_agentSearch().clear();
         searchprofessional.enterAgentOrCompanyNameinAgentSearchAndClickonSearchButton(agentCompanySearch.get("text"));
         element=searchprofessional.searchAgentResultMessage();
-        Assert.assertEquals(searchprofessional.getTextForSearch(element),"No agents found", "Expected Search result message not found");
+        Assert.assertEquals(element.getText(),"No agents found", "Expected Search result message not found");
         searchprofessional.clickOnCompaniesTabOnSearchProfessionals();
         element=searchprofessional.searchCompaniesResultMessage();
-        Assert.assertEquals(searchprofessional.getTextForSearch(element),"No companies found", "Expected Search result message not found");
+        Assert.assertEquals(element.getText(),"No companies found", "Expected Search result message not found");
+        AutomationLog.info("Appropriate message is shown on entering a random search text");
     }
     
      public void putDataInNeighborHoodDropBox(HashMap<String, String> neighborName) throws Exception
      {
         searchprofessional.clickOnNeighborhoodsSearchDropBox();
-        searchprofessional.ActionToProvideFocusOnDropBox();
+        //searchprofessional.ActionToProvideFocusOnDropBox();
         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor1"));
         searchprofessional.clickOnNeighborhoodsSearchDropBox();
-        searchprofessional.ActionToProvideFocusOnDropBox();
+        //searchprofessional.ActionToProvideFocusOnDropBox();
         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor2"));
         searchprofessional.clickOnNeighborhoodsSearchDropBox();
-        searchprofessional.ActionToProvideFocusOnDropBox();
+        //searchprofessional.ActionToProvideFocusOnDropBox();
         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor3"));
         searchprofessional.clickOnNeighborhoodsSearchDropBox();
-        searchprofessional.ActionToProvideFocusOnDropBox();
+        //searchprofessional.ActionToProvideFocusOnDropBox();
         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor4"));
         searchprofessional.clickOnNeighborhoodsSearchDropBox();
-        searchprofessional.ActionToProvideFocusOnDropBox();
+        //searchprofessional.ActionToProvideFocusOnDropBox();
         searchprofessional.clickOnneighborhoodsOptionListing(neighborName.get("neighbor5"));
      }
         
@@ -127,29 +129,31 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     {
         putDataInNeighborHoodDropBox(neighborName);
         searchprofessional.clickOnNeighborhoodsSearchDropBox();
-        Assert.assertEquals(searchprofessional.checkingNeighborhoodsDropBoxVisibility(),false ,"Neighborhoods DropBox must not be visible");
-        AutomationLog.info("5 Neighborhood is added successful and user is successfully not able to add further Neighbors as Droxbox is not longer visible after adding 5 Neighbors");
+        //Assert.assertEquals(searchprofessional.checkingNeighborhoodsDropBoxVisibility(),false ,"Neighborhoods DropBox must not be visible");
+        Assert.assertEquals(searchprofessional.msg_NeighborhoodsSelectionLimit().getText(), neighborName.get("neighborsLimitMsg"), "Expected message is not shown");
+        //AutomationLog.info("5 Neighborhood is added successful and user is successfully not able to add further Neighbors as Droxbox is not longer visible after adding 5 Neighbors");
+        AutomationLog.info("Not able to add more than 5 Neighborhoods");
     }
     
     public void clickingCheckboxOFExpertiseAndConcentration() throws Exception
     {
-        searchprofessional.clickingOncheckboxOfOfficeLeasingInExpertise();
-        searchprofessional.clickingOncheckboxOfRetailLeasingInExpertise();
-        searchprofessional.clickingOncheckboxOfTenantRepresentationInConcentration();
-        searchprofessional.clickingOnLandlordRepresentationInConcentration();
+        searchprofessional.clickOncheckboxOfOfficeLeasingInExpertise();
+        searchprofessional.clickOncheckboxOfRetailLeasingInExpertise();
+        searchprofessional.clickOncheckboxOfTenantRepresentationInConcentration();
+        searchprofessional.clickOnLandlordRepresentationInConcentration();
     }
     
     public void AssertToVerifyThatCheckboxOFExpertiseAndConcentrationMustBeUncheck() throws Exception
     {
         Assert.assertEquals(searchprofessional.dropBox_NeighborhoodsSearch().getText(),"" ,"Excepted result is the neighborhoods Search DropBox must get empty");
         AutomationLog.info("neighborhoods Search DropBox all text gets removed successfully");
-        Assert.assertEquals(searchprofessional.checkbox_OfOfficeLeasingInExpertise().isSelected(),false ,"Excepted result is false and checkbox must not be clicked");
+        Assert.assertEquals(searchprofessional.checkbox_OfficeLeasingInExpertise().isSelected(),false ,"Excepted result is false and checkbox must not be clicked");
         AutomationLog.info("successfully verified that checkbox Of Office Leasing In Expertise is uncheck");
-        Assert.assertEquals(searchprofessional.checkbox_OfRetailLeasingInExpertise().isSelected(),false ,"Excepted result is false and checkbox must not be clicked");
+        Assert.assertEquals(searchprofessional.checkbox_RetailLeasingInExpertise().isSelected(),false ,"Excepted result is false and checkbox must not be clicked");
         AutomationLog.info("successfully verified that checkbox Of Retail Leasing In Expertise is uncheck");
-        Assert.assertEquals(searchprofessional.checkbox_OfTenantRepresentationInConcentration().isSelected(),false ,"Excepted result is false and checkbox must not be clicked");
+        Assert.assertEquals(searchprofessional.checkbox_TenantRepresentationInConcentration().isSelected(),false ,"Excepted result is false and checkbox must not be clicked");
         AutomationLog.info("successfully verified that checkbox Of Tenant Representation In Concentration is uncheck");
-        Assert.assertEquals(searchprofessional.checkbox_OfLandlordRepresentationInConcentration().isSelected(),false ,"Excepted result is false and checkbox must not be clicked");
+        Assert.assertEquals(searchprofessional.checkbox_LandlordRepresentationInConcentration().isSelected(),false ,"Excepted result is false and checkbox must not be clicked");
         AutomationLog.info("successfully verified that checkbox Of Landlord Representation In Concentration is uncheck");
         AutomationLog.info("All Checkbox is successfully uncheck and text on neighborhoods Search DropBox is also removed");
     }
@@ -160,15 +164,17 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         Page.driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
         searchprofessional.sendDataToAgentSearchTextBox(agentName.get("name"));
         AssertToVerifyThatCheckboxOFExpertiseAndConcentrationMustBeUncheck();
+        AutomationLog.info("Switching from Expertise search to Agent/Company Search unmarks checkbox in Expertise search");
     }
 
     public void verifyIfSearchByExpertiseClearsAgentCompanySearchText(SearchProfessionalsPage searchprofessional,HashMap<String, String> search) throws Exception
     {
         WebElement element=null;
         searchprofessional.enterSearchcontentInAgentCompanySearchTextBox(search.get("name"));
-        searchprofessional.clickingOncheckboxOfOfficeLeasingInExpertise();
+        searchprofessional.clickOncheckboxOfOfficeLeasingInExpertise();
         element=searchprofessional.txtbx_agentSearch();
         Assert.assertEquals(element.getText(), "", "Expected Agent search textbox is not cleard ");
+        AutomationLog.info("Switching from agent /company search to expertise search clears agent/company search text ");
     }
 
     public void verifyIfClickingOnClearButtonClearsFieldsOnExpertiseSearchPanel(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighbor) throws Exception

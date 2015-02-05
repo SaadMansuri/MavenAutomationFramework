@@ -1,5 +1,5 @@
 agentName,name="Terry Bater"
-companySearch,name="Dumann Reality"
+companySearch,name="Dumann Realty"
 agentCompanySearch,text="asdf"
-Neighborhoods,neighbor1=Financial District;neighbor2=Battery Park City;neighbor3=City Hall / Civic Center;neighbor4=Little Italy;neighbor5=Chinatown;neighbor6=Bowery
+Neighborhoods,neighbor1=Financial District;neighbor2=Battery Park City;neighbor3=City Hall / Civic Center;neighbor4=Little Italy;neighbor5=Chinatown;neighbor6=Bowery;neighborsLimitMsg="You can only select 5 items"
 propertyType,res=Residential;com=Commercial

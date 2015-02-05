@@ -3,7 +3,6 @@ package com.agorafy.automation.testcases;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -143,7 +142,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         verifyTextBoxZip(overviewTab, overviewData);
         verifyTextBoxDescribeYourself(overviewTab, overviewData);
         // TODO: Add test to verify neighborhood as it is a complex ui
-        verifyTextBoxNeigborhood(overviewTab, overviewData);
+        //verifyTextBoxNeigborhood(overviewTab, overviewData);
     }
 
     public void verifyBannerDetails(PageBanner banner, UserProfile overviewData) throws Exception
@@ -299,7 +298,11 @@ public class OverviewTabAction extends AutomationTestCaseVerification
     public void verifyIfClickingSpecializedNeighborhoodsShowsDropDownToSelectNeighborhoods() throws Exception
     {
         HashMap<String, String> getNeighborhood = testCaseData.get("NeighborHoods");
+        overviewTab.clearSpecializedNeighborhoodsTextBox();
+        WaitFor.ElementToBeDisplayed(Page.driver, overviewTab.neighborhoodlocator());
         addNeighborhoodsInSpecializedNeighborhoods(getNeighborhood);
+        overviewTab.saveOverviewDetails();
+        WaitFor.ElementToBeDisplayed(Page.driver, overviewTab.neighborhoodlocator());
         List<String> neighbors = new ArrayList<String>();
         List<WebElement > elements = overviewTab.addedNeighborhoods();
         for(WebElement ele : elements)
