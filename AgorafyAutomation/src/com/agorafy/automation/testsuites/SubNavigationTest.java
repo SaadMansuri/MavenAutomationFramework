@@ -4,16 +4,21 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
+import com.agorafy.automation.testcases.contentpages.subnavigation.MyDashboardAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.MyListingsAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationAboutUsAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationAdvancedSearchAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationBlogAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationCareersAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationContactAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationFaqAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationFeedbackAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationHowItWorksAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationMemberBenefitAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationPressAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationSearchProfessionalsAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationSearchPropertiesAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationTeamAction;
 
 /**
  * Test the links present in the subnavigation bar
@@ -157,4 +162,36 @@ public class SubNavigationTest
             throw(e);
         }
     }
+
+    @Test
+    public void testMoreLink() throws Exception
+    {
+        try
+        {
+            new SubnavigationTeamAction().Execute();
+            new SubnavigationCareersAction().Execute();
+            new SubnavigationPressAction().Execute();
+            new SubnavigationFeedbackAction().Execute();
+            new SubnavigationContactAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
+
+    @Test
+    public void testMyDashboardLink() throws Exception
+    {
+        try
+        {
+            new MyDashboardAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
 }
+
+
