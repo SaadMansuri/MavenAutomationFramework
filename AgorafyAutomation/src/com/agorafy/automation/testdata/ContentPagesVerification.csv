@@ -4,7 +4,7 @@ AboutUs,title="AGORAFY - About Us";heading="About Us"
 Blog,title="Agorafy Blog"
 Careers,title="AGORAFY - Careers";heading=Careers
 Contact,title="AGORAFY - Contact";heading=Contact
-FAQ,title="FAQ — Agorafy Blog",
+FAQ,title="Agorafy – FAQ"
 HowItWorks,title="AGORAFY - Tips and How-Tos";heading="How It Works"
 Member,title="AGORAFY - Members' Benefits";heading="Members' Benefits"
 SearchProfessionals,title="AGORAFY - Agent and Company Search";heading="Agent and Company Search"
@@ -23,3 +23,27 @@ Team,title="AGORAFY - Team";heading=Team
 Terms,title="AGORAFY - Terms and Conditions";heading="Terms and Conditions"
 
 AdvancedSearch,title="AGORAFY";heading="Advanced Search"
+
+
+#data for More->Team verification
+More->TeamPageData,title="AGORAFY - Team";heading="Team"
+
+#data for More->Careers verification
+More->CareersPageData,title="AGORAFY - Careers";heading=Careers
+
+#data for More->Press verification
+More->PressPageData,title="AGORAFY - Press";heading=Press
+
+#data for More->Feedback verification
+More->FeedbackPageData,title="AGORAFY - Feedback";heading="Feedback"
+SubjectDropdownOptions,SubjectDropdownOption1="Report a Problem";SubjectDropdownOption2="Ask a Question";SubjectDropdownOption3="Share an Idea";SubjectDropdownOption4="Select Subject"
+ErrorMessages,ErrorForName="* This field is required";ErrorForEmail="* This field is required * Invalid email address";ErrorForSubjectDropdown="* This field is required";ErrorForMessage="* This field is required"
+IfNameEmpty,Email="kevin@gmail.com";SubjectDropdown="Share an Idea";Message="This is feedback page"
+IfEmailEmpty,Name="Kevin";SubjectDropdown="Share an Idea";Message="This is feedback page"
+IfSubjectEmpty,Name="Kevin";Email="kevin@gmail.com";SubjectDropdown="Select Subject";Message="This is feedback page"
+IfMessageEmpty,Name="Kevin";Email="kevin@gmail.com";SubjectDropdown="Report a Problem"
+FeedbackFormTotalData,Name="Kevin";Email="kevin@gmail.com";SubjectDropdown="Ask a Question";Message="This is feedback page"
+SuccessMsg,SuccessMsgForFeedbackForm="Thank you! Your feedback has been submitted."
+
+#data for My Dashboard verification
+MyDashboard,title="AGORAFY - My Profile";heading="My Dashboard"
