@@ -29,16 +29,12 @@ public class SubnavigationCareersAction extends ContentPagesVerification
     @Override
     protected void verifyTestCases() throws Exception
     {
-        SubNavigation subnavigation = Page.subNavigation();
-        Careers careerPage = subnavigation.clickLinkCareers();
+    	SubNavigation subnavigation = Page.subNavigation();
+        Careers careerPage = (Careers) subnavigation.selectDropdownMoreOption("Careers");
 
-        HashMap<String, String> expectedCareersData = testCaseData.get("Careers");
+        HashMap<String, String> expectedCareersData = testCaseData.get("More->CareersPageData");
         expectedCareersData.put("url", careerPage.careersPageUrl());
         verifyLink(careerPage, expectedCareersData);
-
-        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
-        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.careersLinkText(),"Left menu does not show Careers link as Active Link");
-        AutomationLog.info("Left menu shows Careers link as Active Link");
 
         AutomationLog.info("Careers page is correctly loaded");
     }
