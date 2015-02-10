@@ -6,9 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.datamodel.profile.UserProfile;
 
 public class OverviewTab extends Page 
@@ -203,7 +201,7 @@ public class OverviewTab extends Page
 
     public By neighborhoodlocator() throws Exception
     {
-        return By.id("s2id_autogen1");
+        return By.id("s2id_neighborhoodSelect");
     }
 
     public WebElement txtbx_NeigborhoodDropDown() throws Exception
@@ -242,7 +240,6 @@ public class OverviewTab extends Page
         {
              optionElement.click();
         }
-        WaitFor.waitForPageToLoad(driver);
     }
 
     public void selectNeighborhood(String neighor) throws Exception
@@ -518,7 +515,6 @@ public class OverviewTab extends Page
         try
         {
             btn_Save().click();
-            WaitFor.waitForPageToLoad(driver);
             tab = new OverviewTab(driver);
         }
         catch (Exception e)
@@ -927,6 +923,20 @@ public class OverviewTab extends Page
         throw(e);
         }
     return element;
+    }
+
+    public WebElement msg_SuccessAfterSave() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("profileSubmitMsg"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("could not found success message");
+            throw(e);
+        }
+        return element;
     }
 
     public String getTheCountOfDescYourself() throws Exception

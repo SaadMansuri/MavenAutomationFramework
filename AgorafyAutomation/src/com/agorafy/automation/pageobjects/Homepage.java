@@ -188,6 +188,7 @@ public class Homepage extends Page
                 if((listingcategory.getText()).equalsIgnoreCase(selectcategory))
                 {
                     listingcategory.click();
+                    break;
                 }
             }
             AutomationLog.info("Successfully selected listing category");
@@ -210,6 +211,7 @@ public class Homepage extends Page
                 if((borough.getText()).equalsIgnoreCase(selectborough))
                 {
                     borough.click();
+                    break;
                 }
             }
             AutomationLog.info("Successfully selected borough");

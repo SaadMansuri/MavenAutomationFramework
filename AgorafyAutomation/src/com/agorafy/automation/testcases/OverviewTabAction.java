@@ -82,6 +82,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
 
         overviewTab.populateOverviewDetails(userData);
         overviewTab = overviewTab.saveOverviewDetails();
+        WaitFor.waitForPageToLoad(Page.driver, overviewTab.msg_SuccessAfterSave().getText(), overviewTab.neighborhoodlocator());
 
         pageBanner = dashboard.pageBanner();
         WaitFor.waitForPageToLoad(Page.driver, userData.getName(),pageBanner.getBannerTextLocater());
@@ -90,7 +91,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         verifyUpdatedOverviewTabForm(overviewTab, userData);
 
         verifyIfEmailFieldIsEditable(); 
-        
+
         verifyIfClickingSpecializedNeighborhoodsShowsDropDownToSelectNeighborhoods();
         verifyIfMoreThanFiveNeighborhoodsCanBeAddedInSpecializedNeighborhoods();
     }
@@ -299,10 +300,9 @@ public class OverviewTabAction extends AutomationTestCaseVerification
     {
         HashMap<String, String> getNeighborhood = testCaseData.get("NeighborHoods");
         overviewTab.clearSpecializedNeighborhoodsTextBox();
-        WaitFor.ElementToBeDisplayed(Page.driver, overviewTab.neighborhoodlocator());
         addNeighborhoodsInSpecializedNeighborhoods(getNeighborhood);
         overviewTab.saveOverviewDetails();
-        WaitFor.ElementToBeDisplayed(Page.driver, overviewTab.neighborhoodlocator());
+        WaitFor.waitForPageToLoad(Page.driver, overviewTab.msg_SuccessAfterSave().getText(), overviewTab.neighborhoodlocator());
         List<String> neighbors = new ArrayList<String>();
         List<WebElement > elements = overviewTab.addedNeighborhoods();
         for(WebElement ele : elements)

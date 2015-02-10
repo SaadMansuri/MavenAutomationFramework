@@ -255,6 +255,7 @@ public class ListingDetailPage extends LoginPopUp
     {
         header().link_ProfileNameOnDashboardAfterLogin().click();
         header().link_Logout().click();
+        WaitFor.waitForPageToLoad(driver);
     }
 
 }
