@@ -21,7 +21,9 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 public class SubnavigationContactAction extends ContentPagesVerification
 {
-    public SubnavigationContactAction()
+    private Contact contactPage;
+
+	public SubnavigationContactAction()
     {
         super();
     }
@@ -29,16 +31,14 @@ public class SubnavigationContactAction extends ContentPagesVerification
     @Override
     protected void verifyTestCases() throws Exception
     {
+
         SubNavigation subnavigation = Page.subNavigation();
-        Contact contactPage = subnavigation.clickLinkContact();
+        String dropdownMoreOption = "Contact";
+        contactPage = (Contact) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
 
         HashMap<String, String> expectedContactData = testCaseData.get("Contact");
         expectedContactData.put("url", contactPage.contactPageUrl());
         verifyLink(contactPage, expectedContactData);
-
-        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
-        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.contactLinkText(),"Left menu does not show Contact link as Active Link");
-        AutomationLog.info("Left menu shows Contact link as Active Link");
 
         AutomationLog.info("Contact page is correctly loaded");
     }

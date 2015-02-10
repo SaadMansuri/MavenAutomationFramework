@@ -451,7 +451,7 @@ public class SubmitListingDetailsFormOfficeAction extends SubmitListingBaseActio
     {
         try 
         {
-            verifyRemoveAllAddedSpaces();
+            removeAllAddedSpaces();
             detailsOfficePage.clearAskingPrice();
             detailsOfficePage.clearCeilingHeight();
             detailsOfficePage.clearCombinable();
@@ -463,6 +463,24 @@ public class SubmitListingDetailsFormOfficeAction extends SubmitListingBaseActio
         catch (Exception e) 
         {
             AutomationLog.error("failed to clear Current Form");
+            throw (e);
+        }
+    }
+
+    private void removeAllAddedSpaces() 
+    {
+    	try 
+        {
+            noOfSpacesAddedSeenInSpaceHeader = detailsOfficePage.noOfSpacesAddedSeenInSpaceHeader();
+            for(Integer index=1; index <= noOfSpacesAddedSeenInSpaceHeader; index++)
+            {
+                detailsOfficePage.removeSpaceElement(0);
+            }
+            AutomationLog.info("All added spaces removed sucessfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to remove all added spaces");
             throw (e);
         }
     }
