@@ -3,6 +3,7 @@ package com.agorafy.automation.pageobjects.subnavigationmenu;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
 
@@ -60,4 +61,30 @@ public class MyListings extends Page
         }
         return element;
     }
+
+    public WebElement element_PageHeading() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2")); 
+            AutomationLog.info("My listing heading found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find My listings heading");
+            throw (e);
+        }
+        return element;
+    }
+
+    public String getURL()
+    {
+        return applicationUrl() + "/manage/listings/";
+    }
+
+    public String pageHeading() throws Exception
+    {
+        return element_PageHeading().getText();
+    }
+
 }

@@ -3,8 +3,11 @@ package com.agorafy.automation.testcases.contentpages.subnavigation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+
 import org.testng.Assert;
+
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.support.Feedback;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
@@ -17,6 +20,9 @@ public class SubnavigationFeedbackAction extends ContentPagesVerification
     private SubNavigation subnavigation;
     private Feedback feedback;
     private HashMap<String, String> expectedFeedbackData;
+	private ContentPagesLeftMenu leftMenu;
+	private String actualActiveLeftMenu;
+	private String expectedActiveLeftMenu;
 
 	public SubnavigationFeedbackAction() 
     {
@@ -41,6 +47,9 @@ public class SubnavigationFeedbackAction extends ContentPagesVerification
 
         AutomationLog.info("positive form fill up sarted....");
         testPositiveFormFillup();
+
+        AutomationLog.info("Testing whether Feedback link is active in left side started...");
+        verifyLeftMenu();
     }
 
     private void testPositiveFormFillup() throws Exception 
@@ -54,6 +63,15 @@ public class SubnavigationFeedbackAction extends ContentPagesVerification
         Assert.assertEquals(successMsg, expectedFeedbackData.get("SuccessMsgForFeedbackForm"), "Success msg for feedback form fill up is not displayed as expected:");
         AutomationLog.info("Success msg for feedback form fill up is seen as expected");
 
+    }
+
+    private void verifyLeftMenu() throws Exception 
+    {
+        leftMenu = Page.contentPagesLeftMenu();
+        actualActiveLeftMenu = leftMenu.getCurrentlyActiveLink();
+        expectedActiveLeftMenu = leftMenu.FeedbackLinkText();  
+        Assert.assertEquals(actualActiveLeftMenu, expectedActiveLeftMenu,"Left menu does not show Feedback link as Active Link");
+        AutomationLog.info("Left menu shows Feedback link as Active Link");
     }
 
 	private void testNegativeFormFillup() throws Exception 

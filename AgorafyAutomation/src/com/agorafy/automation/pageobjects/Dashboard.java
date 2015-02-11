@@ -175,6 +175,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingLocationFormPage;
+import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 
 public class Dashboard extends Page
 {
@@ -355,5 +356,37 @@ public class Dashboard extends Page
     public String pageHeading() throws Exception
     {
         return element_PageHeading().getText();
+    }
+
+    public WebElement link_MySubscriptions() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.linkText("My Subscriptions"));
+            AutomationLog.info("My Subscriptions link found");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("My Subscriptions link Not found the Home Page");
+            throw (e);
+        }
+        return element;
+    }
+
+    public MySubscriptions clickOnMySubscriptionsLink() throws Exception 
+    {
+        MySubscriptions mySubscriptions;
+        try
+        {
+            link_MySubscriptions().click();
+            mySubscriptions = new MySubscriptions(driver);
+            AutomationLog.info("Successfully clicked on My Subscriptions Link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not clicked on My Subscriptions Link");
+            throw(e);
+        }
+        return mySubscriptions;
     }
 }

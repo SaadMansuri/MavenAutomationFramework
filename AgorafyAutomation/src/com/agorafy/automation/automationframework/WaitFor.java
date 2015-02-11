@@ -130,10 +130,9 @@ public class WaitFor
 
     public static void waitUntilElementIsLoaded(WebDriver driver, By elementLocator)
     {
-    		Integer elementwaitTimeout = Integer.parseInt(Configuration.getConfigurationValueForProperty("global-page-element-polling-timeout"));
-        	WebDriverWait wait = new WebDriverWait(driver, elementwaitTimeout);
-        	wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
-        	
-    }
+        Integer elementwaitTimeout = Integer.parseInt(Configuration.getConfigurationValueForProperty("global-page-element-polling-timeout"));
+        WebDriverWait wait = new WebDriverWait(driver, elementwaitTimeout);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
 
+    }
 }

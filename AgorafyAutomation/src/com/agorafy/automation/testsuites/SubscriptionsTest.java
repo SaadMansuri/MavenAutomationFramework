@@ -4,27 +4,29 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.PropertySearchAction;
+import com.agorafy.automation.testcases.SubscriptionsAction;
+/*Test Subscription Pages*/
 
-public class PropertySearchTest 
+
+public class SubscriptionsTest 
 {
     @BeforeSuite
-    public void Init()
-     {
+    public void Init() throws Exception
+    {
         String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
-     }
+    }
 
     @Test
-    public void propertySearchActionTestCases() throws Exception
+    public void testSubscriptionsLink() throws Exception
     {
         try
         {
-            new PropertySearchAction().Execute();
+            new SubscriptionsAction().Execute();
         }
-        catch (Exception e) 
+        catch(Exception e)
         {
-            throw (e);
+            throw(e);
         }
     }
 }

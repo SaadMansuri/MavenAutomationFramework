@@ -15,7 +15,7 @@ public class MySubscriptions extends Page
     {
         super(driver);
     }
-	
+
     public WebElement SubscriptionFeedBlock() throws Exception
     {
         try 
@@ -45,7 +45,7 @@ public class MySubscriptions extends Page
         }
         return element;
     }
-	
+
     public WebElement TitleElement() throws Exception
     {
         try 
@@ -60,6 +60,30 @@ public class MySubscriptions extends Page
         }
         return element;
     }
-	
-	
+
+    public WebElement element_PageHeading() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
+            AutomationLog.info("Page heading found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Page heading");
+            throw (e);
+        }
+        return element;
+    }
+
+    public String getURL()
+    {
+        return applicationUrl() + "/manage/subscriptions/";
+    }
+
+    public String pageHeading() throws Exception
+    {
+        return element_PageHeading().getText();
+    }
+
 }

@@ -1,6 +1,11 @@
 package com.agorafy.automation.testcases.contentpages.subnavigation;
 
 import java.util.HashMap;
+
+import org.testng.Assert;
+
+import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.company.Team;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
@@ -17,6 +22,9 @@ public class SubnavigationTeamAction extends ContentPagesVerification
     HashMap<String, String> expectedTeamData;
     SubNavigation subnavigation;
     Team team;
+	private ContentPagesLeftMenu leftMenu;
+	private String actualActiveLeftMenu;
+	private String expectedActiveLeftMenu;
 
     @Override
     protected void verifyTestCases() throws Exception 
@@ -28,6 +36,17 @@ public class SubnavigationTeamAction extends ContentPagesVerification
         expectedTeamData.put("url", team.teamPageUrl());
         verifyLink(team, expectedTeamData);
 
+        AutomationLog.info("Testing whether Team link is active in left side started...");
+        verifyLeftMenu();
+    }
+
+    private void verifyLeftMenu() throws Exception 
+    {
+        leftMenu = Page.contentPagesLeftMenu();
+        actualActiveLeftMenu = leftMenu.getCurrentlyActiveLink();
+        expectedActiveLeftMenu = leftMenu.TeamLinkText();  
+        Assert.assertEquals(actualActiveLeftMenu, expectedActiveLeftMenu,"Left menu does not show My Team link as Active Link");
+        AutomationLog.info("Left menu shows My Team link as Active Link");
     }
 
     @Override

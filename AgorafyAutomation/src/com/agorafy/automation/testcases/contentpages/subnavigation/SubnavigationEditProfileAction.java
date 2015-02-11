@@ -1,7 +1,6 @@
 package com.agorafy.automation.testcases.contentpages.subnavigation;
 
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
 
@@ -9,33 +8,31 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
-import com.agorafy.automation.pageobjects.Dashboard;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.contentpages.AboutUs;
+import com.agorafy.automation.pageobjects.subnavigationmenu.EditProfile;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 /**
- * Test whether 'My Dashboard' link appears in the subnavigation bar
+ * Test whether 'Edit Profile' link appears in the subnavigation bar
  * Test whether it gets clicked
  * Test whether actual Url and expected Url are the same
  * Test whether actual Page Title and expected are the same
  * Test whether actual Page Heading and expected Heading match 
  *
  */
-public class MyDashboardAction extends ContentPagesVerification
+public class SubnavigationEditProfileAction extends ContentPagesVerification 
 {
 
     private Homepage homePage;
     private HeaderLoginForm headerLoginForm;
-    private Dashboard myDashboardPage;
-    private HashMap<String, String> expectedMyDashboardData;
+    private EditProfile editProfilePage;
+    private HashMap<String, String> expectedEditProfileData;
+    private SubNavigation subnavigation;
 	private ContentPagesLeftMenu leftMenu;
-	private String actualActiveLeftMenu;
-	private String expectedActiveLeftMenu;
 
-    public MyDashboardAction() 
+    public SubnavigationEditProfileAction() 
     {
         super();
     }
@@ -43,40 +40,37 @@ public class MyDashboardAction extends ContentPagesVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        SubNavigation subnavigation = Page.subNavigation();
+        subnavigation = Page.subNavigation();
         homePage = Homepage.homePage();
         headerLoginForm = homePage.openHeaderLoginForm();
         Credentials ValidCredentials = userCredentials();
         homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
         WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
-        myDashboardPage = subnavigation.clickLinkMyDashboard(); 
-        expectedMyDashboardData = testCaseData.get("MyDashboard");
-        expectedMyDashboardData.put("url", myDashboardPage.getURL());
-        verifyLink(myDashboardPage, expectedMyDashboardData);
+        editProfilePage = subnavigation.clickLinkEditProfile(); 
+        expectedEditProfileData = testCaseData.get("EditProfile");
+        expectedEditProfileData.put("url", editProfilePage.getURL());
+        verifyLink(editProfilePage, expectedEditProfileData);
 
-        AutomationLog.info("Testing whether My Dashboard link is active in left side started...");
+        AutomationLog.info("Testing whether same link is active in left side started...");
         verifyLeftMenu();
     }
-
     private void verifyLeftMenu() throws Exception 
     {
         leftMenu = Page.contentPagesLeftMenu();
-        actualActiveLeftMenu = leftMenu.getCurrentlyActiveLink();
-        expectedActiveLeftMenu = leftMenu.MyDashboardLinkText();  
-        Assert.assertEquals(actualActiveLeftMenu, expectedActiveLeftMenu,"Left menu does not show My Dashboard link as Active Link");
-        AutomationLog.info("Left menu shows My Dashboard link as Active Link");
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.EditProfileLinkText(),"Left menu does not show Edit/View My Profile link as Active Link");
+        AutomationLog.info("Left menu shows Edit/View My Profile link as Active Link");
     }
 
-    @Override
+	@Override
     protected String successMessage() 
     {
-        return "Tested My Dashboard sucessfully";
+        return "Sucessfully tested Subnavigation Edit Profile page";
     }
 
     @Override
     protected String failureMessage() 
     {
-        return "Failed to test My Dashboard";
+        return "Failed to test Subnavigation Edit Profile page";
     }
 
 }

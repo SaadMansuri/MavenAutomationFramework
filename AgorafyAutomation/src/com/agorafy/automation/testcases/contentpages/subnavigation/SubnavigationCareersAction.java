@@ -21,7 +21,11 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 public class SubnavigationCareersAction extends ContentPagesVerification
 {
-    public SubnavigationCareersAction()
+    private ContentPagesLeftMenu leftMenu;
+	private String actualActiveLeftMenu;
+	private String expectedActiveLeftMenu;
+
+	public SubnavigationCareersAction()
     {
         super();
     }
@@ -37,6 +41,18 @@ public class SubnavigationCareersAction extends ContentPagesVerification
         verifyLink(careerPage, expectedCareersData);
 
         AutomationLog.info("Careers page is correctly loaded");
+
+        AutomationLog.info("Testing whether Carrers link is active in left side started...");
+        verifyLeftMenu();
+    }
+
+    private void verifyLeftMenu() throws Exception 
+    {
+        leftMenu = Page.contentPagesLeftMenu();
+        actualActiveLeftMenu = leftMenu.getCurrentlyActiveLink();
+        expectedActiveLeftMenu = leftMenu.CareersLinkText();  
+        Assert.assertEquals(actualActiveLeftMenu, expectedActiveLeftMenu,"Left menu does not show Carrers link as Active Link");
+        AutomationLog.info("Left menu shows Carrers link as Active Link");
     }
 
     @Override
