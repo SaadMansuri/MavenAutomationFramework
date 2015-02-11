@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 
 public class Homepage extends Page 
 {
@@ -292,5 +293,39 @@ public class Homepage extends Page
             throw(e);
         }
         return element;
+    }
+
+    public WebElement dropdown_LoginAvatar() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[4]/a[1]"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not found dropdown of Login avatar");
+            throw(e);
+        }
+        return element;
+    }
+
+    public Page selectDropdownOptionFromLoginAvatar(String option) 
+    {
+        Page page = null;
+        switch (option)
+        {
+            case "My Dashboard":
+            page = new Dashboard(driver);
+            break;
+
+            case "Switch To Admin":
+            page = new Admin(driver);
+            break;
+
+            case "Logout":
+            page = new Homepage(driver);
+            break;
+        }
+        return page;
     }
 }
