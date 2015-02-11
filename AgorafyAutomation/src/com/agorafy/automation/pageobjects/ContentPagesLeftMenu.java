@@ -433,4 +433,19 @@ public class ContentPagesLeftMenu extends Page
     {
         return link_Careers().getText();
     }
+
+    public String PressLinkText() throws Exception 
+    {
+        return link_Press().getText();
+    }
+
+    public String FeedbackLinkText() throws Exception 
+    {
+        return link_Feedback().getText();
+    }
+
+    public String ContactLinkText() throws Exception 
+    {
+        return link_Contact().getText();
+    }
 }	
