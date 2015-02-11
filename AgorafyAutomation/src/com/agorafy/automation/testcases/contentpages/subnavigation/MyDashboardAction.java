@@ -3,8 +3,12 @@ package com.agorafy.automation.testcases.contentpages.subnavigation;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import org.testng.Assert;
+
+import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Dashboard;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
@@ -27,6 +31,9 @@ public class MyDashboardAction extends ContentPagesVerification
     private HeaderLoginForm headerLoginForm;
     private Dashboard myDashboardPage;
     private HashMap<String, String> expectedMyDashboardData;
+	private ContentPagesLeftMenu leftMenu;
+	private String actualActiveLeftMenu;
+	private String expectedActiveLeftMenu;
 
     public MyDashboardAction() 
     {
@@ -47,6 +54,17 @@ public class MyDashboardAction extends ContentPagesVerification
         expectedMyDashboardData.put("url", myDashboardPage.getURL());
         verifyLink(myDashboardPage, expectedMyDashboardData);
 
+        AutomationLog.info("Testing whether My Dashboard link is active in left side started...");
+        verifyLeftMenu();
+    }
+
+    private void verifyLeftMenu() throws Exception 
+    {
+        leftMenu = Page.contentPagesLeftMenu();
+        actualActiveLeftMenu = leftMenu.getCurrentlyActiveLink();
+        expectedActiveLeftMenu = leftMenu.MyDashboardLinkText();  
+        Assert.assertEquals(actualActiveLeftMenu, expectedActiveLeftMenu,"Left menu does not show My Dashboard link as Active Link");
+        AutomationLog.info("Left menu shows My Dashboard link as Active Link");
     }
 
     @Override
