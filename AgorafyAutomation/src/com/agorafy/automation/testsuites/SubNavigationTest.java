@@ -11,17 +11,19 @@ import com.agorafy.automation.testcases.contentpages.subnavigation.Subnavigation
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationBlogAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationCareersAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationContactAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationEditProfileAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationFaqAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationFeedbackAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationHowItWorksAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationMemberBenefitAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationMySubscriptionsAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationPressAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationSearchProfessionalsAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationSearchPropertiesAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationTeamAction;
 
 /**
- * Test the links present in the subnavigation bar
+ * Test the links present in the subnavigation bar in Logged in logged out states
  */
 
 public class SubNavigationTest
@@ -192,6 +194,44 @@ public class SubNavigationTest
             throw(e);
         }
     }
+
+    @Test
+    public void testMyListingLink() throws Exception
+    {
+        try
+        {
+            new MyListingsAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
+
+    @Test
+    public void testMySubscriptionsLink() throws Exception
+    {
+        try
+        {
+            new SubnavigationMySubscriptionsAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
+
+    @Test
+    public void testEditProfileLink() throws Exception
+    {
+        try
+        {
+            new SubnavigationEditProfileAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
+
 }
-
-
