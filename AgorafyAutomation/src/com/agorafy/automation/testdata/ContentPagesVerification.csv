@@ -47,3 +47,13 @@ SuccessMsg,SuccessMsgForFeedbackForm="Thank you! Your feedback has been submitte
 
 #data for My Dashboard verification
 MyDashboard,title="AGORAFY - My Profile";heading="My Dashboard"
+
+#data for My Listings verification
+MyListings,title="AGORAFY - Manage My Listings";heading="My Listings"
+
+#data for My Subscriptions verification
+MySubscriptions,title="AGORAFY - Manage My Subscriptions";heading="My Subscriptions"
+
+#data for Edit Profiles verification
+EditProfile,title="AGORAFY - Manage My Profile";heading="Edit / View My Profile"
+
