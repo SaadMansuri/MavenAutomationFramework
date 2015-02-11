@@ -31,10 +31,28 @@ public class EditProfile extends Page
         return element;
     }
 
-    
-    
-	
-	
-	
-	
+    public WebElement element_PageHeading() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
+            AutomationLog.info("edit profile page title found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find edit profile title");
+            throw (e);
+        }
+        return element;
+    }
+
+    public String getURL()
+    {
+        return applicationUrl() + "/manage/profile";
+    }
+
+    public String pageHeading() throws Exception
+    {
+        return element_PageHeading().getText();
+    }
 }
