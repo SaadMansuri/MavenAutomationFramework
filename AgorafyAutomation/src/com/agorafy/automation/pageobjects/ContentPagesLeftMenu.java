@@ -347,4 +347,90 @@ public class ContentPagesLeftMenu extends Page
         }
         return activeLinkText;
     } 
-}
+
+    public WebElement link_EditAndViewProfile() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[4]/a"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not find link Edit And View Profile on left hand side");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String EditProfileLinkText() throws Exception 
+    {
+    	return link_EditAndViewProfile().getText();
+    }
+
+    public WebElement link_MySubscriptions() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[3]/a"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not find link My Subscriptions on left hand side");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String MySubscriptionsLinkText() throws Exception 
+    {
+    	return link_MySubscriptions().getText();
+    }
+
+    public WebElement link_MyListings() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[2]/a"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not find link My Listings on left hand side");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String MyListingsLinkText() throws Exception 
+    {
+        return link_MyListings().getText();
+    }
+
+    public WebElement link_MyDashboard() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[1]/a"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not find link My Dashboard on left hand side");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String MyDashboardLinkText() throws Exception 
+    {
+        return link_MyDashboard().getText();
+    }
+
+    public String TeamLinkText() throws Exception 
+    {
+        return link_Team().getText();
+    }
+
+    public String CareersLinkText() throws Exception 
+    {
+        return link_Careers().getText();
+    }
+}	
