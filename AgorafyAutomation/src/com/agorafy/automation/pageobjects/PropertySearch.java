@@ -79,6 +79,20 @@ public class PropertySearch extends Page
         return element;
     }
 
+    public WebElement FilterText_Size() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("filterText"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not find Filter text for advance search(Size)");
+            throw(e);
+        }
+        return element;
+    }
+
     public void clickOnCreateProfileButton() throws Exception
     {
         try
@@ -172,7 +186,21 @@ public class PropertySearch extends Page
         }
         return element;
     }
- 
+
+    public WebElement FilterText_Price() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("filterText"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Filter text for advance search(Price)");
+            throw(e);
+        }
+        return element;
+    }
+
     public String NoOfBedsInPropertiesSearch() throws Exception
     {
         String number = null;
