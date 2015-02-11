@@ -22,6 +22,9 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 public class SubnavigationContactAction extends ContentPagesVerification
 {
     private Contact contactPage;
+	private ContentPagesLeftMenu leftMenu;
+	private String actualActiveLeftMenu;
+	private String expectedActiveLeftMenu;
 
 	public SubnavigationContactAction()
     {
@@ -41,6 +44,18 @@ public class SubnavigationContactAction extends ContentPagesVerification
         verifyLink(contactPage, expectedContactData);
 
         AutomationLog.info("Contact page is correctly loaded");
+
+        AutomationLog.info("Testing whether Contact link is active in left side started...");
+        verifyLeftMenu();
+    }
+
+    private void verifyLeftMenu() throws Exception 
+    {
+        leftMenu = Page.contentPagesLeftMenu();
+        actualActiveLeftMenu = leftMenu.getCurrentlyActiveLink();
+        expectedActiveLeftMenu = leftMenu.ContactLinkText();  
+        Assert.assertEquals(actualActiveLeftMenu, expectedActiveLeftMenu,"Left menu does not show Contact link as Active Link");
+        AutomationLog.info("Left menu shows Contact link as Active Link");
     }
 
     @Override

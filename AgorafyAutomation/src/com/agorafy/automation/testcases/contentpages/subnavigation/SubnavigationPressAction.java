@@ -1,6 +1,11 @@
 package com.agorafy.automation.testcases.contentpages.subnavigation;
 
 import java.util.HashMap;
+
+import org.testng.Assert;
+
+import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.support.Press;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
@@ -11,6 +16,9 @@ public class SubnavigationPressAction extends ContentPagesVerification
     private SubNavigation subnavigation;
 	private Press Press;
 	private HashMap<String, String> expectedPressData;
+	private ContentPagesLeftMenu leftMenu;
+	private String actualActiveLeftMenu;
+	private String expectedActiveLeftMenu;
 
 	public SubnavigationPressAction() 
     {
@@ -26,6 +34,18 @@ public class SubnavigationPressAction extends ContentPagesVerification
         expectedPressData = testCaseData.get("More->PressPageData");
         expectedPressData.put("url", Press.pressPageUrl());
         verifyLink(Press, expectedPressData);
+
+        AutomationLog.info("Testing whether Press link is active in left side started...");
+        verifyLeftMenu();
+    }
+
+    private void verifyLeftMenu() throws Exception 
+    {
+        leftMenu = Page.contentPagesLeftMenu();
+        actualActiveLeftMenu = leftMenu.getCurrentlyActiveLink();
+        expectedActiveLeftMenu = leftMenu.PressLinkText();  
+        Assert.assertEquals(actualActiveLeftMenu, expectedActiveLeftMenu,"Left menu does not show Press link as Active Link");
+        AutomationLog.info("Left menu shows Press link as Active Link");
     }
 
     @Override
@@ -37,6 +57,6 @@ public class SubnavigationPressAction extends ContentPagesVerification
     @Override
     protected String failureMessage()
     {
-        return "Press link Test Failed ";
+        return "Press link Testing Failed ";
     }
 }
