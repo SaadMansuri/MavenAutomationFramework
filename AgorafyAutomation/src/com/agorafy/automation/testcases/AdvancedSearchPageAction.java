@@ -50,8 +50,8 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
-       /* verifyIfResidentialListingCategoryIsSelected();
-        verifyIfEmptySearchPerformed();*/
+        verifyIfResidentialListingCategoryIsSelected();
+        verifyIfEmptySearchPerformed();
         verifyIfCommercialRadioButtonClicked();
         verifySearchByCommercial();
         verifySearchByResidential();
@@ -181,13 +181,13 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     @Override
     protected String successMessage() 
     {
-    	return null;
+    	return "test cases for AdvanceSearch page passed" ;
     }
 
     @Override
     protected String failureMessage() 
     {
-    	return null;
+    	return "test cases for AdvanceSearch page failed";
     }
     
 }

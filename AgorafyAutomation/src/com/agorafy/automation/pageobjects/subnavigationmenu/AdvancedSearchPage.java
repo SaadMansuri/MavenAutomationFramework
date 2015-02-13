@@ -69,7 +69,7 @@ public class AdvancedSearchPage extends Page
 
     public void selectPriceType(String pricetype) throws Exception
     {
-        Select type = new Select(driver.findElement(By.id("priceType")));
+         Select type = new Select(driver.findElement(By.id("priceType")));
         type.selectByVisibleText(pricetype);
     }
 
