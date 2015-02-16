@@ -72,4 +72,19 @@ public class Page
         // TODO: To throw Expection for pages that do not have Page Headings 
         return "";
     }
+
+    public void refreshPage() 
+    {
+        driver.navigate().refresh();
+    }
+
+    public void alertAccept() 
+    {
+        driver.switchTo().alert().accept();
+    }
+
+    public void alertDismiss() 
+    {
+        driver.switchTo().alert().dismiss();
+    }
 }
