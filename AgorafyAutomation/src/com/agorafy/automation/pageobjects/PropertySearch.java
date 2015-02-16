@@ -10,6 +10,7 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
@@ -228,11 +229,13 @@ public class PropertySearch extends Page
         return number;
         
     }
-    public void clickOnSubscribeToThisSearchLink() throws Exception
+    public MySubscriptions clickOnSubscribeToThisSearchLink() throws Exception
     {
+        MySubscriptions mySubscriptions;
         try
         {
             link_SubscribeToThisSearch().click();
+            mySubscriptions = new MySubscriptions(driver);
             AutomationLog.info("Successfully clicked on Subscribe to this search link ");
         }
         catch(Exception e)
@@ -240,6 +243,7 @@ public class PropertySearch extends Page
             AutomationLog.error("Could not clicked on Subscribe to this search link");
             throw(e);
         }
+        return mySubscriptions;
     }
 
     public void closeLoginPoPup(LoginPopUp loginpopup) throws Exception
@@ -436,96 +440,6 @@ public class PropertySearch extends Page
     {
         elements = driver.findElement(By.className("resultsSet")).findElements(By.tagName("li"));
         return elements;
-    }
-
-    public WebElement element_SubscriptionWindow() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.id("subscriptionsContainer"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not locate Subscription Window under User Name Avatar");
-            throw(e);
-        }
-        return element;
-    }
-
-    public WebElement element_SubscriptionWindowCloseCross() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.id("subscriptionsWindowClose"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not locate Cross used to Close Subscription Window under User's Avatar");
-            throw(e);
-        }
-        return element;
-    }
-
-    public void closeSubscriptionWindow() throws Exception
-    {
-        try
-        {
-            element_SubscriptionWindowCloseCross().click();
-            AutomationLog.info("Successfully closed Subscription Window under User's Avatar");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("failed to close Subscription Window under User's Avatar");
-            throw(e);
-        }
-    }
-
-    public WebElement btn_SubscribeInSubscriptionWindow() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[2]/div[2]/a"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not locate button Subscribe in Subscription Window under User's Avatar");
-            throw(e);
-        }
-        return element;
-    }
-
-    public void clickSubscribeInSubscriptionWindow() throws Exception
-    {
-        try
-        {
-            btn_SubscribeInSubscriptionWindow().click();
-            AutomationLog.info("Successfully clicked Subscribe button in Subscription Window under User's Avatar");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("failed to click Subscribe button in Subscription Window under User's Avatar");
-            throw(e);
-        }
-    }
-
-    public WebElement txtbx_SearchStringInSubscriptionWindow() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.id("subscriptionsLabel"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not locate text box Search String in Subscribe Window under User's Avatar");
-            throw(e);
-        }
-        return element;
-    }
-
-    public String getSearchStringInSubscriptionWindow() throws Exception
-    {
-        String searchString = txtbx_SearchStringInSubscriptionWindow().getAttribute("value");
-        return searchString;
     }
 
 }
