@@ -312,7 +312,7 @@ public class PropertySearch extends Page
         }
         return element;
     }
-    
+
     public WebElement loadingMessage() throws Exception
     {
         try
@@ -326,7 +326,7 @@ public class PropertySearch extends Page
         }
         return element;
     }
-    
+
     public void BedsInAdvanceSearchForm(String badNo) throws Exception
     {
         try
@@ -352,6 +352,96 @@ public class PropertySearch extends Page
     {
         elements = driver.findElement(By.className("resultsSet")).findElements(By.tagName("li"));
         return elements;
+    }
+
+    public WebElement element_SubscriptionWindow() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("subscriptionsContainer"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not locate Subscription Window under User Name Avatar");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement element_SubscriptionWindowCloseCross() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("subscriptionsWindowClose"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not locate Cross used to Close Subscription Window under User's Avatar");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void closeSubscriptionWindow() throws Exception
+    {
+        try
+        {
+            element_SubscriptionWindowCloseCross().click();
+            AutomationLog.info("Successfully closed Subscription Window under User's Avatar");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("failed to close Subscription Window under User's Avatar");
+            throw(e);
+        }
+    }
+
+    public WebElement btn_SubscribeInSubscriptionWindow() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[2]/div[2]/a"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not locate button Subscribe in Subscription Window under User's Avatar");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickSubscribeInSubscriptionWindow() throws Exception
+    {
+        try
+        {
+            btn_SubscribeInSubscriptionWindow().click();
+            AutomationLog.info("Successfully clicked Subscribe button in Subscription Window under User's Avatar");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("failed to click Subscribe button in Subscription Window under User's Avatar");
+            throw(e);
+        }
+    }
+
+    public WebElement txtbx_SearchStringInSubscriptionWindow() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("subscriptionsLabel"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not locate text box Search String in Subscribe Window under User's Avatar");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String getSearchStringInSubscriptionWindow() throws Exception
+    {
+        String searchString = txtbx_SearchStringInSubscriptionWindow().getAttribute("value");
+        return searchString;
     }
 
 }
