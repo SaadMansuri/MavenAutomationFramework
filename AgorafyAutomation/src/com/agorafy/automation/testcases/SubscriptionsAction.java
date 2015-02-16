@@ -23,7 +23,8 @@ public class SubscriptionsAction extends AutomationTestCaseVerification
     private HeaderLoginForm headerLoginForm;
     private HashMap<String, String> dataFromCSV;
     private PropertySearch propertySearch;
-	private boolean actualStatusOfElement;
+    private boolean actualStatusOfElement;
+	private MySubscriptions mySubscriptions;
 
     public SubscriptionsAction() 
     {
@@ -41,7 +42,7 @@ public class SubscriptionsAction extends AutomationTestCaseVerification
             Credentials ValidCredentials = userCredentials();
             homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
-            dataFromCSV = testCaseData.get("SearchCombination");
+            dataFromCSV = testCaseData.get("SearchInputCombination");
             propertySearch = homePage.populateSearchTermTextBox(dataFromCSV.get("boroughname"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchstring"));
         }
         catch (Exception e)
@@ -53,7 +54,7 @@ public class SubscriptionsAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        /*AutomationLog.info("Verify whether Subscription box display's under username after clicking Subscribe to this search link ");
+        AutomationLog.info("Verify whether Subscription box display's under username after clicking Subscribe to this search link ");
         verifySubscriptionBoxDisplay();
 
         AutomationLog.info("Verify whether same search term reflects in Subscription window under user's avator");
@@ -64,12 +65,22 @@ public class SubscriptionsAction extends AutomationTestCaseVerification
 
         AutomationLog.info("Verify whether pop-up window opens when you subscribe the already subscribed search");
         verifyPopUpAlreadySubscribed();
-*/
+
         AutomationLog.info("Verify whether Subscriptions window has view more subscriptions link");
         verifyViewMoreSubscriptionsLink();
+
+        AutomationLog.info("Verify Subscribe to listing link on Listing details page");
+        verifySubscribeToListingLink();
+
     }
 
-    private void verifyViewMoreSubscriptionsLink() throws Exception 
+    private void verifySubscribeToListingLink() 
+    {
+        
+        
+    }
+
+	private void verifyViewMoreSubscriptionsLink() throws Exception 
     {
         propertySearch.refreshPage();
         propertySearch.clickOnSubscribeToThisSearchLink();
@@ -89,7 +100,7 @@ public class SubscriptionsAction extends AutomationTestCaseVerification
     {
         propertySearch.refreshPage();
         propertySearch.clickOnSubscribeToThisSearchLink();
-        propertySearch.clickSubscribeInSubscriptionWindow();
+        mySubscriptions.clickSubscribeInSubscriptionWindow();
         try 
         {
             propertySearch.alertAccept();
@@ -99,38 +110,38 @@ public class SubscriptionsAction extends AutomationTestCaseVerification
         {
             AutomationLog.error("Alert is expected since current search subscription is already subscribed");
         }
-        propertySearch.closeSubscriptionWindow();
+        mySubscriptions.closeSubscriptionWindow();
     }
 
     private void verifySearchTerm() throws Exception 
     {
-        propertySearch.clickOnSubscribeToThisSearchLink();
-        String searchText = propertySearch.getSearchStringInSubscriptionWindow();
+        mySubscriptions = propertySearch.clickOnSubscribeToThisSearchLink();
+        String searchText = mySubscriptions.getSearchStringInSubscriptionWindow();
         dataFromCSV = testCaseData.get("SearchCombination");
         Assert.assertEquals(searchText, dataFromCSV.get("searchstring"), "Data mismatch in search text from search navigation and Subscription window from user's dropdown");
         AutomationLog.info("Same Search string data is shown in search in navigation bar and subscription window under user name");
-        propertySearch.closeSubscriptionWindow();
+        mySubscriptions.closeSubscriptionWindow();
     }
 
     private void verifySubscriptionTextVanishing() throws Exception 
     {
-        propertySearch.clickOnSubscribeToThisSearchLink();
-        propertySearch.clickSubscribeInSubscriptionWindow();
+        mySubscriptions = propertySearch.clickOnSubscribeToThisSearchLink();
+        mySubscriptions.clickSubscribeInSubscriptionWindow();
         actualStatusOfElement = false;
         actualStatusOfElement = propertySearch.link_SubscribeToThisSearch().isDisplayed();
         Assert.assertEquals(actualStatusOfElement, false, "Subscribe to this search link still persists, it should be vanished");
         AutomationLog.info("Subscribe to this search link vanishes sucessfully");
-        propertySearch.closeSubscriptionWindow();
+        mySubscriptions.closeSubscriptionWindow();
     }
 
 	private void verifySubscriptionBoxDisplay() throws Exception 
     {
-        propertySearch.clickOnSubscribeToThisSearchLink();
+        mySubscriptions = propertySearch.clickOnSubscribeToThisSearchLink();
         actualStatusOfElement = false;
-        actualStatusOfElement = propertySearch.element_SubscriptionWindow().isDisplayed();
+        actualStatusOfElement = mySubscriptions.element_SubscriptionWindow().isDisplayed();
         Assert.assertEquals(actualStatusOfElement, true, "Subscription Box under user's Avatar is not displayed");
         AutomationLog.info("Subscription Box under user's Avatar is displayed sucessfully");
-        propertySearch.closeSubscriptionWindow();
+        mySubscriptions.closeSubscriptionWindow();
     }
 
 	@Override
