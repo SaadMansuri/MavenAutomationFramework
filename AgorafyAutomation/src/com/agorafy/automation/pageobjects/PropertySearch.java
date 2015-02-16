@@ -6,10 +6,13 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
+
 
 public class PropertySearch extends Page
 {
@@ -367,6 +370,59 @@ public class PropertySearch extends Page
             AutomationLog.error("Could not put the "+badNo+"number of both");
             throw(e);
         }
+    }
+
+    public WebElement icon_AddToReport() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("prop-14289"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not found AddToReport icon");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void hoverOnAddToReportIcon() throws Exception
+    {
+        Actions builder = new Actions(driver);
+        Action hover = builder.moveToElement(icon_AddToReport()).build();
+        hover.perform();
+    }
+
+    public By Tooltiplocator() throws Exception
+    {
+        return By.className("Zebra_Tooltip_Message");
+    }
+
+    public WebElement tooltip_AddToReport() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(Tooltiplocator());
+            AutomationLog.info("tooltip  found");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not found tooltip ");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement tile_firstSearchResult() throws Exception
+    {
+        return resultSet().get(0);
+    }
+
+    public void hoverOnFirstSearchResultTile() throws Exception
+    {
+        Actions builder = new Actions(driver);
+        Action hover = builder.moveToElement(tile_firstSearchResult()).build();
+        hover.perform();
     }
 
     public ListingDetailPage clickSearchResult()

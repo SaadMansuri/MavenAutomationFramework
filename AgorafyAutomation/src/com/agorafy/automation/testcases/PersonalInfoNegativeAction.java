@@ -1,7 +1,6 @@
 package com.agorafy.automation.testcases;
 
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
 

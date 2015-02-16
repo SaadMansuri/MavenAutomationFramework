@@ -1,5 +1,6 @@
 package com.agorafy.automation.testcases;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
@@ -38,9 +39,10 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         super.setup();
         try
         {
+            HashMap<String, String> data = testCaseData.get("SearchData");
             homepage=Homepage.homePage();
             Page.driver.manage().timeouts().implicitlyWait(2, TimeUnit.MINUTES);
-            propertysearch=homepage.populateSearchTermTextBox("Manhattan","Residential","Rentals in 10010");
+            propertysearch=homepage.populateSearchTermTextBox(data.get("borough"),data.get("listingcategory"),data.get("searchterm"));
             loginpopup=new LoginPopUp(Page.driver);
             AutomationLog.info("Redirected to Property Search page ");
         }
