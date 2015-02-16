@@ -243,6 +243,25 @@ public class ListingDetailPage extends LoginPopUp
         return loginPopUp;
     }
 
+    public WebElement title_ListingTypeSearched() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div[1]/div[1]/div[1]/div[3]/h2"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.info("Could not found Title of Listing Type Searched");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String getTitleOfListingTypeSearched() throws Exception
+    {
+        return title_ListingTypeSearched().getText();
+    }
+
     public boolean isUpdateListingLinkPresent() throws Exception
     {
         if(link_UpdateListing().isDisplayed()==true)

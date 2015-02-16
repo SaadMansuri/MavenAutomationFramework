@@ -1,6 +1,9 @@
 package com.agorafy.automation.pageobjects.subnavigationmenu;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,6 +42,19 @@ public class AdvancedSearchPage extends Page
         boroughs.selectByVisibleText(boroughname);
     }
 
+    public List<String> listingType() throws Exception
+    {
+        List<String> list = new ArrayList<String>();
+        Select ele = new Select(driver.findElement(By.id("offeringType")));
+        List<WebElement> els = ele.getOptions();
+        for(WebElement opt : els)
+        {
+             list.add(opt.getText());
+        }
+        return list;
+        
+    }
+
     public void selectListingType(String listingtype) throws Exception
     {
         Select type = new Select(driver.findElement(By.id("offeringType")));
@@ -53,8 +69,21 @@ public class AdvancedSearchPage extends Page
 
     public void selectPriceType(String pricetype) throws Exception
     {
-        Select type = new Select(driver.findElement(By.id("priceType")));
+         Select type = new Select(driver.findElement(By.id("priceType")));
         type.selectByVisibleText(pricetype);
+    }
+
+    public List<String> priceType() throws Exception
+    {
+        List<String> list = new ArrayList<String>();
+        Select ele = new Select(driver.findElement(By.id("priceType")));
+        List<WebElement> els = ele.getOptions();
+        for(WebElement opt : els)
+        {
+             list.add(opt.getText());
+        }
+        return list;
+        
     }
 
     public WebElement radiobtn_Commercial() throws Exception

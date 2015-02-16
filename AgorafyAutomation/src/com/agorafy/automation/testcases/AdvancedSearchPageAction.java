@@ -1,7 +1,10 @@
 package com.agorafy.automation.testcases;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
@@ -13,12 +16,16 @@ import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.PropertySearch;
 import com.agorafy.automation.pageobjects.subnavigationmenu.AdvancedSearchPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 
 public class AdvancedSearchPageAction extends AutomationTestCaseVerification
 {
     private AdvancedSearchPage advancedsearch = null;
     private PropertySearch propsearch = null;
+    private ListingDetailPage listingdetail = null;
     private SubNavigation subnavigation = null;
+    private List<String> list = new ArrayList<String>();
+
     public AdvancedSearchPageAction() 
     {
         super();
@@ -47,6 +54,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         verifyIfEmptySearchPerformed();
         verifyIfCommercialRadioButtonClicked();
         verifySearchByCommercial();
+        verifySearchByResidential();
     }
 
     public void verifyIfResidentialListingCategoryIsSelected() throws Exception
@@ -78,28 +86,108 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     {
         HashMap<String, String> searchData = testCaseData.get("SearchCommercial");
         searchByAddress(searchData);
+        searchByListingtype();
+        searchBySize(searchData);
+        searchByPrice(searchData);
+    }
+
+    public void verifySearchByResidential() throws Exception
+    {
+    	HashMap<String, String> searchData = testCaseData.get("SearchResidential");
+        searchResidential(searchData);
     }
 
     public void searchByAddress(HashMap<String, String> searchData) throws Exception
     {
         advancedsearch.selectBorough(searchData.get("borough"));
+        advancedsearch.txtbx_SearchInput().clear();
         advancedsearch.txtbx_SearchInput().sendKeys(searchData.get("searchTerm"));
         propsearch = advancedsearch.clickOnSearchButton();
-        String titleText = "Results for Retail in "+ searchData.get("searchTerm");
+        String titleText = searchData.get("searchText") + searchData.get("searchTerm");
         Assert.assertEquals(propsearch.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
         AutomationLog.info("Search Result page title is same as search term ");
+        Page.driver.navigate().back();
+    }
+
+    public void searchByListingtype() throws Exception
+    {
+        list.addAll(advancedsearch.listingType());
+        for(int i=1;i<(list.size());i++)
+        {
+            advancedsearch.selectListingType(list.get(i));
+            propsearch = advancedsearch.clickOnSearchButton();
+            String curHandle = Page.driver.getWindowHandle();
+            listingdetail = propsearch.clickSearchResult();
+            Set<String> handleset = Page.driver.getWindowHandles();
+            for(String handle : handleset)
+            {
+                 if(!handle.equals(curHandle))
+                 {
+                     Page.driver.switchTo().window(handle);
+                     break;
+                 }
+            }
+            String expected  = "Retail for " + list.get(i).replace("-","");
+            String actual = listingdetail.getTitleOfListingTypeSearched();
+            list.clear();
+            Assert.assertEquals(actual, expected,"Expected title is not shown");
+            AutomationLog.info("Search is Successfull");
+            Page.driver.close();
+            Page.driver.switchTo().window(curHandle);
+            Page.driver.navigate().back();
+        }
+        
+    }
+
+    public void searchBySize(HashMap<String, String> searchData) throws Exception
+    {
+        advancedsearch.txtbx_SizeInput().clear();
+        advancedsearch.txtbx_SizeInput().sendKeys(searchData.get("size"));
+        String expectedSize = searchData.get("size")+"sqft";
+        propsearch = advancedsearch.clickOnSearchButton();
+        String actualSize = propsearch.FilterText_Size().getText().replaceAll("[,\\s]", "");
+        Assert.assertEquals(actualSize, expectedSize, "Expected search size is not shown");
+        AutomationLog.info("Search by Filter size is Successfull ");
+        Page.driver.navigate().back();
+    }
+
+    public void searchByPrice(HashMap<String, String> searchData) throws Exception
+    {
+        list.addAll(advancedsearch.priceType());
+        advancedsearch.txtbx_Price().clear();
+        advancedsearch.txtbx_Price().sendKeys(searchData.get("price"));
+        advancedsearch.selectPriceType(list.get(0));
+        String expectedSize = searchData.get("price")+"/mo";
+        propsearch = advancedsearch.clickOnSearchButton();
+        String actualSize = propsearch.FilterText_Price().getText().replaceAll("[$,\\s]", "");
+        Assert.assertEquals(actualSize, expectedSize, "Expected search size is not shown");
+        AutomationLog.info("Search by Filter price is Successfull ");
+        Page.driver.navigate().back();
+    }
+
+    public void searchResidential(HashMap<String, String> searchData) throws Exception
+    {
+        advancedsearch.selectBorough(searchData.get("borough"));
+        advancedsearch.clickOnResidentialRadioButton();
+        advancedsearch.txtbx_SearchInput().clear();
+        advancedsearch.txtbx_SearchInput().sendKeys(searchData.get("searchTerm"));
+        propsearch = advancedsearch.clickOnSearchButton();
+        String titleText = searchData.get("searchText") + searchData.get("searchTerm");
+        Assert.assertEquals(propsearch.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
+        AutomationLog.info("Search Result page title is same as search term ");
+
     }
 
     @Override
     protected String successMessage() 
     {
-    	return null;
+    	return "test cases for AdvanceSearch page passed" ;
     }
 
     @Override
     protected String failureMessage() 
     {
-    	return null;
+    	return "test cases for AdvanceSearch page failed";
     }
     
 }
