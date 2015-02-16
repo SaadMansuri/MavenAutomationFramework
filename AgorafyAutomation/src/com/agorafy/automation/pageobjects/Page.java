@@ -78,9 +78,10 @@ public class Page
         driver.navigate().refresh();
     }
 
-    public void alertAccept() 
+    public boolean alertAccept() 
     {
         driver.switchTo().alert().accept();
+        return true;
     }
 
     public void alertDismiss() 
