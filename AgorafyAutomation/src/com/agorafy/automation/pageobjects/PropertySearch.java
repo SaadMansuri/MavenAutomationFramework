@@ -10,6 +10,7 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
@@ -228,11 +229,13 @@ public class PropertySearch extends Page
         return number;
         
     }
-    public void clickOnSubscribeToThisSearchLink() throws Exception
+    public MySubscriptions clickOnSubscribeToThisSearchLink() throws Exception
     {
+        MySubscriptions mySubscriptions;
         try
         {
             link_SubscribeToThisSearch().click();
+            mySubscriptions = new MySubscriptions(driver);
             AutomationLog.info("Successfully clicked on Subscribe to this search link ");
         }
         catch(Exception e)
@@ -240,6 +243,7 @@ public class PropertySearch extends Page
             AutomationLog.error("Could not clicked on Subscribe to this search link");
             throw(e);
         }
+        return mySubscriptions;
     }
 
     public void closeLoginPoPup(LoginPopUp loginpopup) throws Exception
@@ -343,7 +347,7 @@ public class PropertySearch extends Page
         }
         return element;
     }
-    
+
     public WebElement loadingMessage() throws Exception
     {
         try
@@ -357,7 +361,7 @@ public class PropertySearch extends Page
         }
         return element;
     }
-    
+
     public void BedsInAdvanceSearchForm(String badNo) throws Exception
     {
         try

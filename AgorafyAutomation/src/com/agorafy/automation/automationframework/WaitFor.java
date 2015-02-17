@@ -1,7 +1,6 @@
 package com.agorafy.automation.automationframework;
 
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -12,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.google.common.base.Function;
 
 public class WaitFor 
@@ -133,6 +131,6 @@ public class WaitFor
         Integer elementwaitTimeout = Integer.parseInt(Configuration.getConfigurationValueForProperty("global-page-element-polling-timeout"));
         WebDriverWait wait = new WebDriverWait(driver, elementwaitTimeout);
         wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
-
     }
+
 }
