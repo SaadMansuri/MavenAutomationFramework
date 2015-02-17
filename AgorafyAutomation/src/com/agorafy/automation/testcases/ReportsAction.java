@@ -1,6 +1,7 @@
 package com.agorafy.automation.testcases;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
 
@@ -15,7 +16,7 @@ import com.agorafy.automation.pageobjects.Reports;
 
 public class ReportsAction extends AutomationTestCaseVerification
 {
-    private Reports report = null;
+    private Reports reports = new Reports(Page.driver);
     private Homepage homePage = null;
     private HeaderLoginForm headerLoginForm =null;
     private PropertySearch propertysearch = null;
@@ -54,6 +55,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     {
         verifyIfMouseHoverOnTile();
         veifyIfMouseHoverAddToReportIcon();
+        verifyIfClickOnAddToReportIcon();
     }
 
     public void verifyIfMouseHoverOnTile() throws Exception
@@ -69,6 +71,20 @@ public class ReportsAction extends AutomationTestCaseVerification
         WaitFor.presenceOfTheElement(Page.driver, propertysearch.Tooltiplocator());
         Assert.assertEquals(propertysearch.tooltip_AddToReport().getText(), "Add to Report", "Expected tooltip is not shown");
         AutomationLog.info("On mouse hover addtoreport icon tooltip is shown");
+    }
+
+    public void verifyIfClickOnAddToReportIcon() throws Exception
+    {
+        String beforeCount = reports.getReportCount();
+        propertysearch.hoverOnFirstSearchResultTile();
+        propertysearch.hoverOnAddToReportIcon();
+        WaitFor.presenceOfTheElement(Page.driver, propertysearch.Tooltiplocator());
+        reports = propertysearch.clickOnAddToReportIcon();
+        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        String afterCount = reports.getReportCount();
+        Assert.assertEquals(beforeCount.equalsIgnoreCase(afterCount), false, "not");
+        
+
     }
 
     @Override

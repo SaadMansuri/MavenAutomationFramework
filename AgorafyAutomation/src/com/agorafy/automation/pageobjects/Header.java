@@ -341,7 +341,49 @@ public class Header extends Page
         }
         return element;
     }
-    
+
+    public WebElement arrow_profileNameDropdown() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("profile-name"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not found Profile name dropdown");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnProfileNameDropdownArrow() throws Exception
+    {
+        try
+        {
+            arrow_profileNameDropdown().click();
+            AutomationLog.info("Successfully clicked on Profile name dropdown Arrow");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not found Profile name dropdown Arrow");
+            throw(e);
+        }
+    }
+
+    public WebElement reportCount() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("reportCount"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not found report count in prfile name dropdown");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement logoutXpathonPropertyPage() throws Exception
     {
         try

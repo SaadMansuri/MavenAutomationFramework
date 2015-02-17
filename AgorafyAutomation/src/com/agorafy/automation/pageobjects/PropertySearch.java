@@ -376,7 +376,7 @@ public class PropertySearch extends Page
     {
         try
         {
-            element = driver.findElement(By.id("prop-14289"));
+            element = driver.findElement(By.className("pinCushion")).findElement(By.tagName("a"));
         }
         catch (Exception e)
         {
@@ -384,6 +384,23 @@ public class PropertySearch extends Page
             throw(e);
         }
         return element;
+    }
+
+    public Reports clickOnAddToReportIcon() throws Exception
+    {
+        Reports reports = null;
+        try
+        {
+            icon_AddToReport().click();
+            reports = new Reports(driver);
+            AutomationLog.info("Successfully clicked on Add To Report icon");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Add To Report icon");
+            throw(e);
+        }
+        return reports;
     }
 
     public void hoverOnAddToReportIcon() throws Exception
