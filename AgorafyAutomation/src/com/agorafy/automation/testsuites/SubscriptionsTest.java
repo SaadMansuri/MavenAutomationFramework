@@ -2,11 +2,10 @@ package com.agorafy.automation.testsuites;
 
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.SubscriptionsAction;
-/*Test Subscription Pages*/
-
+import com.agorafy.automation.testcases.subscriptions.SubscribeToListingAction;
+import com.agorafy.automation.testcases.subscriptions.SubscribeToSearchAction;
+/*Test Subscription related Pages*/
 
 public class SubscriptionsTest 
 {
@@ -18,11 +17,24 @@ public class SubscriptionsTest
     }
 
     @Test
-    public void testSubscriptionsLink() throws Exception
+    public void testSubscribeToSearchLink() throws Exception
     {
         try
         {
-            new SubscriptionsAction().Execute();
+            new SubscribeToSearchAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
+
+    @Test
+    public void testSubscribeToListingLink() throws Exception
+    {
+        try
+        {
+            new SubscribeToListingAction().Execute();
         }
         catch(Exception e)
         {
