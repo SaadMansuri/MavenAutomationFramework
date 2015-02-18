@@ -40,14 +40,50 @@ public class ListingDetailPage extends LoginPopUp
         }
          return element;
     }
-    public LoginPopUp clickSubscribeToListingLinkInListingDetailPage() throws Exception
+
+    public WebElement SubscribeToListingLinkInLoggedInMode() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='subscriptionSectionLink']/div[2]/a"));
+            AutomationLog.info("Subscribe to listing link in Logged in mode, found on Listing Detail Page");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Subscribe to listing link in Logged in mode, not found on Listing Detail Page");
+            throw(e);
+        }
+         return element;
+    }
+
+    public void clickSubscribeToListingLinkInLoggedInMode()  
+    {
+        try 
+        {
+            SubscribeToListingLinkInLoggedInMode().click();
+            AutomationLog.info("Subscribe to listing link in logged in mode, on listing details page is clicked sucessfully");
+        } 
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to click, Subscribe to listing link in logged in mode, on listing details page");
+        }
+    }
+
+    public LoginPopUp clickSubscribeToListingLinkInListingDetailPage(boolean loginStatus) throws Exception
     {
         LoginPopUp subscribeToListingPopUp= null;
         try
         {
-            SubscribeToListingLinkInListingDetailPage().click();
-            WaitFor.ElementToBeDisplayed(driver, getLoginPopUpLocator());
-            subscribeToListingPopUp = new LoginPopUp(driver);
+            if(loginStatus)
+            {
+                SubscribeToListingLinkInLoggedInMode().click();
+            }
+            else
+            {
+                SubscribeToListingLinkInListingDetailPage().click();
+                WaitFor.ElementToBeDisplayed(driver, getLoginPopUpLocator());
+                subscribeToListingPopUp = new LoginPopUp(driver);
+            }
             AutomationLog.info("Click action performed on SubscribeToListingLink on Listing Detail Page");
         }
         catch(Exception e)
@@ -57,6 +93,7 @@ public class ListingDetailPage extends LoginPopUp
          }
          return subscribeToListingPopUp;
     }
+
     public WebElement UnSubscribeToListingLinkInListingDetailPage() throws Exception
     {
         try
@@ -71,6 +108,20 @@ public class ListingDetailPage extends LoginPopUp
         }
          return element;
     }
+
+    public void clickUnsubscribeListingLink()  
+    {
+        try 
+        {
+            UnSubscribeToListingLinkInListingDetailPage().click();
+            AutomationLog.info("Unsubscribe listing link in listing details page is sucessfully clicked");
+        } 
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to click, Unsubscribe listing link in listing details page");
+        }
+    }
+
     public String getUnSubscribeToListingLinkTextInListingDetailPage() throws Exception
     {
         String unSubscribeToListing="";
@@ -276,5 +327,4 @@ public class ListingDetailPage extends LoginPopUp
         header().link_Logout().click();
         WaitFor.waitForPageToLoad(driver);
     }
-
 }
