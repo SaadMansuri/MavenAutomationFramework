@@ -127,7 +127,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
     {
         media.clickOnSaveAndContinueButton();
         String msg = media.msg_MediaError().getText();
-        Assert.assertEquals(msg, "Minimum one file should be added", "Expected Media Error Message is not Shown");
+        Assert.assertEquals(msg, "Minimum one image file is required", "Expected Media Error Message is not Shown");
         AutomationLog.info("Media Error message is shown if clicked on save without uploading an Image");
     }
 

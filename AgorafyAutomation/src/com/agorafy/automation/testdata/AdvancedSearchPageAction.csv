@@ -1,3 +1,3 @@
 SearchCommercial,borough="Manhattan";searchTerm="10001";searchText="Results for Retail in ";size="1000-2000";price="5000-10000"
-SearchResidential,borough="Manhattan";searchTerm="10001";searchText="Results for Residential in "
+SearchResidential,borough="Manhattan";searchTerm="Sales in 10001";searchText="Results for "
 ListingType,listType1="All Listing Type";listType2="Lease";listType3="Sub-lease";listType4="Sale"

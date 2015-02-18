@@ -171,6 +171,8 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         advancedsearch.clickOnResidentialRadioButton();
         advancedsearch.txtbx_SearchInput().clear();
         advancedsearch.txtbx_SearchInput().sendKeys(searchData.get("searchTerm"));
+        advancedsearch.txtbx_Price().clear();
+        advancedsearch.txtbx_SizeInput().clear();
         propsearch = advancedsearch.clickOnSearchButton();
         String titleText = searchData.get("searchText") + searchData.get("searchTerm");
         Assert.assertEquals(propsearch.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
