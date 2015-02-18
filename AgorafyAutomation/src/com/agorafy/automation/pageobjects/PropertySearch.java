@@ -442,4 +442,110 @@ public class PropertySearch extends Page
         return elements;
     }
 
+    public WebElement element_NoOfSearchResults() throws Exception 
+    {
+        try 
+        {
+            element = driver.findElement(By.xpath(".//*[@id='resultsHeader']/div[1]/div/div[1]/p"));
+        } 
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find No Of Search Results element");
+        }
+        return element; 
+    }
+
+    public String noOfSearchResults() throws Exception 
+    {
+        String noOfSearchResults;
+        noOfSearchResults = element_NoOfSearchResults().getText();
+        return noOfSearchResults;
+    }
+
+    public WebElement element_SearchResultsContainer() 
+    {
+        try 
+        {
+            element = driver.findElement(By.id("resultsLineItems"));
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find Search Results Container element");
+        }
+        return element;
+    }
+
+    public List<WebElement> elements_PropertyListings() 
+    {
+        List<WebElement> allPropertyListings = null;
+        try 
+        {
+            WebElement parent = element_SearchResultsContainer().findElement(By.className("ul-reset"));
+            allPropertyListings = parent.findElements(By.tagName("li"));
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find all property listings elements");
+        }
+        return allPropertyListings;
+    }
+
+    public Page selectFirstListingOnPropertySearchPage(String destinationPage) 
+    {
+        Page page = null;
+        List<WebElement> allPropertyListings;
+        allPropertyListings = elements_PropertyListings();
+        if(allPropertyListings != null)
+        {
+            for(WebElement element : allPropertyListings)
+            {
+                WebElement imageElement = element.findElement(By.tagName("img"));
+                imageElement.click();
+                break;
+            }
+        }
+        switch (destinationPage)
+        {
+            case "IntermidiatePage":
+            page = new IntermidiatePage(driver);
+            AutomationLog.info("Since more than one listings present on this property, intermidiate page is opened");
+            break;
+
+            case "ListingDetailPage":
+            page = new ListingDetailPage(driver);
+            AutomationLog.info("Since only one listing is present on this property, listing details page is opened");
+            break;
+         }
+        return page;
+    }
+
+    public boolean checkForMultiplelistingsInFirstProperty() throws Exception
+    {
+        boolean multipleListingsStatus = false;
+        List<WebElement> allPropertyListings;
+        try 
+        {
+            allPropertyListings = elements_PropertyListings();
+            for(WebElement element : allPropertyListings)
+                {
+                    if(element.findElements(By.className("listing-badge")).size()>0)
+                    {
+                        multipleListingsStatus = true;
+                    }
+                    else
+                    {
+                        multipleListingsStatus = false;
+                    }
+                    break;
+                }
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Checking whether multiple listings are present in selected property failed");
+            throw (e);
+            
+        }
+        return multipleListingsStatus;
+    }
+
 }
