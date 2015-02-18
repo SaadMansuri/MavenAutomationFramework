@@ -1,5 +1,5 @@
 
-#For Subscribe to Search test cases  -- This is one time usage test data, please change data for every test run
-#For Subscribe to Listing test cases -- This data can be used many times but, it should have search results for input combination 
-SearchInputCombination,boroughname="Manhatten";listingcategory="Residential";searchstring="Coops on Fifth Avenue"
+
+#For Subscribe to Search test cases  -- This is one time usage test data, please change data for every test run 
+SearchInputCombination,boroughname="Manhatten";listingcategory="Commercial";searchstring="Retail"
 
