@@ -1,6 +1,7 @@
 package com.agorafy.automation.testcases;
 
 import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
@@ -8,18 +9,23 @@ import org.testng.Assert;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.PropertySearch;
 import com.agorafy.automation.pageobjects.Reports;
+import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
+
 
 public class ReportsAction extends AutomationTestCaseVerification
 {
     private Reports reports = new Reports(Page.driver);
+    private Header header = Page.header();
     private Homepage homePage = null;
     private HeaderLoginForm headerLoginForm =null;
     private PropertySearch propertysearch = null;
+    private ListingDetailPage listingdetail = null;
     
     public ReportsAction()
     {
@@ -56,6 +62,12 @@ public class ReportsAction extends AutomationTestCaseVerification
         verifyIfMouseHoverOnTile();
         veifyIfMouseHoverAddToReportIcon();
         verifyIfClickOnAddToReportIcon();
+        verifyIfAddToReportIconIsFixed();
+        verifyIfHoverOnFixedAddToReportIcon();
+        verifyIfClickedOnFixedAddToReportIcon();
+        verifyIfClickedOnReportsLinkInProfileNameDropDown();
+        verifyAddToReportlinkOnListingDetailPage();
+        
     }
 
     public void verifyIfMouseHoverOnTile() throws Exception
@@ -75,16 +87,74 @@ public class ReportsAction extends AutomationTestCaseVerification
 
     public void verifyIfClickOnAddToReportIcon() throws Exception
     {
-        String beforeCount = reports.getReportCount();
+        int beforeCount = Integer.parseInt(reports.getReportCount());
+        addReportUsingAddToReportIcon();
+        int afterCount = Integer.parseInt(reports.getReportCount());
+        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(afterCount, beforeCount+1, "Expected report count in not incremented");
+        AutomationLog.info("Clicking add to report icon increaments the reports count");
+    }
+
+    public void verifyIfAddToReportIconIsFixed() throws Exception
+    {
+        System.out.println(propertysearch.icon_AddToReport().isDisplayed());
+        Assert.assertEquals(propertysearch.icon_AddToReport().isDisplayed(), true, "Expected icon is not fixed");
+        AutomationLog.info("Add To Report icon is Fixed");
+    }
+
+    public void verifyIfHoverOnFixedAddToReportIcon() throws Exception 
+    {
+        propertysearch.hoverOnAddToReportIcon();
+        WaitFor.presenceOfTheElement(Page.driver, propertysearch.Tooltiplocator());
+        Assert.assertEquals(propertysearch.tooltip_AddToReport().getText(), "Remove from Report", "Expected tooltip is not shown");
+        AutomationLog.info("On mouse hover fixed addtoreport icon tooltip is shown");
+    }
+
+    public void verifyIfClickedOnFixedAddToReportIcon() throws Exception
+    {
+    	int beforeCount = Integer.parseInt(reports.getReportCount());
+        addReportUsingAddToReportIcon();
+        int afterCount = Integer.parseInt(reports.getReportCount());
+        Assert.assertEquals(afterCount, beforeCount-1, "Expected report count in not incremented");
+        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(propertysearch.icon_AddToReport().isDisplayed(), false, "Expected icon is not fixed");
+        propertysearch.hoverOnFirstSearchResultTile();
+        Assert.assertEquals(propertysearch.icon_AddToReport().isDisplayed(), true, "Expected icon is not displayed");
+        AutomationLog.info("Clicking add to report icon decreaments the reports count");
+    }
+
+    public void addReportUsingAddToReportIcon() throws Exception
+    {
         propertysearch.hoverOnFirstSearchResultTile();
         propertysearch.hoverOnAddToReportIcon();
         WaitFor.presenceOfTheElement(Page.driver, propertysearch.Tooltiplocator());
-        reports = propertysearch.clickOnAddToReportIcon();
+        propertysearch.clickOnAddToReportIcon();
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        String afterCount = reports.getReportCount();
-        Assert.assertEquals(beforeCount.equalsIgnoreCase(afterCount), false, "not");
-        
+    }
 
+    public void verifyIfClickedOnReportsLinkInProfileNameDropDown() throws Exception
+    {
+        addReportUsingAddToReportIcon();
+        header.clickOnProfileNameDropdownArrow();
+        reports = header.clickOnReportsLink();
+        Assert.assertEquals(reports.reportBox().isDisplayed(), true, "Expected reports Box is not shown");
+        AutomationLog.info("Clicking on reports link shows Reports Box");
+    }
+
+    public void verifyAddToReportlinkOnListingDetailPage() throws Exception
+    {
+        String curHandle = Page.driver.getWindowHandle();
+        listingdetail = propertysearch.clickSearchResult();
+        Set<String> handleset = Page.driver.getWindowHandles();
+        for(String handle : handleset)
+        {
+            if(!handle.equals(curHandle))
+            {
+                Page.driver.switchTo().window(handle);
+                break;
+            }
+        }
+        
     }
 
     @Override

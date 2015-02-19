@@ -384,6 +384,37 @@ public class Header extends Page
         return element;
     }
 
+    public WebElement link_Reports() throws Exception
+    {
+       try
+       {
+           element = driver.findElement(By.id("viewReport"));
+       }
+       catch(Exception e)
+       {
+           AutomationLog.error("Could not found Reports link in Profile DropDown");
+           throw(e);
+       }
+       return element;
+    }
+
+    public Reports clickOnReportsLink() throws Exception
+    {
+        Reports reports = null;
+        try
+        {
+            link_Reports().click();
+            reports = new Reports(driver);
+            AutomationLog.info("Successfully clicked in Reports link in Profile Dropdown");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Reports link in Profile Dropdown");
+            throw(e);
+        }
+        return reports;
+    }
+
     public WebElement logoutXpathonPropertyPage() throws Exception
     {
         try
