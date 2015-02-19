@@ -1,8 +1,10 @@
 package com.agorafy.automation.testcases.subscriptions;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -15,6 +17,8 @@ import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.PropertySearch;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
+import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.testcases.contentpages.subnavigation.MyDashboardAction;
 
 /*Test case data required for this action needs to be changed each time, otherwise it will be useless to run this action class*/
 public class SubscribeToSearchAction extends AutomationTestCaseVerification 
@@ -22,10 +26,11 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
 
     private Homepage homePage;
     private HeaderLoginForm headerLoginForm;
-    private HashMap<String, String> dataFromCSV;
+    private HashMap<String, String> dataFromCSV = new HashMap<>();
     private PropertySearch propertySearch;
     private boolean actualStatusOfElement;
-	private MySubscriptions mySubscriptions;
+    private MySubscriptions mySubscriptions; 
+    private SubNavigation subNavigation;
 
     public SubscribeToSearchAction() 
     {
@@ -70,12 +75,44 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         AutomationLog.info("Verify whether Subscriptions window has view more subscriptions link");
         verifyViewMoreSubscriptionsLink();
 
+        AutomationLog.info("Verify whether already subscribed search found in search subscriptions col in My Subscrptions page");
+        verifyAlreadySubscribedInMySubscriptionsPage();
+    }
+
+    private void verifyAlreadySubscribedInMySubscriptionsPage() throws Exception 
+    {
+        dataFromCSV = testCaseData.get("SearchInputCombination");
+        String expectedSubscribedSearch = dataFromCSV.get("searchstring");
+        subNavigation = SubNavigation.subnavigation();
+        mySubscriptions = subNavigation.clickLinkMySubscriptions();
+        List<WebElement> list_AllSubscribedSearches = mySubscriptions.list_AllSubscribedSearches();
+        Integer countOfAllSubscribedSearches = list_AllSubscribedSearches.size();
+        String actualSubscribedSearch; 
+        for(WebElement singleSubscription : list_AllSubscribedSearches)
+        {
+            actualSubscribedSearch = singleSubscription.getText();
+            if(actualSubscribedSearch.equals(expectedSubscribedSearch))
+            {
+                AutomationLog.info("Already subscribed search found on RHS of My Subscription page");
+                mySubscriptions.deleteSubscribedSearchOnRHS(singleSubscription);
+                break;
+            }
+            countOfAllSubscribedSearches--;
+        }
+        if(countOfAllSubscribedSearches.equals(0))
+        {
+            AutomationLog.error("Already subscribed search does not found on RHS of My Subscription page");
+            Exception exception = new Exception();
+            exception.printStackTrace();
+            throw (exception);
+        }
     }
 
 	private void verifyViewMoreSubscriptionsLink() throws Exception 
     {
         propertySearch.refreshPage();
         propertySearch.clickOnSubscribeToThisSearchLink();
+        mySubscriptions.closeSubscriptionWindow();
         try 
         {
             WaitFor.waitUntilElementIsLoaded(Page.driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[5]/a"));
@@ -108,9 +145,10 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     private void verifySearchTerm() throws Exception 
     {
         mySubscriptions = propertySearch.clickOnSubscribeToThisSearchLink();
-        String searchText = mySubscriptions.getSearchStringInSubscriptionWindow();
-        dataFromCSV = testCaseData.get("SearchCombination");
-        Assert.assertEquals(searchText, dataFromCSV.get("searchstring"), "Data mismatch in search text from search navigation and Subscription window from user's dropdown");
+        String actualSearchText = mySubscriptions.getSearchStringInSubscriptionWindow();
+        dataFromCSV = testCaseData.get("SearchInputCombination");
+        String expectedStringText = dataFromCSV.get("searchstring");
+        Assert.assertEquals(actualSearchText, expectedStringText, "Data mismatch in search text from search navigation and Subscription window from user's dropdown");
         AutomationLog.info("Same Search string data is shown in search in navigation bar and subscription window under user name");
         mySubscriptions.closeSubscriptionWindow();
     }
@@ -145,7 +183,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     @Override
     protected String failureMessage() 
     {
-        String msg = "Test case data (SearchInputCombination) needs to be changed each time, otherwise it will produce wrong results";
+        String msg = "Test case data.csv file (SearchInputCombination) needs to be changed each time, otherwise it will produce wrong results";
         return "Subscribe To Search Link failed: \n Note:" +msg;
     }
 }
