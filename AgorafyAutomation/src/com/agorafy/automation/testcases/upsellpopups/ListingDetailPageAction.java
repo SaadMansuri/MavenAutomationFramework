@@ -65,7 +65,8 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
         ListingDetailPage listingDetailPage;
         try
         {
-            LoginPopUp loginpopup = subscribeListingPopup.clickSubscribeToListingLinkInListingDetailPage();
+            boolean loginStatus = false;
+            LoginPopUp loginpopup = subscribeListingPopup.clickSubscribeToListingLinkInListingDetailPage(loginStatus);
             Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Subscribe to Listing");
             loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
             listingDetailPage = (ListingDetailPage) loginpopup.clickLoginButtonOnUpsell();

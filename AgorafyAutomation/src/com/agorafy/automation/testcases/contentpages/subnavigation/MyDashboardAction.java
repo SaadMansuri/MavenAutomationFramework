@@ -1,10 +1,7 @@
 package com.agorafy.automation.testcases.contentpages.subnavigation;
 
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
-
 import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -13,7 +10,6 @@ import com.agorafy.automation.pageobjects.Dashboard;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.contentpages.AboutUs;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 /**

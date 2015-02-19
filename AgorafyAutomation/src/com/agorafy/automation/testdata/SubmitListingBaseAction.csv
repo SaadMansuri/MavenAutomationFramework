@@ -44,7 +44,7 @@ AddSpaceNegativeCombination3,SpaceType="Unit";SpaceSize="1000"
 AddSpaceNegativeCombination4,SpaceType="Unit";SpaceName="Yes"
 SpaceType,SpaceType1="Full floor";SpaceType2="Partial Floor";SpaceType3="Unit"
 ListingOffersForOffice,ListingOffer1="Lease";ListingOffer2="Sublease"
-CompulsoryOfficeFormData,AddSpace="Yes";AskingPrice="5000";AskingPriceUnit="total"
+CompulsoryOfficeFormData,AddSpace="Yes";AskingPrice="5000";AskingPriceUnit="total";CeilingHeight="50"
 TotalOfficeFormData,ListingOffer="Lease";AddSpace="Yes";AskingPrice="5000";AskingPriceUnit="total";CeilingHeight="50";Combinable="100";Electricity="Direct Metered";Description="This is details-Office page"
 NegativeOfficeFormDataWithAddSpaceOnly,AddSpace="Yes"
 NegativeOfficeFormDataWithAskingPriceOnly,AskingPrice="5000";AskingPriceUnit="total"
@@ -64,7 +64,7 @@ NegativePropertyFormDataWithoutCompulsoryFields,ListingLink="https://www.agorafy
 #Details-Residential page data
 
 ListingOffersForResidential,ListingOffer1="Lease";ListingOffer2="Sublease";ListingOffer3="Sale"
-ResidentialTypes,ResidentialType1="Apartment";ResidentialType2="Condo";ResidentialType3="Coop";ResidentialType4="Condop";ResidentialType5="Multi-Family";
+ResidentialTypes,ResidentialType1="Apartment";ResidentialType2="Condo";ResidentialType3="Coop";ResidentialType4="Condop"
 NoOfUnits,NoOfUnit1="Single unit";NoOfUnit2="Multiple units"
 CompulsoryResidentialFormData,SpaceSizeMin="5000";Bedrooms="3";Bathrooms="3";PriceMin="50000"
 TotalResidentialFormDataHavingSingleUnit,ListingOffer="Sale";ResidentialType="Apartment";NoOfUnits="Single unit";PropertyName="Lucy's Villa";SpaceSizeMin="1000";Bedrooms="3";Bathrooms="3";PriceMin="100000";PriceUnit="total";Description="This is details-residential page"

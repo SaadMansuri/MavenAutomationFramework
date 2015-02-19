@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 
 public class Homepage extends Page 
@@ -268,6 +269,7 @@ public class Homepage extends Page
             txtbx_SearchTerm().sendKeys(searchstring);
             clickOnSearchButtton();
             propertysearch=new PropertySearch(driver);
+            WaitFor.waitUntilElementIsLoaded(driver, By.id("resultsHeader"));
             AutomationLog.info("Search is performed successfully");
         }
         catch(Exception e)
