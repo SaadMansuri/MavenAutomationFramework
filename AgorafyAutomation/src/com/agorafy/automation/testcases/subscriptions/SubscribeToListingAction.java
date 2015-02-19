@@ -58,10 +58,11 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
 
     private void verifySubscribeToListingLink()  
     {
-        try 
+        try
         {
             setupForVerifySubscribeToListingLink();
             listingDetailPage.clickSubscribeToListingLinkInLoggedInMode();
+            Thread.sleep(1000);
             String actualSubscribeStatus = listingDetailPage.getUnSubscribeToListingLinkTextInListingDetailPage();
             dataFromCSV = testCaseData.get("ExpectedUnsubscribeToListingText");
             String expectedSubscriptionStatus = dataFromCSV.get("ExpectedText");
