@@ -390,13 +390,11 @@ public class PropertySearch extends Page
         return element;
     }
 
-    public Reports clickOnAddToReportIcon() throws Exception
+    public void clickOnAddToReportIcon() throws Exception
     {
-        Reports reports = null;
         try
         {
             icon_AddToReport().click();
-            reports = new Reports(driver);
             AutomationLog.info("Successfully clicked on Add To Report icon");
         }
         catch(Exception e)
@@ -404,7 +402,6 @@ public class PropertySearch extends Page
             AutomationLog.error("Could not click on Add To Report icon");
             throw(e);
         }
-        return reports;
     }
 
     public void hoverOnAddToReportIcon() throws Exception

@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.testcases.subscriptions.SubscribeToListingAction;
 import com.agorafy.automation.testcases.subscriptions.SubscribeToSearchAction;
-/*Test Subscription related Pages*/
 
 public class SubscriptionsTest 
 {
