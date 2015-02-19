@@ -1,6 +1,6 @@
 
 #Input search combination which results atleast one output  
-SearchInputCombination,boroughname="Manhatten";listingcategory="Residential";searchstring="Coops in Yorkville"
+SearchInputCombination,boroughname="Manhatten";listingcategory="Commercial";searchstring="Retail"
 
 #Expected unsubscribe to listing text on listing details page
 ExpectedUnsubscribeToListingText,ExpectedText="Unsubscribe listing"
