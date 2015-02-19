@@ -16,7 +16,7 @@ public class SubscriptionsTest
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-    //@Test
+    @Test(priority = 1)
     public void testSubscribeToSearchLink() throws Exception
     {
         try
@@ -29,7 +29,7 @@ public class SubscriptionsTest
         }
     }
 
-    @Test
+    @Test(priority = 2)
     public void testSubscribeToListingLink() throws Exception
     {
         try
