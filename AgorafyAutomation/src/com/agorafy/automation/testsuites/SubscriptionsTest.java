@@ -16,7 +16,7 @@ public class SubscriptionsTest
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-    @Test
+    //@Test
     public void testSubscribeToSearchLink() throws Exception
     {
         try
