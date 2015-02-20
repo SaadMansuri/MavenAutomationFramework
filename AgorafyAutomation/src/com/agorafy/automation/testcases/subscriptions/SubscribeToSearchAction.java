@@ -102,9 +102,9 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         if(countOfAllSubscribedSearches.equals(0))
         {
             AutomationLog.error("Already subscribed search does not found on RHS of My Subscription page");
-            Exception exception = new Exception();
-            exception.printStackTrace();
-            throw (exception);
+            boolean actualStatusOfSubscribedLink = false;
+            boolean expectedStatusOfSubscribedLink = true;
+            Assert.assertEquals(actualStatusOfSubscribedLink, expectedStatusOfSubscribedLink, "Subscribed search on search results page doew not reflects on RHS of My Subscriptions page");
         }
     }
 
@@ -185,7 +185,6 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     @Override
     protected String failureMessage() 
     {
-        String msg = "Test case data.csv file (SearchInputCombination) needs to be changed each time, otherwise it will produce wrong results";
-        return "Subscribe To Search Link failed: \n Note:" +msg;
+        return "Subscribe To Search Link failed";
     }
 }
