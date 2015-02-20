@@ -1,5 +1,5 @@
 
 
-#For Subscribe to Search test cases  -- This is one time usage test data, please change data for every test run 
+#For Subscribe to Search test cases  --  
 SearchInputCombination,boroughname="Manhatten";listingcategory="Commercial";searchstring="Retail"
 
