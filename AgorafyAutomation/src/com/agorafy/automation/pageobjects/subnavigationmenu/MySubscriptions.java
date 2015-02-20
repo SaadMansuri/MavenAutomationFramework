@@ -83,6 +83,7 @@ public class MySubscriptions extends Page
         {
             /*Wait until subscription window under user name displays*/
             WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote"));
+            Thread.sleep(2000);
             element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[2]/div[2]/a"));
         }
         catch(Exception e)
@@ -217,4 +218,19 @@ public class MySubscriptions extends Page
         }
     }
 
+    public WebElement link_ViewMoreSubscriptions() throws Exception 
+    {
+        try 
+        {
+        	/*Wait until subscription window under user name displays*/
+            WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote"));
+            element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[5]/a"));
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("View more subscriptions link is not found on subscription window below profile pic");
+            throw (e);
+        }
+        return element;
+    }
 }
