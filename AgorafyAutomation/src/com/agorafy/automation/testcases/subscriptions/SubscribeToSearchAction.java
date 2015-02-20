@@ -112,17 +112,19 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     {
         propertySearch.refreshPage();
         propertySearch.clickOnSubscribeToThisSearchLink();
-        mySubscriptions.closeSubscriptionWindow();
         try 
         {
-            WaitFor.waitUntilElementIsLoaded(Page.driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[5]/a"));
+            boolean actualViewMoreSubscriptionsLinkStatus = mySubscriptions.link_ViewMoreSubscriptions().isDisplayed();
+            boolean expectedViewMoreSubscriptionsLinkStatus = true;
+            Assert.assertEquals(actualViewMoreSubscriptionsLinkStatus, expectedViewMoreSubscriptionsLinkStatus, "View More Subscriptions link is not found on subscriptions window under profile pic");
+            //WaitFor.waitUntilElementIsLoaded(Page.driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[5]/a"));
             AutomationLog.info("View More Subscriptions link is found in subcriptions window");
         }
         catch (Exception e) 
         {
             AutomationLog.error("View More Subscriptions link is not found in subcriptions window");
         }
-
+        mySubscriptions.closeSubscriptionWindow();
     }
 
 	private void verifyPopUpAlreadySubscribed() throws Exception 
