@@ -33,6 +33,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     private boolean actualStatusOfElement;
     private MySubscriptions mySubscriptions; 
     private SubNavigation subNavigation;
+    private boolean status = true;
 
     public SubscribeToSearchAction() 
     {
@@ -111,10 +112,10 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         }
     }
 
-	private void verifyViewMoreSubscriptionsLink() throws Exception 
+    private void verifyViewMoreSubscriptionsLink() throws Exception 
     {
         propertySearch.refreshPage();
-        propertySearch.clickOnSubscribeToThisSearchLink();
+        propertySearch.clickOnSubscribeToThisSearchLink(status);
         try 
         {
             boolean actualViewMoreSubscriptionsLinkStatus = mySubscriptions.link_ViewMoreSubscriptions().isDisplayed();
@@ -133,7 +134,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
 	private void verifyPopUpAlreadySubscribed() throws Exception 
     {
         propertySearch.refreshPage();
-        propertySearch.clickOnSubscribeToThisSearchLink();
+        propertySearch.clickOnSubscribeToThisSearchLink(status);
         mySubscriptions.clickSubscribeInSubscriptionWindow();
         try 
         {
@@ -149,7 +150,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
 
     private void verifySearchTerm() throws Exception 
     {
-        mySubscriptions = propertySearch.clickOnSubscribeToThisSearchLink();
+        mySubscriptions = (MySubscriptions) propertySearch.clickOnSubscribeToThisSearchLink(status);
         String actualSearchText = mySubscriptions.getSearchStringInSubscriptionWindow();
         dataFromCSV = testCaseData.get("SearchInputCombination");
         String expectedStringText = dataFromCSV.get("searchstring");
@@ -160,7 +161,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
 
     private void verifySubscriptionTextVanishing() throws Exception 
     {
-        mySubscriptions = propertySearch.clickOnSubscribeToThisSearchLink();
+        mySubscriptions = (MySubscriptions) propertySearch.clickOnSubscribeToThisSearchLink(status);
         mySubscriptions.clickSubscribeInSubscriptionWindow();
         actualStatusOfElement = false;
         actualStatusOfElement = propertySearch.link_SubscribeToThisSearch().isDisplayed();
@@ -171,7 +172,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
 
 	private void verifySubscriptionBoxDisplay() throws Exception 
     {
-        mySubscriptions = propertySearch.clickOnSubscribeToThisSearchLink();
+        mySubscriptions = (MySubscriptions) propertySearch.clickOnSubscribeToThisSearchLink(status);
         actualStatusOfElement = false;
         actualStatusOfElement = mySubscriptions.element_SubscriptionWindow().isDisplayed();
         Assert.assertEquals(actualStatusOfElement, true, "Subscription Box under user's Avatar is not displayed");
