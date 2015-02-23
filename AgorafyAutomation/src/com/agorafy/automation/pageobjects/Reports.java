@@ -1,6 +1,7 @@
 package com.agorafy.automation.pageobjects;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -41,11 +42,16 @@ public class Reports extends Page
         return element;
     }
 
+    public By getReportBoxLocator() throws Exception
+    {
+        return By.id("reportBox");
+    }
+
     public WebElement reportBox() throws Exception
     {
         try
         {
-            element = driver.findElement(By.id("reportBox"));
+            element = driver.findElement(getReportBoxLocator());
             AutomationLog.info("ReportBox found");
         }
         catch (Exception e)
@@ -60,8 +66,10 @@ public class Reports extends Page
     {
         String count;
         header.clickOnProfileNameDropdownArrow();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         count = header.reportCount().getText();
         header.clickOnProfileNameDropdownArrow();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return count;
         
     }
