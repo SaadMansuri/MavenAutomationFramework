@@ -48,11 +48,13 @@ public class SubmitListingMediaFormPage extends Page
         return element;
     }	
 
-    public void clickOnBackButton() throws Exception
+    public SubmitListingDetailsFormBasePage clickOnBackButton() throws Exception
     {
+        SubmitListingDetailsFormBasePage details = null;
         try 
         {
             btn_Back().click();
+            details = new SubmitListingDetailsFormBasePage(driver);
             AutomationLog.info("Successfully clicked on Back button ");
         }
         catch (Exception e) 
@@ -60,6 +62,7 @@ public class SubmitListingMediaFormPage extends Page
             AutomationLog.error("Could not click on Back button");
             throw(e);
         }
+        return details;
     }
 
         public void clickOnAddFilesButton() throws Exception

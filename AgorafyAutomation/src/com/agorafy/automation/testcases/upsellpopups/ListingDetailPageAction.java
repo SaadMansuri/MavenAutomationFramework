@@ -1,5 +1,6 @@
 package com.agorafy.automation.testcases.upsellpopups;
 
+import java.util.HashMap;
 import java.util.Set;
 
 import org.testng.Assert;
@@ -31,7 +32,8 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
             super.setup();
 
             Homepage homepage = Homepage.homePage();
-            searchResultsPage = homepage.populateSearchTermTextBox("Manhattan","Commercial","Retail in 10010");
+            HashMap<String, String> data = testCaseData.get("SearchData");
+            searchResultsPage = homepage.populateSearchTermTextBox(data.get("borough"),data.get("listingcategory"),data.get("searchterm"));
             String handle = Page.driver.getWindowHandle();
             listingDetailPage = searchResultsPage.clickSearchResult();
 
@@ -66,7 +68,7 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
         try
         {
             boolean loginStatus = false;
-            LoginPopUp loginpopup = subscribeListingPopup.clickSubscribeToListingLinkInListingDetailPage(loginStatus);
+            LoginPopUp loginpopup = (LoginPopUp) subscribeListingPopup.clickOnSubscribeToListingLink(loginStatus);
             Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Subscribe to Listing");
             loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
             listingDetailPage = (ListingDetailPage) loginpopup.clickLoginButtonOnUpsell();
@@ -90,7 +92,8 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
 
     public void verifyAddToReportLinkUpsell(ListingDetailPage subscribeListingPopup, Credentials getValidCredentials)throws Exception
     {
-        LoginPopUp loginpopup = subscribeListingPopup.clickLinkAddToReport();
+        boolean isLoggedIn = false;
+        LoginPopUp loginpopup = (LoginPopUp) subscribeListingPopup.clickOnAddToReportLink(isLoggedIn);
         Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Add To Report");
         loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
         listingDetailPage = (ListingDetailPage) loginpopup.clickLoginButtonOnUpsell();

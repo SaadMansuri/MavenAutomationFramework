@@ -11,11 +11,13 @@ import com.agorafy.automation.automationframework.Configuration;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingContactsFormPage;
+import com.agorafy.automation.pageobjects.submitlisting.SubmitListingDetailsFormBasePage;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingMediaFormPage;
 
 public class SubmitListingMediaFormAction extends SubmitListingBaseAction
 {
     private SubmitListingMediaFormPage media = new SubmitListingMediaFormPage(Page.driver);
+    private SubmitListingDetailsFormBasePage details ;
     private SubmitListingDetailsFormRetailAction detailsRetailAction = new SubmitListingDetailsFormRetailAction();
     private SubmitListingContactsFormPage contacts = null;
     public String exefilepath = Configuration.getConfigurationValueForProperty("exe-path-to-upload");
@@ -39,12 +41,13 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         mediadata = testCaseData.get("MediaFormData");
         String highResFile = exefilepath + mediadata.get("highResFile");
         String lowResFile = exefilepath + mediadata.get("lowResFile");
-        verifyIfClickingAddfilesAddImageToUpload(highResFile); 
+        /*verifyIfClickingAddfilesAddImageToUpload(highResFile); 
         verifyIfClickingCancelButtonRemovesAddedImage();
         verifyIfClickingStartUpdateUploadsTheImage(highResFile);
         verifyIfclickingDeleteButtonRemoveUploadedImage();
         verifyIfLowResolutionImageCantBeUploaded(lowResFile);
-        verifyIfErrorMessageShownOnClickingSaveAndContinueWithoutUploadingImage();
+        verifyIfErrorMessageShownOnClickingSaveAndContinueWithoutUploadingImage();*/
+        verifyIfClickingOnBackButtonRedirectsToDetailsForm();
         verifyIfclickingOnSaveAndContinueRedirectsToContactsPage();
     }
 
@@ -159,6 +162,14 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
        return contact;
        
    }
+
+    public void verifyIfClickingOnBackButtonRedirectsToDetailsForm() throws Exception
+    {
+        details = media.clickOnBackButton();
+        Assert.assertEquals(details.form_Property().isDisplayed(), true, "Expected form is not shown");
+        AutomationLog.info("Clicking back button on media form redirects details page");
+        details.clickSaveAndContinue();
+    }
 
     @Override
     protected String successMessage() {
