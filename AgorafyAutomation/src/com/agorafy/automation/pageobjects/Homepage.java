@@ -311,12 +311,13 @@ public class Homepage extends Page
         return element;
     }
 
-    public Page selectDropdownOptionFromLoginAvatar(String option) 
+    /*public Page selectDropdownOptionFromProfilePic(String dropdownOption) 
     {
         Page page = null;
-        switch (option)
+        switch (dropdownOption)
         {
             case "My Dashboard":
+            
             page = new Dashboard(driver);
             break;
 
@@ -329,5 +330,5 @@ public class Homepage extends Page
             break;
         }
         return page;
-    }
+    }*/
 }

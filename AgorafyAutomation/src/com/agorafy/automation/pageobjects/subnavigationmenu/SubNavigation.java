@@ -3,10 +3,12 @@ package com.agorafy.automation.pageobjects.subnavigationmenu;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Dashboard;
+import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.AboutUs;
 import com.agorafy.automation.pageobjects.contentpages.Blog;
@@ -26,6 +28,11 @@ public class SubNavigation extends Page
     public SubNavigation(WebDriver driver)
     {
         super(driver);
+    }
+
+    public static SubNavigation subnavigation()
+    {
+        return PageFactory.initElements(driver, SubNavigation.class);
     }
 
     public WebElement subNavigationBar() throws Exception

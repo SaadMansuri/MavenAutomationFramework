@@ -1,10 +1,13 @@
 package com.agorafy.automation.pageobjects.subnavigationmenu;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
 
 public class MySubscriptions extends Page 
@@ -78,6 +81,9 @@ public class MySubscriptions extends Page
     {
         try
         {
+            /*Wait until subscription window under user name displays*/
+            WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote"));
+            Thread.sleep(2000);
             element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[2]/div[2]/a"));
         }
         catch(Exception e)
@@ -92,6 +98,8 @@ public class MySubscriptions extends Page
     {
         try
         {
+            /*Wait until subscription window under user name displays*/
+            WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote"));
             element = driver.findElement(By.id("subscriptionsWindowClose"));
         }
         catch(Exception e)
@@ -176,4 +184,53 @@ public class MySubscriptions extends Page
         return searchString;
     }
 
+    public WebElement element_SearchSubscriptionsContainer() throws Exception 
+    {
+        try 
+        {
+            element = driver.findElement(By.id("manage_search"));
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Search Subscriptions Container on RHS in MySubscriptions page not found");
+            throw (e);
+        }
+        return element;
+    }
+
+    public List<WebElement> list_AllSubscribedSearches() throws Exception 
+    {
+        List<WebElement> list_AllSubscribedSearches = element_SearchSubscriptionsContainer().findElements(By.tagName("li"));
+        return list_AllSubscribedSearches;
+    }
+
+    public void deleteSubscribedSearchOnRHS(WebElement subscribeToSearchLink) 
+    {
+        try 
+        {
+            element = subscribeToSearchLink.findElement(By.tagName("i"));
+            element.click();
+            AutomationLog.info("Sucessfully deleted subscribed search on RHS of My Subscriptions page");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to delete subscribed search on RHS of My Subscriptions page");
+        }
+    }
+
+    public WebElement link_ViewMoreSubscriptions() throws Exception 
+    {
+        try 
+        {
+        	/*Wait until subscription window under user name displays*/
+            WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote"));
+            element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[5]/a"));
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("View more subscriptions link is not found on subscription window below profile pic");
+            throw (e);
+        }
+        return element;
+    }
 }

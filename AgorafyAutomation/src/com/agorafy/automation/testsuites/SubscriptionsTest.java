@@ -1,10 +1,16 @@
 package com.agorafy.automation.testsuites;
 
+import mailReport.SendMail;
+
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
 import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.testcases.subscriptions.SubscribeToListingAction;
 import com.agorafy.automation.testcases.subscriptions.SubscribeToSearchAction;
+
+
 
 public class SubscriptionsTest 
 {
@@ -15,7 +21,7 @@ public class SubscriptionsTest
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-    @Test
+    @Test(priority = 1)
     public void testSubscribeToSearchLink() throws Exception
     {
         try
@@ -28,12 +34,25 @@ public class SubscriptionsTest
         }
     }
 
-    @Test
+    //@Test(priority = 2)
     public void testSubscribeToListingLink() throws Exception
     {
         try
         {
             new SubscribeToListingAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
+
+    @AfterSuite
+    public void sendReport() throws Exception
+    {
+        try
+        {
+            SendMail.execute("Subscribe To Search");
         }
         catch(Exception e)
         {

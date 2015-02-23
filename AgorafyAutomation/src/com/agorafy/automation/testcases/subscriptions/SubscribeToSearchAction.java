@@ -1,8 +1,12 @@
 package com.agorafy.automation.testcases.subscriptions;
 
 import java.util.HashMap;
+import java.util.List;
+
+import mailReport.SendMail;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -15,6 +19,8 @@ import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.PropertySearch;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
+import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.testcases.contentpages.subnavigation.MyDashboardAction;
 
 /*Test case data required for this action needs to be changed each time, otherwise it will be useless to run this action class*/
 public class SubscribeToSearchAction extends AutomationTestCaseVerification 
@@ -22,10 +28,11 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
 
     private Homepage homePage;
     private HeaderLoginForm headerLoginForm;
-    private HashMap<String, String> dataFromCSV;
+    private HashMap<String, String> dataFromCSV = new HashMap<>();
     private PropertySearch propertySearch;
     private boolean actualStatusOfElement;
-	private MySubscriptions mySubscriptions;
+    private MySubscriptions mySubscriptions; 
+    private SubNavigation subNavigation;
 
     public SubscribeToSearchAction() 
     {
@@ -39,12 +46,12 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         {
             super.setup();
             homePage = Homepage.homePage();
-            headerLoginForm = homePage.openHeaderLoginForm();
+            /*headerLoginForm = homePage.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();
             homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+            *//*WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             dataFromCSV = testCaseData.get("SearchInputCombination");
-            propertySearch = homePage.populateSearchTermTextBox(dataFromCSV.get("boroughname"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchstring"));
+            propertySearch = homePage.populateSearchTermTextBox(dataFromCSV.get("boroughname"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchstring"));*/
         }
         catch (Exception e)
         {
@@ -56,9 +63,9 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception 
     {
         AutomationLog.info("Verify whether Subscription box display's under username after clicking Subscribe to this search link ");
-        verifySubscriptionBoxDisplay();
+        //verifySubscriptionBoxDisplay();
 
-        AutomationLog.info("Verify whether same search term reflects in Subscription window under user's avator");
+       /* AutomationLog.info("Verify whether same search term reflects in Subscription window under user's avator");
         verifySearchTerm();
 
         AutomationLog.info("Verify whether Subscribe to this search link vanishes after clicking Subscribe in subscription box under user's avatar");
@@ -70,6 +77,38 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         AutomationLog.info("Verify whether Subscriptions window has view more subscriptions link");
         verifyViewMoreSubscriptionsLink();
 
+        AutomationLog.info("Verify whether already subscribed search found in search subscriptions col in My Subscrptions page");
+        verifyAlreadySubscribedInMySubscriptionsPage();*/
+
+    }
+
+    private void verifyAlreadySubscribedInMySubscriptionsPage() throws Exception 
+    {
+        dataFromCSV = testCaseData.get("SearchInputCombination");
+        String expectedSubscribedSearch = dataFromCSV.get("searchstring");
+        subNavigation = SubNavigation.subnavigation();
+        mySubscriptions = subNavigation.clickLinkMySubscriptions();
+        List<WebElement> list_AllSubscribedSearches = mySubscriptions.list_AllSubscribedSearches();
+        Integer countOfAllSubscribedSearches = list_AllSubscribedSearches.size();
+        String actualSubscribedSearch; 
+        for(WebElement singleSubscription : list_AllSubscribedSearches)
+        {
+            actualSubscribedSearch = singleSubscription.getText();
+            if(actualSubscribedSearch.equals(expectedSubscribedSearch))
+            {
+                AutomationLog.info("Already subscribed search found on RHS of My Subscription page");
+                mySubscriptions.deleteSubscribedSearchOnRHS(singleSubscription);
+                break;
+            }
+            countOfAllSubscribedSearches--;
+        }
+        if(countOfAllSubscribedSearches.equals(0))
+        {
+            AutomationLog.error("Already subscribed search does not found on RHS of My Subscription page");
+            boolean actualStatusOfSubscribedLink = false;
+            boolean expectedStatusOfSubscribedLink = true;
+            Assert.assertEquals(actualStatusOfSubscribedLink, expectedStatusOfSubscribedLink, "Subscribed search on search results page doew not reflects on RHS of My Subscriptions page");
+        }
     }
 
 	private void verifyViewMoreSubscriptionsLink() throws Exception 
@@ -78,14 +117,17 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         propertySearch.clickOnSubscribeToThisSearchLink();
         try 
         {
-            WaitFor.waitUntilElementIsLoaded(Page.driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[5]/a"));
+            boolean actualViewMoreSubscriptionsLinkStatus = mySubscriptions.link_ViewMoreSubscriptions().isDisplayed();
+            boolean expectedViewMoreSubscriptionsLinkStatus = true;
+            Assert.assertEquals(actualViewMoreSubscriptionsLinkStatus, expectedViewMoreSubscriptionsLinkStatus, "View More Subscriptions link is not found on subscriptions window under profile pic");
+            //WaitFor.waitUntilElementIsLoaded(Page.driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[5]/a"));
             AutomationLog.info("View More Subscriptions link is found in subcriptions window");
         }
         catch (Exception e) 
         {
             AutomationLog.error("View More Subscriptions link is not found in subcriptions window");
         }
-
+        mySubscriptions.closeSubscriptionWindow();
     }
 
 	private void verifyPopUpAlreadySubscribed() throws Exception 
@@ -108,9 +150,10 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     private void verifySearchTerm() throws Exception 
     {
         mySubscriptions = propertySearch.clickOnSubscribeToThisSearchLink();
-        String searchText = mySubscriptions.getSearchStringInSubscriptionWindow();
-        dataFromCSV = testCaseData.get("SearchCombination");
-        Assert.assertEquals(searchText, dataFromCSV.get("searchstring"), "Data mismatch in search text from search navigation and Subscription window from user's dropdown");
+        String actualSearchText = mySubscriptions.getSearchStringInSubscriptionWindow();
+        dataFromCSV = testCaseData.get("SearchInputCombination");
+        String expectedStringText = dataFromCSV.get("searchstring");
+        Assert.assertEquals(actualSearchText, expectedStringText, "Data mismatch in search text from search navigation and Subscription window from user's dropdown");
         AutomationLog.info("Same Search string data is shown in search in navigation bar and subscription window under user name");
         mySubscriptions.closeSubscriptionWindow();
     }
@@ -145,7 +188,6 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     @Override
     protected String failureMessage() 
     {
-        String msg = "Test case data (SearchInputCombination) needs to be changed each time, otherwise it will produce wrong results";
-        return "Subscribe To Search Link failed: \n Note:" +msg;
+        return "Subscribe To Search Link failed";
     }
 }

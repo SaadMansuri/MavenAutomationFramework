@@ -560,7 +560,7 @@ public class Header extends Page
             throw(e);
         }
     }
-    
+
     public WebElement autocompleteMenu_ComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearchDropbox() throws Exception
     {
         try
@@ -574,7 +574,7 @@ public class Header extends Page
         }
         return element;
     }
-    
+
     public boolean checkingAutoCompleteMenuComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearchVisibility() throws Exception
     {
         boolean bool;
@@ -589,5 +589,5 @@ public class Header extends Page
         }
         return bool;
      }
-    
+
 }
