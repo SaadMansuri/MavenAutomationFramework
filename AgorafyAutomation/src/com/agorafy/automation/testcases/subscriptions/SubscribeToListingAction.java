@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import org.testng.Assert;
 
-import com.agorafy.automation.automationframework.AppDriver;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.Credentials;
@@ -58,15 +57,16 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
 
     private void verifySubscribeToListingLink()  
     {
+        boolean status = true;
         try 
         {
             setupForVerifySubscribeToListingLink();
-            listingDetailPage.clickSubscribeToListingLinkInLoggedInMode();
-            String actualSubscribeStatus = listingDetailPage.getUnSubscribeToListingLinkTextInListingDetailPage();
+            listingDetailPage.clickOnSubscribeToListingLink(status);
+            String actualSubscribeStatus = listingDetailPage.link_UnsubscribeListing().getText();
             dataFromCSV = testCaseData.get("ExpectedUnsubscribeToListingText");
             String expectedSubscriptionStatus = dataFromCSV.get("ExpectedText");
             Assert.assertEquals(actualSubscribeStatus, expectedSubscriptionStatus, "In Listing details page, Subscribe to listing link does not change to Unsubscribe listing");
-            listingDetailPage.clickUnsubscribeListingLink();
+            listingDetailPage.clickOnUnsubscribeListingLink();
             AutomationLog.info("Subscribe to link testing passed");
         }
         catch (Exception e) 
