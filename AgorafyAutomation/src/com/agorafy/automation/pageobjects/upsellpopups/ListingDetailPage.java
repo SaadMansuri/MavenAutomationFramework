@@ -1,6 +1,6 @@
 package com.agorafy.automation.pageobjects.upsellpopups;
 
-//import java.awt.List;
+
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.Page;
 
 public class ListingDetailPage extends LoginPopUp
 {
@@ -22,15 +23,17 @@ public class ListingDetailPage extends LoginPopUp
     {
         super(driver);
     }
+
     public static ListingDetailPage listingDetailPage()
     {
         return PageFactory.initElements(driver, ListingDetailPage.class);
     }
-    public WebElement SubscribeToListingLinkInListingDetailPage() throws Exception
+
+    public WebElement link_SubscribeToListing() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='subscriptionSectionLink']/div/a"));
+            element = driver.findElement(By.className("subscriptionsAddContainer")).findElement(By.tagName("a"));
             AutomationLog.info("Subscribe to listing link found on Listing Detail Page");
         }
         catch(Exception e)
@@ -38,170 +41,62 @@ public class ListingDetailPage extends LoginPopUp
             AutomationLog.error("Subscribe to listing link not found on Listing Detail Page");
             throw(e);
         }
-         return element;
+        return element;
     }
 
-    public WebElement SubscribeToListingLinkInLoggedInMode() throws Exception
+    public Page clickOnSubscribeToListingLink(boolean loginStatus) throws Exception
     {
+        Page page = null;
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='subscriptionSectionLink']/div[2]/a"));
-            AutomationLog.info("Subscribe to listing link in Logged in mode, found on Listing Detail Page");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Subscribe to listing link in Logged in mode, not found on Listing Detail Page");
-            throw(e);
-        }
-         return element;
-    }
-
-    public void clickSubscribeToListingLinkInLoggedInMode()  
-    {
-        try 
-        {
-            SubscribeToListingLinkInLoggedInMode().click();
-            AutomationLog.info("Subscribe to listing link in logged in mode, on listing details page is clicked sucessfully");
-        } 
-        catch (Exception e) 
-        {
-            AutomationLog.error("Failed to click, Subscribe to listing link in logged in mode, on listing details page");
-        }
-    }
-
-    public LoginPopUp clickSubscribeToListingLinkInListingDetailPage(boolean loginStatus) throws Exception
-    {
-        LoginPopUp subscribeToListingPopUp= null;
-        try
-        {
+            link_SubscribeToListing().click();
             if(loginStatus)
             {
-                SubscribeToListingLinkInLoggedInMode().click();
+                page = new ListingDetailPage(driver);
             }
             else
             {
-                SubscribeToListingLinkInListingDetailPage().click();
                 WaitFor.ElementToBeDisplayed(driver, getLoginPopUpLocator());
-                subscribeToListingPopUp = new LoginPopUp(driver);
+                page = new LoginPopUp(driver);
             }
-            AutomationLog.info("Click action performed on SubscribeToListingLink on Listing Detail Page");
+            AutomationLog.info("Successfully clicked on  SubscribeToListingLink on Listing Detail Page");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Click action not performed on SubscribeToListingLink on Listing Detail Page");
+            AutomationLog.error("Could not click on SubscribeToListingLink on Listing Detail Page");
             throw(e);
          }
-         return subscribeToListingPopUp;
+         return page;
     }
 
-    public WebElement UnSubscribeToListingLinkInListingDetailPage() throws Exception
+    public WebElement link_UnsubscribeListing() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath("//*[@id='subscriptionSectionLink']/div[1]/a"));
-            AutomationLog.info("UnSubscribe to listing link found on Listing Detail Page");
+            element = driver.findElement(By.className("subscriptionsRemoveContainer"));
+            AutomationLog.info("UnSubscribe listing link found on Listing Detail Page");
         }
         catch(Exception e)
         {
-            AutomationLog.error("UnSubscribe to listing link not found on Listing Detail Page");
+            AutomationLog.error("UnSubscribe listing link not found on Listing Detail Page");
             throw(e);
         }
-         return element;
+        return element;
     }
 
-    public void clickUnsubscribeListingLink()  
-    {
-        try 
-        {
-            UnSubscribeToListingLinkInListingDetailPage().click();
-            AutomationLog.info("Unsubscribe listing link in listing details page is sucessfully clicked");
-        } 
-        catch (Exception e) 
-        {
-            AutomationLog.error("Failed to click, Unsubscribe listing link in listing details page");
-        }
-    }
-
-    public String getUnSubscribeToListingLinkTextInListingDetailPage() throws Exception
-    {
-        String unSubscribeToListing="";
-        try
-        {
-            unSubscribeToListing = driver.findElement(By.xpath("//*[@id='subscriptionSectionLink']/div[1]/a")).getText();
-            AutomationLog.info("UnSubscribeToListingLink Text found after click on SubscribeToListingLink on ListingPage");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("UnSubscribeToListingLink Text Not found after click on SubscribeToListingLink on ListingPage");
-            throw(e);
-         }
-         return unSubscribeToListing;
-    }
-    public WebElement userNameInPopupSubscribeToListingLinkInListingDetailPage() throws Exception
+    public void clickOnUnsubscribeListingLink() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath("//*[@id='upsellPopup']/form/div[1]/input"));
-            AutomationLog.info("Found Username Field on Login popup after click on SubscribeToListingLinkInListingDetailPage");
+            link_UnsubscribeListing().click();
+            AutomationLog.info("Successfully clicked on Unsubscribe listing link on Listing Detail Page");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Dind't Found Username Field on Login popup after click on SubscribeToListingLinkInListingDetailPage");
+            AutomationLog.error("Could not click on Unsubscribe listing link on Listing Detail Page");
             throw(e);
-         }
-         return element;
+        }
     }
-
-    public WebElement passwordInPopupSubscribeToListingLinkInListingDetailPage() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.xpath("//*[@id='upsellPopup']/form/div[2]/input"));
-            AutomationLog.info("Found Password Field on Login popup after click on SubscribeToListingLinkInListingDetailPage");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Dind't Found Username Field on Login popup after click on SubscribeToListingLinkInListingDetailPage");
-            throw(e);
-         }
-         return element;
-    }
-
-    public WebElement btnLoginToMyAccountInPopupInSubscribeToListing() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.xpath("//*[@id='upsellPopup']/form/div[3]/input"));
-            AutomationLog.info("LoginToMyAccount button found on Login popup in SubscribeToListingLinkInListingDetailPage");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("LoginToMyAccount button did not found on Login popup in SubscribeToListingLinkInListingDetailPage");
-            throw(e);
-         }
-         return element;
-    }
-
-    /*public ListingDetailPage populateLoginPopUpDataForListingDetailPage(String Email, String Password ) throws Exception
-    {
-    	ListingDetailPage listingDetailPage = new ListingDetailPage(driver);
-        try
-        {
-            Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            userNameInPopupSubscribeToListingLinkInListingDetailPage().clear();
-            userNameInPopupSubscribeToListingLinkInListingDetailPage().sendKeys(Email);
-            passwordInPopupSubscribeToListingLinkInListingDetailPage().clear();
-            passwordInPopupSubscribeToListingLinkInListingDetailPage().sendKeys(Password);
-            btnLoginToMyAccountInPopupInSubscribeToListing().click();
-            AutomationLog.info("Successfully populated data in login pop up of SubscribeToListingLinkInListingDetailPage");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not populate data into login pop up of SubscribeToListingLinkInListingDetailPage");
-            throw(e);
-        }
-        return listingDetailPage;
-    }*/
 
     public WebElement brokerInformationSection() throws Exception
     {
@@ -254,7 +149,7 @@ public class ListingDetailPage extends LoginPopUp
         try 
         {
             element = driver.findElement(By.id("listingUpdateLink"));
-            //AutomationLog.info("Listing update link is visible");
+            AutomationLog.info("Listing update link is visible");
         }
         catch (Exception e)
         {
@@ -277,21 +172,58 @@ public class ListingDetailPage extends LoginPopUp
         return element;
     }
 
-    public LoginPopUp clickLinkAddToReport() throws Exception
+    public WebElement link_removeFromReport() throws Exception
     {
-        LoginPopUp loginPopUp = null;
+        try
+        {
+            element = driver.findElement(By.id("removeFromReport"));
+            AutomationLog.info("Remove From Report link is present on details page");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Remove From Report link is not present on Details page");
+        }
+        return element;
+    }
+
+    public void clickOnRemoveFromReportLink() throws Exception
+    {
+        try
+        {
+            link_removeFromReport().click();
+            AutomationLog.info("Successfully clicked on Remove From Report Link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Remove From Report Link");
+            throw(e);
+        }
+    }
+
+    public Page clickOnAddToReportLink(boolean isLoggedIn) throws Exception
+    {
+        Page page = null;
+
         try
         {
             link_addToReport().click();
-            WaitFor.ElementToBeDisplayed(driver, getLoginPopUpLocator());
-            loginPopUp = new LoginPopUp(driver);
-            AutomationLog.info("Add to Report link clicked");
+            if(isLoggedIn)
+            {
+                page = new ListingDetailPage(driver);
+                AutomationLog.info("Add to Report link clicked");
+            }
+            else
+            {
+                WaitFor.ElementToBeDisplayed(driver, getLoginPopUpLocator());
+                page = new LoginPopUp(driver);
+                AutomationLog.info("Add to Report link clicked");
+            }
         }
         catch(Exception e)
         {
             AutomationLog.error("Unable to click Add to Report");
         }
-        return loginPopUp;
+        return page;
     }
 
     public WebElement title_ListingTypeSearched() throws Exception
