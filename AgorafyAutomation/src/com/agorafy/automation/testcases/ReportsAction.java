@@ -42,7 +42,6 @@ public class ReportsAction extends AutomationTestCaseVerification
         try
         {
             headerLoginForm = homePage.openHeaderLoginForm();
-
             HashMap<String, String> loginData =  testCaseData.get("validCredential");
             String UserName = loginData.get("username");
             String Password = loginData.get("password");

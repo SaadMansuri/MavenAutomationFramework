@@ -10,6 +10,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
+import com.thoughtworks.selenium.Wait;
 
 public class Reports extends Page 
 {
@@ -62,14 +64,19 @@ public class Reports extends Page
         return element;
     }
 
+    public By getUserDropdownLocator() throws Exception
+    {
+        return By.className("userDropdown");
+    }
+
     public String getReportCount() throws Exception
     {
         String count;
         header.clickOnProfileNameDropdownArrow();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WaitFor.presenceOfTheElement(driver, getUserDropdownLocator());
         count = header.reportCount().getText();
         header.clickOnProfileNameDropdownArrow();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WaitFor.presenceOfTheElement(driver, getUserDropdownLocator());
         return count;
         
     }
