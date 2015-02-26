@@ -327,7 +327,139 @@ public class Header extends Page
         }
         return Heading;
      }
-    
+
+    public WebElement icon_AdvanceSearchDropDown() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("advancedSearch"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find AdvanceSearch Dropdown icon ");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnAdvanceSearchDropDownIcon() throws Exception
+    {
+        try
+        {
+            icon_AdvanceSearchDropDown().click();
+            AutomationLog.info("Successfully clicked on AdvanceSearch DropDown icon");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on AdvanceSearch DropDown icon");
+        }
+        
+    }
+
+    public WebElement txtbx_BedsInAdvanceSearchForm() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("bedsInput"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Textbox for beds in advance search form    ");
+            throw(e);
+        }
+        return element;
+    }
+
+
+    public WebElement txtbx_BathInAdvanceSearchForm() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("bathsInput"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Textbox for beds in advance search form    ");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void BedsInAdvanceSearchForm(String badNo) throws Exception
+    {
+        try
+        {
+        	txtbx_BedsInAdvanceSearchForm().sendKeys(badNo);
+            AutomationLog.error("Could put the "+badNo+"number of both");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not put the "+badNo+"number of both");
+            throw(e);
+        }
+    }
+
+    public void BathInAdvanceSearchForm(String bathNo) throws Exception
+    {
+        try
+        {
+            txtbx_BathInAdvanceSearchForm().sendKeys(bathNo);
+            AutomationLog.error("Could put the "+bathNo+"number of both");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not put the "+bathNo+"number of both");
+            throw(e);
+        }
+    }
+
+    public WebElement btn_SearchOnAdvanceSearchForm() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("searchFormAdvancedButton"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find search button on advance search form");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnSearchButtonOnAdvanceSearchform() throws Exception
+    {
+
+        try
+        {
+            btn_SearchOnAdvanceSearchForm().click();
+            AutomationLog.info("Successfully clicked on Search button on Advanced search form");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not click on Search button on Advanced search form");
+            throw(e);
+        }
+    }
+
+    public void searchByNoOfBeds(String val) throws Exception
+    {
+        clickOnAdvanceSearchDropDownIcon();
+        txtbx_BedsInAdvanceSearchForm().clear();
+        txtbx_BedsInAdvanceSearchForm().sendKeys(val);
+        AutomationLog.info("Successfully entered Search text for no of beds ");
+        clickOnSearchButtonOnAdvanceSearchform();
+    }
+
+    public void searchByNoOfBaths(String val) throws Exception
+    {
+        clickOnAdvanceSearchDropDownIcon();
+        txtbx_BathInAdvanceSearchForm().clear();
+        txtbx_BathInAdvanceSearchForm().sendKeys(val);
+        AutomationLog.info("Successfully entered Search text for no of baths ");
+        clickOnSearchButtonOnAdvanceSearchform();
+    }
+
     public WebElement arrowToNavigateForLogout() throws Exception
     {
         try
