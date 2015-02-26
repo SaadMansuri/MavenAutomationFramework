@@ -125,7 +125,7 @@ public class Header extends Page
     {
         try
         {
-            val=loginpopup.popUp_Login().isDisplayed();
+            val = loginpopup.popUp_Login().isDisplayed();
             AutomationLog.info("login pop up is displayed");
         }
         catch(Exception e)
@@ -299,7 +299,7 @@ public class Header extends Page
         }
     }
     
-    public WebElement advancedSearchFormId() throws Exception
+    public WebElement form_AdvancedSearch() throws Exception
     {
         try
         {
@@ -307,26 +307,11 @@ public class Header extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Search advancedSearchForm is not present");
+            AutomationLog.error("Could not found Advance Search form");
             throw(e);
         }
         return element;
     }
-
-    public boolean verifyAdvancedSearchFormVisibity() throws Exception
-    {
-        boolean Heading;
-        try
-        {
-            Heading=advancedSearchFormId().isDisplayed();
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Heading of LoginPage not found");
-            throw(e);
-        }
-        return Heading;
-     }
 
     public WebElement icon_AdvanceSearchDropDown() throws Exception
     {
@@ -389,7 +374,7 @@ public class Header extends Page
     {
         try
         {
-        	txtbx_BedsInAdvanceSearchForm().sendKeys(badNo);
+            txtbx_BedsInAdvanceSearchForm().sendKeys(badNo);
             AutomationLog.error("Could put the "+badNo+"number of both");
         }
         catch(Exception e)
@@ -636,11 +621,11 @@ public class Header extends Page
         }
     }
     
-    public WebElement tooltipMessageOnclickingOnEmptySearch() throws Exception
+    public WebElement msg_ZebraTooltip() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath("//div[@class='Zebra_Tooltip_Message']"));
+            element = driver.findElement(By.className("Zebra_Tooltip_Message"));
         }
         catch(Exception e)
         {
@@ -649,23 +634,8 @@ public class Header extends Page
         }
         return element;
     }
-    
-    public boolean verifyZebraTooltipMessageComesAfterClickingEmptySearchbuttonVisibity() throws Exception
-    {
-        boolean tooltip;
-        try
-        {
-            tooltip=tooltipMessageOnclickingOnEmptySearch().isDisplayed();
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Tool Tip After clicking on Empty Search button is failed");
-            throw(e);
-        }
-        return tooltip;
-     }
-    
-    public WebElement dropbox_NeighborhoodStreetAddressZipcodeSearch() throws Exception
+
+    public WebElement txtbx_SearchInput() throws Exception
     {
         try
         {
@@ -673,53 +643,43 @@ public class Header extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Neighborhood Street Address Zipcode dropbox is not found");
+            AutomationLog.error("Search Input textbox is not found");
             throw(e);
         }
         return element;
     }
     
-    public void sendDataToNeighborhoodStreetAddressZipcodeSearchDropbox(String data) throws Exception
+    public void enterSearchTextInSearchInputTextBox(String data) throws Exception
     {
         try
         {
-            dropbox_NeighborhoodStreetAddressZipcodeSearch().sendKeys(data);
-            AutomationLog.info("Successfully enter data in Neighborhood Street Address Zipcode Search Dropbox");
+            txtbx_SearchInput().sendKeys(data);
+            AutomationLog.info("Successfully enter data in SearchInput Textbox");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Failed to enter data in Neighborhood Street Address Zipcode Search Dropbox");
+            AutomationLog.error("Failed to enter data in SearchInput Textbox");
             throw(e);
         }
     }
 
-    public WebElement autocompleteMenu_ComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearchDropbox() throws Exception
+    public By getAutoCompleteMenuDropboxLoactor() throws Exception
+    {
+        return By.className("ui-autocomplete");
+    }
+
+    public WebElement dropbox_AutoCompleteMenu() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath("//li[@class='ui-autocomplete-category']"));
+            element = driver.findElement(getAutoCompleteMenuDropboxLoactor());
         }
         catch(Exception e)
         {
-            AutomationLog.error("Failed to Autocomplete Menu which Comes After Typing Text On Neighborhood Street Address Search");
+            AutomationLog.error("Could not found Autocomplete Menu dropbox");
             throw(e);
         }
         return element;
     }
-
-    public boolean checkingAutoCompleteMenuComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearchVisibility() throws Exception
-    {
-        boolean bool;
-        try
-        {
-            bool=autocompleteMenu_ComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearchDropbox().isDisplayed();
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Fail to check Neighborhoods DropBox Visibility");
-            throw(e);
-        }
-        return bool;
-     }
 
 }

@@ -1,10 +1,8 @@
 package com.agorafy.automation.testcases;
 
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -49,15 +47,15 @@ public class HeaderAction extends AutomationTestCaseVerification
     {
         verifyIFAdvancedSearchFormPresent(header);
         verifyIfLoginPopUpIsDisplayed();
-        verifyIFTooltipMessageComesAfterClickingOnSearchButton(header);
+        verifyIfTooltipIsShownWhenEmptySearchIsPerformed(header);
         
-        HashMap<String, String> textInZipAddressSearch = testCaseData.get("searchData");
-        verifyIFAutoCompleteMenuComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearch(header,textInZipAddressSearch);
+        HashMap<String, String> searchinput = testCaseData.get("searchData");
+        verifyIfAutoCompleteMenuComesAfterTypingTextInSearchInputTextBox(header,searchinput);
     }
 
     public void verifyIfLoginPopUpIsDisplayed() throws Exception
     {
-        loginpopup=header.clickOnSubmitListingLink();
+        loginpopup = header.clickOnSubmitListingLink();
         WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
         Assert.assertEquals(header.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
         AutomationLog.info("Clicking on submit listing link in header displays Login popup ");
@@ -66,24 +64,24 @@ public class HeaderAction extends AutomationTestCaseVerification
     public void verifyIFAdvancedSearchFormPresent(Header header) throws Exception
     {
         header.clickOndropbox_searchInputBox();
-        Assert.assertEquals(header.verifyAdvancedSearchFormVisibity(), true, "Expected error message when the Advanced Search Form is not Visible");
+        Assert.assertEquals(header.form_AdvancedSearch().isDisplayed(), true, "Expected error message when the Advanced Search Form is not Visible");
         AutomationLog.info("Advanced Search Form is Visible");
     }
     
-    public void verifyIFTooltipMessageComesAfterClickingOnSearchButton(Header header) throws Exception
+    public void verifyIfTooltipIsShownWhenEmptySearchIsPerformed(Header header) throws Exception
     {
         header.clickOnCloseLoginPopUp();
         header.clickOnSearchFormButton();
-        Assert.assertEquals(header.verifyZebraTooltipMessageComesAfterClickingEmptySearchbuttonVisibity(), true, "Expected error message when Tool Tip is not Visible which should come after clicking on search button with empty text");
-        AutomationLog.info("Tool Tip is Visible which comes after clicking on search button with empty text");
+        Assert.assertEquals(header.msg_ZebraTooltip().isDisplayed(), true, "Expected tooltip is not shown when empty search is performed");
+        AutomationLog.info("Tool Tip is Shown when clicked on search button with empty text");
     }
     
-    public void verifyIFAutoCompleteMenuComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearch(Header header, HashMap<String, String> textInZipAddressSearch) throws Exception
+    public void verifyIfAutoCompleteMenuComesAfterTypingTextInSearchInputTextBox(Header header, HashMap<String, String> searchinput) throws Exception
     {
-        header.sendDataToNeighborhoodStreetAddressZipcodeSearchDropbox(textInZipAddressSearch.get("data"));
-        Page.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        Assert.assertEquals(header.checkingAutoCompleteMenuComesAfterTypingTextOnNeighborhoodStreetAddressZipcodeSearchVisibility(), true, "Expected error message when AutoCompleteMenu is not found which Comes After Typing Text On Neighborhood Street Address Zipcode Search");
-        AutomationLog.info("Sucessfully found AutoCompleteMenu which Comes After Typing Text On Neighborhood Street Address Zipcode Search");
+        header.enterSearchTextInSearchInputTextBox(searchinput.get("data"));
+        WaitFor.ElementToBeDisplayed(Page.driver, header.getAutoCompleteMenuDropboxLoactor());
+        Assert.assertEquals(header.dropbox_AutoCompleteMenu().isDisplayed(), true, "Expected AutoCompleteMenu dropbox is not Show when Text is entered in SearchInput textbox");
+        AutomationLog.info("Sucessfully found AutoCompleteMenu dropbox which Comes After Typing Text in SearchInput Textbox");
     }
 
     @Override
