@@ -60,5 +60,6 @@
 	<classpathentry kind="lib" path="D:/selenium-java-2.43.1/selenium-server-2.44.0/selenium-2.44.0/libs/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="lib" path="D:/selenium-java-2.43.1/selenium-2.44.0/selenium-java-2.44.0.jar"/>
 	<classpathentry kind="lib" path="D:/selenium-java-2.43.1/selenium-2.44.0/selenium-java-2.44.0-srcs.jar"/>
+	<classpathentry kind="lib" path="src/lib/mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
