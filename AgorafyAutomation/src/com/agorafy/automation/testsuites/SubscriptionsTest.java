@@ -47,16 +47,4 @@ public class SubscriptionsTest
         }
     }
 
-    @AfterSuite
-    public void sendReport() throws Exception
-    {
-        try
-        {
-            SendMail.execute("Subscribe To Search");
-        }
-        catch(Exception e)
-        {
-            throw(e);
-        }
-    }
 }

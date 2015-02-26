@@ -253,6 +253,48 @@ public class ListingDetailPage extends LoginPopUp
             return false;
     }
 
+    public WebElement listingTitle() throws Exception
+    {
+        try
+        {
+            //element = driver.findElement(By.className("listing-details-page"));
+            element = element.findElement(By.className("listing-address"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Title of the listing is NOT found");
+        }
+        return element;
+    }
+
+    public WebElement link_PropertyDetails() throws Exception
+    {
+        try
+        {
+            element = listingTitle().findElement(By.linkText("Property Details"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Property Details link is NOT found in the title section");
+        }
+        return element;
+    }
+
+    public PropertyDetailPage clickPropertyDetailLink() throws Exception
+    {
+        PropertyDetailPage propertyDetail= null;
+        try
+        {
+            link_PropertyDetails().click();
+            propertyDetail = new PropertyDetailPage();
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Unable to locate or click Property Details link");
+        }
+        return propertyDetail;
+    }
+
     public void logout() throws Exception
     {
         header().link_ProfileNameOnDashboardAfterLogin().click();

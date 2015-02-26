@@ -2,6 +2,7 @@ package com.agorafy.automation.testcases.upsellpopups;
 
 
 import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
@@ -12,11 +13,16 @@ import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
+import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.pageobjects.upsellpopups.PropertyDetailPage;
+import com.agorafy.automation.pageobjects.upsellpopups.SearchResultsPage;
 
 public class PropertyDetailAction extends AutomationTestCaseVerification
 {
-    PropertyDetailPage propertydetails=new PropertyDetailPage();
+    ListingDetailPage listingDetailPage;
+    PropertySearch searchResultsPage;
+    PropertyDetailPage propertydetails;
     Header header=Homepage.header();
     
     
@@ -26,12 +32,32 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
     }
 
     @Override
-    public void setup()
+    /*public void setup()
     {
         super.setup();
         try
         {
               propertydetails.redirectedToPropertyPage();
+        }*/
+    public void setup()
+    {
+        listingDetailPage = ListingDetailPage.listingDetailPage();
+        try
+        {
+            super.setup();
+
+            Homepage homepage = Homepage.homePage();
+            searchResultsPage = homepage.populateSearchTermTextBox("Manhattan","Commercial","Retail in 10010");
+            String handle = Page.driver.getWindowHandle();
+            listingDetailPage = searchResultsPage.clickSearchResult();
+            
+
+            Set<String> numbers = Page.driver.getWindowHandles();
+            numbers.remove(handle);
+            String newHandle = numbers.iterator().next();
+            Page.driver.switchTo().window(newHandle);
+            
+            propertydetails = listingDetailPage.clickPropertyDetailLink();
         }
         catch(Exception e)
         {
