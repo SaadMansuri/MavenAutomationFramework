@@ -257,8 +257,8 @@ public class ListingDetailPage extends LoginPopUp
     {
         try
         {
-            //element = driver.findElement(By.className("listing-details-page"));
-            element = element.findElement(By.className("listing-address"));
+            element = driver.findElement(By.className("listing-details-page"));
+            //element = element.findElement(By.className("listing-address"));
         }
         catch(Exception e)
         {
@@ -293,12 +293,5 @@ public class ListingDetailPage extends LoginPopUp
             AutomationLog.error("Unable to locate or click Property Details link");
         }
         return propertyDetail;
-    }
-
-    public void logout() throws Exception
-    {
-        header().link_ProfileNameOnDashboardAfterLogin().click();
-        header().link_Logout().click();
-        WaitFor.waitForPageToLoad(driver);
     }
 }

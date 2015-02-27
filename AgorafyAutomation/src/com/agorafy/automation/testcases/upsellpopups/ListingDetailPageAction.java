@@ -104,7 +104,8 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
     public void preconditionForNextTest() throws Exception
     {
         String currentUrl = listingDetailPage.currentURL();
-        listingDetailPage.logout();
+        //listingDetailPage.logout();
+        Page.header().logout();
         Page.driver.get(currentUrl);
     }
 @Override

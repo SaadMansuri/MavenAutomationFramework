@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingLocationFormPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
@@ -460,47 +461,6 @@ public class Header extends Page
         clickOnSearchButtonOnAdvanceSearchform();
     }
 
-    public WebElement arrowToNavigateForLogout() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.xpath("//b[@class='caret']"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Arrow to navigate for Logout is not  found");
-            throw(e);
-        }
-        return element;
-    }
-
-    public WebElement arrow_profileNameDropdown() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.className("profile-name"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not found Profile name dropdown");
-            throw(e);
-        }
-        return element;
-    }
-
-    public void clickOnProfileNameDropdownArrow() throws Exception
-    {
-        try
-        {
-            arrow_profileNameDropdown().click();
-            AutomationLog.info("Successfully clicked on Profile name dropdown Arrow");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not found Profile name dropdown Arrow");
-            throw(e);
-        }
-    }
 
     public WebElement reportCount() throws Exception
     {
@@ -547,28 +507,28 @@ public class Header extends Page
         return reports;
     }
 
-    public WebElement logoutXpathonPropertyPage() throws Exception
+    public WebElement link_profileNameDropdown() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath("//ul[@class='userDropdown dropdown-menu']//a[@href='/logout']"));
+            element = driver.findElement(By.className("profile-name"));
         }
         catch(Exception e)
         {
-            AutomationLog.error("Arrow to navigate for Logout is not  found");
+            AutomationLog.error("Could not found Profile name dropdown");
             throw(e);
         }
         return element;
     }
-    
-    public Homepage logOutProceessOnPropertyDetailPage() throws Exception
+
+    public Homepage logout() throws Exception
     {
     	Homepage homepage = null;
         try
         {
-            arrowToNavigateForLogout().click();
-            AutomationLog.info("Successfully click on arrow to navigate to logout");
-            logoutXpathonPropertyPage().click();
+            header().link_profileNameDropdown().click();
+            header().link_Logout().click();
+            WaitFor.waitForPageToLoad(driver);
             homepage = new Homepage();
             AutomationLog.info("Successfully Logout from Property Page");
         }
@@ -579,7 +539,7 @@ public class Header extends Page
         }
         return homepage;
     }
-    
+
     public WebElement closeLoginPopUp() throws Exception
     {
         try
@@ -593,7 +553,7 @@ public class Header extends Page
         }
         return element;
     }
-    
+
     public void clickOnCloseLoginPopUp() throws Exception
     {
         try
@@ -607,7 +567,7 @@ public class Header extends Page
             throw(e);
         }
     }
-    
+
     public WebElement btn_searchForm() throws Exception
     {
         try
@@ -621,7 +581,7 @@ public class Header extends Page
         }
         return element;
     }
-    
+
     public void clickOnSearchFormButton() throws Exception
     {
         try
@@ -635,7 +595,7 @@ public class Header extends Page
             throw(e);
         }
     }
-    
+
     public WebElement tooltipMessageOnclickingOnEmptySearch() throws Exception
     {
         try
@@ -649,7 +609,7 @@ public class Header extends Page
         }
         return element;
     }
-    
+
     public boolean verifyZebraTooltipMessageComesAfterClickingEmptySearchbuttonVisibity() throws Exception
     {
         boolean tooltip;
@@ -664,7 +624,7 @@ public class Header extends Page
         }
         return tooltip;
      }
-    
+
     public WebElement dropbox_NeighborhoodStreetAddressZipcodeSearch() throws Exception
     {
         try
@@ -678,7 +638,7 @@ public class Header extends Page
         }
         return element;
     }
-    
+
     public void sendDataToNeighborhoodStreetAddressZipcodeSearchDropbox(String data) throws Exception
     {
         try
@@ -722,4 +682,17 @@ public class Header extends Page
         return bool;
      }
 
+    public void clickOnProfileNameDropdownArrow() throws Exception
+    {
+        try
+        {
+            link_profileNameDropdown().click();
+            AutomationLog.info("Successfully clicked on Profile name dropdown Arrow");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not found Profile name dropdown Arrow");
+            throw(e);
+        }
+    }
 }
