@@ -14,6 +14,12 @@ import com.agorafy.automation.pageobjects.PropertySearch;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
+/**
+ * Verify whether login pop up is seen when 'Subscribe to Listing' link is clicked in Logged out state
+ * Verify whether login pop up is seen when 'Send Email' link provided below Agent name is clicked in Logged out state
+ * Verify whether login pop up is seen when 'Add to Report' link is clicked in Logged out state
+ */
+
 public class ListingDetailPageAction extends AutomationTestCaseVerification 
 {
     private ListingDetailPage listingDetailPage = null;
@@ -104,19 +110,18 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
     public void preconditionForNextTest() throws Exception
     {
         String currentUrl = listingDetailPage.currentURL();
-        //listingDetailPage.logout();
         Page.header().logout();
         Page.driver.get(currentUrl);
     }
 @Override
     protected String successMessage()
      {
-            return "Funtionality of SubscribeToListingLink on ListingDetailPage is Passed";
+        return "Test for verifying login pop-ups on listing detail page has Passed";
      }
 
 @Override
     protected String failureMessage()
     {
-            return "Funtionality of SubscribeToListingLink on ListingDetailPage is Failed";
+        return "Test for verifying login pop-ups on listing detail page has Failed";
     }
 }

@@ -1,6 +1,5 @@
 package com.agorafy.automation.testcases.upsellpopups;
 
-
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +14,11 @@ import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.PropertySearch;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.pageobjects.upsellpopups.PropertyDetailPage;
+
+/**
+ * Verify whether login pop up is seen when link for 'NYC property records' is clicked in Logged out state
+ * Verify whether login pop up is seen when link for 'Contact information' is clicked in Logged out state
+ */
 
 public class PropertyDetailAction extends AutomationTestCaseVerification
 {
@@ -48,6 +52,7 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
             Page.driver.switchTo().window(newHandle);
             
             propertydetails = listingDetailPage.clickPropertyDetailLink();
+            AutomationLog.info("Navigating to Property Detail page");
         }
         catch(Exception e)
         {
@@ -70,7 +75,7 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
     public void verifyLoginPopupOnPropertyRecords(PropertyDetailPage propertydetails) throws Exception
     {
         propertydetails.clickOnPropertyRecordsLink();
-        AutomationLog.info("SignUp Link Clicked Successfully");
+        AutomationLog.info("Signin Link Clicked Successfully");
         Page.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         Assert.assertEquals(propertydetails.checkingLogInPopUpUpsell(),true,"Expected form is not present");
         AutomationLog.info("Login popup form is present on page");
@@ -110,11 +115,11 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
 
     @Override
     protected String successMessage() {
-        return "Test cases passed for Property Details";
+        return "Test for verifying login pop-ups on Property Detail page has Passed";
     }
 
     @Override
     protected String failureMessage() {
-        return "Test cases failed for Property Details";
+        return "Test for verifying login pop-ups on Property Detail page has Failed";
     }
 }
