@@ -1,8 +1,8 @@
 package com.agorafy.automation.testsuites;
 
-import mailReport.SendMail;
 
-import org.testng.annotations.AfterSuite;
+
+
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -21,7 +21,7 @@ public class SubscriptionsTest
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-    @Test(priority = 1)
+    //@Test(priority = 1)
     public void testSubscribeToSearchLink() throws Exception
     {
         try
@@ -34,7 +34,7 @@ public class SubscriptionsTest
         }
     }
 
-    //@Test(priority = 2)
+    @Test(priority = 2)
     public void testSubscribeToListingLink() throws Exception
     {
         try

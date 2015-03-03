@@ -8,7 +8,7 @@ import javax.mail.internet.*;
 
 
 import java.util.*;
-
+/*This file is used for sending the report after execution of all suites using email*/
 public class SendMail
 {
 
@@ -16,13 +16,16 @@ public class SendMail
     public static void execute(String reportFileName) throws Exception
 
     {
+        /*path of file which contains report*/
         String path ="D:\\AgorafyGit\\AgrofyAutomation\\AgorafyAutomation\\test-output\\emailable-report.html";
         //Report file = path&gt;
 
+        /*No of recipients of the report, you can have many separated by comma*/
         String[] to={"ashishpatil227@gmail.com"};
         String[] cc={};
         String[] bcc={};
 
+        /*email user name and password of sender*/ 
         SendMail.sendMail("ashish.patil@cuelogic.co.in",
                             "1qaz!QAZ@WSX",
                             "smtp.gmail.com",
@@ -156,7 +159,7 @@ InternetAddress(bcc[i]));
             msg.saveChanges();
 
             System.out.println("msg...................."+msg);
-            
+
             Transport transport = session.getTransport("smtp");
 
             transport.connect(host, userName, passWord);
