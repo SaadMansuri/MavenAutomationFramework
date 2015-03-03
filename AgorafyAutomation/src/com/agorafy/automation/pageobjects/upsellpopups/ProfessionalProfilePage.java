@@ -24,11 +24,12 @@ public class ProfessionalProfilePage extends Page
             return PageFactory.initElements(driver, ProfessionalProfilePage.class);
         }
 
-        public WebElement btnSendEmailInProfessionalProfilePage() throws Exception
+        public WebElement btn_SendEmail() throws Exception
         {
             try
             {
                 element = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div/div/div/a"));
+                //element = driver.findElement(By.className("upsell btn"));
                 AutomationLog.info("Send Email button found on Professional Profile Page");
             }
             catch(Exception e)
@@ -39,11 +40,13 @@ public class ProfessionalProfilePage extends Page
              return element;
         }
 
-        public void clickSendEmailbtnInProfessionalProfilePage() throws Exception
+        public LoginPopUp clickSendEmailbtnOnProfessionalProfile() throws Exception
         {
+            LoginPopUp loginpopup = null;
             try
             {
-                btnSendEmailInProfessionalProfilePage().click();
+                btn_SendEmail().click();
+                loginpopup = new LoginPopUp(driver);
                 AutomationLog.info("Click action performed on Send Email button on Professional Profile Page");
             }
             catch(Exception e)
@@ -51,6 +54,7 @@ public class ProfessionalProfilePage extends Page
                 AutomationLog.error("Click action not performed on Send Email button on Professional Profile Page");
                 throw(e);
              }
+            return loginpopup;
         }
 
         public WebElement userNameInPopupAfterclickSendEmailbtnInProfessionalProfilePage() throws Exception

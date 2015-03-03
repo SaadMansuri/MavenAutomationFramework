@@ -1,15 +1,14 @@
 package com.agorafy.automation.testcases.upsellpopups;
 
-import java.util.HashMap;
-
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
+import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SignUp;
-
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
 /**
@@ -19,14 +18,14 @@ import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
  * verify Clicking on Login Link shows login Pop Up
  * verify if valid credentials are entered in login pop up then page redirected to Homepage
  */
-public class LoginPopUpAction extends AutomationTestCaseVerification
+public class SignupPageLoginAction extends AutomationTestCaseVerification
 {
     private SignUp signup=null;
     private Header header=null;
     private Homepage homepage=null;
     private LoginPopUp loginpopup=null;
 
-    public LoginPopUpAction()  
+    public SignupPageLoginAction()  
     {
         super();
     }
@@ -40,7 +39,6 @@ public class LoginPopUpAction extends AutomationTestCaseVerification
         {
             header = Homepage.header();
             signup = header.clickOnSignUpUpLink();
-            loginpopup = signup.clickOnLoginLink();
         }
         catch(Exception e)
         {
@@ -51,17 +49,22 @@ public class LoginPopUpAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        HashMap<String, String> getvalidcrendial = testCaseData.get("validCredential");
-        verifyIfHomePageIsShownOnSuccessfullLogin(loginpopup,getvalidcrendial);
+        Credentials validCredentials = userCredentials();
+        verifyLoginUpsellOnSignup(loginpopup,validCredentials);
     }
 
-    public void verifyIfHomePageIsShownOnSuccessfullLogin(LoginPopUp loginpopup, HashMap<String, String> getvalidcrendial) throws Exception
+    public void verifyLoginUpsellOnSignup(LoginPopUp loginpopup, Credentials credentials) throws Exception
     {
         try
         {
-            homepage= loginpopup.populateHomePageLoginPopUpData(getvalidcrendial.get("username"),getvalidcrendial.get("password"));
+            String Url = Page.driver.getCurrentUrl();
+            loginpopup = signup.clickOnLoginLink();
+            Thread.sleep(7000);
+            Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Subscribe to Listing");
+            loginpopup.populateLoginPopUpData(credentials.getEmail(),credentials.getPassword());
+            homepage = (Homepage) loginpopup.clickLoginButtonOnUpsell();
 
-            Assert.assertEquals(homepage.currentURL(),homepage.homepageUrl(),"unsuccessfull login" );
+            //Assert.assertEquals(homepage.currentURL(),Url,"unsuccessfull login" );
             AutomationLog.info("expected page is loaded after login");
         }
         catch(Exception e)

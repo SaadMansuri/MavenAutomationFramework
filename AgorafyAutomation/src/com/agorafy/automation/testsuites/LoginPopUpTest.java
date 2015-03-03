@@ -4,7 +4,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.upsellpopups.LoginPopUpAction;
+import com.agorafy.automation.testcases.upsellpopups.ListingDetailPageAction;
+import com.agorafy.automation.testcases.upsellpopups.SignupPageLoginAction;
 
 public class LoginPopUpTest 
 {
@@ -16,11 +17,24 @@ public class LoginPopUpTest
      }
 
     @Test
-    public void testForLoginPopUp() throws Exception
+    public void testForLoginPopUpSignupPage() throws Exception
     {
         try
         {
-            new LoginPopUpAction().Execute();
+            new SignupPageLoginAction().Execute();
+        }
+        catch (Exception e) 
+        {
+            throw (e);
+        }
+    }
+
+    @Test
+    public void testForLoginPopUpListingPage() throws Exception
+    {
+        try
+        {
+            new ListingDetailPageAction().Execute();
         }
         catch (Exception e) 
         {

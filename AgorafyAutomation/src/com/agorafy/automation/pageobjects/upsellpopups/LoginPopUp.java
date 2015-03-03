@@ -225,6 +225,12 @@ public class LoginPopUp extends Page
 
                 break;
 
+            case "profile":
+                pageObject = new ProfessionalProfilePage(driver);
+
+            case "home":
+                pageObject = new Homepage();
+
         default:
             break;
         }
