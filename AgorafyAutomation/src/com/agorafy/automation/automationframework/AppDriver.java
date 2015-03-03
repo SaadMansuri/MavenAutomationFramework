@@ -2,8 +2,11 @@ package com.agorafy.automation.automationframework;
 
 
 import java.util.HashMap;
+
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 import com.agorafy.automation.utilities.HandlingWindows;
 
 public class AppDriver 
@@ -12,6 +15,8 @@ public class AppDriver
     {
         // TODO: Get browser driver based on browser type specified.
         WebDriver driver = new FirefoxDriver();
+        /*System.setProperty("webdriver.chrome.driver", "src\\lib\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();*/
         driver.manage().window().maximize();
         driver.get(Configuration.applicationUnderTestURL());
         return driver;

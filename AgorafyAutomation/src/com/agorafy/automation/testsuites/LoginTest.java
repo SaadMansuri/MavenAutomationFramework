@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.testcases.HomepageAction;
+import com.agorafy.automation.testcases.LoginAttemptsAction;
 import com.agorafy.automation.testcases.LoginNegativeTestsHeaderFormAction;
 import com.agorafy.automation.testcases.LoginNegativeTestsPageFormAction;
 import com.agorafy.automation.testcases.LoginPositiveTestPageFormAction;
@@ -69,6 +70,20 @@ public class LoginTest
         catch(Exception e)
         {
             throw(e);
+        }
+    }
+
+
+    //@Test(priority = 5)
+    public void testCaptchaAppearance() throws Exception
+    {
+        try
+        {
+            new LoginAttemptsAction().Execute();
+        }
+        catch (Exception e)
+        {
+            throw (e);
         }
     }
 }

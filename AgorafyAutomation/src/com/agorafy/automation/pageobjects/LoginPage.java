@@ -131,6 +131,20 @@ public class LoginPage extends Page
         return element;
     }
 
+    public boolean isCaptchaPresent() throws Exception
+    {
+        Boolean bool = null;
+        try
+        {
+            bool = driver.findElement(By.id("recaptcha_challenge_image")).isDisplayed();
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Captcha element is not displayed");
+        }
+        return bool;
+    }
+
     public WebElement txtbx_Captcha() throws Exception
     {
         try 

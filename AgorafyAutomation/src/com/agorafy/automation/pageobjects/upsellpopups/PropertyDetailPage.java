@@ -18,25 +18,8 @@ public class PropertyDetailPage extends Page
     public PropertyDetailPage() {
         super(driver);
     }
-    
-    public PropertyDetailPage redirectedToPropertyPage() throws Exception
-    {
-        PropertyDetailPage propertydetail= null;
-        try
-        {
-            driver.get("http://www.agorafy.com/property/826093/11-Madison-Avenue-Madison-Square-New-York");
-            propertydetail = new PropertyDetailPage(driver);
-            AutomationLog.info("Redirected to property Page");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Redirect to property Page is failed");
-            throw(e);
-        }
-        return propertydetail;
-    }
-    
-    public WebElement propertyRecordSignUpLink_element() throws Exception
+
+    public WebElement link_propertyRecords() throws Exception
     {
         try 
         {
@@ -51,14 +34,14 @@ public class PropertyDetailPage extends Page
         return element;
     }
     
-    public PropertyDetailPage clickOnSignUpUpLink() throws Exception
+    public PropertyDetailPage clickOnPropertyRecordsLink() throws Exception
     {
         PropertyDetailPage propertydetail = null;
         try
         {
-            propertyRecordSignUpLink_element().click();
+            link_propertyRecords().click();
             propertydetail = new PropertyDetailPage(driver);
-            AutomationLog.info("Clicked on signup link from property record section");
+            AutomationLog.info("Clicked on Property Signin link from property record section");
         }
         catch(Exception e)
         {
@@ -82,7 +65,7 @@ public class PropertyDetailPage extends Page
         return element;
     }
     
-    public boolean checkingLogInPopUpOnPropertyPage() throws Exception
+    public boolean checkingLogInPopUpUpsell() throws Exception
     {
         boolean bool;
         try
@@ -173,7 +156,7 @@ public class PropertyDetailPage extends Page
         return element;
     }
     
-    public PropertyDetailPage loginProcessOnPropertyPage(String email, String Password ) throws Exception
+    public PropertyDetailPage loginProcess(String email, String Password ) throws Exception
     {
         PropertyDetailPage propertydetail = null;
         try
@@ -224,7 +207,7 @@ public class PropertyDetailPage extends Page
         return bool;
      }
     
-    public WebElement signInToContactInformation_element() throws Exception
+    public WebElement link_signInToContactInformation() throws Exception
     {
         try 
         {
@@ -238,13 +221,13 @@ public class PropertyDetailPage extends Page
         return element;
     }
     
-    public PropertyDetailPage clickOnSignInToContactInformation() throws Exception
+    public LoginPopUp clickOnContactInformation() throws Exception
     {
-        PropertyDetailPage propertydetail = null;
+        LoginPopUp loginpopup = null;
         try
         {
-            signInToContactInformation_element().click();
-            propertydetail = new PropertyDetailPage(driver);
+            link_signInToContactInformation().click();
+            loginpopup = new LoginPopUp(driver);
             AutomationLog.info("Clicked on 'Sign in to see contact information' link");
         }
         catch(Exception e)
@@ -252,9 +235,9 @@ public class PropertyDetailPage extends Page
             AutomationLog.error("Failed to Click on 'Sign in to see contact information' link");
             throw(e);
         }
-            return propertydetail;
+        return loginpopup;
     }
-    
+
     public WebElement userNameElementAfterLogIn_element() throws Exception
     {
         try 
@@ -284,4 +267,6 @@ public class PropertyDetailPage extends Page
         }
         return username;
      }
+
+   
 }
