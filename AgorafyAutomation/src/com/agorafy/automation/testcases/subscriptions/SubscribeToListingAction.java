@@ -21,7 +21,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
 
     private Homepage homePage;
     private HeaderLoginForm headerLoginForm;
-    private HashMap<String, String> dataFromCSV;
+    private HashMap<String, String> dataFromCSV = new HashMap<> ();
     private PropertySearch propertySearch;
     private IntermidiatePage intermidiatePage = null;
     private ListingDetailPage listingDetailPage;
@@ -55,13 +55,14 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         verifySubscribeToListingLink();
     }
 
-    private void verifySubscribeToListingLink()  
+    private void verifySubscribeToListingLink() throws Exception
     {
         boolean status = true;
         try 
         {
             setupForVerifySubscribeToListingLink();
             listingDetailPage.clickOnSubscribeToListingLink(status);
+            Thread.sleep(1000);
             String actualSubscribeStatus = listingDetailPage.link_UnsubscribeListing().getText();
             dataFromCSV = testCaseData.get("ExpectedUnsubscribeToListingText");
             String expectedSubscriptionStatus = dataFromCSV.get("ExpectedText");
@@ -72,6 +73,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         catch (Exception e) 
         {
             AutomationLog.error("Subscribe to link testing failed");
+            throw (e);
         }
     }
 
@@ -80,10 +82,11 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         try 
         {
             String noOfSearchResults = propertySearch.noOfSearchResults();
-            if(!(noOfSearchResults.equals("0 matches")))
+            if(!(noOfSearchResults.equals("0 matches")))/*checks whether search results are more than 0*/
             {
                 boolean multipleListingsStatus;
                 multipleListingsStatus = propertySearch.checkForMultiplelistingsInFirstProperty();
+                /*first search result can have multiple listings or single listing depends on that it navigates to listing details page or intermidiate page*/
                 if(multipleListingsStatus)
                 {
                     destinationPage = "IntermidiatePage";
@@ -96,7 +99,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
                 }
                 Integer windowNoToSwitch = 2;
                 HandlingWindows.switchToWindow(Page.driver, windowNoToSwitch);
-                if(intermidiatePage != null)
+                if(intermidiatePage != null)/*If there are multiple listings then it needs one more click to reach listing details page*/
                 {
                     listingDetailPage = intermidiatePage.selectFirstListingOnIntermidiatePage();
                     windowNoToSwitch = 3;

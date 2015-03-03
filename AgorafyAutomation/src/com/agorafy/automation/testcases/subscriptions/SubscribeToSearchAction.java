@@ -47,12 +47,12 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         {
             super.setup();
             homePage = Homepage.homePage();
-            /*headerLoginForm = homePage.openHeaderLoginForm();
+            headerLoginForm = homePage.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();
             homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-            *//*WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             dataFromCSV = testCaseData.get("SearchInputCombination");
-            propertySearch = homePage.populateSearchTermTextBox(dataFromCSV.get("boroughname"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchstring"));*/
+            propertySearch = homePage.populateSearchTermTextBox(dataFromCSV.get("boroughname"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchstring"));
         }
         catch (Exception e)
         {
@@ -61,12 +61,12 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     }
 
     @Override
-    protected void verifyTestCases() throws Exception 
+    protected void verifyTestCases() throws Exception
     {
         AutomationLog.info("Verify whether Subscription box display's under username after clicking Subscribe to this search link ");
-        //verifySubscriptionBoxDisplay();
+        verifySubscriptionBoxDisplay();
 
-       /* AutomationLog.info("Verify whether same search term reflects in Subscription window under user's avator");
+        AutomationLog.info("Verify whether same search term reflects in Subscription window under user's avator");
         verifySearchTerm();
 
         AutomationLog.info("Verify whether Subscribe to this search link vanishes after clicking Subscribe in subscription box under user's avatar");
@@ -79,7 +79,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         verifyViewMoreSubscriptionsLink();
 
         AutomationLog.info("Verify whether already subscribed search found in search subscriptions col in My Subscrptions page");
-        verifyAlreadySubscribedInMySubscriptionsPage();*/
+        verifyAlreadySubscribedInMySubscriptionsPage();
 
     }
 
@@ -164,7 +164,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         mySubscriptions = (MySubscriptions) propertySearch.clickOnSubscribeToThisSearchLink(status);
         mySubscriptions.clickSubscribeInSubscriptionWindow();
         actualStatusOfElement = false;
-        actualStatusOfElement = propertySearch.link_SubscribeToThisSearch().isDisplayed();
+        actualStatusOfElement = propertySearch.link_SubscribeToThisSearchInLoggedInCase().isDisplayed();
         Assert.assertEquals(actualStatusOfElement, false, "Subscribe to this search link still persists, it should be vanished");
         AutomationLog.info("Subscribe to this search link vanishes sucessfully");
         mySubscriptions.closeSubscriptionWindow();

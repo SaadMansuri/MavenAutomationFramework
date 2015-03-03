@@ -33,7 +33,8 @@ public class ListingDetailPage extends LoginPopUp
     {
         try
         {
-            element = driver.findElement(By.className("subscriptionsAddContainer")).findElement(By.tagName("a"));
+            //element = driver.findElement(By.className("subscriptionsAddContainer")).findElement(By.tagName("a"));
+            element = driver.findElement(By.xpath(".//*[@id='subscriptionSectionLink']/div[2]/a"));
             AutomationLog.info("Subscribe to listing link found on Listing Detail Page");
         }
         catch(Exception e)
@@ -73,7 +74,7 @@ public class ListingDetailPage extends LoginPopUp
     {
         try
         {
-            element = driver.findElement(By.className("subscriptionsRemoveContainer"));
+            element = driver.findElement(By.xpath(".//*[@id='subscriptionSectionLink']/div[1]/a"));
             AutomationLog.info("UnSubscribe listing link found on Listing Detail Page");
         }
         catch(Exception e)

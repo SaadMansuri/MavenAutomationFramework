@@ -25,16 +25,31 @@ public class PropertySearch extends Page
         super(driver);
     }
 
-    public WebElement link_SubscribeToThisSearch() throws Exception
+    public WebElement link_SubscribeToThisSearchInLoggedInCase() throws Exception
     {
         try
         {
             element=driver.findElement(By.xpath(".//*[@id='subscribeCalloutContainer']/a"));
-            AutomationLog.info("Found link Subscribe to this search ");
+            AutomationLog.info("Found link Subscribe to this search in logged in case");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found link Subscribe to this search");
+            AutomationLog.error("Could not found link Subscribe to this search in logged in case");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement link_SubscribeToThisSearchInLoggedOutCase() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("subscribeCalloutContainer")).findElement(By.tagName("a"));
+            AutomationLog.info("Found link Subscribe to this search in logged out state");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not found link Subscribe to this search in logged out state");
             throw(e);
         }
         return element;
@@ -149,13 +164,14 @@ public class PropertySearch extends Page
         Page page = null;
         try
         {
-            link_SubscribeToThisSearch().click();
             if(loginstatus)
             {
+                 link_SubscribeToThisSearchInLoggedInCase().click();
                  page = new MySubscriptions(driver);
             }
             else
             {
+                link_SubscribeToThisSearchInLoggedOutCase().click();
                 page = new LoginPopUp(driver);
             }
             AutomationLog.info("Successfully clicked on Subscribe to this search link ");
