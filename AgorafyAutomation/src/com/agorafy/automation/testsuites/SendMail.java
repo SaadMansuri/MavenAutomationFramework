@@ -2,7 +2,6 @@ package com.agorafy.automation.testsuites;
 
 import org.testng.annotations.AfterSuite;
 
-
 public class SendMail 
 {
 

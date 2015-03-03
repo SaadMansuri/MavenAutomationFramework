@@ -29,16 +29,31 @@ public class ListingDetailPage extends LoginPopUp
         return PageFactory.initElements(driver, ListingDetailPage.class);
     }
 
-    public WebElement link_SubscribeToListing() throws Exception
+    public WebElement link_SubscribeToListingInLoggedInState() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='subscriptionSectionLink']/div[2]/a"));
+            AutomationLog.info("Subscribe to listing link in logged in state found on Listing Detail Page");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Subscribe to listing link in logged in state not found on Listing Detail Page");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement link_SubscribeToListingInLoggedOutState() throws Exception
     {
         try
         {
             element = driver.findElement(By.className("subscriptionsAddContainer")).findElement(By.tagName("a"));
-            AutomationLog.info("Subscribe to listing link found on Listing Detail Page");
+            AutomationLog.info("Subscribe to listing link in logged out state found on Listing Detail Page");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Subscribe to listing link not found on Listing Detail Page");
+            AutomationLog.error("Subscribe to listing link link in logged out state not found on Listing Detail Page");
             throw(e);
         }
         return element;
@@ -49,13 +64,14 @@ public class ListingDetailPage extends LoginPopUp
         Page page = null;
         try
         {
-            link_SubscribeToListing().click();
             if(loginStatus)
             {
+                link_SubscribeToListingInLoggedInState().click();
                 page = new ListingDetailPage(driver);
             }
             else
             {
+            	link_SubscribeToListingInLoggedOutState().click();
                 WaitFor.ElementToBeDisplayed(driver, getLoginPopUpLocator());
                 page = new LoginPopUp(driver);
             }
@@ -73,7 +89,7 @@ public class ListingDetailPage extends LoginPopUp
     {
         try
         {
-            element = driver.findElement(By.className("subscriptionsRemoveContainer"));
+            element = driver.findElement(By.xpath(".//*[@id='subscriptionSectionLink']/div[1]/a"));
             AutomationLog.info("UnSubscribe listing link found on Listing Detail Page");
         }
         catch(Exception e)

@@ -1,8 +1,8 @@
 package com.agorafy.automation.testsuites;
 
-import mailReport.SendMail;
 
-import org.testng.annotations.AfterSuite;
+
+
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -34,7 +34,7 @@ public class SubscriptionsTest
         }
     }
 
-    //@Test(priority = 2)
+    @Test(priority = 2)
     public void testSubscribeToListingLink() throws Exception
     {
         try
