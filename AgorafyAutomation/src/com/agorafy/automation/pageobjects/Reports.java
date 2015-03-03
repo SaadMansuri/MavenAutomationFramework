@@ -76,7 +76,8 @@ public class Reports extends Page
         WaitFor.presenceOfTheElement(driver, getUserDropdownLocator());
         count = header.reportCount().getText();
         header.clickOnProfileNameDropdownArrow();
-        WaitFor.presenceOfTheElement(driver, getUserDropdownLocator());
+        WaitFor.sleepFor(10000);
+        AutomationLog.info("Successfully got Reports Count");
         return count;
         
     }
