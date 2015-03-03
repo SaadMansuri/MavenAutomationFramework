@@ -17,7 +17,7 @@ import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
 public class PropertySearch extends Page
 {
-    private WebElement element=null;
+    private WebElement element = null;
     private List<WebElement> elements = null;
 
     public PropertySearch(WebDriver driver)
@@ -29,7 +29,7 @@ public class PropertySearch extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='subscribeCalloutContainer']/a"));
+            element = driver.findElement(By.xpath(".//*[@id='subscribeCalloutContainer']/a"));
             AutomationLog.info("Found link Subscribe to this search in logged in case");
         }
         catch(Exception e)
@@ -59,7 +59,7 @@ public class PropertySearch extends Page
     {
         try
         {
-            element = driver.findElement(By.className("page-title"));
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div/div/ul/li[1]/div/h2"));
             AutomationLog.info("title found on Search Result page");
         }
         catch (Exception e)
@@ -88,7 +88,8 @@ public class PropertySearch extends Page
     {
         try
         {
-            element = driver.findElement(By.className("filterText"));
+            //element = driver.findElement(By.className("filterText"));
+        	element = driver.findElement(By.xpath("//a[@data-filtertarget='size']"));
         }
         catch (Exception e)
         {
@@ -119,7 +120,8 @@ public class PropertySearch extends Page
     {
         try
         {
-            element = driver.findElement(By.className("filterText"));
+            //element = driver.findElement(By.className("filterText"));
+        	element = driver.findElement(By.xpath("//a[@data-filtertarget='numBeds']"));
         }
         catch(Exception e)
         {
@@ -133,7 +135,8 @@ public class PropertySearch extends Page
     {
         try
         {
-            element = driver.findElement(By.className("filterText"));
+            //element = driver.findElement(By.className("filterText"));
+        	element = driver.findElement(By.xpath("//a[@data-filtertarget='price']"));
         }
         catch(Exception e)
         {
@@ -202,10 +205,10 @@ public class PropertySearch extends Page
 
     public String getTitleForLoginPopUp(LoginPopUp loginpopup) throws Exception
     {
-        String title=null;
+        String title = null;
         try
         {
-            title=loginpopup.title_LoginPopUp().getText();
+            title = loginpopup.title_LoginPopUp().getText();
         }
         catch(Exception e)
         {
@@ -220,7 +223,7 @@ public class PropertySearch extends Page
         boolean val;
         try
         {
-            val=loginpopup.popUp_Login().isDisplayed();
+            val = loginpopup.popUp_Login().isDisplayed();
             AutomationLog.info("login pop up is displayed");
         }
         catch(Exception e)
@@ -260,7 +263,7 @@ public class PropertySearch extends Page
         return element;
     }
 
-    public WebElement icon_AddToReport() throws Exception
+    public WebElement icon_PinCushionReport() throws Exception
     {
         try
         {
@@ -274,25 +277,26 @@ public class PropertySearch extends Page
         return element;
     }
 
-    public void clickOnAddToReportIcon() throws Exception
+    public void clickOnPinCushionReportIcon() throws Exception
     {
         try
         {
-            icon_AddToReport().click();
-            AutomationLog.info("Successfully clicked on Add To Report icon");
+            icon_PinCushionReport().click();
+            AutomationLog.info("Successfully clicked on PinCushionReport icon");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not click on Add To Report icon");
+            AutomationLog.error("Could not click on PinCushionReport icon");
             throw(e);
         }
     }
 
-    public void hoverOnAddToReportIcon() throws Exception
+    public void hoverOnPinCushionReportIcon() throws Exception
     {
         Actions builder = new Actions(driver);
-        Action hover = builder.moveToElement(icon_AddToReport()).build();
+        Action hover = builder.moveToElement(icon_PinCushionReport()).build();
         hover.perform();
+        AutomationLog.info("Successfully hovered on PinCushionReport icon");
     }
 
     public By Tooltiplocator() throws Exception
@@ -300,7 +304,7 @@ public class PropertySearch extends Page
         return By.className("Zebra_Tooltip_Message");
     }
 
-    public WebElement tooltip_AddToReport() throws Exception
+    public WebElement tooltip_PinCushionReport() throws Exception
     {
         try
         {
