@@ -12,7 +12,6 @@ import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 public class Header extends Page
 {
     private WebElement element = null;
-    private boolean val=false;
 
     public Header(WebDriver driver)
     {
@@ -33,11 +32,6 @@ public class Header extends Page
         }
 
         return element;
-    }
-
-    public By getProfileNameLocator() 
-    {
-        return  (By.className("profile-name"));
     }
 
     public WebElement link_SignUp() throws Exception
@@ -122,28 +116,18 @@ public class Header extends Page
         }
     }
 
-    public boolean loginPopUpIsDisplayed(LoginPopUp loginpopup) throws Exception
-    {
-        try
-        {
-            val = loginpopup.popUp_Login().isDisplayed();
-            AutomationLog.info("login pop up is displayed");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Login pop up is not displayed");
-            throw(e);
-        }
-        return val;
-    }
-
     //Links below are seen when user is logged in
+
+    public By getProfileNameLocator() 
+    {
+        return  (By.className("profile-name"));
+    }
 
     public WebElement link_ProfileNameOnHomepageAfterLogin() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/a[1]/span[2]"));
+            element = driver.findElement(getProfileNameLocator());
         }
         catch (Exception e)
         {
@@ -171,7 +155,8 @@ public class Header extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/ul/li[1]/a"));
+            element = driver.findElement(getProfileNameLocator());
+
         }
         catch (Exception e)
         {
@@ -199,7 +184,7 @@ public class Header extends Page
     {
         try
         {
-            link_ProfileNameOnHomepageAfterLogin().click();
+            Page.driver.findElement(getProfileNameLocator()).click();
             AutomationLog.info("Opened drop down for active profile link");
         }
         catch (Exception e)
@@ -355,7 +340,6 @@ public class Header extends Page
         }
         return element;
     }
-
 
     public WebElement txtbx_BathInAdvanceSearchForm() throws Exception
     {
@@ -596,7 +580,7 @@ public class Header extends Page
         return By.className("ui-autocomplete");
     }
 
-    public WebElement dropbox_AutoCompleteMenu() throws Exception
+    public WebElement searchBox_AutoCompleteMenu() throws Exception
     {
         try
         {

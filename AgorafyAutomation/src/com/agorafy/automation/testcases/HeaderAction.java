@@ -45,42 +45,42 @@ public class HeaderAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception
     {
-        verifyIFAdvancedSearchFormPresent(header);
+        verifyIFAdvancedSearchFormPresent();
         verifyIfLoginPopUpIsDisplayed();
-        verifyIfTooltipIsShownWhenEmptySearchIsPerformed(header);
-        
+        verifyIfTooltipIsShownWhenEmptySearchIsPerformed();
+
         HashMap<String, String> searchinput = testCaseData.get("searchData");
-        verifyIfAutoCompleteMenuComesAfterTypingTextInSearchInputTextBox(header,searchinput);
+        verifyIfAutoCompleteMenuComesAfterTypingTextInSearchInputTextBox(searchinput);
     }
 
     public void verifyIfLoginPopUpIsDisplayed() throws Exception
     {
         loginpopup = header.clickOnSubmitListingLink();
         WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
-        Assert.assertEquals(header.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
+        Assert.assertEquals(loginpopup.checkingLogInPopUp(),true,"Expected login pop up Not found");
         AutomationLog.info("Clicking on submit listing link in header displays Login popup ");
     }
 
-    public void verifyIFAdvancedSearchFormPresent(Header header) throws Exception
+    public void verifyIFAdvancedSearchFormPresent() throws Exception
     {
         header.clickOndropbox_searchInputBox();
         Assert.assertEquals(header.form_AdvancedSearch().isDisplayed(), true, "Expected error message when the Advanced Search Form is not Visible");
         AutomationLog.info("Advanced Search Form is Visible");
     }
-    
-    public void verifyIfTooltipIsShownWhenEmptySearchIsPerformed(Header header) throws Exception
+
+    public void verifyIfTooltipIsShownWhenEmptySearchIsPerformed() throws Exception
     {
         header.clickOnCloseLoginPopUp();
         header.clickOnSearchFormButton();
         Assert.assertEquals(header.msg_ZebraTooltip().isDisplayed(), true, "Expected tooltip is not shown when empty search is performed");
         AutomationLog.info("Tool Tip is Shown when clicked on search button with empty text");
     }
-    
-    public void verifyIfAutoCompleteMenuComesAfterTypingTextInSearchInputTextBox(Header header, HashMap<String, String> searchinput) throws Exception
+
+    public void verifyIfAutoCompleteMenuComesAfterTypingTextInSearchInputTextBox(HashMap<String, String> searchinput) throws Exception
     {
         header.enterSearchTextInSearchInputTextBox(searchinput.get("data"));
         WaitFor.ElementToBeDisplayed(Page.driver, header.getAutoCompleteMenuDropboxLoactor());
-        Assert.assertEquals(header.dropbox_AutoCompleteMenu().isDisplayed(), true, "Expected AutoCompleteMenu dropbox is not Show when Text is entered in SearchInput textbox");
+        Assert.assertEquals(header.searchBox_AutoCompleteMenu().isDisplayed(), true, "Expected AutoCompleteMenu dropbox is not Show when Text is entered in SearchInput textbox");
         AutomationLog.info("Sucessfully found AutoCompleteMenu dropbox which Comes After Typing Text in SearchInput Textbox");
     }
 
