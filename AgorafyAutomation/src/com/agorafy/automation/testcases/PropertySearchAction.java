@@ -41,11 +41,10 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         super.setup();
         try
         {
-            HashMap<String, String> data = testCaseData.get("SearchData");
             homepage=Homepage.homePage();
-            Page.driver.manage().timeouts().implicitlyWait(2, TimeUnit.MINUTES);
-            propertysearch=homepage.populateSearchTermTextBox(data.get("borough"),data.get("listingcategory"),data.get("searchterm"));
-            AutomationLog.info("Redirected to Property Search page ");
+            HashMap<String, String> data = testCaseData.get("SearchData");
+            propertysearch = homepage.populateSearchTermTextBox(data.get("borough"),data.get("listingcategory"),data.get("searchterm"));
+            AutomationLog.info("Successfully Redirected to Property Search page ");
         }
         catch(Exception e)
         {
@@ -59,9 +58,9 @@ public class PropertySearchAction extends AutomationTestCaseVerification
     {
         verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink();
         verifyIfSearchByBedsShowsPropertiesWithNoOfBeds();
-        verifyIfSearchByBathsShowsPropertiesWithNoOfBaths();
         verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations();
         verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound();
+        verifyIfSearchByBathsShowsPropertiesWithNoOfBaths();
         verifyIfLoginPopUpIsShownOnClickOfCreateYourProfileButton();
     }
 
@@ -79,7 +78,9 @@ public class PropertySearchAction extends AutomationTestCaseVerification
     public void verifyIfSearchByBedsShowsPropertiesWithNoOfBeds() throws Exception
     {
         String result = null;
+        header.clickOnAdvanceSearchDropDownIcon();
         header.searchByNoOfBeds("2");
+        header.clickOnSearchButtonOnAdvanceSearchform();
         result = propertysearch.NoOfBedsInPropertiesSearch();
         Assert.assertEquals(result, "2", "Expected Properties with specified beds is not shown");
         AutomationLog.info("Successfully shown Properties with x beds");
@@ -88,25 +89,21 @@ public class PropertySearchAction extends AutomationTestCaseVerification
     public void verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations() throws Exception
     {
         header.clickOnAdvanceSearchDropDownIcon();
-        header.txtbx_BedsInAdvanceSearchForm().clear();
-        header.txtbx_BathInAdvanceSearchForm().clear();
-        header.BedsInAdvanceSearchForm("3");
-        header.BathInAdvanceSearchForm("3");
+        header.searchByNoOfBeds("3");
+        header.searchByNoOfBaths("3");
         header.clickOnSearchButtonOnAdvanceSearchform();
         Assert.assertEquals(propertysearch.NoOfBedsInPropertiesSearch(), "3", "Expected Properties with specified beds is not shown");
-        Assert.assertEquals(propertysearch.FilterText_Bath().getText(), "3", "Expected Properties with specified bath is not shown");
+        Assert.assertEquals(propertysearch.NoOfBathsInPropertiesSearch(), "3", "Expected Properties with specified bath is not shown");
         AutomationLog.info("Properties with X baths And Y Beds And Different Combinations is verified");
     }
     
     public void verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound() throws Exception
     {
         header.clickOnAdvanceSearchDropDownIcon();
-        header.txtbx_BedsInAdvanceSearchForm().clear();
-        header.txtbx_BathInAdvanceSearchForm().clear();
-        header.BedsInAdvanceSearchForm("0");
-        header.BathInAdvanceSearchForm("0");
+        header.searchByNoOfBeds("0");
+        header.searchByNoOfBaths("0");
         header.clickOnSearchButtonOnAdvanceSearchform();
-        Assert.assertEquals(propertysearch.loadingMessage().getText(), "NO RESULTS FOUND.", "Expected message which is no result found is displaying");
+        Assert.assertEquals(propertysearch.loadingMessage().getText(), "NO RESULTS FOUND.", "Expected message is Not Shown");
         AutomationLog.info("Successfully verified that by searching with 0 bath and 0 bed, appropiate message comes up");
     }
 
@@ -114,7 +111,9 @@ public class PropertySearchAction extends AutomationTestCaseVerification
     public void verifyIfSearchByBathsShowsPropertiesWithNoOfBaths() throws Exception
     {
         String result = null;
+        header.clickOnAdvanceSearchDropDownIcon();
         header.searchByNoOfBaths("2");
+        header.clickOnSearchButtonOnAdvanceSearchform();
         result = propertysearch.NoOfBathsInPropertiesSearch();
         Assert.assertEquals(result, "2", "Expected Properties with specified baths is not shown");
         AutomationLog.info("Successfully shown Properties with x baths");
