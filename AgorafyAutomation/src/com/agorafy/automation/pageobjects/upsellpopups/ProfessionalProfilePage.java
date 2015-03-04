@@ -1,7 +1,5 @@
 package com.agorafy.automation.pageobjects.upsellpopups;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -57,36 +55,6 @@ public class ProfessionalProfilePage extends Page
             return loginpopup;
         }
 
-        public WebElement userNameInPopupAfterclickSendEmailbtnInProfessionalProfilePage() throws Exception
-        {
-            try
-            {
-                element = driver.findElement(By.xpath("//*[@id='upsellPopup']/form/div[1]/input"));
-                AutomationLog.info("Found Username Field on Login popup after click of send email on Prfessional Profile Page");
-            }
-            catch(Exception e)
-            {
-                AutomationLog.error("Dind't Found Username Field on Login popup after click of send email on Prfessional Profile Page");
-                throw(e);
-             }
-             return element;
-        }
-
-        public WebElement passwordInPopupAfterclickSendEmailbtnInProfessionalProfilePage() throws Exception
-        {
-            try
-            {
-                element = driver.findElement(By.xpath("//*[@id='upsellPopup']/form/div[2]/input"));
-                AutomationLog.info("Found password Field on Login popup after click of send email on Prfessional Profile Page");
-            }
-            catch(Exception e)
-            {
-                AutomationLog.error("Dind't Found password Field on Login popup after click of send email on Prfessional Profile Page");
-                throw(e);
-             }
-             return element;
-        }
-
         public WebElement btnLoginToMyAccountInPopup() throws Exception
         {
             try
@@ -100,26 +68,5 @@ public class ProfessionalProfilePage extends Page
                 throw(e);
              }
              return element;
-        }
-
-        public ProfessionalProfilePage populateLoginPopUpDataForProfessionalPage(String Email, String Password ) throws Exception
-        {
-        	ProfessionalProfilePage professionalProfilePage = new ProfessionalProfilePage(driver);
-            try
-            {
-                Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                userNameInPopupAfterclickSendEmailbtnInProfessionalProfilePage().clear();
-                userNameInPopupAfterclickSendEmailbtnInProfessionalProfilePage().sendKeys(Email);
-                passwordInPopupAfterclickSendEmailbtnInProfessionalProfilePage().clear();
-                passwordInPopupAfterclickSendEmailbtnInProfessionalProfilePage().sendKeys(Password);
-                btnLoginToMyAccountInPopup().click();
-                AutomationLog.info("Successfully populated data in login pop up of Professional Page");
-            }
-            catch(Exception e)
-            {
-                AutomationLog.error("Could not populate data into login pop up of Professional Page");
-                throw(e);
-            }
-            return professionalProfilePage;
         }
 }

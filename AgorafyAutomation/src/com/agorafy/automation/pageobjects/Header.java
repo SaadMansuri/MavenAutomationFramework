@@ -515,11 +515,11 @@ public class Header extends Page
             header().link_Logout().click();
             WaitFor.waitForPageToLoad(driver);
             homepage = new Homepage();
-            AutomationLog.info("Successfully Logout from Property Page");
+            AutomationLog.info("Logged out of Agorafy");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Failed to Logout from Property Page");
+            AutomationLog.error("Failed to Logout from Agorafy");
             throw(e);
         }
         return homepage;
