@@ -4,27 +4,28 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.upsellpopups.PropertyDetailAction;
+import com.agorafy.automation.testcases.LoginAttemptsAction;
 
-public class PropertyDetailTest 
+public class LoginAttemptsTest
 {
     @BeforeSuite
-    public void Init()
-     {
+    public void Init() throws Exception
+    {
+        // TODO: Move this to some TestNg XML configuration file, so that we can set config file path
+        // when running in headless mode.
         String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
-     }
+    }
 
     @Test
-    public void testPropertyDetailActionTestCases() throws Exception
+    public void testCaptchaAppearance() throws Exception
     {
         try
         {
-            new PropertyDetailAction().Execute();
+            new LoginAttemptsAction().Execute();
         }
-        catch (Exception e) 
+        catch (Exception e)
         {
-            System.out.println(e.getMessage());
             throw (e);
         }
     }

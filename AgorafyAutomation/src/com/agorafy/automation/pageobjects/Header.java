@@ -437,34 +437,6 @@ public class Header extends Page
         return element;
     }
 
-    public void BedsInAdvanceSearchForm(String badNo) throws Exception
-    {
-        try
-        {
-            txtbx_BedsInAdvanceSearchForm().sendKeys(badNo);
-            AutomationLog.error("Could put the "+badNo+"number of both");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not put the "+badNo+"number of both");
-            throw(e);
-        }
-    }
-
-    public void BathInAdvanceSearchForm(String bathNo) throws Exception
-    {
-        try
-        {
-            txtbx_BathInAdvanceSearchForm().sendKeys(bathNo);
-            AutomationLog.error("Could put the "+bathNo+"number of both");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not put the "+bathNo+"number of both");
-            throw(e);
-        }
-    }
-
     public WebElement btn_SearchOnAdvanceSearchForm() throws Exception
     {
         try
@@ -496,20 +468,16 @@ public class Header extends Page
 
     public void searchByNoOfBeds(String val) throws Exception
     {
-        clickOnAdvanceSearchDropDownIcon();
         txtbx_BedsInAdvanceSearchForm().clear();
         txtbx_BedsInAdvanceSearchForm().sendKeys(val);
         AutomationLog.info("Successfully entered Search text for no of beds ");
-        clickOnSearchButtonOnAdvanceSearchform();
     }
 
     public void searchByNoOfBaths(String val) throws Exception
     {
-        clickOnAdvanceSearchDropDownIcon();
         txtbx_BathInAdvanceSearchForm().clear();
         txtbx_BathInAdvanceSearchForm().sendKeys(val);
         AutomationLog.info("Successfully entered Search text for no of baths ");
-        clickOnSearchButtonOnAdvanceSearchform();
     }
 
 
@@ -581,11 +549,11 @@ public class Header extends Page
             header().link_Logout().click();
             WaitFor.waitForPageToLoad(driver);
             homepage = new Homepage();
-            AutomationLog.info("Successfully Logout from Property Page");
+            AutomationLog.info("Logged out of Agorafy");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Failed to Logout from Property Page");
+            AutomationLog.error("Failed to Logout from Agorafy");
             throw(e);
         }
         return homepage;

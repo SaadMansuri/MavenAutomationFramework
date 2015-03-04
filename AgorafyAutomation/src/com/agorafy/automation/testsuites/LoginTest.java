@@ -72,18 +72,4 @@ public class LoginTest
             throw(e);
         }
     }
-
-
-    //@Test(priority = 5)
-    public void testCaptchaAppearance() throws Exception
-    {
-        try
-        {
-            new LoginAttemptsAction().Execute();
-        }
-        catch (Exception e)
-        {
-            throw (e);
-        }
-    }
 }

@@ -1,7 +1,5 @@
 package com.agorafy.automation.pageobjects.upsellpopups;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,11 +22,12 @@ public class ProfessionalProfilePage extends Page
             return PageFactory.initElements(driver, ProfessionalProfilePage.class);
         }
 
-        public WebElement btnSendEmailInProfessionalProfilePage() throws Exception
+        public WebElement btn_SendEmail() throws Exception
         {
             try
             {
                 element = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div/div/div/a"));
+                //element = driver.findElement(By.className("upsell btn"));
                 AutomationLog.info("Send Email button found on Professional Profile Page");
             }
             catch(Exception e)
@@ -39,11 +38,13 @@ public class ProfessionalProfilePage extends Page
              return element;
         }
 
-        public void clickSendEmailbtnInProfessionalProfilePage() throws Exception
+        public LoginPopUp clickSendEmailbtnOnProfessionalProfile() throws Exception
         {
+            LoginPopUp loginpopup = null;
             try
             {
-                btnSendEmailInProfessionalProfilePage().click();
+                btn_SendEmail().click();
+                loginpopup = new LoginPopUp(driver);
                 AutomationLog.info("Click action performed on Send Email button on Professional Profile Page");
             }
             catch(Exception e)
@@ -51,36 +52,7 @@ public class ProfessionalProfilePage extends Page
                 AutomationLog.error("Click action not performed on Send Email button on Professional Profile Page");
                 throw(e);
              }
-        }
-
-        public WebElement userNameInPopupAfterclickSendEmailbtnInProfessionalProfilePage() throws Exception
-        {
-            try
-            {
-                element = driver.findElement(By.xpath("//*[@id='upsellPopup']/form/div[1]/input"));
-                AutomationLog.info("Found Username Field on Login popup after click of send email on Prfessional Profile Page");
-            }
-            catch(Exception e)
-            {
-                AutomationLog.error("Dind't Found Username Field on Login popup after click of send email on Prfessional Profile Page");
-                throw(e);
-             }
-             return element;
-        }
-
-        public WebElement passwordInPopupAfterclickSendEmailbtnInProfessionalProfilePage() throws Exception
-        {
-            try
-            {
-                element = driver.findElement(By.xpath("//*[@id='upsellPopup']/form/div[2]/input"));
-                AutomationLog.info("Found password Field on Login popup after click of send email on Prfessional Profile Page");
-            }
-            catch(Exception e)
-            {
-                AutomationLog.error("Dind't Found password Field on Login popup after click of send email on Prfessional Profile Page");
-                throw(e);
-             }
-             return element;
+            return loginpopup;
         }
 
         public WebElement btnLoginToMyAccountInPopup() throws Exception
@@ -96,26 +68,5 @@ public class ProfessionalProfilePage extends Page
                 throw(e);
              }
              return element;
-        }
-
-        public ProfessionalProfilePage populateLoginPopUpDataForProfessionalPage(String Email, String Password ) throws Exception
-        {
-        	ProfessionalProfilePage professionalProfilePage = new ProfessionalProfilePage(driver);
-            try
-            {
-                Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                userNameInPopupAfterclickSendEmailbtnInProfessionalProfilePage().clear();
-                userNameInPopupAfterclickSendEmailbtnInProfessionalProfilePage().sendKeys(Email);
-                passwordInPopupAfterclickSendEmailbtnInProfessionalProfilePage().clear();
-                passwordInPopupAfterclickSendEmailbtnInProfessionalProfilePage().sendKeys(Password);
-                btnLoginToMyAccountInPopup().click();
-                AutomationLog.info("Successfully populated data in login pop up of Professional Page");
-            }
-            catch(Exception e)
-            {
-                AutomationLog.error("Could not populate data into login pop up of Professional Page");
-                throw(e);
-            }
-            return professionalProfilePage;
         }
 }

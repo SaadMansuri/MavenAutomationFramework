@@ -60,14 +60,14 @@ public class ReportsAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception
     {
-        verifyIfMouseHoverOnTile();
-        veifyIfMouseHoverAddToReportIcon();
-        verifyIfClickOnAddToReportIcon();
-        verifyIfAddToReportIconIsFixed();
-        verifyIfHoverOnFixedAddToReportIcon();
-        verifyIfClickedOnFixedAddToReportIcon();
-        verifyIfClickedOnReportsLinkInProfileNameDropDown();
-        verifyIfClearLinkOnReportsBoxIsClicked();
+        //verifyIfMouseHoverOnTile();
+        //veifyIfMouseHoverAddToReportIcon();
+        //verifyIfClickOnAddToReportIcon();
+        //verifyIfAddToReportIconIsFixed();
+        //verifyIfHoverOnFixedAddToReportIcon();
+        //verifyIfClickedOnFixedAddToReportIcon();
+        //verifyIfClickedOnReportsLinkInProfileNameDropDown();
+        //verifyIfClearLinkOnReportsBoxIsClicked();
         verifyAddToReportlinkOnListingDetailPage();
         verifyRemoveFromReportLinkOnListingDetailPage();
         
@@ -91,8 +91,13 @@ public class ReportsAction extends AutomationTestCaseVerification
     public void verifyIfClickOnAddToReportIcon() throws Exception
     {
         int beforeCount = Integer.parseInt(reports.getReportCount());
+        System.out.println(beforeCount);
+        //Thread.sleep(10000);
         addReportUsingAddToReportIcon();
+        Thread.sleep(10000);
         int afterCount = Integer.parseInt(reports.getReportCount());
+        System.out.println(afterCount);
+
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(afterCount, beforeCount+1, "Expected report count is not incremented");
         AutomationLog.info("Clicking add to report icon increaments the reports count");
@@ -116,8 +121,13 @@ public class ReportsAction extends AutomationTestCaseVerification
     public void verifyIfClickedOnFixedAddToReportIcon() throws Exception
     {
     	int beforeCount = Integer.parseInt(reports.getReportCount());
+        System.out.println(beforeCount);
+
         addReportUsingAddToReportIcon();
+        Thread.sleep(10000);
         int afterCount = Integer.parseInt(reports.getReportCount());
+        System.out.println(afterCount);
+
         Assert.assertEquals(afterCount, beforeCount-1, "Expected report count in not decremented");
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(propertysearch.icon_AddToReport().isDisplayed(), false, "Expected icon is not fixed");
@@ -130,9 +140,10 @@ public class ReportsAction extends AutomationTestCaseVerification
     {
         propertysearch.hoverOnFirstSearchResultTile();
         propertysearch.hoverOnAddToReportIcon();
-        WaitFor.presenceOfTheElement(Page.driver, propertysearch.Tooltiplocator());
+        //WaitFor.presenceOfTheElement(Page.driver, propertysearch.Tooltiplocator());
         propertysearch.clickOnAddToReportIcon();
-        WaitFor.waitUntilElementIsLoaded(Page.driver, reports.getReportBoxLocator());
+        //Thread.sleep(10000);
+        //WaitFor.waitUntilElementIsLoaded(Page.driver, reports.getReportBoxLocator());
     }
 
     public void verifyIfClickedOnReportsLinkInProfileNameDropDown() throws Exception
@@ -188,9 +199,13 @@ public class ReportsAction extends AutomationTestCaseVerification
     public void verifyRemoveFromReportLinkOnListingDetailPage() throws Exception
     {
         int beforcount = Integer.parseInt(reports.getReportCount());
+        System.out.println(beforcount);
         listingdetail.clickOnRemoveFromReportLink();
-        WaitFor.waitUntilElementIsLoaded(Page.driver, reports.getReportBoxLocator());
+        Thread.sleep(10000);
+        //WaitFor.waitUntilElementIsLoaded(Page.driver, reports.getReportBoxLocator());
         int aftercount = Integer.parseInt(reports.getReportCount());
+        System.out.println(aftercount);
+
         Assert.assertEquals(aftercount, beforcount-1, "Expected reports count is not decremented ");
         Assert.assertEquals(listingdetail.link_addToReport().isDisplayed(), true, "Expected addToReport link is not shown");
         AutomationLog.info("Clicking AddToReport link decreaments Reports count by 1 and addToReport link displayed");
