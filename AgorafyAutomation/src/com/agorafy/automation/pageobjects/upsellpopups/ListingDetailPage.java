@@ -269,7 +269,8 @@ public class ListingDetailPage extends LoginPopUp
             return false;
     }
 
-    public WebElement listingTitle() throws Exception
+    /*change page object element*/
+    public WebElement listingDetailsPageContainer() throws Exception
     {
         try
         {
@@ -278,7 +279,7 @@ public class ListingDetailPage extends LoginPopUp
         }
         catch(Exception e)
         {
-            AutomationLog.error("Title of the listing is NOT found");
+            AutomationLog.error("Container for listing details page not found");
         }
         return element;
     }
@@ -287,7 +288,7 @@ public class ListingDetailPage extends LoginPopUp
     {
         try
         {
-            element = listingTitle().findElement(By.linkText("Property Details"));
+            element = listingDetailsPageContainer().findElement(By.linkText("Property Details"));
         }
         catch(Exception e)
         {
@@ -309,5 +310,33 @@ public class ListingDetailPage extends LoginPopUp
             AutomationLog.error("Unable to locate or click Property Details link");
         }
         return propertyDetail;
+    }
+
+    public WebElement element_listingTitle() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div/div[1]/div[1]/div[2]/h2"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Title element of the listing is NOT found");
+        }
+        return element;
+    }
+
+    public String txt_listingTitle() throws Exception
+    {
+        String listingTitle = null; 
+        try
+        {
+            listingTitle = element_listingTitle().getText();
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Title element of the listing is NOT found");
+            throw (e);
+        }
+        return listingTitle;
     }
 }

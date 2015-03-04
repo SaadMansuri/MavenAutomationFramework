@@ -311,24 +311,4 @@ public class Homepage extends Page
         return element;
     }
 
-    /*public Page selectDropdownOptionFromProfilePic(String dropdownOption) 
-    {
-        Page page = null;
-        switch (dropdownOption)
-        {
-            case "My Dashboard":
-            
-            page = new Dashboard(driver);
-            break;
-
-            case "Switch To Admin":
-            page = new Admin(driver);
-            break;
-
-            case "Logout":
-            page = new Homepage(driver);
-            break;
-        }
-        return page;
-    }*/
 }

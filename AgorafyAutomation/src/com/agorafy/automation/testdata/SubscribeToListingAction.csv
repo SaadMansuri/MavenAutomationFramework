@@ -1,6 +1,6 @@
 
 #Input search combination which results atleast one output  
-SearchInputCombination,boroughname="Manhatten";listingcategory="Commercial";searchstring="Office on Eleventh Avenue"
+SearchInputCombination,boroughname="Manhatten";listingcategory="Residential";searchstring="Coops on Fifth Avenue"
 
 #Expected unsubscribe to listing text on listing details page
 ExpectedUnsubscribeToListingText,ExpectedText="Unsubscribe listing"
