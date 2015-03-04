@@ -1,5 +1,5 @@
 
 
 #For Subscribe to Search test cases  --  
-SearchInputCombination,boroughname="Manhatten";listingcategory="Commercial";searchstring="Retail"
+SearchInputCombination,boroughname="Manhatten";listingcategory="Residential";searchstring="Coops on Fifth Avenue"
 

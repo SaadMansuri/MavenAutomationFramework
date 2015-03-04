@@ -233,4 +233,131 @@ public class MySubscriptions extends Page
         }
         return element;
     }
+
+    public WebElement option_SubscribeToRespectiveListing() throws Exception 
+    {
+        try 
+        {
+            /*Wait until subscription window under user name displays*/
+            WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote"));
+            element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[2]/div[2]/a"));
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Subscribe To Respective Listing link is not found in subscription window below profile pic");
+            throw (e);
+        }
+        return element;
+    }
+
+    public void clickSubscribeToRespectiveListingInSubscriptionWindow() throws Exception
+    {
+        try
+        {
+            option_SubscribeToRespectiveListing().click();
+            AutomationLog.info("Successfully clicked Subscribe To Respective Listing in Subscription Window under User's pic");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("failed to click Subscribe To Respective Listing in Subscription Window under User's Pic");
+            throw(e);
+        }
+    }
+
+    public String txt_SubscribeToRespectiveListingInSubscriptionWindow() throws Exception
+    {
+        String txt_SubscribeToRespectiveListing = null;
+        try
+        {
+            txt_SubscribeToRespectiveListing = option_SubscribeToRespectiveListing().getText();
+            AutomationLog.info("Successfully got Subscribe To Respective Listing txt in Subscription Window");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("failed to get text of Subscribe To Respective Listing  in Subscription Window");
+            throw(e);
+        }
+        return txt_SubscribeToRespectiveListing;
+    }
+
+    public WebElement option_UnsubscribeFromRespectiveListing() throws Exception 
+    {
+        try 
+        {
+            /*Wait until subscription window under user name displays*/
+            WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote"));
+            element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[2]/div[1]/a"));
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Unsubscribe from Respective Listing link is not found in subscription window below profile pic");
+            throw (e);
+        }
+        return element;
+    }
+
+    public String txt_UnsubscrubeFromRespectiveListingInSubscriptionWindow() throws Exception
+    {
+        String txt_UnsubscrubeFromRespectiveListing = null;
+        try
+        {
+            txt_UnsubscrubeFromRespectiveListing = option_UnsubscribeFromRespectiveListing().getText();
+            AutomationLog.info("Successfully got txt of Unsubscribe from Respective Listing  in Subscription Window");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("failed to get text of Unsubscribe from Respective Listing txt in Subscription Window");
+            throw(e);
+        }
+        return txt_UnsubscrubeFromRespectiveListing;
+    }
+
+    public void clickUnsubscribeFromRespectiveListingInSubscriptionWindow() throws Exception
+    {
+        try
+        {
+            option_UnsubscribeFromRespectiveListing().click();
+            AutomationLog.info("Successfully clicked Unsubscribe From Respective Listing in Subscription Window under User's pic");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("failed to click Unsubscribe From Respective Listing in Subscription Window under User's Pic");
+            throw(e);
+        }
+    }
+
+    public void clickViewMoreSubscriptionsInSubscriptionWindow() throws Exception
+    {
+        try
+        {
+            link_ViewMoreSubscriptions().click();
+            AutomationLog.info("Successfully clicked View More Subscriptions in Subscription Window under User's pic");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("failed to click View More Subscriptions in Subscription Window under User's Pic");
+            throw(e);
+        }
+    }
+
+    public WebElement element_ListingSubscriptionsContainer() throws Exception 
+    {
+        try 
+        {
+            element = driver.findElement(By.id("manage_listing"));
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Listing Subscriptions Container on RHS in MySubscriptions page not found");
+            throw (e);
+        }
+        return element;
+    }
+
+    public List<WebElement> list_AllSubscribedListings() throws Exception 
+    {
+        List<WebElement> list_AllSubscribedListings = element_ListingSubscriptionsContainer().findElements(By.tagName("li"));
+        return list_AllSubscribedListings;
+    }
+
 }
