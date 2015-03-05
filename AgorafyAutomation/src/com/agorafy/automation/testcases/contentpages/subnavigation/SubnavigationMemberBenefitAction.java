@@ -21,22 +21,43 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 public class SubnavigationMemberBenefitAction extends ContentPagesVerification
 {
+    private SubNavigation subnavigation;
+    private MembershipBenefit memberBenefit;
+    private HashMap<String, String> expectedMembershipBenefitData = new HashMap<>();
+	private ContentPagesLeftMenu leftMenu;
+
     public SubnavigationMemberBenefitAction()
     {
         super();
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            memberBenefit = subnavigation.clickLinkMemberBenefits();
+
+            expectedMembershipBenefitData  = testCaseData.get("Member");
+            expectedMembershipBenefitData.put("url", memberBenefit.membershipBenefitPageUrl());
+
+            leftMenu = Page.contentPagesLeftMenu();
+
+            AutomationLog.info("Redirection to Member's benefit page passed");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirection to Member's benefit page failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception
     {
-        SubNavigation subnavigation = Page.subNavigation();
-        MembershipBenefit memberBenefit = subnavigation.clickLinkMemberBenefits();
-
-        HashMap<String, String> expectedMembershipBenefitData = testCaseData.get("Member");
-        expectedMembershipBenefitData.put("url", memberBenefit.membershipBenefitPageUrl());
         verifyLink(memberBenefit, expectedMembershipBenefitData);
 
-        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.membershipBenefitLinkText(),"Left menu does not show Membership Benefit link as Active Link");
         AutomationLog.info("Left menu shows Membership Benefit link as Active Link");
 

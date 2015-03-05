@@ -20,11 +20,11 @@ public class SubnavigationFeedbackAction extends ContentPagesVerification
     private SubNavigation subnavigation;
     private Feedback feedback;
     private HashMap<String, String> expectedFeedbackData;
-	private ContentPagesLeftMenu leftMenu;
-	private String actualActiveLeftMenu;
-	private String expectedActiveLeftMenu;
+    private ContentPagesLeftMenu leftMenu;
+    private String actualActiveLeftMenu;
+    private String expectedActiveLeftMenu;
 
-	public SubnavigationFeedbackAction() 
+    public SubnavigationFeedbackAction() 
     {
          super();
     }

@@ -40,19 +40,32 @@ public class SubnavigationMySubscriptionsAction extends ContentPagesVerification
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            homePage = Homepage.homePage();
+            headerLoginForm = homePage.openHeaderLoginForm();
+            Credentials ValidCredentials = userCredentials();
+            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
+            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+            mySubscriptionsPage = subnavigation.clickLinkMySubscriptions(); 
+            expectedMySubscriptionsData = testCaseData.get("MySubscriptions");
+            expectedMySubscriptionsData.put("url", mySubscriptionsPage.getURL());
+            AutomationLog.info("Redirection to My Subscriptions page passed");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirection to My Subscriptions page failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception 
     {
-        subnavigation = Page.subNavigation();
-        homePage = Homepage.homePage();
-        headerLoginForm = homePage.openHeaderLoginForm();
-        Credentials ValidCredentials = userCredentials();
-        homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-        WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
-        mySubscriptionsPage = subnavigation.clickLinkMySubscriptions(); 
-        expectedMySubscriptionsData = testCaseData.get("MySubscriptions");
-        expectedMySubscriptionsData.put("url", mySubscriptionsPage.getURL());
         verifyLink(mySubscriptionsPage, expectedMySubscriptionsData);
-
         AutomationLog.info("verification of whether My Subscription link is active in left side started...");
         verifyLeftMenu();
     }

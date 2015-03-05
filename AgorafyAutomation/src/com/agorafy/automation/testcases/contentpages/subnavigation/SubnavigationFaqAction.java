@@ -12,21 +12,39 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 public class SubnavigationFaqAction extends ContentPagesVerification
 {
+    private SubNavigation subnavigation;
+    private FAQs faqs;
+    private HashMap<String, String> expectedFAQsData = new HashMap<>();
+
     public SubnavigationFaqAction()
     {
         super();
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            faqs = subnavigation.clickLinkFAQ();
+            expectedFAQsData = testCaseData.get("FAQ");
+
+            AutomationLog.info("Redirection to FAQ page passed");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirection to FAQ page failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception
     {
-        SubNavigation subnavigation = Page.subNavigation();
-        FAQs faqs = subnavigation.clickLinkFAQ();
-
         Assert.assertEquals(faqs.currentURL(),faqs.faqsPageUrl(), "Link did not redirect to correct PageUrl ");
         AutomationLog.info("Link redirects to correct PageUrl");
 
-        HashMap<String, String> expectedFAQsData = testCaseData.get("FAQ");
         Assert.assertEquals(faqs.currentPageTitle(), expectedFAQsData.get("title"), "Page does not show correct Page Title");
         AutomationLog.info("Page shows correct page Title");
 
