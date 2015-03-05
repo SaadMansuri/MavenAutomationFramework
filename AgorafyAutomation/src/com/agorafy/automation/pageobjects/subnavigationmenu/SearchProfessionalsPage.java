@@ -1,17 +1,10 @@
 package com.agorafy.automation.pageobjects.subnavigationmenu;
 
-
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
@@ -30,25 +23,11 @@ public class SearchProfessionalsPage extends Page
         super(driver);
     }
 
-    public WebElement pageHeadingElement() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div/div[1]/div/h2"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Search Professionals page heading Not found");
-            throw(e);
-        }
-        return element;
-    }
-
     public WebElement btn_ClearOnExpertiseSearch() throws Exception
     {
         try
         {
-            element=driver.findElement(By.id("brokerClearButton"));
+            element = driver.findElement(By.id("brokerClearButton"));
         }
         catch(Exception e)
         {
@@ -72,39 +51,7 @@ public class SearchProfessionalsPage extends Page
         }
     }
 
-    public WebElement link_searchProfessionals() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.xpath("//li[4]//a[@href='/search/agent'][contains(.,'Search Professionals')]"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Search Professionals page heading Not found");
-            throw(e);
-        }
-        return element;
-    }
-
-    public SearchProfessionalsPage clickOnSearchProfessionalsLink() throws Exception
-    {
-        SearchProfessionalsPage searchprofessional = null;
-        try
-        {
-            link_searchProfessionals().click();
-            searchprofessional = new SearchProfessionalsPage(driver);
-            WaitFor.waitForPageToLoad(driver);
-            AutomationLog.info("Clicked on Search Professionals link");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Failed to Click on Search Professionals link");
-            throw(e);
-        }
-        return searchprofessional;
-    }
-
-    public WebElement txtbx_agentSearch() throws Exception
+    public WebElement txtbx_AgentCompanySearch() throws Exception
     {
         try
         {
@@ -118,21 +65,7 @@ public class SearchProfessionalsPage extends Page
         return element;
     }
 
-    public void sendDataToAgentSearchTextBox(String agentname) throws Exception
-    {
-        try
-        {
-            txtbx_agentSearch().sendKeys(agentname);
-            AutomationLog.info("Agent name is successfully enterted in textbox");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Failed to fill agent name and click on search button");
-            throw(e);
-        }
-    }
-
-    public WebElement btn_AgentSearchSearch() throws Exception
+    public WebElement btn_AgentCompanySearch() throws Exception
     {
         try
         {
@@ -140,33 +73,34 @@ public class SearchProfessionalsPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Agent Search- Search button Not found");
+            AutomationLog.error("Could not found AgentCompanySearch button ");
             throw(e);
         }
         return element;
     }
 
-    public void enterAgentOrCompanyNameinAgentSearchAndClickonSearchButton(String agentname) throws Exception
+    public void searchByAgentOrCompanyName(String name) throws Exception
     {
         try
         {
-            enterSearchcontentInAgentCompanySearchTextBox(agentname);
-            btn_AgentSearchSearch().click();
-            AutomationLog.info("Clicked on Agent Search- search button");
+            enterSearchTextInAgentCompanySearchTextBox(name);
+            WaitFor.sleepFor(1000);
+            btn_AgentCompanySearch().click();
+            AutomationLog.info("Clicked on AgentCompanySearch button");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Failed to fill agent name and click on search button");
+            AutomationLog.error("Failed to fill agentcompany name and click on AgentCompanySearch button");
             throw(e);
         }
     }
 
-    public void enterSearchcontentInAgentCompanySearchTextBox(String searchtext) throws Exception
+    public void enterSearchTextInAgentCompanySearchTextBox(String searchtext) throws Exception
     {
         try
         {
-            txtbx_agentSearch().clear();
-            txtbx_agentSearch().sendKeys(searchtext);
+            txtbx_AgentCompanySearch().clear();
+            txtbx_AgentCompanySearch().sendKeys(searchtext);
             AutomationLog.info("Successfully entered search text for agent company search");
             
         }
@@ -177,9 +111,14 @@ public class SearchProfessionalsPage extends Page
         }
     }
 
-    public String getTheCountOFExclusives(String name)  throws Exception
+    public boolean isAgentExclusivesCountPresent(String name) throws Exception
+    { 
+        return agentExclusivesCount(name).isDisplayed();
+    }
+
+    public WebElement agentExclusivesCount(String name)  throws Exception
     {
-    	String res=null;
+        WebElement element = null;
         try
         {
             WebElement select = driver.findElement(By.id("brokerResults"));
@@ -188,28 +127,28 @@ public class SearchProfessionalsPage extends Page
             {
                 if(option.findElement(By.tagName("a")).getText().equalsIgnoreCase(name))
                 {
-                    res = option.findElement(By.tagName("p")).getText();
+                    element = option.findElement(By.tagName("p"));
                     break;
                 }
             }
-            
+            AutomationLog.info("Found Agent Exclusives Count");
         }
         catch(Exception e)
         {
-            AutomationLog.error("not ");
+            AutomationLog.error("Could not found Agent Exclusives Count ");
         }
-        return res;
+        return element;
     }
 
-    public WebElement link_companiesTabOnSearchProfessionals() throws Exception
+    public WebElement link_CompaniesTab() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath("//a[@href='#companies']"));
+            element = driver.findElement(By.linkText("Companies"));
         }
         catch(Exception e)
         {
-            AutomationLog.error("Companies Tab is not found on Search Professionals Page");
+            AutomationLog.error("Top Companies Tab is not found on Search Professionals Page");
             throw(e);
         }
         return element;
@@ -219,7 +158,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-            link_companiesTabOnSearchProfessionals().click();
+        	link_CompaniesTab().click();
             AutomationLog.info("Clicked on Companies Tab On SearchProfessionals Page");
         }
         catch(Exception e)
@@ -228,26 +167,12 @@ public class SearchProfessionalsPage extends Page
             throw(e);
         }
     }
-    
-    public WebElement companyDumannExclusive() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.xpath("//div[@class='agent-details'][a[contains(text(),'Dumann Realty')]]/p[contains(text(),'exclusive')]"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Company Dumann Realty is Not found");
-            throw(e);
-        }
-        return element;
-    }
 
     public WebElement searchAgentResultMessage() throws Exception 
     {
         try
         {
-            element =driver.findElement(By.id("resultsLineItemsAgents"));
+            element = driver.findElement(By.id("resultsLineItemsAgents"));
         }
         catch(Exception e)
         {
@@ -262,7 +187,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-            element =driver.findElement(By.id("resultsLineItemsCompanies"));
+            element = driver.findElement(By.id("resultsLineItemsCompanies"));
         }
         catch(Exception e)
         {
@@ -273,9 +198,14 @@ public class SearchProfessionalsPage extends Page
         
     }
 
-    public String getTheCountOFCompanyExclusive(String name)  throws Exception
+    public boolean isCompanyExclusivesCountPresent(String name) throws Exception 
     {
-        String res = null;
+        return companyExclusiveCount(name).isDisplayed();
+    }
+
+    public WebElement companyExclusiveCount(String name)  throws Exception
+    {
+        WebElement element = null;
         try
         {
             WebElement select = driver.findElement(By.id("companyResults"));
@@ -284,18 +214,18 @@ public class SearchProfessionalsPage extends Page
             {
                 if(option.findElement(By.tagName("a")).getText().equalsIgnoreCase(name))
                 {
-                    res = option.findElement(By.tagName("p")).getText();
+                    element = option.findElement(By.tagName("p"));
                     break;
                 }
             }
-            
+            AutomationLog.info("Found Company Exclusives Count");
         }
         catch(Exception e)
         {
-            AutomationLog.error("not ");
+            AutomationLog.error("Could not Found Company Exclusives Count");
             throw(e);
         }
-        return res;
+        return element;
     }
 
     public WebElement dropBox_NeighborhoodsSearch() throws Exception
@@ -306,7 +236,7 @@ public class SearchProfessionalsPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Neighborhoods Search TextBox Not found");
+            AutomationLog.error("Neighborhoods Search DropBox Not found");
             throw(e);
         }
         return element;
@@ -321,26 +251,12 @@ public class SearchProfessionalsPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Neighborhoods Search TextBox Not found");
+            AutomationLog.error("Could not click on Neighborhoods Search DropBox ");
             throw(e);
         }
     }
 
-    public WebElement dropboxOptionListing_neighborhoods(String neighbor) throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.xpath("//li[@class='active-result group-option'][contains(text(),'"+neighbor+"')]"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Neighborhoods Search Button Not found");
-            throw(e);
-        }
-        return element;
-    }
-
-    public void clickOnneighborhoodsOptionListing(String neighbor) throws Exception
+    public void clickOnNeighborhoodsOptionListing(String neighbor) throws Exception
     {
         try
         {
@@ -362,6 +278,16 @@ public class SearchProfessionalsPage extends Page
         }
     }
 
+    public void clearNeighorhoods() throws Exception
+    {
+        WebElement select = driver.findElement(By.className("select2-choices"));
+        List<WebElement> options = select.findElements(By.className("select2-search-choice-close"));
+        for(WebElement optionElement : options)
+        {
+             optionElement.click();
+        }
+    }
+
     public WebElement msg_NeighborhoodsSelectionLimit() throws Exception
     {
         try
@@ -376,48 +302,14 @@ public class SearchProfessionalsPage extends Page
         return element;
     }
 
-    public WebElement dropbox_autocompleteMenu_Of_NeighborhoodsList() throws Exception
+    public int getNeighborhoodsDropboxCount() throws Exception
     {
-        try
-        {
-            element = driver.findElement(By.xpath("//div[@class='chosen-drop']"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Neighborhoods List Of Options Not found");
-            throw(e);
-        }
-        return element;
+        int count = 0;
+        WebElement select = driver.findElement(By.className("select2-choices"));
+        List<WebElement> options = select.findElements(By.tagName("li"));
+        count = options.size();
+        return count;
     }
-
-    public void ActionToProvideFocusOnDropBox() throws Exception
-    {
-        try
-        {
-            new Actions(driver).moveToElement(dropbox_autocompleteMenu_Of_NeighborhoodsList()).perform();
-            AutomationLog.info("Focus Provided to Neighborhoods dropbox is successful");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Failed to Provide Focus to Neighborhoods dropbox");
-            throw(e);
-        }
-    }
-
-    public boolean checkingNeighborhoodsDropBoxVisibility() throws Exception
-    {
-        boolean bool;
-        try
-        {
-            bool=dropbox_autocompleteMenu_Of_NeighborhoodsList().isDisplayed();
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Fail to check Neighborhoods DropBox Visibility");
-            throw(e);
-        }
-        return bool;
-     }
 
     public WebElement checkbox_OfficeLeasingInExpertise() throws Exception
     {
@@ -535,7 +427,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-            element=driver.findElement(By.id("exp_building"));
+            element = driver.findElement(By.id("exp_building"));
         }
         catch(Exception e)
         {
@@ -562,7 +454,7 @@ public class SearchProfessionalsPage extends Page
     {
         try
         {
-            element=driver.findElement(By.id("exp_investment"));
+            element = driver.findElement(By.id("exp_investment"));
         }
         catch(Exception e)
         {
@@ -668,76 +560,46 @@ public class SearchProfessionalsPage extends Page
         }
     }
 
-    public WebElement selectbox_NeighborhoodsSearchSelectedDataCloseSign() throws Exception
+    public WebElement icon_NeighborhoodSearchChoiceClose() throws Exception
     {
         try
         {
-            element=driver.findElement(By.xpath("//div[@id='commercial_neighborhoodSelect_chosen']//a[@data-option-array-index='1']"));
+            element = driver.findElement(By.xpath(".//*[@id='s2id_commercial_neighborhoodSelect']/ul/li[5]/a"));
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not find close sign on data Neighborhoods Search");
+            AutomationLog.error("Could not find close icon on Neighborhood Search Choice");
             throw(e);
         }
         return element;
     }
-    
-    public void clickOnNeighborhoodsSearchSelectedDataCloseSign() throws Exception
+
+    public void clickOnNeighborhoodsSearchChoiceCloseIcon() throws Exception
     {
         try
         {
-            selectbox_NeighborhoodsSearchSelectedDataCloseSign().click();
-            AutomationLog.info("Successfully click cross sign on First seleced option of Neighborhoods");
+            icon_NeighborhoodSearchChoiceClose().click();
+            AutomationLog.info("Successfully clicked close icon of Neighborhoods Search Choice");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not click cross sign on First seleced option of Neighborhoods");
+            AutomationLog.error("Could not click close icon of Neighborhoods Search Choice");
             throw(e);
         }
     }
-        
-    public List<String> gettingNeighborhoodsSearchSelectedData() throws Exception
+
+    public List<WebElement> addedNeighborhoods() throws Exception
     {
-        List<String> list = new ArrayList<String>();
-        try
-        {
-            List<WebElement> list1=driver.findElements(By.xpath("//div[@id='commercial_neighborhoodSelect_chosen']/ul//span"));
-            for (WebElement resultItem : list1){
-                String tabname=resultItem.getText();
-                list.add(tabname);
-        }
-            AutomationLog.info("Successfully getting data from Neighborhoods Search Selected box");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not data from Neighborhoods Search Selected box");
-            throw(e);
-        }
-        return list;
-    }
-    
-    public List<String> convertingDataFromListToStringArray(String neigh1,String neigh2,String neigh3,String neigh4,String neigh5) throws Exception
-    {
-        List<String> wordList;
-        try
-        {
-            String[] words= {neigh1, neigh2, neigh3, neigh4, neigh5};
-            wordList = Arrays.asList(words);
-            AutomationLog.info("Successfully prepare previous and latest data");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not prepare previous and latest data");
-            throw(e);
-        }
-        return wordList;
+        WebElement select = driver.findElement(By.className("select2-choices"));
+        List<WebElement> options = select.findElements(By.className("select2-search-choice"));
+        return options;
     }
 
     public WebElement btn_brokerNeighborSearchButton() throws Exception
     {
         try
         {
-            element=driver.findElement(By.id("brokerSearchButton"));
+            element = driver.findElement(By.id("brokerSearchButton"));
         }
         catch(Exception e)
         {
@@ -746,7 +608,7 @@ public class SearchProfessionalsPage extends Page
         }
         return element;
     }
-    
+
     public void clickOnbrokerNeighborSearchButton() throws Exception
     {
         try
@@ -759,12 +621,6 @@ public class SearchProfessionalsPage extends Page
             AutomationLog.error("Could not click Neighbor Search Button button");
             throw(e);
         }
-    }
-    
-    @Override
-    public String pageHeading() throws Exception
-    {
-        return pageHeadingElement().getText();
     }
 
     public String getURL()

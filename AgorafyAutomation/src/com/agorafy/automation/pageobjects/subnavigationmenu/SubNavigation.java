@@ -3,12 +3,9 @@ package com.agorafy.automation.pageobjects.subnavigationmenu;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Dashboard;
-import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.contentpages.AboutUs;
 import com.agorafy.automation.pageobjects.contentpages.Blog;
@@ -28,11 +25,6 @@ public class SubNavigation extends Page
     public SubNavigation(WebDriver driver)
     {
         super(driver);
-    }
-
-    public static SubNavigation subnavigation()
-    {
-        return PageFactory.initElements(driver, SubNavigation.class);
     }
 
     public WebElement subNavigationBar() throws Exception
@@ -70,7 +62,7 @@ public class SubNavigation extends Page
         try
         {
             link_Contact().click();
-            contact = new Contact(Page.driver);
+            contact = new Contact(driver);
             AutomationLog.info("Contact link clicked");
         }
         catch (Exception e)
@@ -102,7 +94,7 @@ public class SubNavigation extends Page
         try
         {
             link_SearchProfessionals().click();
-            searchprofessionals = new SearchProfessionalsPage(Page.driver);
+            searchprofessionals = new SearchProfessionalsPage(driver);
             AutomationLog.info("Search Professionals link is clicked");
         }
         catch (Exception e)
@@ -134,7 +126,7 @@ public class SubNavigation extends Page
         try
         {
             link_HowItWorks().click();
-            howitworks = new HowItWorks(Page.driver);
+            howitworks = new HowItWorks(driver);
             AutomationLog.info("How it Works link is clicked");
         }
         catch(Exception e)
@@ -166,7 +158,7 @@ public class SubNavigation extends Page
         try
         {
             link_MemberBenefits().click();
-            membership = new MembershipBenefit(Page.driver);
+            membership = new MembershipBenefit(driver);
             AutomationLog.info("Members' Benefits link clicked");
         }
         catch(Exception e)
@@ -198,7 +190,7 @@ public class SubNavigation extends Page
         try
         {
             link_SearchProperties().click();
-            searchproperties = new SearchPropertiesPage(Page.driver);
+            searchproperties = new SearchPropertiesPage(driver);
             AutomationLog.info("Search Properties link is clicked");
         }
         catch (Exception e)
@@ -230,7 +222,7 @@ public class SubNavigation extends Page
         try
         {
             link_AboutUs().click();
-            aboutus = new AboutUs(Page.driver);
+            aboutus = new AboutUs(driver);
             AutomationLog.info("About Us link is clicked");
         }
         catch (Exception e)
@@ -262,7 +254,7 @@ public class SubNavigation extends Page
         try
         {
             link_Blog().click();
-            blog = new Blog(Page.driver);
+            blog = new Blog(driver);
             AutomationLog.info("Blog link is clicked");
         }
         catch (Exception e)
@@ -294,7 +286,7 @@ public class SubNavigation extends Page
         try
         {
             link_FAQ().click();
-            faq = new FAQs(Page.driver);
+            faq = new FAQs(driver);
             AutomationLog.info("FAQs link is clicked");
         }
         catch (Exception e)
@@ -341,7 +333,7 @@ public class SubNavigation extends Page
         try
         {
         	link_MyDashboard().click();
-        	dashboard = new Dashboard(Page.driver);
+        	dashboard = new Dashboard(driver);
             AutomationLog.info("My Dashboard link is clicked");
         }
         catch (Exception e)
@@ -358,7 +350,7 @@ public class SubNavigation extends Page
         try
         {
         	link_AdvancedSearch().click();
-            advancedSearch = new AdvancedSearchPage(Page.driver);
+            advancedSearch = new AdvancedSearchPage(driver);
             AutomationLog.info("Advanced Search link is clicked");
         }
         catch (Exception e)
@@ -390,7 +382,7 @@ public class SubNavigation extends Page
         try
         {
         	link_MyListings().click();
-        	myListings = new MyListings(Page.driver);
+        	myListings = new MyListings(driver);
             AutomationLog.info("My Listings link is clicked");
         }
         catch (Exception e)
@@ -422,7 +414,7 @@ public class SubNavigation extends Page
         try
         {
         	link_MySubscriptions().click();
-        	mySubscriptions = new MySubscriptions(Page.driver);
+        	mySubscriptions = new MySubscriptions(driver);
             AutomationLog.info("My Subscriptions link is clicked");
         }
         catch (Exception e)
@@ -454,7 +446,7 @@ public class SubNavigation extends Page
         try
         {
             link_EditProfile().click();
-            editProfile = new EditProfile(Page.driver);
+            editProfile = new EditProfile(driver);
             AutomationLog.info("Edit Profile link is clicked");
         }
         catch (Exception e)
@@ -465,11 +457,11 @@ public class SubNavigation extends Page
         return editProfile;
     }
 
-    public WebElement dropdown_More() throws Exception
+    public WebElement dropdown_MoreLink() throws Exception
     {	
         try
         {
-            element = subNavigationBar().findElement(By.className("more-link"));
+            element = driver.findElement(By.className("more-link"));
             AutomationLog.info("drop down More found in sub-navigation tab");
         }
         catch (Exception e) 
@@ -480,11 +472,11 @@ public class SubNavigation extends Page
         return element;
     }
 
-    public WebElement option_More_Team() throws Exception
+    public WebElement link_More_Team() throws Exception
     {	
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='mainHeader']/div[3]/div/ul/li[11]/ul/li[1]/a"));
+            element = driver.findElement(By.linkText("Team"));
             AutomationLog.info("drop down More-Team Option found in sub-navigation tab");
         }
         catch (Exception e) 
@@ -495,11 +487,11 @@ public class SubNavigation extends Page
         return element;
     }
 
-    public WebElement option_More_Careers() throws Exception
+    public WebElement link_More_Careers() throws Exception
     {	
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='mainHeader']/div[3]/div/ul/li[11]/ul/li[2]/a"));
+            element = driver.findElement(By.linkText("Careers"));
             AutomationLog.info("drop down More-Careers Option found in sub-navigation tab");
         }
         catch (Exception e) 
@@ -510,11 +502,11 @@ public class SubNavigation extends Page
         return element;
     }
 
-    public WebElement option_More_Press() throws Exception
+    public WebElement link_More_Press() throws Exception
     {	
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='mainHeader']/div[3]/div/ul/li[11]/ul/li[3]/a"));
+            element = driver.findElement(By.linkText("Press"));
             AutomationLog.info("drop down More-Press Option found in sub-navigation tab");
         }
         catch (Exception e) 
@@ -525,12 +517,11 @@ public class SubNavigation extends Page
         return element;
     }
 
-    public WebElement option_More_Feedback() throws Exception
+    public WebElement link_More_Feedback() throws Exception
     {	
         try
         {
-            WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='mainHeader']/div[3]/div/ul/li[11]/ul/li[4]/a"));
-            element = driver.findElement(By.xpath(".//*[@id='mainHeader']/div[3]/div/ul/li[11]/ul/li[4]/a"));
+            element = driver.findElement(By.linkText("Feedback"));
             AutomationLog.info("drop down More-Feedback Option found in sub-navigation tab");
         }
         catch (Exception e) 
@@ -541,12 +532,11 @@ public class SubNavigation extends Page
         return element;
     }
 
-    public WebElement option_More_Contact() throws Exception
+    public WebElement link_More_Contact() throws Exception
     {	
         try
         {
-        	WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='mainHeader']/div[3]/div/ul/li[11]/ul/li[5]/a"));
-            element = driver.findElement(By.xpath(".//*[@id='mainHeader']/div[3]/div/ul/li[11]/ul/li[5]/a"));
+            element = driver.findElement(By.linkText("Contact"));
             AutomationLog.info("drop down More-Contact Option found in sub-navigation tab");
         }
         catch (Exception e) 
@@ -562,39 +552,35 @@ public class SubNavigation extends Page
         Page page = null;
         try
         {
+            dropdown_MoreLink().click();
             switch (dropdownMoreOption)
             {
                 case "Team":
-                    dropdown_More().click();
-                    option_More_Team().click();
-                    page = new Team(Page.driver);
+                    link_More_Team().click();
+                    page = new Team(driver);
                     break;
 
                 case "Careers":
-                    dropdown_More().click();
-                    option_More_Careers().click();
-                    page = new Careers(Page.driver);
+                    link_More_Careers().click();
+                    page = new Careers(driver);
                     break;
 
                 case "Press":
-                    dropdown_More().click();
-                    option_More_Press().click();
-                    page = new Press(Page.driver);
+                    link_More_Press().click();
+                    page = new Press(driver);
                     break;
 
                 case "Feedback":
-                    dropdown_More().click();
-                    option_More_Feedback().click();
-                    page = new Feedback(Page.driver);
+                    link_More_Feedback().click();
+                    page = new Feedback(driver);
                     break;
 
                 case "Contact":
-                    dropdown_More().click();
-                    option_More_Contact().click();
-                    page = new Contact(Page.driver);
+                    link_More_Contact().click();
+                    page = new Contact(driver);
                     break;
             }
-            AutomationLog.info("More drop down option" + dropdownMoreOption +" is clicked");
+            AutomationLog.info("Successfully clicked on More drop down option" + dropdownMoreOption );
         }
         catch (Exception e)
         {
