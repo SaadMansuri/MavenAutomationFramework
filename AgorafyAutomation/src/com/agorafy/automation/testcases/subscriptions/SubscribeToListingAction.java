@@ -32,7 +32,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
     private String destinationPage;
     private Header header = Header.header(); 
     private MySubscriptions mySubscriptions;
-	private boolean loginStatus;
+    private boolean loginStatus;
 
 	@Override
     public void setup() 
@@ -94,11 +94,12 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
             if(actualListingTitle.matches(expectedListingTitle))
             {
                 actualListingPresentStatus = true;
+                mySubscriptions.deleteSubscribedSearchOnRHS(singleListing);
             }
         }
         Assert.assertEquals(actualListingPresentStatus, true, "Listing subscribed on listing details page does not seen on My Subscriptions page, RHS under listing subscriptions");
         AutomationLog.info("Listing subscribed on listing details page successfully seen on My Subscriptions page, RHS under listing subscriptions");
-        
+        Page.navigateToPreviousPage();
     }
 
     private void verifyListingDetailsPageAfterClickSubscribeToListingInSubscriptionWindow() throws Exception 
