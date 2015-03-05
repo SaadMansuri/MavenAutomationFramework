@@ -88,4 +88,10 @@ public class Page
     {
         driver.switchTo().alert().dismiss();
     }
+
+    public static void navigateToPreviousPage() 
+    {
+        driver.navigate().back();
+    }
+
 }
