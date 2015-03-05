@@ -11,7 +11,6 @@ import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
-import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.PropertySearch;
 import com.agorafy.automation.pageobjects.subnavigationmenu.AdvancedSearchPage;
@@ -37,7 +36,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         super.setup();
         try 
         {
-            subnavigation = Homepage.subNavigation();
+            subnavigation = Page.subNavigation();
             advancedsearch = subnavigation.clickLinkAdvancedSearch();
             AutomationLog.info("Redirected to advanced search page  ");
         } 

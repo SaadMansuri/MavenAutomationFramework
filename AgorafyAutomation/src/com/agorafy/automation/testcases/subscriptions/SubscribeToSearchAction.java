@@ -87,7 +87,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     {
         dataFromCSV = testCaseData.get("SearchInputCombination");
         String expectedSubscribedSearch = dataFromCSV.get("searchstring");
-        subNavigation = SubNavigation.subnavigation();
+        subNavigation = Page.subNavigation();
         mySubscriptions = subNavigation.clickLinkMySubscriptions();
         List<WebElement> list_AllSubscribedSearches = mySubscriptions.list_AllSubscribedSearches();
         Integer countOfAllSubscribedSearches = list_AllSubscribedSearches.size();
