@@ -34,7 +34,7 @@ public class LoginPopUp extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("could not found login pop up");
+            AutomationLog.error("Login popup Not found");
             throw(e);
         }
         return element;

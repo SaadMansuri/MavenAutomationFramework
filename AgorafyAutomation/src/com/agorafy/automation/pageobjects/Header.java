@@ -7,12 +7,12 @@ import org.openqa.selenium.WebElement;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingLocationFormPage;
+import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
 public class Header extends Page
 {
     private WebElement element = null;
-    private boolean val=false;
 
     public Header(WebDriver driver)
     {
@@ -33,11 +33,6 @@ public class Header extends Page
         }
 
         return element;
-    }
-
-    public By getProfileNameLocator() 
-    {
-        return  (By.className("profile-name"));
     }
 
     public WebElement link_SignUp() throws Exception
@@ -122,28 +117,18 @@ public class Header extends Page
         }
     }
 
-    public boolean loginPopUpIsDisplayed(LoginPopUp loginpopup) throws Exception
-    {
-        try
-        {
-            val = loginpopup.popUp_Login().isDisplayed();
-            AutomationLog.info("login pop up is displayed");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Login pop up is not displayed");
-            throw(e);
-        }
-        return val;
-    }
-
     //Links below are seen when user is logged in
+
+    public By getProfileNameLocator() 
+    {
+        return  (By.className("profile-name"));
+    }
 
     public WebElement link_ProfileNameOnHomepageAfterLogin() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/a[1]/span[2]"));
+            element = driver.findElement(getProfileNameLocator());
         }
         catch (Exception e)
         {
@@ -171,7 +156,7 @@ public class Header extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/ul/li[1]/a"));
+            element = driver.findElement(getProfileNameLocator());
         }
         catch (Exception e)
         {
@@ -179,6 +164,54 @@ public class Header extends Page
             throw(e);
         }
         return element;
+    }
+
+    public Dashboard clickMyDashboardBelowProfilePic() throws Exception
+    {
+        Dashboard myDashboard;
+        try
+        {
+            link_Dashboard().click();
+            myDashboard = new Dashboard(driver);
+            AutomationLog.info("Successfully clicked on My Dashboard link under profile pic");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not clicked on My Dashboard link under profile pic");
+            throw(e);
+        }
+        return myDashboard;
+    }
+
+    public WebElement link_SwitchToAdmin() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[4]/ul/li[4]/a"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Switch To Admin link not found when Profile name is clicked");
+            throw(e);
+        }
+        return element;
+    }
+
+    public Admin clickSwitchToAdminLinkBelowProfilePic() throws Exception
+    {
+        Admin admin;
+        try
+        {
+            link_SwitchToAdmin().click();
+            admin = new Admin(driver);
+            AutomationLog.info("Successfully clicked on Switch To Admin link under profile pic");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not clicked on Switch To Admin link under profile pic");
+            throw(e);
+        }
+        return admin;
     }
 
     public WebElement link_Logout() throws Exception
@@ -195,11 +228,28 @@ public class Header extends Page
         return element;
     }
 
+    public Homepage clickLogoutLinkBelowProfilePic() throws Exception
+    {
+        Homepage homepage;
+        try
+        {
+            link_Logout().click();
+            homepage = new Homepage();
+            AutomationLog.info("Successfully clicked on Logout link under profile pic");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not clicked on Logout link under profile pic");
+            throw(e);
+        }
+        return homepage;
+    }
+
     public void openActiveProfile() throws Exception
     {
         try
         {
-            link_ProfileNameOnHomepageAfterLogin().click();
+            Page.driver.findElement(getProfileNameLocator()).click();
             AutomationLog.info("Opened drop down for active profile link");
         }
         catch (Exception e)
@@ -356,7 +406,6 @@ public class Header extends Page
         return element;
     }
 
-
     public WebElement txtbx_BathInAdvanceSearchForm() throws Exception
     {
         try
@@ -483,11 +532,11 @@ public class Header extends Page
             header().link_Logout().click();
             WaitFor.waitForPageToLoad(driver);
             homepage = new Homepage();
-            AutomationLog.info("Successfully Logout from Property Page");
+            AutomationLog.info("Logged out of Agorafy");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Failed to Logout from Property Page");
+            AutomationLog.error("Failed to Logout from Agorafy");
             throw(e);
         }
         return homepage;
@@ -596,7 +645,7 @@ public class Header extends Page
         return By.className("ui-autocomplete");
     }
 
-    public WebElement dropbox_AutoCompleteMenu() throws Exception
+    public WebElement searchBox_AutoCompleteMenu() throws Exception
     {
         try
         {
@@ -622,5 +671,36 @@ public class Header extends Page
             AutomationLog.error("Could not found Profile name dropdown Arrow");
             throw(e);
         }
+    }
+
+    public WebElement link_Subscriptions() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("subscriptions_dropBox"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Subscriptions link below profile pic not found");
+            throw(e);
+        }
+        return element;
+    }
+
+    public MySubscriptions clickSubscriptionsLinkBelowProfilePic() throws Exception
+    {
+        MySubscriptions mySubscriptions;
+        try
+        {
+            link_Subscriptions().click();
+            mySubscriptions = new MySubscriptions(driver);
+            AutomationLog.info("Successfully clicked on Subscriptions link under profile pic");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not clicked on Subscriptions link under profile pic");
+            throw(e);
+        }
+        return mySubscriptions;
     }
 }

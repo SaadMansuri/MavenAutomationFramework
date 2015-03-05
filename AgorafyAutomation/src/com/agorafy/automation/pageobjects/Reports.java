@@ -79,7 +79,6 @@ public class Reports extends Page
         WaitFor.sleepFor(10000);
         AutomationLog.info("Successfully got Reports Count");
         return count;
-        
     }
 
     public WebElement icon_Close() throws Exception

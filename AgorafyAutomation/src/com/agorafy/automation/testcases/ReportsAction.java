@@ -194,9 +194,12 @@ public class ReportsAction extends AutomationTestCaseVerification
     public void verifyIfClickingRemoveFromReportLinkOnListingDetailPageDecrementsReportsCount() throws Exception
     {
         int beforcount = Integer.parseInt(reports.getReportCount());
+        System.out.println(beforcount);
         listingdetail.clickOnRemoveFromReportLink();
         WaitFor.sleepFor(10000);
         int aftercount = Integer.parseInt(reports.getReportCount());
+        System.out.println(aftercount);
+
         Assert.assertEquals(aftercount, beforcount-1, "Expected reports count is not decremented ");
         Assert.assertEquals(listingdetail.link_addToReport().isDisplayed(), true, "Expected addToReport link is not shown");
         AutomationLog.info("Clicking RemoveFromReport link decrements Reports count by 1 and addToReport link displayed");
