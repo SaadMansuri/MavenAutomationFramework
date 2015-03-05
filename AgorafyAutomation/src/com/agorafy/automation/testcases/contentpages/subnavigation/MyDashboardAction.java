@@ -37,17 +37,31 @@ public class MyDashboardAction extends ContentPagesVerification
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            SubNavigation subnavigation = Page.subNavigation();
+            homePage = Homepage.homePage();
+            headerLoginForm = homePage.openHeaderLoginForm();
+            Credentials ValidCredentials = userCredentials();
+            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
+            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+            myDashboardPage = subnavigation.clickLinkMyDashboard(); 
+            expectedMyDashboardData = testCaseData.get("MyDashboard");
+            expectedMyDashboardData.put("url", myDashboardPage.getURL());
+            AutomationLog.info("Redirecting to My Dashboard page sucessfull");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirecting to My Dashboard page failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception 
     {
-        SubNavigation subnavigation = Page.subNavigation();
-        homePage = Homepage.homePage();
-        headerLoginForm = homePage.openHeaderLoginForm();
-        Credentials ValidCredentials = userCredentials();
-        homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-        WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
-        myDashboardPage = subnavigation.clickLinkMyDashboard(); 
-        expectedMyDashboardData = testCaseData.get("MyDashboard");
-        expectedMyDashboardData.put("url", myDashboardPage.getURL());
         verifyLink(myDashboardPage, expectedMyDashboardData);
 
         AutomationLog.info("Testing whether My Dashboard link is active in left side started...");

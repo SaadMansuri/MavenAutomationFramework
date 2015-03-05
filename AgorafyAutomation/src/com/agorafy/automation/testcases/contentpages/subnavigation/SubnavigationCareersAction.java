@@ -24,6 +24,9 @@ public class SubnavigationCareersAction extends ContentPagesVerification
     private ContentPagesLeftMenu leftMenu;
 	private String actualActiveLeftMenu;
 	private String expectedActiveLeftMenu;
+	private SubNavigation subnavigation;
+	private HashMap<String, String> expectedCareersData;
+	private Careers careerPage;
 
 	public SubnavigationCareersAction()
     {
@@ -31,13 +34,27 @@ public class SubnavigationCareersAction extends ContentPagesVerification
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            expectedCareersData = testCaseData.get("More->CareersPageData");
+            careerPage = (Careers) subnavigation.selectDropdownMoreOption("Careers");
+            expectedCareersData.put("url", careerPage.careersPageUrl());
+
+            AutomationLog.info("Redirection to Career page passed");
+        } 
+        catch (Exception e) 
+        {
+             AutomationLog.error("Redirection to Career page failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception
     {
-    	SubNavigation subnavigation = Page.subNavigation();
-        Careers careerPage = (Careers) subnavigation.selectDropdownMoreOption("Careers");
-
-        HashMap<String, String> expectedCareersData = testCaseData.get("More->CareersPageData");
-        expectedCareersData.put("url", careerPage.careersPageUrl());
         verifyLink(careerPage, expectedCareersData);
 
         AutomationLog.info("Careers page is correctly loaded");

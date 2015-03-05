@@ -227,7 +227,7 @@ public class SubmitListingLocationFormPage extends Page
             throw(e);
         }
     }
-    
+
     public void fillingLocationForm(HashMap<String , String> dummyLocationData) throws Exception
     {
         try 

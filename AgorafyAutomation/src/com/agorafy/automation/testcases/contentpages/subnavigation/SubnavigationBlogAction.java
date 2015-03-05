@@ -21,21 +21,38 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 public class SubnavigationBlogAction extends ContentPagesVerification
 {
+    private SubNavigation subnavigation;
+    private Blog blog;
+    private HashMap<String, String> expectedBlogData;
+
     public SubnavigationBlogAction()
     {
         super();
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            blog = subnavigation.clickLinkBlog();
+            expectedBlogData = testCaseData.get("Blog");
+            AutomationLog.info("Redirection to Blog page sucessfull");
+        } 
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirection to Blog page failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception
     {
-        SubNavigation subnavigation = Page.subNavigation();
-        Blog blog = subnavigation.clickLinkBlog();
-
         Assert.assertEquals(blog.currentURL(), blog.blogPageUrl(), "Link did not redirect to correct Page Url");
         AutomationLog.info("Link redirects to correct Page Url");
 
-        HashMap<String, String> expectedBlogData = testCaseData.get("Blog");
         Assert.assertEquals(blog.currentPageTitle(), expectedBlogData.get("title"), "Page does not show correct Page Title");
         AutomationLog.info("Page shows correct Page Title");
 

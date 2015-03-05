@@ -17,6 +17,12 @@ public abstract class ContentPagesVerification extends AutomationTestCaseVerific
         super(ContentPagesVerification.class.getSimpleName());
     }
 
+    @Override
+    public void setup() 
+    {
+        super.setup();
+    }
+
     public void verifyLink(Page verificationPage, HashMap<String, String> expectedData)
     {
         try

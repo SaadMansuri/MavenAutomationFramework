@@ -313,32 +313,32 @@ public class SubNavigation extends Page
     }
 
     public WebElement link_MyDashboard() throws Exception
-    {	
-    	try
-    	{
-    		element = subNavigationBar().findElement(By.linkText("My Dashboard"));
-    		AutomationLog.info("My Dashboard link found in sub-navigation tab");
-		}
-    	catch (Exception e) 
-    	{
-    		AutomationLog.error("My Dashboard link does not found in sub-navigation tab");
-    		throw (e);
-		}
-    	return element;
-	}
-    
+    {
+        try
+        {
+            element = subNavigationBar().findElement(By.linkText("My Dashboard"));
+            AutomationLog.info("My Dashboard link found in sub-navigation tab");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("My Dashboard link does not found in sub-navigation tab");
+            throw (e);
+        }
+        return element;
+    }
+
     public Dashboard clickLinkMyDashboard() throws Exception
     {
         Dashboard dashboard;
         try
         {
-        	link_MyDashboard().click();
-        	dashboard = new Dashboard(driver);
+            link_MyDashboard().click();
+            dashboard = new Dashboard(driver);
             AutomationLog.info("My Dashboard link is clicked");
         }
         catch (Exception e)
         {
-        	AutomationLog.error("My Dashboard link click operation not successful");
+            AutomationLog.error("My Dashboard link click operation not successful");
             throw(e);
         }
         return dashboard;
@@ -346,87 +346,87 @@ public class SubNavigation extends Page
     
     public AdvancedSearchPage clickLinkAdvancedSearch() throws Exception
     {
-    	AdvancedSearchPage advancedSearch;
+        AdvancedSearchPage advancedSearch;
         try
         {
-        	link_AdvancedSearch().click();
+            link_AdvancedSearch().click();
             advancedSearch = new AdvancedSearchPage(driver);
             AutomationLog.info("Advanced Search link is clicked");
         }
         catch (Exception e)
         {
-        	AutomationLog.error("Advanced Search link click operation not successful");
+            AutomationLog.error("Advanced Search link click operation not successful");
             throw(e);
         }
         return advancedSearch;
     }
-    
+
     public WebElement link_MyListings() throws Exception
     {
-    	try
-    	{
-    		element = subNavigationBar().findElement(By.linkText("My Listings"));
-    		AutomationLog.info("My Listings link found in sub-navigation tab");
-		}
-    	catch (Exception e) 
-    	{
-    		AutomationLog.error("My Listings link does not found in sub-navigation tab");
-    		throw (e);
-		}
-    	return element;
-	}
+        try
+        {
+            element = subNavigationBar().findElement(By.linkText("My Listings"));
+            AutomationLog.info("My Listings link found in sub-navigation tab");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("My Listings link does not found in sub-navigation tab");
+            throw (e);
+        }
+        return element;
+    }
 
     public MyListings clickLinkMyListings() throws Exception
     {
-    	MyListings myListings;
+        MyListings myListings;
         try
         {
-        	link_MyListings().click();
-        	myListings = new MyListings(driver);
+            link_MyListings().click();
+            myListings = new MyListings(driver);
             AutomationLog.info("My Listings link is clicked");
         }
         catch (Exception e)
         {
-        	AutomationLog.error("My Listings link click operation not successful");
+            AutomationLog.error("My Listings link click operation not successful");
             throw(e);
         }
         return myListings;
     }
-    
+
     public WebElement link_MySubscriptions() throws Exception
-    {	
-    	try
-    	{
-    		element = subNavigationBar().findElement(By.linkText("My Subscriptions"));
-    		AutomationLog.info("My Subscriptions link found in sub-navigation tab");
-		}
-    	catch (Exception e) 
-    	{
-    		AutomationLog.error("My Subscriptions link does not found in sub-navigation tab");
-    		throw (e);
-		}
-    	return element;
-	}
+    {
+        try
+        {
+            element = subNavigationBar().findElement(By.linkText("My Subscriptions"));
+            AutomationLog.info("My Subscriptions link found in sub-navigation tab");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("My Subscriptions link does not found in sub-navigation tab");
+            throw (e);
+        }
+        return element;
+    }
 
     public MySubscriptions clickLinkMySubscriptions() throws Exception
     {
-    	MySubscriptions mySubscriptions;
+        MySubscriptions mySubscriptions;
         try
         {
-        	link_MySubscriptions().click();
-        	mySubscriptions = new MySubscriptions(driver);
+            link_MySubscriptions().click();
+            mySubscriptions = new MySubscriptions(driver);
             AutomationLog.info("My Subscriptions link is clicked");
         }
         catch (Exception e)
         {
-        	AutomationLog.error("My Subscriptions link click operation not successful");
+            AutomationLog.error("My Subscriptions link click operation not successful");
             throw(e);
         }
         return mySubscriptions;
     }
 
     public WebElement link_EditProfile() throws Exception
-    {	
+    {
         try
         {
             element = subNavigationBar().findElement(By.linkText("Edit Profile"));
@@ -458,7 +458,7 @@ public class SubNavigation extends Page
     }
 
     public WebElement dropdown_MoreLink() throws Exception
-    {	
+    {
         try
         {
             element = driver.findElement(By.className("more-link"));
@@ -473,7 +473,7 @@ public class SubNavigation extends Page
     }
 
     public WebElement link_More_Team() throws Exception
-    {	
+    {
         try
         {
             element = driver.findElement(By.linkText("Team"));
@@ -488,7 +488,7 @@ public class SubNavigation extends Page
     }
 
     public WebElement link_More_Careers() throws Exception
-    {	
+    {
         try
         {
             element = driver.findElement(By.linkText("Careers"));
@@ -590,5 +590,3 @@ public class SubNavigation extends Page
         return page;
     }
 }
-
-

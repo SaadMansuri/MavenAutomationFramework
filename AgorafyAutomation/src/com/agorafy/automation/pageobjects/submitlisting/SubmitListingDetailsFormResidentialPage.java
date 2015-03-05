@@ -21,7 +21,7 @@ public class SubmitListingDetailsFormResidentialPage extends SubmitListingDetail
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='property']/div[1]/div/div/div[3]/span/select"));
+            element = driver.findElement(By.name("ls_residential_type"));
             return element;
         }
         catch(Exception e)
@@ -89,7 +89,7 @@ public class SubmitListingDetailsFormResidentialPage extends SubmitListingDetail
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='property']/div[2]/div/div/div/span/select"));
+            element = driver.findElement(By.name("ls_space_unit"));
             return element;
         }
         catch(Exception e)

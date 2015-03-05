@@ -61,34 +61,6 @@ public class SubmitListingDetailsFormOfficePage extends SubmitListingDetailsForm
         return spaceType;
     }
 
-    public WebElement txtbx_CeilingHeight() throws Exception
-    {
-        try 
-        {
-            element = driver.findElement(By.id("ls_ceiling_height"));
-        }
-        catch (Exception e) 
-        {
-            AutomationLog.error("txtbx_CeilingHeight not found");
-            throw (e);
-        }
-        return element;
-    }
-
-    public void clearCeilingHeight() throws Exception
-    {
-        try 
-        {
-            txtbx_CeilingHeight().clear();
-            AutomationLog.info("clearCeilingHeight passed");
-        }
-        catch (Exception e) 
-        {
-            AutomationLog.error("clearCeilingHeight failed");
-            throw (e);
-        }
-    }
-
     public WebElement txtbx_Combinable() throws Exception
     {
         try 
@@ -170,20 +142,6 @@ public class SubmitListingDetailsFormOfficePage extends SubmitListingDetailsForm
         {
             AutomationLog.error("Electricity txt Box not cleared");
             throw (e);
-        }
-    }
-
-    public void setCeilingHeight(String ceilingHeight) throws Exception
-    {
-        try 
-        {
-            txtbx_CeilingHeight().sendKeys(ceilingHeight);
-            AutomationLog.info("ceiling Height set to:" + ceilingHeight);
-        }
-        catch (Exception e) 
-        {
-            AutomationLog.error("ceiling Height failed to set:" + ceilingHeight);
-            throw e;
         }
     }
 

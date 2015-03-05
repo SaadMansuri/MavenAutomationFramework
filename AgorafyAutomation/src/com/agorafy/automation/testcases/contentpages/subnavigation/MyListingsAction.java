@@ -41,7 +41,10 @@ public class MyListingsAction extends ContentPagesVerification
     }
 
     @Override
-    protected void verifyTestCases() throws Exception 
+    public void setup() 
+    {
+    super.setup();
+    try 
     {
         subnavigation = Page.subNavigation();
         homePage = Homepage.homePage();
@@ -52,7 +55,20 @@ public class MyListingsAction extends ContentPagesVerification
         myListingsPage = subnavigation.clickLinkMyListings(); 
         expectedmyListingsData = testCaseData.get("MyListings");
         expectedmyListingsData.put("url", myListingsPage.getURL());
-        verifyLink(myListingsPage, expectedmyListingsData);
+        AutomationLog.info("Redirection to MyListing is sucessfull");
+    }
+    catch (Exception e) 
+    {
+        AutomationLog.error("Redirection to MyListing is failed");
+    }
+
+    }
+
+    @Override
+    protected void verifyTestCases() throws Exception 
+    {
+
+       verifyLink(myListingsPage, expectedmyListingsData);
 
         AutomationLog.info("Testing whether My Listings link is active in left side started...");
         verifyLeftMenu();

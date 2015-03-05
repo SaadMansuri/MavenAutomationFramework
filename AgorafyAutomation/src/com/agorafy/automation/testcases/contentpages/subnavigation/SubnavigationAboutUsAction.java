@@ -22,31 +22,47 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 public class SubnavigationAboutUsAction extends ContentPagesVerification
 {
-    public SubnavigationAboutUsAction()
+    private AboutUs aboutUs;
+    private HashMap<String, String> expectedAboutUsData = new HashMap<>();
+	private SubNavigation subnavigation;
+	private ContentPagesLeftMenu leftMenu;
+
+	public SubnavigationAboutUsAction()
     {
         super();
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            aboutUs = subnavigation.clickLinkAboutUs();
+            expectedAboutUsData = testCaseData.get("AboutUs");
+            expectedAboutUsData.put("url", aboutUs.aboutUsPageUrl());
+            leftMenu = Page.contentPagesLeftMenu();
+            AutomationLog.info("Redirection for About Us Page sucessfull");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirection for About Us Page failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception
     {
-        SubNavigation subnavigation = Page.subNavigation();
-        AboutUs aboutUs = subnavigation.clickLinkAboutUs();
-
-        HashMap<String, String> expectedAboutUsData = testCaseData.get("AboutUs");
-        expectedAboutUsData.put("url", aboutUs.aboutUsPageUrl());
         verifyLink(aboutUs, expectedAboutUsData);
-
-        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.aboutUsLinkText(),"Left menu does not show About Us link as Active Link");
         AutomationLog.info("Left menu shows About Us link as Active Link");
         AutomationLog.info("AboutUs page is correctly loaded");
-
         verifyCategorySelectSearchBoxInAboutUsHeaderForDropDownOptions(aboutUs);
         verifySearchTextBoxInAboutUsHeader(aboutUs);
         verifyBoroughSelectSearchBoxInAboutUsHeaderForDropDownOptions(aboutUs);
-
     }
+
     public void verifyCategorySelectSearchBoxInAboutUsHeaderForDropDownOptions(AboutUs aboutUs) throws Exception
     {
         String verifyCategorySelectSearchBoxInHeaderForCommercialOption =aboutUs.clickHeaderCategorySearchBar();

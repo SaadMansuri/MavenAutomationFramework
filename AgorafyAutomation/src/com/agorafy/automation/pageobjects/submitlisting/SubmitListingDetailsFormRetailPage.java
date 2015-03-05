@@ -129,47 +129,6 @@ public class SubmitListingDetailsFormRetailPage extends SubmitListingDetailsForm
         }
     }
 
-    public WebElement txtbx_CeilingHeight() throws Exception 
-    {
-        try
-        {
-            element = driver.findElement(By.id("ls_ceiling_height"));
-            return element;
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("CeilingHeight txt Box not found");
-            throw e;
-        }
-    }
-
-    public void setCeilingHeight(String ceilingHeight) throws Exception
-    {
-        try 
-        {
-            txtbx_CeilingHeight().sendKeys(ceilingHeight);
-            AutomationLog.info("CeilingHeight is set to:" +ceilingHeight );
-        }
-        catch (Exception e) 
-        {
-            AutomationLog.error("failed to set Frontage to:" +ceilingHeight);
-            throw e;
-        }
-    }
-
-    public void clearCeilingHeight() throws Exception
-    {
-        try 
-        {
-            txtbx_CeilingHeight().clear();
-        }
-        catch (Exception e) 
-        {
-            AutomationLog.error("failed to clear CeilingHeight");
-            throw (e);
-        }
-    }
-
     public WebElement radiobtn_FoodYes() throws Exception 
     {
         try
@@ -281,7 +240,7 @@ public class SubmitListingDetailsFormRetailPage extends SubmitListingDetailsForm
             throw e;
         }
     }
-
+/*This method is used to fill Submit listing details -retail form and return media form*/
     public SubmitListingMediaFormPage fillCurrentFormAndClickSaveAndContinue(HashMap<String, String> dummyRetailData) throws Exception
     {
         SubmitListingMediaFormPage submitListingMediaFormPage;
@@ -330,7 +289,8 @@ public class SubmitListingDetailsFormRetailPage extends SubmitListingDetailsForm
         }
         return submitListingMediaFormPage;
     }
-    
+
+    /*This method does the same work as above method but used for set up of preview and submit form*/
     public SubmitListingMediaFormPage fillDetailsRetailFormForPreviewSetup(HashMap<String, HashMap<String, String>> data) throws Exception
     {
     	return fillCurrentFormAndClickSaveAndContinue(data.get("TotalRetailFormData"));
