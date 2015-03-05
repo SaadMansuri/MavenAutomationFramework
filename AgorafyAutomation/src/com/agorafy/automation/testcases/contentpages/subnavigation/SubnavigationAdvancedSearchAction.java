@@ -1,6 +1,7 @@
 package com.agorafy.automation.testcases.contentpages.subnavigation;
 
 import java.util.HashMap;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.subnavigationmenu.AdvancedSearchPage;
@@ -17,21 +18,38 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 public class SubnavigationAdvancedSearchAction extends ContentPagesVerification
 {
+    private SubNavigation subnavigation;
+    private AdvancedSearchPage advancedSearch;
+    private HashMap<String, String> expectedAdvancedSearchData = new HashMap<>();
+
     public SubnavigationAdvancedSearchAction()
     {
         super();
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            advancedSearch = subnavigation.clickLinkAdvancedSearch();
+            expectedAdvancedSearchData  = testCaseData.get("AdvancedSearch");
+            expectedAdvancedSearchData.put("url", advancedSearch.getURL());
+
+            AutomationLog.info("Redirection to Adavance search passed");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirection to Adavance search failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception
     {
-        SubNavigation subnavigation = Page.subNavigation();
-        AdvancedSearchPage advancedSearch = subnavigation.clickLinkAdvancedSearch();
-
-        HashMap<String, String> expectedAdvancedSearchData = testCaseData.get("AdvancedSearch");
-        expectedAdvancedSearchData.put("url", advancedSearch.getURL());
         verifyLink(advancedSearch, expectedAdvancedSearchData);
-
         AutomationLog.info("Advanced Search page is correctly loaded");
     }
 

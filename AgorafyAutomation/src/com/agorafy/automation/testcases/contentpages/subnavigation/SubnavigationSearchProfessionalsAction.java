@@ -18,19 +18,38 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 public class SubnavigationSearchProfessionalsAction extends ContentPagesVerification
 {
+    private SubNavigation subnavigation;
+    private SearchProfessionalsPage searchProfessionals;
+    private HashMap<String, String> expectedSearchProfData = new HashMap<>();
+
     public SubnavigationSearchProfessionalsAction()
     {
         super();
     }
 
     @Override
+    public void setup() 
+    {
+         super.setup();
+         try 
+         {
+             subnavigation = Page.subNavigation();
+             searchProfessionals = subnavigation.clickLinkSearchProfessionals();
+
+             expectedSearchProfData  = testCaseData.get("SearchProfessionals");
+             expectedSearchProfData.put("url", searchProfessionals.getURL());
+
+            AutomationLog.info("Redirection to Search Professionals page passed");
+         }
+         catch (Exception e) 
+         {
+             AutomationLog.error("Redirection to Search Professionals page failed");
+         }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception
     {
-        SubNavigation subnavigation = Page.subNavigation();
-        SearchProfessionalsPage searchProfessionals = subnavigation.clickLinkSearchProfessionals();
-
-        HashMap<String, String> expectedSearchProfData = testCaseData.get("SearchProfessionals");
-        expectedSearchProfData.put("url", searchProfessionals.getURL());
         verifyLink(searchProfessionals, expectedSearchProfData);
 
         AutomationLog.info("Search Professionals Page is correctly loaded");

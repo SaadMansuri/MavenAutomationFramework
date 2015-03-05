@@ -21,22 +21,42 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 public class SubnavigationHowItWorksAction extends ContentPagesVerification
 {
+    private SubNavigation subnavigation;
+    private HowItWorks howItWorks;
+    private HashMap<String, String> expectedHowItWorksData = new HashMap<>();
+    private ContentPagesLeftMenu leftMenu;
+
     public SubnavigationHowItWorksAction()
     {
         super();
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            howItWorks = subnavigation.clickLinkHowitWorks();
+
+            expectedHowItWorksData  = testCaseData.get("HowItWorks");
+            expectedHowItWorksData.put("url", howItWorks.howItWorksPageUrl());
+
+            leftMenu = Page.contentPagesLeftMenu();
+            AutomationLog.info("Redirection to How it works passed");
+        } 
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirection to How it works failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception
     {
-        SubNavigation subnavigation = Page.subNavigation();
-        HowItWorks howItWorks = subnavigation.clickLinkHowitWorks();
-
-        HashMap<String, String> expectedHowItWorksData = testCaseData.get("HowItWorks");
-        expectedHowItWorksData.put("url", howItWorks.howItWorksPageUrl());
         verifyLink(howItWorks, expectedHowItWorksData);
 
-        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.howItWorksLinkText(),"Left menu does not show How It Works link as Active Link");
         AutomationLog.info("Left menu shows How It Works link as Active Link");
 

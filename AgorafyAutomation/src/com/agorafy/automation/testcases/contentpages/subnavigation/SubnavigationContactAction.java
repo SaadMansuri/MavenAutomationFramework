@@ -22,25 +22,42 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 public class SubnavigationContactAction extends ContentPagesVerification
 {
     private Contact contactPage;
-	private ContentPagesLeftMenu leftMenu;
-	private String actualActiveLeftMenu;
-	private String expectedActiveLeftMenu;
+    private ContentPagesLeftMenu leftMenu;
+    private String actualActiveLeftMenu;
+    private String expectedActiveLeftMenu;
+    private SubNavigation subnavigation;
+    private String dropdownMoreOption;
+    private HashMap<String, String> expectedContactData = new HashMap<>();
 
-	public SubnavigationContactAction()
+    public SubnavigationContactAction()
     {
         super();
+    }
+
+    @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            dropdownMoreOption = "Contact";
+            contactPage = (Contact) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
+            expectedContactData = testCaseData.get("Contact");
+            expectedContactData.put("url", contactPage.contactPageUrl());
+
+            AutomationLog.info("Redirection to Contact page passed");
+        }
+        catch (Exception e) 
+        {
+             AutomationLog.error("Redirection to Contact page failed");
+        }
     }
 
     @Override
     protected void verifyTestCases() throws Exception
     {
 
-        SubNavigation subnavigation = Page.subNavigation();
-        String dropdownMoreOption = "Contact";
-        contactPage = (Contact) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
-
-        HashMap<String, String> expectedContactData = testCaseData.get("Contact");
-        expectedContactData.put("url", contactPage.contactPageUrl());
         verifyLink(contactPage, expectedContactData);
 
         AutomationLog.info("Contact page is correctly loaded");

@@ -2,15 +2,17 @@ package com.agorafy.automation.pageobjects.submitlisting;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
 
 public class SubmitListingDetailsFormBasePage extends Page 
-{	
+{
     public WebElement element;
     public Select dropdown;
 
@@ -76,7 +78,7 @@ public class SubmitListingDetailsFormBasePage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='property']/div[1]/div/div/div[1]/span/select"));
+            element = driver.findElement(By.name("ls_listing_type"));
             return element;
         }
         catch(Exception e)
@@ -127,7 +129,7 @@ public class SubmitListingDetailsFormBasePage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='property']/div[1]/div/div/div[2]/span/select"));
+            element = driver.findElement(By.name("ls_listing_offer"));
             return element;
         }
         catch(Exception e)
@@ -136,7 +138,7 @@ public class SubmitListingDetailsFormBasePage extends Page
             throw e;
         }
     }
-    
+
     public List<WebElement> allListingOfferTypes() throws Exception 
     {
         List<WebElement> allListingOfferTypes;
@@ -249,7 +251,10 @@ public class SubmitListingDetailsFormBasePage extends Page
         try 
         {
             dropdown_SpaceName().click();
-            driver.findElement(By.xpath(".//*[@id='ls_space_name_chzn_o_2']")).click();
+            WebElement parentElement = driver.findElement(By.className("chzn-results"));
+            element = parentElement.findElement(By.id("ls_space_name_chzn_o_2"));
+            element.click();
+            //driver.findElement(By.xpath(".//*[@id='ls_space_name_chzn_o_2']")).click();
             AutomationLog.info("selected one of the space name");
         }
         catch (Exception e) 
@@ -446,7 +451,7 @@ public class SubmitListingDetailsFormBasePage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='property']/div[8]/div[3]/span/select"));
+            element = driver.findElement(By.name("ls_unit"));
             return element;
         }
         catch(Exception e)
@@ -562,15 +567,15 @@ public class SubmitListingDetailsFormBasePage extends Page
 
     public java.util.List<WebElement> allSpaceElements()
     {
-        java.util.List<WebElement> parent1 = driver.findElements(By.id("added-spaces"));
+        List<WebElement> parent1 = driver.findElements(By.id("added-spaces"));
         WebElement child = parent1.get(0).findElement(By.className("ul-reset"));
-        java.util.List<WebElement> allSpaces = child.findElements(By.tagName("li"));
+        List<WebElement> allSpaces = child.findElements(By.tagName("li"));
         return allSpaces;
     }
 
     public WebElement getSingleSpace()
     {
-        java.util.List<WebElement> allSpaces = allSpaceElements();
+        List<WebElement> allSpaces = allSpaceElements();
         for(WebElement element1 : allSpaces)
         {
             element = element1;
@@ -618,7 +623,7 @@ public class SubmitListingDetailsFormBasePage extends Page
 
     public void removeSpaceElement(int spaceElementNo)
     {
-        java.util.List<WebElement> allSpaceElements = allSpaceElements();
+        List<WebElement> allSpaceElements = allSpaceElements();
         allSpaceElements.get(spaceElementNo).findElement(By.className("remove")).click();
     }
 
@@ -675,6 +680,47 @@ public class SubmitListingDetailsFormBasePage extends Page
         {
             AutomationLog.error("SaveAndContinue btn is not clicked");
             throw e;
+        }
+    }
+
+    public WebElement txtbx_CeilingHeight() throws Exception 
+    {
+        try
+        {
+            element = driver.findElement(By.id("ls_ceiling_height"));
+            return element;
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("CeilingHeight txt Box not found");
+            throw e;
+        }
+    }
+
+    public void setCeilingHeight(String ceilingHeight) throws Exception
+    {
+        try 
+        {
+            txtbx_CeilingHeight().sendKeys(ceilingHeight);
+            AutomationLog.info("CeilingHeight is set to:" +ceilingHeight );
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set Frontage to:" +ceilingHeight);
+            throw e;
+        }
+    }
+
+    public void clearCeilingHeight() throws Exception
+    {
+        try 
+        {
+            txtbx_CeilingHeight().clear();
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to clear CeilingHeight");
+            throw (e);
         }
     }
 }
