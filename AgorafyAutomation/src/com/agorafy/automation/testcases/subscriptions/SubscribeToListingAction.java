@@ -208,7 +208,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
             }
             else
             {
-                AutomationLog.error("SubscribeToListing.csv file (SearchInputCombination) -input combination should result atleast one one property listing");
+                AutomationLog.error("SubscribeToListing.csv file (SearchInputCombination) -input combination should result atleast one property listing");
             }
             
             AutomationLog.info("Set up to reach listing details page successfull");
