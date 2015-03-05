@@ -61,16 +61,16 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
     {
 
         AutomationLog.info("Verify whether Subscribe To Listing option changes to Unsubscribe To Listing option started...");
-        //verifySubscribeToListingOption();
+        verifySubscribeToListingOption();
 
         AutomationLog.info("Verify whether listing name sholud be reflected in subscribe to respective listing in subscription window started...");
         verifyListingNameInSubscribeToRespectiveListingOptionInSubscriptionWindow();
 
         AutomationLog.info("Verify whether Subscribe To respective listing option in subscriptions window below profile pic changes to Unsubscribe To respective Listing option started...");
-        //verifySubscribeToRespectiveListingOptionInSubscriptionWindow();
+        verifySubscribeToRespectiveListingOptionInSubscriptionWindow();
 
         AutomationLog.info("Verify whether Subscribe To respective listing option in listing details page changes to Unsubscribe To respective Listing option started...");
-        //verifyListingDetailsPageAfterClickSubscribeToListingInSubscriptionWindow();
+        verifyListingDetailsPageAfterClickSubscribeToListingInSubscriptionWindow();
 
         AutomationLog.info("Verify whether subscribed listing in listing details page reflects in My subscriptions page started...");
         verifySubscribedListingInMySubscriptionsPage();
