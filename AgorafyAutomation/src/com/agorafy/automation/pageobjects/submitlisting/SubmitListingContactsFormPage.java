@@ -27,7 +27,7 @@ public class SubmitListingContactsFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Add contacts button");
+            AutomationLog.error("Could not find Add contacts button");
             throw(e);
         }
         return element;
@@ -63,9 +63,8 @@ public class SubmitListingContactsFormPage extends Page
             throw(e);
         }
         return count;
-        
     }
-    
+
     public void deleteAllAddedContacts() throws Exception
     {
         try
@@ -93,12 +92,12 @@ public class SubmitListingContactsFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("could not found drop down for Representing as");
+            AutomationLog.error("could not find drop down for Representing as");
             throw(e);
         }
         return element;
     }
-    
+
     public WebElement btn_SaveAndContinue() throws Exception
     {
         try
@@ -108,7 +107,7 @@ public class SubmitListingContactsFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Save And Continue  button");
+            AutomationLog.error("Could not find Save And Continue  button");
             throw(e);
         }
         return element;
@@ -118,11 +117,11 @@ public class SubmitListingContactsFormPage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='contacts']/div[5]/div/button[1]"));
+            element = driver.findElement(By.id("contacts")).findElement(By.className("back-step"));
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found back button");
+            AutomationLog.error("Could not find back button");
             throw(e);
         }
         return element;
@@ -154,11 +153,10 @@ public class SubmitListingContactsFormPage extends Page
         } 
         catch (Exception e) 
         {
-            AutomationLog.error("Could not found No of contacts");
+            AutomationLog.error("Could not find No of contacts");
             throw(e);
         }
         return element;
-        
     }
 
     public WebElement form_Contacts() throws Exception
@@ -170,7 +168,7 @@ public class SubmitListingContactsFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found contacts form");
+            AutomationLog.error("Could not find contacts form");
             throw(e);
         }
         return element;
@@ -198,7 +196,7 @@ public class SubmitListingContactsFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Company textbox");
+            AutomationLog.error("Could not find Company textbox");
             throw(e);
         }
         return element;
@@ -212,7 +210,7 @@ public class SubmitListingContactsFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Email textbox");
+            AutomationLog.error("Could not find Email textbox");
             throw(e);
         }
         return element;
@@ -226,7 +224,7 @@ public class SubmitListingContactsFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Phone textbox");
+            AutomationLog.error("Could not find Phone textbox");
             throw(e);
         }
         return element;
@@ -241,7 +239,7 @@ public class SubmitListingContactsFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found contact name");
+            AutomationLog.error("Could not find contact name");
             throw(e);
         }
         return element;
@@ -256,7 +254,7 @@ public class SubmitListingContactsFormPage extends Page
         } 
         catch (Exception e) 
         {
-            AutomationLog.error("Could not found cancel button ");
+            AutomationLog.error("Could not find cancel button ");
             throw(e);
         }
         return element;
@@ -285,7 +283,7 @@ public class SubmitListingContactsFormPage extends Page
         } 
         catch (Exception e) 
         {
-            AutomationLog.error("Could not found Save button ");
+            AutomationLog.error("Could not find Save button ");
             throw(e);
         }
         return element;
@@ -305,8 +303,6 @@ public class SubmitListingContactsFormPage extends Page
         }
     }
 
-
-
     public WebElement icon_EditAddedContact() throws Exception
     {
         try 
@@ -316,7 +312,7 @@ public class SubmitListingContactsFormPage extends Page
         } 
         catch (Exception e) 
         {
-            AutomationLog.error("Could not found edit icon on added contacts");
+            AutomationLog.error("Could not find edit icon on added contacts");
             throw(e);
         }
         return element;
@@ -336,7 +332,6 @@ public class SubmitListingContactsFormPage extends Page
         }
     }
 
-
     public WebElement icon_DeleteAddedContact() throws Exception
     {
         try 
@@ -346,7 +341,7 @@ public class SubmitListingContactsFormPage extends Page
         } 
         catch (Exception e) 
         {
-            AutomationLog.error("Could not found Delete icon on added contacts");
+            AutomationLog.error("Could not find Delete icon on added contacts");
             throw(e);
         }
         return element;
@@ -366,7 +361,6 @@ public class SubmitListingContactsFormPage extends Page
         }
     }
 
-    
     public WebElement txtbx_Address() throws Exception
     {
         try
@@ -375,7 +369,7 @@ public class SubmitListingContactsFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Address textbox");
+            AutomationLog.error("Could not find Address textbox");
             throw(e);
         }
         return element;
@@ -390,7 +384,7 @@ public class SubmitListingContactsFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("could not found added contacts");
+            AutomationLog.error("could not find added contacts");
             throw(e);
         }
         return element;
@@ -404,10 +398,39 @@ public class SubmitListingContactsFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found error message");
+            AutomationLog.error("Could not find error message");
             throw(e);
         }
         return element;
+    }
+
+    public WebElement btn_UseMyContactInformation() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("ls_use_my_contact"));
+            AutomationLog.info("Found button UseMyContactInformation");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find button UseMyContactInformation");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnUseMyContactInformationbutton() throws Exception
+    {
+        try
+        {
+            btn_UseMyContactInformation().click();
+            AutomationLog.info("Successfully clicked on UseMyContactInformation button");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on UseMyContactInformation button");
+            throw(e);
+        }
     }
 
     public void selectValueFromRepresentingAsDropDown(String option) throws Exception

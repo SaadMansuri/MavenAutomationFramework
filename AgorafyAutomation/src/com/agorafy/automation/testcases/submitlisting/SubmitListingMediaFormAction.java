@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.Configuration;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -41,12 +40,12 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         mediadata = testCaseData.get("MediaFormData");
         String highResFile = exefilepath + mediadata.get("highResFile");
         String lowResFile = exefilepath + mediadata.get("lowResFile");
-        /*verifyIfClickingAddfilesAddImageToUpload(highResFile); 
+        verifyIfClickingAddfilesAddImageToUpload(highResFile); 
         verifyIfClickingCancelButtonRemovesAddedImage();
         verifyIfClickingStartUpdateUploadsTheImage(highResFile);
         verifyIfclickingDeleteButtonRemoveUploadedImage();
         verifyIfLowResolutionImageCantBeUploaded(lowResFile);
-        verifyIfErrorMessageShownOnClickingSaveAndContinueWithoutUploadingImage();*/
+        verifyIfErrorMessageShownOnClickingSaveAndContinueWithoutUploadingImage();
         verifyIfClickingOnBackButtonRedirectsToDetailsForm();
         verifyIfclickingOnSaveAndContinueRedirectsToContactsPage();
     }
@@ -58,17 +57,14 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
             media.clickOnAddFilesButton();
             Runtime.getRuntime().exec(highResFile);
             WaitFor.presenceOfTheElement(Page.driver, media.listingImageLocator()); 
-            Assert.assertEquals(media.img_Listing().isDisplayed(), true, "Expected AddFiles does not add image to upload");
+            Assert.assertEquals(media.img_Listing().isDisplayed(), true, "Expected AddFiles button does not add image for upload");
             AutomationLog.info("Clicking AddFiles adds image to be uploaded successfully");
-            	
         }
         catch(Exception e)
         {
             AutomationLog.error("Could not open windows file upload");
             throw(e);
-            
         }
-       
     }
 
     public void verifyIfClickingCancelButtonRemovesAddedImage() throws Exception

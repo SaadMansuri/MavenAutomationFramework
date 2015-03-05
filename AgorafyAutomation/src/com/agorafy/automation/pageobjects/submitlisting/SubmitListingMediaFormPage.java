@@ -24,11 +24,11 @@ public class SubmitListingMediaFormPage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='files']"));
+            element = driver.findElement(By.id("files"));
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Add files button");
+            AutomationLog.error("Could not find Add files button");
             throw(e);
         }
         return element;
@@ -38,11 +38,11 @@ public class SubmitListingMediaFormPage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='media']/div[3]/div/button[1]"));
+            element = driver.findElement(By.id("media")).findElement(By.className("back-step"));
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Back button");
+            AutomationLog.error("Could not find Back button");
             throw(e);
         }
         return element;
@@ -83,12 +83,12 @@ public class SubmitListingMediaFormPage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='file-upload-cont']/div/div/div/ul/li/div/p[2]/button"));
+            element = driver.findElement(By.className("cancel")).findElement(By.tagName("button"));
             AutomationLog.info("Cancel button found after image is selected");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found cancel button ");
+            AutomationLog.error("Could not find cancel button ");
             throw(e);
         }
         return element;
@@ -103,7 +103,7 @@ public class SubmitListingMediaFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found media form");
+            AutomationLog.error("Could not find media form");
             throw(e);
         }
         return element;
@@ -117,7 +117,7 @@ public class SubmitListingMediaFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Save and Continue button");
+            AutomationLog.error("Could not find Save and Continue button");
             throw(e);
         }
         return element;
@@ -134,7 +134,6 @@ public class SubmitListingMediaFormPage extends Page
         {
             AutomationLog.error("Could not click on Save and Continue Button");
             throw(e);
-            
         }
     }
 
@@ -147,28 +146,28 @@ public class SubmitListingMediaFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could Not foung Media Error Message");
+            AutomationLog.error("Could Not find Media Error Message");
             throw(e);
         }
         return element;
-
     }
 
+    @SuppressWarnings("static-access")
     public By listingImageLocator() throws Exception
     {
-        return By.xpath(".//*[@id='file-upload-cont']/div/div/div/ul/li/p/span/canvas");
+        return By.className("fade").tagName("canvas");
     }
 
     public WebElement img_Listing() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='file-upload-cont']/div/div/div/ul/li/p/span/canvas"));
+            element = driver.findElement(listingImageLocator());
             AutomationLog.info("Listing image found for upload");
         }
         catch(Exception e)
         {
-            AutomationLog.error("could not found listing image for upload");
+            AutomationLog.error("could not find listing image for upload");
             throw(e);
         }
         return element;
@@ -195,7 +194,7 @@ public class SubmitListingMediaFormPage extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Could not found image name text");
+            AutomationLog.error("Could not find image name text");
             throw(e);
         }
         return element;
@@ -215,7 +214,7 @@ public class SubmitListingMediaFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("could not found image");
+            AutomationLog.error("could not find image");
             throw(e);
         }
         return element;
@@ -225,12 +224,13 @@ public class SubmitListingMediaFormPage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='file-upload-cont']/div/div/div/ul/li/div/div/div/button"));
+            //element = driver.findElement(By.xpath(".//*[@id='file-upload-cont']/div/div/div/ul/li/div/div/div/button"));
+            element = driver.findElement(By.className("delete")).findElement(By.tagName("button"));
             AutomationLog.info("Delete button found on uploaded image");
         }
         catch(Exception e)
         {
-            AutomationLog.error("could not found delete button on uploaded image");
+            AutomationLog.error("could not find delete button on uploaded image");
             throw(e);
         }
         return element;
@@ -267,13 +267,12 @@ public class SubmitListingMediaFormPage extends Page
 
     public void watiUntilElementIsRemoved() throws Exception
     {
-    	WebElement select = driver.findElement(By.className("files"));
+        WebElement select = driver.findElement(By.className("files"));
         List<WebElement> options = select.findElements(By.tagName("li"));
         if(options.size() > 0)
         {
              driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        }   
+        }
     }
 
     public WebElement btn_StartUpload() throws Exception
@@ -285,7 +284,7 @@ public class SubmitListingMediaFormPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Start Upload Button");
+            AutomationLog.error("Could not find Start Upload Button");
             throw(e);
         }
         return element;
@@ -302,7 +301,6 @@ public class SubmitListingMediaFormPage extends Page
         {
             AutomationLog.error("could not click on Start Upload button");
             throw(e);
-            
         }
     }
 
@@ -325,31 +323,6 @@ public class SubmitListingMediaFormPage extends Page
             throw(e);
         }
         return contact;
-        
     }
 }
 
-/*    public void gotomediaform() throws Exception
-    {
-        driver.findElement(By.id("ls_address")).sendKeys("asdf");
-        driver.findElement(By.id("ls_city")).sendKeys("asdf");
-        driver.findElement(By.id("ls_state")).sendKeys("asdf");
-        driver.findElement(By.id("ls_zipcode")).sendKeys("asdf");
-        
-        driver.findElement(By.id("saveLocation")).click();
-        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        
-        driver.findElement(By.xpath(".//*[@id='ls_space_name_chzn']/a")).click();
-        driver.findElement(By.xpath(".//*[@id='ls_space_name_chzn_o_47']")).click();
-        driver.findElement(By.xpath(".//*[@id='ls_space_size']")).sendKeys("sadfsf");
-        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.findElement(By.xpath(".//*[@id='add-space']")).click();
-        driver.findElement(By.xpath(".//*[@id='ls_price_min']")).sendKeys("sadfsf");
-        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.findElement(By.id("saveProperty")).click();
-        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-    
-}
-
-*/

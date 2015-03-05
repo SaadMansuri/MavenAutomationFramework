@@ -49,7 +49,7 @@ public class ForgotPassword extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='forgotPassError']"));
+            element=driver.findElement(By.id("forgotPassError"));
         }
         catch(Exception e)
         {
