@@ -22,7 +22,7 @@ public class SubmitListingDetailsFormPropertyPage extends SubmitListingDetailsFo
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='property']/div[1]/div/div/div[4]/span/select"));
+            element = driver.findElement(By.name("ls_property_type"));
             return element;
         }
         catch(Exception e)

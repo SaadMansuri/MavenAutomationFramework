@@ -174,7 +174,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     {
         mySubscriptions = (MySubscriptions) propertySearch.clickOnSubscribeToThisSearchLink(status);
         actualStatusOfElement = false;
-        actualStatusOfElement = mySubscriptions.element_SubscriptionWindow().isDisplayed();
+        actualStatusOfElement = mySubscriptions.SubscriptionWindow().isDisplayed();
         Assert.assertEquals(actualStatusOfElement, true, "Subscription Box under user's Avatar is not displayed");
         AutomationLog.info("Subscription Box under user's Avatar is displayed sucessfully");
         mySubscriptions.closeSubscriptionWindow();

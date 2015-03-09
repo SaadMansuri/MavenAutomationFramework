@@ -30,13 +30,27 @@ public class SubnavigationFeedbackAction extends ContentPagesVerification
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            String dropdownMoreOption = "Feedback";
+            feedback = (Feedback) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
+            expectedFeedbackData = testCaseData.get("More->FeedbackPageData");
+            expectedFeedbackData.put("url", feedback.feedbackPageUrl());
+            AutomationLog.info("Redirection to feedback page sucessfull");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirection to feedback page failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception 
     {
-        subnavigation = Page.subNavigation();
-        String dropdownMoreOption = "Feedback";
-        feedback = (Feedback) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
-        expectedFeedbackData = testCaseData.get("More->FeedbackPageData");
-        expectedFeedbackData.put("url", feedback.feedbackPageUrl());
         verifyLink(feedback, expectedFeedbackData);
 
         AutomationLog.info(" testing of dropdown options for subject started...");

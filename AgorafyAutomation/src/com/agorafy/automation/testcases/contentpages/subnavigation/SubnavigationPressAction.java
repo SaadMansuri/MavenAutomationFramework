@@ -26,13 +26,27 @@ public class SubnavigationPressAction extends ContentPagesVerification
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            String dropdownMoreOption = "Press";
+            Press = (Press) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
+            expectedPressData = testCaseData.get("More->PressPageData");
+            expectedPressData.put("url", Press.pressPageUrl());
+            AutomationLog.info("Redirection to Press page passed");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirection to Press page failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception
     {
-        subnavigation = Page.subNavigation();
-        String dropdownMoreOption = "Press";
-        Press = (Press) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
-        expectedPressData = testCaseData.get("More->PressPageData");
-        expectedPressData.put("url", Press.pressPageUrl());
         verifyLink(Press, expectedPressData);
 
         AutomationLog.info("Testing whether Press link is active in left side started...");

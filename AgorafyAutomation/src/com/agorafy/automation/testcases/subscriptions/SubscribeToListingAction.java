@@ -189,13 +189,11 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
                 /*first search result can have multiple listings or single listing depends on that it navigates to listing details page or intermidiate page*/
                 if(multipleListingsStatus)
                 {
-                    destinationPage = "IntermidiatePage";
-                    intermidiatePage = (IntermidiatePage) propertySearch.selectFirstListingOnPropertySearchPage(destinationPage);
+                    intermidiatePage = (IntermidiatePage) propertySearch.selectFirstListingOnPropertySearchPage(multipleListingsStatus);
                 }
                 else
                 {
-                    destinationPage = "ListingDetailPage";
-                    listingDetailPage = (ListingDetailPage) propertySearch.selectFirstListingOnPropertySearchPage(destinationPage);
+                    listingDetailPage = (ListingDetailPage) propertySearch.selectFirstListingOnPropertySearchPage(multipleListingsStatus);
                 }
                 Integer windowNoToSwitch = 2;
                 HandlingWindows.switchToWindow(Page.driver, windowNoToSwitch);

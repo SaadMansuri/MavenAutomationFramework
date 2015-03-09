@@ -18,21 +18,37 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 
 public class SubnavigationSearchPropertiesAction extends ContentPagesVerification
 {
+    private SubNavigation subnavigation;
+    private SearchPropertiesPage searchProperties;
+    private HashMap<String, String> expectedSearchPropData = new HashMap<>();
+
     public SubnavigationSearchPropertiesAction()
     {
         super();
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try
+        {
+            subnavigation = Page.subNavigation();
+            searchProperties = subnavigation.clickLinkSearchProperties();
+            expectedSearchPropData  = testCaseData.get("SearchProperties");
+            expectedSearchPropData.put("url", searchProperties.getURL());
+            AutomationLog.info("Redirection to search properties page sucessful");
+        } 
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirection to search properties page failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception
     {
-        SubNavigation subnavigation = Page.subNavigation();
-        SearchPropertiesPage searchProperties = subnavigation.clickLinkSearchProperties();
-
-        HashMap<String, String> expectedSearchPropData = testCaseData.get("SearchProperties");
-        expectedSearchPropData.put("url", searchProperties.getURL());
         verifyLink(searchProperties, expectedSearchPropData);
-
         AutomationLog.info("Search Properties Page is correctly loaded");
     }
 

@@ -29,7 +29,8 @@ public class PropertySearch extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='subscribeCalloutContainer']/a"));
+            //element = driver.findElement(By.xpath(".//*[@id='subscribeCalloutContainer']/a"));
+            element = driver.findElement(By.id("subscribeCalloutContainer")).findElement(By.tagName("a"));
             AutomationLog.info("Found link Subscribe to this search in logged in case");
         }
         catch(Exception e)
@@ -167,14 +168,15 @@ public class PropertySearch extends Page
         Page page = null;
         try
         {
+            link_SubscribeToThisSearchInLoggedInCase().click();
             if(loginstatus)
             {
-                 link_SubscribeToThisSearchInLoggedInCase().click();
+                 /*link_SubscribeToThisSearchInLoggedInCase().click();*/
                  page = new MySubscriptions(driver);
             }
             else
             {
-                link_SubscribeToThisSearchInLoggedOutCase().click();
+                /*link_SubscribeToThisSearchInLoggedOutCase().click();*/
                 page = new LoginPopUp(driver);
             }
             AutomationLog.info("Successfully clicked on Subscribe to this search link ");
@@ -377,60 +379,30 @@ public class PropertySearch extends Page
         return element;
     }
 
-    public List<WebElement> elements_PropertyListings() 
-    {
-        List<WebElement> allPropertyListings = null;
-        try 
-        {
-            WebElement parent = element_SearchResultsContainer().findElement(By.className("ul-reset"));
-            allPropertyListings = parent.findElements(By.tagName("li"));
-        }
-        catch (Exception e) 
-        {
-            AutomationLog.error("Failed to find all property listings elements");
-        }
-        return allPropertyListings;
-    }
-
-    public Page selectFirstListingOnPropertySearchPage(String destinationPage) 
+    public Page selectFirstListingOnPropertySearchPage(boolean multipleListingStatus) 
     {
         Page page = null;
-        List<WebElement> allPropertyListings;
-        allPropertyListings = elements_PropertyListings();
-        if(allPropertyListings != null)
+        clickSearchResult();
+        if(multipleListingStatus)
         {
-            for(WebElement element : allPropertyListings)
-            {
-                WebElement imageElement = element.findElement(By.tagName("img"));
-                imageElement.click();
-                break;
-            }
-        }
-        switch (destinationPage)
-        {
-            case "IntermidiatePage":
             page = new IntermidiatePage(driver);
             AutomationLog.info("Since more than one listings present on this property, intermidiate page is opened");
-            break;
-
-            case "ListingDetailPage":
+        }
+        else
+        {
             page = new ListingDetailPage(driver);
             AutomationLog.info("Since only one listing is present on this property, listing details page is opened");
-            break;
-         }
+        }
         return page;
     }
 
     public boolean checkForMultiplelistingsInFirstProperty() throws Exception
     {
         boolean multipleListingsStatus = false;
-        List<WebElement> allPropertyListings;
         try 
         {
-            allPropertyListings = elements_PropertyListings();
-            for(WebElement element : allPropertyListings)
-                {
-                    if(element.findElements(By.className("listing-badge")).size()>0)
+            element = resultSet().get(0);
+            if(element.findElements(By.className("listing-badge")).size()>0)
                     {
                         multipleListingsStatus = true;
                     }
@@ -438,8 +410,6 @@ public class PropertySearch extends Page
                     {
                         multipleListingsStatus = false;
                     }
-                    break;
-                }
         }
         catch (Exception e) 
         {
