@@ -19,23 +19,36 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
  */
 public class SubnavigationTeamAction extends ContentPagesVerification 
 {
-    HashMap<String, String> expectedTeamData;
+    HashMap<String, String> expectedTeamData = new HashMap<>();
     SubNavigation subnavigation;
     Team team;
-	private ContentPagesLeftMenu leftMenu;
-	private String actualActiveLeftMenu;
-	private String expectedActiveLeftMenu;
+    private ContentPagesLeftMenu leftMenu;
+    private String actualActiveLeftMenu;
+    private String expectedActiveLeftMenu;
+
+    @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            String dropdownMoreOption = "Team";
+            team = (Team) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
+            expectedTeamData = testCaseData.get("More->TeamPageData");
+            expectedTeamData.put("url", team.teamPageUrl());
+            AutomationLog.info("Redirection to Team page sucessfull");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirection to Team page failed");
+        }
+    }
 
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        subnavigation = Page.subNavigation();
-        String dropdownMoreOption = "Team";
-        team = (Team) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
-        expectedTeamData = testCaseData.get("More->TeamPageData");
-        expectedTeamData.put("url", team.teamPageUrl());
         verifyLink(team, expectedTeamData);
-
         AutomationLog.info("Testing whether Team link is active in left side started...");
         verifyLeftMenu();
     }
