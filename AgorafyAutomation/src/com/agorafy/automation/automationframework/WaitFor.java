@@ -135,6 +135,13 @@ public class WaitFor
         wait.until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
     }
 
+    public static void waitUntilElementIsLoaded(WebDriver driver, WebElement element)
+    {
+        Integer elementwaitTimeout = Integer.parseInt(Configuration.getConfigurationValueForProperty("global-page-element-polling-timeout"));
+        WebDriverWait wait = new WebDriverWait(driver, elementwaitTimeout);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     public static void sleepFor(int millis) throws InterruptedException
     {
         Thread.sleep(millis);

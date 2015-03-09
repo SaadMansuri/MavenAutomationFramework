@@ -53,7 +53,7 @@ public class MySubscriptions extends Page
     {
         try
         {
-            element_SubscriptionWindowCloseCross().click();
+            SubscriptionWindowCloseCross().click();
             AutomationLog.info("Successfully closed Subscription Window under User's Avatar");
         }
         catch(Exception e)
@@ -82,7 +82,7 @@ public class MySubscriptions extends Page
         try
         {
             /*Wait until subscription window under user name displays*/
-            WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote"));
+        	WaitFor.waitUntilElementIsLoaded(driver, subscriptionsWindow());
             Thread.sleep(2000);
             element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[2]/div[2]/a"));
         }
@@ -94,12 +94,12 @@ public class MySubscriptions extends Page
         return element;
     }
 
-    public WebElement element_SubscriptionWindowCloseCross() throws Exception
+    public WebElement SubscriptionWindowCloseCross() throws Exception
     {
         try
         {
             /*Wait until subscription window under user name displays*/
-            WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote"));
+            WaitFor.waitUntilElementIsLoaded(driver, subscriptionsWindow());
             element = driver.findElement(By.id("subscriptionsWindowClose"));
         }
         catch(Exception e)
@@ -110,7 +110,7 @@ public class MySubscriptions extends Page
         return element;
     }
 
-    public WebElement element_SubscriptionWindow() throws Exception
+    public WebElement SubscriptionWindow() throws Exception
     {
         try
         {
@@ -139,7 +139,7 @@ public class MySubscriptions extends Page
         return element;
     }
 
-    public WebElement element_PageHeading() throws Exception
+    public WebElement PageHeading() throws Exception
     {
         try 
         {
@@ -161,7 +161,7 @@ public class MySubscriptions extends Page
 
     public String pageHeading() throws Exception
     {
-        return element_PageHeading().getText();
+        return PageHeading().getText();
     }
 
     public WebElement txtbx_SearchStringInSubscriptionWindow() throws Exception
@@ -184,7 +184,7 @@ public class MySubscriptions extends Page
         return searchString;
     }
 
-    public WebElement element_SearchSubscriptionsContainer() throws Exception 
+    public WebElement SearchSubscriptionsContainer() throws Exception 
     {
         try 
         {
@@ -200,7 +200,7 @@ public class MySubscriptions extends Page
 
     public List<WebElement> list_AllSubscribedSearches() throws Exception 
     {
-        List<WebElement> list_AllSubscribedSearches = element_SearchSubscriptionsContainer().findElements(By.tagName("li"));
+        List<WebElement> list_AllSubscribedSearches = SearchSubscriptionsContainer().findElements(By.tagName("li"));
         return list_AllSubscribedSearches;
     }
 
@@ -222,13 +222,28 @@ public class MySubscriptions extends Page
     {
         try 
         {
-        	/*Wait until subscription window under user name displays*/
-            WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote"));
-            element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[5]/a"));
+            /*Wait until subscription window under user name displays*/
+            WaitFor.waitUntilElementIsLoaded(driver, subscriptionsWindow());
+            element = subscriptionsWindow().findElement(By.linkText("View More Subscriptions")); 
         }
         catch (Exception e) 
         {
             AutomationLog.error("View more subscriptions link is not found on subscription window below profile pic");
+            throw (e);
+        }
+        return element;
+    }
+
+    public WebElement subscriptionsWindow() throws Exception 
+    {
+        try 
+        {
+            WebElement parentElement = driver.findElement(By.id("subscriptionsContainer"));
+            element = parentElement.findElement(By.tagName("blockquote")); 
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Subscriptions window container is not found on subscription window below profile pic");
             throw (e);
         }
         return element;
@@ -285,7 +300,7 @@ public class MySubscriptions extends Page
         try 
         {
             /*Wait until subscription window under user name displays*/
-            WaitFor.waitUntilElementIsLoaded(driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote"));
+            WaitFor.waitUntilElementIsLoaded(driver, subscriptionsWindow());
             element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[2]/div[1]/a"));
         }
         catch (Exception e) 
@@ -340,7 +355,7 @@ public class MySubscriptions extends Page
         }
     }
 
-    public WebElement element_ListingSubscriptionsContainer() throws Exception 
+    public WebElement ListingSubscriptionsContainer() throws Exception 
     {
         try 
         {
@@ -356,7 +371,9 @@ public class MySubscriptions extends Page
 
     public List<WebElement> list_AllSubscribedListings() throws Exception 
     {
-        List<WebElement> list_AllSubscribedListings = element_ListingSubscriptionsContainer().findElements(By.tagName("li"));
+        /*Wait until Listing Subscriptions Container on RHS in MySubscriptions page*/ 
+        WaitFor.waitUntilElementIsLoaded(driver, ListingSubscriptionsContainer());
+        List<WebElement> list_AllSubscribedListings = ListingSubscriptionsContainer().findElements(By.tagName("li"));
         return list_AllSubscribedListings;
     }
 
