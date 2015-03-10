@@ -399,25 +399,4 @@ public class SearchResultsPage extends Page
         }
         return multipleListingsStatus;
     }
-
-
-    /*public WebElement searchResultsContainer() throws Exception
-    
-
-    {
-        try
-        {
-            driver.findElement(By.id("resultsLineItems"));
-        }
-        catch(Exception e)
-        {
-            System.out.println("Results container Not found");
-        }
-        return element;
-
-    }*/
-
-
-    
-
 }
