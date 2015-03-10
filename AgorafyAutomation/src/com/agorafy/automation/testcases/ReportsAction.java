@@ -15,7 +15,7 @@ import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.Reports;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 
@@ -26,7 +26,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     private Header header = Page.header();
     private Homepage homePage = null;
     private HeaderLoginForm headerLoginForm =null;
-    private PropertySearch propertysearch = null;
+    private SearchResultsPage propertysearch = null;
     private ListingDetailPage listingdetail = null;
     
     public ReportsAction()

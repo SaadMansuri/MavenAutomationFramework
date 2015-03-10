@@ -82,8 +82,8 @@ public class MySubscriptions extends Page
         try
         {
             /*Wait until subscription window under user name displays*/
-        	WaitFor.waitUntilElementIsLoaded(driver, subscriptionsWindow());
-            Thread.sleep(2000);
+            WaitFor.waitUntilElementIsLoaded(driver, subscriptionsWindow());
+            WaitFor.sleepFor(2000);
             element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[2]/div[2]/a"));
         }
         catch(Exception e)

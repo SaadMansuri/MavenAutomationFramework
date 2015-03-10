@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.SearchResultsPage;
 
 public class LoginPopUp extends Page 
 {
@@ -216,7 +216,7 @@ public class LoginPopUp extends Page
         switch (urlOfPage[3])
         {
             case "search":
-                pageObject = new PropertySearch(driver);
+                pageObject = new SearchResultsPage(driver);
 
             break;
 

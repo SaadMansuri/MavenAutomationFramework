@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.SearchResultsPage;
 
 public class AdvancedSearchPage extends Page
 {
@@ -228,13 +228,13 @@ public class AdvancedSearchPage extends Page
         return element;
     }
 
-    public PropertySearch clickOnSearchButton() throws Exception
+    public SearchResultsPage clickOnSearchButton() throws Exception
     {
-        PropertySearch search = null;
+        SearchResultsPage search = null;
         try
         {
             btn_Search().click();
-            search = new PropertySearch(driver);
+            search = new SearchResultsPage(driver);
             AutomationLog.info("Successfully clicked on search button");
         }
         catch (Exception e)

@@ -15,7 +15,7 @@ import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.IntermidiatePage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.utilities.HandlingWindows;
@@ -26,7 +26,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
     private Homepage homePage;
     private HeaderLoginForm headerLoginForm;
     private HashMap<String, String> dataFromCSV = new HashMap<> ();
-    private PropertySearch propertySearch;
+    private SearchResultsPage propertySearch;
     private IntermidiatePage intermidiatePage = null;
     private ListingDetailPage listingDetailPage;
     private String destinationPage;

@@ -25,32 +25,16 @@ public class SearchResultsPage extends Page
         super(driver);
     }
 
-    public WebElement link_SubscribeToThisSearchInLoggedInCase() throws Exception
-    {
-        try
-        {
-            //element = driver.findElement(By.xpath(".//*[@id='subscribeCalloutContainer']/a"));
-            element = driver.findElement(By.id("subscribeCalloutContainer")).findElement(By.tagName("a"));
-            AutomationLog.info("Found link Subscribe to this search in logged in case");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not found link Subscribe to this search in logged in case");
-            throw(e);
-        }
-        return element;
-    }
-
-    public WebElement link_SubscribeToThisSearchInLoggedOutCase() throws Exception
+    public WebElement link_SubscribeToThisSearch() throws Exception
     {
         try
         {
             element = driver.findElement(By.id("subscribeCalloutContainer")).findElement(By.tagName("a"));
-            AutomationLog.info("Found link Subscribe to this search in logged out state");
+            AutomationLog.info("Found link Subscribe to this search ");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found link Subscribe to this search in logged out state");
+            AutomationLog.error("Could not found link Subscribe to this search ");
             throw(e);
         }
         return element;
@@ -90,8 +74,7 @@ public class SearchResultsPage extends Page
     {
         try
         {
-            //element = driver.findElement(By.className("filterText"));
-        	element = driver.findElement(By.xpath("//a[@data-filtertarget='size']"));
+            element = driver.findElement(By.xpath("//a[@data-filtertarget='size']"));
         }
         catch (Exception e)
         {
@@ -122,8 +105,7 @@ public class SearchResultsPage extends Page
     {
         try
         {
-            //element = driver.findElement(By.className("filterText"));
-        	element = driver.findElement(By.xpath("//a[@data-filtertarget='numBeds']"));
+            element = driver.findElement(By.xpath("//a[@data-filtertarget='numBeds']"));
         }
         catch(Exception e)
         {
@@ -137,8 +119,7 @@ public class SearchResultsPage extends Page
     {
         try
         {
-            //element = driver.findElement(By.className("filterText"));
-        	element = driver.findElement(By.xpath("//a[@data-filtertarget='price']"));
+            element = driver.findElement(By.xpath("//a[@data-filtertarget='price']"));
         }
         catch(Exception e)
         {
@@ -169,16 +150,14 @@ public class SearchResultsPage extends Page
         Page page = null;
         try
         {
-            link_SubscribeToThisSearchInLoggedInCase().click();
+            link_SubscribeToThisSearch().click();
             if(loginstatus)
             {
-                 /*link_SubscribeToThisSearchInLoggedInCase().click();*/
                  page = new MySubscriptions(driver);
             }
             else
             {
-                /*link_SubscribeToThisSearchInLoggedOutCase().click();*/
-                page = new LoginPopUp(driver);
+                 page = new LoginPopUp(driver);
             }
             AutomationLog.info("Successfully clicked on Subscribe to this search link ");
         }
@@ -367,7 +346,7 @@ public class SearchResultsPage extends Page
         return noOfSearchResults;
     }
 
-    public WebElement element_SearchResultsContainer() 
+    public WebElement searchResultsContainer() 
     {
         try 
         {
@@ -404,13 +383,13 @@ public class SearchResultsPage extends Page
         {
             element = resultSet().get(0);
             if(element.findElements(By.className("listing-badge")).size()>0)
-                    {
-                        multipleListingsStatus = true;
-                    }
-                    else
-                    {
-                        multipleListingsStatus = false;
-                    }
+            {
+                multipleListingsStatus = true;
+            }
+            else
+            {
+                multipleListingsStatus = false;
+            }
         }
         catch (Exception e) 
         {
@@ -421,7 +400,10 @@ public class SearchResultsPage extends Page
         return multipleListingsStatus;
     }
 
-    public WebElement searchResultsContainer() throws Exception
+
+    /*public WebElement searchResultsContainer() throws Exception
+    
+
     {
         try
         {
@@ -432,7 +414,10 @@ public class SearchResultsPage extends Page
             System.out.println("Results container Not found");
         }
         return element;
-    }
 
+    }*/
+
+
+    
 
 }

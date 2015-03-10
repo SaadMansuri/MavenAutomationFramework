@@ -12,7 +12,7 @@ import org.testng.Assert;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.AdvancedSearchPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
@@ -20,7 +20,7 @@ import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 public class AdvancedSearchPageAction extends AutomationTestCaseVerification
 {
     private AdvancedSearchPage advancedsearch = null;
-    private PropertySearch propsearch = null;
+    private SearchResultsPage propsearch = null;
     private ListingDetailPage listingdetail = null;
     private SubNavigation subnavigation = null;
     private List<String> list = new ArrayList<String>();
