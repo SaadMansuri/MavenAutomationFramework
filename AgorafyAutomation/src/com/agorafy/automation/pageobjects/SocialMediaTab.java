@@ -29,7 +29,6 @@ public class SocialMediaTab extends Page
             throw(e);
         }
         return element;
-        
     }
 
     public WebElement btn_SignInWithLinkedIn() throws Exception
@@ -41,7 +40,7 @@ public class SocialMediaTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Sign in with Linkedin button");
+            AutomationLog.error("Could not find Sign in with Linkedin button");
             throw(e);
         }
         return element;
@@ -60,7 +59,7 @@ public class SocialMediaTab extends Page
             throw(e);
         }
     }
-    
+
     public void clickOnSocialMediaTab() throws Exception
     {
         try
@@ -83,7 +82,7 @@ public class SocialMediaTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Connect Your Twitter Profile Textbox");
+            AutomationLog.error("Could not find Connect Your Twitter Profile Textbox");
             throw(e);
         }
         return element;
@@ -98,7 +97,7 @@ public class SocialMediaTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Save button");
+            AutomationLog.error("Could not find Save button");
             throw(e);
         }
         return element;

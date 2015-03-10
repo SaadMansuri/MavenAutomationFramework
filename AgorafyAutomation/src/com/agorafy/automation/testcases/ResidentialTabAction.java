@@ -21,7 +21,7 @@ public class ResidentialTabAction extends OverviewTabAction
     {
         try
         {
-        	residential = new ResidentialTab(Page.driver);
+            residential = new ResidentialTab(Page.driver);
             super.setup();
             residential.clickOnResidentialTab();
         }
@@ -40,16 +40,16 @@ public class ResidentialTabAction extends OverviewTabAction
 
     public void verifyIfSuccessMessageShownOnMarkingCheckboxesInAreasOfExpertiseAndClickedOnSaveButton() throws Exception
     {
-    	residential.markAllCheckboxesInAreasofExpertise();
-    	residential.clickOnSaveButton();
+        residential.markAllCheckboxesInAreasofExpertise();
+        residential.clickOnSaveButton();
         String msg = residential.msg_Success().getText();
         Assert.assertEquals(msg, "Success!", "Expected Success Message is not shown");
         AutomationLog.info("Success message is shown After marking checkboxes in areas of expertise and clicked on save button ");
     }
     public void verifyIfSuccessMessageShownOnMarkingCheckboxesInAreasOfFocusAndClickedOnSaveButton() throws Exception
     {
-    	residential.markAllCheckboxesInAreasofFocus();
-    	residential.clickOnSaveButton();
+        residential.markAllCheckboxesInAreasofFocus();
+        residential.clickOnSaveButton();
         String msg = residential.msg_Success().getText();
         Assert.assertEquals(msg, "Success!", "Expected Success Message is not shown");
         AutomationLog.info("Success message is shown After marking checkboxes in areas of focus and clicked on save button ");

@@ -26,7 +26,7 @@ public class ResidentialTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Residential Tab");
+            AutomationLog.error("Could not find Residential Tab");
             throw(e);
         }
         return element;
@@ -42,7 +42,7 @@ public class ResidentialTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Save button");
+            AutomationLog.error("Could not find Save button");
             throw(e);
         }
         return element;

@@ -3,6 +3,7 @@ package com.agorafy.automation.testcases;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -17,6 +18,7 @@ import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.OverviewTab;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.PageBanner;
+import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 
 /**
  * Preconditions: Home page is loaded and login done.
@@ -39,9 +41,9 @@ public class OverviewTabAction extends AutomationTestCaseVerification
 {
     private Homepage homePage = null;
     private HeaderLoginForm headerLoginForm = null;
-    private Header header = null;
     private Dashboard dashboard = null;
     private OverviewTab overviewTab = null;
+    private SubNavigation subnavigation = null;
     static HashMap<String,String> stateAbbMap;
     PageBanner pageBanner = null;
 
@@ -64,9 +66,8 @@ public class OverviewTabAction extends AutomationTestCaseVerification
             String Password = loginData.get("password");
             homePage = headerLoginForm.doSuccessfulLogin(UserName, Password);
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
-            header = Page.header();
-            header.openActiveProfile();
-            dashboard = header.openDashboard();
+            subnavigation = Page.subNavigation();
+            dashboard = subnavigation.clickLinkMyDashboard();
             overviewTab = dashboard.editProfile();
         }
         catch(Exception e)
@@ -315,8 +316,6 @@ public class OverviewTabAction extends AutomationTestCaseVerification
 
     public void verifyIfMoreThanFiveNeighborhoodsCanBeAddedInSpecializedNeighborhoods() throws Exception
     {
-       /* HashMap<String, String> getNeighborhood = testCaseData.get("NeighborHoods");
-        addNeighborhoodsInSpecializedNeighborhoods(getNeighborhood);*/
         overviewTab.clickOnNeighborhoodDropdown();
         Assert.assertEquals(overviewTab.msg_SelectionLimit().getText(), "You can only select 5 items", "Expected message is not shown");
         AutomationLog.info("Message is shown if try to add more than 5 neighborhoods ");

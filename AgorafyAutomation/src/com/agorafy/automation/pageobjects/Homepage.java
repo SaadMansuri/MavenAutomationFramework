@@ -258,7 +258,7 @@ public class Homepage extends Page
      
     public SearchResultsPage populateSearchTermTextBox(String boroughname,String listingcategory,String searchstring) throws Exception
     {
-        SearchResultsPage propertysearch=null;
+        SearchResultsPage searchresult=null;
         try
         {
             clickOnSelectBoroughIcon();
@@ -267,7 +267,7 @@ public class Homepage extends Page
             selectListingCategory(listingcategory);
             txtbx_SearchTerm().sendKeys(searchstring);
             clickOnSearchButtton();
-            propertysearch=new SearchResultsPage(driver);
+            searchresult = new SearchResultsPage(driver);
             WaitFor.waitUntilElementIsLoaded(driver, By.id("resultsHeader"));
             AutomationLog.info("Search is performed successfully");
         }
@@ -276,7 +276,7 @@ public class Homepage extends Page
             AutomationLog.error("Could not performed Search");
             throw(e);
         }
-        return propertysearch;
+        return searchresult;
     }
 
     public HeaderLoginForm openHeaderLoginForm() throws Exception

@@ -13,6 +13,7 @@ import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.OverviewTab;
 import com.agorafy.automation.pageobjects.Page;
+import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 
 /**
  * Preconditions: Home page is loaded and login done.
@@ -53,10 +54,10 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
 {
     private Homepage homePage = null;
     private HeaderLoginForm headerLoginForm = null;
-    private Header header = null;
     private Dashboard dashboard = null;
     private OverviewTab overviewTab = null;
     private HashMap<String, String> invalidTestData = null;
+	private SubNavigation subnavigation = null;
     static HashMap<String,String> stateAbbMap;
 
     public OverviewTabNegativeAction()
@@ -81,14 +82,9 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
             // Verify this is the correct homepage.
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
 
-            header = Page.header();
-            header.openActiveProfile();
-
-            // Verify header is displayed.
-             dashboard = header.openDashboard();
-
-            //Verify this is the correct dashboard.
-             overviewTab = dashboard.editProfile();
+            subnavigation  = Page.subNavigation();
+            dashboard = subnavigation.clickLinkMyDashboard();
+            overviewTab = dashboard.editProfile();
         }
         catch(Exception e)
         {

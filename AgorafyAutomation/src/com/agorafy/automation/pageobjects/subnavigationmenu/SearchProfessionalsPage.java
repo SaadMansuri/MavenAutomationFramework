@@ -13,11 +13,12 @@ public class SearchProfessionalsPage extends Page
 {
     private WebElement element = null;
     private List<WebElement> options = null;
+
     public SearchProfessionalsPage(WebDriver driver)
     {
         super(driver);
     }
-    
+
     public SearchProfessionalsPage()
     {
         super(driver);
@@ -73,7 +74,7 @@ public class SearchProfessionalsPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found AgentCompanySearch button ");
+            AutomationLog.error("Could not find AgentCompanySearch button ");
             throw(e);
         }
         return element;
@@ -135,7 +136,7 @@ public class SearchProfessionalsPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Agent Exclusives Count ");
+            AutomationLog.error("Could not find Agent Exclusives Count ");
         }
         return element;
     }
@@ -153,12 +154,12 @@ public class SearchProfessionalsPage extends Page
         }
         return element;
     }
-    
+
     public void clickOnCompaniesTabOnSearchProfessionals() throws Exception
     {
         try
         {
-        	link_CompaniesTab().click();
+            link_CompaniesTab().click();
             AutomationLog.info("Clicked on Companies Tab On SearchProfessionals Page");
         }
         catch(Exception e)
@@ -176,7 +177,7 @@ public class SearchProfessionalsPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Agent Search Result text");
+            AutomationLog.error("Could not find Agent Search Result text");
             throw(e);
         }
         return element;
@@ -191,7 +192,7 @@ public class SearchProfessionalsPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Company Search Result text");
+            AutomationLog.error("Could not find Company Search Result text");
             throw(e);
         }
         return element;
@@ -222,7 +223,7 @@ public class SearchProfessionalsPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not Found Company Exclusives Count");
+            AutomationLog.error("Could not Find Company Exclusives Count");
             throw(e);
         }
         return element;
@@ -296,7 +297,7 @@ public class SearchProfessionalsPage extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Selection limit message");
+            AutomationLog.error("Could not find Selection limit message");
             throw(e);
         }
         return element;
