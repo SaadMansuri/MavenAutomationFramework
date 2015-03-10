@@ -17,7 +17,7 @@ import com.agorafy.automation.pageobjects.Dashboard;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.testcases.contentpages.subnavigation.MyDashboardAction;
@@ -29,7 +29,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     private Homepage homePage;
     private HeaderLoginForm headerLoginForm;
     private HashMap<String, String> dataFromCSV = new HashMap<>();
-    private PropertySearch propertySearch;
+    private SearchResultsPage propertySearch;
     private boolean actualStatusOfElement;
     private MySubscriptions mySubscriptions; 
     private SubNavigation subNavigation;

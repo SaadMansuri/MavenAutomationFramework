@@ -10,7 +10,7 @@ import com.agorafy.automation.automationframework.AutomationTestCaseVerification
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
@@ -23,7 +23,7 @@ import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 public class ListingDetailPageAction extends AutomationTestCaseVerification 
 {
     private ListingDetailPage listingDetailPage = null;
-    private PropertySearch searchResultsPage = null;
+    private SearchResultsPage searchResultsPage = null;
 
     public ListingDetailPageAction()
     {

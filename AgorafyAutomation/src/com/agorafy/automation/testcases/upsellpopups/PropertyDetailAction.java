@@ -11,7 +11,7 @@ import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.pageobjects.upsellpopups.PropertyDetailPage;
 
@@ -23,7 +23,7 @@ import com.agorafy.automation.pageobjects.upsellpopups.PropertyDetailPage;
 public class PropertyDetailAction extends AutomationTestCaseVerification
 {
     ListingDetailPage listingDetailPage;
-    PropertySearch searchResultsPage;
+    SearchResultsPage searchResultsPage;
     PropertyDetailPage propertydetails;
     Header header=Homepage.header();
 

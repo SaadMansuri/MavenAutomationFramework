@@ -256,9 +256,9 @@ public class Homepage extends Page
         return dashboard;
     }
      
-    public PropertySearch populateSearchTermTextBox(String boroughname,String listingcategory,String searchstring) throws Exception
+    public SearchResultsPage populateSearchTermTextBox(String boroughname,String listingcategory,String searchstring) throws Exception
     {
-        PropertySearch propertysearch=null;
+        SearchResultsPage searchresult=null;
         try
         {
             clickOnSelectBoroughIcon();
@@ -267,7 +267,7 @@ public class Homepage extends Page
             selectListingCategory(listingcategory);
             txtbx_SearchTerm().sendKeys(searchstring);
             clickOnSearchButtton();
-            propertysearch=new PropertySearch(driver);
+            searchresult = new SearchResultsPage(driver);
             WaitFor.waitUntilElementIsLoaded(driver, By.id("resultsHeader"));
             AutomationLog.info("Search is performed successfully");
         }
@@ -276,7 +276,7 @@ public class Homepage extends Page
             AutomationLog.error("Could not performed Search");
             throw(e);
         }
-        return propertysearch;
+        return searchresult;
     }
 
     public HeaderLoginForm openHeaderLoginForm() throws Exception

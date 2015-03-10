@@ -16,7 +16,7 @@ import com.thoughtworks.selenium.Wait;
 public class Reports extends Page 
 {
     private WebElement element = null;
-    private PropertySearch propertysearch = null;
+    private SearchResultsPage propertysearch = null;
     private Header header = new Header(driver);
 
     public Reports(WebDriver driver) 
