@@ -15,12 +15,12 @@ import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
 
-public class PropertySearch extends Page
+public class SearchResultsPage extends Page
 {
     private WebElement element = null;
     private List<WebElement> elements = null;
 
-    public PropertySearch(WebDriver driver)
+    public SearchResultsPage(WebDriver driver)
     {
         super(driver);
     }
@@ -60,7 +60,8 @@ public class PropertySearch extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div/div/ul/li[1]/div/h2"));
+            //element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div/div/ul/li[1]/div/h2"));
+            element = driver.findElement(By.className("page-title"));
             AutomationLog.info("title found on Search Result page");
         }
         catch (Exception e)
@@ -419,5 +420,19 @@ public class PropertySearch extends Page
         }
         return multipleListingsStatus;
     }
+
+    public WebElement searchResultsContainer() throws Exception
+    {
+        try
+        {
+            driver.findElement(By.id("resultsLineItems"));
+        }
+        catch(Exception e)
+        {
+            System.out.println("Results container Not found");
+        }
+        return element;
+    }
+
 
 }
