@@ -30,7 +30,7 @@ public class CommercialTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Commercial tab ");
+            AutomationLog.error("Could not find Commercial tab ");
             throw(e);
         }
         return element;
@@ -44,7 +44,7 @@ public class CommercialTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found textbox for Exclusive Tenant Representation");
+            AutomationLog.error("Could not find textbox for Exclusive Tenant Representation");
             throw(e);
         }
         return element;
@@ -58,7 +58,7 @@ public class CommercialTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found textbox for Tenant Requirements");
+            AutomationLog.error("Could not find textbox for Tenant Requirements");
             throw(e);
         }
         return element;
@@ -72,6 +72,7 @@ public class CommercialTab extends Page
         }
         catch(Exception e)
         {
+            AutomationLog.error("Could not find characters remaining text for ExclusiveTenant");
             throw(e);
         }
         return element;
@@ -85,6 +86,7 @@ public class CommercialTab extends Page
         }
         catch(Exception e)
         {
+            AutomationLog.error("Could not find characters remaining text for TenantRequirement");
             throw(e);
         }
         return element;
@@ -177,7 +179,7 @@ public class CommercialTab extends Page
         }
         
     }
-    
+
     public void clickOnCommercialTab() throws Exception
     {
         try
@@ -232,7 +234,7 @@ public class CommercialTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could no remove specified no of characters from Exclusive Tenant Representation TextBox");
+            AutomationLog.error("Could not remove specified no of characters from Exclusive Tenant Representation TextBox");
             throw(e);
         }
     }
@@ -249,7 +251,7 @@ public class CommercialTab extends Page
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could no remove specified no of characters from Tenant Requirements TextBox");
+            AutomationLog.error("Could not remove specified no of characters from Tenant Requirements TextBox");
             throw(e);
         }
     }

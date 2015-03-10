@@ -1,7 +1,6 @@
 package com.agorafy.automation.testcases;
 
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
 
@@ -26,7 +25,7 @@ import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 public class SearchResultsAction extends AutomationTestCaseVerification
 {
     private Homepage homepage;
-    private SearchResultsPage propertysearch;
+    private SearchResultsPage searchresult;
     private LoginPopUp loginpopup;
     private Header header = Header.header();
 
@@ -41,9 +40,9 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         super.setup();
         try
         {
-            homepage=Homepage.homePage();
+            homepage = Homepage.homePage();
             HashMap<String, String> data = testCaseData.get("SearchData");
-            propertysearch = homepage.populateSearchTermTextBox(data.get("borough"),data.get("listingcategory"),data.get("searchterm"));
+            searchresult = homepage.populateSearchTermTextBox(data.get("borough"),data.get("listingcategory"),data.get("searchterm"));
             AutomationLog.info("Successfully Redirected to Property Search page ");
         }
         catch(Exception e)
@@ -67,12 +66,12 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     public void verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink() throws Exception
     {
         boolean Status = false;
-        loginpopup = (LoginPopUp) propertysearch.clickOnSubscribeToThisSearchLink(Status);
+        loginpopup = (LoginPopUp) searchresult.clickOnSubscribeToThisSearchLink(Status);
         WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
-        Assert.assertEquals(propertysearch.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
-        Assert.assertEquals(propertysearch.getTitleForLoginPopUp(loginpopup), "Log in", "Could not Get login pop up title");
+        Assert.assertEquals(searchresult.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
+        Assert.assertEquals(searchresult.getTitleForLoginPopUp(loginpopup), "Log in", "Could not Get login pop up title");
         AutomationLog.info("Clicking on Subscribe to this search link displays Login popup ");
-        propertysearch.closeLoginPoPup(loginpopup);
+        searchresult.closeLoginPoPup(loginpopup);
     }
 
     public void verifyIfSearchByBedsShowsPropertiesWithNoOfBeds() throws Exception
@@ -81,7 +80,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         header.clickOnAdvanceSearchDropDownIcon();
         header.searchByNoOfBeds("2");
         header.clickOnSearchButtonOnAdvanceSearchform();
-        result = propertysearch.NoOfBedsInPropertiesSearch();
+        result = searchresult.NoOfBedsInPropertiesSearch();
         Assert.assertEquals(result, "2", "Expected Properties with specified beds is not shown");
         AutomationLog.info("Successfully shown Properties with x beds");
     }
@@ -92,8 +91,8 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         header.searchByNoOfBeds("3");
         header.searchByNoOfBaths("3");
         header.clickOnSearchButtonOnAdvanceSearchform();
-        Assert.assertEquals(propertysearch.NoOfBedsInPropertiesSearch(), "3", "Expected Properties with specified beds is not shown");
-        Assert.assertEquals(propertysearch.NoOfBathsInPropertiesSearch(), "3", "Expected Properties with specified bath is not shown");
+        Assert.assertEquals(searchresult.NoOfBedsInPropertiesSearch(), "3", "Expected Properties with specified beds is not shown");
+        Assert.assertEquals(searchresult.NoOfBathsInPropertiesSearch(), "3", "Expected Properties with specified bath is not shown");
         AutomationLog.info("Properties with X baths And Y Beds And Different Combinations is verified");
     }
     
@@ -103,7 +102,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         header.searchByNoOfBeds("0");
         header.searchByNoOfBaths("0");
         header.clickOnSearchButtonOnAdvanceSearchform();
-        Assert.assertEquals(propertysearch.loadingMessage().getText(), "NO RESULTS FOUND.", "Expected message is Not Shown");
+        Assert.assertEquals(searchresult.loadingMessage().getText(), "NO RESULTS FOUND.", "Expected message is Not Shown");
         AutomationLog.info("Successfully verified that by searching with 0 bath and 0 bed, appropiate message comes up");
     }
 
@@ -114,22 +113,22 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         header.clickOnAdvanceSearchDropDownIcon();
         header.searchByNoOfBaths("2");
         header.clickOnSearchButtonOnAdvanceSearchform();
-        result = propertysearch.NoOfBathsInPropertiesSearch();
+        result = searchresult.NoOfBathsInPropertiesSearch();
         Assert.assertEquals(result, "2", "Expected Properties with specified baths is not shown");
         AutomationLog.info("Successfully shown Properties with x baths");
     }
 
     public void verifyIfLoginPopUpIsShownOnClickOfCreateYourProfileButton() throws Exception
     {
-        String beforURL = propertysearch.currentURL();
-        loginpopup = propertysearch.clickOnCreateProfileButton();
+        String beforURL = searchresult.currentURL();
+        loginpopup = searchresult.clickOnCreateProfileButton();
         WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
-        Assert.assertEquals(propertysearch.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
-        Assert.assertEquals(propertysearch.getTitleForLoginPopUp(loginpopup), "Log in", "Could not Get login pop up title");
+        Assert.assertEquals(searchresult.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
+        Assert.assertEquals(searchresult.getTitleForLoginPopUp(loginpopup), "Log in", "Could not Get login pop up title");
         Credentials ValidCredentials = userCredentials();
         loginpopup.populateLoginPopUpData(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-        propertysearch = (SearchResultsPage) loginpopup.clickLoginButtonOnUpsell();
-        String afterURL = propertysearch.currentURL();
+        searchresult = (SearchResultsPage) loginpopup.clickLoginButtonOnUpsell();
+        String afterURL = searchresult.currentURL();
         Assert.assertEquals(beforURL, afterURL, "Expected url match failed");
         AutomationLog.info("Clicking on Create Your Profile button displays Login popup and when logged in using valid credentials same page is shown");
     }
@@ -137,13 +136,13 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     @Override
     protected String successMessage() 
     {
-        return "Test case for LoginPopUp on PropertySearch passed";
+        return "Test case for SearchResults passed";
     }
 
     @Override
     protected String failureMessage() 
     {
-        return "Test case for LoginPopUp on PropertySearch failed";
+        return "Test case for SearchResults failed";
     }
 
 }

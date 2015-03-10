@@ -12,7 +12,7 @@ import org.testng.Assert;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.AdvancedSearchPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
@@ -20,7 +20,7 @@ import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 public class AdvancedSearchPageAction extends AutomationTestCaseVerification
 {
     private AdvancedSearchPage advancedsearch = null;
-    private PropertySearch propsearch = null;
+    private SearchResultsPage propsearch = null;
     private ListingDetailPage listingdetail = null;
     private SubNavigation subnavigation = null;
     private List<String> list = new ArrayList<String>();
@@ -51,7 +51,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     {
         verifyIfResidentialListingCategoryIsSelected();
         verifyIfEmptySearchPerformed();
-        verifyIfCommercialRadioButtonClicked();
+        verifyIfCommercialListingCategoryIsSelected();
         verifySearchByCommercial();
         verifySearchByResidential();
     }
@@ -60,9 +60,9 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     {
         advancedsearch.clickOnResidentialRadioButton();
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Assert.assertEquals(advancedsearch.dropdown_ResidentialOnly().isDisplayed(), true, "Expected residential only drop down not shown");
-        Assert.assertEquals(advancedsearch.txtboxes_ResidentialOnly().isDisplayed(), true, "Expected residential only textboxes not shown");
-        AutomationLog.info("Clicking on Residential radio button shows residential only drop down and textboxes");
+        Assert.assertEquals(advancedsearch.dropdown_PropertyType().isDisplayed(), true, "Expected residential only drop down not shown");
+        Assert.assertEquals(advancedsearch.txtboxes_BedsNBaths().isDisplayed(), true, "Expected residential only textboxes not shown");
+        AutomationLog.info("Clicking on Residential radio button shows PropertyType drop down and Beds and Baths textboxes");
     }
 
     public void verifyIfEmptySearchPerformed() throws Exception
@@ -72,13 +72,13 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         AutomationLog.info("Search Input field is mandatory");
     }
 
-    public void verifyIfCommercialRadioButtonClicked() throws Exception
+    public void verifyIfCommercialListingCategoryIsSelected() throws Exception
     {
         advancedsearch.clickOnCommercialRadioButton();
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Assert.assertEquals(advancedsearch.dropdown_ResidentialOnly().isDisplayed(), false, "Expected residential only drop down not shown");
-        Assert.assertEquals(advancedsearch.txtboxes_ResidentialOnly().isDisplayed(), false, "Expected residential only textboxes not shown");
-        AutomationLog.info("Clicking back to commercial radio button hides residential only fields");
+        Assert.assertEquals(advancedsearch.dropdown_PropertyType().isDisplayed(), false, "Expected residential only drop down not shown");
+        Assert.assertEquals(advancedsearch.txtboxes_BedsNBaths().isDisplayed(), false, "Expected residential only textboxes not shown");
+        AutomationLog.info("Clicking on commercial radio button hides PropertyType drop down and Beds and Baths textboxes");
     }
 
     public void verifySearchByCommercial() throws Exception
@@ -92,7 +92,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
 
     public void verifySearchByResidential() throws Exception
     {
-    	HashMap<String, String> searchData = testCaseData.get("SearchResidential");
+        HashMap<String, String> searchData = testCaseData.get("SearchResidential");
         searchResidential(searchData);
     }
 

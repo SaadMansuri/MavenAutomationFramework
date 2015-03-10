@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.SearchResultsPage;
 
 public class AdvancedSearchPage extends Page
 {
@@ -94,7 +94,7 @@ public class AdvancedSearchPage extends Page
         } 
         catch (Exception e) 
         {
-            AutomationLog.error("Could not found radio button for commercial listing");
+            AutomationLog.error("Could not find radio button for commercial listing");
             throw(e);
         }
         return element;
@@ -133,25 +133,25 @@ public class AdvancedSearchPage extends Page
         try 
         {
             radiobtn_Residential().click();
-            AutomationLog.info("Successfully clicked on residential radio butoon");
+            AutomationLog.info("Successfully clicked on Residential radio butoon");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Could not click on residential radio button");
+            AutomationLog.error("Could not click on Residential radio button");
             throw(e);
         }
     }
 
-    public WebElement dropdown_ResidentialOnly() throws Exception
+    public WebElement dropdown_PropertyType() throws Exception
     {
         try 
         {
             element = driver.findElement(By.xpath(".//*[@id='advancedSearchFormContainer']/div[5]"));
-            AutomationLog.info("Drop down for Residential Only is found");
+            AutomationLog.info("PropertyType drop down is found");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Could not found drop down for residential only");
+            AutomationLog.error("Could not find drop down for PropertyType");
             throw(e);
         }
         return element;
@@ -165,7 +165,7 @@ public class AdvancedSearchPage extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Could not fould Search Input text box");
+            AutomationLog.error("Could not find Search Input text box");
             throw(e);
         }
         return element;
@@ -179,7 +179,7 @@ public class AdvancedSearchPage extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Could not fould Size Input text box");
+            AutomationLog.error("Could not find Size Input text box");
             throw(e);
         }
         return element;
@@ -193,22 +193,22 @@ public class AdvancedSearchPage extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Could not fould Price text box");
+            AutomationLog.error("Could not find Price text box");
             throw(e);
         }
         return element;
     }
 
-    public WebElement txtboxes_ResidentialOnly() throws Exception
+    public WebElement txtboxes_BedsNBaths() throws Exception
     {
         try 
         {
             element = driver.findElement(By.cssSelector(".row.clearfix.residential-only"));
-            AutomationLog.info("Residential Only text boxes found");
+            AutomationLog.info("Text boxe for Beds and Baths found");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not fould text boxes for residential only");
+            AutomationLog.error("could not find text boxe for Beds and Baths");
             throw(e);
         }
         return element;
@@ -222,19 +222,19 @@ public class AdvancedSearchPage extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Could not fould Search button");
+            AutomationLog.error("Could not find Search button");
             throw(e);
         }
         return element;
     }
 
-    public PropertySearch clickOnSearchButton() throws Exception
+    public SearchResultsPage clickOnSearchButton() throws Exception
     {
-        PropertySearch search = null;
+        SearchResultsPage search = null;
         try
         {
             btn_Search().click();
-            search = new PropertySearch(driver);
+            search = new SearchResultsPage(driver);
             AutomationLog.info("Successfully clicked on search button");
         }
         catch (Exception e)

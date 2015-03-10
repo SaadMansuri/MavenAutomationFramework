@@ -38,7 +38,6 @@ public class SocialMediaTabAction extends OverviewTabAction
         verifyIfSuccessMessageShownOnEnteringTwitterProfileAndClickedOnSaveButton();
     }
 
-
     public void verifyIfSuccessMessageShownOnEnteringTwitterProfileAndClickedOnSaveButton() throws Exception
     {
         HashMap<String, String> profile = testCaseData.get("validTwitterProfile");
