@@ -12,7 +12,7 @@ import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
 /**
@@ -23,14 +23,14 @@ import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
  * verify that Only properties with 'x+' baths and 'y+' beds and different combinations of those only displayed on results page
  * verify if user searches for zero baths and zero beds shows no results found
  */
-public class PropertySearchAction extends AutomationTestCaseVerification
+public class SearchResultsAction extends AutomationTestCaseVerification
 {
     private Homepage homepage;
-    private PropertySearch propertysearch;
+    private SearchResultsPage propertysearch;
     private LoginPopUp loginpopup;
     private Header header = Header.header();
 
-    public PropertySearchAction()
+    public SearchResultsAction()
     {
         super();
     }
@@ -128,7 +128,7 @@ public class PropertySearchAction extends AutomationTestCaseVerification
         Assert.assertEquals(propertysearch.getTitleForLoginPopUp(loginpopup), "Log in", "Could not Get login pop up title");
         Credentials ValidCredentials = userCredentials();
         loginpopup.populateLoginPopUpData(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-        propertysearch = (PropertySearch) loginpopup.clickLoginButtonOnUpsell();
+        propertysearch = (SearchResultsPage) loginpopup.clickLoginButtonOnUpsell();
         String afterURL = propertysearch.currentURL();
         Assert.assertEquals(beforURL, afterURL, "Expected url match failed");
         AutomationLog.info("Clicking on Create Your Profile button displays Login popup and when logged in using valid credentials same page is shown");
