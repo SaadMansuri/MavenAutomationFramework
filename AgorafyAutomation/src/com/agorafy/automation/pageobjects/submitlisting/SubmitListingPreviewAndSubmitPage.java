@@ -30,7 +30,7 @@ public class SubmitListingPreviewAndSubmitPage extends Page
        } 
        catch (Exception e) 
        {
-           AutomationLog.error("Could not found Listing Submit form");
+           AutomationLog.error("Could not find Listing Submit form");
            throw(e);
        }
        return element;
@@ -70,6 +70,7 @@ public class SubmitListingPreviewAndSubmitPage extends Page
     {
         return contacts.txtbx_Name().getAttribute("value");
     }
+
     public String Contact_RepresentingAs() throws Exception
     {
         return contacts.dropdown_RepresentingAs().getAttribute("value");
@@ -104,12 +105,12 @@ public class SubmitListingPreviewAndSubmitPage extends Page
     {
         return locationPage.txtbx_City().getAttribute("value");
     }
-    
+
     public String Location_State() throws Exception
     {
         return locationPage.txtbx_State().getAttribute("value");
     }
-    
+
     public String Location_ZipCode() throws Exception
     {
         return locationPage.txtbx_ZipCode().getAttribute("value");
@@ -119,17 +120,17 @@ public class SubmitListingPreviewAndSubmitPage extends Page
     {
         return detailsRetailPage.txtbx_AskingPrice().getAttribute("value");
     }
-    
+
     public String Details_Frontage() throws Exception
     {
         return detailsRetailPage.txtbx_Frontage().getAttribute("value");
     }
-    
+
     public String Details_CeilingHeight() throws Exception
     {
         return detailsRetailPage.txtbx_CeilingHeight().getAttribute("value");
     }
-    
+
     public String Details_Description() throws Exception
     {
         return detailsRetailPage.txtbx_Description().getAttribute("value");

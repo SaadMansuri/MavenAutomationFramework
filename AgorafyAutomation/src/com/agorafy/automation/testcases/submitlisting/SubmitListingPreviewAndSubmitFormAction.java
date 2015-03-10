@@ -59,7 +59,6 @@ public class SubmitListingPreviewAndSubmitFormAction extends SubmitListingBaseAc
         testLocationFormStateData();
         testLocationFormCityData();
         testLocationFormZipCodeData();
-
         AutomationLog.info("same data reflects back in preview and submit form as added in location form");
     }
 
@@ -251,13 +250,13 @@ public class SubmitListingPreviewAndSubmitFormAction extends SubmitListingBaseAc
     @Override
     protected String successMessage() 
     {
-        return null;
+        return "test cases for Preview And Submit form passed";
     }
 
     @Override
     protected String failureMessage() 
     {
-        return null;
+        return "test cases for Preview And Submit form failed";
     }
 
 }
