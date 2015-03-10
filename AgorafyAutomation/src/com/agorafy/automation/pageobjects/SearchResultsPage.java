@@ -398,5 +398,4 @@ public class SearchResultsPage extends Page
         }
         return multipleListingsStatus;
     }
-
 }
