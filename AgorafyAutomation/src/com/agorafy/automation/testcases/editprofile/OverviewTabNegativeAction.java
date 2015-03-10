@@ -1,4 +1,4 @@
-package com.agorafy.automation.testcases;
+package com.agorafy.automation.testcases.editprofile;
 
 import java.util.HashMap;
 
@@ -8,10 +8,9 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Dashboard;
-import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
-import com.agorafy.automation.pageobjects.OverviewTab;
+import com.agorafy.automation.pageobjects.editprofile.OverviewTab;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 

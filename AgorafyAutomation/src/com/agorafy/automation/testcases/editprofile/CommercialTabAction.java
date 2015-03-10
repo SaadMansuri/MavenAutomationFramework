@@ -1,11 +1,11 @@
-package com.agorafy.automation.testcases;
+package com.agorafy.automation.testcases.editprofile;
 
 import java.util.HashMap;
 
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.pageobjects.CommercialTab;
+import com.agorafy.automation.pageobjects.editprofile.CommercialTab;
 import com.agorafy.automation.pageobjects.Page;
 
 /**

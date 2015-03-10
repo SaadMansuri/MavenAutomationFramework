@@ -1,4 +1,4 @@
-package com.agorafy.automation.pageobjects;
+package com.agorafy.automation.pageobjects.editprofile;
 
 import java.util.List;
 
@@ -6,8 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.datamodel.profile.UserProfile;
+import com.agorafy.automation.pageobjects.Page;
 
 public class OverviewTab extends Page 
 {

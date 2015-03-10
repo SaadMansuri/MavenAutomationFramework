@@ -1,4 +1,4 @@
-package com.agorafy.automation.pageobjects;
+package com.agorafy.automation.pageobjects.editprofile;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.Page;
 
 public class SocialMediaTab extends Page
 {
