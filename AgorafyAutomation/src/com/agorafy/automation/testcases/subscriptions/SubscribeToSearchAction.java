@@ -53,6 +53,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             dataFromCSV = testCaseData.get("SearchInputCombination");
             propertySearch = homePage.populateSearchTermTextBox(dataFromCSV.get("boroughname"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchstring"));
+            AutomationLog.info("Setup for Subscribe to search passed");
         }
         catch (Exception e)
         {
@@ -164,7 +165,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         mySubscriptions = (MySubscriptions) propertySearch.clickOnSubscribeToThisSearchLink(status);
         mySubscriptions.clickSubscribeInSubscriptionWindow();
         actualStatusOfElement = false;
-        actualStatusOfElement = propertySearch.link_SubscribeToThisSearchInLoggedInCase().isDisplayed();
+        actualStatusOfElement = propertySearch.link_SubscribeToThisSearch().isDisplayed();
         Assert.assertEquals(actualStatusOfElement, false, "Subscribe to this search link still persists, it should be vanished");
         AutomationLog.info("Subscribe to this search link vanishes sucessfully");
         mySubscriptions.closeSubscriptionWindow();

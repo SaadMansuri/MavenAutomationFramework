@@ -18,7 +18,7 @@ public class IntermidiatePage extends Page
         super(driver);
     }
 
-    public List<WebElement> elements_AllListingsInCurrentProperty() throws Exception 
+    public List<WebElement> allListingsInCurrentProperty() throws Exception 
     {
         List<WebElement> allListingElements = null;
         try 
@@ -38,8 +38,7 @@ public class IntermidiatePage extends Page
     public ListingDetailPage selectFirstListingOnIntermidiatePage() throws Exception
     {
         ListingDetailPage listingDetailPage;
-        List<WebElement> allListingElements = elements_AllListingsInCurrentProperty();
-        for(WebElement singleListing : allListingElements)
+        for(WebElement singleListing : allListingsInCurrentProperty())
         {
             singleListing.click();
             break;

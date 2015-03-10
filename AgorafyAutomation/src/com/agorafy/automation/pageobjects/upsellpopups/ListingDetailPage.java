@@ -15,7 +15,7 @@ import com.agorafy.automation.pageobjects.Page;
 public class ListingDetailPage extends LoginPopUp
 {
 
-	WebElement element = null;
+    WebElement element = null;
     List <WebElement> elements = null;
     String CurrentUrl = null;
 
@@ -33,7 +33,8 @@ public class ListingDetailPage extends LoginPopUp
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='subscriptionSectionLink']/div[2]/a"));
+            WebElement parent = driver.findElement(By.id("subscriptionSectionLink"));
+            element = parent.findElement(By.className("subscriptionsAddContainer")).findElement(By.tagName("a"));
             AutomationLog.info("Subscribe to listing link in logged in state found on Listing Detail Page");
         }
         catch(Exception e)
