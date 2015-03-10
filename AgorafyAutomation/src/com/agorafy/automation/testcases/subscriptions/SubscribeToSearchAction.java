@@ -17,7 +17,7 @@ import com.agorafy.automation.pageobjects.Dashboard;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PropertySearch;
+import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.testcases.contentpages.subnavigation.MyDashboardAction;
@@ -29,7 +29,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     private Homepage homePage;
     private HeaderLoginForm headerLoginForm;
     private HashMap<String, String> dataFromCSV = new HashMap<>();
-    private PropertySearch propertySearch;
+    private SearchResultsPage propertySearch;
     private boolean actualStatusOfElement;
     private MySubscriptions mySubscriptions; 
     private SubNavigation subNavigation;
@@ -53,6 +53,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             dataFromCSV = testCaseData.get("SearchInputCombination");
             propertySearch = homePage.populateSearchTermTextBox(dataFromCSV.get("boroughname"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchstring"));
+            AutomationLog.info("Setup for Subscribe to search passed");
         }
         catch (Exception e)
         {
@@ -164,7 +165,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         mySubscriptions = (MySubscriptions) propertySearch.clickOnSubscribeToThisSearchLink(status);
         mySubscriptions.clickSubscribeInSubscriptionWindow();
         actualStatusOfElement = false;
-        actualStatusOfElement = propertySearch.link_SubscribeToThisSearchInLoggedInCase().isDisplayed();
+        actualStatusOfElement = propertySearch.link_SubscribeToThisSearch().isDisplayed();
         Assert.assertEquals(actualStatusOfElement, false, "Subscribe to this search link still persists, it should be vanished");
         AutomationLog.info("Subscribe to this search link vanishes sucessfully");
         mySubscriptions.closeSubscriptionWindow();

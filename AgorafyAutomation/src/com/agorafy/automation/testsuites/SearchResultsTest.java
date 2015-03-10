@@ -4,9 +4,9 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.PropertySearchAction;
+import com.agorafy.automation.testcases.SearchResultsAction;
 
-public class PropertySearchTest 
+public class SearchResultsTest 
 {
     @BeforeSuite
     public void Init()
@@ -20,7 +20,7 @@ public class PropertySearchTest
     {
         try
         {
-            new PropertySearchAction().Execute();
+            new SearchResultsAction().Execute();
         }
         catch (Exception e) 
         {
