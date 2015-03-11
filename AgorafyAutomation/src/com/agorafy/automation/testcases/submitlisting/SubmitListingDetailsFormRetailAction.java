@@ -34,17 +34,24 @@ public class SubmitListingDetailsFormRetailAction extends SubmitListingBaseActio
     public void setup()
     {
         super.setup();
+        try 
+        {
+            /*set up which fills location form and navigates to details page and then clicks retail option*/
+            locationAction = new SubmitListingLocationFormAction();
+            dataFromCSV = testCaseData.get("LocationCombination16");
+            detailsBasePage = locationPage.fillLocationFormAndClickSaveAndContinue(dataFromCSV);
+            detailsRetailPage = (SubmitListingDetailsFormRetailPage) detailsBasePage.selectListingTypeDropdown("Retail");
+            AutomationLog.info("Setup to reach Details-Retails page passed");
+        } 
+        catch (Exception e) 
+        {
+            AutomationLog.error("Setup to reach Details-Retails page failed");
+        }
     }
 
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        /*set up which fills location form and navigates to details page and then clicks retail option*/
-        locationAction = new SubmitListingLocationFormAction();
-        dataFromCSV = testCaseData.get("LocationCombination16");
-        detailsBasePage = locationPage.fillLocationFormAndClickSaveAndContinue(dataFromCSV);
-        detailsRetailPage = (SubmitListingDetailsFormRetailPage) detailsBasePage.selectListingTypeDropdown("Retail");
-
         AutomationLog.info("verifying All Drop Down Options started...");
         verifyAllDropDownOptions();
 
