@@ -39,7 +39,7 @@ public class SubscriptionsTest
     {
         try
         {
-            new SubscribeToListingAction().Execute();
+
         }
         catch(Exception e)
         {
