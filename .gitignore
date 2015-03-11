@@ -6,3 +6,5 @@
 *.class
 *.html
 *.xml
+*.css
+*.js
