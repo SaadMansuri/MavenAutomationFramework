@@ -11,16 +11,16 @@ import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PageBanner;
+import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 
 public abstract class AccountSettingsBaseAction extends AutomationTestCaseVerification
 {
     protected Homepage homePage = null;
     protected HeaderLoginForm loginForm = null;
-    protected Header header = null;
     protected Dashboard dashboard = null;
+    protected Header header = null;
     protected AccountSettings accountSettings = null;
-    protected PageBanner pageBanner = null;
+    protected SubNavigation subnavigation = null;;
 
     protected AccountSettingsBaseAction()
     {
@@ -38,12 +38,10 @@ public abstract class AccountSettingsBaseAction extends AutomationTestCaseVerifi
 
             HashMap<String, String> expectedLoginData = testCaseData.get("validCredential");
             homePage = loginForm.doSuccessfulLogin(expectedLoginData.get("username"),expectedLoginData.get("password"));
-
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
-            header = Homepage.header();
-            header.openActiveProfile();
-            dashboard = header.openDashboard();
-            pageBanner = dashboard.pageBanner();
+
+            subnavigation = Page.subNavigation();
+            dashboard = subnavigation.clickLinkMyDashboard();
             accountSettings = dashboard.accountSettings();
         }
         catch (Exception e)
