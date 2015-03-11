@@ -41,7 +41,7 @@ public class SubmitListingTest
     {
         try
         {
-            new SubmitListingDetailsFormRetailAction().Execute();
+            //new SubmitListingDetailsFormRetailAction().Execute();
             new SubmitListingDetailsFormOfficeAction().Execute();
             new SubmitListingDetailsFormResidentialAction().Execute();
             new SubmitListingDetailsFormPropertyAction().Execute();
