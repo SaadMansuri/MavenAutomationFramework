@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.testcases.HomepageAction;
-import com.agorafy.automation.testcases.LoginAttemptsAction;
 import com.agorafy.automation.testcases.LoginNegativeTestsHeaderFormAction;
 import com.agorafy.automation.testcases.LoginNegativeTestsPageFormAction;
 import com.agorafy.automation.testcases.LoginPositiveTestPageFormAction;

@@ -85,8 +85,7 @@ public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
     private void populateFields(PersonalInfo personalInfo, UserProfile profileData) throws Exception
     {
         personalInfo.populateData(profileData);
-        //personalInfo = personalInfo.clickOnSaveChangesBtn();
-        personalInfo.clickOnSaveChangesBtn();
+        personalInfo = personalInfo.clickOnSaveChangesBtn();
         WaitFor.waitForPageToLoad(Page.driver);
         Assert.assertEquals(personalInfo.successMessage(),expectedpersonalInfoData.get("successMessage"),"Success Message is not shown after valid changes have been made");
         AutomationLog.info("Success Message is shown after valid changes have been made");
