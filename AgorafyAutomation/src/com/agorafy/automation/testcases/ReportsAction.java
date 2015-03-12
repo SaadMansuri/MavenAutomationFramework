@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -90,11 +89,9 @@ public class ReportsAction extends AutomationTestCaseVerification
     public void verifyIfClickingOnPinCushionReportIconIncrementsReportsCount() throws Exception
     {
         int beforeCount = Integer.parseInt(reports.getReportCount());
-        System.out.println(beforeCount);
         addReportUsingPinCushionReportIcon();
         WaitFor.sleepFor(10000);
         int afterCount = Integer.parseInt(reports.getReportCount());
-        System.out.println(afterCount);
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(afterCount, beforeCount+1, "Expected Reports Count is not incremented");
         AutomationLog.info("Clicking PinCushionReport icon Increments the Reports Count");
@@ -194,11 +191,9 @@ public class ReportsAction extends AutomationTestCaseVerification
     public void verifyIfClickingRemoveFromReportLinkOnListingDetailPageDecrementsReportsCount() throws Exception
     {
         int beforcount = Integer.parseInt(reports.getReportCount());
-        System.out.println(beforcount);
         listingdetail.clickOnRemoveFromReportLink();
         WaitFor.sleepFor(10000);
         int aftercount = Integer.parseInt(reports.getReportCount());
-        System.out.println(aftercount);
 
         Assert.assertEquals(aftercount, beforcount-1, "Expected reports count is not decremented ");
         Assert.assertEquals(listingdetail.link_addToReport().isDisplayed(), true, "Expected addToReport link is not shown");
