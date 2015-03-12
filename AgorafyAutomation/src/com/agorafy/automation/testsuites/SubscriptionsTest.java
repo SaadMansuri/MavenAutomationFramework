@@ -1,8 +1,4 @@
 package com.agorafy.automation.testsuites;
-
-
-
-
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
@@ -12,7 +8,7 @@ import com.agorafy.automation.testcases.subscriptions.SubscribeToSearchAction;
 
 
 
-public class SubscriptionsTest 
+public class SubscriptionsTest
 {
     @BeforeSuite
     public void Init() throws Exception
