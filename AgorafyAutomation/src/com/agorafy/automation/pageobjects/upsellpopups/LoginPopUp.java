@@ -104,7 +104,7 @@ public class LoginPopUp extends Page
     {
         try
         {
-            element = driver.findElement(By.className("ui-icon-closethick"));
+            element = driver.findElement(getCloseIconLocator());
         }
         catch(Exception e)
         {
@@ -251,4 +251,9 @@ public class LoginPopUp extends Page
         }
         return bool;
      }
+
+    public By getCloseIconLocator()
+    {
+        return By.className("ui-icon-closethick");
+    }
 }
