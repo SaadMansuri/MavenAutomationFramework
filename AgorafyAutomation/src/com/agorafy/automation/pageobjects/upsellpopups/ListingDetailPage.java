@@ -29,32 +29,17 @@ public class ListingDetailPage extends LoginPopUp
         return PageFactory.initElements(driver, ListingDetailPage.class);
     }
 
-    public WebElement link_SubscribeToListingInLoggedInState() throws Exception
+    public WebElement link_SubscribeToListing() throws Exception
     {
         try
         {
             WebElement parent = driver.findElement(By.id("subscriptionSectionLink"));
-            element = parent.findElement(By.className("subscriptionsAddContainer")).findElement(By.tagName("a"));
-            AutomationLog.info("Subscribe to listing link in logged in state found on Listing Detail Page");
+            element = parent.findElement(By.linkText("Subscribe to listing"));
+            AutomationLog.info("Subscribe to listing link found on Listing Detail Page");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Subscribe to listing link in logged in state not found on Listing Detail Page");
-            throw(e);
-        }
-        return element;
-    }
-
-    public WebElement link_SubscribeToListingInLoggedOutState() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.className("subscriptionsAddContainer")).findElement(By.tagName("a"));
-            AutomationLog.info("Subscribe to listing link in logged out state found on Listing Detail Page");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Subscribe to listing link link in logged out state not found on Listing Detail Page");
+            AutomationLog.error("Subscribe to listing link not found on Listing Detail Page");
             throw(e);
         }
         return element;
@@ -63,16 +48,15 @@ public class ListingDetailPage extends LoginPopUp
     public Page clickOnSubscribeToListingLink(boolean loginStatus) throws Exception
     {
         Page page = null;
+        link_SubscribeToListing().click();
         try
         {
             if(loginStatus)
             {
-                link_SubscribeToListingInLoggedInState().click();
                 page = new ListingDetailPage(driver);
             }
             else
             {
-            	link_SubscribeToListingInLoggedOutState().click();
                 WaitFor.ElementToBeDisplayed(driver, getLoginPopUpLocator());
                 page = new LoginPopUp(driver);
             }
@@ -90,7 +74,8 @@ public class ListingDetailPage extends LoginPopUp
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='subscriptionSectionLink']/div[1]/a"));
+            WebElement parent = driver.findElement(By.id("subscriptionSectionLink"));
+            element = parent.findElement(By.linkText("Unsubscribe listing"));
             AutomationLog.info("UnSubscribe listing link found on Listing Detail Page");
         }
         catch(Exception e)

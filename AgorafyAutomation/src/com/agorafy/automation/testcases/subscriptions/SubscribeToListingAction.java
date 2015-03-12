@@ -19,7 +19,14 @@ import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.utilities.HandlingWindows;
-
+/**
+ * Precondition:Do valid login
+ * Search for a particular input combination
+ * Check for single or multiple listings
+ * If multiple listings present then navigate to Intermidiate page and then to listing details page
+ * If single listing present then navigate to listing details page
+ * Verify test cases on listing details page for Subscribe to listing
+ */
 public class SubscribeToListingAction extends AutomationTestCaseVerification
 {
 
@@ -29,7 +36,6 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
     private SearchResultsPage propertySearch;
     private IntermidiatePage intermidiatePage = null;
     private ListingDetailPage listingDetailPage;
-    private String destinationPage;
     private Header header = Header.header(); 
     private MySubscriptions mySubscriptions;
     private boolean loginStatus;
@@ -109,7 +115,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         mySubscriptions.clickSubscribeToRespectiveListingInSubscriptionWindow();
         dataFromCSV = testCaseData.get("ExpectedUnsubscribeToListingText");
         String expectedString = dataFromCSV.get("ExpectedText");
-        Thread.sleep(1000);
+        WaitFor.sleepFor(1000);
         String actualStringAfterSubscribeListing = listingDetailPage.link_UnsubscribeListing().getText();
         Assert.assertEquals(actualStringAfterSubscribeListing, expectedString, "After performing click operation on Subscribe to respective listing in subscription window, Subscribe to listing does not change to unsubscribe listing on listing details page");
         AutomationLog.info("After performing click operation on Subscribe to respective listing in subscription window, Subscribe to listing changes to unsubscribe listing on listing details page");
@@ -141,9 +147,9 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
             String listingNameOnListingDetailsPage = listingDetailPage.txt_listingTitle();
             expectedString = expectedString.concat(listingNameOnListingDetailsPage);
             expectedString = expectedString.replaceAll("Property Details", "");
-            Thread.sleep(1000);
+            WaitFor.sleepFor(1000);
             String actualStringAfterSubscribing = mySubscriptions.txt_UnsubscrubeFromRespectiveListingInSubscriptionWindow();
-            actualStringAfterSubscribing = actualStringAfterSubscribing.replaceAll("Property Details", "");
+            /*actualStringAfterSubscribing = actualStringAfterSubscribing.replaceAll("Property Details", "");*/
             Assert.assertEquals(actualStringAfterSubscribing, expectedString, "Subscribe to respective listing option in subscription window below profile pic does not change to Unsubscribe from listing after click performed");
             AutomationLog.info("Subscribe to respective listing option in subscription window below profile pic changes to Unsubscribe from listing after click performed");
             mySubscriptions.clickUnsubscribeFromRespectiveListingInSubscriptionWindow();
@@ -162,7 +168,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         try 
         {
             listingDetailPage.clickOnSubscribeToListingLink(loginStatus);
-            Thread.sleep(1000);
+            WaitFor.sleepFor(1000);
             String actualSubscribeStatus = listingDetailPage.link_UnsubscribeListing().getText();
             dataFromCSV = testCaseData.get("ExpectedUnsubscribeToListingText");
             String expectedSubscriptionStatus = dataFromCSV.get("ExpectedText");
@@ -186,7 +192,8 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
             {
                 boolean multipleListingsStatus;
                 multipleListingsStatus = propertySearch.checkForMultiplelistingsInFirstProperty();
-                /*first search result can have multiple listings or single listing depends on that it navigates to listing details page or intermidiate page*/
+                /*first search result can have multiple listings or single listing
+              *  depends on that it navigates to listing details page or intermidiate page*/
                 if(multipleListingsStatus)
                 {
                     intermidiatePage = (IntermidiatePage) propertySearch.selectFirstListingOnPropertySearchPage(multipleListingsStatus);

@@ -299,7 +299,7 @@ public class MySubscriptions extends Page
     {
         try 
         {
-            /*Wait until subscription window under user name displays*/
+            //Wait until subscription window under user name displays
             WaitFor.waitUntilElementIsLoaded(driver, subscriptionsWindow());
             element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[2]/div[1]/a"));
         }
@@ -331,7 +331,7 @@ public class MySubscriptions extends Page
     {
         try
         {
-            option_UnsubscribeFromRespectiveListing().click();
+        	option_UnsubscribeFromRespectiveListing().click();
             AutomationLog.info("Successfully clicked Unsubscribe From Respective Listing in Subscription Window under User's pic");
         }
         catch(Exception e)

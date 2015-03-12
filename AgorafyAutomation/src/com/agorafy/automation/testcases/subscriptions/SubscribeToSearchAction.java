@@ -21,8 +21,11 @@ import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.testcases.contentpages.subnavigation.MyDashboardAction;
-
-/*Test case data required for this action needs to be changed each time, otherwise it will be useless to run this action class*/
+/**
+ * Precondition:Do valid login
+ * Search for a particular criteria
+ * Verify test cases for subscribe to search on rearch results page
+ */
 public class SubscribeToSearchAction extends AutomationTestCaseVerification 
 {
 
@@ -122,7 +125,6 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
             boolean actualViewMoreSubscriptionsLinkStatus = mySubscriptions.link_ViewMoreSubscriptions().isDisplayed();
             boolean expectedViewMoreSubscriptionsLinkStatus = true;
             Assert.assertEquals(actualViewMoreSubscriptionsLinkStatus, expectedViewMoreSubscriptionsLinkStatus, "View More Subscriptions link is not found on subscriptions window under profile pic");
-            //WaitFor.waitUntilElementIsLoaded(Page.driver, By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[5]/a"));
             AutomationLog.info("View More Subscriptions link is found in subcriptions window");
         }
         catch (Exception e) 

@@ -48,13 +48,16 @@ public class SubmitListingLocationFormAction extends SubmitListingBaseAction
     {
         try
         {
-             //Since, we can't add empty values in CSV file, we have to set key's in hashmap for all fields
+             /*Since, we can't add empty values in CSV file, 
+             we have to set key's in hashmap for all fields*/
+
             setkeysOfDataFromCSV();
 
             //for all empty combinations
             clearCurrentForm();
             locationPage.clickSaveAndContinue();
-            //when we are on current form its CSS display property= block and we check that property to check whether we are on same or different form
+            /*when we are on current form its CSS display property= block 
+             * and we check that property to check whether we are on same or different form*/
             Assert.assertEquals(locationPage.form_Location().isDisplayed(), true, "Location form with all empty fields should not navigate to next page");
             AutomationLog.info("Location form with all empty fields stays on same page");
 
@@ -62,7 +65,8 @@ public class SubmitListingLocationFormAction extends SubmitListingBaseAction
             for(Integer combinationNo=2; combinationNo<15; combinationNo++)
             {
                 getCombination = "LocationCombination"+combinationNo ;
-                //We use para to locate location combination no in CSV file, see CSV file for more info 
+                /*We use para to locate location combination no in CSV file, 
+                 * see CSV file for more info*/ 
                 dataFromCSV = testCaseData.get(getCombination);
                 setValuesOfDataFromCSV(dataFromCSV);
                 clearCurrentForm();
@@ -83,7 +87,8 @@ public class SubmitListingLocationFormAction extends SubmitListingBaseAction
     {
         try
         {
-             //Since, we can't add empty values in CSV file, we have to set key's in hashmap for all fields
+             /*Since, we can't add empty values in CSV file, 
+              * we have to set key's in hashmap for all fields*/
             setkeysOfDataFromCSV();
             for(Integer combinationNo=15; combinationNo<17; combinationNo++)
             {
