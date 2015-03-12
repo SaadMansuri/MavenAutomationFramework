@@ -14,7 +14,7 @@ import com.agorafy.automation.pageobjects.SearchResultsPage;
 public class LoginPopUp extends Page 
 {
     private WebElement element=null;
-    private Homepage homepage;
+//    private Homepage homepage;
 
     public LoginPopUp(WebDriver driver)
     {
@@ -89,7 +89,7 @@ public class LoginPopUp extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='upsellRememberMeLabel']"));
+            element=driver.findElement(By.id("upsellRememberMeLabel"));
             AutomationLog.info("Stay logged in label found on login pop up");
         }
         catch(Exception e)
@@ -104,7 +104,7 @@ public class LoginPopUp extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[5]/div[1]/a"));
+            element = driver.findElement(By.className("ui-icon-closethick"));
         }
         catch(Exception e)
         {
@@ -134,7 +134,7 @@ public class LoginPopUp extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='upsellRememberMe']"));
+            element=driver.findElement(By.id("upsellRememberMe"));
             AutomationLog.info("Stay logged in checkbox found on login pop up");
         }
         catch(Exception e)
