@@ -31,13 +31,22 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
     public void setup()
     {
         super.setup();
+
+        try
+        {
+            detailsRetailAction.fillDetailsFormAndMoveToMediaForm(testCaseData);
+            mediadata = testCaseData.get("MediaFormData");
+            AutomationLog.info("Successfully reached to Media form");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to reach Media form");
+        }
     }
 
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        detailsRetailAction.fillDetailsFormAndMoveToMediaForm(testCaseData);
-        mediadata = testCaseData.get("MediaFormData");
         String highResFile = exefilepath + mediadata.get("highResFile");
         String lowResFile = exefilepath + mediadata.get("lowResFile");
         verifyIfClickingAddfilesAddImageToUpload(highResFile); 

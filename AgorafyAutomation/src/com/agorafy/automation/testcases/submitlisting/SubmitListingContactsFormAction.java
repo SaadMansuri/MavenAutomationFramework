@@ -18,6 +18,7 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
     private SubmitListingMediaFormAction media = new SubmitListingMediaFormAction();
     private SubmitListingPreviewAndSubmitPage preview = null;
     HashMap<String, String> mediadata;
+    HashMap<String, String > contactinfo;
     public SubmitListingContactsFormAction() 
     {
         super();
@@ -27,13 +28,23 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
     public void setup() 
     {
         super.setup();
+
+        try
+        {
+            contacts = media.moveToContactsForm(testCaseData);
+            contactinfo = testCaseData.get("ContactOwner");
+            AutomationLog.info("Successfully reached to Contacts Form");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to reach Contacts form");
+        }
     }
 
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        contacts = media.moveToContactsForm(testCaseData);
-        HashMap<String, String > contactinfo = testCaseData.get("ContactOwner");
+
         verifyIfErrorMessageShownOnClickingSaveAndContinueButtonWithEmptyForm(); 
         verifyIfNameFieldIsRequired();
         verifyIfClickingAddContactWithFormDataAddsContact(contactinfo);

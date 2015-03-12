@@ -26,12 +26,21 @@ public class SubmitListingPreviewAndSubmitFormAction extends SubmitListingBaseAc
     public void setup()
     {
        super.setup();
+
+       try
+       {
+           preview = contactsAction.moveToPreviewAndSubmitForm(testCaseData);
+           AutomationLog.info("Successfully reached to Preview and Submit form");
+       }
+       catch(Exception e)
+       {
+           AutomationLog.error("Failed to reach Preview and Submit form");
+       }
     }
 
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        preview = contactsAction.moveToPreviewAndSubmitForm(testCaseData);
         verifyIfPreviewAndSubmitContainsAllListingForms();
         verifyDifferentFormsDataOnPreviewAndSubmitForm();
     }
@@ -64,38 +73,38 @@ public class SubmitListingPreviewAndSubmitFormAction extends SubmitListingBaseAc
 
     private void testLocationFormZipCodeData() throws Exception 
     {
-            String actualZipCode;
-            actualZipCode = preview.Location_ZipCode();
-            String expectedZipCode = testCaseData.get("LocationCombination16").get("zipcode");
-            Assert.assertEquals(actualZipCode, expectedZipCode, "ZipCode added in location form did not reflects back in preview and submit form:");
-            AutomationLog.info("same Zip Code reflects back in preview and submit form as added in location form");
+        String actualZipCode;
+        actualZipCode = preview.Location_ZipCode();
+        String expectedZipCode = testCaseData.get("LocationCombination16").get("zipcode");
+        Assert.assertEquals(actualZipCode, expectedZipCode, "ZipCode added in location form did not reflects back in preview and submit form:");
+        AutomationLog.info("same Zip Code reflects back in preview and submit form as added in location form");
     }
 
     private void testLocationFormCityData() throws Exception 
     {
-            String actualCity;
-            actualCity = preview.Location_City();
-            String expectedCity = testCaseData.get("LocationCombination16").get("city");
-            Assert.assertEquals(actualCity, expectedCity, "City added in location form did not reflects back in preview and submit form:");
-            AutomationLog.info("same City reflects back in preview and submit form as added in location form");
+        String actualCity;
+        actualCity = preview.Location_City();
+        String expectedCity = testCaseData.get("LocationCombination16").get("city");
+        Assert.assertEquals(actualCity, expectedCity, "City added in location form did not reflects back in preview and submit form:");
+        AutomationLog.info("same City reflects back in preview and submit form as added in location form");
     }
 
     private void testLocationFormStateData() throws Exception 
     {
-            String actualState;
-            actualState = preview.Location_State();
-            String expectedState = testCaseData.get("LocationCombination16").get("state");
-            Assert.assertEquals(actualState, expectedState, "State added in location form did not reflects back in preview and submit form:");
-            AutomationLog.info("same State reflects back in preview and submit form as added in location form");
+        String actualState;
+        actualState = preview.Location_State();
+        String expectedState = testCaseData.get("LocationCombination16").get("state");
+        Assert.assertEquals(actualState, expectedState, "State added in location form did not reflects back in preview and submit form:");
+        AutomationLog.info("same State reflects back in preview and submit form as added in location form");
     }
 
     private void testLocationFormAddressData() throws Exception 
     {
-            String actualAddress;
-            actualAddress = preview.Location_Address();
-            String expectedAddress = testCaseData.get("LocationCombination16").get("address");
-            Assert.assertEquals(actualAddress, expectedAddress, "address added in location form did not reflects back in preview and submit form:");
-            AutomationLog.info("same Address reflects back in preview and submit form as added in location form");
+        String actualAddress;
+        actualAddress = preview.Location_Address();
+        String expectedAddress = testCaseData.get("LocationCombination16").get("address");
+        Assert.assertEquals(actualAddress, expectedAddress, "address added in location form did not reflects back in preview and submit form:");
+        AutomationLog.info("same Address reflects back in preview and submit form as added in location form");
     }
 
     public void testDetailsFormData() throws Exception
@@ -120,20 +129,20 @@ public class SubmitListingPreviewAndSubmitFormAction extends SubmitListingBaseAc
 
     private void testdetailsFormDescription() throws Exception 
     {
-            String actualDescription;
-            actualDescription = preview.Details_Description();
-            String expectedDescription = testCaseData.get("TotalRetailFormData").get("Description");
-            Assert.assertEquals(actualDescription, expectedDescription, "Description added in details-retail form did not reflects back in preview and submit form:");
-            AutomationLog.info("same Description reflects back in preview and submit form as added in details-retail form");
+        String actualDescription;
+        actualDescription = preview.Details_Description();
+        String expectedDescription = testCaseData.get("TotalRetailFormData").get("Description");
+        Assert.assertEquals(actualDescription, expectedDescription, "Description added in details-retail form did not reflects back in preview and submit form:");
+        AutomationLog.info("same Description reflects back in preview and submit form as added in details-retail form");
     }
 
     private void testdetailsFormCeilingHeight() throws Exception 
     {
-            String actualCeilingHeight;
-            actualCeilingHeight = preview.Details_CeilingHeight();
-            String expectedCeilingHeight = testCaseData.get("TotalRetailFormData").get("CeilingHeight");
-            Assert.assertEquals(actualCeilingHeight, expectedCeilingHeight, "Ceiling Height added in details-retail form did not reflects back in preview and submit form:");
-            AutomationLog.info("same Ceiling Height reflects back in preview and submit form as added in details-retail form");
+        String actualCeilingHeight;
+        actualCeilingHeight = preview.Details_CeilingHeight();
+        String expectedCeilingHeight = testCaseData.get("TotalRetailFormData").get("CeilingHeight");
+        Assert.assertEquals(actualCeilingHeight, expectedCeilingHeight, "Ceiling Height added in details-retail form did not reflects back in preview and submit form:");
+        AutomationLog.info("same Ceiling Height reflects back in preview and submit form as added in details-retail form");
     }
 
     private void testdetailsFormFrontage() throws Exception 
@@ -147,11 +156,11 @@ public class SubmitListingPreviewAndSubmitFormAction extends SubmitListingBaseAc
 
     private void testdetailsFormAskingPrice() throws Exception 
     {
-            String actualAskingPrice;
-            actualAskingPrice = preview.Details_AskingPrice();
-            String expectedAskingPrice = testCaseData.get("TotalRetailFormData").get("AskingPrice");
-            Assert.assertEquals(actualAskingPrice, expectedAskingPrice, "Asking Price added in details-retail form did not reflects back in preview and submit form:");
-            AutomationLog.info("same Asking Price reflects back in preview and submit form as added in details-retail form"); 
+        String actualAskingPrice;
+        actualAskingPrice = preview.Details_AskingPrice();
+        String expectedAskingPrice = testCaseData.get("TotalRetailFormData").get("AskingPrice");
+        Assert.assertEquals(actualAskingPrice, expectedAskingPrice, "Asking Price added in details-retail form did not reflects back in preview and submit form:");
+        AutomationLog.info("same Asking Price reflects back in preview and submit form as added in details-retail form"); 
     }
 
 	private void testNoOfSpacesAdded() 
