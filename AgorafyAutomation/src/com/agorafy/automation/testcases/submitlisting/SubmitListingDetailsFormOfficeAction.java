@@ -35,11 +35,6 @@ public class SubmitListingDetailsFormOfficeAction extends SubmitListingBaseActio
     public void setup() 
     {
         super.setup();
-    }
-
-    @Override
-    protected void verifyTestCases() throws Exception 
-    {
         try 
         {
             detailsOfficeAction = new SubmitListingDetailsFormOfficeAction();
@@ -48,6 +43,19 @@ public class SubmitListingDetailsFormOfficeAction extends SubmitListingBaseActio
             detailsBasePage = locationPage.fillLocationFormAndClickSaveAndContinue(dataFromCSV);
             detailsOfficePage = (SubmitListingDetailsFormOfficePage) detailsBasePage.selectListingTypeDropdown("Office");
 
+            AutomationLog.info("Set up to reach Details-Office page sucessfull");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Set up to reach Details-Office page failed");
+        }
+    }
+
+    @Override
+    protected void verifyTestCases() throws Exception 
+    {
+        try 
+        {
             AutomationLog.info("verify All Drop Down Options started...");
             verifyAllDropDownOptions();
 

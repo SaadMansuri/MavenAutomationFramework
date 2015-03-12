@@ -29,11 +29,6 @@ public class SubmitListingDetailsFormResidentialAction extends SubmitListingBase
     public void setup() 
     {
         super.setup();
-    }
-
-    @Override
-    protected void verifyTestCases() throws Exception 
-    {
         try 
         {
             detailsResidentialAction = new SubmitListingDetailsFormResidentialAction();
@@ -42,6 +37,19 @@ public class SubmitListingDetailsFormResidentialAction extends SubmitListingBase
             detailsBasePage = locationPage.fillLocationFormAndClickSaveAndContinue(dataFromCSV);
             detailsResidentialPage = (SubmitListingDetailsFormResidentialPage) detailsBasePage.selectListingTypeDropdown("Residential");
 
+            AutomationLog.info("Setup to reach Details-residential sucessfull");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Setup to reach Details-residential failed");
+        }
+    }
+
+    @Override
+    protected void verifyTestCases() throws Exception 
+    {
+        try 
+        {
             AutomationLog.info("verify All Drop Down Options started...");
             verifyAllDropDownOptions();
 

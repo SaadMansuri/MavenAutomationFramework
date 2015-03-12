@@ -28,6 +28,18 @@ public class SubmitListingDetailsFormPropertyAction extends SubmitListingBaseAct
     public void setup() 
     {
         super.setup();
+        try 
+        {
+            locationAction = new SubmitListingLocationFormAction();
+            dataFromCSV = testCaseData.get("LocationCombination16");
+            detailsBasePage = locationPage.fillLocationFormAndClickSaveAndContinue(dataFromCSV);
+            detailsPropertyPage = (SubmitListingDetailsFormPropertyPage) detailsBasePage.selectListingTypeDropdown("Property");
+            AutomationLog.info("Set up to reach details-Property page sucessfull");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Set up to reach details-Property page failed");
+        }
     }
 
     @Override
@@ -35,11 +47,6 @@ public class SubmitListingDetailsFormPropertyAction extends SubmitListingBaseAct
     {
         try
         {
-            locationAction = new SubmitListingLocationFormAction();
-            dataFromCSV = testCaseData.get("LocationCombination16");
-            detailsBasePage = locationPage.fillLocationFormAndClickSaveAndContinue(dataFromCSV);
-            detailsPropertyPage = (SubmitListingDetailsFormPropertyPage) detailsBasePage.selectListingTypeDropdown("Property");
-
             AutomationLog.info("verify All Drop Down Options started...");
             verifyAllDropDownOptions();
 
