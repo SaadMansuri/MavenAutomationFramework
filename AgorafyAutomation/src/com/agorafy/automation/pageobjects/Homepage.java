@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
-import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 
 public class Homepage extends Page 
 {
@@ -264,6 +263,7 @@ public class Homepage extends Page
             clickOnSelectBoroughIcon();
             selectBorough(boroughname);
             clickOnSelectListingCategoryIcon();
+            WaitFor.sleepFor(1000);
             selectListingCategory(listingcategory);
             txtbx_SearchTerm().sendKeys(searchstring);
             clickOnSearchButtton();

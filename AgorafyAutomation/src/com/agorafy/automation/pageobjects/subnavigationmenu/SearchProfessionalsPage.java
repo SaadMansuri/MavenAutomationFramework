@@ -1,10 +1,12 @@
 package com.agorafy.automation.pageobjects.subnavigationmenu;
 
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
@@ -622,6 +624,27 @@ public class SearchProfessionalsPage extends Page
             AutomationLog.error("Could not click Neighbor Search Button button");
             throw(e);
         }
+    }
+
+    public WebElement heading_SearchProfessionalPage() throws Exception
+    {
+        try
+        {
+            element =  driver.findElement(By.className("content-block")).findElement(By.tagName("h2"));
+            AutomationLog.info("Found Heading for SearchProfessionals page");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not find Heading for SearchProfessionals page");
+            throw(e);
+        }
+        return element;
+    }
+
+    @Override
+    public String pageHeading() throws Exception
+    {
+        return heading_SearchProfessionalPage().getText();
     }
 
     public String getURL()
