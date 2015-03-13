@@ -8,6 +8,7 @@ import com.agorafy.automation.automationframework.AutomationTestCaseVerification
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Dashboard;
+import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
@@ -23,6 +24,7 @@ public abstract class SubmitListingBaseAction extends AutomationTestCaseVerifica
     protected SubmitListingLocationFormPage locationPage;
     protected SubmitListingDetailsFormBasePage detailsBasePage;
     HashMap<String, String> dataFromCSV;
+	private Header header;
 
     public SubmitListingBaseAction()
     {
@@ -36,7 +38,8 @@ public abstract class SubmitListingBaseAction extends AutomationTestCaseVerifica
         try
         {
             homePage = Homepage.homePage();
-            headerLoginForm = homePage.openHeaderLoginForm();
+            header = Header.header();
+            headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();
             homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());

@@ -47,7 +47,8 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         try 
         {
             homePage = Homepage.homePage();
-            headerLoginForm = homePage.openHeaderLoginForm();
+            header = Header.header();
+            headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();
             homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
@@ -85,6 +86,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
     private void verifySubscribedListingInMySubscriptionsPage() throws Exception 
     {
         loginStatus = true;
+        WaitFor.sleepFor(1000);
         listingDetailPage.clickOnSubscribeToListingLink(loginStatus);
         String expectedListingTitle = listingDetailPage.txt_listingTitle();
         expectedListingTitle = expectedListingTitle.replaceAll("Property Details", "");
