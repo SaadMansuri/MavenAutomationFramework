@@ -8,6 +8,7 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Dashboard;
+import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.editprofile.OverviewTab;
@@ -57,6 +58,7 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
     private OverviewTab overviewTab = null;
     private HashMap<String, String> invalidTestData = null;
 	private SubNavigation subnavigation = null;
+	private Header header;
     static HashMap<String,String> stateAbbMap;
 
     public OverviewTabNegativeAction()
@@ -71,7 +73,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         homePage = Homepage.homePage();
         try
         {
-            headerLoginForm = homePage.openHeaderLoginForm();
+            header = Header.header();
+            headerLoginForm = header.openHeaderLoginForm();
 
             HashMap<String, String> loginData =  testCaseData.get("validCredential");
             String UserName = loginData.get("username");
