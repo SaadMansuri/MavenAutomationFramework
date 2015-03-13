@@ -41,7 +41,8 @@ public abstract class LoginBaseAction extends AutomationTestCaseVerification
         {
             homePage = Homepage.homePage();
             header = Page.header();
-            headerLoginForm = homePage.openHeaderLoginForm();
+            header = Header.header();
+            headerLoginForm = header.openHeaderLoginForm();
             AutomationLog.info("Log In link is clicked");
 
             HashMap<String, String> loginData =  testCaseData.get("validCredential");

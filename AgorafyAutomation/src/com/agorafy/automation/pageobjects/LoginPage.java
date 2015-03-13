@@ -208,7 +208,8 @@ public class LoginPage extends Page
     {
         try 
         {
-            element = driver.findElement(By.xpath(".//*[@id='login_form']/p"));
+            //element = driver.findElement(By.xpath(".//*[@id='login_form']/p"));
+            element = driver.findElement(By.id("login_form")).findElement(By.className("error"));
             AutomationLog.info("Invalid email or password message found on the form");
         } 
         catch (Exception e)

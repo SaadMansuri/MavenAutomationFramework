@@ -703,4 +703,21 @@ public class Header extends Page
         }
         return mySubscriptions;
     }
+
+    public HeaderLoginForm openHeaderLoginForm() throws Exception
+    {
+        HeaderLoginForm headerloginform = null;
+        try
+        {
+            link_Login().click();
+            headerloginform = new HeaderLoginForm(driver);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Login link");
+            throw(e);
+        }
+        return headerloginform;
+    }
+    
 }

@@ -34,8 +34,8 @@ public abstract class AccountSettingsBaseAction extends AutomationTestCaseVerifi
         try
         {
             homePage = Homepage.homePage();
-            loginForm = homePage.openHeaderLoginForm();
-
+            header = Header.header();
+            loginForm = header.openHeaderLoginForm();
             HashMap<String, String> expectedLoginData = testCaseData.get("validCredential");
             homePage = loginForm.doSuccessfulLogin(expectedLoginData.get("username"),expectedLoginData.get("password"));
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());

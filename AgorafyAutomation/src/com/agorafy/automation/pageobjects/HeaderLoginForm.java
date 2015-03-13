@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 
 public class HeaderLoginForm extends Page
 {
@@ -19,7 +20,8 @@ public class HeaderLoginForm extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='headerLoginForm']/div[1]/input"));
+            //element = driver.findElement(By.xpath(".//*[@id='headerLoginForm']/div[1]/input"));
+            element = driver.findElement(By.name("_username"));
             AutomationLog.info("Username text box found on Header Login Form");
         }
         catch (Exception e)
@@ -34,7 +36,8 @@ public class HeaderLoginForm extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='headerLoginForm']/div[2]/input"));
+            //element = driver.findElement(By.xpath(".//*[@id='headerLoginForm']/div[2]/input"));
+            element = driver.findElement(By.name("_password"));
             AutomationLog.info("Password text box found on Header Login Form");
         }
         catch (Exception e)
@@ -49,7 +52,8 @@ public class HeaderLoginForm extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='headerLoginForm']/div[4]/input"));
+            //element = driver.findElement(By.xpath(".//*[@id='headerLoginForm']/div[4]/input"));
+            element = driver.findElement(By.id("headerLoginForm")).findElement(By.className("btn-primary"));
             AutomationLog.info("Submit button found on Header Login Form");
         }
         catch (Exception e)
@@ -94,6 +98,7 @@ public class HeaderLoginForm extends Page
         LoginPage element = null;
         try
         {
+            WaitFor.ElementToBeDisplayed(driver, getHeaderLoginFormLocator());
             doLoginWithCredentials(email, password);
             element = new LoginPage(driver);
         }
@@ -122,6 +127,11 @@ public class HeaderLoginForm extends Page
         return element;
     }
 
+    public By getHeaderLoginFormLocator() throws Exception
+    {
+        return By.id("headerLoginForm");
+    }
+
     private void doLoginWithCredentials(String username, String password) throws Exception
     {
         try
@@ -129,9 +139,11 @@ public class HeaderLoginForm extends Page
             WebElement userNameTextBox = txtbx_UserNameInHeaderDropdown();
             userNameTextBox.clear();
             userNameTextBox.sendKeys(username);
+            WaitFor.sleepFor(1000);
             WebElement passwordTextBox = txtbx_PasswordInHeaderDropdown();
             passwordTextBox.clear();
             passwordTextBox.sendKeys(password);
+            WaitFor.sleepFor(1000);
             btn_LogInHeaderDropdown().click();
         }
         catch (Exception e)

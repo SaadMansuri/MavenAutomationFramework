@@ -3,6 +3,7 @@ package com.agorafy.automation.testcases;
 import java.util.HashMap;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 
 /**
  * Precondition: home page is loaded.

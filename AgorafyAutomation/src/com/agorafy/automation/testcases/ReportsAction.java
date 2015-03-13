@@ -40,7 +40,8 @@ public class ReportsAction extends AutomationTestCaseVerification
         homePage = Homepage.homePage();
         try
         {
-            headerLoginForm = homePage.openHeaderLoginForm();
+            header = Header.header();
+            headerLoginForm = header.openHeaderLoginForm();
             HashMap<String, String> loginData =  testCaseData.get("validCredential");
             String UserName = loginData.get("username");
             String Password = loginData.get("password");
@@ -90,7 +91,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     {
         int beforeCount = Integer.parseInt(reports.getReportCount());
         addReportUsingPinCushionReportIcon();
-        WaitFor.sleepFor(10000);
+        WaitFor.sleepFor(2000);
         int afterCount = Integer.parseInt(reports.getReportCount());
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(afterCount, beforeCount+1, "Expected Reports Count is not incremented");
@@ -115,7 +116,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     {
         int beforeCount = Integer.parseInt(reports.getReportCount());
         removeReportUsingPinCushionReportIcon();
-        WaitFor.sleepFor(10000);
+        WaitFor.sleepFor(2000);
         int afterCount = Integer.parseInt(reports.getReportCount());
         Assert.assertEquals(afterCount, beforeCount-1, "Expected reports count in not decremented");
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -142,7 +143,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     public void verifyIfClickingOnReportsLinkInProfileNameDropDownShowsReportsBox() throws Exception
     {
         addReportUsingPinCushionReportIcon();
-        WaitFor.sleepFor(10000);
+        WaitFor.sleepFor(2000);
         header.clickOnProfileNameDropdownArrow();
         reports = header.clickOnReportsLink();
         WaitFor.presenceOfTheElement(Page.driver, reports.getReportBoxLocator());
@@ -155,7 +156,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     {
         String text = null;
         reports.clickOnClearLink();
-        WaitFor.sleepFor(10000);
+        WaitFor.sleepFor(2000);
         for(WebElement ele : reports.resultsetReportList())
         {
            text = ele.getText();
@@ -181,7 +182,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         }
         int beforcount = Integer.parseInt(reports.getReportCount());
         listingdetail.clickOnAddToReportLink(isLoggedIn);
-        WaitFor.sleepFor(10000);
+        WaitFor.sleepFor(2000);
         int aftercount = Integer.parseInt(reports.getReportCount());
         Assert.assertEquals(aftercount, beforcount+1, "Expected report count is not incremented");
         Assert.assertEquals(listingdetail.link_removeFromReport().isDisplayed(), true, "Expected RemoveFromReport link is not shown");
@@ -192,7 +193,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     {
         int beforcount = Integer.parseInt(reports.getReportCount());
         listingdetail.clickOnRemoveFromReportLink();
-        WaitFor.sleepFor(10000);
+        WaitFor.sleepFor(2000);
         int aftercount = Integer.parseInt(reports.getReportCount());
 
         Assert.assertEquals(aftercount, beforcount-1, "Expected reports count is not decremented ");

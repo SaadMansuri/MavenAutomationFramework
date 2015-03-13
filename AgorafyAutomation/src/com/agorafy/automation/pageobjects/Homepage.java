@@ -42,7 +42,8 @@ public class Homepage extends Page
     {
         try
         {
-             element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/a/span"));
+             //element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/a/span"));
+             element = driver.findElement(By.className("user-dropdown")).findElement(By.tagName("a"));
              AutomationLog.info("Log In link found on the Home Page");
         }
         catch (Exception e)
@@ -279,7 +280,7 @@ public class Homepage extends Page
         return searchresult;
     }
 
-    public HeaderLoginForm openHeaderLoginForm() throws Exception
+/*    public HeaderLoginForm openHeaderLoginForm() throws Exception
     {
         HeaderLoginForm element = null;
         try
@@ -295,7 +296,7 @@ public class Homepage extends Page
         }
         return element;
     }
-
+*/
     public WebElement dropdown_LoginAvatar() throws Exception
     {
         try

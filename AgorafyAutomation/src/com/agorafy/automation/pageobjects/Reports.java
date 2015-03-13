@@ -1,22 +1,18 @@
 package com.agorafy.automation.pageobjects;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
-import com.thoughtworks.selenium.Wait;
 
 public class Reports extends Page 
 {
     private WebElement element = null;
-    private SearchResultsPage propertysearch = null;
     private Header header = new Header(driver);
 
     public Reports(WebDriver driver) 
@@ -76,7 +72,7 @@ public class Reports extends Page
         WaitFor.presenceOfTheElement(driver, getUserDropdownLocator());
         count = header.reportCount().getText();
         header.clickOnProfileNameDropdownArrow();
-        WaitFor.sleepFor(10000);
+        WaitFor.sleepFor(1000);
         AutomationLog.info("Successfully got Reports Count");
         return count;
     }
