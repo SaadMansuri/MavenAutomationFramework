@@ -3,8 +3,10 @@ package com.agorafy.automation.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.seleniumhq.jetty7.util.resource.Resource;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.sun.jna.platform.unix.X11.Window;
 
 public class LoginPage extends Page 
 {
@@ -27,6 +29,7 @@ public class LoginPage extends Page
         {
             doLoginWithCredentials(username, password);
             element = Homepage.homePage();
+            
         }
         catch (Exception e)
         {
