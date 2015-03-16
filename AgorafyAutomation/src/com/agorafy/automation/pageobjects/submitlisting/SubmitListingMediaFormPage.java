@@ -1,7 +1,6 @@
 package com.agorafy.automation.pageobjects.submitlisting;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -224,7 +223,6 @@ public class SubmitListingMediaFormPage extends Page
     {
         try
         {
-            //element = driver.findElement(By.xpath(".//*[@id='file-upload-cont']/div/div/div/ul/li/div/div/div/button"));
             element = driver.findElement(By.className("delete")).findElement(By.tagName("button"));
             AutomationLog.info("Delete button found on uploaded image");
         }
@@ -265,16 +263,6 @@ public class SubmitListingMediaFormPage extends Page
         }
     }
 
-    public void watiUntilElementIsRemoved() throws Exception
-    {
-        WebElement select = driver.findElement(By.className("files"));
-        List<WebElement> options = select.findElements(By.tagName("li"));
-        if(options.size() > 0)
-        {
-             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        }
-    }
-
     public WebElement btn_StartUpload() throws Exception
     {
         try
@@ -304,25 +292,5 @@ public class SubmitListingMediaFormPage extends Page
         }
     }
 
-    public SubmitListingContactsFormPage moveToContactsForm() throws Exception
-    {
-        SubmitListingContactsFormPage contact = null;
-        try
-        {
-            clickOnAddFilesButton();
-            Runtime.getRuntime().exec("C:\\Users\\admin\\Desktop\\upload.exe");
-            WaitFor.presenceOfTheElement(driver, listingImageLocator()); 
-            clickOnStartUploadButton();
-            WaitFor.presenceOfTheElement(driver, uploadImagelocator());
-            clickOnSaveAndContinueButton();
-            contact = new SubmitListingContactsFormPage(driver);
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not go to Contacts form ");
-            throw(e);
-        }
-        return contact;
-    }
 }
 

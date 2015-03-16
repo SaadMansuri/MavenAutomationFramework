@@ -81,7 +81,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         try
         {
             media.clickOnCancelBbutton();
-            Thread.sleep(1000);
+            Thread.sleep(2000);
             Assert.assertEquals(media.template_Upload(), false, "Expected Cancel button does not remove image ");
             AutomationLog.info("Clicking cancel removes image to be uploaded ");
         }
@@ -107,7 +107,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
     {
         WaitFor.ElementToBeDisplayed(Page.driver, media.uploadImagelocator());
         media.clickOnDeleteButton();
-        Thread.sleep(500);
+        Thread.sleep(1000);
         Assert.assertEquals(media.template_Upload(), false, "Expected image is not removed ");
         AutomationLog.info("Clicking delete button removes uploaded image");
     }
