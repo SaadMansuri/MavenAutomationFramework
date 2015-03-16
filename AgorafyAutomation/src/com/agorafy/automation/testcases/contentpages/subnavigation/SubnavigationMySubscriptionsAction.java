@@ -8,6 +8,7 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
+import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
@@ -33,6 +34,7 @@ public class SubnavigationMySubscriptionsAction extends ContentPagesVerification
 	private ContentPagesLeftMenu leftMenu;
 	private String actualActiveLeftMenu;
 	private String expectedActiveLeftMenu;
+	private Header header;
 
     public SubnavigationMySubscriptionsAction() 
     {
@@ -47,7 +49,8 @@ public class SubnavigationMySubscriptionsAction extends ContentPagesVerification
         {
             subnavigation = Page.subNavigation();
             homePage = Homepage.homePage();
-            headerLoginForm = homePage.openHeaderLoginForm();
+            header = Header.header();
+            headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();
             homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());

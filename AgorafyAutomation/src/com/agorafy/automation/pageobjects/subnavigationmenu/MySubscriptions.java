@@ -224,7 +224,9 @@ public class MySubscriptions extends Page
         {
             /*Wait until subscription window under user name displays*/
             WaitFor.waitUntilElementIsLoaded(driver, subscriptionsWindow());
-            element = subscriptionsWindow().findElement(By.linkText("View More Subscriptions")); 
+            //element = subscriptionsWindow().findElement(By.linkText("View More Subscriptions"));
+            WaitFor.sleepFor(1000);
+            element = subscriptionsWindow().findElement(By.linkText("View More Subscriptions"));
         }
         catch (Exception e) 
         {
@@ -269,6 +271,7 @@ public class MySubscriptions extends Page
     {
         try
         {
+            WaitFor.sleepFor(1000);
             option_SubscribeToRespectiveListing().click();
             AutomationLog.info("Successfully clicked Subscribe To Respective Listing in Subscription Window under User's pic");
         }
@@ -300,7 +303,7 @@ public class MySubscriptions extends Page
         try 
         {
             //Wait until subscription window under user name displays
-            WaitFor.waitUntilElementIsLoaded(driver, subscriptionsWindow());
+            WaitFor.waitUntilElementIsLoaded(driver, getViewMoreSubscriptionsLocator());
             element = driver.findElement(By.xpath(".//*[@id='subscriptionsContainer']/blockquote/div[2]/div[1]/a"));
         }
         catch (Exception e) 
@@ -375,6 +378,12 @@ public class MySubscriptions extends Page
         WaitFor.waitUntilElementIsLoaded(driver, ListingSubscriptionsContainer());
         List<WebElement> list_AllSubscribedListings = ListingSubscriptionsContainer().findElements(By.tagName("li"));
         return list_AllSubscribedListings;
+    }
+
+    @SuppressWarnings("static-access")
+	public By getViewMoreSubscriptionsLocator() throws Exception
+    {
+       return By.id("subscriptionsContainer").linkText("View More Subscriptions");
     }
 
 }

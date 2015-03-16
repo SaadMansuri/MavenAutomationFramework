@@ -14,6 +14,7 @@ import com.agorafy.automation.automationframework.AutomationTestCaseVerification
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Dashboard;
+import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
@@ -37,6 +38,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     private MySubscriptions mySubscriptions; 
     private SubNavigation subNavigation;
     private boolean status = true;
+	private Header header;
 
     public SubscribeToSearchAction() 
     {
@@ -50,7 +52,8 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         {
             super.setup();
             homePage = Homepage.homePage();
-            headerLoginForm = homePage.openHeaderLoginForm();
+            header = Header.header();
+            headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();
             homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());

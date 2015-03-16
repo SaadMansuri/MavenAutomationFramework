@@ -30,7 +30,8 @@ public class LoginAttemptsAction extends AutomationTestCaseVerification
         {
             homePage = Homepage.homePage();
             header = Page.header();
-            headerLogin =  homePage.openHeaderLoginForm();
+            header = Header.header();
+            headerLogin = header.openHeaderLoginForm();
             loginPage = headerLogin.doInvalidLogin("", "");
         }
         catch(Exception e)

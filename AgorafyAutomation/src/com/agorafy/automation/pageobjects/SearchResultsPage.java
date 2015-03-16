@@ -10,6 +10,7 @@ import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
@@ -276,6 +277,7 @@ public class SearchResultsPage extends Page
     {
         Actions builder = new Actions(driver);
         Action hover = builder.moveToElement(icon_PinCushionReport()).build();
+        WaitFor.sleepFor(1000);
         hover.perform();
         AutomationLog.info("Successfully hovered on PinCushionReport icon");
     }
@@ -309,6 +311,7 @@ public class SearchResultsPage extends Page
     {
         Actions builder = new Actions(driver);
         Action hover = builder.moveToElement(tile_firstSearchResult()).build();
+        WaitFor.sleepFor(1000);
         hover.perform();
     }
 

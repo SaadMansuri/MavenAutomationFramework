@@ -33,8 +33,10 @@ public abstract class NegativeLoginBaseAction extends AutomationTestCaseVerifica
         {
             homePage = Homepage.homePage();
             header = Page.header();
-            headerLogin =  homePage.openHeaderLoginForm();
+            headerLogin = header.openHeaderLoginForm();
+            WaitFor.sleepFor(1000);
             loginPage = headerLogin.doInvalidLogin("", "");
+            WaitFor.waitForPageToLoad(Page.driver);
         }
         catch(Exception e)
         {
