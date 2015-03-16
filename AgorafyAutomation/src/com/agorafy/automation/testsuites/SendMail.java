@@ -10,7 +10,7 @@ public class SendMail
     {
         try
         {
-           mailReport.SendMail.execute("Subscribe To Search");
+           mailReport.SendMail.execute("Total regression report");
         }
         catch(Exception e)
         {

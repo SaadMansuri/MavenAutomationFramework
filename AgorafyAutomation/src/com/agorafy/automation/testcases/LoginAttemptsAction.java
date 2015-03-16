@@ -61,7 +61,6 @@ public class LoginAttemptsAction extends AutomationTestCaseVerification
             }
         }
         Assert.assertEquals(loginPage.isCaptchaPresent(), true, "Captcha is not seen after "+attempts);
-        System.out.println(attempts);
     }
 
     @Override
