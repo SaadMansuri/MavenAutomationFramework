@@ -34,7 +34,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
 
         try
         {
-            detailsRetailAction.fillDetailsFormAndMoveToMediaForm(testCaseData);
+            media = detailsRetailAction.fillDetailsFormAndMoveToMediaForm(testCaseData);
             mediadata = testCaseData.get("MediaFormData");
             AutomationLog.info("Successfully reached to Media form");
         }
@@ -81,7 +81,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         try
         {
             media.clickOnCancelBbutton();
-            Thread.sleep(2000);
+            Thread.sleep(1000);
             Assert.assertEquals(media.template_Upload(), false, "Expected Cancel button does not remove image ");
             AutomationLog.info("Clicking cancel removes image to be uploaded ");
         }
@@ -107,7 +107,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
     {
         WaitFor.ElementToBeDisplayed(Page.driver, media.uploadImagelocator());
         media.clickOnDeleteButton();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         Assert.assertEquals(media.template_Upload(), false, "Expected image is not removed ");
         AutomationLog.info("Clicking delete button removes uploaded image");
     }
@@ -134,6 +134,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
     public void verifyIfErrorMessageShownOnClickingSaveAndContinueWithoutUploadingImage() throws Exception
     {
         media.clickOnSaveAndContinueButton();
+        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         String msg = media.msg_MediaError().getText();
         Assert.assertEquals(msg, "Minimum one image file is required", "Expected Media Error Message is not Shown");
         AutomationLog.info("Media Error message is shown if clicked on save without uploading an Image");
@@ -171,6 +172,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
     public void verifyIfClickingOnBackButtonRedirectsToDetailsForm() throws Exception
     {
         details = media.clickOnBackButton();
+        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(details.form_Property().isDisplayed(), true, "Expected form is not shown");
         AutomationLog.info("Clicking back button on media form redirects details page");
         details.clickSaveAndContinue();
