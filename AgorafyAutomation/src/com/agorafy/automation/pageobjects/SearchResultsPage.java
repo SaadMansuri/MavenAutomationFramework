@@ -315,6 +315,33 @@ public class SearchResultsPage extends Page
         hover.perform();
     }
 
+    public WebElement tile_Searchresult(int index) throws Exception
+    {
+        return resultSet().get(index);
+    }
+
+    public void hoverOnSearchResult(int index) throws Exception
+    {
+        Actions builder = new Actions(driver);
+        Action hover = builder.moveToElement(tile_Searchresult(index)).build();
+        WaitFor.sleepFor(1000);
+        hover.perform();
+    }
+
+    public WebElement icon_PinCushion(int index) throws Exception
+    {
+        return tile_Searchresult(index).findElement(By.className("pinCushion")).findElement(By.tagName("a"));
+    }
+
+    public void hoverOnPincushionIcon(int index) throws Exception 
+    {
+        Actions builder = new Actions(driver);
+        Action hover = builder.moveToElement(icon_PinCushion(index)).build();
+        WaitFor.sleepFor(1000);
+        hover.perform();
+        AutomationLog.info("Successfully hovered on PinCushionReport icon");
+    }
+
     public ListingDetailPage clickSearchResult()
     {
         element = resultSet().get(0).findElement(By.className("caption")).findElement(By.tagName("a"));

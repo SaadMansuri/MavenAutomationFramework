@@ -5,6 +5,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -77,7 +79,7 @@ public class Reports extends Page
         return count;
     }
 
-    public WebElement icon_Close() throws Exception
+    public WebElement icon_ReportWindowClose() throws Exception
     {
         try
         {
@@ -91,16 +93,16 @@ public class Reports extends Page
         return element;
     }
 
-    public void clickOnCloseIcon() throws Exception
+    public void clickOnReportWindowCloseIcon() throws Exception
     {
         try
         {
-            icon_Close().click();
-            AutomationLog.info("Successfully clicked on Close icon");
+            icon_ReportWindowClose().click();
+            AutomationLog.info("Successfully clicked on Reports Box Close icon");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not click on Close icon");
+            AutomationLog.error("Could not click on Reports Box Close icon");
             throw(e);
         }
     }
@@ -182,4 +184,49 @@ public class Reports extends Page
         }
     }
 
+    public WebElement icon_DeleteListing() throws Exception
+    {
+        try
+        {
+            element = DeleteListingIconList().get(0);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Delete Listing icon");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void hoverOnFirstDeleteListingIcon() throws Exception
+    {
+        Actions builder = new Actions(driver);
+        Action hover = builder.moveToElement(FirstListingInReportList()).build();
+        WaitFor.sleepFor(1000);
+        hover.perform();
+        AutomationLog.info("Successfully hovered on DeleteListing icon");
+    }
+
+    public WebElement FirstListingInReportList() throws Exception
+    {
+        return resultsetReportList().get(0).findElement(By.tagName("a"));
+    }
+
+    public void clickOnFirstDeleteListingIcon() throws Exception
+    {
+        try
+        {
+            icon_DeleteListing().click();
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on first delete listing icon");
+            throw(e);
+        }
+    }
+
+    public List<WebElement> DeleteListingIconList() throws Exception
+    {
+        return Report_List().findElements(By.className("del-listing"));
+    }
 }

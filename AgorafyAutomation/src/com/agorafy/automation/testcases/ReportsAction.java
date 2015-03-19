@@ -25,8 +25,9 @@ public class ReportsAction extends AutomationTestCaseVerification
     private Header header = Page.header();
     private Homepage homePage = null;
     private HeaderLoginForm headerLoginForm =null;
-    private SearchResultsPage propertysearch = null;
+    private SearchResultsPage searchresult = null;
     private ListingDetailPage listingdetail = null;
+    String curHandle;
     
     public ReportsAction()
     {
@@ -48,8 +49,9 @@ public class ReportsAction extends AutomationTestCaseVerification
             homePage = headerLoginForm.doSuccessfulLogin(UserName, Password);
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             HashMap<String, String> search = testCaseData.get("SearchData");
-            propertysearch = homePage.populateSearchTermTextBox(search.get("borough"), search.get("listingcategory"), search.get("searchterm"));
+            searchresult = homePage.populateSearchTermTextBox(search.get("borough"), search.get("listingcategory"), search.get("searchterm"));
             AutomationLog.info("Successfully redirected to PropertySearch page");
+            curHandle = Page.driver.getWindowHandle();
         }
         catch(Exception e)
         {
@@ -60,6 +62,14 @@ public class ReportsAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception
     {
+        verifySearchResultPageTestCases();
+        verifyListingDetailPageTestCases();
+        verifyIfReportsCountIsSameOnBothWindows();
+       
+    }
+
+    public void verifySearchResultPageTestCases() throws Exception
+    {
         verifyIfMouseHoverOnTileShowsPinCushionReportIcon();
         veifyIfMouseHoverOnPinCushionReportIconShowsToolTip();
         verifyIfClickingOnPinCushionReportIconIncrementsReportsCount();
@@ -68,22 +78,34 @@ public class ReportsAction extends AutomationTestCaseVerification
         verifyIfClickingOnFixedPinCushionReportIconDecrementsReportsCount();
         verifyIfClickingOnReportsLinkInProfileNameDropDownShowsReportsBox ();
         verifyIfClickingOnClearLinkOnReportsBoxClearsReportsList();
-        verifyIfClickingAddToReportLinkOnListingDetailPageIncrementsReportsCount();
-        verifyIfClickingRemoveFromReportLinkOnListingDetailPageDecrementsReportsCount();
+        verifyIfClickedOnCloseIconForIndividualListingInReportsBox();
+        verifyIfAddingMoreThanFifteenListingShowsErrorDialog();
+    }
+
+    public void verifyListingDetailPageTestCases() throws Exception
+    {
+        verifyIfAddToReportLinkIsPresent();
+        verifyIfClickingAddToReportLinkIncrementsReportsCount();
+        verifyIfClickingRemoveFromReportLinkDecrementsReportsCount();
+        verifyIfClickingOnReportsLinkInProfileNameDropDownShowsListOfAddedListing();
+        verifyIfClickingOnClearLinkOnReportsBoxClearsReportsList();
+        verifyIfClickingCloseIconForIndividualListingRemovesthatListingFromReportsList();
+        verifyIfRemoveFromReportLinkIsShownWhenListingIsAddedFromSearchResultsPage();
+        verifyIfPinCushionReportIconIsFixedAfterAddToReportLinkIsClicked();
     }
 
     public void verifyIfMouseHoverOnTileShowsPinCushionReportIcon() throws Exception
     {
-         propertysearch.hoverOnFirstSearchResultTile();
-         Assert.assertEquals(propertysearch.icon_PinCushionReport().isDisplayed(), true, "Expected icon is not displayed");
-         AutomationLog.info("On Mouse hover tile PinCushionReport icon is shown");
+        searchresult.hoverOnFirstSearchResultTile();
+        Assert.assertEquals(searchresult.icon_PinCushionReport().isDisplayed(), true, "Expected icon is not displayed");
+        AutomationLog.info("On Mouse hover tile PinCushionReport icon is shown");
     }
 
     public void veifyIfMouseHoverOnPinCushionReportIconShowsToolTip() throws Exception
     {
-        propertysearch.hoverOnPinCushionReportIcon();
-        WaitFor.presenceOfTheElement(Page.driver, propertysearch.Tooltiplocator());
-        Assert.assertEquals(propertysearch.tooltip_PinCushionReport().getText(), "Add to Report", "Expected tooltip is not shown");
+        searchresult.hoverOnPinCushionReportIcon();
+        WaitFor.presenceOfTheElement(Page.driver, searchresult.Tooltiplocator());
+        Assert.assertEquals(searchresult.tooltip_PinCushionReport().getText(), "Add to Report", "Expected tooltip is not shown");
         AutomationLog.info("On mouse hover PinCushionReport icon tooltip is shown");
     }
 
@@ -100,15 +122,15 @@ public class ReportsAction extends AutomationTestCaseVerification
 
     public void verifyIfPinCushionReportIconIsFixed() throws Exception
     {
-        Assert.assertEquals(propertysearch.icon_PinCushionReport().isDisplayed(), true, "Expected icon is not fixed");
+        Assert.assertEquals(searchresult.icon_PinCushionReport().isDisplayed(), true, "Expected icon is not fixed");
         AutomationLog.info("PinCushionReport icon is Fixed");
     }
 
     public void verifyIfMouseHoverOnFixedPinCushionReportIconShowsToolTip() throws Exception 
     {
-        propertysearch.hoverOnPinCushionReportIcon();
-        WaitFor.presenceOfTheElement(Page.driver, propertysearch.Tooltiplocator());
-        Assert.assertEquals(propertysearch.tooltip_PinCushionReport().getText(), "Remove from Report", "Expected tooltip is not shown");
+        searchresult.hoverOnPinCushionReportIcon();
+        WaitFor.presenceOfTheElement(Page.driver, searchresult.Tooltiplocator());
+        Assert.assertEquals(searchresult.tooltip_PinCushionReport().getText(), "Remove from Report", "Expected tooltip is not shown");
         AutomationLog.info("On mouse hover fixed PinCushionReport icon, Remove from Report tooltip is shown");
     }
 
@@ -120,24 +142,24 @@ public class ReportsAction extends AutomationTestCaseVerification
         int afterCount = Integer.parseInt(reports.getReportCount());
         Assert.assertEquals(afterCount, beforeCount-1, "Expected reports count in not decremented");
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Assert.assertEquals(propertysearch.icon_PinCushionReport().isDisplayed(), false, "Expected icon is not fixed");
-        propertysearch.hoverOnFirstSearchResultTile();
-        Assert.assertEquals(propertysearch.icon_PinCushionReport().isDisplayed(), true, "Expected icon is not displayed");
+        Assert.assertEquals(searchresult.icon_PinCushionReport().isDisplayed(), false, "Expected icon is not fixed");
+        searchresult.hoverOnFirstSearchResultTile();
+        Assert.assertEquals(searchresult.icon_PinCushionReport().isDisplayed(), true, "Expected icon is not displayed");
         AutomationLog.info("Clicking On PinCushionReport icon decrements the reports count ");
     }
 
     public void addReportUsingPinCushionReportIcon() throws Exception
     {
-        propertysearch.hoverOnFirstSearchResultTile();
-        propertysearch.hoverOnPinCushionReportIcon();
-        propertysearch.clickOnPinCushionReportIcon();
+        searchresult.hoverOnFirstSearchResultTile();
+        searchresult.hoverOnPinCushionReportIcon();
+        searchresult.clickOnPinCushionReportIcon();
     }
 
     public void removeReportUsingPinCushionReportIcon() throws Exception
     {
-        propertysearch.hoverOnFirstSearchResultTile();
-        propertysearch.hoverOnPinCushionReportIcon();
-        propertysearch.clickOnPinCushionReportIcon();
+        searchresult.hoverOnFirstSearchResultTile();
+        searchresult.hoverOnPinCushionReportIcon();
+        searchresult.clickOnPinCushionReportIcon();
     }
 
     public void verifyIfClickingOnReportsLinkInProfileNameDropDownShowsReportsBox() throws Exception
@@ -163,23 +185,20 @@ public class ReportsAction extends AutomationTestCaseVerification
         }
         Assert.assertEquals(text, "No items in report.", "Expected List is not cleared");
         AutomationLog.info("Clicking on Clear Link On ReportsBox Clears ReportsList ");
-        reports.clickOnCloseIcon();
+        reports.clickOnReportWindowCloseIcon();
     }
 
-    public void verifyIfClickingAddToReportLinkOnListingDetailPageIncrementsReportsCount() throws Exception
+    public void verifyIfAddToReportLinkIsPresent() throws Exception
+    {
+        listingdetail = searchresult.clickSearchResult();
+        SwitchToNextWindow();
+        Assert.assertEquals(listingdetail.link_addToReport().isDisplayed(), true, "Expected Add to Report link is not displayed");
+        AutomationLog.info("Add to Report link is present on listing detail page");
+    }
+
+    public void verifyIfClickingAddToReportLinkIncrementsReportsCount() throws Exception
     {
         boolean isLoggedIn = true;
-        String curHandle = Page.driver.getWindowHandle();
-        listingdetail = propertysearch.clickSearchResult();
-        Set<String> handleset = Page.driver.getWindowHandles();
-        for(String handle : handleset)
-        {
-            if(!handle.equals(curHandle))
-            {
-                Page.driver.switchTo().window(handle);
-                break;
-            }
-        }
         int beforcount = Integer.parseInt(reports.getReportCount());
         listingdetail.clickOnAddToReportLink(isLoggedIn);
         WaitFor.sleepFor(2000);
@@ -189,7 +208,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         AutomationLog.info("Clicking AddToReport link increaments Reports count by 1 and RemoveFromReport link displayed");
     }
 
-    public void verifyIfClickingRemoveFromReportLinkOnListingDetailPageDecrementsReportsCount() throws Exception
+    public void verifyIfClickingRemoveFromReportLinkDecrementsReportsCount() throws Exception
     {
         int beforcount = Integer.parseInt(reports.getReportCount());
         listingdetail.clickOnRemoveFromReportLink();
@@ -199,6 +218,116 @@ public class ReportsAction extends AutomationTestCaseVerification
         Assert.assertEquals(aftercount, beforcount-1, "Expected reports count is not decremented ");
         Assert.assertEquals(listingdetail.link_addToReport().isDisplayed(), true, "Expected addToReport link is not shown");
         AutomationLog.info("Clicking RemoveFromReport link decrements Reports count by 1 and addToReport link displayed");
+    }
+
+    public void verifyIfClickedOnCloseIconForIndividualListingInReportsBox() throws Exception
+    {
+        verifyIfClickingOnReportsLinkInProfileNameDropDownShowsReportsBox();
+        int beforeCount = Integer.parseInt(reports.getReportCount());
+        reports.hoverOnFirstDeleteListingIcon();
+        reports.clickOnFirstDeleteListingIcon();
+        WaitFor.sleepFor(2000);
+        int afterCount = Integer.parseInt(reports.getReportCount());
+        Assert.assertEquals(afterCount, beforeCount-1, "Expected reports count in not decremented");
+        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Assert.assertEquals(searchresult.icon_PinCushionReport().isDisplayed(), false, "Expected icon is not fixed");
+        AutomationLog.info("Clicking On Delete Listing icon decrements the reports count and Removes listing from Reports box ");
+        reports.clickOnReportWindowCloseIcon();
+    }
+
+    public void verifyIfClickingOnReportsLinkInProfileNameDropDownShowsListOfAddedListing() throws Exception
+    {
+        boolean isLoggedIn = true;
+        listingdetail.clickOnAddToReportLink(isLoggedIn);
+        header.clickOnProfileNameDropdownArrow();
+        header.clickOnReportsLink();
+        WaitFor.presenceOfTheElement(Page.driver, reports.getReportBoxLocator());
+        Assert.assertEquals(reports.reportBox().isDisplayed(), true, "Expected reports Box is not shown");
+        AutomationLog.info("Clicking On Reports Link In Profile Name DropDown Shows Reports Box");
+    }
+
+    public void verifyIfClickingCloseIconForIndividualListingRemovesthatListingFromReportsList() throws Exception
+    {
+        boolean isLoggedIn = true;
+        listingdetail.clickOnAddToReportLink(isLoggedIn);
+        WaitFor.sleepFor(2000);
+        int beforeCount = Integer.parseInt(reports.getReportCount());
+        header.clickOnProfileNameDropdownArrow();
+        header.clickOnReportsLink();
+        WaitFor.sleepFor(2000);
+        reports.hoverOnFirstDeleteListingIcon();
+        reports.clickOnFirstDeleteListingIcon();
+        WaitFor.sleepFor(2000);
+        int afterCount = Integer.parseInt(reports.getReportCount());
+        Assert.assertEquals(afterCount, beforeCount-1, "Expected reports count in not decremented");
+        AutomationLog.info("Clicking On Delete Listing icon decrements the reports count and Removes listing from Reports box  ");
+        
+    }
+
+    public void verifyIfRemoveFromReportLinkIsShownWhenListingIsAddedFromSearchResultsPage() throws Exception
+    {
+        Page.driver.close();
+        Page.driver.switchTo().window(curHandle);
+        addReportUsingPinCushionReportIcon();
+        listingdetail = searchresult.clickSearchResult();
+        SwitchToNextWindow();
+        Assert.assertEquals(listingdetail.link_removeFromReport().isDisplayed(), true, "Expected Remove From Report Link is Not shown");
+        AutomationLog.info("Remove From report Link is shown When ListingIsAddedFromSearchResultsPage");
+        listingdetail.clickOnRemoveFromReportLink();
+        Page.driver.close();
+        Page.driver.switchTo().window(curHandle);
+        Page.driver.navigate().refresh();
+
+    }
+
+    public void verifyIfPinCushionReportIconIsFixedAfterAddToReportLinkIsClicked() throws Exception
+    {
+        boolean isLoggedIn = true;
+        listingdetail = searchresult.clickSearchResult();
+        SwitchToNextWindow();
+        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        listingdetail.clickOnAddToReportLink(isLoggedIn);
+        Page.driver.close();
+        Page.driver.switchTo().window(curHandle);
+        Page.driver.navigate().refresh();
+        verifyIfPinCushionReportIconIsFixed();
+        searchresult.clickOnPinCushionReportIcon();
+    }
+
+    public void verifyIfReportsCountIsSameOnBothWindows() throws Exception
+    {
+        boolean isLoggedIn = true;
+        searchresult.clickSearchResult();
+        SwitchToNextWindow();
+        listingdetail.clickOnAddToReportLink(isLoggedIn);
+        int listingpagecount = Integer.parseInt(reports.getReportCount());
+        Page.driver.close();
+        Page.driver.switchTo().window(curHandle);
+        int searchpagecount = Integer.parseInt(reports.getReportCount());
+        Assert.assertEquals(listingpagecount, searchpagecount, "Adding report Increase Reports Count on ");
+        AutomationLog.info("Adding report increase Count in both windows");
+    }
+
+    public void SwitchToNextWindow() throws Exception
+    {
+        Set<String> handleset = Page.driver.getWindowHandles();
+        for(String handle : handleset)
+        {
+            if(!handle.equals(curHandle))
+            {
+                Page.driver.switchTo().window(handle);
+                break;
+            }
+        }
+    }
+
+    public void verifyIfAddingMoreThanFifteenListingShowsErrorDialog() throws Exception
+    {
+            searchresult.hoverOnSearchResult(2);
+            searchresult.hoverOnPincushionIcon(2);
+            searchresult.clickOnPinCushionReportIcon();
+        System.out.println("done");
+
     }
 
     @Override

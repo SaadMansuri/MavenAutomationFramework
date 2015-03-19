@@ -9,7 +9,7 @@ import com.agorafy.automation.testcases.ReportsAction;
 
 public class ReportsTest 
 {
- @BeforeSuite
+    @BeforeSuite
     public void Init()
     {
         String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
