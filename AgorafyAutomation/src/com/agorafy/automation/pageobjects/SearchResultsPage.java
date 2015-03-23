@@ -1,9 +1,11 @@
 package com.agorafy.automation.pageobjects;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -317,7 +319,7 @@ public class SearchResultsPage extends Page
 
     public WebElement tile_Searchresult(int index) throws Exception
     {
-        return resultSet().get(index);
+        return resultSetListings().get(index);
     }
 
     public void hoverOnSearchResult(int index) throws Exception
@@ -333,13 +335,14 @@ public class SearchResultsPage extends Page
         return tile_Searchresult(index).findElement(By.className("pinCushion")).findElement(By.tagName("a"));
     }
 
-    public void hoverOnPincushionIcon(int index) throws Exception 
+    public void hoverAndClickOnPincushionIcon(int index) throws Exception 
     {
         Actions builder = new Actions(driver);
         Action hover = builder.moveToElement(icon_PinCushion(index)).build();
         WaitFor.sleepFor(1000);
         hover.perform();
-        AutomationLog.info("Successfully hovered on PinCushionReport icon");
+        icon_PinCushion(index).click();
+        AutomationLog.info("Successfully hovered And Clicked PinCushionReport icon");
     }
 
     public ListingDetailPage clickSearchResult()
@@ -353,6 +356,24 @@ public class SearchResultsPage extends Page
     {
         elements = driver.findElement(By.className("resultsSet")).findElements(By.tagName("li"));
         return elements;
+    }
+
+    public List<WebElement> resultSetListings() throws Exception
+    {
+        List<WebElement> list = new ArrayList<WebElement>();
+        for(WebElement element : resultSet())
+        {
+            if(element.isDisplayed())
+            {
+                list.add(element);
+            }
+        }
+        return list;
+    }
+
+    public int getResultSetListingsConut() throws Exception
+    {
+        return resultSetListings().size();
     }
 
     public WebElement element_NoOfSearchResults() throws Exception 
@@ -428,4 +449,69 @@ public class SearchResultsPage extends Page
         }
         return multipleListingsStatus;
     }
+
+    public WebElement popup_ErrorDialog() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("errorDialog"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find error dialog pop up");
+            throw(e);
+        }
+        return element;
+    }
+
+    public boolean checkMultipleListings(int index) throws Exception
+    {
+        boolean val;
+        try
+        {
+            if(tile_Searchresult(index).findElements(By.className("listing-badge")).size()>0)
+            {
+                val = true;
+            }
+            else 
+            {
+                val = false;
+            }
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not perform check for multiple listings ");
+            throw(e);
+        }
+        return val;
+    }
+
+    public WebElement Listing_Badge(int index) throws Exception 
+    {
+        try
+        {
+            element = tile_Searchresult(index).findElement(By.className("listing-badge"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Listing badge ");
+            throw(e);
+        }
+        return element;
+    }
+
+    public int getListingBadgeCount(int index) throws Exception
+    {
+        String text = Listing_Badge(index).getText();
+        String retext = text.replaceAll(" Listings", "");
+        int count = Integer.parseInt(retext);
+        return count;
+    }
+
+    public void scrollDownPage() throws Exception 
+    {
+        ((JavascriptExecutor) Page.driver).executeScript("window.scrollBy(0,700)", "");
+        WaitFor.sleepFor(2000);
+    }
+
 }
