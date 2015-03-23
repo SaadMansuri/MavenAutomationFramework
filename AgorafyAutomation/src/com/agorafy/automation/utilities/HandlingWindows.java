@@ -27,4 +27,9 @@ public class HandlingWindows
         driver.switchTo().window(allWindowHandles.get(windowNoToSwitch));
     }
 
+    public static void closeCurrentWindow(WebDriver driver) 
+    {
+       	driver.close();
+    }
+
 }

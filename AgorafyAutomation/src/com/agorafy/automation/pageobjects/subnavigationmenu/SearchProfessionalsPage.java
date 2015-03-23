@@ -1,5 +1,6 @@
 package com.agorafy.automation.pageobjects.subnavigationmenu;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.CompanyProfilePage;
 import com.agorafy.automation.pageobjects.Page;
 
 public class SearchProfessionalsPage extends Page
@@ -639,6 +641,165 @@ public class SearchProfessionalsPage extends Page
             throw(e);
         }
         return element;
+    }
+
+    public WebElement element_AgentsContainer() throws Exception
+    {
+        try
+        {
+            element =  driver.findElement(By.id("agents"));
+            AutomationLog.info("Agents container found on SearchProfessionals page");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Failed to found Agents container on SearchProfessionals page");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement element_CompaniesContainer() throws Exception
+    {
+        try
+        {
+            element =  driver.findElement(By.id("companies"));
+            AutomationLog.info("Companies container found on SearchProfessionals page");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Failed to found companies container on SearchProfessionals page");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement tab_TopAgents() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.linkText("Top Agents"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Top Agents Tab is not found on Search Professionals Page");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement tab_TopCompanies() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.linkText("Top Companies"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Top Companies Tab is not found on Search Professionals Page");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnTopAgentsTab() throws Exception
+    {
+        try
+        {
+            tab_TopAgents().click();
+            AutomationLog.info("Successfully clicked top agents tab");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to click top agents tab");
+            throw(e);
+        }
+    }
+
+    public void clickOnTopCompaniesTab() throws Exception
+    {
+        try
+        {
+            tab_TopCompanies().click();
+            AutomationLog.info("Successfully clicked top companies tab");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to click top companies tab");
+            throw(e);
+        }
+    }
+
+    public WebElement firstCompanyUnderCompaniesTab() throws Exception
+    {
+        List<WebElement> allCompaniesSet = new ArrayList<>();
+        List<WebElement> allCompanies = new ArrayList<>();
+        try
+        {
+            element =  driver.findElement(By.id("companies")).findElement(By.id("resultsLineItemsCompanies"));
+            allCompaniesSet = element.findElements(By.tagName("ul"));
+            allCompanies = allCompaniesSet.get(0).findElements(By.tagName("li"));
+            AutomationLog.info("Companies container found on SearchProfessionals page");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Failed to found companies container on SearchProfessionals page");
+            throw(e);
+        }
+        return allCompanies.get(0);
+    }
+
+    public CompanyProfilePage clickOnFirstCompany() throws Exception
+    {
+        CompanyProfilePage companyProfilePage;
+        try
+        {
+            firstCompanyUnderCompaniesTab().findElement(By.tagName("a")).click();;
+            companyProfilePage = new CompanyProfilePage(driver);
+            AutomationLog.info("Successfully clicked first company");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to click first company");
+            throw(e);
+        }
+        return companyProfilePage;
+    }
+
+    public String singleAgentsName() throws Exception
+    {
+        String agentName = null;
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='brokerResults']/li[2]/div[2]/a"));
+            agentName = element.getText();
+            AutomationLog.info("Successfully fetched single agent name");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to fetch single agent name");
+            throw(e);
+        }
+        return agentName;
+    }
+
+    public boolean agentsStatus() throws Exception
+    {
+        boolean agentsStatus = false;
+        try
+        {
+            int agents = element_AgentsContainer().findElement(By.id("resultsLineItemsAgents")).findElements(By.tagName("h4")).size();
+            if(agents == 0)
+            agentsStatus = true;
+            else if (agents == 1) 
+            agentsStatus = false;
+            AutomationLog.info("Successfully found whether multiple agents are present or not");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to found whether multiple agents are present or not");
+            throw(e);
+        }
+        return agentsStatus;
     }
 
     @Override
