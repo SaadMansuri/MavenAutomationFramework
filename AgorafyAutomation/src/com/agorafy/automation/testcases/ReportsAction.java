@@ -28,6 +28,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     private SearchResultsPage searchresult = null;
     private ListingDetailPage listingdetail = null;
     String curHandle;
+    static int reportcount = 15;
     
     public ReportsAction()
     {
@@ -50,12 +51,12 @@ public class ReportsAction extends AutomationTestCaseVerification
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             HashMap<String, String> search = testCaseData.get("SearchData");
             searchresult = homePage.populateSearchTermTextBox(search.get("borough"), search.get("listingcategory"), search.get("searchterm"));
-            AutomationLog.info("Successfully redirected to PropertySearch page");
+            AutomationLog.info("Successfully redirected to SearchResults page");
             curHandle = Page.driver.getWindowHandle();
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not navigate to page");
+            AutomationLog.error("Could not navigate to SearchResults page");
         }
     }
 
@@ -65,6 +66,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         verifySearchResultPageTestCases();
         verifyListingDetailPageTestCases();
         verifyIfReportsCountIsSameOnBothWindows();
+        verifyIfAddingMoreThanFifteenListingShowsErrorDialog();
        
     }
 
@@ -79,7 +81,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         verifyIfClickingOnReportsLinkInProfileNameDropDownShowsReportsBox ();
         verifyIfClickingOnClearLinkOnReportsBoxClearsReportsList();
         verifyIfClickedOnCloseIconForIndividualListingInReportsBox();
-        verifyIfAddingMoreThanFifteenListingShowsErrorDialog();
+        
     }
 
     public void verifyListingDetailPageTestCases() throws Exception
@@ -304,7 +306,11 @@ public class ReportsAction extends AutomationTestCaseVerification
         Page.driver.close();
         Page.driver.switchTo().window(curHandle);
         int searchpagecount = Integer.parseInt(reports.getReportCount());
-        Assert.assertEquals(listingpagecount, searchpagecount, "Adding report Increase Reports Count on ");
+        Assert.assertEquals(listingpagecount, searchpagecount, "Expected Reports Count is not increased on both windows ");
+        header.clickOnProfileNameDropdownArrow();
+        reports = header.clickOnReportsLink();
+        reports.clickOnClearLink();
+        reports.clickOnReportWindowCloseIcon();
         AutomationLog.info("Adding report increase Count in both windows");
     }
 
@@ -323,11 +329,27 @@ public class ReportsAction extends AutomationTestCaseVerification
 
     public void verifyIfAddingMoreThanFifteenListingShowsErrorDialog() throws Exception
     {
-            searchresult.hoverOnSearchResult(2);
-            searchresult.hoverOnPincushionIcon(2);
-            searchresult.clickOnPinCushionReportIcon();
-        System.out.println("done");
-
+        int licount = 0;
+        int count = 1;
+        int total = searchresult.getResultSetListingsConut();
+        for(int i=0;i<total;i++)
+        {
+            if(reportcount < 0)
+            {
+                break;
+            }
+            searchresult.hoverOnSearchResult(i);
+            searchresult.hoverAndClickOnPincushionIcon(i);
+            --reportcount;
+            
+            if(++licount >=6*count)
+            {
+                searchresult.scrollDownPage();
+                ++count;
+            }
+        }
+        Assert.assertTrue(searchresult.popup_ErrorDialog().isDisplayed(), "Expected Error dialog pop up is not shown");
+        AutomationLog.info("Error Dialog is shown if more than fifteen listings tried to add ");
     }
 
     @Override
