@@ -62,24 +62,21 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     {
 
         AutomationLog.info("Verification of toggle between Top Agents and Top Companies");
-        //verifyToggleBetweenAgentsAndCompanies();
+        verifyToggleBetweenAgentsAndCompanies();
 
         AutomationLog.info("Verify whether empty agent search results in same page");
-        //verifyEmptyAgentSearch();
+        verifyEmptyAgentSearch();
 
         AutomationLog.info("Verify whether after performing click operation on company name in compnies tab, it redirects to company profile page");
-        //verifyCompanyProfilePage();
+        verifyCompanyProfilePage();
 
         AutomationLog.info("verify whether already present agent shown under agents tab after performing search");
-        //verifyAgentSearch();
+        verifyAgentSearch();
 
         AutomationLog.info("verify whether if agent is not present then shows the message no agents found");
-        //verifyNoAgentsFoundSearch();
+        verifyNoAgentsFoundSearch();
 
-        AutomationLog.info("");
-        
-
-       /* HashMap<String, String> agentCompanySearch = testCaseData.get("agentCompanySearch");
+        HashMap<String, String> agentCompanySearch = testCaseData.get("agentCompanySearch");
         verifyIfRandomAgentCompanySearchShowsAppropriateMessage(searchprofessional,agentCompanySearch);
 
         HashMap<String, String> agentName = testCaseData.get("agentName");
@@ -104,7 +101,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
 
         verifyNeighborhoodsEnteredShouldNotPersist(searchprofessional,neighborName,propertyType);
 
-        verifyIfNeighborhoodCanBeAddedAfterRemovefromNeighborhoodsDropbox(searchprofessional, neighborName);*/
+        verifyIfNeighborhoodCanBeAddedAfterRemovefromNeighborhoodsDropbox(searchprofessional, neighborName);
     }
 
     private void verifyNoAgentsFoundSearch() throws Exception 
@@ -127,6 +124,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
 
 	private void verifyCompanyProfilePage() throws Exception 
     {
+        subnavigation.clickLinkSearchProfessionals();
         searchprofessional.clickOnTopCompaniesTab();
         companyProfilePage = searchprofessional.clickOnFirstCompany();
         HandlingWindows.switchToWindow(Page.driver, 2);
