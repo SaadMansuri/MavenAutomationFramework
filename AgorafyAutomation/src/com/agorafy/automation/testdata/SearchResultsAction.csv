@@ -1,1 +1,3 @@
 SearchData,borough="Manhattan";listingcategory="Residential";searchterm="Rentals in 10010"
+InvalidPinData,invalidPin1=100;invalidPin2=123456
+ValidSearchInputWithNoResults,borough="Bronx";listingcategory="Commercial";searchterm="10001"

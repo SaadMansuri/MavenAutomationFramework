@@ -266,10 +266,11 @@ public class Homepage extends Page
             clickOnSelectListingCategoryIcon();
             WaitFor.sleepFor(1000);
             selectListingCategory(listingcategory);
+            txtbx_SearchTerm().clear();
             txtbx_SearchTerm().sendKeys(searchstring);
+            WaitFor.sleepFor(2000);
             clickOnSearchButtton();
             searchresult = new SearchResultsPage(driver);
-            WaitFor.waitUntilElementIsLoaded(driver, By.id("resultsHeader"));
             AutomationLog.info("Search is performed successfully");
         }
         catch(Exception e)

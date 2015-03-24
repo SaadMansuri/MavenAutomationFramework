@@ -12,6 +12,7 @@ import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
+import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
 /**
@@ -28,6 +29,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     private SearchResultsPage searchresult;
     private LoginPopUp loginpopup;
     private Header header = Header.header();
+    private HashMap<String, String> dataFromCSV = new HashMap<>();
 
     public SearchResultsAction()
     {
@@ -61,6 +63,41 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound();
         verifyIfSearchByBathsShowsPropertiesWithNoOfBaths();
         verifyIfLoginPopUpIsShownOnClickOfCreateYourProfileButton();
+        AutomationLog.info("Verifivation of search results page after entering pin code which is less 5 digits");
+        verifyInvalidPinCode();
+
+        AutomationLog.info("Verification of search result page after entering valid input combination, but dont have results for that");
+        verifyNoResultsCombination();
+    }
+
+    private void verifyNoResultsCombination() throws Exception 
+    {
+        dataFromCSV = testCaseData.get("ValidSearchInputWithNoResults");
+        searchresult = homepage.populateSearchTermTextBox(dataFromCSV.get("borough"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchterm"));
+        boolean errorMsgStatus = false;
+        errorMsgStatus = searchresult.noResultsErrorMsg().isDisplayed();
+        Assert.assertEquals(errorMsgStatus, true, "Msg for no results is not generated");
+        AutomationLog.info("Msg for no results is sucessfully generated");
+    }
+
+	private void verifyInvalidPinCode() throws Exception 
+    {
+        Integer pinCombinationNo;
+        String pinCombination;
+        String pinCombinationString;
+        dataFromCSV = testCaseData.get("InvalidPinData");
+        for(pinCombinationNo = 1; pinCombinationNo<3; pinCombinationNo++)
+        {
+            pinCombination = "invalidPin";
+            pinCombination = pinCombination.concat(pinCombinationNo.toString());
+            pinCombinationString = dataFromCSV.get(pinCombination);
+            searchresult = homepage.populateSearchTermTextBox(null, null, pinCombinationString);
+            boolean errorMsgStatus = false;
+            errorMsgStatus = searchresult.noResultsErrorMsg().isDisplayed();
+            Assert.assertEquals(errorMsgStatus, true, "Error msg for no results is not generated, if invalid pin is added, invalid pin is as follows:"+pinCombination);
+            AutomationLog.info("Error msg for no results is sucessfully generated, if invalid pin is added");
+            pinCombination = null;
+        }
     }
 
     public void verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink() throws Exception

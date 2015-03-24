@@ -341,6 +341,19 @@ public class SearchResultsPage extends Page
         return element; 
     }
 
+    public WebElement noResultsErrorMsg() throws Exception 
+    {
+        try 
+        {
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div/div/h2"));
+        } 
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find no results error msg");
+        }
+        return element; 
+    }
+
     public String noOfSearchResults() throws Exception 
     {
         String noOfSearchResults;
