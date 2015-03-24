@@ -15,7 +15,7 @@ import com.agorafy.automation.automationframework.WaitFor;
 public class Reports extends Page 
 {
     private WebElement element = null;
-    private Header header = new Header(driver);
+    private Header header = Header.header();
 
     public Reports(WebDriver driver) 
     {
@@ -72,6 +72,7 @@ public class Reports extends Page
         String count;
         header.clickOnProfileNameDropdownArrow();
         WaitFor.presenceOfTheElement(driver, getUserDropdownLocator());
+        WaitFor.sleepFor(1000);
         count = header.reportCount().getText();
         header.clickOnProfileNameDropdownArrow();
         WaitFor.sleepFor(1000);
@@ -209,7 +210,8 @@ public class Reports extends Page
 
     public WebElement FirstListingInReportList() throws Exception
     {
-        return resultsetReportList().get(0).findElement(By.tagName("a"));
+        //return resultsetReportList().get(0).findElement(By.tagName("a"));
+        return resultsetReportList().get(0);
     }
 
     public void clickOnFirstDeleteListingIcon() throws Exception
@@ -228,5 +230,46 @@ public class Reports extends Page
     public List<WebElement> DeleteListingIconList() throws Exception
     {
         return Report_List().findElements(By.className("del-listing"));
+    }
+
+    public WebElement popup_print() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("customizeReport"));
+        }
+        catch(Exception e)
+        {
+           AutomationLog.error("Could not find PopUp");
+        }
+        return element;
+    }
+
+    public WebElement btn_CloseOnPrintReportPopUp() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("btn-cancel"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not fing close button on Print Reports Popup");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnCloseButtonOnPrintReportsPopUp() throws Exception 
+    {
+        try
+        {
+            btn_CloseOnPrintReportPopUp().click();
+            AutomationLog.info("Successfully clicked on close button on Print Report PopUp");
+        }
+        catch(Exception e)
+        {
+           AutomationLog.error("Could not click on close button on Print Report Popup");
+           throw(e);
+        }
     }
 }
