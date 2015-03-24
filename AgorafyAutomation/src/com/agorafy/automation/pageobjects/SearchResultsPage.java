@@ -514,4 +514,31 @@ public class SearchResultsPage extends Page
         WaitFor.sleepFor(2000);
     }
 
+    public WebElement icon_CloseOnErrorDialogPopup() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("ui-dialog-titlebar-close"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Close icon on ErrorDialog PopUp");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickCloseIconOnErrorDialogPopUp() throws Exception
+    {
+        try
+        {
+            icon_CloseOnErrorDialogPopup().click();
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on close icon on Error dialog popup");
+            throw(e);
+        }
+    }
+
 }
