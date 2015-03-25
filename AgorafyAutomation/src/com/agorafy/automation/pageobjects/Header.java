@@ -499,7 +499,7 @@ public class Header extends Page
         {
             link_Reports().click();
             reports = new Reports(driver);
-            AutomationLog.info("Successfully clicked in Reports link in Profile Dropdown");
+            AutomationLog.info("Successfully clicked on Reports link in Profile Dropdown");
         }
         catch(Exception e)
         {
