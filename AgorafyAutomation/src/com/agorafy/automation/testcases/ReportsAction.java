@@ -65,7 +65,6 @@ public class ReportsAction extends AutomationTestCaseVerification
     {
         verifySearchResultPageTestCases();
         verifyListingDetailPageTestCases();
-       
     }
 
     public void verifySearchResultPageTestCases() throws Exception
@@ -79,11 +78,11 @@ public class ReportsAction extends AutomationTestCaseVerification
         verifyIfClickingOnReportsLinkInProfileNameDropDownShowsReportsBox ();
         verifyIfClickingOnClearLinkOnReportsBoxClearsReportsList();
         verifyIfClickedOnCloseIconForIndividualListingInReportsBox();
-        
+
         verifyIfReportsCountIsSameOnBothWindows();
         verifyIfAddingMoreThanFifteenListingShowsErrorDialog();
         verifyIfClickingCloseIconOnReportsListRemovesThatListing();
-        
+
         verifyIfPrintLinkIsShownOnReportsBox();
         verifyIfClickingPrintLinkOpensPopUp();
     }
@@ -379,7 +378,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     public void verifyIfClickingPrintLinkOpensPopUp() throws Exception 
     {
         reports.clickOnPrintLink();
-        Assert.assertTrue(reports.popup_print().isDisplayed(), "Expected popup is not shown");
+        Assert.assertTrue(reports.popup_PrintReports().isDisplayed(), "Expected popup is not shown");
         reports.clickOnCloseButtonOnPrintReportsPopUp();
         AutomationLog.info("Clicking on print link shows popup");
     }

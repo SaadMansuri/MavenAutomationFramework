@@ -210,7 +210,6 @@ public class Reports extends Page
 
     public WebElement FirstListingInReportList() throws Exception
     {
-        //return resultsetReportList().get(0).findElement(By.tagName("a"));
         return resultsetReportList().get(0);
     }
 
@@ -232,7 +231,7 @@ public class Reports extends Page
         return Report_List().findElements(By.className("del-listing"));
     }
 
-    public WebElement popup_print() throws Exception
+    public WebElement popup_PrintReports() throws Exception
     {
         try
         {
@@ -240,12 +239,12 @@ public class Reports extends Page
         }
         catch(Exception e)
         {
-           AutomationLog.error("Could not find PopUp");
+           AutomationLog.error("Could not find PrintReports PopUp ");
         }
         return element;
     }
 
-    public WebElement btn_CloseOnPrintReportPopUp() throws Exception
+    public WebElement btn_CloseOnPrintReportsPopUp() throws Exception
     {
         try
         {
@@ -263,7 +262,7 @@ public class Reports extends Page
     {
         try
         {
-            btn_CloseOnPrintReportPopUp().click();
+            btn_CloseOnPrintReportsPopUp().click();
             AutomationLog.info("Successfully clicked on close button on Print Report PopUp");
         }
         catch(Exception e)
