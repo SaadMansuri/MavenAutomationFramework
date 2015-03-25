@@ -1,6 +1,5 @@
 package com.agorafy.automation.testcases;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +10,8 @@ import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.AdvancedSearchPage;
@@ -24,6 +25,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     private ListingDetailPage listingdetail = null;
     private SubNavigation subnavigation = null;
     private List<String> list = new ArrayList<String>();
+    private Homepage homepage = Homepage.homePage();
 
     public AdvancedSearchPageAction() 
     {
@@ -54,9 +56,22 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         verifyIfCommercialListingCategoryIsSelected();
         verifySearchByCommercial();
         verifySearchByResidential();
+
+        AutomationLog.info("Verify whether auto compile is provided for search criteria");
+        verifyAutoComplete();
     }
 
-    public void verifyIfResidentialListingCategoryIsSelected() throws Exception
+    private void verifyAutoComplete() throws Exception 
+    {
+        advancedsearch.txtbx_SearchInput().sendKeys("1");
+        WaitFor.sleepFor(1000);
+        boolean autoCompleteBoxStatus = false;
+        autoCompleteBoxStatus = advancedsearch.autoComplete().isDisplayed();
+        Assert.assertEquals(autoCompleteBoxStatus, true, "Auto complete box is not displayed");
+        AutomationLog.info("Auto complete box is displayed sucessfully");
+    }
+
+	public void verifyIfResidentialListingCategoryIsSelected() throws Exception
     {
         advancedsearch.clickOnResidentialRadioButton();
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -94,6 +109,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     {
         HashMap<String, String> searchData = testCaseData.get("SearchResidential");
         searchResidential(searchData);
+        advancedsearch.navigateToPreviousPage();
     }
 
     public void searchByAddress(HashMap<String, String> searchData) throws Exception
@@ -174,6 +190,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         advancedsearch.txtbx_SizeInput().clear();
         propsearch = advancedsearch.clickOnSearchButton();
         String titleText = searchData.get("searchText") + searchData.get("searchTerm");
+        WaitFor.sleepFor(2000);
         Assert.assertEquals(propsearch.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
         AutomationLog.info("Search Result page title is same as search term ");
 

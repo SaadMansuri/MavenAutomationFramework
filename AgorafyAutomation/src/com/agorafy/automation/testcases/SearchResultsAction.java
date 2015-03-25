@@ -63,14 +63,28 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound();
         verifyIfSearchByBathsShowsPropertiesWithNoOfBaths();
         verifyIfLoginPopUpIsShownOnClickOfCreateYourProfileButton();
-        AutomationLog.info("Verifivation of search results page after entering pin code which is less 5 digits");
+
+        AutomationLog.info("Verification of search results page after entering pin code which is less 5 digits");
         verifyInvalidPinCode();
 
         AutomationLog.info("Verification of search result page after entering valid input combination, but dont have results for that");
         verifyNoResultsCombination();
+
+        AutomationLog.info("Verification of search result page after entering special character in search criteria");
+        verifySpecialCharacterInSearch();
+
     }
 
-    private void verifyNoResultsCombination() throws Exception 
+   	private void verifySpecialCharacterInSearch() throws Exception 
+    {
+        searchresult = homepage.populateSearchTermTextBox(null, null, "$");
+        boolean errorMsgStatus = false;
+        errorMsgStatus = searchresult.noResultsErrorMsg().isDisplayed();
+        Assert.assertEquals(errorMsgStatus, true, "Msg for no results is not generated");
+        AutomationLog.info("Msg for no results is sucessfully generated");
+    }
+
+	private void verifyNoResultsCombination() throws Exception 
     {
         dataFromCSV = testCaseData.get("ValidSearchInputWithNoResults");
         searchresult = homepage.populateSearchTermTextBox(dataFromCSV.get("borough"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchterm"));

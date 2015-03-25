@@ -245,6 +245,20 @@ public class AdvancedSearchPage extends Page
         return search;
     }
 
+    public WebElement autoComplete() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='advancedSearchFormContainer']/div[3]/ul"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not find auto-complete box");
+            throw(e);
+        }
+        return element;
+    }
+
     @Override
     public String pageHeading() throws Exception
     {

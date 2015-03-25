@@ -312,4 +312,19 @@ public class Homepage extends Page
         return element;
     }
 
+    public WebElement autoComplete() throws Exception
+    {
+        WebElement autoComplete;
+        try
+        {
+            element = driver.findElement(By.className("well"));
+            autoComplete = element.findElement(By.className("ui-autocomplete"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not found auto complete option for search results");
+            throw(e);
+        }
+        return autoComplete;
+    }
 }

@@ -3,7 +3,7 @@ package com.agorafy.automation.testcases.subscriptions;
 import java.util.HashMap;
 import java.util.List;
 
-import mailReport.SendMail;
+import mailReport.SendMailClass;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
