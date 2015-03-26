@@ -2,11 +2,10 @@ package com.agorafy.automation.testcases.submitlisting;
 
 
 import java.util.HashMap;
-
 import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
+import com.agorafy.automation.pageobjects.PageBanner;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingContactsFormPage;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingMediaFormPage;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingPreviewAndSubmitPage;
@@ -17,6 +16,7 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
     private SubmitListingContactsFormPage contacts = new SubmitListingContactsFormPage(Page.driver);
     private SubmitListingMediaFormAction media = new SubmitListingMediaFormAction();
     private SubmitListingPreviewAndSubmitPage preview = null;
+    private PageBanner pagebanner = new PageBanner(Page.driver);
     HashMap<String, String> mediadata;
     HashMap<String, String > contactinfo;
     public SubmitListingContactsFormAction() 
@@ -55,6 +55,8 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
         verifyIfAddedContactsShowsTotalNoOfContactsAdded();
         verifyIfClickingBackButtonRedirectsToMediaForm();
         verifyIfMultipleContactsCanBeRemoved();
+        verifyIfClickingUseMyContactInformationButtonContactsFormIsFilledWithPageBannerData();
+        verifyIfClickingAddToContactAfterClickingUseMyContactInformationButton();
         verifyIfClickingSaveAndContinueRedirectsToPreviewAndSubmitForm();
     }
 
@@ -86,7 +88,7 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
         addContactFormFill(contacts,contactinfo);
         contacts.clickOnAddContactsButton();
         Assert.assertEquals(contacts.added_Contacts().isDisplayed(), true, "Expected added contacts is not shown");
-        Assert.assertEquals(contacts.txt_AddedContactName().getText(), contactinfo.get("Name"), "not found ");
+        Assert.assertEquals(contacts.txt_AddedContactName().getText(), contactinfo.get("Name"), "Expected contact name not found ");
         AutomationLog.info("Clicking Add Contact with form data shows added contacts successfullys");
     }
 
@@ -106,11 +108,13 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
 
     public void verifyIfSaveButtonIsClickedAfterEdit() throws Exception 
     {
+        contactinfo = testCaseData.get("ContactName");
+        String name = contactinfo.get("name");
         contacts.clickEditIconOnAddedContact();
         contacts.txtbx_Name().clear();
-        contacts.txtbx_Name().sendKeys("Jason Borne");
+        contacts.txtbx_Name().sendKeys(name);
         contacts.clickOnSaveContactButton();
-        Assert.assertEquals(contacts.txt_AddedContactName().getText(), "Jason Borne", "Expected Form Data is not Saved from edit");
+        Assert.assertEquals(contacts.txt_AddedContactName().getText(), name, "Expected Form Data is not Saved from edit");
         AutomationLog.info("Clickin Cancel button clears form data from edit successfully ");
     }
 
@@ -189,6 +193,62 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
         contact.txtbx_Address().clear();
         contact.txtbx_Address().sendKeys(contactinfo.get("Address"));
         AutomationLog.info("Form data added successfully");
+    }
+
+    public void verifyIfClickingUseMyContactInformationButtonContactsFormIsFilledWithPageBannerData() throws Exception
+    {
+        contacts.clickOnUseMyContactInformationbutton();
+        verifyContactForm();
+    }
+
+    public void verifyContactForm() throws Exception
+    {
+        verifyNameField();
+        verifyCompanyField();
+        verifyEmailField();
+        verifyPhoneField();
+        verifyAddressField();
+    }
+
+    public void verifyIfClickingAddToContactAfterClickingUseMyContactInformationButton() throws Exception
+    {
+        contacts.clickOnAddContactsButton();
+        Assert.assertEquals(contacts.added_Contacts().isDisplayed(), true, "Expected added contacts is not shown");
+    }
+
+    public void verifyNameField() throws Exception 
+    {
+        String actualName = contacts.txtbx_Name().getAttribute("value").replaceAll("\\s", "");
+        String expectedName =  pagebanner.getBannerText();
+        Assert.assertEquals(actualName, expectedName, "Expected name is not shown");
+    }
+
+    public void verifyCompanyField() throws Exception
+    {
+        String actualCompany = contacts.txtbx_Company().getAttribute("value");
+        String expectedCompany = pagebanner.getBannerCompanyText();
+        Assert.assertEquals(actualCompany, expectedCompany, "Expected Company is not shown");
+    }
+
+    public void verifyEmailField() throws Exception
+    {
+        String actualEmail = contacts.txtbx_Email().getAttribute("value");
+        String expectedEmail = pagebanner.getBannerEmailText();
+        Assert.assertEquals(actualEmail, expectedEmail, "Expected email is not shown");
+    }
+
+    public void verifyPhoneField() throws  Exception
+    {
+         String actualPhone = contacts.txtbx_Phone().getAttribute("value").replaceAll("\\D", "");
+         String expectedPhone = (pagebanner.getBannerWorkPhoneText() + pagebanner.getBannerMobilePhoneText()).replaceAll("\\D", "");
+         Assert.assertEquals(actualPhone, expectedPhone, "Expected phone in not shown");
+    }
+
+    public void verifyAddressField() throws Exception
+    {
+        String actualAddress = contacts.txtbx_Address().getAttribute("value").replaceAll("\\W", "");
+        String expectedAddress = pagebanner.getBannerAddressText().replaceAll("\\W", "");
+        Assert.assertEquals(actualAddress, expectedAddress, "Expected Address is not shown");
     }
 
     @Override
