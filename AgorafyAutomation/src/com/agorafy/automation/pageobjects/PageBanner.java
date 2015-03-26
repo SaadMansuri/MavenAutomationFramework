@@ -91,4 +91,19 @@ public class PageBanner extends Page
         }
         return addressText;
     }
+
+    public String getBannerEmailText() throws Exception
+    {
+        String emailText="";
+        try
+        {
+            emailText= driver.findElement(By.xpath("html/body/div[2]/div/div[1]/div/div[2]/div/div/p[3]")).getText();
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("emailText not found in Overview tab form");
+            throw(e);
+        }
+        return emailText;
+    }
 }

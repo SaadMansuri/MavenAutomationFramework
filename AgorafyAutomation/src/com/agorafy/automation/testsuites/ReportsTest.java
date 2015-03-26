@@ -4,12 +4,13 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
+import com.agorafy.automation.testcases.AddToReportsAction;
 import com.agorafy.automation.testcases.ReportsAction;
 
 
 public class ReportsTest 
 {
- @BeforeSuite
+    @BeforeSuite
     public void Init()
     {
         String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
@@ -22,6 +23,19 @@ public class ReportsTest
         try
         {
             new ReportsAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
+
+    @Test
+    public void testAddToReportsTestCase() throws Exception
+    {
+        try
+        {
+            new AddToReportsAction().Execute();
         }
         catch(Exception e)
         {
