@@ -782,6 +782,22 @@ public class SearchProfessionalsPage extends Page
         return agentName;
     }
 
+    public String firstCompnayName() throws Exception
+    {
+        String compnayName = null;
+        try
+        {
+            compnayName = firstCompanyUnderCompaniesTab().findElement(By.tagName("a")).getText();
+            AutomationLog.info("Successfully fetched single compnay name");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Failed to fetch single compnay name");
+            throw(e);
+        }
+        return compnayName;
+    }
+
     public boolean agentsStatus() throws Exception
     {
         boolean agentsStatus = false;

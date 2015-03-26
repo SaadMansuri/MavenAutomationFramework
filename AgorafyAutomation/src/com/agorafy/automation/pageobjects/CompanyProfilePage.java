@@ -45,4 +45,19 @@ public class CompanyProfilePage extends Page
         }
         return element;
     }
+
+    public WebElement compnayName() throws Exception
+    {
+        try
+        {
+            element =  driver.findElement(By.className("page-banner-section")).findElement(By.className("col-sm-8")).findElement(By.className("profile-content")).findElement(By.tagName("h2"));
+            AutomationLog.info("compny name is found on copmany profile page");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Failed to found compnay name on company profile page");
+            throw(e);
+        }
+        return element;
+    }
 }

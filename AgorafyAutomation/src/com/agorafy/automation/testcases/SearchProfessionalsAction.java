@@ -34,6 +34,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     private SubNavigation subnavigation = null;
     private SearchProfessionalsPage searchprofessional = null;
     private CompanyProfilePage companyProfilePage;
+    private HashMap<String, String> dataFromCSV = new HashMap<>(); 
 
     public SearchProfessionalsAction()
     {
@@ -61,20 +62,11 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception 
     {
 
-        AutomationLog.info("Verification of toggle between Top Agents and Top Companies");
-        verifyToggleBetweenAgentsAndCompanies();
-
-        AutomationLog.info("Verify whether empty agent search results in same page");
+        AutomationLog.info("Verify whether empty agent search results in same page, by checking URL");
         verifyEmptyAgentSearch();
 
-        AutomationLog.info("Verify whether after performing click operation on company name in compnies tab, it redirects to company profile page");
+        AutomationLog.info("Verify whether after performing click operation on company name in compnies tab, it redirects to company profile page by checking company name");
         verifyCompanyProfilePage();
-
-        AutomationLog.info("verify whether already present agent shown under agents tab after performing search");
-        verifyAgentSearch();
-
-        AutomationLog.info("verify whether if agent is not present then shows the message no agents found");
-        verifyNoAgentsFoundSearch();
 
         HashMap<String, String> agentCompanySearch = testCaseData.get("agentCompanySearch");
         verifyIfRandomAgentCompanySearchShowsAppropriateMessage(searchprofessional,agentCompanySearch);
@@ -104,34 +96,16 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         verifyIfNeighborhoodCanBeAddedAfterRemovefromNeighborhoodsDropbox(searchprofessional, neighborName);
     }
 
-    private void verifyNoAgentsFoundSearch() throws Exception 
-    {
-        String agentName = "Hello";
-        searchprofessional.searchByAgentOrCompanyName(agentName);
-        boolean agentSearchStatus = searchprofessional.agentsStatus();
-        Assert.assertEquals(agentSearchStatus, false, "After performing search operation for agent which is not present, no agents found message is not found");
-        AutomationLog.info("After performing search operation for agent which is not present, no agents found message is found");
-    }
-
-	private void verifyAgentSearch() throws Exception 
-    {
-        String agentName = searchprofessional.singleAgentsName();
-        searchprofessional.searchByAgentOrCompanyName(agentName);
-        boolean agentSearchStatus = searchprofessional.agentsStatus();
-        Assert.assertEquals(agentSearchStatus, true, "After performing search for already present agent, agents list is not displayed on search professionals page");
-        AutomationLog.info("After performing search for already present agent, agents list is displayed on search professionals page");
-    }
-
 	private void verifyCompanyProfilePage() throws Exception 
     {
         subnavigation.clickLinkSearchProfessionals();
+        WaitFor.sleepFor(2000);
         searchprofessional.clickOnTopCompaniesTab();
+        String expectedCompanyName = searchprofessional.firstCompnayName();
         companyProfilePage = searchprofessional.clickOnFirstCompany();
         HandlingWindows.switchToWindow(Page.driver, 2);
-        boolean companyProfilePageStatus = false;
-        companyProfilePageStatus = companyProfilePage.agentsContainer().isDisplayed();
-        companyProfilePageStatus = companyProfilePage.listingsContainer().isDisplayed();
-        Assert.assertEquals(companyProfilePageStatus, true, "After selecting a company from top companies tab it fails to redirect respective company page");
+        String actualCompanyName = companyProfilePage.compnayName().getText();
+        Assert.assertEquals(actualCompanyName, expectedCompanyName, "After selecting a company from top companies tab it fails to redirect respective company page");
         AutomationLog.info("After selecting a company from top companies tab it sucessfully redirects to respective company page");
         HandlingWindows.closeCurrentWindow(Page.driver);
         HandlingWindows.switchToWindow(Page.driver, 1);
@@ -140,24 +114,13 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
 	private void verifyEmptyAgentSearch() throws Exception 
     {
         searchprofessional.btn_AgentCompanySearch().click();
-        boolean topAgentsTabStatus = searchprofessional.element_AgentsContainer().isDisplayed();
-        Assert.assertEquals(topAgentsTabStatus, true, "After performing empty search, page does not redirects to same page");
+        String actualURL = searchprofessional.currentURL();
+        dataFromCSV = testCaseData.get("ExpectedURL's");
+        String expectedURL = dataFromCSV.get("EmptyAgentSearchURL");
+        expectedURL = expectedURL.concat("=1&fT=ag&name=");//CSV parser ignores data after = therefore we have to concat this string in expected string part
+        Assert.assertEquals(actualURL, expectedURL, "After performing empty search, page does not redirects to same page");
         AutomationLog.info("After performing empty search, page sucessfully redirects to same page");
     }
-
-	private void verifyToggleBetweenAgentsAndCompanies() throws Exception 
-    {
-        searchprofessional.clickOnTopCompaniesTab();
-        boolean topCompaniesTabStatus = false;
-        topCompaniesTabStatus = searchprofessional.tab_TopCompanies().isDisplayed();
-        Assert.assertEquals(topCompaniesTabStatus, true, "After performing click operation on Top Companies tab companies container did not open");
-        AutomationLog.info("After performing click operation on Top Companies tab companies container sucessfully opened");
-        boolean topAgentsTabStatus = false;
-        searchprofessional.clickOnTopAgentsTab();
-        topAgentsTabStatus = searchprofessional.tab_TopAgents().isDisplayed();
-        Assert.assertEquals(topAgentsTabStatus, true, "After performing click operation on Top Agents tab agents container did not open");
-        AutomationLog.info("After performing click operation on Top Agents tab agents container sucessfully opened");
-	}
 
 	public void verifyIfAgentSearchShowsExcusiveListingsCount(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentName) throws Exception
     {
