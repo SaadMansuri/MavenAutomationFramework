@@ -245,11 +245,16 @@ public class AdvancedSearchPage extends Page
         return search;
     }
 
-    public WebElement autoComplete() throws Exception
+    public By getAutocompleteSearchListLocator() throws Exception
+    {
+       return By.className("ui-autocomplete");
+    }
+
+    public WebElement autoComplete_SearchBox() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='advancedSearchFormContainer']/div[3]/ul"));
+            element = driver.findElement(getAutocompleteSearchListLocator());
         }
         catch (Exception e)
         {
@@ -257,6 +262,82 @@ public class AdvancedSearchPage extends Page
             throw(e);
         }
         return element;
+    }
+
+    public WebElement selected_PropertyType() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='advancedSearchFormContainer']/div[5]/span/span"));
+        }
+        catch(Exception e)
+        {
+           AutomationLog.error("Could not find selected property type");
+           throw(e);
+        }
+        return element;
+    }
+
+    public WebElement selected_Borough() throws Exception
+    {
+    	try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='advancedSearchFormContainer']/div[1]/span/span"));
+        }
+        catch(Exception e)
+        {
+           AutomationLog.error("Could not find selected borough");
+           throw(e);
+        }
+        return element;
+    }
+
+    public WebElement selected_ListingType() throws Exception 
+    {
+    	 try
+         {
+             element = driver.findElement(By.xpath(".//*[@id='advancedSearchFormContainer']/div[4]/span/span"));
+         }
+         catch(Exception e)
+         {
+            AutomationLog.error("Could not find selected Listing type");
+            throw(e);
+         }
+         return element;
+    }
+
+    public List<WebElement> list_AutoCompleteSearch() throws Exception 
+    {
+        return autoComplete_SearchBox().findElements(By.className("ui-menu-item"));
+    }
+
+    public WebElement getFirstSearchSuggestionFromAutoCompleteList() throws Exception
+    {
+        try
+        {
+            element = list_AutoCompleteSearch().get(0).findElement(By.tagName("a"));
+        }
+        catch(Exception e)
+        {
+           AutomationLog.error("Could not get first search suggestion form autocomplete list");
+           throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnFirstSearchSuggestionFromAutoCompleteList() throws Exception 
+    {
+        try
+        {
+            
+            getFirstSearchSuggestionFromAutoCompleteList().click();
+            AutomationLog.info("Successfully clicked on First Search Suggestion From AutoComplete List");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on First Search Suggestion From AutoComplete List");
+            throw(e);
+        }
     }
 
     @Override
