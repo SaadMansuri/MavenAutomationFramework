@@ -11,7 +11,6 @@ import org.testng.Assert;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
-import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.AdvancedSearchPage;
@@ -25,7 +24,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     private ListingDetailPage listingdetail = null;
     private SubNavigation subnavigation = null;
     private List<String> list = new ArrayList<String>();
-    private Homepage homepage = Homepage.homePage();
+
 
     public AdvancedSearchPageAction() 
     {
@@ -66,7 +65,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         advancedsearch.txtbx_SearchInput().sendKeys("1");
         WaitFor.sleepFor(1000);
         boolean autoCompleteBoxStatus = false;
-        autoCompleteBoxStatus = advancedsearch.autoComplete().isDisplayed();
+        autoCompleteBoxStatus = advancedsearch.autoComplete_SearchBox().isDisplayed();
         Assert.assertEquals(autoCompleteBoxStatus, true, "Auto complete box is not displayed");
         AutomationLog.info("Auto complete box is displayed sucessfully");
     }
@@ -107,9 +106,11 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
 
     public void verifySearchByResidential() throws Exception
     {
+        advancedsearch.clickOnResidentialRadioButton();
         HashMap<String, String> searchData = testCaseData.get("SearchResidential");
-        searchResidential(searchData);
-        advancedsearch.navigateToPreviousPage();
+        verifyIfListingTypeDropdownResetsAfterTogglingBoroughs(searchData);
+        verifySearchByPropertyTypes(searchData);
+        Page.navigateToPreviousPage();
     }
 
     public void searchByAddress(HashMap<String, String> searchData) throws Exception
@@ -180,26 +181,43 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         Page.driver.navigate().back();
     }
 
-    public void searchResidential(HashMap<String, String> searchData) throws Exception
+    public void verifyIfListingTypeDropdownResetsAfterTogglingBoroughs(HashMap<String, String> searchData) throws Exception
     {
-        advancedsearch.selectBorough(searchData.get("borough"));
-        advancedsearch.clickOnResidentialRadioButton();
+        String defaultproptype = advancedsearch.selected_PropertyType().getText();
         advancedsearch.txtbx_SearchInput().clear();
-        advancedsearch.txtbx_SearchInput().sendKeys(searchData.get("searchTerm"));
-        advancedsearch.txtbx_Price().clear();
-        advancedsearch.txtbx_SizeInput().clear();
-        propsearch = advancedsearch.clickOnSearchButton();
-        String titleText = searchData.get("searchText") + searchData.get("searchTerm");
-        WaitFor.sleepFor(2000);
-        Assert.assertEquals(propsearch.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
-        AutomationLog.info("Search Result page title is same as search term ");
+        advancedsearch.txtbx_SearchInput().sendKeys("1");
+        WaitFor.ElementToBeDisplayed(Page.driver, advancedsearch.getAutocompleteSearchListLocator());
+        advancedsearch.clickOnFirstSearchSuggestionFromAutoCompleteList();
+        advancedsearch.selectBorough(searchData.get("borough2"));
+        String searchterm = advancedsearch.txtbx_SearchInput().getAttribute("value");
+        String proptype = advancedsearch.selected_PropertyType().getText();
+        Assert.assertEquals(searchterm, "", "Expected SearchInput text box is not cleared");
+        Assert.assertEquals(proptype, defaultproptype, "Expected proprty type drop down does not resets after toggling boroughs");
+        AutomationLog.info("Switching borough resets search form fields ");
+    }
 
+    public void verifySearchByPropertyTypes(HashMap<String, String> searchData) throws Exception
+    {
+        for(int i=1;i<=5;i++)
+        {
+            String searchterm = "searchTerm"+i;
+            String text = searchData.get(searchterm);
+            advancedsearch.txtbx_SearchInput().clear();
+            advancedsearch.txtbx_SearchInput().sendKeys(text);
+            advancedsearch.clickOnSearchButton();
+            String titleText = searchData.get("searchText") + searchData.get(searchterm);
+            WaitFor.sleepFor(2000);
+            Assert.assertEquals(propsearch.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
+            AutomationLog.info("Search Result page title is same as search term ");
+            Page.driver.navigate().back();
+        }
+        AutomationLog.info("Successfully performed search By Property Types");
     }
 
     @Override
     protected String successMessage() 
     {
-    	return "test cases for AdvanceSearch page passed" ;
+        return "test cases for AdvanceSearch page passed" ;
     }
 
     @Override
