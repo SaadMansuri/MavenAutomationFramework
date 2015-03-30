@@ -16,6 +16,8 @@ import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SearchProfessionalsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.utilities.HandlingWindows;
+import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 
 /**
  * Precondition:Navigate to Search Professionals Page 
@@ -29,7 +31,7 @@ import com.agorafy.automation.utilities.HandlingWindows;
  * verify that if User enters neighborhoods under Commercial brokerage tab and toggles to Residential brokerage, togles back to commercial then checkbox of expertise and concentration must be uncheck
  * verify that if user add five neighborhoods and then deleting one and adding one another and click on search then only same five latest neighborhoods is shown.
  */
-public class SearchProfessionalsAction extends AutomationTestCaseVerification 
+public class SearchProfessionalsAction extends AutomationTestCaseVerification  
 {
     private SubNavigation subnavigation = null;
     private SearchProfessionalsPage searchprofessional = null;
@@ -68,6 +70,12 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         AutomationLog.info("Verify whether after performing click operation on company name in compnies tab, it redirects to company profile page by checking company name");
         verifyCompanyProfilePage();
 
+        AutomationLog.info("verify scroll down agent's page");
+        verifyLazyLoadingAgentsPage();
+
+        AutomationLog.info("verify scroll down companies page");
+        verifyLazyLoadingCompniesPage();
+
         HashMap<String, String> agentCompanySearch = testCaseData.get("agentCompanySearch");
         verifyIfRandomAgentCompanySearchShowsAppropriateMessage(searchprofessional,agentCompanySearch);
 
@@ -96,6 +104,28 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         verifyIfNeighborhoodCanBeAddedAfterRemovefromNeighborhoodsDropbox(searchprofessional, neighborName);
     }
 
+    private void verifyLazyLoadingAgentsPage() throws InterruptedException 
+    {
+        boolean actualLazyLoadingStatus = false;
+        searchprofessional.pageScrollDown(0,10000);
+        WaitFor.sleepFor(5000);
+        actualLazyLoadingStatus = searchprofessional.lazyLoadingStatus();
+        Assert.assertEquals(actualLazyLoadingStatus, true, "After scrolling down search professionals page, new agents are not being displayed");
+        AutomationLog.info("After scrolling down search professionals page, new agents are being displayed");
+    }
+
+    private void verifyLazyLoadingCompniesPage() throws Exception 
+    {
+        searchprofessional.tab_TopCompanies().click();
+        boolean actualLazyLoadingStatus = false;
+        searchprofessional.pageScrollDown(0,10000);
+        WaitFor.sleepFor(5000);
+        actualLazyLoadingStatus = searchprofessional.lazyLoadingStatus();
+        Assert.assertEquals(actualLazyLoadingStatus, true, "After scrolling down search professionals page, new companies are not being displayed");
+        AutomationLog.info("After scrolling down search professionals page, new companies are being displayed");
+        searchprofessional.tab_TopAgents().click();
+    }
+
 	private void verifyCompanyProfilePage() throws Exception 
     {
         subnavigation.clickLinkSearchProfessionals();
@@ -118,8 +148,8 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         dataFromCSV = testCaseData.get("ExpectedURL's");
         String expectedURL = dataFromCSV.get("EmptyAgentSearchURL");
         expectedURL = expectedURL.concat("=1&fT=ag&name=");//CSV parser ignores data after = therefore we have to concat this string in expected string part
-        Assert.assertEquals(actualURL, expectedURL, "After performing empty search, page does not redirects to same page");
-        AutomationLog.info("After performing empty search, page sucessfully redirects to same page");
+        Assert.assertEquals(actualURL, expectedURL, "After performing empty search page URL is not found as expected");
+        AutomationLog.info("After performing empty search, page URL is found same as expected");
     }
 
 	public void verifyIfAgentSearchShowsExcusiveListingsCount(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentName) throws Exception
@@ -284,5 +314,4 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     {
         return "Test cases failed for Search Professionals";
     }
-
 }

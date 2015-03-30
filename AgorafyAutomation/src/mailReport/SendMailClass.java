@@ -24,7 +24,7 @@ public class SendMailClass
         //Report file = path&gt;
 
         /*No of recipients of the report, you can have many separated by comma*/
-        String[] to={"ashishpatil227@gmail.com"};
+        String[] to={"chandrani.bhagat@cuelogic.co.in"};
         String[] cc={};
         String[] bcc={};
 

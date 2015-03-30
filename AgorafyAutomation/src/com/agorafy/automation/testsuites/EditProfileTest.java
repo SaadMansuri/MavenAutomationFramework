@@ -15,7 +15,7 @@ public class EditProfileTest
     @BeforeSuite
     public void Init()
     {
-        // TODO: Move this to some TestNg XML configuration file, so that we can set config file path
+        // Move this to some TestNg XML configuration file, so that we can set config file path
         // when running in headless mode.
         String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);

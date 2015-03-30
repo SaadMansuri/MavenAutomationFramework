@@ -173,7 +173,7 @@ public class SubNavigationTest
             new SubnavigationTeamAction().Execute();
             new SubnavigationCareersAction().Execute();
             new SubnavigationPressAction().Execute();
-            //new SubnavigationFeedbackAction().Execute();
+            new SubnavigationFeedbackAction().Execute();
             new SubnavigationContactAction().Execute();
         }
         catch(Exception e)

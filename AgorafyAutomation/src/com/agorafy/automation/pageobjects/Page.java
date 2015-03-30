@@ -1,5 +1,6 @@
 package com.agorafy.automation.pageobjects;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -68,8 +69,7 @@ public class Page
     }
 
     public String pageHeading() throws Exception
-    {
-        // TODO: To throw Expection for pages that do not have Page Headings 
+    { 
         return "";
     }
 
@@ -92,6 +92,13 @@ public class Page
     public static void navigateToPreviousPage() 
     {
         driver.navigate().back();
+    }
+
+    public void pageScrollDown(int x, int y) 
+    {
+         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+         jsExecutor.executeScript("window.scrollTo("+x+"," +y+")");
+         //jsExecutor.executeScript("window.scrollTo(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight,document.documentElement.clientHeight));");
     }
 
 }

@@ -13,6 +13,7 @@ import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.CompanyProfilePage;
 import com.agorafy.automation.pageobjects.Page;
 
+
 public class SearchProfessionalsPage extends Page
 {
     private WebElement element = null;
@@ -735,7 +736,7 @@ public class SearchProfessionalsPage extends Page
         List<WebElement> allCompanies = new ArrayList<>();
         try
         {
-            element =  driver.findElement(By.id("companies")).findElement(By.id("resultsLineItemsCompanies"));
+            element =  driver.findElement(By.id("resultsLineItemsCompanies"));
             allCompaniesSet = element.findElements(By.tagName("ul"));
             allCompanies = allCompaniesSet.get(0).findElements(By.tagName("li"));
             AutomationLog.info("Companies container found on SearchProfessionals page");
@@ -828,4 +829,29 @@ public class SearchProfessionalsPage extends Page
     {
         return applicationUrl() + "/search/agent";
     }
+
+    public boolean lazyLoadingStatus() 
+    {
+        boolean lazyLoadingStatus = false;
+        Integer noOfulTags = 0;
+        try 
+        {
+            element = driver.findElement(By.id("resultsLineItemsAgents"));
+            noOfulTags = element.findElements(By.tagName("ul")).size();
+            if(noOfulTags > 0)
+            {
+                lazyLoadingStatus = true;
+            }
+            else
+            {
+                lazyLoadingStatus = false;
+            }
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Falied to get lazy loading status");
+        }
+        return lazyLoadingStatus;
+    }
+
 }
