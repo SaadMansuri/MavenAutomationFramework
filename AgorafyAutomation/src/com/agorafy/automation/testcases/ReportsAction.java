@@ -14,6 +14,7 @@ import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
+import com.agorafy.automation.pageobjects.ReportsPopUp;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.Reports;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
@@ -27,6 +28,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     private HeaderLoginForm headerLoginForm =null;
     private SearchResultsPage searchresult = null;
     private ListingDetailPage listingdetail = null;
+    private ReportsPopUp reportspopup = null;
     String curHandle;
     static int reportcount = 15;
     
@@ -377,9 +379,9 @@ public class ReportsAction extends AutomationTestCaseVerification
 
     public void verifyIfClickingPrintLinkOpensPopUp() throws Exception 
     {
-        reports.clickOnPrintLink();
-        Assert.assertTrue(reports.popup_PrintReports().isDisplayed(), "Expected popup is not shown");
-        reports.clickOnCloseButtonOnPrintReportsPopUp();
+        reportspopup = reports.clickOnPrintLink();
+        Assert.assertTrue(reportspopup.popup_Reports().isDisplayed(), "Expected popup is not shown");
+        reportspopup.clickOnCloseButton();
         AutomationLog.info("Clicking on print link shows popup");
     }
 
