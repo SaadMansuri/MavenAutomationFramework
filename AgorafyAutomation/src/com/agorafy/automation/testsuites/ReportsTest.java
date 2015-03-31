@@ -4,9 +4,9 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.AddToReportsAction;
-import com.agorafy.automation.testcases.ReportsAction;
-import com.agorafy.automation.testcases.ReportsPopUpAction;
+import com.agorafy.automation.testcases.reports.AddToReportsAction;
+import com.agorafy.automation.testcases.reports.ReportsAction;
+import com.agorafy.automation.testcases.reports.ReportsPopUpAction;
 
 
 public class ReportsTest 
