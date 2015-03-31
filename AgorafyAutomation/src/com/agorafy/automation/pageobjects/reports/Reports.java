@@ -1,4 +1,4 @@
-package com.agorafy.automation.pageobjects;
+package com.agorafy.automation.pageobjects.reports;
 
 import java.util.List;
 
@@ -11,6 +11,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.Header;
+import com.agorafy.automation.pageobjects.Page;
 
 public class Reports extends Page 
 {

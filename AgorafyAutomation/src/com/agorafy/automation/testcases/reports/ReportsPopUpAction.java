@@ -1,4 +1,4 @@
-package com.agorafy.automation.testcases;
+package com.agorafy.automation.testcases.reports;
 
 import java.util.HashMap;
 
@@ -12,8 +12,8 @@ import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.Reports;
-import com.agorafy.automation.pageobjects.ReportsPopUp;
+import com.agorafy.automation.pageobjects.reports.Reports;
+import com.agorafy.automation.pageobjects.reports.ReportsPopUp;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
 
 public class ReportsPopUpAction extends AutomationTestCaseVerification
