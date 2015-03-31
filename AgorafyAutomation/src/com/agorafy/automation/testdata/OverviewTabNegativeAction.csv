@@ -1,4 +1,3 @@
-validCredential,username=chandrani.bhagat@cuelogic.co.in;password=cuelogic77
 name,invalid="@#SD!2as";withDigit="anjan123";errorMsg1="* Letters only";errorMsg2="* Letters only";errorMsg3="* This field is required\n* Letters only"
 company,alphanumeric="abclimited12";
 workPhone,invalidWorkPhone="12345678";withAlphaChar="123ab@#";errorMsg1="* Invalid phone number\nex. 212-555-5555 x123"
