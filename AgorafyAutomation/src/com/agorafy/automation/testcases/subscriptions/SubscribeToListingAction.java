@@ -46,7 +46,6 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         super.setup();
         try 
         {
-            homePage = Homepage.homePage();
             header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();

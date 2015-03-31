@@ -16,8 +16,7 @@ import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SearchProfessionalsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.utilities.HandlingWindows;
-import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
+
 
 /**
  * Precondition:Navigate to Search Professionals Page 

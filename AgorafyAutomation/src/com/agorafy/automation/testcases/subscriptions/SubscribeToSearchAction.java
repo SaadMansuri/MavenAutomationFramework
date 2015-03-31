@@ -2,18 +2,12 @@ package com.agorafy.automation.testcases.subscriptions;
 
 import java.util.HashMap;
 import java.util.List;
-
-import mailReport.SendMailClass;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
-import com.agorafy.automation.pageobjects.Dashboard;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
@@ -21,7 +15,6 @@ import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
-import com.agorafy.automation.testcases.contentpages.subnavigation.MyDashboardAction;
 /**
  * Precondition:Do valid login
  * Search for a particular criteria
@@ -51,7 +44,6 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         try 
         {
             super.setup();
-            homePage = Homepage.homePage();
             header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();

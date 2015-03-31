@@ -48,7 +48,6 @@ public class SubnavigationMySubscriptionsAction extends ContentPagesVerification
         try 
         {
             subnavigation = Page.subNavigation();
-            homePage = Homepage.homePage();
             header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();

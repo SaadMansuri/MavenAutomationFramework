@@ -37,7 +37,6 @@ public abstract class SubmitListingBaseAction extends AutomationTestCaseVerifica
         super.setup();
         try
         {
-            homePage = Homepage.homePage();
             header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();

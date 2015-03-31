@@ -39,8 +39,6 @@ public abstract class LoginBaseAction extends AutomationTestCaseVerification
         super.setup();
         try 
         {
-            homePage = Homepage.homePage();
-            header = Page.header();
             header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             AutomationLog.info("Log In link is clicked");

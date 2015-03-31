@@ -71,10 +71,8 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
     public void setup()
     {
         super.setup();
-        homePage = Homepage.homePage();
         try
         {
-        	homePage = Homepage.homePage();
             header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();

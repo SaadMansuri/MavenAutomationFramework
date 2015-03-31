@@ -6,13 +6,10 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
-import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.LoginPage;
-import com.agorafy.automation.pageobjects.Page;
 
 public class LoginAttemptsAction extends AutomationTestCaseVerification
 {
-    protected Homepage homePage;
     protected LoginPage loginPage;
     protected HeaderLoginForm headerLogin;
     protected Header header;
@@ -28,8 +25,6 @@ public class LoginAttemptsAction extends AutomationTestCaseVerification
         super.setup();
         try
         {
-            homePage = Homepage.homePage();
-            header = Page.header();
             header = Header.header();
             headerLogin = header.openHeaderLoginForm();
             loginPage = headerLogin.doInvalidLogin("", "");

@@ -43,7 +43,6 @@ public class SubnavigationEditProfileAction extends ContentPagesVerification
     protected void verifyTestCases() throws Exception 
     {
         subnavigation = Page.subNavigation();
-        homePage = Homepage.homePage();
         header = Header.header();
         headerLoginForm = header.openHeaderLoginForm();
         Credentials ValidCredentials = userCredentials();

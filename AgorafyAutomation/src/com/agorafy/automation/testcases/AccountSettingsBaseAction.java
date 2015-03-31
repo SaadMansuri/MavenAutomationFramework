@@ -33,7 +33,6 @@ public abstract class AccountSettingsBaseAction extends AutomationTestCaseVerifi
         super.setup();
         try
         {
-            homePage = Homepage.homePage();
             header = Header.header();
             loginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();

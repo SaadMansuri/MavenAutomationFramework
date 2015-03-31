@@ -11,7 +11,6 @@ import com.agorafy.automation.datamodel.profile.EmailData;
 import com.agorafy.automation.pageobjects.ForgotPassword;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
-import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.LoginPage;
 import com.agorafy.automation.pageobjects.Page;
 
@@ -25,7 +24,6 @@ import com.agorafy.automation.pageobjects.Page;
  */
 public class ForgotPasswordAction extends AutomationTestCaseVerification
 {
-    private Homepage homePage;
     private LoginPage loginPage;
     private HeaderLoginForm headerlogin;
     private ForgotPassword forgotPassword = null;
@@ -39,7 +37,6 @@ public class ForgotPasswordAction extends AutomationTestCaseVerification
     public void setup()
     {
         super.setup();
-        homePage = Homepage.homePage();
         try
         {
             header = Header.header();

@@ -8,7 +8,6 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
-import com.agorafy.automation.pageobjects.Dashboard;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
@@ -49,7 +48,6 @@ public class MyListingsAction extends ContentPagesVerification
     try 
     {
         subnavigation = Page.subNavigation();
-        homePage = Homepage.homePage();
         header = Header.header();
         headerLoginForm = header.openHeaderLoginForm();
         Credentials ValidCredentials = userCredentials();

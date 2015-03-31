@@ -47,7 +47,6 @@ public class MyDashboardAction extends ContentPagesVerification
         try 
         {
             SubNavigation subnavigation = Page.subNavigation();
-            homePage = Homepage.homePage();
             header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();

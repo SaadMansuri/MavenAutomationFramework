@@ -1,14 +1,11 @@
 package com.agorafy.automation.testcases.upsellpopups;
 
-import java.util.HashMap;
 
 import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 import com.agorafy.automation.pageobjects.upsellpopups.ProfessionalProfilePage;
 

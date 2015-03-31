@@ -1,13 +1,9 @@
 package com.agorafy.automation.testsuites;
 
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import com.agorafy.automation.automationframework.AppDriver;
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.automationframework.Configuration;
-import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.testcases.contentpages.footer.FooterAboutUsAction;
 import com.agorafy.automation.testcases.contentpages.footer.FooterBlogAction;
 import com.agorafy.automation.testcases.contentpages.footer.FooterCareersAction;
