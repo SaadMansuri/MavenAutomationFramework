@@ -1,9 +1,9 @@
 package com.agorafy.automation.testcases;
 
-import java.util.HashMap;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.AccountSettings;
 import com.agorafy.automation.pageobjects.Dashboard;
@@ -36,11 +36,10 @@ public abstract class AccountSettingsBaseAction extends AutomationTestCaseVerifi
             homePage = Homepage.homePage();
             header = Header.header();
             loginForm = header.openHeaderLoginForm();
-            HashMap<String, String> expectedLoginData = testCaseData.get("validCredential");
-            homePage = loginForm.doSuccessfulLogin(expectedLoginData.get("username"),expectedLoginData.get("password"));
+            Credentials ValidCredentials = userCredentials();
+            homePage = loginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             header = Header.header();
-
             subnavigation = Page.subNavigation();
             dashboard = subnavigation.clickLinkMyDashboard();
             accountSettings = dashboard.accountSettings();

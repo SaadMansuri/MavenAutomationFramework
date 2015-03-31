@@ -1,9 +1,9 @@
 package com.agorafy.automation.testcases;
 
-import java.util.HashMap;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
@@ -44,9 +44,8 @@ public abstract class LoginBaseAction extends AutomationTestCaseVerification
             header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             AutomationLog.info("Log In link is clicked");
-
-            HashMap<String, String> loginData =  testCaseData.get("validCredential");
-            homePage = headerLoginForm.doSuccessfulLogin(loginData.get("username"), loginData.get("password"));
+            Credentials ValidCredentials = userCredentials();
+            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
         }
         catch (Exception e)
