@@ -6,6 +6,7 @@ import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
+import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
@@ -23,6 +24,9 @@ public class ReportsPopUpAction extends AutomationTestCaseVerification
     private SearchResultsPage searchresult;
     private Reports reports;
     private ReportsPopUp reportspopup;
+    HashMap<String, String> emaildata;
+    HashMap<String, String> phonedata;
+
 
 	public ReportsPopUpAction() 
     {
@@ -36,10 +40,8 @@ public class ReportsPopUpAction extends AutomationTestCaseVerification
         {
             header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
-            HashMap<String, String> loginData =  testCaseData.get("validCredential");
-            String UserName = loginData.get("username");
-            String Password = loginData.get("password");
-            homePage = headerLoginForm.doSuccessfulLogin(UserName, Password);
+            Credentials ValidCredentials = userCredentials();
+            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             HashMap<String, String> search = testCaseData.get("SearchData");
             searchresult = homePage.populateSearchTermTextBox(search.get("borough"), search.get("listingcategory"), search.get("searchterm"));
@@ -63,17 +65,14 @@ public class ReportsPopUpAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception
     {
-        verifyCustomizedReportsPopUp();
-    }
-
-    public void verifyCustomizedReportsPopUp() throws Exception
-    {
+        phonedata = testCaseData.get("InvalidPhone");
+        emaildata = testCaseData.get("InvalidEmail");
         verifyIfNameFieldIsEmpty();
         verifyIfPhoneFieldIsEmpty();
         verifyIfEmailFieldIsEmpty();
-        verifyIfInvalidPhoneIsEntered();
+        verifyIfInvalidPhoneIsEntered(phonedata);
         verifyIfBothPhoneAndEmailFieldsAreEmpty();
-        verifyIfInvalidEmailIsEntered();
+        verifyIfInvalidEmailIsEntered(emaildata);
     }
 
     public void verifyIfNameFieldIsEmpty() throws Exception
@@ -101,13 +100,17 @@ public class ReportsPopUpAction extends AutomationTestCaseVerification
         AutomationLog.info("Error message not shown if Only Email field is entered ");
     }
 
-    public void verifyIfInvalidPhoneIsEntered() throws Exception 
+    public void verifyIfInvalidPhoneIsEntered(HashMap<String, String> phonedata) throws Exception 
     {
-        reportspopup.txtbx_Phone().clear();
-        reportspopup.txtbx_Phone().sendKeys("123456");
-        reportspopup.clickOnSelectButtonForCustomizedReports();
-        Assert.assertTrue(reportspopup.msg_InvalidPhone().isDisplayed(), "Expected Phone error message not shown");
-        AutomationLog.info("Error message is shown if Invalid phone is entered");
+        for(int i=1;i<=3;i++)
+        {
+            String phno = "phone"+i;
+            reportspopup.txtbx_Phone().clear();
+            reportspopup.txtbx_Phone().sendKeys(phonedata.get(phno));
+            reportspopup.clickOnSelectButtonForCustomizedReports();
+            Assert.assertTrue(reportspopup.msg_InvalidPhone().isDisplayed(), "Expected Phone error message not shown");
+        }
+            AutomationLog.info("Error message is shown if Invalid phone combination is entered");
     }
 
     public void verifyIfBothPhoneAndEmailFieldsAreEmpty() throws Exception
@@ -120,12 +123,17 @@ public class ReportsPopUpAction extends AutomationTestCaseVerification
         AutomationLog.info("Error message is shown if both email and phone fields are empty");
     }
 
-    public void verifyIfInvalidEmailIsEntered() throws Exception
+    public void verifyIfInvalidEmailIsEntered(HashMap<String, String> emaildata) throws Exception
     {
-        reportspopup.txtbx_Email().sendKeys("asdf");
-        reportspopup.clickOnSelectButtonForCustomizedReports();
-        Assert.assertTrue(reportspopup.msg_InvalidEmail().isDisplayed(), "Expected Invalid Email error message is not shown");
-        AutomationLog.info("Error message is shown when invalid email is entered");
+        for(int i=1;i<=3;i++)
+        {
+            String em = "email"+i;
+            reportspopup.txtbx_Email().clear();
+            reportspopup.txtbx_Email().sendKeys(emaildata.get(em));
+            reportspopup.clickOnSelectButtonForCustomizedReports();
+            Assert.assertTrue(reportspopup.msg_InvalidEmail().isDisplayed(), "Expected Invalid Email error message is not shown");
+        }
+        AutomationLog.info("Error message is shown when invalid email combination is entered");
     }
 
     @Override
