@@ -4,8 +4,9 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.AddToReportsAction;
-import com.agorafy.automation.testcases.ReportsAction;
+import com.agorafy.automation.testcases.reports.AddToReportsAction;
+import com.agorafy.automation.testcases.reports.ReportsAction;
+import com.agorafy.automation.testcases.reports.ReportsPopUpAction;
 
 
 public class ReportsTest 
@@ -42,4 +43,18 @@ public class ReportsTest
             throw(e);
         }
     }
+
+    @Test
+    public void testReportsPopUpTestCase() throws Exception
+    {
+        try
+        {
+            new ReportsPopUpAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
+
 }
