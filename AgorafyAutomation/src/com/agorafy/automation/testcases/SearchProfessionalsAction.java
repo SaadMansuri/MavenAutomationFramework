@@ -71,10 +71,10 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         verifyCompanyProfilePage();
 
         AutomationLog.info("verify scroll down agent's page");
-        verifyLazyLoadingAgentsPage();
+        verifyLazyLoadingAgents();
 
         AutomationLog.info("verify scroll down companies page");
-        verifyLazyLoadingCompniesPage();
+        verifyLazyLoadingCompnies();
 
         HashMap<String, String> agentCompanySearch = testCaseData.get("agentCompanySearch");
         verifyIfRandomAgentCompanySearchShowsAppropriateMessage(searchprofessional,agentCompanySearch);
@@ -104,7 +104,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         verifyIfNeighborhoodCanBeAddedAfterRemovefromNeighborhoodsDropbox(searchprofessional, neighborName);
     }
 
-    private void verifyLazyLoadingAgentsPage() throws InterruptedException 
+    private void verifyLazyLoadingAgents() throws InterruptedException 
     {
         boolean actualLazyLoadingStatus = false;
         searchprofessional.pageScrollDown(0,10000);
@@ -114,7 +114,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         AutomationLog.info("After scrolling down search professionals page, new agents are being displayed");
     }
 
-    private void verifyLazyLoadingCompniesPage() throws Exception 
+    private void verifyLazyLoadingCompnies() throws Exception 
     {
         searchprofessional.tab_TopCompanies().click();
         boolean actualLazyLoadingStatus = false;
