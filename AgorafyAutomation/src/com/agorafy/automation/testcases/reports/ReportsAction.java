@@ -273,6 +273,8 @@ public class ReportsAction extends AutomationTestCaseVerification
     {
         Page.driver.close();
         Page.driver.switchTo().window(curHandle);
+        Page.driver.navigate().refresh();
+        WaitFor.waitForPageToLoad(Page.driver);
         addReportUsingPinCushionReportIcon();
         listingdetail = searchresult.clickSearchResult();
         SwitchToNextWindow();
@@ -380,6 +382,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         reportspopup = reports.clickOnPrintLink();
         Assert.assertTrue(reportspopup.popup_Reports().isDisplayed(), "Expected popup is not shown");
         reportspopup.clickOnCloseButton();
+        reports.clickOnReportWindowCloseIcon();
         AutomationLog.info("Clicking on print link shows popup");
     }
 

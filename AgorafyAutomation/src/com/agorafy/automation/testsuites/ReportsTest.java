@@ -18,7 +18,7 @@ public class ReportsTest
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-    @Test
+    @Test(priority = 1)
     public void testReportsTestCase() throws Exception
     {
         try
@@ -31,7 +31,7 @@ public class ReportsTest
         }
     }
 
-    @Test
+    @Test(priority = 2)
     public void testAddToReportsTestCase() throws Exception
     {
         try
@@ -44,7 +44,7 @@ public class ReportsTest
         }
     }
 
-    @Test
+    @Test(priority = 3)
     public void testReportsPopUpTestCase() throws Exception
     {
         try
