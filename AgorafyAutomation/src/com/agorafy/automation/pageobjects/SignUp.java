@@ -45,7 +45,7 @@ public class SignUp extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='registrationSubmitForm']/div[1]/div/div"));
+            element = driver.findElement(By.className("registrationEmailInputformError")).findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
         {
@@ -58,7 +58,7 @@ public class SignUp extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='description']/p/a"));
+            element = driver.findElement(By.id("description")).findElement(By.className("upsell"));
             AutomationLog.info("login link found on Signup page");
         }
         catch(Exception e)

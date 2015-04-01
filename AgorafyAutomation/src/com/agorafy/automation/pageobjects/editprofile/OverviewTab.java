@@ -686,11 +686,13 @@ public class OverviewTab extends Page
     {
        try
        {
-           element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[1]/div/div"));
+           //element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[1]/div/div"));
+           element = driver.findElement(By.className("nameformError")).findElement(By.className("formErrorContent"));
        }
        catch(Exception e)
        {
-       throw(e);
+           AutomationLog.error("Could not find Error message When Name field is empty");
+           throw(e);
        }
        return element;
     }
@@ -715,7 +717,7 @@ public class OverviewTab extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[4]/div/div[1]/div/div"));
+             element = driver.findElement(By.className("workformError")).findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
         {
@@ -744,7 +746,7 @@ public class OverviewTab extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[4]/div/div[2]/div/div"));
+            element = driver.findElement(By.className("mobileformError")).findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
         {
@@ -773,7 +775,7 @@ public class OverviewTab extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[5]/div/div"));
+            element = driver.findElement(By.className("address1formError")).findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
         {
@@ -802,7 +804,7 @@ public class OverviewTab extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[6]/div/div"));
+            element = driver.findElement(By.className("address2formError")).findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
         {
@@ -831,7 +833,7 @@ public class OverviewTab extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[7]/div/div"));
+            element = driver.findElement(By.className("cityformError")).findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
         {
@@ -860,7 +862,7 @@ public class OverviewTab extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[8]/span/div/div"));
+            element = driver.findElement(By.className("stateformError")).findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
         {
@@ -889,7 +891,7 @@ public class OverviewTab extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[9]/div/div"));
+            element = driver.findElement(By.className("zipformError")).findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
         {
@@ -918,7 +920,7 @@ public class OverviewTab extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[2]/div[1]/label/span"));
+            element = driver.findElement(By.id("charLimit"));
         }
         catch(Exception e)
         {
@@ -946,7 +948,7 @@ public class OverviewTab extends Page
         String countOfChar = "";
         try
         {
-            countOfChar = txtbx_countCharInDecribeYourself().getText();
+            countOfChar = "("+txtbx_countCharInDecribeYourself().getText()+" characters remaining)";
             AutomationLog.info("Appropriate error message for count of character is shown");
         }
         catch (Exception e)
