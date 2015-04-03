@@ -98,7 +98,6 @@ public class Page
     {
          JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
          jsExecutor.executeScript("window.scrollTo("+x+"," +y+")");
-         //jsExecutor.executeScript("window.scrollTo(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight,document.documentElement.clientHeight));");
     }
 
 }
