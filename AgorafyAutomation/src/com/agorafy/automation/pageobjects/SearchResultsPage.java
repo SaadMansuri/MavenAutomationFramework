@@ -393,7 +393,7 @@ public class SearchResultsPage extends Page
     {
         try 
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div/div/h2"));
+            element = driver.findElement(By.className("result-error-msg"));
         } 
         catch (Exception e) 
         {
@@ -554,4 +554,90 @@ public class SearchResultsPage extends Page
         }
     }
 
+    public WebElement btn_AnalyticsView() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("btn-group")).findElement(By.className("fa-line-chart"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Analytics View button");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement btn_MapView() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("btn-group")).findElement(By.className("fa-map-marker"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Map View button");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement btn_ListView() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("btn-group")).findElement(By.className("fa-list"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find List View button");
+            throw(e);
+        }
+        return element;
+    }
+
+    public boolean isAnalyticsViewButtonPresent() throws Exception 
+    {
+        boolean val;
+        try
+        {
+            element = driver.findElement(By.className("btn-group"));
+            val = element.findElements(By.className("fa-line-chart")).size() > 0;
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+        return val;
+    }
+
+    public boolean isMapViewButtonPresent() throws Exception 
+    {
+        boolean val;
+        try
+        {
+            element = driver.findElement(By.className("btn-group"));
+            val = element.findElements(By.className("fa-map-marker")).size() > 0;
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+        return val;
+    }
+
+    public boolean isListViewButtonPresent() throws Exception 
+    {
+        boolean val;
+        try
+        {
+            element = driver.findElement(By.className("btn-group"));
+            val = element.findElements(By.className("fa-list")).size() > 0;
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+        return val;
+    }
 }

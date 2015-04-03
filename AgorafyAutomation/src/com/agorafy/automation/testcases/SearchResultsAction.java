@@ -13,6 +13,7 @@ import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
+import com.thoughtworks.selenium.webdriven.commands.WaitForCondition;
 
 /**
  * Precondition:Do search for property 
@@ -29,6 +30,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     private LoginPopUp loginpopup;
     private Header header = Header.header();
     private HashMap<String, String> dataFromCSV = new HashMap<>();
+    HashMap<String, String> searchdata; 
 
     public SearchResultsAction()
     {
@@ -42,9 +44,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         try
         {
             homepage = Homepage.homePage();
-            HashMap<String, String> data = testCaseData.get("SearchData");
-            searchresult = homepage.populateSearchTermTextBox(data.get("borough"),data.get("listingcategory"),data.get("searchterm"));
-            AutomationLog.info("Successfully Redirected to Property Search page ");
+           
         }
         catch(Exception e)
         {
@@ -56,25 +56,54 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink();
-        verifyIfSearchByBedsShowsPropertiesWithNoOfBeds();
+/*        verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink();*/
+        verifyIfAnalyticsViewButtonIsHiddenForShortSearchTerm();
+        verifyIfAnalyticsViewButtonIsDisplayedForLongSearchTerm();
+
+
+
+
+
+
+        /*verifyIfSearchByBedsShowsPropertiesWithNoOfBeds();
         verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations();
         verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound();
-        verifyIfSearchByBathsShowsPropertiesWithNoOfBaths();
-        verifyIfLoginPopUpIsShownOnClickOfCreateYourProfileButton();
+        verifyIfSearchByBathsShowsPropertiesWithNoOfBaths();*/
+        //verifyIfLoginPopUpIsShownOnClickOfCreateYourProfileButton();
 
-        AutomationLog.info("Verification of search results page after entering pin code which is less 5 digits");
+        /*AutomationLog.info("Verification of search results page after entering pin code which is less 5 digits");
         verifyInvalidPinCode();
 
         AutomationLog.info("Verification of search result page after entering valid input combination, but dont have results for that");
         verifyNoResultsCombination();
 
         AutomationLog.info("Verification of search result page after entering special character in search criteria");
-        verifySpecialCharacterInSearch();
+        verifySpecialCharacterInSearch();*/
 
     }
 
-   	private void verifySpecialCharacterInSearch() throws Exception 
+    public void verifyIfAnalyticsViewButtonIsHiddenForShortSearchTerm() throws Exception 
+    {
+        searchdata = testCaseData.get("SearchData");
+        searchresult = homepage.populateSearchTermTextBox(searchdata.get("borough"),searchdata.get("listingcategory"),searchdata.get("searchterm"));
+        AutomationLog.info("Successfully Redirected to Property Search page ");
+        WaitFor.sleepFor(10000);
+        Assert.assertFalse(searchresult.isAnalyticsViewButtonPresent(), "Expected Analytics view button is not hidden ");
+        AutomationLog.info("Short searchterm does not show analytics view button");
+    }
+
+    public void verifyIfAnalyticsViewButtonIsDisplayedForLongSearchTerm() throws Exception 
+    {
+        header.txtbx_SearchInput().clear();
+        header.enterSearchTextInSearchInputTextBox(searchdata.get("longsearchterm"));
+        WaitFor.sleepFor(10000);
+        header.clickOnSearchFormButton();
+        WaitFor.sleepFor(20000);
+        Assert.assertTrue(searchresult.isAnalyticsViewButtonPresent(), "Expected Analytics view button is not displayed");
+        AutomationLog.info("Long searchterm shown analytics view button");
+    }
+
+    private void verifySpecialCharacterInSearch() throws Exception 
     {
         searchresult = homepage.populateSearchTermTextBox(null, null, "$");
         boolean errorMsgStatus = false;
@@ -107,6 +136,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
             searchresult = homepage.populateSearchTermTextBox(null, null, pinCombinationString);
             boolean errorMsgStatus = false;
             errorMsgStatus = searchresult.noResultsErrorMsg().isDisplayed();
+            System.out.println(searchresult.noResultsErrorMsg().getText());
             Assert.assertEquals(errorMsgStatus, true, "Error msg for no results is not generated, if invalid pin is added, invalid pin is as follows:"+pinCombination);
             AutomationLog.info("Error msg for no results is sucessfully generated, if invalid pin is added");
             pinCombination = null;
