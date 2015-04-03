@@ -1,5 +1,6 @@
 package com.agorafy.automation.pageobjects.submitlisting;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -14,6 +15,8 @@ import com.agorafy.automation.pageobjects.Page;
 public class SubmitListingMediaFormPage extends Page
 {
     private WebElement element = null;
+    private List<WebElement> list = new ArrayList<WebElement>();
+
     public SubmitListingMediaFormPage(WebDriver driver) 
     {
         super(driver);
@@ -122,11 +125,13 @@ public class SubmitListingMediaFormPage extends Page
         return element;
     }
 
-    public void clickOnSaveAndContinueButton() throws Exception
+    public SubmitListingContactsFormPage clickOnSaveAndContinueButton() throws Exception
     {
+        SubmitListingContactsFormPage contacts = null;
         try
         {
             btn_SaveAndContinue().click();
+            contacts = new SubmitListingContactsFormPage(driver);
             AutomationLog.info("Successfully clicked on Save and Continue Button");
         }
         catch(Exception e)
@@ -134,6 +139,7 @@ public class SubmitListingMediaFormPage extends Page
             AutomationLog.error("Could not click on Save and Continue Button");
             throw(e);
         }
+        return contacts;
     }
 
     public WebElement msg_MediaError() throws Exception 
@@ -292,5 +298,34 @@ public class SubmitListingMediaFormPage extends Page
         }
     }
 
+    public WebElement uploaded_files() throws Exception 
+    {
+        try
+        {
+            element = driver.findElement(By.className("files"));
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+        return element;
+    }
+
+    public void  deleteUploadedfiles() throws Exception 
+    {
+
+        list = uploaded_files().findElements(By.className("btn-danger"));
+        for(WebElement option : list)
+        {
+            option.click();
+        }
+        AutomationLog.info("Successfully deleted all uploaded files");
+    }
+
+    public int getCountOfUploadedFiles() throws Exception
+    {
+        list = uploaded_files().findElements(By.tagName("li"));
+        return list.size();
+    }
 }
 
