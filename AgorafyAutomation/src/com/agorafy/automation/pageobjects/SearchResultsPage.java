@@ -2,7 +2,9 @@ package com.agorafy.automation.pageobjects;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -554,11 +556,26 @@ public class SearchResultsPage extends Page
         }
     }
 
+    public List<WebElement> view_ToggleButtons() throws Exception
+    {
+        List<WebElement> list = new ArrayList<WebElement>();
+        List<WebElement> visibleElements = new ArrayList<WebElement>();
+        list = driver.findElements(By.className("view-toggle"));
+        for(WebElement option : list)
+        {
+            if(option.isDisplayed())
+            {
+                visibleElements = option.findElements(By.tagName("button"));
+            }
+        }
+        return visibleElements;
+    }
+
     public WebElement btn_AnalyticsView() throws Exception
     {
         try
         {
-            element = driver.findElement(By.className("btn-group")).findElement(By.className("fa-line-chart"));
+            element = view_ToggleButtons().get(0);
         }
         catch(Exception e)
         {
@@ -568,11 +585,25 @@ public class SearchResultsPage extends Page
         return element;
     }
 
+    public WebElement btn_ListView() throws Exception
+    {
+        try
+        {
+            element = view_ToggleButtons().get(1);
+       }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find List View button");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement btn_MapView() throws Exception
     {
         try
         {
-            element = driver.findElement(By.className("btn-group")).findElement(By.className("fa-map-marker"));
+            element = view_ToggleButtons().get(2);
         }
         catch(Exception e)
         {
@@ -582,18 +613,56 @@ public class SearchResultsPage extends Page
         return element;
     }
 
-    public WebElement btn_ListView() throws Exception
+    public Page clickOnAnalyticsViewButton(boolean isLoggedIn) throws Exception
     {
+        Page obj = null;
         try
         {
-            element = driver.findElement(By.className("btn-group")).findElement(By.className("fa-list"));
+            btn_AnalyticsView().click();
+            if(isLoggedIn)
+            {
+                obj = new SearchResultsPage(driver);
+            }
+            else
+            {
+                obj = new LoginPopUp(driver);
+            }
+            AutomationLog.info("Successfully clicked on Analytics View button");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not find List View button");
+            AutomationLog.error("Could not click on Analytics view button");
             throw(e);
         }
-        return element;
+        return obj;
+    }
+
+    public void clickOnMapViewButton() throws Exception 
+    {
+        try
+        {
+            btn_MapView().click();
+            AutomationLog.info("Successfully clicked on Map View button");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Map view button");
+            throw(e);
+        }
+    }
+
+    public void clickOnListViewButton() throws Exception
+    {
+        try
+        {
+            btn_ListView().click();
+            AutomationLog.info("Successfully clicked on List View button");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on List view button");
+            throw(e);
+        }
     }
 
     public boolean isAnalyticsViewButtonPresent() throws Exception 
@@ -640,4 +709,55 @@ public class SearchResultsPage extends Page
         }
         return val;
     }
+
+    public WebElement Filter_SquareFeet_From() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("sqft-range")).findElement(By.className("irs-from"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Filter square feet from");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement Filter_SquareFeet_To() throws Exception
+    {
+         try
+         {
+             element = driver.findElement(By.className("sqft-range")).findElement(By.className("irs-to"));
+         }
+         catch(Exception e)
+         {
+             AutomationLog.error("Could not find Filter square feet to");
+             throw(e);
+         }
+         return element;
+    }
+
+    public String getCurrentUrl() throws Exception
+    {
+        return driver.getCurrentUrl();
+    }
+
+    public Map<String, String> getQueryMap(String query)  
+   {  
+       String[] quryparams = query.split("\\?"); 
+       String[] params = quryparams[1].split("&");  
+       Map<String, String> map = new HashMap<String, String>();  
+       for (String param : params)  
+       {  String [] p=param.split("=");
+           String name = p[0];  
+           if(p.length>1)
+           {
+               String value = p[1];  
+               map.put(name, value);
+           }   
+       }  
+       return map;  
+   } 
+
 }
