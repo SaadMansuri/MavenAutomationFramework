@@ -108,7 +108,7 @@ public class AdvancedSearchPage extends Page
         } 
         catch (Exception e) 
         {
-            AutomationLog.error("Could not found radio button for residential listing");
+            AutomationLog.error("Could not find radio button for residential listing");
             throw(e);
         }
         return element;
@@ -204,14 +204,56 @@ public class AdvancedSearchPage extends Page
         try 
         {
             element = driver.findElement(By.cssSelector(".row.clearfix.residential-only"));
-            AutomationLog.info("Text boxe for Beds and Baths found");
+            AutomationLog.info("Text boxes for Beds and Baths found");
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not find text boxe for Beds and Baths");
+            AutomationLog.error("could not find text boxes for Beds and Baths");
             throw(e);
         }
         return element;
+    }
+
+    public WebElement txtbx_BedsInput() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("bedsInput"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Textbox for Beds ");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement txtbx_BathsInput() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("bathsInput"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Textbox for Baths");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void searchByNoOfBeds(String val) throws Exception
+    {
+        txtbx_BedsInput().clear();
+        txtbx_BedsInput().sendKeys(val);
+        AutomationLog.info("Successfully entered Search text for no of beds ");
+    }
+
+    public void searchByNoOfBaths(String val) throws Exception
+    {
+        txtbx_BathsInput().clear();
+        txtbx_BathsInput().sendKeys(val);
+        AutomationLog.info("Successfully entered Search text for no of baths ");
     }
 
     public WebElement btn_Search() throws Exception
