@@ -1,12 +1,18 @@
 package com.agorafy.automation.pageobjects.subnavigationmenu;
 
+import javax.print.attribute.standard.Media;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
+import com.agorafy.automation.pageobjects.UpdateListing;
+import com.agorafy.automation.pageobjects.submitlisting.SubmitListingMediaFormPage;
+import com.agorafy.automation.testcases.UpdateListingAction;
 
 public class MyListings extends Page 
 {
@@ -96,6 +102,23 @@ public class MyListings extends Page
             throw (e);
         }
         return element;
+    }
+
+    public String txt_FirstListing() throws Exception
+    {
+        String firstListing = null;
+        try
+        {
+           element = firstOnMarketListing().findElement(By.className("listing-details")).findElement(By.tagName("h4"));
+           firstListing = element.getText();
+           AutomationLog.info("Sucessfully found txt of first listing");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("failed to found txt of first listing");
+            throw (e);
+        }
+        return firstListing;
     }
 
     public WebElement hoverOverFirstListing() throws Exception
@@ -220,18 +243,38 @@ public class MyListings extends Page
         return element;
     }
 
-    public void clickUpdateOfFirstListing() 
+    public UpdateListing clickUpdateOfFirstListing() 
     {
+        UpdateListing updateListingPage = null;
         try 
         {
              Actions actions = new Actions(driver);
              actions.moveToElement(updateListing()).click().build().perform();
+             updateListingPage = new UpdateListing(driver);
              AutomationLog.info("Sucessfully clicked update link found after hovering over first listing");
         }
         catch (Exception e) 
         {
             AutomationLog.error("Failed to click update link found after hovering over first listing");
         }
+        return updateListingPage;
+    }
+
+    public SubmitListingMediaFormPage clickAddMediaOfFirstListing() 
+    {
+        SubmitListingMediaFormPage mediaPage = null;
+        try 
+        {
+             Actions actions = new Actions(driver);
+             actions.moveToElement(addMedia()).click().build().perform();
+             mediaPage = new SubmitListingMediaFormPage(driver);
+             AutomationLog.info("Sucessfully clicked Add Media link found after hovering over first listing");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to click Add Media link found after hovering over first listing");
+        }
+        return mediaPage;
     }
 
     public String getURL()
