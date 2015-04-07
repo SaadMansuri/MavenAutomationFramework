@@ -10,7 +10,6 @@ import com.agorafy.automation.automationframework.AutomationTestCaseVerification
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Header;
-import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
@@ -30,7 +29,6 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     private SearchResultsPage searchresult;
     private LoginPopUp loginpopup;
     private Header header = Header.header();
-    private HeaderLoginForm headerloginform;
     private HashMap<String, String> dataFromCSV = new HashMap<>();
     HashMap<String, String> searchdata; 
 
@@ -48,31 +46,25 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
-/*        verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink();*/
         verifyIfAnalyticsViewButtonIsHiddenForShortSearchTerm();
         verifyIfAnalyticsViewButtonIsDisplayedForLongSearchTerm();
         HashMap<String, String> viewtype = testCaseData.get("ViewType");
         verifyIfMapViewButtonIsClicked(viewtype);
         verifyIfListViewButtonIsClicked(viewtype);
         verifyLoginOnAnalyticsButtonClick(viewtype);
+        verifyLoginOnCreateYourProfileButtonClick();
         verifyAnalyticsClickInLoggedInState(viewtype);
         verifySizeInAdvanceSearch();
+        PriseInAdvanceSearch();
 
-
-        /*verifyIfSearchByBedsShowsPropertiesWithNoOfBeds();
-        verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations();
-        verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound();
-        verifyIfSearchByBathsShowsPropertiesWithNoOfBaths();*/
-        //verifyIfLoginPopUpIsShownOnClickOfCreateYourProfileButton();
-
-        /*AutomationLog.info("Verification of search results page after entering pin code which is less 5 digits");
+        AutomationLog.info("Verification of search results page after entering pin code which is less 5 digits");
         verifyInvalidPinCode();
 
         AutomationLog.info("Verification of search result page after entering valid input combination, but dont have results for that");
         verifyNoResultsCombination();
 
         AutomationLog.info("Verification of search result page after entering special character in search criteria");
-        verifySpecialCharacterInSearch();*/
+        verifySpecialCharacterInSearch();
 
     }
 
@@ -109,11 +101,8 @@ public class SearchResultsAction extends AutomationTestCaseVerification
 
     public void verifyAnalyticsClickInLoggedInState(HashMap<String, String> viewtype) throws Exception 
     {
-        headerloginform = header.openHeaderLoginForm();
-        WaitFor.sleepFor(2000);
-        Credentials ValidCredentials = userCredentials();
-        headerloginform.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
         boolean isloggedIn = true;
+        searchresult.scrollPage(700, 0);
         searchresult = (SearchResultsPage) searchresult.clickOnAnalyticsViewButton(isloggedIn);
         String url = searchresult.getCurrentUrl();
         Map<String, String> params=searchresult.getQueryMap(url);
@@ -125,7 +114,8 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     public void verifyIfMapViewButtonIsClicked(HashMap<String, String> viewtype) throws Exception 
     {
         searchresult.clickOnMapViewButton();
-        WaitFor.sleepFor(20000);
+        WaitFor.waitForPageToLoad(Page.driver);
+        WaitFor.sleepFor(30000);
         String url = searchresult.getCurrentUrl();
         Map<String, String> params=searchresult.getQueryMap(url);
         String actualviewtype =(String)params.get("view");
@@ -149,11 +139,23 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         header.clickOnAdvanceSearchDropDownIcon();
         header.enterSizeInAdvanceSearchSizeTextBox("5000-10000");
         header.clickOnSearchButtonOnAdvanceSearchform();
-        String sizefrom = searchresult.Filter_SquareFeet_From().getText().replaceAll("\\D", "");
-        String sizeto = searchresult.Filter_SquareFeet_To().getText().replaceAll("\\D", "");
+        String sizefrom = searchresult.FilterSize_SquareFeet_From().getText().replaceAll("\\D", "");
+        String sizeto = searchresult.FilterSize_SquareFeet_To().getText().replaceAll("\\D", "");
         String actualsize = sizefrom+"-"+sizeto;
         Assert.assertEquals(actualsize, "5000-10000", "Expected size is not found");
-        AutomationLog.info("Successfully got size on filter section");
+        AutomationLog.info("Changing size in advance Search reflects in Sqft range in filter section ");
+    }
+
+    public void PriseInAdvanceSearch() throws Exception 
+    {
+        header.clickOnAdvanceSearchDropDownIcon();
+        header.enterPriceInAdvanceSearchPriceTextBox("5000-15000");
+        header.clickOnSearchButtonOnAdvanceSearchform();
+        String pricefrom = searchresult.FilterPrice_From().getText().replaceAll("\\D", "");
+        String priceto = searchresult.FilterPrice_To().getText().replaceAll("\\D", "");
+        String actualsize = pricefrom+"-"+priceto;
+        Assert.assertEquals(actualsize, "5000-15000", "Expected price is not found");
+        AutomationLog.info("Changing price in advance Search reflects in Price Range  in filter section ");
     }
 
     private void verifySpecialCharacterInSearch() throws Exception 
@@ -189,71 +191,16 @@ public class SearchResultsAction extends AutomationTestCaseVerification
             searchresult = homepage.populateSearchTermTextBox(null, null, pinCombinationString);
             boolean errorMsgStatus = false;
             errorMsgStatus = searchresult.noResultsErrorMsg().isDisplayed();
-            System.out.println(searchresult.noResultsErrorMsg().getText());
             Assert.assertEquals(errorMsgStatus, true, "Error msg for no results is not generated, if invalid pin is added, invalid pin is as follows:"+pinCombination);
             AutomationLog.info("Error msg for no results is sucessfully generated, if invalid pin is added");
             pinCombination = null;
         }
     }
 
-    public void verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink() throws Exception
-    {
-        boolean Status = false;
-        loginpopup = (LoginPopUp) searchresult.clickOnSubscribeToThisSearchLink(Status);
-        WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
-        Assert.assertEquals(searchresult.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
-        Assert.assertEquals(searchresult.getTitleForLoginPopUp(loginpopup), "Log in", "Could not Get login pop up title");
-        AutomationLog.info("Clicking on Subscribe to this search link displays Login popup ");
-        searchresult.closeLoginPoPup(loginpopup);
-    }
-
-/*    public void verifyIfSearchByBedsShowsPropertiesWithNoOfBeds() throws Exception
-    {
-        String result = null;
-        header.clickOnAdvanceSearchDropDownIcon();
-        header.searchByNoOfBeds("2");
-        header.clickOnSearchButtonOnAdvanceSearchform();
-        result = searchresult.NoOfBedsInPropertiesSearch();
-        Assert.assertEquals(result, "2", "Expected Properties with specified beds is not shown");
-        AutomationLog.info("Successfully shown Properties with x beds");
-    }
-
-    public void verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations() throws Exception
-    {
-        header.clickOnAdvanceSearchDropDownIcon();
-        header.searchByNoOfBeds("3");
-        header.searchByNoOfBaths("3");
-        header.clickOnSearchButtonOnAdvanceSearchform();
-        Assert.assertEquals(searchresult.NoOfBedsInPropertiesSearch(), "3", "Expected Properties with specified beds is not shown");
-        Assert.assertEquals(searchresult.NoOfBathsInPropertiesSearch(), "3", "Expected Properties with specified bath is not shown");
-        AutomationLog.info("Properties with X baths And Y Beds And Different Combinations is verified");
-    }
-    
-    public void verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound() throws Exception
-    {
-        header.clickOnAdvanceSearchDropDownIcon();
-        header.searchByNoOfBeds("0");
-        header.searchByNoOfBaths("0");
-        header.clickOnSearchButtonOnAdvanceSearchform();
-        Assert.assertEquals(searchresult.loadingMessage().getText(), "NO RESULTS FOUND.", "Expected message is Not Shown");
-        AutomationLog.info("Successfully verified that by searching with 0 bath and 0 bed, appropiate message comes up");
-    }
-
-    
-    public void verifyIfSearchByBathsShowsPropertiesWithNoOfBaths() throws Exception
-    {
-        String result = null;
-        header.clickOnAdvanceSearchDropDownIcon();
-        header.searchByNoOfBaths("2");
-        header.clickOnSearchButtonOnAdvanceSearchform();
-        result = searchresult.NoOfBathsInPropertiesSearch();
-        Assert.assertEquals(result, "2", "Expected Properties with specified baths is not shown");
-        AutomationLog.info("Successfully shown Properties with x baths");
-    }*/
-
-    public void verifyIfLoginPopUpIsShownOnClickOfCreateYourProfileButton() throws Exception
+    public void verifyLoginOnCreateYourProfileButtonClick() throws Exception
     {
         String beforURL = searchresult.currentURL();
+        searchresult.scrollPage(0, 700);
         loginpopup = searchresult.clickOnCreateProfileButton();
         WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
         Assert.assertEquals(searchresult.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");

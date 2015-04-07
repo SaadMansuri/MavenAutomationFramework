@@ -106,7 +106,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     private void verifyLazyLoadingAgents() throws InterruptedException 
     {
         boolean actualLazyLoadingStatus = false;
-        searchprofessional.pageScrollDown(0,10000);
+        searchprofessional.scrollPage(0,10000);
         WaitFor.sleepFor(5000);
         actualLazyLoadingStatus = searchprofessional.lazyLoadingStatus();
         Assert.assertEquals(actualLazyLoadingStatus, true, "After scrolling down search professionals page, new agents are not being displayed");
@@ -117,7 +117,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     {
         searchprofessional.tab_TopCompanies().click();
         boolean actualLazyLoadingStatus = false;
-        searchprofessional.pageScrollDown(0,10000);
+        searchprofessional.scrollPage(0,10000);
         WaitFor.sleepFor(5000);
         actualLazyLoadingStatus = searchprofessional.lazyLoadingStatus();
         Assert.assertEquals(actualLazyLoadingStatus, true, "After scrolling down search professionals page, new companies are not being displayed");

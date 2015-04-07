@@ -73,7 +73,7 @@ public class AddToReportsAction extends AutomationTestCaseVerification
                     {
                         if(++licount >=6*count)
                         {
-                            searchresult.scrollDownPage();
+                            searchresult.scrollPage(0, 700);
                             ++count;
                         }
                         continue;
@@ -90,7 +90,7 @@ public class AddToReportsAction extends AutomationTestCaseVerification
                 }
                 if(++licount >=6*count)
                 {
-                    searchresult.scrollDownPage();
+                    searchresult.scrollPage(0, 700);
                     ++count;
                 }
             }

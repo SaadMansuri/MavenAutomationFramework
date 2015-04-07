@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -64,7 +63,7 @@ public class SearchResultsPage extends Page
     {
         try
         {
-            element = driver.findElement(By.id("createProfileButton"));
+            element = getVisibleElement(By.id("createProfileButton"));
         }
         catch(Exception e)
         {
@@ -523,12 +522,6 @@ public class SearchResultsPage extends Page
         return count;
     }
 
-    public void scrollDownPage() throws Exception 
-    {
-        ((JavascriptExecutor) Page.driver).executeScript("window.scrollBy(0,700)", "");
-        WaitFor.sleepFor(2000);
-    }
-
     public WebElement icon_CloseOnErrorDialogPopup() throws Exception
     {
         try
@@ -559,16 +552,9 @@ public class SearchResultsPage extends Page
     public List<WebElement> view_ToggleButtons() throws Exception
     {
         List<WebElement> list = new ArrayList<WebElement>();
-        List<WebElement> visibleElements = new ArrayList<WebElement>();
-        list = driver.findElements(By.className("view-toggle"));
-        for(WebElement option : list)
-        {
-            if(option.isDisplayed())
-            {
-                visibleElements = option.findElements(By.tagName("button"));
-            }
-        }
-        return visibleElements;
+        element = getVisibleElement(By.className("view-toggle"));
+        list = element.findElements(By.tagName("button"));
+        return list;
     }
 
     public WebElement btn_AnalyticsView() throws Exception
@@ -710,7 +696,7 @@ public class SearchResultsPage extends Page
         return val;
     }
 
-    public WebElement Filter_SquareFeet_From() throws Exception
+    public WebElement FilterSize_SquareFeet_From() throws Exception
     {
         try
         {
@@ -724,11 +710,39 @@ public class SearchResultsPage extends Page
         return element;
     }
 
-    public WebElement Filter_SquareFeet_To() throws Exception
+    public WebElement FilterSize_SquareFeet_To() throws Exception
     {
          try
          {
              element = driver.findElement(By.className("sqft-range")).findElement(By.className("irs-to"));
+         }
+         catch(Exception e)
+         {
+             AutomationLog.error("Could not find Filter square feet to");
+             throw(e);
+         }
+         return element;
+    }
+
+    public WebElement FilterPrice_From() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("price-range")).findElement(By.className("irs-from"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Filter square feet from");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement FilterPrice_To() throws Exception
+    {
+         try
+         {
+             element = driver.findElement(By.className("price-range")).findElement(By.className("irs-to"));
          }
          catch(Exception e)
          {
@@ -759,5 +773,4 @@ public class SearchResultsPage extends Page
        }  
        return map;  
    } 
-
 }

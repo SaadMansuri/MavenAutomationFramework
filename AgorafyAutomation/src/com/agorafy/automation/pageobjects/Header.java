@@ -470,6 +470,26 @@ public class Header extends Page
         txtbx_Size_AdvanceSearchForm().sendKeys(size);
     }
 
+    public WebElement txtbx_Price_AdvanceSearchForm() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.name("price"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Price text box in Advance Search form");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void enterPriceInAdvanceSearchPriceTextBox(String price) throws Exception
+    {
+        txtbx_Price_AdvanceSearchForm().clear();
+        txtbx_Price_AdvanceSearchForm().sendKeys(price);
+    }
+
     public WebElement reportCount() throws Exception
     {
         try
