@@ -55,7 +55,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         verifyLoginOnCreateYourProfileButtonClick();
         verifyAnalyticsClickInLoggedInState(viewtype);
         verifySizeInAdvanceSearch();
-        PriseInAdvanceSearch();
+        verifyPriseInAdvanceSearch();
 
         AutomationLog.info("Verification of search results page after entering pin code which is less 5 digits");
         verifyInvalidPinCode();
@@ -146,7 +146,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         AutomationLog.info("Changing size in advance Search reflects in Sqft range in filter section ");
     }
 
-    public void PriseInAdvanceSearch() throws Exception 
+    public void verifyPriseInAdvanceSearch() throws Exception 
     {
         header.clickOnAdvanceSearchDropDownIcon();
         header.enterPriceInAdvanceSearchPriceTextBox("5000-15000");
