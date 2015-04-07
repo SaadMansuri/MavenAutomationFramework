@@ -450,20 +450,45 @@ public class Header extends Page
         }
     }
 
-    public void searchByNoOfBeds(String val) throws Exception
+    public WebElement txtbx_Size_AdvanceSearchForm() throws Exception
     {
-        txtbx_BedsInAdvanceSearchForm().clear();
-        txtbx_BedsInAdvanceSearchForm().sendKeys(val);
-        AutomationLog.info("Successfully entered Search text for no of beds ");
+        try
+        {
+            element = driver.findElement(By.id("sizeInput"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Size text box in Advance Search form");
+            throw(e);
+        }
+        return element;
     }
 
-    public void searchByNoOfBaths(String val) throws Exception
+    public void enterSizeInAdvanceSearchSizeTextBox(String size) throws Exception
     {
-        txtbx_BathInAdvanceSearchForm().clear();
-        txtbx_BathInAdvanceSearchForm().sendKeys(val);
-        AutomationLog.info("Successfully entered Search text for no of baths ");
+        txtbx_Size_AdvanceSearchForm().clear();
+        txtbx_Size_AdvanceSearchForm().sendKeys(size);
     }
 
+    public WebElement txtbx_Price_AdvanceSearchForm() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.name("price"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Price text box in Advance Search form");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void enterPriceInAdvanceSearchPriceTextBox(String price) throws Exception
+    {
+        txtbx_Price_AdvanceSearchForm().clear();
+        txtbx_Price_AdvanceSearchForm().sendKeys(price);
+    }
 
     public WebElement reportCount() throws Exception
     {

@@ -1,6 +1,7 @@
 package com.agorafy.automation.testcases;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.testng.Assert;
 
@@ -24,11 +25,12 @@ import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
  */
 public class SearchResultsAction extends AutomationTestCaseVerification
 {
-    private Homepage homepage;
+    private Homepage homepage = Homepage.homePage();
     private SearchResultsPage searchresult;
     private LoginPopUp loginpopup;
     private Header header = Header.header();
     private HashMap<String, String> dataFromCSV = new HashMap<>();
+    HashMap<String, String> searchdata; 
 
     public SearchResultsAction()
     {
@@ -39,29 +41,21 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     public void setup() 
     {
         super.setup();
-        try
-        {
-            homepage = Homepage.homePage();
-            HashMap<String, String> data = testCaseData.get("SearchData");
-            searchresult = homepage.populateSearchTermTextBox(data.get("borough"),data.get("listingcategory"),data.get("searchterm"));
-            AutomationLog.info("Successfully Redirected to Property Search page ");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not be redirected to Property Search page");
-            e.getMessage();
-        }
     }
 
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink();
-        verifyIfSearchByBedsShowsPropertiesWithNoOfBeds();
-        verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations();
-        verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound();
-        verifyIfSearchByBathsShowsPropertiesWithNoOfBaths();
-        verifyIfLoginPopUpIsShownOnClickOfCreateYourProfileButton();
+        verifyIfAnalyticsViewButtonIsHiddenForShortSearchTerm();
+        verifyIfAnalyticsViewButtonIsDisplayedForLongSearchTerm();
+        HashMap<String, String> viewtype = testCaseData.get("ViewType");
+        verifyIfMapViewButtonIsClicked(viewtype);
+        verifyIfListViewButtonIsClicked(viewtype);
+        verifyLoginOnAnalyticsButtonClick(viewtype);
+        verifyLoginOnCreateYourProfileButtonClick();
+        verifyAnalyticsClickInLoggedInState(viewtype);
+        verifySizeInAdvanceSearch();
+        verifyPriseInAdvanceSearch();
 
         AutomationLog.info("Verification of search results page after entering pin code which is less 5 digits");
         verifyInvalidPinCode();
@@ -74,7 +68,97 @@ public class SearchResultsAction extends AutomationTestCaseVerification
 
     }
 
-   	private void verifySpecialCharacterInSearch() throws Exception 
+    public void verifyIfAnalyticsViewButtonIsHiddenForShortSearchTerm() throws Exception 
+    {
+        searchdata = testCaseData.get("SearchData");
+        searchresult = homepage.populateSearchTermTextBox(searchdata.get("borough"),searchdata.get("listingcategory"),searchdata.get("searchterm"));
+        AutomationLog.info("Successfully Redirected to Property Search page ");
+        WaitFor.sleepFor(10000);
+        Assert.assertFalse(searchresult.isAnalyticsViewButtonPresent(), "Expected Analytics view button is not hidden ");
+        AutomationLog.info("Short searchterm does not show analytics view button");
+    }
+
+    public void verifyIfAnalyticsViewButtonIsDisplayedForLongSearchTerm() throws Exception 
+    {
+        header.txtbx_SearchInput().clear();
+        header.enterSearchTextInSearchInputTextBox(searchdata.get("longsearchterm"));
+        WaitFor.sleepFor(10000);
+        header.clickOnSearchFormButton();
+        WaitFor.sleepFor(20000);
+        Assert.assertTrue(searchresult.isAnalyticsViewButtonPresent(), "Expected Analytics view button is not displayed");
+        AutomationLog.info("Long searchterm shown analytics view button");
+    }
+
+    public void verifyLoginOnAnalyticsButtonClick(HashMap<String, String> viewtype) throws Exception 
+    {
+        boolean isloggedIn = false;
+        loginpopup = (LoginPopUp) searchresult.clickOnAnalyticsViewButton(isloggedIn);
+        WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
+        Assert.assertEquals(searchresult.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
+        AutomationLog.info("Clicking AnalyticsView button in logged out state shows LoginPopUp  ");
+        searchresult.closeLoginPoPup(loginpopup);
+    }
+
+    public void verifyAnalyticsClickInLoggedInState(HashMap<String, String> viewtype) throws Exception 
+    {
+        boolean isloggedIn = true;
+        searchresult.scrollPage(700, 0);
+        searchresult = (SearchResultsPage) searchresult.clickOnAnalyticsViewButton(isloggedIn);
+        String url = searchresult.getCurrentUrl();
+        Map<String, String> params=searchresult.getQueryMap(url);
+        String actualviewtype =(String)params.get("view");
+        Assert.assertEquals(actualviewtype, viewtype.get("view1"), "Expected AnalyticsView page is not shown");
+        AutomationLog.info("Clicking AnalyticsView button in logged in state redirects to Analytics page");
+    }
+
+    public void verifyIfMapViewButtonIsClicked(HashMap<String, String> viewtype) throws Exception 
+    {
+        searchresult.clickOnMapViewButton();
+        WaitFor.waitForPageToLoad(Page.driver);
+        WaitFor.sleepFor(30000);
+        String url = searchresult.getCurrentUrl();
+        Map<String, String> params=searchresult.getQueryMap(url);
+        String actualviewtype =(String)params.get("view");
+        Assert.assertEquals(actualviewtype, viewtype.get("view3"), "Expected MapView page is not shown");
+        AutomationLog.info("Clicking MapView button redirects to MapView page ");
+    }
+
+    public void verifyIfListViewButtonIsClicked(HashMap<String, String> viewtype) throws Exception 
+    {
+        searchresult.clickOnListViewButton();
+        WaitFor.sleepFor(20000);
+        String url = searchresult.getCurrentUrl();
+        Map<String, String> params=searchresult.getQueryMap(url);
+        String actualviewtype =(String)params.get("view");
+        Assert.assertEquals(actualviewtype, viewtype.get("view2"), "Expected ListView page is not shown");
+        AutomationLog.info("Clicking ListView button redirects to ListView page ");
+    }
+
+    public void verifySizeInAdvanceSearch() throws Exception
+    {
+        header.clickOnAdvanceSearchDropDownIcon();
+        header.enterSizeInAdvanceSearchSizeTextBox("5000-10000");
+        header.clickOnSearchButtonOnAdvanceSearchform();
+        String sizefrom = searchresult.FilterSize_SquareFeet_From().getText().replaceAll("\\D", "");
+        String sizeto = searchresult.FilterSize_SquareFeet_To().getText().replaceAll("\\D", "");
+        String actualsize = sizefrom+"-"+sizeto;
+        Assert.assertEquals(actualsize, "5000-10000", "Expected size is not found");
+        AutomationLog.info("Changing size in advance Search reflects in Sqft range in filter section ");
+    }
+
+    public void verifyPriseInAdvanceSearch() throws Exception 
+    {
+        header.clickOnAdvanceSearchDropDownIcon();
+        header.enterPriceInAdvanceSearchPriceTextBox("5000-15000");
+        header.clickOnSearchButtonOnAdvanceSearchform();
+        String pricefrom = searchresult.FilterPrice_From().getText().replaceAll("\\D", "");
+        String priceto = searchresult.FilterPrice_To().getText().replaceAll("\\D", "");
+        String actualsize = pricefrom+"-"+priceto;
+        Assert.assertEquals(actualsize, "5000-15000", "Expected price is not found");
+        AutomationLog.info("Changing price in advance Search reflects in Price Range  in filter section ");
+    }
+
+    private void verifySpecialCharacterInSearch() throws Exception 
     {
         searchresult = homepage.populateSearchTermTextBox(null, null, "$");
         boolean errorMsgStatus = false;
@@ -113,64 +197,10 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         }
     }
 
-    public void verifyIfLoginPopUpIsShownOnSubscribeToThisSearchLink() throws Exception
-    {
-        boolean Status = false;
-        loginpopup = (LoginPopUp) searchresult.clickOnSubscribeToThisSearchLink(Status);
-        WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
-        Assert.assertEquals(searchresult.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
-        Assert.assertEquals(searchresult.getTitleForLoginPopUp(loginpopup), "Log in", "Could not Get login pop up title");
-        AutomationLog.info("Clicking on Subscribe to this search link displays Login popup ");
-        searchresult.closeLoginPoPup(loginpopup);
-    }
-
-    public void verifyIfSearchByBedsShowsPropertiesWithNoOfBeds() throws Exception
-    {
-        String result = null;
-        header.clickOnAdvanceSearchDropDownIcon();
-        header.searchByNoOfBeds("2");
-        header.clickOnSearchButtonOnAdvanceSearchform();
-        result = searchresult.NoOfBedsInPropertiesSearch();
-        Assert.assertEquals(result, "2", "Expected Properties with specified beds is not shown");
-        AutomationLog.info("Successfully shown Properties with x beds");
-    }
-
-    public void verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations() throws Exception
-    {
-        header.clickOnAdvanceSearchDropDownIcon();
-        header.searchByNoOfBeds("3");
-        header.searchByNoOfBaths("3");
-        header.clickOnSearchButtonOnAdvanceSearchform();
-        Assert.assertEquals(searchresult.NoOfBedsInPropertiesSearch(), "3", "Expected Properties with specified beds is not shown");
-        Assert.assertEquals(searchresult.NoOfBathsInPropertiesSearch(), "3", "Expected Properties with specified bath is not shown");
-        AutomationLog.info("Properties with X baths And Y Beds And Different Combinations is verified");
-    }
-    
-    public void verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound() throws Exception
-    {
-        header.clickOnAdvanceSearchDropDownIcon();
-        header.searchByNoOfBeds("0");
-        header.searchByNoOfBaths("0");
-        header.clickOnSearchButtonOnAdvanceSearchform();
-        Assert.assertEquals(searchresult.loadingMessage().getText(), "NO RESULTS FOUND.", "Expected message is Not Shown");
-        AutomationLog.info("Successfully verified that by searching with 0 bath and 0 bed, appropiate message comes up");
-    }
-
-    
-    public void verifyIfSearchByBathsShowsPropertiesWithNoOfBaths() throws Exception
-    {
-        String result = null;
-        header.clickOnAdvanceSearchDropDownIcon();
-        header.searchByNoOfBaths("2");
-        header.clickOnSearchButtonOnAdvanceSearchform();
-        result = searchresult.NoOfBathsInPropertiesSearch();
-        Assert.assertEquals(result, "2", "Expected Properties with specified baths is not shown");
-        AutomationLog.info("Successfully shown Properties with x baths");
-    }
-
-    public void verifyIfLoginPopUpIsShownOnClickOfCreateYourProfileButton() throws Exception
+    public void verifyLoginOnCreateYourProfileButtonClick() throws Exception
     {
         String beforURL = searchresult.currentURL();
+        searchresult.scrollPage(0, 700);
         loginpopup = searchresult.clickOnCreateProfileButton();
         WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
         Assert.assertEquals(searchresult.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");

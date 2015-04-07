@@ -1,5 +1,9 @@
 package com.agorafy.automation.pageobjects;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -94,11 +98,32 @@ public class Page
         driver.navigate().back();
     }
 
-    public void pageScrollDown(int x, int y) 
+    public void scrollPage(int x, int y) 
     {
          JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-         jsExecutor.executeScript("window.scrollTo("+x+"," +y+")");
-         //jsExecutor.executeScript("window.scrollTo(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight,document.documentElement.clientHeight));");
+         jsExecutor.executeScript("window.scrollBy("+x+","+y+")", "");
+    }
+
+    public WebElement getVisibleElement(By element)
+    {
+        List<WebElement> list = new ArrayList<WebElement>();
+        WebElement visibleElement = null;
+        try
+        {
+            list = driver.findElements(element);
+            for(WebElement ele : list)
+            {
+                if(ele.isDisplayed())
+                {
+                    visibleElement = ele;
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+        return visibleElement;
     }
 
 }

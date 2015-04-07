@@ -1,3 +1,4 @@
-SearchData,borough="Manhattan";listingcategory="Residential";searchterm="Rentals in 10010"
+SearchData,borough="Manhattan";listingcategory="Residential";searchterm="Apartments";longsearchterm="Condos in 10011"
 InvalidPinData,invalidPin1=100;invalidPin2=123456
 ValidSearchInputWithNoResults,borough="Bronx";listingcategory="Commercial";searchterm="10001"
+ViewType,view1="analytics";view2="list";view3="map"
