@@ -84,9 +84,18 @@ public class UpdateListingAction extends AutomationTestCaseVerification
 
         AutomationLog.info("Verification of email id on update listing page");
         verifyEmailId();
+
+        AutomationLog.info("Verify whether after selecting No radio btn on availability form respective form opens");
+        verifyNoRadioBtn();
     }
 
-    private void verifyEmailId() throws Exception 
+    private void verifyNoRadioBtn() 
+    {
+        
+    	
+    }
+
+	private void verifyEmailId() throws Exception 
     {
         myListings.hoverOverFirstListing();
         myListings.hoverOverUpdate();
@@ -108,6 +117,7 @@ public class UpdateListingAction extends AutomationTestCaseVerification
         myListings.hoverOverUpdate();
         updateListingPage = myListings.clickUpdateOfFirstListing();
         HandlingWindows.switchToWindow(Page.driver, 2);
+        WaitFor.sleepFor(2000);
         actualUpdateListingPageHeading = updateListingPage.pageHeading(); 
         dataFromCSV = testCaseData.get("Headings");
         String expectedUpdateListingPageHeading = dataFromCSV.get("PageHeading");
