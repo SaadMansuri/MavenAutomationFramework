@@ -1,6 +1,8 @@
 package com.agorafy.automation.testcases;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 import org.testng.Assert;
 
@@ -74,20 +76,50 @@ public class UpdateListingAction extends AutomationTestCaseVerification
 
         AutomationLog.info("Verify whether after selecting No radio btn on availability form respective form opens");
         verifyNoRadioBtn();
+
+        AutomationLog.info("Verify whether after selecting No radio btn on availability form reason dropdown has required options");
+        verifyReasonDropdown();
+
+        AutomationLog.info("Verify whether after selecting Save and continue btn on availability form it navigates to details form");
+        verifySaveAndContinue();
+
     }
 
-    private void verifyNoRadioBtn() 
+    private void verifySaveAndContinue() throws Exception 
     {
-        
-    	
+        updateListingPage.btn_SaveAndContinue().click();
+        boolean detailsFormStatus = false;
+        detailsFormStatus = updateListingPage.form_Details().isDisplayed();
+        Assert.assertEquals(detailsFormStatus, true, "After performing click operation on Save And Continue btn on Availability form it should navigate to Detais form");
+        AutomationLog.info("After performing click operation on Save And Continue btn on Availability form it does navigate to Detais form");
+        updateListingPage.btn_Back().click();
+    }
+
+	private void verifyReasonDropdown() throws Exception 
+    {
+        updateListingPage.radioBtnNo().click();
+        updateListingPage.dropdownReason().click();
+        Collection<String> actualAllReasonDropdownOptions = updateListingPage.dropdownReasonOptions();
+        dataFromCSV = testCaseData.get("ReasonDropdownOptions");
+        Collection<String> expectedAllReasonDropdownOptions = dataFromCSV.values();
+        boolean flag = compareTwoCollections(actualAllReasonDropdownOptions, expectedAllReasonDropdownOptions);
+        Assert.assertEquals(flag, true, "Dropdown options for reason dropdown does not match as expected");
+        AutomationLog.info("Dropdown options for reason dropdown does matches as expected");
+        updateListingPage.radioBtnYes().click();
+    }
+
+	private void verifyNoRadioBtn() throws Exception 
+    {
+        updateListingPage.radioBtnNo().click();
+        boolean actualReasonAndNotesBlockStatus = false;
+        actualReasonAndNotesBlockStatus = ( updateListingPage.reasonBlock().isDisplayed() && updateListingPage.notesBlock().isDisplayed());
+        Assert.assertEquals(actualReasonAndNotesBlockStatus, true, "After performing click operation on No availability radio btn reason and notes blocks does not open sucessfully"); 
+        AutomationLog.info("After performing click operation on No availability radio btn reason and notes blocks opens sucessfully");
+        updateListingPage.radioBtnYes().click();
     }
 
 	private void verifyEmailId() throws Exception 
     {
-        /*myListings.hoverOverFirstListing();
-        myListings.hoverOverUpdate();
-        updateListingPage = myListings.clickUpdateOfFirstListing();
-        HandlingWindows.switchToWindow(Page.driver, 2);*/
         String actualEmailId = updateListingPage.emailId().getText();
         dataFromCSV = testCaseData.get("EmailIdOnlistingUpdatePage");
         String expectedEmailId = dataFromCSV.get("EmailId");
@@ -98,11 +130,6 @@ public class UpdateListingAction extends AutomationTestCaseVerification
 	private void verifyUpdateListingPageHeading() throws Exception 
     {
         String actualUpdateListingPageHeading;
-        /*myListings.hoverOverFirstListing();
-        myListings.hoverOverUpdate();
-        updateListingPage = myListings.clickUpdateOfFirstListing();
-        HandlingWindows.switchToWindow(Page.driver, 2);
-        WaitFor.sleepFor(2000);*/
         actualUpdateListingPageHeading = updateListingPage.pageHeading(); 
         dataFromCSV = testCaseData.get("Headings");
         String expectedUpdateListingPageHeading = dataFromCSV.get("PageHeading");

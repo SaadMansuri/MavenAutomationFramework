@@ -209,21 +209,6 @@ public class SubnavigationFeedbackAction extends ContentPagesVerification
         feedback.textBox_Message().clear();
     }
 
-    public boolean compareTwoCollections(Collection<String> collection1, Collection<String> collection2)
-    {
-        boolean flag = false;
-        if(collection1.size() == collection2.size())
-        {
-            if(collection1.containsAll(collection2) && collection2.containsAll(collection1))
-            {
-                 flag = true;
-            }
-        }
-        else 
-            flag = false;
-        return flag;
-    }
-
     @Override
     protected String successMessage() 
     {

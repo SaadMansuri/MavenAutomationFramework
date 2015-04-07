@@ -1,2 +1,3 @@
 Headings,PageHeading="Submit a listing update"
 EmailIdOnlistingUpdatePage,EmailId="chandrani.bhagat@cuelogic.co.in"
+ReasonDropdownOptions,Option1="Space was leased";Option2="Space is off market";Option3="Other"
