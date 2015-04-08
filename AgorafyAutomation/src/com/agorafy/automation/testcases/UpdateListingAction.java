@@ -2,7 +2,6 @@ package com.agorafy.automation.testcases;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 import org.testng.Assert;
 
@@ -83,6 +82,59 @@ public class UpdateListingAction extends AutomationTestCaseVerification
         AutomationLog.info("Verify whether after selecting Save and continue btn on availability form it navigates to details form");
         verifySaveAndContinue();
 
+        AutomationLog.info("Verify whether after selecting single family for sale listing it opens respective details form");
+        verifySingleFamilyListingForm();
+
+        AutomationLog.info("Verify whether after selecting single family for sale listing it opens respective details form");
+        verifyHotelForSaleListingForm();
+    }
+
+    private void verifyHotelForSaleListingForm() throws Exception 
+    {
+        dataFromCSV = testCaseData.get("ListingTypes");
+        String listingType = dataFromCSV.get("ListingType2");
+        String listingName;
+        subNavigation.clickLinkMyListings();
+        HashMap<String, String> allListingTypes = new HashMap<>();
+        allListingTypes = myListings.allListingTypes();
+        listingName = allListingTypes.get(listingType);
+        try 
+        {
+            updateListingPage = myListings.selectRequiredListingsUpdate(listingName);
+            AutomationLog.info("Successfully selected required listing");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("It may happen that, given listing type is not present on My Listings page, So make sure that given listing type is present on My listings page. Listing type:"+listingType);
+        }
+        HandlingWindows.closeCurrentWindow(Page.driver);
+        HandlingWindows.switchToWindow(Page.driver, 1);
+        updateListingPage.btn_SaveAndContinue();
+        
+    	
+    }
+
+	private void verifySingleFamilyListingForm() throws Exception 
+    {
+        dataFromCSV = testCaseData.get("ListingTypes");
+        String listingType = dataFromCSV.get("ListingType1");
+        String listingName;
+        subNavigation.clickLinkMyListings();
+        HashMap<String, String> allListingTypes = new HashMap<>();
+        allListingTypes = myListings.allListingTypes();
+        listingName = allListingTypes.get(listingType);
+        try 
+        {
+            updateListingPage = myListings.selectRequiredListingsUpdate(listingName);
+            AutomationLog.info("Successfully selected required listing");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("It may happen that, given listing type is not present on My Listings page, So make sure that given listing type is present on My listings page. Listing type:"+listingType);
+        }
+        HandlingWindows.closeCurrentWindow(Page.driver);
+        HandlingWindows.switchToWindow(Page.driver, 1);
+        updateListingPage.btn_SaveAndContinue();
     }
 
     private void verifySaveAndContinue() throws Exception 
@@ -95,7 +147,7 @@ public class UpdateListingAction extends AutomationTestCaseVerification
         updateListingPage.btn_Back().click();
     }
 
-	private void verifyReasonDropdown() throws Exception 
+    private void verifyReasonDropdown() throws Exception 
     {
         updateListingPage.radioBtnNo().click();
         updateListingPage.dropdownReason().click();
@@ -118,7 +170,7 @@ public class UpdateListingAction extends AutomationTestCaseVerification
         updateListingPage.radioBtnYes().click();
     }
 
-	private void verifyEmailId() throws Exception 
+    private void verifyEmailId() throws Exception 
     {
         String actualEmailId = updateListingPage.emailId().getText();
         dataFromCSV = testCaseData.get("EmailIdOnlistingUpdatePage");
@@ -127,7 +179,7 @@ public class UpdateListingAction extends AutomationTestCaseVerification
         AutomationLog.info("Email Id matches with expected email id on listing update page");
     }
 
-	private void verifyUpdateListingPageHeading() throws Exception 
+    private void verifyUpdateListingPageHeading() throws Exception 
     {
         String actualUpdateListingPageHeading;
         actualUpdateListingPageHeading = updateListingPage.pageHeading(); 

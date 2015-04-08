@@ -1,6 +1,8 @@
 package com.agorafy.automation.pageobjects.subnavigationmenu;
 
-import javax.print.attribute.standard.Media;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +14,6 @@ import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.UpdateListing;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingMediaFormPage;
-import com.agorafy.automation.testcases.UpdateListingAction;
 
 public class MyListings extends Page 
 {
@@ -275,6 +276,118 @@ public class MyListings extends Page
             AutomationLog.error("Failed to click Add Media link found after hovering over first listing");
         }
         return mediaPage;
+    }
+
+    public List<WebElement> allListingElements() 
+    {
+        List<WebElement> allListingElements = new ArrayList<>();
+        WebElement parent;
+        try 
+        {
+            parent = driver.findElement(By.id("DataTables_Table_0")).findElement(By.tagName("tbody"));
+            allListingElements = parent.findElements(By.tagName("tr"));
+            AutomationLog.info("All listing elements are located successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to locate all listing elements");
+        }
+        return allListingElements;
+    }
+
+    public HashMap<String, String> allListingTypes() 
+    {
+        HashMap<String, String> allListingTypes = new HashMap<>();
+        List<WebElement> allListingElements = new ArrayList<>();
+        WebElement parent;
+        try 
+        {
+            allListingElements = allListingElements();
+            String listingName = null;
+            String listingType = null;
+            for(WebElement singleListing : allListingElements)
+            {
+                 parent = singleListing.findElements(By.tagName("td")).get(0);
+                 element = parent.findElements(By.tagName("div")).get(1);
+                 listingName = element.findElement(By.tagName("h4")).findElement(By.tagName("a")).getText();
+                 element = singleListing.findElements(By.tagName("td")).get(1);
+                 listingType = element.findElement(By.tagName("div")).getText();
+                 allListingTypes.put(listingType,listingName);
+            }
+            AutomationLog.info("Successfully got all listing types on My Listings page");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to get all listing types on My Listings page");
+        }
+        return allListingTypes;
+    }
+
+    public void clickThisListingsUpdate(WebElement singleListing) 
+    {
+        WebElement parent;
+        WebElement update;
+        Actions hover = new Actions(driver);
+        try 
+        {
+            parent = singleListing.findElements(By.tagName("td")).get(0);
+            element = parent.findElements(By.tagName("div")).get(1);
+            update = element.findElement(By.id("update"));
+            hover.moveToElement(singleListing);
+            hover.moveToElement(update).click().build().perform();
+            AutomationLog.info("Successfully clicked single listings update");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to click single listings update");
+        }
+    }
+
+    public String getSingleListingName(WebElement singleListing) 
+    {
+        WebElement parent;
+        WebElement name;
+        String listingName = null;
+        try 
+        {
+            parent = singleListing.findElements(By.tagName("td")).get(0);
+            element = parent.findElements(By.tagName("div")).get(1);
+            name = element.findElement(By.tagName("h4"));
+            listingName = name.findElement(By.tagName("a")).getText();
+            AutomationLog.info("Successfully got selected listings name");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to get selected listings name");
+        }
+        return listingName;
+    }
+
+    public UpdateListing selectRequiredListingsUpdate(String expectedListingName)
+    {
+        List<WebElement> allListingElements = new ArrayList<>();
+        String actualListingName;
+        UpdateListing updateListingPage = null;
+        try
+        {
+            allListingElements = allListingElements();
+            for(WebElement singleListing : allListingElements)
+            {
+                actualListingName = getSingleListingName(singleListing);
+                if(actualListingName.equals(expectedListingName))
+                {
+                    clickThisListingsUpdate(singleListing);
+                    updateListingPage = new UpdateListing(driver);
+                    break;
+                }
+            }
+            AutomationLog.info("Successfully selected required listing depending upon listing type");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to select required listing depending upon listing type");
+        }
+        return updateListingPage;
     }
 
     public String getURL()

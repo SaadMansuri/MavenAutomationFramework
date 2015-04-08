@@ -3,8 +3,6 @@ package com.agorafy.automation.pageobjects;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import org.apache.xalan.templates.ElemApplyImport;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
