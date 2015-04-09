@@ -5,9 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.HasInputDevices;
+import org.openqa.selenium.interactions.Mouse;
+import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.internal.Locatable;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -333,6 +339,7 @@ public class MyListings extends Page
             parent = singleListing.findElements(By.tagName("td")).get(0);
             element = parent.findElements(By.tagName("div")).get(1);
             update = element.findElement(By.id("update"));
+            pageScrollDown(0, singleListing.getLocation().getX());
             hover.moveToElement(singleListing);
             hover.moveToElement(update).click().build().perform();
             AutomationLog.info("Successfully clicked single listings update");

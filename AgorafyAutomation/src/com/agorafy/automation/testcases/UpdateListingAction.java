@@ -67,6 +67,7 @@ public class UpdateListingAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
+
         AutomationLog.info("Verify whether after performing click operation over update link for single listing it navigates to update listing page with expected heading");
         verifyUpdateListingPageHeading();
 
@@ -85,11 +86,14 @@ public class UpdateListingAction extends AutomationTestCaseVerification
         AutomationLog.info("Verify whether after selecting single family for sale listing it opens respective details form");
         verifySingleFamilyListingForm();
 
-        AutomationLog.info("Verify whether after selecting single family for sale listing it opens respective details form");
+        AutomationLog.info("Verify whether after selecting Hotel for Sale listing it opens respective details form");
         verifyHotelForSaleListingForm();
+
+        AutomationLog.info("Verify whether after selecting Office for Sublease listing it opens respective details form");
+        verifyOfficeForSubleaseListingForm();
     }
 
-    private void verifyHotelForSaleListingForm() throws Exception 
+    private void verifyOfficeForSubleaseListingForm() throws Exception 
     {
         dataFromCSV = testCaseData.get("ListingTypes");
         String listingType = dataFromCSV.get("ListingType2");
@@ -109,9 +113,36 @@ public class UpdateListingAction extends AutomationTestCaseVerification
         }
         HandlingWindows.closeCurrentWindow(Page.driver);
         HandlingWindows.switchToWindow(Page.driver, 1);
-        updateListingPage.btn_SaveAndContinue();
-        
-    	
+        updateListingPage.btn_SaveAndContinue().click();
+        int count_NoOfTextBoxes = updateListingPage.count_NoOfTextBoxesInDetailsForm();
+        Assert.assertEquals(count_NoOfTextBoxes, 13, "No of text boxes in details form of this type of listing do not matches as expected");
+        AutomationLog.info("No of text boxes in details form of this type of listing matches as expected");
+    }
+
+	private void verifyHotelForSaleListingForm() throws Exception 
+    {
+        dataFromCSV = testCaseData.get("ListingTypes");
+        String listingType = dataFromCSV.get("ListingType2");
+        String listingName;
+        subNavigation.clickLinkMyListings();
+        HashMap<String, String> allListingTypes = new HashMap<>();
+        allListingTypes = myListings.allListingTypes();
+        listingName = allListingTypes.get(listingType);
+        try 
+        {
+            updateListingPage = myListings.selectRequiredListingsUpdate(listingName);
+            AutomationLog.info("Successfully selected required listing");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("It may happen that, given listing type is not present on My Listings page, So make sure that given listing type is present on My listings page. Listing type:"+listingType);
+        }
+        HandlingWindows.closeCurrentWindow(Page.driver);
+        HandlingWindows.switchToWindow(Page.driver, 1);
+        updateListingPage.btn_SaveAndContinue().click();
+        int count_NoOfTextBoxes = updateListingPage.count_NoOfTextBoxesInDetailsForm();
+        Assert.assertEquals(count_NoOfTextBoxes, 13, "No of text boxes in details form of this type of listing do not matches as expected");
+        AutomationLog.info("No of text boxes in details form of this type of listing matches as expected");
     }
 
 	private void verifySingleFamilyListingForm() throws Exception 
@@ -134,7 +165,10 @@ public class UpdateListingAction extends AutomationTestCaseVerification
         }
         HandlingWindows.closeCurrentWindow(Page.driver);
         HandlingWindows.switchToWindow(Page.driver, 1);
-        updateListingPage.btn_SaveAndContinue();
+        updateListingPage.btn_SaveAndContinue().click();
+        int count_NoOfTextBoxes = updateListingPage.count_NoOfTextBoxesInDetailsForm();
+        Assert.assertEquals(count_NoOfTextBoxes, 11, "No of text boxes in details form of this type of listing do not matches as expected");
+        AutomationLog.info("No of text boxes in details form of this type of listing matches as expected");
     }
 
     private void verifySaveAndContinue() throws Exception 

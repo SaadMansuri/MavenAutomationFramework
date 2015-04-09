@@ -193,6 +193,37 @@ public class UpdateListing extends Page
         return element;
     }
 
+    public WebElement form_Property() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("property"));
+            AutomationLog.info("property form is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find property form");
+            throw (e);
+        }
+        return element;
+    }
+
+    public int count_NoOfTextBoxesInDetailsForm() throws Exception
+    {
+        int count_TextBoxes = 0;
+        try 
+        {
+             count_TextBoxes = form_Property().findElements(By.tagName("div")).size();
+            AutomationLog.info("No of text boxes in respective details form counted successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to count text boxes in respective details form");
+            throw (e);
+        }
+        return count_TextBoxes;
+    }
+
     public WebElement btn_Back() throws Exception
     {
         try 
