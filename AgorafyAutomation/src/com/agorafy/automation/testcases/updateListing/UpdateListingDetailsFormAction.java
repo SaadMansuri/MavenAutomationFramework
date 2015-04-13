@@ -10,6 +10,8 @@ import java.util.HashMap;
 
 
 
+
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -172,18 +174,37 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
         AutomationLog.info("Verification of  Asking price units");
         verifySingleFamilyListingAskingPriceUnits();
 
-        AutomationLog.info("Verification of  details form compulsory fields");
-        verifySingleFamilyListingCompulsoryFields();
+        AutomationLog.info("Verification of  details form without compulsory fields");
+        verifySingleFamilyListingWithoutCompulsoryFields();
+
+        AutomationLog.info("Verification of  details form with compulsory fields only");
+        verifySingleFamilyListingWithCompulsoryFields();
     }
 
-    private void verifySingleFamilyListingCompulsoryFields() throws Exception 
+    private void verifySingleFamilyListingWithCompulsoryFields() throws Exception 
     {
-        updateListingPage.setAskingPrice("");
+        dataFromCSV = testCaseData.get("AskingPrices");
+        updateListingPage.setAskingPrice(dataFromCSV.get("AskingPrice1"));
+        updateListingPage.txt_ListingLink().clear();
+        dataFromCSV = testCaseData.get("DetailsDescription");
+        updateListingPage.setDescription(dataFromCSV.get("Description"));
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
+        boolean actualMediaFormStatus = false;
+        actualMediaFormStatus = updateListingPage.form_Media().isDisplayed();
+        Assert.assertEquals(actualMediaFormStatus, true, "After filling details form with compulsory fields only it should navigate to media form");
+        AutomationLog.info("After filling details form with compulsory fields only it navigate to media form");
+        updateListingPage.btn_Back().click();
+        updateListingPage.btn_Back().click();
+    }
+
+	private void verifySingleFamilyListingWithoutCompulsoryFields() throws Exception 
+    {
+        updateListingPage.txt_AskingPrice().clear();;
         dataFromCSV = testCaseData.get("ListingLinkUrls");
         String listinglinkUrl = dataFromCSV.get("ListingLinkUrl1");
         updateListingPage.setListingLinkUrl(listinglinkUrl);
-        updateListingPage.setDescription("");
-        updateListingPage.btn_SaveAndContinue().click();
+        updateListingPage.txt_Description().clear();
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
         boolean actualDetailsPageStatus = false;
         actualDetailsPageStatus = updateListingPage.form_Details().isDisplayed();
         Assert.assertEquals(actualDetailsPageStatus, true,"After filling details form without any compulsory fields form should not navigate to media form");

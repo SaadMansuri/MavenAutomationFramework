@@ -178,16 +178,46 @@ public class UpdateListing extends Page
         return element;
     }
 
+    public WebElement btn_SaveAndContinueOnDetailsForm() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("saveProperty"));
+            AutomationLog.info("Save and Continue btn on details form is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Save and Continue btn on details form");
+            throw (e);
+        }
+        return element;
+    }
+
     public WebElement form_Details() throws Exception
     {
         try 
         {
-            element = driver.findElement(By.id("listingSubmitForm"));
+            element = driver.findElement(By.id("property"));
             AutomationLog.info("details form is found");
         }
         catch (Exception e) 
         {
             AutomationLog.error("failed to find details form");
+            throw (e);
+        }
+        return element;
+    }
+
+    public WebElement form_Media() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("media"));
+            AutomationLog.info("media form is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find media form");
             throw (e);
         }
         return element;
