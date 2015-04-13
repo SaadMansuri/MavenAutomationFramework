@@ -34,7 +34,7 @@ public class MyListings extends Page
     {
         try 
         {
-            element = driver.findElement(By.className("content-block tabContainer"));
+            element = driver.findElement(By.className("tabContainer"));
             AutomationLog.info("My listings content block found");
         }
         catch (Exception e) 
@@ -339,7 +339,7 @@ public class MyListings extends Page
             parent = singleListing.findElements(By.tagName("td")).get(0);
             element = parent.findElements(By.tagName("div")).get(1);
             update = element.findElement(By.id("update"));
-            pageScrollDown(0, singleListing.getLocation().getX());
+            pageScrollDown(0, (singleListing.getLocation().getX()+150));
             hover.moveToElement(singleListing);
             hover.moveToElement(update).click().build().perform();
             AutomationLog.info("Successfully clicked single listings update");

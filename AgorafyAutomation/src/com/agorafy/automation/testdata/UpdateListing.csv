@@ -1,0 +1,7 @@
+Headings,PageHeading="Submit a listing update"
+EmailIdOnlistingUpdatePage,EmailId="chandrani.bhagat@cuelogic.co.in"
+ReasonDropdownOptions,Option1="Space was leased";Option2="Space is off market";Option3="Other"
+ListingTypes,ListingType1="Single-Family for Sale";ListingType2="Hotel for Sale";ListingType3="Office for Sublease";ListingType4="Condo for Sale"
+AskingPrices,AskingPrice1="1000"
+AskingPriceUnits,AskingPriceUnit1="total";AskingPriceUnit2="per sqft"
+ListingLinkUrls,ListingLinkUrl1="http://beta.agorafy.com/listing/39965/120-Pierrepont-Streetclone-Single-Family-for-Sale"

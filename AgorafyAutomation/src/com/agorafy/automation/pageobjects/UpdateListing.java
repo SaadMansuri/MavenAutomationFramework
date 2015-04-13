@@ -193,6 +193,42 @@ public class UpdateListing extends Page
         return element;
     }
 
+    public WebElement dropdown_AskingPriceUnits() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.name("ls_unit"));
+            AutomationLog.info("Asking price unit dropdown is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Asking price unit dropdown");
+            throw (e);
+        }
+        return element;
+    }
+
+    public Collection<String> askingPriceUnits() throws Exception
+    {
+        List<WebElement> elements_AskingPriceUnits = new ArrayList<>();
+        List<String> askingPriceunits = new ArrayList<>();
+        try 
+        {
+            elements_AskingPriceUnits = dropdown_AskingPriceUnits().findElements(By.tagName("option"));
+            for(WebElement singleAskingPriceUnit : elements_AskingPriceUnits)
+            {
+                askingPriceunits.add(singleAskingPriceUnit.getAttribute("value"));
+            }
+            AutomationLog.info("Asking price unit dropdown is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Asking price unit dropdown");
+            throw (e);
+        }
+        return askingPriceunits;
+    }
+
     public WebElement form_Property() throws Exception
     {
         try 
@@ -234,6 +270,93 @@ public class UpdateListing extends Page
         catch (Exception e) 
         {
             AutomationLog.error("failed to find back btn");
+            throw (e);
+        }
+        return element;
+    }
+
+    public WebElement txt_AskingPrice() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_price_min"));
+            AutomationLog.info("Asking price txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Asking price txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public void setAskingPrice(String askingPrice) throws Exception
+    {
+        try 
+        {
+            txt_AskingPrice().sendKeys(askingPrice);
+            AutomationLog.info("set asking price successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set Asking price");
+            throw (e);
+        }
+    }
+
+    public void setListingLinkUrl(String listingLinkUrl) throws Exception
+    {
+        try 
+        {
+            txt_ListingLink().sendKeys(listingLinkUrl);
+            AutomationLog.info("set listing link successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set listing link");
+            throw (e);
+        }
+    }
+
+    public void setDescription(String description) throws Exception
+    {
+        try 
+        {
+            txt_Description().sendKeys(description);
+            AutomationLog.info("set description box successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set description box");
+            throw (e);
+        }
+    }
+
+    public WebElement txt_Description() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_notes"));
+            AutomationLog.info("Description txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Description txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public WebElement txt_ListingLink() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_url"));
+            AutomationLog.info("Listing link Url txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Listing link Url txt box");
             throw (e);
         }
         return element;

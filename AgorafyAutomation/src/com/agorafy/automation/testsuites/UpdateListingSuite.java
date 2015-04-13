@@ -4,7 +4,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.UpdateListingAction;
+import com.agorafy.automation.testcases.updateListing.*;
 
 public class UpdateListingSuite 
 {
@@ -18,12 +18,25 @@ public class UpdateListingSuite
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-    @Test(priority = 1)
-    public void testUpdateListing() throws Exception
+    //@Test(priority = 1)
+    public void testUpdateListingAvailabilityForm() throws Exception
     {
         try
         {
-            new UpdateListingAction().Execute();
+            new UpdateListingAvailabilityFormAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
+
+    @Test(priority = 2)
+    public void testUpdateListingDetailsForm() throws Exception
+    {
+        try
+        {
+            new UpdateListingDetailsFormAction().Execute();
         }
         catch(Exception e)
         {
