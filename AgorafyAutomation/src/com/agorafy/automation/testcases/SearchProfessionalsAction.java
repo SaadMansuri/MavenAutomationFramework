@@ -68,15 +68,6 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     	AutomationLog.info("Verify whether empty agent search results in same page, by checking URL");
         verifyEmptyAgentSearch();
 
-        AutomationLog.info("Verify whether after performing click operation on company name in compnies tab, it redirects to company profile page by checking company name");
-        verifyCompanyProfilePage();
-
-        AutomationLog.info("verify scroll down agent's page");
-        verifyLazyLoadingAgents();
-
-        AutomationLog.info("verify scroll down companies page");
-        verifyLazyLoadingCompnies();
-
         HashMap<String, String> agentCompanySearch = testCaseData.get("agentCompanySearch");
         verifyIfRandomAgentCompanySearchShowsAppropriateMessage(searchprofessional,agentCompanySearch);
 
@@ -88,6 +79,15 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
 
         HashMap<String, String> search = testCaseData.get("agentName");
         verifyIfSearchByExpertiseClearsAgentCompanySearchText(searchprofessional,search);
+
+        AutomationLog.info("Verify whether after performing click operation on company name in compnies tab, it redirects to company profile page by checking company name");
+        verifyCompanyProfilePage();
+
+        AutomationLog.info("verify scroll down agent's page");
+        verifyLazyLoadingAgents();
+
+        AutomationLog.info("verify scroll down companies page");
+        verifyLazyLoadingCompnies();
 
         HashMap<String, String> neighborName = testCaseData.get("Neighborhoods");
         verifyIfNeighborHoodDropBoxDoNotAddMoreThan5Neighborhoods(searchprofessional,neighborName);
