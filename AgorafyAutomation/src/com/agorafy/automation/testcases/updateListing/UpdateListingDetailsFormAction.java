@@ -3,17 +3,7 @@ package com.agorafy.automation.testcases.updateListing;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-
-
-
-
-
-
-
-
-
 import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.Credentials;
@@ -26,6 +16,7 @@ import com.agorafy.automation.pageobjects.UpdateListing;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MyListings;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.utilities.HandlingWindows;
+
 
 public class UpdateListingDetailsFormAction extends AutomationTestCaseVerification
 {
@@ -113,7 +104,82 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
         int count_NoOfTextBoxes = updateListingPage.count_NoOfTextBoxesInDetailsForm();
         Assert.assertEquals(count_NoOfTextBoxes, 36, "No of text boxes in details form of this type of listing do not matches as expected");
         AutomationLog.info("No of text boxes in details form of this type of listing matches as expected");
-        updateListingPage.btn_Back().click();
+
+        AutomationLog.info("Verification of  Asking price units");
+        verifyAskingPriceUnitsForOfficeForSublease();
+
+        AutomationLog.info("Verification of  details form without compulsory fields");
+        verifyOfficeForSubleaseWithoutCompulsoryFields();
+
+        AutomationLog.info("Verification of  details form with compulsory fields only");
+        verifyOfficeForSubleaseWithCompulsoryFields();
+    }
+
+    private void verifyOfficeForSubleaseWithCompulsoryFields() throws Exception 
+    {
+        addSpace();
+        dataFromCSV = testCaseData.get("AskingPrices");
+        updateListingPage.txt_AskingPrice().clear();
+        updateListingPage.setAskingPrice(dataFromCSV.get("AskingPrice1"));
+        updateListingPage.txt_CeilingHeight().clear();
+        dataFromCSV = testCaseData.get("CeilingHeights");
+        updateListingPage.txt_CeilingHeight().clear();
+        updateListingPage.setCeilingHeight(dataFromCSV.get("CeilingHeight1"));
+        updateListingPage.txt_Combinable().clear();
+        updateListingPage.txt_Electricity().clear();
+        updateListingPage.txt_Description().clear();
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
+        boolean actualMediaFormStatus = false;
+        actualMediaFormStatus = updateListingPage.form_Media().isDisplayed();
+        Assert.assertEquals(actualMediaFormStatus, true, "After filling details form with compulsory fields only it should navigate to media form");
+        AutomationLog.info("After filling details form with compulsory fields only it navigate to media form");
+        updateListingPage.btn_BackOnMediaForm().click();
+    }
+
+    private void addSpace() throws Exception 
+    {
+        dataFromCSV = testCaseData.get("SpaceTypes");
+        updateListingPage.selectSpaceType(dataFromCSV.get("SpaceType1"));
+        updateListingPage.selectSpaceName();
+        dataFromCSV = testCaseData.get("SpaceSizes");
+        updateListingPage.txt_SpaceSize().clear();
+        updateListingPage.setSpaceSize(dataFromCSV.get("SpaceSize1"));
+        updateListingPage.btn_AddSpace().click();
+    }
+
+    private void verifyOfficeForSubleaseWithoutCompulsoryFields() throws Exception 
+    {
+        Integer noOfSpaceAdded = updateListingPage.noOfSpacesAdded();
+        if(noOfSpaceAdded != 0)
+        updateListingPage.deleteAllSpaces();
+        updateListingPage.txt_AskingPrice().clear();
+        updateListingPage.txt_CeilingHeight().clear();
+        dataFromCSV = testCaseData.get("CombinableOption");
+        updateListingPage.txt_Combinable().clear();
+        updateListingPage.setCombinable(dataFromCSV.get("Combinable"));
+        dataFromCSV = testCaseData.get("Electricity");
+        updateListingPage.txt_Electricity().clear();
+        updateListingPage.setElectricity(dataFromCSV.get("ElectricityOption"));
+        dataFromCSV = testCaseData.get("DetailsDescription");
+        updateListingPage.txt_Description().clear();
+        updateListingPage.setDescription(dataFromCSV.get("Description"));
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
+        boolean actualDetailsPageStatus = false;
+        actualDetailsPageStatus = updateListingPage.form_Details().isDisplayed();
+        Assert.assertEquals(actualDetailsPageStatus, true,"After filling details form without any compulsory fields form should not navigate to media form");
+        AutomationLog.info("After filling details form without any compulsory fields form stays on same details form");
+    }
+
+	private void verifyAskingPriceUnitsForOfficeForSublease() throws Exception 
+    {
+        updateListingPage.dropdown_AskingPriceUnits().click();
+        Collection<String> actualAskingPriceUnits = new ArrayList<>();
+        actualAskingPriceUnits = updateListingPage.askingPriceUnits();
+        dataFromCSV = testCaseData.get("AskingPriceUnitsForofficeForSublease");
+        Collection<String> expectedAskingPriceUnits = dataFromCSV.values();
+        boolean askingPriceUnitsStatus = false;
+        askingPriceUnitsStatus = compareTwoCollections(actualAskingPriceUnits, expectedAskingPriceUnits);
+        Assert.assertEquals(askingPriceUnitsStatus, true, "Asking price units are found as expected");
     }
 
 	private void verifyHotelForSaleListingForm() throws Exception 
@@ -142,9 +208,54 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
         int count_NoOfTextBoxes = updateListingPage.count_NoOfTextBoxesInDetailsForm();
         Assert.assertEquals(count_NoOfTextBoxes, 13, "No of text boxes in details form of this type of listing do not matches as expected");
         AutomationLog.info("No of text boxes in details form of this type of listing matches as expected");
+
+        AutomationLog.info("Verify that Aasking price should have $ sign before amount");
+        verifyDollarSignInAskingPrice();
+
+        AutomationLog.info("Verification of  Asking price units");
+        verifyAskingPriceUnits();
+
+        AutomationLog.info("Verification of  details form without compulsory fields");
+        verifyHotelForSaleWithoutCompulsoryFields();
+
+        AutomationLog.info("Verification of  details form with compulsory fields only");
+        verifyHotelForSaleWithCompulsoryFields();
+
     }
 
-    private void verifySingleFamilyListingForm() throws Exception 
+    private void verifyHotelForSaleWithCompulsoryFields() throws Exception 
+    {
+        dataFromCSV = testCaseData.get("AskingPrices");
+        updateListingPage.setAskingPrice(dataFromCSV.get("AskingPrice1"));
+        updateListingPage.txt_ListingLink().clear();
+        updateListingPage.txt_BidDeadline().clear();
+        dataFromCSV = testCaseData.get("DetailsDescription");
+        updateListingPage.setDescription(dataFromCSV.get("Description"));
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
+        boolean actualMediaFormStatus = false;
+        actualMediaFormStatus = updateListingPage.form_Media().isDisplayed();
+        Assert.assertEquals(actualMediaFormStatus, true, "After filling details form with compulsory fields only it should navigate to media form");
+        AutomationLog.info("After filling details form with compulsory fields only it navigate to media form");
+        updateListingPage.btn_BackOnMediaForm().click();
+    }
+
+    private void verifyHotelForSaleWithoutCompulsoryFields() throws Exception 
+    {
+        updateListingPage.txt_AskingPrice().clear();;
+        dataFromCSV = testCaseData.get("ListingLinkUrls");
+        String listinglinkUrl = dataFromCSV.get("ListingLinkUrl1");
+        updateListingPage.setListingLinkUrl(listinglinkUrl);
+        dataFromCSV = testCaseData.get("BidDeadlines");
+        updateListingPage.setBidDeadline(dataFromCSV.get("BidDeadline"));
+        updateListingPage.txt_Description().clear();
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
+        boolean actualDetailsPageStatus = false;
+        actualDetailsPageStatus = updateListingPage.form_Details().isDisplayed();
+        Assert.assertEquals(actualDetailsPageStatus, true,"After filling details form without any compulsory fields form should not navigate to media form");
+        AutomationLog.info("After filling details form without any compulsory fields form does not navigate to media form");
+    }
+
+	private void verifySingleFamilyListingForm() throws Exception 
     {
         dataFromCSV = testCaseData.get("ListingTypes");
         String listingType = dataFromCSV.get("ListingType1");
@@ -171,8 +282,11 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
         Assert.assertEquals(count_NoOfTextBoxes, 11, "No of text boxes in details form of this type of listing do not matches as expected");
         AutomationLog.info("No of text boxes in details form of this type of listing matches as expected");
 
+        AutomationLog.info("Verify that Aasking price should have $ sign before amount");
+        verifyDollarSignInAskingPrice();
+
         AutomationLog.info("Verification of  Asking price units");
-        verifySingleFamilyListingAskingPriceUnits();
+        verifyAskingPriceUnits();
 
         AutomationLog.info("Verification of  details form without compulsory fields");
         verifySingleFamilyListingWithoutCompulsoryFields();
@@ -181,7 +295,16 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
         verifySingleFamilyListingWithCompulsoryFields();
     }
 
-    private void verifySingleFamilyListingWithCompulsoryFields() throws Exception 
+    private void verifyDollarSignInAskingPrice() throws Exception 
+    {
+         String askingPrice = updateListingPage.txt_AskingPrice().getAttribute("value");
+         boolean actualDollarSignStatus = false;
+         actualDollarSignStatus = askingPrice.contains("$");
+         Assert.assertEquals(actualDollarSignStatus, true, "Asking price should contain dollar sign before price");
+         AutomationLog.info("Asking price contains dollar sign before price");
+    }
+
+	private void verifySingleFamilyListingWithCompulsoryFields() throws Exception 
     {
         dataFromCSV = testCaseData.get("AskingPrices");
         updateListingPage.setAskingPrice(dataFromCSV.get("AskingPrice1"));
@@ -193,11 +316,10 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
         actualMediaFormStatus = updateListingPage.form_Media().isDisplayed();
         Assert.assertEquals(actualMediaFormStatus, true, "After filling details form with compulsory fields only it should navigate to media form");
         AutomationLog.info("After filling details form with compulsory fields only it navigate to media form");
-        updateListingPage.btn_Back().click();
-        updateListingPage.btn_Back().click();
+        updateListingPage.btn_BackOnMediaForm().click();
     }
 
-	private void verifySingleFamilyListingWithoutCompulsoryFields() throws Exception 
+    private void verifySingleFamilyListingWithoutCompulsoryFields() throws Exception 
     {
         updateListingPage.txt_AskingPrice().clear();;
         dataFromCSV = testCaseData.get("ListingLinkUrls");
@@ -209,10 +331,9 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
         actualDetailsPageStatus = updateListingPage.form_Details().isDisplayed();
         Assert.assertEquals(actualDetailsPageStatus, true,"After filling details form without any compulsory fields form should not navigate to media form");
         AutomationLog.info("After filling details form without any compulsory fields form does not navigate to media form");
-        updateListingPage.btn_Back().click();
     }
 
-	private void verifySingleFamilyListingAskingPriceUnits() throws Exception 
+	private void verifyAskingPriceUnits() throws Exception 
     {
         updateListingPage.dropdown_AskingPriceUnits().click();
         Collection<String> actualAskingPriceUnits = new ArrayList<>();

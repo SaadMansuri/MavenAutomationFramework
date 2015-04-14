@@ -3,6 +3,8 @@ package com.agorafy.automation.pageobjects;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -305,6 +307,23 @@ public class UpdateListing extends Page
         return element;
     }
 
+    public WebElement btn_BackOnMediaForm() throws Exception
+    {
+        WebElement parent;
+        try 
+        {
+            parent = driver.findElement(By.className("col-md-12"));
+            element = parent.findElements(By.tagName("button")).get(0);
+            AutomationLog.info("back btn on media form is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find back btn on media form");
+            throw (e);
+        }
+        return element;
+    }
+
     public WebElement txt_AskingPrice() throws Exception
     {
         try 
@@ -320,6 +339,35 @@ public class UpdateListing extends Page
         return element;
     }
 
+    public WebElement txt_BidDeadline() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_bidDeadline"));
+            AutomationLog.info("Bid deadline txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Bid deadline txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public void setBidDeadline(String bidDeadline) throws Exception
+    {
+        try 
+        {
+            txt_BidDeadline().sendKeys(bidDeadline);
+            AutomationLog.info("set bid Deadline txt box successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set bid Deadline");
+            throw (e);
+        }
+    }
+
     public void setAskingPrice(String askingPrice) throws Exception
     {
         try 
@@ -330,6 +378,83 @@ public class UpdateListing extends Page
         catch (Exception e) 
         {
             AutomationLog.error("failed to set Asking price");
+            throw (e);
+        }
+    }
+
+    public Integer noOfSpacesAdded() 
+    {
+        Integer noOfSapcesAdded = 0;
+        try 
+        {
+            if(txt_NoOfSpacesAdded().isDisplayed())
+            {
+                 String txt_NoOfSpaces = txt_NoOfSpacesAdded().getText();
+                 txt_NoOfSpaces = txt_NoOfSpaces.substring(0, 1);
+                 noOfSapcesAdded = Integer.parseInt(txt_NoOfSpaces);
+            }
+            else
+            {
+                noOfSapcesAdded = 0;
+            }
+            AutomationLog.info("Successfully found No of space added");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find No of space added");
+        }
+        return noOfSapcesAdded;
+    }
+
+    public WebElement txt_NoOfSpacesAdded() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("numSpaces"));
+            AutomationLog.info("No of spaces added txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Asking price txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public List<WebElement> elements_NoOfSpacesAdded() throws Exception
+    {
+        List<WebElement> elements_NoOfSpacesAdded = new ArrayList<>();
+        WebElement parent;
+        try 
+        {
+            parent = driver.findElement(By.id("added-spaces"));
+            element = parent.findElement(By.className("ul-reset"));
+            elements_NoOfSpacesAdded = element.findElements(By.tagName("li"));
+            AutomationLog.info("all elements for No of spaces added txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find all elements for no of added spaces");
+            throw (e);
+        }
+        return elements_NoOfSpacesAdded;
+    }
+
+    public void deleteAllSpaces() throws Exception
+    {
+        List<WebElement> allAddedSpaces = elements_NoOfSpacesAdded();
+        try 
+        {
+            for(WebElement singleSpace : allAddedSpaces)
+            {
+                element = singleSpace.findElement(By.tagName("p"));
+                element.findElements(By.tagName("a")).get(1).click();
+            }
+            AutomationLog.info("deleted all spaces successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to delete all spaces");
             throw (e);
         }
     }
@@ -387,6 +512,194 @@ public class UpdateListing extends Page
         catch (Exception e) 
         {
             AutomationLog.error("failed to find Listing link Url txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public WebElement txt_CeilingHeight()
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_ceiling_height"));
+            AutomationLog.info("Sucessfully found Ceiling height");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find Ceiling height");
+        }
+        return element;
+    }
+
+    public WebElement txt_Combinable()
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_combinable"));
+            AutomationLog.info("Sucessfully found Combinable");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find Combinable");
+        }
+        return element;
+    }
+
+    public void setCombinable(String combinable) throws Exception
+    {
+        try 
+        {
+            txt_Combinable().sendKeys(combinable);
+            AutomationLog.info("set combinable box successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set combinable box");
+            throw (e);
+        }
+    }
+
+    public WebElement txt_Electricity()
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_electricity"));
+            AutomationLog.info("Sucessfully found Electricity");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find Electricity");
+        }
+        return element;
+    }
+
+    public void setElectricity(String electricity) throws Exception
+    {
+        try 
+        {
+            txt_Electricity().sendKeys(electricity);
+            AutomationLog.info("set electricity box successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set electricity box");
+            throw (e);
+        }
+    }
+
+    public void selectSpaceType(String spaceType) throws Exception
+    {
+        try 
+        {
+            element = dropdown_SpaceType();
+            org.openqa.selenium.support.ui.Select dropdown = new org.openqa.selenium.support.ui.Select(element);
+            dropdown.selectByVisibleText(spaceType);
+            AutomationLog.info("selected space type successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to select space type");
+            throw (e);
+        }
+    }
+
+    public void selectSpaceName() throws Exception
+    {
+        try 
+        {
+            dropdown_SpaceName().click();
+            element = driver.findElement(By.className("chzn-results"));
+            element.findElements(By.tagName("li")).get(0).click();
+            AutomationLog.info("selected one of the space name successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to select one of the space name");
+            throw (e);
+        }
+    }
+
+    public WebElement dropdown_SpaceType()
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_space_type"));
+            AutomationLog.info("Sucessfully found space type dropdown");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find space type dropdown");
+        }
+        return element;
+    }
+
+    public WebElement dropdown_SpaceName()
+    {
+        try 
+        {
+            element = driver.findElement(By.className("chzn-single"));
+            AutomationLog.info("Sucessfully found space name dropdown");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find space name dropdown");
+        }
+        return element;
+    }
+
+    public WebElement txt_SpaceSize() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_space_size"));
+            AutomationLog.info("Space Size txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Space Size txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public void setSpaceSize(String spaceSize) throws Exception
+    {
+        try 
+        {
+            txt_SpaceSize().sendKeys(spaceSize);
+            AutomationLog.info("set Space Size txt box successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set Space Size");
+            throw (e);
+        }
+    }
+
+    public void setCeilingHeight(String ceilingHeight) throws Exception
+    {
+        try 
+        {
+            txt_CeilingHeight().sendKeys(ceilingHeight);
+            AutomationLog.info("set ceiling Height txt box successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set ceiling Height");
+            throw (e);
+        }
+    }
+
+    public WebElement btn_AddSpace() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("add-space"));
+            AutomationLog.info("Add Space btn is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Add Space btn");
             throw (e);
         }
         return element;
