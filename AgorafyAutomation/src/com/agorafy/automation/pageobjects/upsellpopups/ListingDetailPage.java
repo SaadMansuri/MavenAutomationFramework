@@ -1,6 +1,7 @@
 package com.agorafy.automation.pageobjects.upsellpopups;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -324,5 +325,35 @@ public class ListingDetailPage extends LoginPopUp
             throw (e);
         }
         return listingTitle;
+    }
+
+    public List<WebElement> list_Showings() throws Exception
+    {
+        List<WebElement> list = new ArrayList<WebElement>();
+        try
+        {
+            element = driver.findElement(By.id("showing")).findElement(By.className("ul-reset"));
+            list = element.findElements(By.tagName("li"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find list of showings");
+            throw(e);
+        }
+        return list;
+    }
+
+    public WebElement getFirstShowingFromShowingsList() throws Exception
+    {
+        try
+        {
+            element = list_Showings().get(0);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not get first showing from showings list");
+            throw(e);
+        }
+        return element;
     }
 }

@@ -188,7 +188,7 @@ public class Header extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[4]/ul/li[4]/a"));
+            element = driver.findElement(By.linkText("Switch to Admin"));
         }
         catch (Exception e)
         {
