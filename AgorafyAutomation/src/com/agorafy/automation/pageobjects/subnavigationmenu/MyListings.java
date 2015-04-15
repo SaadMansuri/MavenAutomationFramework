@@ -20,6 +20,7 @@ import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.UpdateListing;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingMediaFormPage;
+import com.gargoylesoftware.htmlunit.javascript.host.Location;
 
 public class MyListings extends Page 
 {
@@ -339,7 +340,15 @@ public class MyListings extends Page
             parent = singleListing.findElements(By.tagName("td")).get(0);
             element = parent.findElements(By.tagName("div")).get(1);
             update = element.findElement(By.id("update"));
-            pageScrollDown(0, (singleListing.getLocation().getX()+150));
+            
+            
+            int elementLocation =  singleListing.getLocation().getX();
+            pageScrollDown(0, (elementLocation+230) );
+            
+            
+            /*JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView();", singleListing);*/
+            
             hover.moveToElement(singleListing);
             hover.moveToElement(update).click().build().perform();
             AutomationLog.info("Successfully clicked single listings update");

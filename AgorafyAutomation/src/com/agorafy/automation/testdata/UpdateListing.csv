@@ -2,7 +2,7 @@ Headings,PageHeading="Submit a listing update"
 EmailIdOnlistingUpdatePage,EmailId="chandrani.bhagat@cuelogic.co.in"
 ReasonDropdownOptions,Option1="Space was leased";Option2="Space is off market";Option3="Other"
 ListingTypes,ListingType1="Single-Family for Sale";ListingType2="Hotel for Sale";ListingType3="Office for Sublease";ListingType4="Condo for Sale"
-AskingPrices,AskingPrice1="1000"
+AskingPrices,AskingPrice1="1000";AskingPriceMin="1000";AskingPriceMax="10000"
 AskingPriceUnits,AskingPriceUnit1="total";AskingPriceUnit2="per sqft"
 ListingLinkUrls,ListingLinkUrl1="http://beta.agorafy.com/listing/39965/120-Pierrepont-Streetclone-Single-Family-for-Sale"
 DetailsDescription,Description="This is description txt box on details pages"
@@ -11,5 +11,8 @@ AskingPriceUnitsForofficeForSublease,AskingPriceUnit1="per month";AskingPriceUni
 CombinableOption,Combinable=" Combinable up to 5,000 sqft"
 Electricity,ElectricityOption="Submetered, $3.25 psf"
 SpaceTypes,SpaceType1="Full floor";SpaceType2="Partial Floor";SpaceType3="Unit"
-SpaceSizes,SpaceSize1="10000"
+SpaceSizes,SpaceSize1="10000";SpaceSizeMin="100";SpaceSizeMax="10000"
 CeilingHeights,CeilingHeight1="50"
+Bedrooms,Bedroom1="3";
+Bathrooms,Bathroom1="3";
+PropertyNames,PropertyName1="100 Maspeth Avenue"

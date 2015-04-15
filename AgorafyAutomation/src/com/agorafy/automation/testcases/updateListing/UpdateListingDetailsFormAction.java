@@ -28,6 +28,7 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
     private MyListings myListings;
     private UpdateListing updateListingPage;
     private HashMap<String, String> dataFromCSV;
+	private Integer noOfSpaceAdded;
 
     public UpdateListingDetailsFormAction() 
     {
@@ -76,9 +77,124 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
         AutomationLog.info("Verify whether after selecting Office for Sublease listing it opens respective details form");
         verifyOfficeForSubleaseListingForm();
 
+        AutomationLog.info("Verify whether after selecting Condo for sale listing it opens respective details form");
+        verifyCondoForSaleListingForm();
     }
 
-    private void verifyOfficeForSubleaseListingForm() throws Exception 
+    private void verifyCondoForSaleListingForm() throws Exception 
+    {
+        dataFromCSV = testCaseData.get("ListingTypes");
+        String listingType = dataFromCSV.get("ListingType4");
+        String listingName;
+        myListings = subNavigation.clickLinkMyListings();
+        WaitFor.sleepFor(2000);
+        HashMap<String, String> allListingTypes = new HashMap<>();
+        allListingTypes = myListings.allListingTypes();
+        listingName = allListingTypes.get(listingType);
+        try 
+        {
+            updateListingPage = myListings.selectRequiredListingsUpdate(listingName);
+            AutomationLog.info("Successfully selected required listing");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("It may happen that, given listing type is not present on My Listings page, So make sure that given listing type is present on My listings page. Listing type:"+listingType);
+        }
+        HandlingWindows.closeCurrentWindow(Page.driver);
+        HandlingWindows.switchToWindow(Page.driver, 1);
+        WaitFor.sleepFor(1000);
+        updateListingPage.btn_SaveAndContinue().click();
+        int count_NoOfTextBoxes = updateListingPage.count_NoOfTextBoxesInDetailsForm();
+        Assert.assertEquals(count_NoOfTextBoxes, 19, "No of text boxes in details form of this type of listing do not matches as expected");
+        AutomationLog.info("No of text boxes in details form of this type of listing matches as expected");
+
+        AutomationLog.info("Verify that Aasking price should have $ sign before amount");
+        verifyDollarSignInAskingPriceInCondoForSale();
+
+        AutomationLog.info("Verification of  details form without compulsory fields");
+        verifyCondoForSaleWithoutCompulsoryFields();
+
+        AutomationLog.info("Verification of  details form with compulsory fields only");
+        verifyCondoForSaleWithCompulsoryFields();
+
+        AutomationLog.info("Verification of  details form with empty fields");
+        verifyCondoForSaleEmptyFields();
+    }
+
+    private void verifyCondoForSaleEmptyFields() throws Exception 
+    {
+        clearCondoForSaleListing();
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
+        boolean actualDetailsPageStatus = false;
+        actualDetailsPageStatus = updateListingPage.form_Details().isDisplayed();
+        Assert.assertEquals(actualDetailsPageStatus, true,"After filling details form with empty form should not navigate to media form");
+        AutomationLog.info("After filling details form with empty form does not navigate to media form");
+    }
+
+	private void verifyCondoForSaleWithCompulsoryFields() throws Exception 
+    {
+        updateListingPage.txt_PropertyName().clear();
+        dataFromCSV = testCaseData.get("SpaceSizes");
+        updateListingPage.txt_SpaceSizeMin().clear();
+        updateListingPage.setSpaceSizeMin(dataFromCSV.get("SpaceSizeMin"));
+        updateListingPage.txt_SpaceSizeMax().clear();
+        updateListingPage.setSpaceSizeMax(dataFromCSV.get("SpaceSizeMax"));
+        dataFromCSV = testCaseData.get("AskingPrices");
+        updateListingPage.txt_AskingPriceMin().clear();
+        updateListingPage.setAskingPriceMin(dataFromCSV.get("AskingPriceMin"));
+        updateListingPage.txt_AskingPriceMax().clear();
+        updateListingPage.setAskingPriceMax(dataFromCSV.get("AskingPriceMax"));
+        dataFromCSV = testCaseData.get("Bedrooms");
+        updateListingPage.txt_Bedrooms().clear();
+        updateListingPage.txt_Bedrooms().sendKeys(dataFromCSV.get("Bedroom1"));
+        dataFromCSV = testCaseData.get("Bathrooms");
+        updateListingPage.txt_Bathrooms().clear();
+        updateListingPage.txt_Bathrooms().sendKeys(dataFromCSV.get("Bathroom1"));
+        updateListingPage.txt_Description().clear();
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
+        boolean actualMediaFormStatus = false;
+        actualMediaFormStatus = updateListingPage.form_Media().isDisplayed();
+        Assert.assertEquals(actualMediaFormStatus, true, "After filling details form with compulsory fields only it should navigate to media form");
+        AutomationLog.info("After filling details form with compulsory fields only it navigate to media form");
+        updateListingPage.btn_BackOnMediaForm().click();
+    }
+
+    private void verifyCondoForSaleWithoutCompulsoryFields() throws Exception 
+    {
+        updateListingPage.txt_PropertyName().clear();
+        dataFromCSV = testCaseData.get("PropertyNames");
+        updateListingPage.txt_PropertyName().sendKeys(dataFromCSV.get("PropertyName1"));
+        updateListingPage.txt_SpaceSizeMin().clear();
+        updateListingPage.txt_SpaceSizeMax().clear();
+        updateListingPage.txt_AskingPriceMin().clear();
+        updateListingPage.txt_AskingPriceMax().clear();
+        updateListingPage.txt_Bedrooms().clear();
+        updateListingPage.txt_Bathrooms().clear();
+        dataFromCSV = testCaseData.get("DetailsDescription");
+        updateListingPage.txt_Description().clear();
+        updateListingPage.setDescription(dataFromCSV.get("Description"));
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
+        boolean actualDetailsPageStatus = false;
+        actualDetailsPageStatus = updateListingPage.form_Details().isDisplayed();
+        Assert.assertEquals(actualDetailsPageStatus, true,"After filling details form without any compulsory fields form should not navigate to media form");
+        AutomationLog.info("After filling details form without any compulsory fields form does not navigate to media form");
+    }
+
+	private void verifyDollarSignInAskingPriceInCondoForSale() throws Exception 
+    {
+        String actualAskingPriceMin = updateListingPage.txt_AskingPriceMin().getAttribute("value");
+        String actualAskingPriceMax = updateListingPage.txt_AskingPriceMax().getAttribute("value");
+        boolean actualDollarSignStatusInAskingPriceMin = false;
+        boolean actualDollarSignStatusInAskingPriceMax = false;
+        actualDollarSignStatusInAskingPriceMin = actualAskingPriceMin.contains("$");
+        actualDollarSignStatusInAskingPriceMax = actualAskingPriceMax.contains("$");
+        boolean actualAskingPriceStatus = false;
+        actualAskingPriceStatus = ( actualDollarSignStatusInAskingPriceMin && actualDollarSignStatusInAskingPriceMax); 
+        Assert.assertEquals(actualAskingPriceStatus, true, "Asking price Min/Max should contain dollar sign before price");
+        AutomationLog.info("Asking price Min/Max contains dollar sign before price");
+    }
+
+	private void verifyOfficeForSubleaseListingForm() throws Exception 
     {
         dataFromCSV = testCaseData.get("ListingTypes");
         String listingType = dataFromCSV.get("ListingType3");
@@ -113,9 +229,22 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
 
         AutomationLog.info("Verification of  details form with compulsory fields only");
         verifyOfficeForSubleaseWithCompulsoryFields();
+
+        AutomationLog.info("Verification of  details form with empty fields");
+        verifyOfficeForSubleaseEmptyFields();
     }
 
-    private void verifyOfficeForSubleaseWithCompulsoryFields() throws Exception 
+    private void verifyOfficeForSubleaseEmptyFields() throws Exception 
+    {
+        clearOfficeForSubleaseDetailsForm();
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
+        boolean actualDetailsPageStatus = false;
+        actualDetailsPageStatus = updateListingPage.form_Details().isDisplayed();
+        Assert.assertEquals(actualDetailsPageStatus, true,"After filling details form with empty form should not navigate to media form");
+        AutomationLog.info("After filling details form with empty form does not navigate to media form");
+    }
+
+	private void verifyOfficeForSubleaseWithCompulsoryFields() throws Exception 
     {
         addSpace();
         dataFromCSV = testCaseData.get("AskingPrices");
@@ -149,7 +278,7 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
 
     private void verifyOfficeForSubleaseWithoutCompulsoryFields() throws Exception 
     {
-        Integer noOfSpaceAdded = updateListingPage.noOfSpacesAdded();
+        noOfSpaceAdded = updateListingPage.noOfSpacesAdded();
         if(noOfSpaceAdded != 0)
         updateListingPage.deleteAllSpaces();
         updateListingPage.txt_AskingPrice().clear();
@@ -221,9 +350,22 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
         AutomationLog.info("Verification of  details form with compulsory fields only");
         verifyHotelForSaleWithCompulsoryFields();
 
+        AutomationLog.info("Verification of  details form empty fields only");
+        verifyHotelForSaleEmptyDetailsForm();
+
     }
 
-    private void verifyHotelForSaleWithCompulsoryFields() throws Exception 
+    private void verifyHotelForSaleEmptyDetailsForm() throws Exception 
+    {
+        clearHotelForSaleDetailsForm();
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
+        boolean actualDetailsPageStatus = false;
+        actualDetailsPageStatus = updateListingPage.form_Details().isDisplayed();
+        Assert.assertEquals(actualDetailsPageStatus, true,"After filling details form with empty form should not navigate to media form");
+        AutomationLog.info("After filling details form with empty form does not navigate to media form");
+    }
+
+	private void verifyHotelForSaleWithCompulsoryFields() throws Exception 
     {
         dataFromCSV = testCaseData.get("AskingPrices");
         updateListingPage.setAskingPrice(dataFromCSV.get("AskingPrice1"));
@@ -293,9 +435,83 @@ public class UpdateListingDetailsFormAction extends AutomationTestCaseVerificati
 
         AutomationLog.info("Verification of  details form with compulsory fields only");
         verifySingleFamilyListingWithCompulsoryFields();
+
+        AutomationLog.info("Verification of  details form with all fields ");
+        verifySingleFamilyListingWithAllFields();
+
+        AutomationLog.info("Verification of  details form with empty fields ");
+        verifySingleFamilyListingWithEmptyFields();
+        }
+
+    private void verifySingleFamilyListingWithEmptyFields() throws Exception 
+    {
+        clearSingleFamilyListingDetailsForm();
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
+        boolean actualDetailsPageStatus = false;
+        actualDetailsPageStatus = updateListingPage.form_Details().isDisplayed();
+        Assert.assertEquals(actualDetailsPageStatus, true,"After filling details form with empty form should not navigate to media form");
+        AutomationLog.info("After filling details form with empty form does not navigate to media form");
     }
 
-    private void verifyDollarSignInAskingPrice() throws Exception 
+    private void clearSingleFamilyListingDetailsForm() throws Exception 
+    {
+        updateListingPage.txt_AskingPrice().clear();
+        updateListingPage.txt_ListingLink().clear();
+        updateListingPage.txt_Description().clear();
+    }
+
+    private void clearHotelForSaleDetailsForm() throws Exception 
+    {
+        updateListingPage.txt_AskingPrice().clear();
+        updateListingPage.txt_ListingLink().clear();
+        updateListingPage.txt_BidDeadline().clear();
+        updateListingPage.txt_Description().clear();
+    }
+
+    private void clearOfficeForSubleaseDetailsForm() throws Exception 
+    {
+        noOfSpaceAdded = updateListingPage.noOfSpacesAdded();
+        if(noOfSpaceAdded != 0)
+        updateListingPage.deleteAllSpaces();
+        updateListingPage.txt_AskingPrice().clear();
+        updateListingPage.txt_CeilingHeight().clear();
+        updateListingPage.txt_Combinable().clear();
+        updateListingPage.txt_Electricity().clear();
+        updateListingPage.txt_Description().clear();
+    }
+
+    private void clearCondoForSaleListing() throws Exception 
+    {
+        updateListingPage.txt_PropertyName().clear();
+        updateListingPage.txt_SpaceSizeMin().clear();
+        updateListingPage.txt_SpaceSizeMax().clear();
+        updateListingPage.txt_AskingPriceMin().clear();
+        updateListingPage.txt_AskingPriceMax().clear();
+        updateListingPage.txt_Bedrooms().clear();
+        updateListingPage.txt_Bathrooms().clear();
+        updateListingPage.txt_Description().clear();
+    }
+
+    private void verifySingleFamilyListingWithAllFields() throws Exception 
+    {
+        dataFromCSV = testCaseData.get("AskingPrices");
+        updateListingPage.txt_AskingPrice().clear();
+        updateListingPage.txt_AskingPrice().sendKeys((dataFromCSV.get("AskingPrice1")));
+        updateListingPage.txt_ListingLink().clear();
+        dataFromCSV = testCaseData.get("ListingLinkUrls");
+        updateListingPage.txt_ListingLink().sendKeys(dataFromCSV.get("ListingLinkUrl1"));
+        updateListingPage.txt_Description().clear();
+        dataFromCSV = testCaseData.get("DetailsDescription");
+        updateListingPage.txt_Description().sendKeys(dataFromCSV.get("Description"));
+        updateListingPage.btn_SaveAndContinueOnDetailsForm().click();
+        boolean actualMediaFormStatus = false;
+        actualMediaFormStatus = updateListingPage.form_Media().isDisplayed();
+        Assert.assertEquals(actualMediaFormStatus, true, "After filling details form with compulsory fields only it should navigate to media form");
+        AutomationLog.info("After filling details form with compulsory fields only it navigate to media form");
+        updateListingPage.btn_BackOnMediaForm().click();
+    }
+
+	private void verifyDollarSignInAskingPrice() throws Exception 
     {
          String askingPrice = updateListingPage.txt_AskingPrice().getAttribute("value");
          boolean actualDollarSignStatus = false;

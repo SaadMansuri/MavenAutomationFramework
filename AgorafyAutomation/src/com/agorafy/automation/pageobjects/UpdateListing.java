@@ -3,8 +3,6 @@ package com.agorafy.automation.pageobjects;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -339,6 +337,168 @@ public class UpdateListing extends Page
         return element;
     }
 
+    public WebElement txt_AskingPriceMin() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_price_min"));
+            AutomationLog.info("Asking price min txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Asking price min txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public WebElement txt_AskingPriceMax() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_price_max"));
+            AutomationLog.info("Asking price max txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Asking price max txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public WebElement txt_SpaceSizeMin() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_residential_space_size_min"));
+            AutomationLog.info("Space Size Min min txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Space Size min txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public WebElement txt_PropertyName() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_residential_property_name"));
+            AutomationLog.info("Property Name txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Property Name txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public WebElement txt_Bedrooms() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_bedrooms"));
+            AutomationLog.info("Bedrooms txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Bedrooms txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public WebElement txt_Bathrooms() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_bathrooms"));
+            AutomationLog.info("Bathrooms txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Bathrooms txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public void setSpaceSizeMin(String spaceSizeMin) throws Exception
+    {
+        try 
+        {
+            txt_SpaceSizeMin().sendKeys(spaceSizeMin);
+            AutomationLog.info("set space Size Min successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set space Size Min");
+            throw (e);
+        }
+    }
+
+    public void setAskingPriceMin(String askingPriceMin) throws Exception
+    {
+        try 
+        {
+            txt_AskingPriceMin().sendKeys(askingPriceMin);
+            AutomationLog.info("set asking Price Min successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set asking Price Min");
+            throw (e);
+        }
+    }
+
+    public void setAskingPriceMax(String askingPriceMax) throws Exception
+    {
+        try 
+        {
+            txt_AskingPriceMax().sendKeys(askingPriceMax);
+            AutomationLog.info("set asking Price Max successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set asking Price Max");
+            throw (e);
+        }
+    }
+
+    public void setSpaceSizeMax(String spaceSizeMax) throws Exception
+    {
+        try 
+        {
+            txt_SpaceSizeMax().sendKeys(spaceSizeMax);
+            AutomationLog.info("set space Size Max successfully");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to set space Size Max");
+            throw (e);
+        }
+    }
+
+    public WebElement txt_SpaceSizeMax() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_residential_space_size_max"));
+            AutomationLog.info("Space Size Max txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Space Size Max txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    
     public WebElement txt_BidDeadline() throws Exception
     {
         try 
