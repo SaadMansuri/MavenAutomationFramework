@@ -3,24 +3,16 @@ package com.agorafy.automation.pageobjects.subnavigationmenu;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Mouse;
-import org.openqa.selenium.interactions.internal.Coordinates;
-import org.openqa.selenium.internal.Locatable;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.UpdateListing;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingMediaFormPage;
-import com.gargoylesoftware.htmlunit.javascript.host.Location;
+
 
 public class MyListings extends Page 
 {

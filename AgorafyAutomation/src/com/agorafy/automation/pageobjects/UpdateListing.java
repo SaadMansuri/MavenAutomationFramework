@@ -691,6 +691,76 @@ public class UpdateListing extends Page
         return element;
     }
 
+    public WebElement txt_Frontage()
+    {
+        try 
+        {
+            element = driver.findElement(By.id("ls_frontage"));
+            AutomationLog.info("Sucessfully found Frontage");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find Frontage");
+        }
+        return element;
+    }
+
+    public WebElement radioBtn_FoodYes()
+    {
+        try 
+        {
+            element = driver.findElement(By.xpath(".//*[@id='property']/div[6]/div/p[1]/label[2]/input"));
+            AutomationLog.info("Sucessfully found radio btn food yes");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find radio btn food yes");
+        }
+        return element;
+    }
+
+    public WebElement radioBtn_FoodNo()
+    {
+        try 
+        {
+            element = driver.findElement(By.xpath(".//*[@id='property']/div[6]/div/p[1]/label[3]/input"));
+            AutomationLog.info("Sucessfully found radio btn food no");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find radio btn food no");
+        }
+        return element;
+    }
+
+    public WebElement radioBtn_CookingYes()
+    {
+        try 
+        {
+            element = driver.findElement(By.xpath(".//*[@id='property']/div[6]/div/p[2]/label[2]/input"));
+            AutomationLog.info("Sucessfully found radio btn cooking yes");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find radio btn cooking yes");
+        }
+        return element;
+    }
+
+    public WebElement radioBtn_CookingNo()
+    {
+        try 
+        {
+            element = driver.findElement(By.xpath(".//*[@id='property']/div[6]/div/p[2]/label[3]/input"));
+            AutomationLog.info("Sucessfully found radio btn cooking no");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find radio btn cooking no");
+        }
+        return element;
+    }
+
     public WebElement txt_Combinable()
     {
         try 
@@ -817,6 +887,21 @@ public class UpdateListing extends Page
         catch (Exception e) 
         {
             AutomationLog.error("failed to find Space Size txt box");
+            throw (e);
+        }
+        return element;
+    }
+
+    public WebElement txt_SpaceSizeWithCSS() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.className("sqft-badge"));
+            AutomationLog.info("Space Size with css txt box is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Space Size with css txt box");
             throw (e);
         }
         return element;
