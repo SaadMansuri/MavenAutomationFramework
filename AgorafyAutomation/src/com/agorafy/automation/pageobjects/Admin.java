@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 
 public class Admin extends Page 
@@ -109,11 +110,11 @@ public class Admin extends Page
         try
         {
             btn_Save().click();
-            AutomationLog.info("Successfully clicked on save button");
+            AutomationLog.info("Successfully clicked on save button for Admin Listing page");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not click on save button");
+            AutomationLog.error("Could not click on save button for Admin Listing page");
             throw(e);
         }
     }
@@ -133,11 +134,11 @@ public class Admin extends Page
         return list;
     }
 
-    public WebElement icon_DeleteFirstShowing() throws Exception
+    public WebElement icon_DeleteFirstShowing(int index) throws Exception
     {
         try
         {
-            element = getFirstShowing().findElement(By.className("fa-trash-o"));
+            element = getFirstShowing(index).findElement(By.className("fa-trash-o"));
         }
         catch(Exception e)
         {
@@ -147,11 +148,11 @@ public class Admin extends Page
         return element;
     }
 
-    public void clickOnFirstShowingDeleteIcon() throws Exception 
+    public void clickOnFirstShowingDeleteIcon(int index) throws Exception 
     {
         try
         {
-            icon_DeleteFirstShowing().click();
+            icon_DeleteFirstShowing(index).click();
         }
         catch(Exception e)
         {
@@ -161,38 +162,39 @@ public class Admin extends Page
     }
 
     
-    public WebElement icon_EditFirstShowing() throws Exception
+    public WebElement icon_EditShowing(int index) throws Exception
     {
         try
         {
-            element = getFirstShowing().findElement(By.className("fa-edit"));
+            element = getFirstShowing(index).findElement(By.className("fa-edit"));
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not find delete icon");
+            AutomationLog.error("Could not find edit icon");
             throw(e);
         }
         return element;
     }
 
-    public void clickOnFirstShowingEditIcon() throws Exception 
+    public void clickOnShowingsEditIcon(int index) throws Exception 
     {
         try
         {
-        	icon_EditFirstShowing().click();
+            icon_EditShowing(index).click();
+            AutomationLog.info("Successfully clicked on Edit icon");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not click on delete icon ");
+            AutomationLog.error("Could not click on edit icon ");
             throw(e);
         }
     }
 
-    public WebElement getFirstShowing() throws Exception
+    public WebElement getFirstShowing(int index) throws Exception
     {
         try
         {
-            element = list_Showings().get(0);
+            element = list_Showings().get(index);
         }
         catch(Exception e)
         {
@@ -202,12 +204,12 @@ public class Admin extends Page
         return element;
     }
 
-    public boolean isShowingPresent() throws Exception
+    public boolean isShowingPresent(int index) throws Exception
     {
         boolean status = false;
         try
         {
-            if(getFirstShowing().findElements(By.className("showings-actions")).size() > 0)
+            if(getFirstShowing(index).findElements(By.className("showings-actions")).size() > 0)
             {
                 status = true;
             }
@@ -253,5 +255,39 @@ public class Admin extends Page
         }
         return listingdetail;
     }
+
+    public WebElement txt_DisplayAddress() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("displayname"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Displaye address text box");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String getStartTimeFromShowing(int index) throws Exception
+    {
+        String str = list_Showings().get(index).getText();
+        String[] str1 = str.split(",");
+        String[] str2 = str1[2].split(" ");
+        String str3 = str2[2];
+        return str3;
+    }
+
+
+    public String getEndTimeFromShowing(int index) throws Exception
+    {
+        String str = list_Showings().get(index).getText();
+        String[] str1 = str.split(",");
+        String[] str2 = str1[2].split(" ");
+        String str3 = str2[4];
+        return str3;
+    }
+
 
 }

@@ -83,6 +83,18 @@ public class AdminShowings extends Page
         select.selectByValue(endtime);
     }
 
+    public String getSelectedStartTime() throws Exception 
+    {
+        Select select = new Select(dropdown_StartTime());
+        return select.getFirstSelectedOption().getText();
+    }
+
+    public String getSelectedEndTime() throws Exception 
+    {
+        Select select = new Select(dropdown_EndTime());
+        return select.getFirstSelectedOption().getText();
+    }
+
     public WebElement dropdown_EndTime() throws Exception
     {
         try
@@ -130,11 +142,11 @@ public class AdminShowings extends Page
         try
         {
             btn_Save().click();
-            AutomationLog.info("Successfully clicked on Save button");
+            AutomationLog.info("Successfully clicked Save button on AdminShowingsPopUp ");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not click on Save button");
+            AutomationLog.error("Could not click Save button on AdminShowingsPopUp");
         }
     }
 
@@ -143,11 +155,11 @@ public class AdminShowings extends Page
         try
         {
             btn_Close().click();
-            AutomationLog.info("Successfully clicked on Close button");
+            AutomationLog.info("Successfully clicked Close button on AdminShowingsPopUp");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not click on Close button");
+            AutomationLog.error("Could not click Close button on AdminShowingsPopUp");
         }
     }
 

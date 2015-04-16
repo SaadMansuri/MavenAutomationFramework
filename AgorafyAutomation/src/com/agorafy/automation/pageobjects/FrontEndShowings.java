@@ -1,5 +1,7 @@
 package com.agorafy.automation.pageobjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -148,6 +150,30 @@ public class FrontEndShowings extends Page
         {
             AutomationLog.error("Could not click on Close button");
         }
+    }
+
+    public List<WebElement> getUpcomingShowingsList() throws Exception
+    {
+        return driver.findElement(By.id("showingFormContainer")).findElements(By.tagName("li"));
+    }
+
+    public WebElement getFirstUpcomingShowing() throws Exception 
+    {
+        try
+        {
+            element = getUpcomingShowingsList().get(0);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not find Upcoming showing");
+            throw(e);
+        }
+        return element;
+    }
+
+    public int getNoOfAddedShowings() throws Exception
+    {
+        return getUpcomingShowingsList().size();
     }
 
 }
