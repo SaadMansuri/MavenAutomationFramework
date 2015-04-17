@@ -60,6 +60,20 @@ public class Admin extends Page
         }
     }
 
+    public void navigateToListingPage() throws Exception
+    {
+        try
+        {
+            driver.get("http://beta.agorafy.com/manage/admin/listing/6020");
+            AutomationLog.info("Successfully navigated to listing page");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not navigate to listing page");
+        }
+    }
+
+
     public WebElement link_AddShowing() throws Exception
     {
         try

@@ -67,6 +67,14 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception
     {
+        verifyNegativeTestCases();
+        verifyIfShowingsShowsSameStartAndEndTimeAfterEdit(); 
+        verifyIfAddedShowingIsSeenOnShowingPopUpOnMyListingsPage();
+        verifyIfAddingShowingsFromFrontEndReflectsOnAdminEnd();
+    }
+
+    public void verifyNegativeTestCases() throws Exception
+    {
         verifyIfAdminShowingsPopUpIsClosedWithoutSaving(); 
         verifyIfSaveButtonClickedWithoutSelectingDateForShowing();
         verifyIfInvalidDateIsEntered();
@@ -74,9 +82,6 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
         verifyIfEditIconIsClicked();
         verifyIfDeleteShowingIsCanceled();
         verifyIfDeleteShowingIsConfirmed();
-        verifyIfShowingsShowsSameStartAndEndTimeAfterEdit(); 
-        verifyIfAddedShowingIsSeenOnShowingPopUpOnMyListingsPage();
-        verifyIfAddingShowingsFromFrontEndReflectsOnAdminEnd();
     }
 
     public String getCurrentDate() throws Exception 
@@ -98,7 +103,7 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
 
     public void verifyIfAdminShowingsPopUpIsClosedWithoutSaving() throws Exception 
     {
-        admin.navigateToListing();
+        admin.navigateToListingPage();
         adminshowings = admin.clickOnAddShowingLink();
         WaitFor.sleepFor(2000);
         adminshowings.enterDateInDatePickerTextBox(getCurrentDate());
@@ -180,9 +185,7 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
         adminshowings.clickOnSaveButton();
         admin.clickOnSaveButton();
         String expected = admin.getFirstShowing(0).getText();
-        System.out.println(expected);
         String listingname = admin.txt_DisplayAddress().getAttribute("value");
-        System.out.println(listingname);
         String curHandle = Page.driver.getWindowHandle();
         listingdetail = admin.clickOnListingDetailIcon();
         Set<String> handles = Page.driver.getWindowHandles();
@@ -196,7 +199,6 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
         mylistings = subnavigation.clickLinkMyListings();
         frontendshowings = mylistings.clickOnShowingsLink(listingname);
         String actual = frontendshowings.getFirstUpcomingShowing().getText();
-        System.out.println(actual);
         Assert.assertEquals(actual, expected, "Expected showing is not present on FrontEndShowing popup");
         AutomationLog.info("Adding showing from admin end shows added showing on frontEndShowing popup");
     }
@@ -210,7 +212,6 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
         mylistings.clickOnUpcomingShowingsLink();
         WaitFor.sleepFor(2000);
         int expected = frontendshowings.getNoOfAddedShowings();
-        System.out.println(expected);
         WaitFor.sleepFor(2000);
         frontendshowings.clickOnCloseButton();
         Page.driver.close();
@@ -271,12 +272,12 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
     @Override
     protected String successMessage()
     {
-        return "";
+        return "test cases for AdminShowings passed";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "";
+        return "test cases for AdminShowings failed";
     }
 }
