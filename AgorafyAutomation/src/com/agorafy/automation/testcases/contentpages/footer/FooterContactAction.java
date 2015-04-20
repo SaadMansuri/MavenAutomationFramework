@@ -32,7 +32,8 @@ public class FooterContactAction extends ContentPagesVerification
         Contact contact = companyLinks.clickOnContactLink();
 
         HashMap<String, String> expectedContactData = testCaseData.get("Contact");
-        expectedContactData.put("url", contact.contactPageUrl());
+        String url = contact.getApplicationUrl() + expectedContactData.get("contactsUrl");
+        expectedContactData.put("url", url);
         verifyLink(contact, expectedContactData);
 
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();

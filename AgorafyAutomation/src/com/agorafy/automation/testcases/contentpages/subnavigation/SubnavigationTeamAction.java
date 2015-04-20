@@ -35,8 +35,9 @@ public class SubnavigationTeamAction extends ContentPagesVerification
             subnavigation = Page.subNavigation();
             String dropdownMoreOption = "Team";
             team = (Team) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
-            expectedTeamData = testCaseData.get("More->TeamPageData");
-            expectedTeamData.put("url", team.teamPageUrl());
+            expectedTeamData = testCaseData.get("Team");
+            String url = team.getApplicationUrl() + expectedTeamData.get("teamurl");
+            expectedTeamData.put("url", url);
             AutomationLog.info("Redirection to Team page sucessfull");
         }
         catch (Exception e) 

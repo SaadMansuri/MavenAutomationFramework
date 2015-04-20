@@ -32,7 +32,8 @@ public class FooterHowItWorksAction extends ContentPagesVerification
         HowItWorks howItWorks = supportLinks.clickOnHowItWorksLink();
 
         HashMap<String, String> expectedHowItWorksData = testCaseData.get("HowItWorks");
-        expectedHowItWorksData.put("url", howItWorks.howItWorksPageUrl());
+        String url = howItWorks.getApplicationUrl() + expectedHowItWorksData.get("howItWorksPageUrl");
+        expectedHowItWorksData.put("url", url);
         verifyLink(howItWorks, expectedHowItWorksData);
 
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();

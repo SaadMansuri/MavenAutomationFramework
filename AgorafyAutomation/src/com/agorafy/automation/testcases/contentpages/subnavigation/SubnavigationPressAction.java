@@ -34,8 +34,9 @@ public class SubnavigationPressAction extends ContentPagesVerification
             subnavigation = Page.subNavigation();
             String dropdownMoreOption = "Press";
             Press = (Press) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
-            expectedPressData = testCaseData.get("More->PressPageData");
-            expectedPressData.put("url", Press.pressPageUrl());
+            expectedPressData = testCaseData.get("Press");
+            String url = Press.getApplicationUrl() + expectedPressData.get("pressPageUrl");
+            expectedPressData.put("url", url);
             AutomationLog.info("Redirection to Press page passed");
         }
         catch (Exception e) 

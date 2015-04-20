@@ -55,7 +55,8 @@ public class MyListingsAction extends ContentPagesVerification
         WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
         myListingsPage = subnavigation.clickLinkMyListings(); 
         expectedmyListingsData = testCaseData.get("MyListings");
-        expectedmyListingsData.put("url", myListingsPage.getURL());
+        String url = myListingsPage.getApplicationUrl() + expectedmyListingsData.get("myListingsPageUrl");
+        expectedmyListingsData.put("url", url);
         AutomationLog.info("Redirection to MyListing is sucessfull");
     }
     catch (Exception e) 

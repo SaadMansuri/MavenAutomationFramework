@@ -36,7 +36,8 @@ public class SubnavigationSearchPropertiesAction extends ContentPagesVerificatio
             subnavigation = Page.subNavigation();
             searchProperties = subnavigation.clickLinkSearchProperties();
             expectedSearchPropData  = testCaseData.get("SearchProperties");
-            expectedSearchPropData.put("url", searchProperties.getURL());
+            String url = searchProperties.getApplicationUrl() + expectedSearchPropData.get("searchPropertiesPageUrl");
+            expectedSearchPropData.put("url", url);
             AutomationLog.info("Redirection to search properties page sucessful");
         } 
         catch (Exception e) 

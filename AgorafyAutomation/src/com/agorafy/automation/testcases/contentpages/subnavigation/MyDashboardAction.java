@@ -54,7 +54,8 @@ public class MyDashboardAction extends ContentPagesVerification
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             myDashboardPage = subnavigation.clickLinkMyDashboard(); 
             expectedMyDashboardData = testCaseData.get("MyDashboard");
-            expectedMyDashboardData.put("url", myDashboardPage.getURL());
+            String url = myDashboardPage.getApplicationURL() + expectedMyDashboardData.get("myDashboardPageUrl");
+            expectedMyDashboardData.put("url", url);
             AutomationLog.info("Redirecting to My Dashboard page sucessfull");
         }
         catch (Exception e) 

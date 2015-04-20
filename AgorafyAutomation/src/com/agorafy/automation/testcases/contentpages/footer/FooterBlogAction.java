@@ -29,10 +29,10 @@ public class FooterBlogAction extends ContentPagesVerification
         FooterSupportLinks supportLinks = Page.footer().supportLinks();
         Blog blog = supportLinks.clickOnBlogLink();;
 
-        Assert.assertEquals(blog.currentURL(), blog.blogPageUrl(), "Link did not redirect to correct Page Url");
+        HashMap<String, String> expectedBlogData = testCaseData.get("Blog");
+        Assert.assertEquals(blog.currentURL(), expectedBlogData.get("blogUrl"), "Link did not redirect to correct Page Url");
         AutomationLog.info("Link redirects to correct Page Url");
 
-        HashMap<String, String> expectedBlogData = testCaseData.get("Blog");
         Assert.assertEquals(blog.currentPageTitle(), expectedBlogData.get("title"), "Page does not show correct PageTitle");
         AutomationLog.info("Page shows correct Page Title");
 

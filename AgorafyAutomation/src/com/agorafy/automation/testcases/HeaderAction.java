@@ -3,6 +3,7 @@ package com.agorafy.automation.testcases;
 import java.util.HashMap;
 
 import org.testng.Assert;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -55,7 +56,8 @@ public class HeaderAction extends AutomationTestCaseVerification
 
     public void verifyIfLoginPopUpIsDisplayed() throws Exception
     {
-        loginpopup = header.clickOnSubmitListingLink();
+        boolean status = false;
+        loginpopup = (LoginPopUp) header.clickSubmitListing(status);
         WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
         Assert.assertEquals(loginpopup.checkingLogInPopUp(),true,"Expected login pop up Not found");
         AutomationLog.info("Clicking on submit listing link in header displays Login popup ");

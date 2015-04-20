@@ -41,7 +41,8 @@ public class SubnavigationAboutUsAction extends ContentPagesVerification
             subnavigation = Page.subNavigation();
             aboutUs = subnavigation.clickLinkAboutUs();
             expectedAboutUsData = testCaseData.get("AboutUs");
-            expectedAboutUsData.put("url", aboutUs.aboutUsPageUrl());
+            String url = aboutUs.getApplicationUrl() + expectedAboutUsData.get("aboutUsUrl");
+            expectedAboutUsData.put("url", url);
             leftMenu = Page.contentPagesLeftMenu();
             AutomationLog.info("Redirection for About Us Page sucessfull");
         }

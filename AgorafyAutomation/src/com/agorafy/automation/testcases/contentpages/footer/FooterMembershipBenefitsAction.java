@@ -32,7 +32,8 @@ public class FooterMembershipBenefitsAction extends ContentPagesVerification
         MembershipBenefit membershipBenefit = companyLinks.clickOnMembershipBenefitLink();
 
         HashMap<String, String> expectedMembershipBenefitData = testCaseData.get("Member");
-        expectedMembershipBenefitData.put("url", membershipBenefit.membershipBenefitPageUrl());
+        String url = membershipBenefit.getApplicationUrl() + expectedMembershipBenefitData.get("membersPageUrl");
+        expectedMembershipBenefitData.put("url", url);
         verifyLink(membershipBenefit, expectedMembershipBenefitData);
 
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();

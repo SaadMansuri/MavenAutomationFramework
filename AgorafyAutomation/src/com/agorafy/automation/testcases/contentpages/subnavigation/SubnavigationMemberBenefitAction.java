@@ -41,7 +41,8 @@ public class SubnavigationMemberBenefitAction extends ContentPagesVerification
             memberBenefit = subnavigation.clickLinkMemberBenefits();
 
             expectedMembershipBenefitData  = testCaseData.get("Member");
-            expectedMembershipBenefitData.put("url", memberBenefit.membershipBenefitPageUrl());
+            String url = memberBenefit.getApplicationUrl() + expectedMembershipBenefitData.get("membersPageUrl");
+            expectedMembershipBenefitData.put("url", url);
 
             leftMenu = Page.contentPagesLeftMenu();
 

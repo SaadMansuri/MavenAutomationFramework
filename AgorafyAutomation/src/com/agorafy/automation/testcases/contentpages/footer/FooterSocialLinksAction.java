@@ -53,10 +53,11 @@ public class FooterSocialLinksAction extends ContentPagesVerification
         AgorafyLinkedInPage agorafyLinkedIn = socialLinks.clickOnLinkedInIconLink();
         switchToNewWindow();
 
-        Assert.assertEquals(agorafyLinkedIn.currentURL(),agorafyLinkedIn.agorafyLinkedInPageUrl(), "LinkedIn IconLink did not navigate to correct page Url");
+        expectedSocialLinksData = testCaseData.get("LinkedIn");
+        Assert.assertEquals(agorafyLinkedIn.currentURL(),expectedSocialLinksData.get("agorafyLinkedInPageUrl"), "LinkedIn IconLink did not navigate to correct page Url");
         AutomationLog.info("LinkedIn IconLink navigates to AgorafyLinkedIn page Url");
 
-        expectedSocialLinksData = testCaseData.get("LinkedIn");
+
         Assert.assertEquals(agorafyLinkedIn.currentPageTitle(),expectedSocialLinksData.get("title"), "Agorafy LinkedIn Page does not show correct page title");
         AutomationLog.info("Agorafy LinkedIn Page shows correct page Title");
 
@@ -69,10 +70,11 @@ public class FooterSocialLinksAction extends ContentPagesVerification
         AgorafyGooglePlusPage agorafyGooglePlus = socialLinks.clickOnGooglePlusIconLink();
         switchToNewWindow();
 
-        Assert.assertEquals(agorafyGooglePlus.currentURL(),agorafyGooglePlus.agorafyGooglePlusPageUrl(), "GooglePlus IconLink did not navigate to correct page Url");
+        expectedSocialLinksData = testCaseData.get("GooglePlus");
+        Assert.assertEquals(agorafyGooglePlus.currentURL(),expectedSocialLinksData.get("agorafyGooglePlusPageUrl"), "GooglePlus IconLink did not navigate to correct page Url");
         AutomationLog.info("GooglePlus IconLink navigates to AgorafyGooglePlus page Url");
 
-        expectedSocialLinksData = testCaseData.get("GooglePlus");
+
         Assert.assertEquals(agorafyGooglePlus.currentPageTitle(),expectedSocialLinksData.get("title"), "Agorafy GooglePlus Page does not show correct page title");
         AutomationLog.info("Agorafy GooglePlus Page shows correct page Title");
 
@@ -85,10 +87,10 @@ public class FooterSocialLinksAction extends ContentPagesVerification
         AgorafyYoutubePage agorafyYoutube = socialLinks.clickOnYoutubeIconLink();
         switchToNewWindow();
 
-        Assert.assertEquals(agorafyYoutube.currentURL(),agorafyYoutube.agorafyYoutubePageUrl(), "YouTube IconLink did not navigate to correct page Url");
+        expectedSocialLinksData = testCaseData.get("Youtube");
+        Assert.assertEquals(agorafyYoutube.currentURL(),expectedSocialLinksData.get("agorafyYoutubePageUrl"), "YouTube IconLink did not navigate to correct page Url");
         AutomationLog.info("Youtube IconLink navigates to AgorafyYoutube page Url");
 
-        expectedSocialLinksData = testCaseData.get("Youtube");
         Assert.assertEquals(agorafyYoutube.currentPageTitle(),expectedSocialLinksData.get("title"), "Agorafy Youtube Page does not show correct page title");
         AutomationLog.info("Agorafy Youtube Page shows correct page Title");
 
@@ -101,10 +103,11 @@ public class FooterSocialLinksAction extends ContentPagesVerification
         AgorafyFacebookPage agorafyFacebook = socialLinks.clickOnFacebookIconLink();
         switchToNewWindow();
 
-        Assert.assertEquals(agorafyFacebook.currentURL(),agorafyFacebook.agorafyFacebookPageUrl(), "Facebook IconLink did not navigate to correct page Url");
+        expectedSocialLinksData = testCaseData.get("Facebook");
+        Assert.assertEquals(agorafyFacebook.currentURL(),expectedSocialLinksData.get("agorafyFacebookPageUrl"), "Facebook IconLink did not navigate to correct page Url");
         AutomationLog.info("Facebook IconLink navigates to AgorafyFacebook page Url");
 
-        expectedSocialLinksData = testCaseData.get("Facebook");
+
         Assert.assertEquals(agorafyFacebook.currentPageTitle(),expectedSocialLinksData.get("title"), "Agorafy Facebook Page does not show correct page title");
         AutomationLog.info("Agorafy Facebook Page shows correct page Title");
 
@@ -117,10 +120,11 @@ public class FooterSocialLinksAction extends ContentPagesVerification
         AgorafyTwitterPage agorafyTwitter = socialLinks.clickOnTwitterIconLink();
         switchToNewWindow();
 
-        Assert.assertEquals(agorafyTwitter.currentURL(),agorafyTwitter.agorafyTwitterPageUrl(), "Twitter IconLink did not navigate to correct page Url");
+        expectedSocialLinksData = testCaseData.get("Twitter");
+        Assert.assertEquals(agorafyTwitter.currentURL(),expectedSocialLinksData.get("agorafyTwitterPageUrl"), "Twitter IconLink did not navigate to correct page Url");
         AutomationLog.info("Twitter IconLink navigates to AgorafyTwitter page Url");
 
-        expectedSocialLinksData = testCaseData.get("Twitter");
+
         Assert.assertEquals(agorafyTwitter.currentPageTitle(),expectedSocialLinksData.get("title"), "Agorafy Twitter Page does not show correct page title");
         AutomationLog.info("Agorafy Twitter Page shows correct page Title");
 
