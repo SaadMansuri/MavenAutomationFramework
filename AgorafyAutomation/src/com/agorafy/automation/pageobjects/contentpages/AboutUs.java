@@ -21,9 +21,9 @@ public class AboutUs extends Page
         super(driver);
     }
 
-    public String aboutUsPageUrl()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/about/";
+        return applicationUrl();
     }
 
     public WebElement pageHeadingElement() throws Exception

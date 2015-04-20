@@ -15,9 +15,9 @@ public class MembershipBenefit extends Page
         super(driver);
     }
 
-    public String membershipBenefitPageUrl()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/benefits/";
+        return applicationUrl();
     }
 
     public WebElement pageHeadingElement() throws Exception

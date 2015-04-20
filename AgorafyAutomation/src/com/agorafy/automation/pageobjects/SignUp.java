@@ -177,8 +177,9 @@ public class SignUp extends Page
         return regEmail;
      }
 
+    @SuppressWarnings("static-access")
     public By emailAlreadyRegisteredLink()
     {
-        return By.xpath(".//*[@id='registration_result_2']/p[1]");
+        return By.className("row-container").tagName("p");
     }
 }

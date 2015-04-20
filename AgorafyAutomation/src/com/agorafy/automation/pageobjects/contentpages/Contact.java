@@ -16,9 +16,9 @@ public class Contact extends Page
         super(driver);
     }
 
-    public String contactPageUrl()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/contact/";
+        return applicationUrl();
     }
 
     public WebElement pageHeadingElement() throws Exception

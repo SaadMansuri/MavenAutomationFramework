@@ -40,7 +40,7 @@ public class Header extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='headerRegisterButton']/span"));
+            element = driver.findElement(By.linkText("Sign Up"));
             AutomationLog.info("SignUp link found in the Header");
         }
         catch (Exception e)
@@ -73,7 +73,7 @@ public class Header extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[1]/a"));
+            element = driver.findElement(By.linkText("Submit Listing"));
             AutomationLog.info("Submit listing link found in the Header");
         }
         catch (Exception e)
@@ -82,23 +82,6 @@ public class Header extends Page
             throw(e);
         }
         return element;
-    }
-
-    public LoginPopUp clickOnSubmitListingLink() throws Exception
-    {
-        LoginPopUp loginpopup=null;
-        try
-        {
-            link_SubmitListing().click();
-            loginpopup=new LoginPopUp(driver);
-            AutomationLog.info("Successfully clicked on submit listing link");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("could not click on submit listing link");
-            throw(e);
-        }
-        return loginpopup;
     }
 
     public Page clickSubmitListing(Boolean loginStatus) throws Exception
@@ -125,70 +108,11 @@ public class Header extends Page
         return  (By.className("profile-name"));
     }
 
-    public WebElement link_ProfileNameOnHomepageAfterLogin() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(getProfileNameLocator());
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Profile name was not found in the Header");
-            throw(e);
-        }
-        return element;
-     }
-
-    public WebElement link_ProfileNameOnDashboardAfterLogin() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[4]/a[1]/span[2]"));
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Profile name was not found in the Header");
-            throw(e);
-        }
-        return element;
-     }
-
-    public WebElement link_Dashboard() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(getProfileNameLocator());
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("My Dashboard link not found when Profile name is clicked");
-            throw(e);
-        }
-        return element;
-    }
-
-    public Dashboard clickMyDashboardBelowProfilePic() throws Exception
-    {
-        Dashboard myDashboard;
-        try
-        {
-            link_Dashboard().click();
-            myDashboard = new Dashboard(driver);
-            AutomationLog.info("Successfully clicked on My Dashboard link under profile pic");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not clicked on My Dashboard link under profile pic");
-            throw(e);
-        }
-        return myDashboard;
-    }
-
     public WebElement link_SwitchToAdmin() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[4]/ul/li[4]/a"));
+            element = driver.findElement(By.linkText("Switch to Admin"));
         }
         catch (Exception e)
         {
@@ -246,73 +170,12 @@ public class Header extends Page
         return homepage;
     }
 
-    public void openActiveProfile() throws Exception
-    {
-        try
-        {
-            Page.driver.findElement(getProfileNameLocator()).click();
-            AutomationLog.info("Opened drop down for active profile link");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Not able to open drop down for active profile link");
-            throw(e);
-        }
-    }
-
-    public Dashboard openDashboard() throws Exception
-     {
-        Dashboard element = null;
-        try
-        {
-             link_Dashboard().click();
-             element = new Dashboard(driver);
-             AutomationLog.info("Opened Dashboard successfully");
-         }
-         catch (Exception e)
-         {
-             AutomationLog.error("Not able to open Dashboard");
-             throw(e);
-         }
-         return element;
-     }
-
-    public WebElement text_ProfileName() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[4]/a[1]/span[2]"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Profile Name not found on header");
-            throw(e);
-        }
-        return element;
-    }
-
-    public String profileName() throws Exception
-    {
-        String profileName = "";
-        try
-        {
-            profileName = text_ProfileName().getText();
-            AutomationLog.info("Name of LoggedIn user found on header");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not retrieve Profile Name");
-            throw(e);
-        }
-        return profileName;
-    }
-
     public String greeting() throws Exception
     {
         String greeting="";
         try
         {
-            greeting = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/a[1]/span[2]")).getText();
+            greeting = driver.findElement(getProfileNameLocator()).getText();
             AutomationLog.info("Greeting found after successful Login");
         }
         catch(Exception e)
@@ -322,7 +185,7 @@ public class Header extends Page
         }
         return greeting;
     }
-    
+
     public WebElement dropbox_navigateArrowsearchInputBox() throws Exception
     {
         try
@@ -539,7 +402,7 @@ public class Header extends Page
     {
         try
         {
-            element = driver.findElement(By.className("profile-name"));
+            element = driver.findElement(getProfileNameLocator());
         }
         catch(Exception e)
         {

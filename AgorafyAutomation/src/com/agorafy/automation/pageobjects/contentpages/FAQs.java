@@ -10,8 +10,4 @@ public class FAQs extends Page
         super(driver);
     }
 
-    public String faqsPageUrl()
-    {
-        return "http://blog.agorafy.com/faq/";
-    }
 }

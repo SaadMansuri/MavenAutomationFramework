@@ -11,8 +11,4 @@ public class AgorafyLinkedInPage extends Page
         super(driver);
     }
 
-    public String agorafyLinkedInPageUrl()
-    {
-        return "https://www.linkedin.com/company/agorafy";
-    }
 }

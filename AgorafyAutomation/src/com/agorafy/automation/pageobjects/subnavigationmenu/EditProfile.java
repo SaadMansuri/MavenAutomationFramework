@@ -46,9 +46,9 @@ public class EditProfile extends Page
         return element;
     }
 
-    public String getURL()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/manage/profile";
+        return applicationUrl();
     }
 
     public String pageHeading() throws Exception

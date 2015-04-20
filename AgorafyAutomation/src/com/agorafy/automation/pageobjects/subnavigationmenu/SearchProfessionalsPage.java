@@ -825,9 +825,9 @@ public class SearchProfessionalsPage extends Page
         return heading_SearchProfessionalPage().getText();
     }
 
-    public String getURL()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/search/agent";
+        return applicationUrl();
     }
 
     public boolean lazyLoadingStatus() 

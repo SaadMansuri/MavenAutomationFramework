@@ -10,8 +10,4 @@ public class Blog extends Page
         super(driver);
     }
 
-    public String blogPageUrl()
-    {
-        return "http://blog.agorafy.com/";
-    }
 }

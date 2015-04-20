@@ -77,9 +77,9 @@ public class MyListings extends Page
         return element;
     }
 
-    public String getURL()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/manage/listings/";
+        return applicationUrl();
     }
 
     public String pageHeading() throws Exception
