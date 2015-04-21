@@ -18,3 +18,14 @@ Bathrooms,Bathroom1="3";
 PropertyNames,PropertyName1="100 Maspeth Avenue"
 Frontages,Frontage1="100"
 Placeholders,ListingLinkPlaceholder="URL"
+
+#Media form data
+
+MediaFormData,imageName="image.jpg";highResFile="upload.exe";lowResFile="lowresupload.exe"
+
+#Contacts Page Data
+
+ContactOwner,Name="Pierre Nanterme";RepresentingAs="Owner";Company="Accenture";Email="pierren@gmail.com";Phone="9895423561";Address="22 West NewYork"
+ContactBroker,Name="Jason Borne";RepresentingAs="Broker";Company="Oracle";Email="jasonb@gmail.com";Phone="9999999999";Address="44 East DC"
+ContactPropertyManager,Name="Stuart Broad";RepresentingAs="Property Manager";Company="Amdocs";Email="stuartb@gmail.com";Phone="5453348286";Address="21 B west"
+ContactName,name="Terry Bater"

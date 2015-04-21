@@ -23,7 +23,7 @@ public class UpdateListingSuite
     {
         try
         {
-            new UpdateListingAvailabilityFormAction().Execute();
+            new AvailabilityFormAction().Execute();
         }
         catch(Exception e)
         {
@@ -31,16 +31,44 @@ public class UpdateListingSuite
         }
     }
 
-    @Test(priority = 2)
+    //@Test(priority = 2)
     public void testUpdateListingDetailsForm() throws Exception
     {
         try
         {
-            new UpdateListingDetailsFormAction().Execute();
+            new DetailsFormAction().Execute();
         }
         catch(Exception e)
         {
             throw(e);
         }
     }
+
+    //@Test(priority = 3)
+    public void testUpdateListingMediaForm() throws Exception
+    {
+        try
+        {
+            new MediaFormAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
+
+    //@Test(priority = 4)
+    public void testUpdateListingContactsForm() throws Exception
+    {
+        try
+        {
+            new ContactsFormAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
+
+    
 }

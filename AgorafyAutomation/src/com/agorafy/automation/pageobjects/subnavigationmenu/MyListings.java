@@ -10,7 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.UpdateListing;
+import com.agorafy.automation.pageobjects.updatelisting.*;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingMediaFormPage;
 
 
@@ -243,14 +243,14 @@ public class MyListings extends Page
         return element;
     }
 
-    public UpdateListing clickUpdateOfFirstListing() 
+    public AvailabilityAndDetailsForm clickUpdateOfFirstListing() 
     {
-        UpdateListing updateListingPage = null;
+        AvailabilityAndDetailsForm updateListingPage = null;
         try 
         {
              Actions actions = new Actions(driver);
              actions.moveToElement(updateListing()).click().build().perform();
-             updateListingPage = new UpdateListing(driver);
+             updateListingPage = new AvailabilityAndDetailsForm(driver);
              AutomationLog.info("Sucessfully clicked update link found after hovering over first listing");
         }
         catch (Exception e) 
@@ -371,11 +371,11 @@ public class MyListings extends Page
         return listingName;
     }
 
-    public UpdateListing selectRequiredListingsUpdate(String expectedListingName)
+    public AvailabilityAndDetailsForm selectRequiredListingsUpdate(String expectedListingName)
     {
         List<WebElement> allListingElements = new ArrayList<>();
         String actualListingName;
-        UpdateListing updateListingPage = null;
+        AvailabilityAndDetailsForm updateListingPage = null;
         try
         {
             allListingElements = allListingElements();
@@ -385,7 +385,7 @@ public class MyListings extends Page
                 if(actualListingName.equals(expectedListingName))
                 {
                     clickThisListingsUpdate(singleListing);
-                    updateListingPage = new UpdateListing(driver);
+                    updateListingPage = new AvailabilityAndDetailsForm(driver);
                     break;
                 }
             }

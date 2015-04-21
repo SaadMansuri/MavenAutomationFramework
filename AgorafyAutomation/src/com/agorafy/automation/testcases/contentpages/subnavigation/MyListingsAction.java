@@ -8,12 +8,11 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
-import com.agorafy.automation.pageobjects.Dashboard;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.UpdateListing;
+import com.agorafy.automation.pageobjects.updatelisting.*;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingMediaFormPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MyListings;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
@@ -39,7 +38,7 @@ public class MyListingsAction extends ContentPagesVerification
     private String expectedActiveLeftMenu;
     private Header header;
     private MyListings myListings;
-    private UpdateListing updateListingPage;
+    private AvailabilityAndDetailsForm updateListingPage;
     private SubmitListingMediaFormPage mediaPage;
 
     public MyListingsAction() 
