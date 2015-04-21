@@ -3,6 +3,7 @@ package com.agorafy.automation.testcases.updateListing;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import org.openqa.selenium.WebElement;
@@ -34,6 +35,8 @@ public class ContactsFormAction extends AutomationTestCaseVerification
     private MediaForm media;
     private PreviewAndSubmitForm previewAndSubmitForm;
     private ContactsForm contacts;
+	private Integer oldNoOfContacts;
+	private Integer newNoOfContacts;
 
     public ContactsFormAction() 
     {
@@ -102,11 +105,90 @@ public class ContactsFormAction extends AutomationTestCaseVerification
         AutomationLog.info("Verify after performing click operation on back btn it navigates to media form");
         verifyIfClickingBackButtonRedirectsToMediaForm();
 
+        AutomationLog.info("Verify representing as options started...");
+        verifyRepresentingAsOptions();
+
+        AutomationLog.info("Verify Contacts form fill up with compulsory fields only started...");
+        verifyContactsFormWithCompulsoryFieldsOnly();
+
+        AutomationLog.info("Verify Contacts form fill up with all fields only started...");
+        verifyContactsFormWithAllFields();
+
+        AutomationLog.info("Verify add contact form fill up with optional fields only");
+        verifyContactsFormWithOptionalFieldsOnly();
+
+        AutomationLog.info("Verify Empty Contacts form fill up started...");
+        verifyEmptyFormFillUp();
+
         AutomationLog.info("Verify that after performing click operation on save and continue btn on contacts form it navigates to preview and submit form");
         verifyIfClickingSaveAndContinueRedirectsToPreviewAndSubmitForm();
+
     }
 
-    public void verifyIfErrorMessageShownOnClickingSaveAndContinueButtonWithEmptyForm() throws Exception
+    private void verifyContactsFormWithOptionalFieldsOnly() throws Exception 
+    {
+        oldNoOfContacts = 0;
+        oldNoOfContacts = contacts.noOfContactsAdded();
+        contactinfo = testCaseData.get("OptionalFieldsOnly");
+        addContactFormFill(contacts, contactinfo);
+        contacts.btn_AddContact().click();
+        newNoOfContacts = 0;
+        newNoOfContacts = contacts.noOfContactsAdded();
+        Assert.assertEquals(newNoOfContacts, oldNoOfContacts,"Contacts form with optional fields should not add new contact");
+        AutomationLog.error("Contacts form with optional fields not added new contact");
+    }
+
+    private void verifyEmptyFormFillUp() throws Exception 
+    {
+        oldNoOfContacts = 0;
+        oldNoOfContacts = contacts.noOfContactsAdded();
+        contacts.btn_AddContact().click();
+        newNoOfContacts = 0;
+        newNoOfContacts = contacts.noOfContactsAdded();
+        Assert.assertEquals(newNoOfContacts, oldNoOfContacts,"Contacts form with empty fields should not add new contact");
+        AutomationLog.error("Contacts form with empty fields not added new contact");
+    }
+
+	private void verifyContactsFormWithAllFields() throws Exception 
+    {
+        oldNoOfContacts = 0;
+        oldNoOfContacts = contacts.noOfContactsAdded();
+        contactinfo = testCaseData.get("ContactPropertyManager");
+        addContactFormFill(contacts, contactinfo);
+        contacts.btn_AddContact().click();
+        newNoOfContacts = 0;
+        newNoOfContacts = contacts.noOfContactsAdded();
+        newNoOfContacts--;
+        Assert.assertEquals(newNoOfContacts, oldNoOfContacts,"Failed to add contact with all fields");
+        AutomationLog.error("Successfully added contact with all fields");
+    }
+
+	private void verifyContactsFormWithCompulsoryFieldsOnly() throws Exception 
+    {
+        oldNoOfContacts = 0;
+        oldNoOfContacts = contacts.noOfContactsAdded();
+        contactinfo = testCaseData.get("ContactName");
+        contacts.txtbx_Name().sendKeys(contactinfo.get("name"));
+        contacts.btn_AddContact().click();
+        newNoOfContacts = 0;
+        newNoOfContacts = contacts.noOfContactsAdded();
+        newNoOfContacts--;
+        Assert.assertEquals(newNoOfContacts, oldNoOfContacts,"Failed to add contact with compulsory field name only");
+        AutomationLog.error("Successfully added contact with compulsory field name only");
+    }
+
+	private void verifyRepresentingAsOptions() 
+    {
+        contactinfo = testCaseData.get("RepresentingAsOptions");
+        Collection<String> actualAllRepresentingAsOptions = contacts.allRepresentingAsOptions();
+        Collection<String> expectedAllRepresentingAsOptions = contactinfo.values();
+        boolean representingAsOptionsStatus = false;
+        representingAsOptionsStatus = compareTwoCollections(actualAllRepresentingAsOptions, expectedAllRepresentingAsOptions);
+        Assert.assertEquals(representingAsOptionsStatus, true, "Representing As Options are not found as expected");
+        AutomationLog.info("Representing As Options are found as expected");
+    }
+
+	public void verifyIfErrorMessageShownOnClickingSaveAndContinueButtonWithEmptyForm() throws Exception
     {
         contacts.clickOnSaveAndContinueButton();
         Assert.assertEquals(contacts.msg_ContactsError().getText(), "Minimum one contact should be added", "Expected error message is not shown");

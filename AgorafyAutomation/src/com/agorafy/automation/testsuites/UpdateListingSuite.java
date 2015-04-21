@@ -57,7 +57,7 @@ public class UpdateListingSuite
         }
     }
 
-    //@Test(priority = 4)
+    @Test(priority = 4)
     public void testUpdateListingContactsForm() throws Exception
     {
         try

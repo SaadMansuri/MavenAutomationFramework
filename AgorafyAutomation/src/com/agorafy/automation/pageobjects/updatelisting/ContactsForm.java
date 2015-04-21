@@ -1,6 +1,7 @@
 package com.agorafy.automation.pageobjects.updatelisting;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -544,6 +545,46 @@ public class ContactsForm extends Page
             throw(e);
         }
         return previewAndSubmitForm;
+    }
+
+    public Integer noOfContactsAdded() 
+    {
+        Integer noOfContactsAdded = 0;
+        String noOfContacts;
+        try 
+        {
+            element = driver.findElement(By.id("numContacts"));
+            noOfContacts = element.getText();
+            noOfContacts = noOfContacts.substring(0, 1);
+            noOfContactsAdded = Integer.parseInt(noOfContacts);
+            AutomationLog.info("Successfully counted no of contacts added");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to count No of contacts added");
+        }
+        return noOfContactsAdded;
+    }
+
+    public Collection<String> allRepresentingAsOptions() 
+    {
+        List<String> allRepresentingAsOptions = new ArrayList<>();
+        Collection<WebElement> elements_allRepresentingAsOptions = new ArrayList<>();
+        try 
+        {
+            element = driver.findElement(By.id("ls_represent"));
+            elements_allRepresentingAsOptions = element.findElements(By.tagName("option"));
+            for(WebElement singleOption : elements_allRepresentingAsOptions)
+            {
+                allRepresentingAsOptions.add(singleOption.getAttribute("value"));
+            }
+            AutomationLog.info("successfully found all Representing As Options dropdowns");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to find all Representing As Options dropdowns");
+        }
+        return allRepresentingAsOptions;
     }
 
 }
