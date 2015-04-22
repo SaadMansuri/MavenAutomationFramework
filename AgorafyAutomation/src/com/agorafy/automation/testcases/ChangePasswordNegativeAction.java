@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.datamodel.profile.ChangePasswordData;
 import com.agorafy.automation.pageobjects.ChangePasswordTab;
 
@@ -47,6 +48,7 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
     public void verifyIfAllFieldsAreEmpty(ChangePasswordTab changePasswordTab) throws Exception
     {
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
+        WaitFor.sleepFor(1000);
         invalidTestData = testCaseData.get("verifyIfAllFieldsAreEmpty");
 
         String oldErrorPasswordMessage = changePasswordTab.errorMessageOldPassword().getText();
@@ -77,6 +79,7 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
         changePasswordTab.populateChangePasswordData(changepassworddata);
 
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
+        WaitFor.sleepFor(1000);
 
         String actualErrorMessageOldPassword = changePasswordTab.errorMessageOldPassword().getText();
         String expectedOldPasswordErrorMessage = invalidTestData.get("errorMsg");
@@ -99,6 +102,7 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
         changePasswordTab.populateChangePasswordData(changepassworddata);
 
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
+        WaitFor.sleepFor(1000);
 
         String verifynewPasswordErrorMessage = changePasswordTab.errorMessageNewPassword().getText();
         Assert.assertEquals(verifynewPasswordErrorMessage, invalidTestData.get("errorMsg1"), "Expected error message for new password is not displayed when NewPassword is left empty" );
@@ -124,6 +128,7 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
         changePasswordTab.populateChangePasswordData(changepassworddata);
 
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
+        WaitFor.sleepFor(1000);
 
         String verifyNewPassworderrorMessage = changePasswordTab.errorRetypeNewPassword().getText();
         Assert.assertEquals(verifyNewPassworderrorMessage, invalidTestData.get("errorMsg"), "Expected error messgae for Retype new password is not displayed when NewPassword is left empty" );
@@ -145,6 +150,7 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
         changePasswordTab.populateChangePasswordData(changepassworddata);
 
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
+        WaitFor.sleepFor(1000);
 
         String verifyNewPasswordMessage = changePasswordTab.errorMessageNewPassword().getText();
         Assert.assertEquals(verifyNewPasswordMessage, invalidTestData.get("errorMsg1"), "Expected error message for new password is not displayed when OldPassword is entered wrong");
@@ -170,6 +176,7 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
         changePasswordTab.populateChangePasswordData(changepassworddata);
 
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
+        WaitFor.sleepFor(1000);
 
         String verifyOldPasswordMessage = changePasswordTab.errorMessageNewPassword().getText();
         Assert.assertEquals(verifyOldPasswordMessage, invalidTestData.get("errorMsg2"), "Expected error message for Old password is not displayed when new password and Retype New Password is less than eight Character");
@@ -192,6 +199,7 @@ public class ChangePasswordNegativeAction extends AccountSettingsBaseAction
         changePasswordTab.populateChangePasswordData(changepassworddata);
 
         changePasswordTab = changePasswordTab.clickOnSubmitButtonChangePassword();
+        WaitFor.sleepFor(1000);
 
         String verifyOldPasswordMessage = changePasswordTab.errorMessageNewPassword().getText();
         Assert.assertEquals(verifyOldPasswordMessage, invalidTestData.get("errorMsg1"), "Expected error message for Old password is not displayed when new password and Retype New Password is not same");

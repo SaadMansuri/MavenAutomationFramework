@@ -156,7 +156,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         WaitFor.sleepFor(20000);
         String actualURL = searchprofessional.currentURL();
         dataFromCSV = testCaseData.get("ExpectedURL's");
-        String expectedURL = dataFromCSV.get("EmptyAgentSearchURL");
+        String expectedURL = searchprofessional.getApplicationUrl() + dataFromCSV.get("EmptyAgentSearchURL");
         expectedURL = expectedURL.concat("=1&fT=ag&name=");//CSV parser ignores data after = therefore we have to concat this string in expected string part
         Assert.assertEquals(actualURL, expectedURL, "After performing empty search page URL is not found as expected");
         AutomationLog.info("After performing empty search, page URL is found same as expected");

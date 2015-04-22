@@ -569,7 +569,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='userEditForm']/div[1]/div/div/div"));
+            element = driver.findElement(By.className("nameformError")).findElement(By.className("formErrorContent")); 
         }
         catch(Exception e)
         {
@@ -599,7 +599,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='userEditForm']/div[4]/div/div/div"));
+            element = driver.findElement(By.className("address1formError")).findElement(By.className("formErrorContent")); 
         }
         catch (Exception e)
         {
@@ -628,7 +628,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='userEditForm']/div[6]/div/div/div"));
+            element = driver.findElement(By.className("cityformError")).findElement(By.className("formErrorContent"));
         }
         catch (Exception e)
         {
@@ -658,7 +658,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='userEditForm']/div[8]/div/div/div"));
+            element = driver.findElement(By.className("zipformError")).findElement(By.className("formErrorContent"));
         }
         catch (Exception e)
         {
@@ -688,7 +688,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='userEditForm']/div[7]/div/span/div/div"));
+            element = driver.findElement(By.className("stateformError")).findElement(By.className("formErrorContent"));
         }
         catch (Exception e)
         {
