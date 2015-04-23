@@ -15,6 +15,7 @@ import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.editprofile.OverviewTab;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.utilities.Login;
 
 /**
  * Preconditions: Home page is loaded and login done.
@@ -73,11 +74,12 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         super.setup();
         try
         {
-            header = Header.header();
+            homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
+/*            header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();
             homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+*/            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
 
             subnavigation  = Page.subNavigation();
             dashboard = subnavigation.clickLinkMyDashboard();

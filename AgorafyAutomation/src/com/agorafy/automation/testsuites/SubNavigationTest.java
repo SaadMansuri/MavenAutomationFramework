@@ -62,32 +62,6 @@ public class SubNavigationTest
     }
 
     @Test
-    public void testCareersLink() throws Exception
-    {
-        try
-        {
-            new SubnavigationCareersAction().Execute();
-        }
-        catch(Exception e)
-        {
-            throw(e);
-        }
-    }
-
-    @Test
-    public void testContactLink() throws Exception
-    {
-        try
-        {
-            new SubnavigationContactAction().Execute();
-        }
-        catch(Exception e)
-        {
-            throw(e);
-        }
-    }
-
-    @Test
     public void testFAQLink() throws Exception
     {
         try

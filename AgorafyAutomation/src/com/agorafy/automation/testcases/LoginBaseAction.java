@@ -9,6 +9,7 @@ import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
+import com.agorafy.automation.utilities.Login;
 
 /**
  * Preconditions: Home page is loaded.
@@ -39,11 +40,12 @@ public abstract class LoginBaseAction extends AutomationTestCaseVerification
         super.setup();
         try 
         {
-            header = Header.header();
+             homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
+/*            header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             AutomationLog.info("Log In link is clicked");
             Credentials ValidCredentials = userCredentials();
-            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
+            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());*/
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
         }
         catch (Exception e)

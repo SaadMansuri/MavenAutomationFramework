@@ -14,6 +14,7 @@ import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingDetailsFormBasePage;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingLocationFormPage;
+import com.agorafy.automation.utilities.Login;
 
 
 public abstract class SubmitListingBaseAction extends AutomationTestCaseVerification
@@ -37,11 +38,12 @@ public abstract class SubmitListingBaseAction extends AutomationTestCaseVerifica
         super.setup();
         try
         {
-            header = Header.header();
+            homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
+/*            header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();
             homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+*/            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             dashboard = homePage.clickOnMyDashboardLink();
             Page.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
             locationPage = dashboard.clickOnSubmitListingButton();

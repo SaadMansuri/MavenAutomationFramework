@@ -1,25 +1,23 @@
 package com.agorafy.automation.testcases.reports;
 
-import java.util.HashMap;
+ import java.util.HashMap;
 
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
-import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Header;
-import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.reports.Reports;
 import com.agorafy.automation.pageobjects.reports.ReportsPopUp;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
+import com.agorafy.automation.utilities.Login;
 
 public class ReportsPopUpAction extends AutomationTestCaseVerification
 {
     private Header header;
-    private HeaderLoginForm headerLoginForm;
     private Homepage homePage;
     private SearchResultsPage searchresult;
     private Reports reports;
@@ -38,10 +36,8 @@ public class ReportsPopUpAction extends AutomationTestCaseVerification
         super.setup();
         try
         {
+            homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
             header = Header.header();
-            headerLoginForm = header.openHeaderLoginForm();
-            Credentials ValidCredentials = userCredentials();
-            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             HashMap<String, String> search = testCaseData.get("SearchData");
             searchresult = homePage.populateSearchTermTextBox(search.get("borough"), search.get("listingcategory"), search.get("searchterm"));

@@ -19,6 +19,7 @@ import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 import com.agorafy.automation.utilities.HandlingWindows;
+import com.agorafy.automation.utilities.Login;
 /**
  * Precondition:Do valid login
  * Search for a particular input combination
@@ -46,11 +47,12 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         super.setup();
         try 
         {
-            header = Header.header();
+            homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
+/*            header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();
             homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+*/            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             dataFromCSV = testCaseData.get("SearchInputCombination");
             propertySearch = homePage.populateSearchTermTextBox(dataFromCSV.get("boroughname"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchstring"));
             setupToReachListingDetailsPage();

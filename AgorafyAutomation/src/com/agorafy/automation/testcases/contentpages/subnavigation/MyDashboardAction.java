@@ -1,20 +1,18 @@
 package com.agorafy.automation.testcases.contentpages.subnavigation;
 
-import java.util.HashMap;
+ import java.util.HashMap;
 
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Dashboard;
-import com.agorafy.automation.pageobjects.Header;
-import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
+import com.agorafy.automation.utilities.Login;
 /**
  * Test whether 'My Dashboard' link appears in the subnavigation bar
  * Test whether it gets clicked
@@ -27,8 +25,6 @@ public class MyDashboardAction extends ContentPagesVerification
 {
 
     private Homepage homePage;
-    private Header header = null;
-    private HeaderLoginForm headerLoginForm;
     private Dashboard myDashboardPage;
     private HashMap<String, String> expectedMyDashboardData;
 	private ContentPagesLeftMenu leftMenu;
@@ -46,11 +42,8 @@ public class MyDashboardAction extends ContentPagesVerification
         super.setup();
         try 
         {
+            homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
             SubNavigation subnavigation = Page.subNavigation();
-            header = Header.header();
-            headerLoginForm = header.openHeaderLoginForm();
-            Credentials ValidCredentials = userCredentials();
-            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             myDashboardPage = subnavigation.clickLinkMyDashboard(); 
             expectedMyDashboardData = testCaseData.get("MyDashboard");

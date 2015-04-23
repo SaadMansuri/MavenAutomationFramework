@@ -14,6 +14,7 @@ import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
+import com.agorafy.automation.utilities.Login;
 
 /**
  * Precondition:Do search for property 
@@ -50,10 +51,19 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         verifyIfAnalyticsViewButtonIsDisplayedForLongSearchTerm();
         HashMap<String, String> viewtype = testCaseData.get("ViewType");
         verifyIfMapViewButtonIsClicked(viewtype);
+        verifyIfMapViewPageContents();
         verifyIfListViewButtonIsClicked(viewtype);
+        verifyIfListViewPageContents();
         verifyLoginOnAnalyticsButtonClick(viewtype);
         verifyLoginOnCreateYourProfileButtonClick();
+        verifyAnalyticsViewPageContents();
+        verifyIfExpiringSessionOnListViewPage();
         verifyAnalyticsClickInLoggedInState(viewtype);
+        verifyIfExportsButtonIsEnabled();
+        verifyIfExportsButtonIsClickedAfterExpiringSession();
+        
+
+        
         verifySizeInAdvanceSearch();
         verifyPriseInAdvanceSearch();
 
@@ -102,7 +112,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     public void verifyAnalyticsClickInLoggedInState(HashMap<String, String> viewtype) throws Exception 
     {
         boolean isloggedIn = true;
-        searchresult.scrollPage(700, 0);
+       // searchresult.scrollPage(700, 0);
         searchresult = (SearchResultsPage) searchresult.clickOnAnalyticsViewButton(isloggedIn);
         String url = searchresult.getCurrentUrl();
         Map<String, String> params=searchresult.getQueryMap(url);
@@ -201,6 +211,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     {
         String beforURL = searchresult.currentURL();
         searchresult.scrollPage(0, 700);
+        Page.driver.navigate().refresh();
         loginpopup = searchresult.clickOnCreateProfileButton();
         WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
         Assert.assertEquals(searchresult.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
@@ -211,6 +222,56 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         String afterURL = searchresult.currentURL();
         Assert.assertEquals(beforURL, afterURL, "Expected url match failed");
         AutomationLog.info("Clicking on Create Your Profile button displays Login popup and when logged in using valid credentials same page is shown");
+    }
+
+    public void verifyIfExportsButtonIsEnabled() throws Exception
+    {
+        Assert.assertTrue(searchresult.btn_Exports().isEnabled(), "Expected button is not enabled");
+        AutomationLog.info("Exports button is enabled ");
+    }
+
+    public void verifyIfExportsButtonIsClickedAfterExpiringSession() throws Exception
+    {
+        String pageurl = Page.driver.getCurrentUrl();
+        Page.driver.manage().deleteAllCookies();
+        searchresult.clickOnExportsButton();
+        Assert.assertEquals(searchresult.getCurrentUrl(), "https://beta.agorafy.com/login", "Expected page is not shown");
+        AutomationLog.info("Expiring Session on Analytics view page redirects to Login page");
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
+        searchresult.clickOnListViewButton();
+    }
+
+    public void verifyIfExpiringSessionOnListViewPage() throws Exception 
+    {
+        String pageurl = Page.driver.getCurrentUrl();
+        Page.driver.manage().deleteAllCookies();
+        searchresult.btn_AnalyticsView().click();
+        Assert.assertEquals(searchresult.getCurrentUrl(), "https://beta.agorafy.com/login", "Expected page is not shown");
+        AutomationLog.info("Expiring Session on list view page redirects to Login page");
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
+    }
+
+    public void verifyIfMapViewPageContents() throws Exception
+    {
+        Assert.assertTrue(searchresult.div_Advertisement().isDisplayed(), "Expected Advertisement div is not present");
+        Assert.assertFalse(searchresult.isCreateYourProfileButtonPresent(), "Expected CreateYourProfile button not present");
+        AutomationLog.info("Map view page contains Advertisement div and not Create your profile button");
+    }
+
+    public void verifyIfListViewPageContents() throws Exception 
+    {
+        Assert.assertTrue(searchresult.div_Advertisement().isDisplayed(), "Expected Advertisement div is not present");
+        Assert.assertTrue(searchresult.btn_CreateYourProfile().isDisplayed(), "Expected CreateYourProfile button not present");
+        AutomationLog.info("List view page contains Advertisement div and Create your profile button");
+    }
+
+    public void verifyAnalyticsViewPageContents() throws Exception 
+    {
+        Assert.assertTrue(searchresult.div_Advertisement().isDisplayed(), "Expected Advertisement div is not present");
+        Assert.assertTrue(searchresult.btn_CreateYourProfile().isDisplayed(), "Expected CreateYourProfile button not present");
+        AutomationLog.info("Analytics view page contains Advertisement div and Create your profile button");
     }
 
     @Override

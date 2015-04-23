@@ -1,20 +1,18 @@
 package com.agorafy.automation.testcases.contentpages.subnavigation;
 
-import java.util.HashMap;
+ import java.util.HashMap;
 
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
-import com.agorafy.automation.pageobjects.Header;
-import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.subnavigationmenu.EditProfile;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
+import com.agorafy.automation.utilities.Login;
 /**
  * Test whether 'Edit Profile' link appears in the subnavigation bar
  * Test whether it gets clicked
@@ -27,12 +25,10 @@ public class SubnavigationEditProfileAction extends ContentPagesVerification
 {
 
     private Homepage homePage;
-    private HeaderLoginForm headerLoginForm;
     private EditProfile editProfilePage;
     private HashMap<String, String> expectedEditProfileData;
     private SubNavigation subnavigation;
-	private ContentPagesLeftMenu leftMenu;
-	private Header header;
+    private ContentPagesLeftMenu leftMenu;
 
     public SubnavigationEditProfileAction() 
     {
@@ -43,10 +39,7 @@ public class SubnavigationEditProfileAction extends ContentPagesVerification
     protected void verifyTestCases() throws Exception 
     {
         subnavigation = Page.subNavigation();
-        header = Header.header();
-        headerLoginForm = header.openHeaderLoginForm();
-        Credentials ValidCredentials = userCredentials();
-        homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
+        homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
         WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
         editProfilePage = subnavigation.clickLinkEditProfile(); 
         expectedEditProfileData = testCaseData.get("EditProfile");
