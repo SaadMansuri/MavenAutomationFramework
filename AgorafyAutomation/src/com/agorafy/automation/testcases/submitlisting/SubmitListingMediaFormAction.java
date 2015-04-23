@@ -1,6 +1,5 @@
 package com.agorafy.automation.testcases.submitlisting;
 
-
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 

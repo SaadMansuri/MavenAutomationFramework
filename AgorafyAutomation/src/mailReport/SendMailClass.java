@@ -29,8 +29,8 @@ public class SendMailClass
         String[] bcc={};
 
         /*email user name and password of sender*/ 
-        SendMailClass.sendMail("ashish.patil@cuelogic.co.in",
-                            "1qaz!QAZ@WSX",
+        SendMailClass.sendMail("ashish.patil@cuelogic.co.in",   /*email id of sender*/
+                            "1qaz!QAZ@WSX",                     /*password of sender*/
                             "smtp.gmail.com",
                             "465",
                             "true",

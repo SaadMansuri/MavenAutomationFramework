@@ -57,7 +57,7 @@ public class UpdateListingSuite
         }
     }
 
-    @Test(priority = 4)
+    //@Test(priority = 4)
     public void testUpdateListingContactsForm() throws Exception
     {
         try
@@ -70,5 +70,16 @@ public class UpdateListingSuite
         }
     }
 
-    
+    @Test(priority = 5)
+    public void testUpdateListingPreviewAndSubmitForm() throws Exception
+    {
+        try
+        {
+             new PreviewAndSubmitAction().Execute();
+        }
+        catch(Exception e)
+        {
+            throw(e);
+        }
+    }
 }

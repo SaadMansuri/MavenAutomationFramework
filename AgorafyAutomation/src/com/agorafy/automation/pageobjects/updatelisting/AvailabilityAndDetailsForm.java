@@ -968,6 +968,21 @@ public class AvailabilityAndDetailsForm extends Page
         return element;
     }
 
+    public WebElement form_Availability() throws Exception
+    {
+        try 
+        {
+            element = driver.findElement(By.id("location"));
+            AutomationLog.info("Availability form is found");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("failed to find Availability form");
+            throw (e);
+        }
+        return element;
+    }
+
     public String pageHeading() throws Exception
     {
         return element_PageHeading().getText();

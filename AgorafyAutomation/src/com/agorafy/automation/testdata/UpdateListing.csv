@@ -2,10 +2,10 @@ Headings,PageHeading="Submit a listing update"
 EmailIdOnlistingUpdatePage,EmailId="chandrani.bhagat@cuelogic.co.in"
 ReasonDropdownOptions,Option1="Space was leased";Option2="Space is off market";Option3="Other"
 ListingTypes,ListingType1="Single-Family for Sale";ListingType2="Hotel for Sale";ListingType3="Office for Sublease";ListingType4="Condo for Sale";ListingType5="Retail for Lease"
-AskingPrices,AskingPrice1="1000";AskingPriceMin="1000";AskingPriceMax="10000"
+AskingPrices,AskingPrice1="1000";AskingPriceMin="1000";AskingPriceMax="10000";AskingPrice2="10"
 AskingPriceUnits,AskingPriceUnit1="total";AskingPriceUnit2="per sqft"
-ListingLinkUrls,ListingLinkUrl1="http://beta.agorafy.com/listing/39965/120-Pierrepont-Streetclone-Single-Family-for-Sale"
-DetailsDescription,Description="This is description text box on details pages"
+ListingLinkUrls,ListingLinkUrl1="http://beta.agorafy.com/listing/39965/120-Pierrepont-Streetclone-Single-Family-for-Sale";ListingLinkUrl2="http://beta.agorafy.com"
+DetailsDescription,Description="This is description text box on details pages";Description1="Description data for preview and submit form"
 BidDeadlines,BidDeadline="11/06/2016"
 AskingPriceUnitsForofficeForSublease,AskingPriceUnit1="per month";AskingPriceUnit2="per sqft"
 CombinableOption,Combinable=" Combinable up to 5,000 sqft"
@@ -25,9 +25,23 @@ MediaFormData,imageName="image.jpg";highResFile="upload.exe";lowResFile="lowresu
 
 #Contacts Page Data
 
-ContactOwner,Name="Pierre Nanterme";RepresentingAs="Owner";Company="Accenture";Email="pierren@gmail.com";Phone="9895423561";Address="22 West NewYork"
+ContactOwner,Name="Pierre Nanterme";Name1="Sheldon cooper";RepresentingAs="Owner";Company="Accenture";Email="pierren@gmail.com";Phone="9895423561";Address="22 West NewYork"
 ContactBroker,Name="Jason Borne";RepresentingAs="Broker";Company="Oracle";Email="jasonb@gmail.com";Phone="9999999999";Address="44 East DC"
 ContactPropertyManager,Name="Stuart Broad";RepresentingAs="Property Manager";Company="Amdocs";Email="stuartb@gmail.com";Phone="5453348286";Address="21 B west"
 ContactName,name="Terry Bater"
 RepresentingAsOptions,RepresentingAsOption1="Owner";RepresentingAsOption2="Broker";RepresentingAsOption3="Property Manager"
 OptionalFieldsOnly,RepresentingAs="Broker";Company="Oracle";Email="jasonb@gmail.com";Phone="9999999999";Address="44 East DC"
+CompanyNames,CompanyName1="Apple"
+EmailIds,Email1="penny@BigBangTheory.com"
+Phones,Phone1="007"
+Addresses,Address1="Texas"
+
+
+
+
+
+
+
+
+
+

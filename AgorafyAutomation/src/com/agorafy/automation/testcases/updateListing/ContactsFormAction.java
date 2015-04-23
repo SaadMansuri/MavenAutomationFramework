@@ -288,28 +288,6 @@ public class ContactsFormAction extends AutomationTestCaseVerification
         AutomationLog.info("Delete option on added contacts multiple contacts Removed successfully");
     }
 
-    /*public SubmitListingPreviewAndSubmitPage moveToPreviewAndSubmitForm(HashMap<String, HashMap<String, String>> data) throws Exception
-    {
-        SubmitListingPreviewAndSubmitPage previewnsubmit = null;
-        try
-        {
-            if(!(contacts.form_Contacts().isDisplayed()))
-            {
-                 media.moveToContactsForm(data);
-            }
-            addContactFormFill(contacts,data.get("ContactOwner"));
-            contacts.clickOnAddContactsButton();
-            contacts.clickOnSaveAndContinueButton();
-            previewnsubmit = new SubmitListingPreviewAndSubmitPage(Page.driver);
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not move to Preview And Submit form");
-            throw(e);
-        }
-        return previewnsubmit;
-    }*/
-
     public void verifyIfAddedContactsShowsTotalNoOfContactsAdded() throws Exception
     {
         contacts.deleteAllAddedContacts();

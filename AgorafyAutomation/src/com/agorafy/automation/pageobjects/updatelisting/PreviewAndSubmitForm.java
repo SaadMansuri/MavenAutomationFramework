@@ -14,10 +14,9 @@ public class PreviewAndSubmitForm extends Page
     }
 
     private WebElement element = null;
-    /*private SubmitListingMediaFormPage media = new SubmitListingMediaFormPage(driver);
-    private SubmitListingContactsFormPage contacts = new SubmitListingContactsFormPage(driver);
-    private SubmitListingLocationFormPage locationPage = new SubmitListingLocationFormPage(driver);
-    private SubmitListingDetailsFormRetailPage detailsRetailPage = new SubmitListingDetailsFormRetailPage(driver);*/
+    private AvailabilityAndDetailsForm availabilityAndDetailsForm = new AvailabilityAndDetailsForm(Page.driver);
+    private MediaForm media = new MediaForm(Page.driver);
+    private ContactsForm contacts = new ContactsForm(Page.driver);
 
     public WebElement form_PreviewAndSubmit() throws Exception
     {
@@ -36,12 +35,12 @@ public class PreviewAndSubmitForm extends Page
 
     public boolean location_Displayed() throws Exception
     {
-        return locationPage.form_Location().isDisplayed();
+        return availabilityAndDetailsForm.form_Availability().isDisplayed();
     }
 
     public boolean Details_Displayed() throws Exception
     {
-        return detailsRetailPage.form_Property().isDisplayed();
+        return availabilityAndDetailsForm.form_Property().isDisplayed();
     }
 
     public boolean Media_Displayed() throws Exception
@@ -93,45 +92,4 @@ public class PreviewAndSubmitForm extends Page
     {
         return contacts.txtbx_Address().getAttribute("value");
     }
-
-    public String Location_Address() throws Exception
-    {
-        return locationPage.txtbx_Address().getAttribute("value");
-    }
-
-    public String Location_City() throws Exception
-    {
-        return locationPage.txtbx_City().getAttribute("value");
-    }
-
-    public String Location_State() throws Exception
-    {
-        return locationPage.txtbx_State().getAttribute("value");
-    }
-
-    public String Location_ZipCode() throws Exception
-    {
-        return locationPage.txtbx_ZipCode().getAttribute("value");
-    }
-
-    public String Details_AskingPrice() throws Exception
-    {
-        return detailsRetailPage.txtbx_AskingPrice().getAttribute("value");
-    }
-
-    public String Details_Frontage() throws Exception
-    {
-        return detailsRetailPage.txtbx_Frontage().getAttribute("value");
-    }
-
-    public String Details_CeilingHeight() throws Exception
-    {
-        return detailsRetailPage.txtbx_CeilingHeight().getAttribute("value");
-    }
-
-    public String Details_Description() throws Exception
-    {
-        return detailsRetailPage.txtbx_Description().getAttribute("value");
-    }
-
 }
