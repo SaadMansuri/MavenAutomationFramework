@@ -1,13 +1,17 @@
 package com.agorafy.automation.pageobjects;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver.Window;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.Configuration;
 import com.agorafy.automation.pageobjects.footer.Footer;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.gargoylesoftware.htmlunit.javascript.host.Location;
 
 public class Page 
 {
@@ -95,10 +99,8 @@ public class Page
     }
 
     public void pageScrollDown(int x, int y) 
-    {
+    { 
          JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-         jsExecutor.executeScript("window.scrollTo("+x+"," +y+")");
-         //jsExecutor.executeScript("window.scrollTo(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight,document.documentElement.clientHeight));");
+         jsExecutor.executeScript("window.scrollBy("+x+"," +y+")");
     }
-
 }

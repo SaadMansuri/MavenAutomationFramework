@@ -1,60 +1,99 @@
-package com.agorafy.automation.testcases.submitlisting;
+package com.agorafy.automation.testcases.updateListing;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
+
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.Configuration;
+import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.Header;
+import com.agorafy.automation.pageobjects.HeaderLoginForm;
+import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.submitlisting.SubmitListingContactsFormPage;
-import com.agorafy.automation.pageobjects.submitlisting.SubmitListingDetailsFormBasePage;
-import com.agorafy.automation.pageobjects.submitlisting.SubmitListingMediaFormPage;
+import com.agorafy.automation.pageobjects.updatelisting.*;
+//import com.agorafy.automation.pageobjects.submitlisting.SubmitListingContactsFormPage;
+import com.agorafy.automation.pageobjects.subnavigationmenu.MyListings;
+import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.utilities.HandlingWindows;
 
-public class SubmitListingMediaFormAction extends SubmitListingBaseAction
+public class MediaFormAction extends AutomationTestCaseVerification
 {
-    private SubmitListingMediaFormPage media = new SubmitListingMediaFormPage(Page.driver);
-    private SubmitListingDetailsFormBasePage details ;
-    private SubmitListingDetailsFormRetailAction detailsRetailAction = new SubmitListingDetailsFormRetailAction();
-    private SubmitListingContactsFormPage contacts = null;
-    public String exefilepath = Configuration.getConfigurationValueForProperty("exe-path-to-upload");
-    HashMap<String, String> mediadata; 
 
-    public SubmitListingMediaFormAction()
+    private Homepage homePage;
+    private Header header;
+    private HeaderLoginForm headerLoginForm;
+    private SubNavigation subNavigation;
+    private MyListings myListings;
+    private AvailabilityAndDetailsForm updateListingPage;
+    private MediaForm media; 
+    private AvailabilityAndDetailsForm details ;
+    public String exefilepath = Configuration.getConfigurationValueForProperty("exe-path-to-upload");
+    HashMap<String, String> mediadata = new HashMap<>();
+    ContactsForm contactsPage;
+
+    public MediaFormAction() 
     {
-        super();
+        super("UpdateListing");
     }
 
     @Override
-    public void setup()
+    public void setup() 
     {
         super.setup();
-
-        try
+        AutomationLog.info("Setup to reach Media page of the user started...");
+        try 
         {
-            media = detailsRetailAction.fillDetailsFormAndMoveToMediaForm(testCaseData);
-            mediadata = testCaseData.get("MediaFormData");
-            AutomationLog.info("Successfully reached to Media form");
+            homePage = Homepage.homePage();
+            header = Header.header();
+            headerLoginForm = header.openHeaderLoginForm();
+            Credentials ValidCredentials = userCredentials();
+            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
+            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+            subNavigation = SubNavigation.subNavigation();
+            myListings = subNavigation.clickLinkMyListings();
+            myListings.pageScrollDown(0, 300);
+            myListings.hoverOverFirstListing();
+            myListings.hoverOverUpdate();
+            updateListingPage = myListings.clickUpdateOfFirstListing();
+            HandlingWindows.closeCurrentWindow(Page.driver);
+            HandlingWindows.switchToWindow(Page.driver, 1);
+            WaitFor.sleepFor(2000);
+            updateListingPage.btn_SaveAndContinue().click();
+            media = updateListingPage.clickSaveAndContinueOnDetailsForm();
+            AutomationLog.info("Setup to reach media page of the user passed");
         }
-        catch(Exception e)
+        catch (Exception e) 
         {
-            AutomationLog.error("Failed to reach Media form");
+            AutomationLog.error("Setup to reach media page of the user failed");
         }
     }
 
     @Override
     protected void verifyTestCases() throws Exception 
     {
+        AutomationLog.info("Verify email address from on media page");
+        verifyEmailAddress();
+
+        mediadata = testCaseData.get("MediaFormData");
         String highResFile = exefilepath + mediadata.get("highResFile");
         String lowResFile = exefilepath + mediadata.get("lowResFile");
+
         verifyIfClickingAddfilesAddImageToUpload(highResFile); 
+
         verifyIfClickingCancelButtonRemovesAddedImage();
+
         verifyIfClickingStartUpdateUploadsTheImage(highResFile);
+
         verifyIfclickingDeleteButtonRemoveUploadedImage();
+
         verifyIfLowResolutionImageCantBeUploaded(lowResFile);
-        verifyIfErrorMessageShownOnClickingSaveAndContinueWithoutUploadingImage();
+
         verifyIfClickingOnBackButtonRedirectsToDetailsForm();
+
         verifyIfclickingOnSaveAndContinueRedirectsToContactsPage();
     }
 
@@ -88,9 +127,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         {
             AutomationLog.error("Could not open windows file upload");
             throw(e);
-            
         }
-       
     }
 
     public void verifyIfClickingStartUpdateUploadsTheImage(String highResFile) throws Exception
@@ -120,35 +157,27 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         Thread.sleep(10000);
         Assert.assertEquals(media.template_Upload(), false, "Low resolution image can be uploaded");
         AutomationLog.info("Low resolution image cant be uploaded");
-        	
     }
 
     public void verifyIfclickingOnSaveAndContinueRedirectsToContactsPage() throws Exception
     {
-        contacts = moveToContactsForm(testCaseData);
-        Assert.assertEquals(contacts.form_Contacts().isDisplayed(), true, "Expected contacts form is not shown");
+        contactsPage = media.clickOnSaveAndContinueButton();;
+        Assert.assertEquals(contactsPage.form_Contacts().isDisplayed(), true, "Expected contacts form is not shown");
         AutomationLog.info("Contacts form is shown after clicking save and continue button with valid media form  input ");
+        contactsPage.clickOnBackButton();
     }
 
-    public void verifyIfErrorMessageShownOnClickingSaveAndContinueWithoutUploadingImage() throws Exception
-    {
-        media.clickOnSaveAndContinueButton();
-        Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        String msg = media.msg_MediaError().getText();
-        Assert.assertEquals(msg, "Minimum one image file is required", "Expected Media Error Message is not Shown");
-        AutomationLog.info("Media Error message is shown if clicked on save without uploading an Image");
-    }
-
-    public SubmitListingContactsFormPage moveToContactsForm(HashMap<String, HashMap<String, String>> data) throws Exception
+    public ContactsForm  moveToContactsForm(HashMap<String, HashMap<String, String>> data) throws Exception
    {
-       SubmitListingContactsFormPage contact = null;
+       ContactsForm contacts = null;
        mediadata = data.get("MediaFormData");
        String highResFile = exefilepath + mediadata.get("highResFile");
        try
        {
            if(!(media.form_Media().isDisplayed()))
            {
-               detailsRetailAction.fillDetailsFormAndMoveToMediaForm(data);
+               //detailsRetailAction.fillDetailsFormAndMoveToMediaForm(data);
+               
            }
            media.clickOnAddFilesButton();
            Runtime.getRuntime().exec(highResFile);
@@ -157,34 +186,44 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
            WaitFor.presenceOfTheElement(Page.driver, media.uploadImagelocator());
            media.clickOnSaveAndContinueButton();
            Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-           contact = new SubmitListingContactsFormPage(Page.driver);
+           contacts = new ContactsForm(Page.driver);
        }
        catch(Exception e)
        {
            AutomationLog.error("Could not go to Contacts form ");
            throw(e);
        }
-       return contact;
-       
-   }
+       return contacts;
+    }
 
     public void verifyIfClickingOnBackButtonRedirectsToDetailsForm() throws Exception
     {
-        details = media.clickOnBackButton();
+        details = media.clickOnBackButtonOnMediaPage();
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Assert.assertEquals(details.form_Property().isDisplayed(), true, "Expected form is not shown");
         AutomationLog.info("Clicking back button on media form redirects details page");
-        details.clickSaveAndContinue();
+        details.clickSaveAndContinueOnDetailsForm();
+    }
+
+    private void verifyEmailAddress() throws Exception 
+    {
+        String EmailIdOnMediaForm = media.txt_EmailAddress().getText();
+        String EmailIdOnBanner =  media.txt_EmailAddressOnBanner().getText();
+        boolean emailIdStatus = false;
+        emailIdStatus = EmailIdOnMediaForm.equals(EmailIdOnBanner);
+        Assert.assertEquals(emailIdStatus, true, "Email id on banner not matches with email id on media form");
+        AutomationLog.info("Email id on banner matches with email id on media form");
+    }
+
+	@Override
+    protected String successMessage() 
+    {
+        return "Sucessfully tested Update Listing Media Form";
     }
 
     @Override
-    protected String successMessage() {
-        return "Test cases passed for SubmitListing Media form";
+    protected String failureMessage() 
+    {
+        return "Failed Update Listing Media Form";
     }
-
-    @Override
-    protected String failureMessage() {
-        return "Test cases failed for SubmitListing Media form";
-    }
-
 }

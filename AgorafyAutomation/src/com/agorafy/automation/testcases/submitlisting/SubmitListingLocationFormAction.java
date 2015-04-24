@@ -126,16 +126,6 @@ public class SubmitListingLocationFormAction extends SubmitListingBaseAction
         dataFromCSV.put("zipcode", dummyLocationDataFromCSV.get("zipcode"));
     }
 
-    public Boolean compareTwoCollections(Collection<String> collection1, Collection<String> collection2)
-    {
-        if(collection1.size() == collection2.size())
-        {
-            if(collection1.containsAll(collection2) && collection2.containsAll(collection1))
-            return true;
-        }
-        return false;
-    }
-
     public void clearCurrentForm() throws Exception
     {
         try 

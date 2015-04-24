@@ -1,5 +1,7 @@
 package com.agorafy.automation.automationframework;
 
+import java.util.Collection;
+
 public abstract class AutomationTestCaseVerification extends AutomationTestCase
 {
     public AutomationTestCaseVerification()
@@ -20,6 +22,16 @@ public abstract class AutomationTestCaseVerification extends AutomationTestCase
     public void cleanup()
     {
         super.cleanup();
+    }
+
+    public Boolean compareTwoCollections(Collection<String> collection1, Collection<String> collection2)
+    {
+        if(collection1.size() == collection2.size())
+        {
+            if(collection1.containsAll(collection2) && collection2.containsAll(collection1))
+            return true;
+        }
+        return false;
     }
 
     protected abstract void verifyTestCases() throws Exception;
