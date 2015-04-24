@@ -18,7 +18,7 @@ public class UpdateListingSuite
         AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
     }
 
-    //@Test(priority = 1)
+    @Test(priority = 1)
     public void testUpdateListingAvailabilityForm() throws Exception
     {
         try
@@ -31,7 +31,7 @@ public class UpdateListingSuite
         }
     }
 
-    //@Test(priority = 2)
+    @Test(priority = 2)
     public void testUpdateListingDetailsForm() throws Exception
     {
         try
@@ -44,7 +44,7 @@ public class UpdateListingSuite
         }
     }
 
-    //@Test(priority = 3)
+    @Test(priority = 3)
     public void testUpdateListingMediaForm() throws Exception
     {
         try
@@ -57,7 +57,7 @@ public class UpdateListingSuite
         }
     }
 
-    //@Test(priority = 4)
+    @Test(priority = 4)
     public void testUpdateListingContactsForm() throws Exception
     {
         try
