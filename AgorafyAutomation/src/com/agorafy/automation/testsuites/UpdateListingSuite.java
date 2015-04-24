@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
+import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.testcases.updateListing.*;
 
 public class UpdateListingSuite 
@@ -27,7 +28,7 @@ public class UpdateListingSuite
         }
         catch(Exception e)
         {
-            throw(e);
+            AutomationLog.error("Failed to test update listing availibility form");
         }
     }
 
@@ -40,7 +41,7 @@ public class UpdateListingSuite
         }
         catch(Exception e)
         {
-            throw(e);
+            AutomationLog.error("Failed to test Details form");
         }
     }
 
@@ -53,7 +54,7 @@ public class UpdateListingSuite
         }
         catch(Exception e)
         {
-            throw(e);
+            AutomationLog.error("Failed to test media form");
         }
     }
 
@@ -66,7 +67,7 @@ public class UpdateListingSuite
         }
         catch(Exception e)
         {
-            throw(e);
+            AutomationLog.error("Failed to test Contacts form");
         }
     }
 
@@ -79,7 +80,7 @@ public class UpdateListingSuite
         }
         catch(Exception e)
         {
-            throw(e);
+            AutomationLog.error("Failed to test preview and submit form");
         }
     }
 }
