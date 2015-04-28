@@ -335,7 +335,7 @@ public class MyListings extends Page
             
             
             int elementLocation =  singleListing.getLocation().getX();
-            pageScrollDown(0, (elementLocation+230) );
+            scrollPage(0, (elementLocation+230) );
             
             
             /*JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -398,9 +398,9 @@ public class MyListings extends Page
         return updateListingPage;
     }
 
-    public String getURL()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/manage/listings/";
+        return applicationUrl();
     }
 
     public String pageHeading() throws Exception

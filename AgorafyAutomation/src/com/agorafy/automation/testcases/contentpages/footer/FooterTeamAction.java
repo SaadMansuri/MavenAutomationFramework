@@ -32,7 +32,8 @@ public class FooterTeamAction extends ContentPagesVerification
         Team team = companyLinks.clickOnTeamLink();;
 
         HashMap<String, String> expectedTeamData = testCaseData.get("Team");
-        expectedTeamData.put("url", team.teamPageUrl());
+        String url = team.getApplicationUrl() + expectedTeamData.get("teamurl");
+        expectedTeamData.put("url", url);
         verifyLink(team, expectedTeamData);
 
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();

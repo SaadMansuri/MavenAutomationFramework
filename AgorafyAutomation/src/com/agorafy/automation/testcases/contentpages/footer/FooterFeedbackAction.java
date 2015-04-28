@@ -32,7 +32,8 @@ public class FooterFeedbackAction extends ContentPagesVerification
         Feedback feedback = supportLinks.clickOnFeedbackLink();
 
         HashMap<String, String> expectedFeedbackData = testCaseData.get("Feedback");
-        expectedFeedbackData.put("url", feedback.feedbackPageUrl());
+        String url = feedback.getApplicationUrl() + expectedFeedbackData.get("feedbackUrl");
+        expectedFeedbackData.put("url", url);
         verifyLink(feedback, expectedFeedbackData);
 
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();

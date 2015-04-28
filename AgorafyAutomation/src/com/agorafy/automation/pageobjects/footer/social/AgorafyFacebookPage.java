@@ -11,8 +11,4 @@ public class AgorafyFacebookPage extends Page
         super(driver);
     }
 
-    public String agorafyFacebookPageUrl()
-    {
-        return "https://www.facebook.com/agorafy";
-    }
 }

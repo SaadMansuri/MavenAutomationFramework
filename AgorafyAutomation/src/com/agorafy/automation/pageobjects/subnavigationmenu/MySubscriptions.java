@@ -154,9 +154,9 @@ public class MySubscriptions extends Page
         return element;
     }
 
-    public String getURL()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/manage/subscriptions/";
+        return applicationUrl();
     }
 
     public String pageHeading() throws Exception

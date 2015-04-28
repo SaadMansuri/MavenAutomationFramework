@@ -38,8 +38,9 @@ public class SubnavigationFeedbackAction extends ContentPagesVerification
             subnavigation = Page.subNavigation();
             String dropdownMoreOption = "Feedback";
             feedback = (Feedback) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
-            expectedFeedbackData = testCaseData.get("More->FeedbackPageData");
-            expectedFeedbackData.put("url", feedback.feedbackPageUrl());
+            expectedFeedbackData = testCaseData.get("Feedback");
+            String url = feedback.getApplicationUrl() + expectedFeedbackData.get("feedbackUrl");
+            expectedFeedbackData.put("url", url);
             AutomationLog.info("Redirection to feedback page sucessfull");
         }
         catch (Exception e) 

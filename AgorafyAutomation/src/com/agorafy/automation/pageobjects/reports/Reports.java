@@ -38,7 +38,7 @@ public class Reports extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Could not found Add To report link");
+            AutomationLog.error("Could not find Add To report link");
             throw(e);
         }
         return element;
@@ -58,7 +58,7 @@ public class Reports extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("could not found ReportBox");
+            AutomationLog.error("could not find ReportBox");
             throw(e);
         }
         return element;
@@ -72,11 +72,11 @@ public class Reports extends Page
     public String getReportCount() throws Exception
     {
         String count;
-        header.clickOnProfileNameDropdownArrow();
+        header.clickOnProfileNameDropdownArrow();//Open profile name dropdown
         WaitFor.presenceOfTheElement(driver, getUserDropdownLocator());
         WaitFor.sleepFor(1000);
         count = header.reportCount().getText();
-        header.clickOnProfileNameDropdownArrow();
+        header.clickOnProfileNameDropdownArrow();//Close profile name dropdown
         WaitFor.sleepFor(1000);
         AutomationLog.info("Successfully got Reports Count");
         return count;
@@ -86,11 +86,11 @@ public class Reports extends Page
     {
         try
         {
-            element = driver.findElement(By.id("reportWindowClose"));
+            element = reportBox().findElement(By.id("reportWindowClose"));
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found close icon");
+            AutomationLog.error("Could not find close icon");
             throw(e);
         }
         return element;
@@ -114,12 +114,12 @@ public class Reports extends Page
     {
         try
         {
-            element = driver.findElement(By.id("clearReport"));
+            element = reportBox().findElement(By.id("clearReport"));
             AutomationLog.info("Clear link found on Reports box");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found clear link Reports box");
+            AutomationLog.error("Could not find clear link Reports box");
             throw(e);
         }
         return element;
@@ -143,11 +143,11 @@ public class Reports extends Page
     {
         try
         {
-            element = driver.findElement(By.id("reportList"));
+            element = reportBox().findElement(By.id("reportList"));
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Report list");
+            AutomationLog.error("Could not find Report list");
             throw(e);
         }
         return element;
@@ -162,12 +162,12 @@ public class Reports extends Page
     {
         try
         {
-            element = driver.findElement(By.id("printReport"));
+            element = reportBox().findElement(By.id("printReport"));
             AutomationLog.info("Print link found on Reports box");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Could not found Print link on Reports box");
+            AutomationLog.error("Could not find Print link on Reports box");
             throw(e);
         }
         return element;
@@ -179,6 +179,7 @@ public class Reports extends Page
         try
         {
             link_Print().click();
+            WaitFor.ElementToBeDisplayed(driver, By.id("customizeReport"));
             reportspopup = new ReportsPopUp(driver);
             AutomationLog.info("Successfully Clicked on Print link");
         }

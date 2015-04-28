@@ -1,41 +1,29 @@
 # This is a comment
 
-AboutUs,title="AGORAFY - About Us";heading="About Us"
-Blog,title="Agorafy Blog"
-Careers,title="AGORAFY - Careers";heading=Careers
-Contact,title="AGORAFY - Contact";heading=Contact
-FAQ,title="FAQ — Agorafy Blog"
-HowItWorks,title="AGORAFY - Tips and How-Tos";heading="How It Works"
-Member,title="AGORAFY - Members' Benefits";heading="Members' Benefits"
-SearchProfessionals,title="AGORAFY - Agent and Company Search";heading="Agent and Company Search"
-SearchProperties,title="AGORAFY - Search";heading="Search Properties in New York City"
+AboutUs,title="AGORAFY - About Us";heading="About Us";aboutUsUrl="/about/"
+Blog,title="Agorafy Blog";blogUrl="http://blog.agorafy.com/"
+Careers,title="AGORAFY - Careers";heading=Careers;careersUrl="/careers/"
+Contact,title="AGORAFY - Contact";heading=Contact;contactsUrl="/contact/"
+FAQ,title="FAQ — Agorafy Blog";faqsPageUrl="http://blog.agorafy.com/faq/"
+HowItWorks,title="AGORAFY - Tips and How-Tos";heading="How It Works";howItWorksPageUrl="/tips/"
+Member,title="AGORAFY - Members' Benefits";heading="Members' Benefits";membersPageUrl="/benefits/"
+SearchProfessionals,title="AGORAFY - Agent and Company Search";heading="Agent and Company Search";searchProfessionalPageUrl="/search/agent"
+SearchProperties,title="AGORAFY - Search";heading="Search Properties in New York City";searchPropertiesPageUrl="/search"
 
 CompanyInfo,companyname="Agorafy, Inc.";companyaddr1="235 West 23rd Street, 5th Floor";companyaddr2="New York, NY 10011";companyphoneNo=(212) 401-4231;supportemail=hello@agorafy.com;copyright="Copyright © 2015 Agorafy, Inc. All rights reserved."
-Feedback,title="AGORAFY - Feedback";heading=Feedback
-Press,title="AGORAFY - Press";heading=Press
-PrivacyPolicy,title="AGORAFY - Privacy Policy";heading="Privacy Policy"
-Twitter,title="Agorafy (@agorafy) | Twitter"
-Facebook,title="Agorafy - New York, New York - Real Estate | Facebook"
-Youtube,title="agorafy - YouTube"
-GooglePlus,title="Agorafy - Google+"
-LinkedIn,title="Agorafy | LinkedIn"
-Team,title="AGORAFY - Team";heading=Team
-Terms,title="AGORAFY - Terms and Conditions";heading="Terms and Conditions"
+Feedback,title="AGORAFY - Feedback";heading=Feedback;feedbackUrl="/feedback/"
+Press,title="AGORAFY - Press";heading=Press;pressPageUrl="/press/"
+PrivacyPolicy,title="AGORAFY - Privacy Policy";heading="Privacy Policy";privacyPolicyPageUrl="/privacy/"
+Twitter,title="Agorafy (@agorafy) | Twitter";agorafyTwitterPageUrl="https://twitter.com/agorafy"
+Facebook,title="Agorafy - New York, New York - Real Estate | Facebook";agorafyFacebookPageUrl="https://www.facebook.com/agorafy"
+Youtube,title="agorafy - YouTube";agorafyYoutubePageUrl="https://www.youtube.com/user/agorafy"
+GooglePlus,title="Agorafy - Google+";agorafyGooglePlusPageUrl="https://plus.google.com/101471233098763801684/posts"
+LinkedIn,title="Agorafy | LinkedIn";agorafyLinkedInPageUrl="https://www.linkedin.com/company/agorafy"
+Team,title="AGORAFY - Team";heading=Team;teamurl="/team/"
+Terms,title="AGORAFY - Terms and Conditions";heading="Terms and Conditions";termsAndConditionsPageUrl="/terms/"
 
 AdvancedSearch,title="AGORAFY";heading="Advanced Search"
 
-
-#data for More->Team verification
-More->TeamPageData,title="AGORAFY - Team";heading="Team"
-
-#data for More->Careers verification
-More->CareersPageData,title="AGORAFY - Careers";heading=Careers
-
-#data for More->Press verification
-More->PressPageData,title="AGORAFY - Press";heading=Press
-
-#data for More->Feedback verification
-More->FeedbackPageData,title="AGORAFY - Feedback";heading="Feedback"
 SubjectDropdownOptions,SubjectDropdownOption1="Report a Problem";SubjectDropdownOption2="Ask a Question";SubjectDropdownOption3="Share an Idea";SubjectDropdownOption4="Select Subject"
 ErrorMessages,ErrorForName="* This field is required";ErrorForEmail="* This field is required * Invalid email address";ErrorForSubjectDropdown="* This field is required";ErrorForMessage="* This field is required"
 IfNameEmpty,Email="kevin@gmail.com";SubjectDropdown="Share an Idea";Message="This is feedback page"
@@ -46,14 +34,14 @@ FeedbackFormTotalData,Name="Kevin";Email="kevin@gmail.com";SubjectDropdown="Ask 
 SuccessMsg,SuccessMsgForFeedbackForm="Thank you! Your feedback has been submitted."
 
 #data for My Dashboard verification
-MyDashboard,title="AGORAFY - My Profile";heading="My Dashboard"
+MyDashboard,title="AGORAFY - My Profile";heading="My Dashboard";myDashboardPageUrl="/manage/dashboard"
 
 #data for My Listings verification
-MyListings,title="AGORAFY - Manage My Listings";heading="My Listings"
+MyListings,title="AGORAFY - Manage My Listings";heading="My Listings";myListingsPageUrl="/manage/listings/"
 
 #data for My Subscriptions verification
-MySubscriptions,title="AGORAFY - Manage My Subscriptions";heading="My Subscriptions"
+MySubscriptions,title="AGORAFY - Manage My Subscriptions";heading="My Subscriptions";mySubscriptionsPageUrl="/manage/subscriptions/"
 
 #data for Edit Profiles verification
-EditProfile,title="AGORAFY - Manage My Profile";heading="Edit / View My Profile"
+EditProfile,title="AGORAFY - Manage My Profile";heading="Edit / View My Profile";editProfilePageUrl="/manage/profile"
 

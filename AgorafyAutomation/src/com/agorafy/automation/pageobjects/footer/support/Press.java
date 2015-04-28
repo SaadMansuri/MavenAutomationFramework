@@ -15,9 +15,9 @@ public class Press extends Page
         super(driver);
     }
 
-    public String pressPageUrl()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/press/";
+        return applicationUrl();
     }
 
     public WebElement pageHeadingElement() throws Exception

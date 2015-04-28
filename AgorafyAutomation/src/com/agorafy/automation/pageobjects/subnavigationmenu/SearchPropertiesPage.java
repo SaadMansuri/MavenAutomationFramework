@@ -36,8 +36,8 @@ public class SearchPropertiesPage extends Page
         return pageHeadingElement().getText();
     }
 
-    public String getURL()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/search";
+        return applicationUrl();
     }
 }

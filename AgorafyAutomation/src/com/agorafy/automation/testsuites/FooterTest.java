@@ -214,7 +214,7 @@ public class FooterTest
         }
     }
 
-   /* @AfterSuite
+    /* @AfterSuite
     public void destroy()
     {
     	AppDriver.clearBrowserContext(Page.driver);	

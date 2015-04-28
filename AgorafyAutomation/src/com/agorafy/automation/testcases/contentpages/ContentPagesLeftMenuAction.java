@@ -51,7 +51,8 @@ public class ContentPagesLeftMenuAction extends ContentPagesVerification
     {
         Contact contact = leftMenu.clickOnContactLink();
         testData = testCaseData.get("Contact");
-        testData.put("url", contact.contactPageUrl());
+        String url = contact.getApplicationUrl() + testData.get("contactsUrl");
+        testData.put("url", url);
         verifyLink(contact, testData);
 
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.contactLinkText(), "Left menu does not show Contact link as Active Link");
@@ -63,7 +64,8 @@ public class ContentPagesLeftMenuAction extends ContentPagesVerification
     {
         Feedback feedback = leftMenu.clickOnFeedbackLink();
         testData = testCaseData.get("Feedback");
-        testData.put("url", feedback.feedbackPageUrl());
+        String url = feedback.getApplicationUrl() + testData.get("feedbackUrl");
+        testData.put("url", url);
         verifyLink(feedback, testData);
 
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.feedbackLinkText(), "Left menu does not show Feedback link as Active Link");
@@ -75,7 +77,8 @@ public class ContentPagesLeftMenuAction extends ContentPagesVerification
     {
         Careers careers = leftMenu.clickOnCareersLink();
         testData = testCaseData.get("Careers");
-        testData.put("url", careers.careersPageUrl());
+        String url = careers.getApplicationUrl() + testData.get("careersUrl");
+        testData.put("url", url);
         verifyLink(careers, testData);
 
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.careersLinkText(), "Left menu does not show Careers link as Active Link");
@@ -87,7 +90,8 @@ public class ContentPagesLeftMenuAction extends ContentPagesVerification
     {
         Team team = leftMenu.clickOnTeamLink();
         testData = testCaseData.get("Team");
-        testData.put("url", team.teamPageUrl());
+        String url = team.getApplicationUrl() + testData.get("teamurl");
+        testData.put("url", url);
         verifyLink(team, testData);
 
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.teamLinkText(), "Left menu does not show Team link as Active Link");
@@ -99,7 +103,8 @@ public class ContentPagesLeftMenuAction extends ContentPagesVerification
     {
         Press press = leftMenu.clickOnPressLink();
         testData = testCaseData.get("Press");
-        testData.put("url", press.pressPageUrl());
+        String url = press.getApplicationUrl() + testData.get("pressPageUrl");
+        testData.put("url", url);
         verifyLink(press, testData);
 
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.pressLinkText(), "Left menu does not show Press link as Active Link");
@@ -111,7 +116,8 @@ public class ContentPagesLeftMenuAction extends ContentPagesVerification
     {
         MembershipBenefit benefits = leftMenu.clickOnMembershipBenefitLink();
         testData = testCaseData.get("Member");
-        testData.put("url", benefits.membershipBenefitPageUrl());
+        String url = benefits.getApplicationUrl() + testData.get("membersPageUrl");
+        testData.put("url", url);
         verifyLink(benefits, testData);
 
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.membershipBenefitLinkText(), "Left menu does not show Membership Benefit link as Active Link");
@@ -123,7 +129,8 @@ public class ContentPagesLeftMenuAction extends ContentPagesVerification
     {
         HowItWorks howItWorks = leftMenu.clickOnHowItWorksLink();
         testData = testCaseData.get("HowItWorks");
-        testData.put("url", howItWorks.howItWorksPageUrl());
+        String url = howItWorks.getApplicationUrl() + testData.get("howItWorksPageUrl");
+        testData.put("url", url);
         verifyLink(howItWorks, testData);
 
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.howItWorksLinkText(), "Left menu does not show How It Works link as Active Link");
@@ -135,7 +142,8 @@ public class ContentPagesLeftMenuAction extends ContentPagesVerification
     {
         AboutUs aboutUs = leftMenu.clickOnAboutUsLink();
         testData = testCaseData.get("AboutUs");
-        testData.put("url", aboutUs.aboutUsPageUrl());
+        String url = aboutUs.getApplicationUrl() + testData.get("aboutUsUrl");
+        testData.put("url", url);
         verifyLink(aboutUs, testData);
 
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.aboutUsLinkText(), "Left menu does not show About Us link as Active Link");

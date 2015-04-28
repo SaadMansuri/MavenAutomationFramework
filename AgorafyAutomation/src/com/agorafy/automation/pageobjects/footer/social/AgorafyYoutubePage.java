@@ -11,8 +11,4 @@ public class AgorafyYoutubePage extends Page
         super(driver);
     }
 
-    public String agorafyYoutubePageUrl()
-    {
-        return "https://www.youtube.com/user/agorafy";
-    }
 }

@@ -50,7 +50,7 @@ public class SubnavigationBlogAction extends ContentPagesVerification
     @Override
     protected void verifyTestCases() throws Exception
     {
-        Assert.assertEquals(blog.currentURL(), blog.blogPageUrl(), "Link did not redirect to correct Page Url");
+        Assert.assertEquals(blog.currentURL(), expectedBlogData.get("blogUrl"), "Link did not redirect to correct Page Url");
         AutomationLog.info("Link redirects to correct Page Url");
 
         Assert.assertEquals(blog.currentPageTitle(), expectedBlogData.get("title"), "Page does not show correct Page Title");

@@ -11,8 +11,4 @@ public class AgorafyGooglePlusPage extends Page
         super(driver);
     }
 
-    public String agorafyGooglePlusPageUrl()
-    {
-        return "https://plus.google.com/101471233098763801684/posts";
-    }
 }

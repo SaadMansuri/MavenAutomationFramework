@@ -60,7 +60,8 @@ public class MyListingsAction extends ContentPagesVerification
         WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
         myListings = subnavigation.clickLinkMyListings(); 
         expectedmyListingsData = testCaseData.get("MyListings");
-        expectedmyListingsData.put("url", myListings.getURL());
+        String url = myListings.getApplicationUrl() + expectedmyListingsData.get("myListingsPageUrl");
+        expectedmyListingsData.put("url", url);
         AutomationLog.info("Redirection to MyListing is sucessfull");
         }
         catch (Exception e) 
@@ -156,7 +157,7 @@ public class MyListingsAction extends ContentPagesVerification
     private void verifyUpdateLinkAfterMouseHover() throws Exception 
     {
         boolean actualUpdateListingLinkStatus = false;
-        myListings.pageScrollDown(0, 300);
+        myListings.scrollPage(0, 300);
         myListings.hoverOverFirstListing();
         actualUpdateListingLinkStatus = myListings.updateListing().isDisplayed();
         Assert.assertEquals(actualUpdateListingLinkStatus, true, "After performing hover operation over first listing update link is not displayed");

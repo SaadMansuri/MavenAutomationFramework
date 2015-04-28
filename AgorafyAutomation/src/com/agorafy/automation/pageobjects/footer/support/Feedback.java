@@ -20,9 +20,9 @@ public class Feedback extends Page
         super(driver);
     }
 
-    public String feedbackPageUrl()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/feedback/";
+        return applicationUrl();
     }
 
     public WebElement pageHeadingElement() throws Exception

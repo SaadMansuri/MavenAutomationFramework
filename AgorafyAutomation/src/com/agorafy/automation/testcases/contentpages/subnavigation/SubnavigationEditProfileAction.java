@@ -50,7 +50,8 @@ public class SubnavigationEditProfileAction extends ContentPagesVerification
         WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
         editProfilePage = subnavigation.clickLinkEditProfile(); 
         expectedEditProfileData = testCaseData.get("EditProfile");
-        expectedEditProfileData.put("url", editProfilePage.getURL());
+        String url = editProfilePage.getApplicationUrl() + expectedEditProfileData.get("editProfilePageUrl");
+        expectedEditProfileData.put("url", url);
         verifyLink(editProfilePage, expectedEditProfileData);
 
         AutomationLog.info("Testing whether same link is active in left side started...");

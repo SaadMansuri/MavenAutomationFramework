@@ -15,9 +15,9 @@ public class TermsAndConditions extends Page
         super(driver);
     }
 
-    public String termsAndConditionsPageUrl()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/terms/";
+        return applicationUrl();
     }
 
     public WebElement pageHeadingElement() throws Exception

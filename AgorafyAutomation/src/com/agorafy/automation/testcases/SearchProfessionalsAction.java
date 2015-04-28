@@ -63,17 +63,10 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception 
     {
 
-        AutomationLog.info("Verify whether empty agent search results in same page, by checking URL");
+        verifyIfLatestAgentsTabIsShown();
+
+    	AutomationLog.info("Verify whether empty agent search results in same page, by checking URL");
         verifyEmptyAgentSearch();
-
-        AutomationLog.info("Verify whether after performing click operation on company name in compnies tab, it redirects to company profile page by checking company name");
-        verifyCompanyProfilePage();
-
-        AutomationLog.info("verify scroll down agent's page");
-        verifyLazyLoadingAgents();
-
-        AutomationLog.info("verify scroll down companies page");
-        verifyLazyLoadingCompnies();
 
         HashMap<String, String> agentCompanySearch = testCaseData.get("agentCompanySearch");
         verifyIfRandomAgentCompanySearchShowsAppropriateMessage(searchprofessional,agentCompanySearch);
@@ -86,6 +79,15 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
 
         HashMap<String, String> search = testCaseData.get("agentName");
         verifyIfSearchByExpertiseClearsAgentCompanySearchText(searchprofessional,search);
+
+        AutomationLog.info("Verify whether after performing click operation on company name in compnies tab, it redirects to company profile page by checking company name");
+        verifyCompanyProfilePage();
+
+        AutomationLog.info("verify scroll down agent's page");
+        verifyLazyLoadingAgents();
+
+        AutomationLog.info("verify scroll down companies page");
+        verifyLazyLoadingCompnies();
 
         HashMap<String, String> neighborName = testCaseData.get("Neighborhoods");
         verifyIfNeighborHoodDropBoxDoNotAddMoreThan5Neighborhoods(searchprofessional,neighborName);
@@ -103,10 +105,16 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         verifyIfNeighborhoodCanBeAddedAfterRemovefromNeighborhoodsDropbox(searchprofessional, neighborName);
     }
 
+    public void verifyIfLatestAgentsTabIsShown() throws Exception
+    {
+        Assert.assertTrue(searchprofessional.link_LatestAgentsTab().isDisplayed(), "Expected Latest Agents tab is not shown");
+        AutomationLog.info("Latest Agents tab is shown when SearchProfessionals page is loaded first time");
+    }
+
     private void verifyLazyLoadingAgents() throws InterruptedException 
     {
         boolean actualLazyLoadingStatus = false;
-        searchprofessional.pageScrollDown(0,10000);
+        searchprofessional.scrollPage(0,10000);
         WaitFor.sleepFor(5000);
         actualLazyLoadingStatus = searchprofessional.lazyLoadingStatus();
         Assert.assertEquals(actualLazyLoadingStatus, true, "After scrolling down search professionals page, new agents are not being displayed");
@@ -117,12 +125,12 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     {
         searchprofessional.tab_TopCompanies().click();
         boolean actualLazyLoadingStatus = false;
-        searchprofessional.pageScrollDown(0,10000);
+        searchprofessional.scrollPage(0,10000);
         WaitFor.sleepFor(5000);
         actualLazyLoadingStatus = searchprofessional.lazyLoadingStatus();
         Assert.assertEquals(actualLazyLoadingStatus, true, "After scrolling down search professionals page, new companies are not being displayed");
         AutomationLog.info("After scrolling down search professionals page, new companies are being displayed");
-        searchprofessional.tab_TopAgents().click();
+        //searchprofessional.tab_TopAgents().click();
     }
 
 	private void verifyCompanyProfilePage() throws Exception 
@@ -142,10 +150,13 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
 
 	private void verifyEmptyAgentSearch() throws Exception 
     {
+        searchprofessional.txtbx_AgentCompanySearch().clear();
+        WaitFor.sleepFor(10000);
         searchprofessional.btn_AgentCompanySearch().click();
+        WaitFor.sleepFor(20000);
         String actualURL = searchprofessional.currentURL();
         dataFromCSV = testCaseData.get("ExpectedURL's");
-        String expectedURL = dataFromCSV.get("EmptyAgentSearchURL");
+        String expectedURL = searchprofessional.getApplicationUrl() + dataFromCSV.get("EmptyAgentSearchURL");
         expectedURL = expectedURL.concat("=1&fT=ag&name=");//CSV parser ignores data after = therefore we have to concat this string in expected string part
         Assert.assertEquals(actualURL, expectedURL, "After performing empty search page URL is not found as expected");
         AutomationLog.info("After performing empty search, page URL is found same as expected");
@@ -174,9 +185,11 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     public void verifyIfRandomAgentCompanySearchShowsAppropriateMessage(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentCompanySearch) throws Exception
     {
         WebElement element=null;
-        WaitFor.sleepFor(1000);
         searchprofessional.txtbx_AgentCompanySearch().clear();
+        WaitFor.waitForPageToLoad(Page.driver);
+        WaitFor.sleepFor(20000);
         searchprofessional.searchByAgentOrCompanyName(agentCompanySearch.get("text"));
+        WaitFor.sleepFor(20000);
         element = searchprofessional.searchAgentResultMessage();
         Assert.assertEquals(element.getText(),"No agents found", "Expected Search result message not found");
         searchprofessional.clickOnCompaniesTabOnSearchProfessionals();

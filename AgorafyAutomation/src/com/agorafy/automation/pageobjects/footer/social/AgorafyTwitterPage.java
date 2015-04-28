@@ -11,8 +11,4 @@ public class AgorafyTwitterPage extends Page
         super(driver);
     }
 
-    public String agorafyTwitterPageUrl()
-    {
-        return "https://twitter.com/agorafy";
-    }
 }

@@ -36,6 +36,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
             media = detailsRetailAction.fillDetailsFormAndMoveToMediaForm(testCaseData);
             mediadata = testCaseData.get("MediaFormData");
             AutomationLog.info("Successfully reached to Media form");
+            
         }
         catch(Exception e)
         {
@@ -48,10 +49,15 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
     {
         String highResFile = exefilepath + mediadata.get("highResFile");
         String lowResFile = exefilepath + mediadata.get("lowResFile");
+        String pdffile = exefilepath + mediadata.get("pdfupload");
         verifyIfClickingAddfilesAddImageToUpload(highResFile); 
         verifyIfClickingCancelButtonRemovesAddedImage();
         verifyIfClickingStartUpdateUploadsTheImage(highResFile);
         verifyIfclickingDeleteButtonRemoveUploadedImage();
+        verifyIfErrorMessageShownIfOnlyPDFIsUploadedAndClickedOnSaveAndContinueButton(pdffile);
+        verifyIfPdfIsUploadedSuccessFullyAfterHighResolutionImageAdded(highResFile);
+        HashMap<String, String> upload = testCaseData.get("MultipleImageUpload");
+        verifyIfmultipleImageFilesCanBeUploaded(upload);
         verifyIfLowResolutionImageCantBeUploaded(lowResFile);
         verifyIfErrorMessageShownOnClickingSaveAndContinueWithoutUploadingImage();
         verifyIfClickingOnBackButtonRedirectsToDetailsForm();
@@ -137,6 +143,52 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         String msg = media.msg_MediaError().getText();
         Assert.assertEquals(msg, "Minimum one image file is required", "Expected Media Error Message is not Shown");
         AutomationLog.info("Media Error message is shown if clicked on save without uploading an Image");
+    }
+
+    public void verifyIfErrorMessageShownIfOnlyPDFIsUploadedAndClickedOnSaveAndContinueButton(String pdffile) throws Exception
+    {
+        media.clickOnAddFilesButton();
+        Runtime.getRuntime().exec(pdffile);
+        WaitFor.sleepFor(10000);
+        media.clickOnStartUploadButton();
+        Thread.sleep(10000);
+        media.clickOnSaveAndContinueButton();
+        String msg = media.msg_MediaError().getText();
+        Assert.assertEquals(msg, "Minimum one image file is required", "Expected Media Error Message is not Shown");
+        AutomationLog.info("Low resolution image cant be uploaded");
+    }
+
+    public void verifyIfPdfIsUploadedSuccessFullyAfterHighResolutionImageAdded(String highResFile) throws Exception 
+    {
+        media.clickOnAddFilesButton();
+        Runtime.getRuntime().exec(highResFile);
+        WaitFor.sleepFor(10000);
+        media.clickOnStartUploadButton();
+        WaitFor.sleepFor(10000);
+        contacts = media.clickOnSaveAndContinueButton();
+        Assert.assertTrue(contacts.form_Contacts().isDisplayed(), "Expected contacts form is not displayed");
+        AutomationLog.info("Adding Image file uploads pdf file successfully");
+        contacts.clickOnBackButton();
+        media.deleteUploadedfiles();
+        WaitFor.sleepFor(10000);
+    }
+
+    public void verifyIfmultipleImageFilesCanBeUploaded(HashMap<String, String> upload) throws Exception 
+    {
+        int count = 3;
+        for(int i=1;i<=count;i++)
+        {
+            String filename ="image"+i;
+            String uploadfile = exefilepath + upload.get(filename);
+            media.clickOnAddFilesButton();
+            Runtime.getRuntime().exec(uploadfile);
+            WaitFor.sleepFor(10000);
+        }
+        media.clickOnStartUploadButton();
+        WaitFor.sleepFor(10000);
+        Assert.assertEquals(media.getCountOfUploadedFiles(), count, "Expected image files are not uploaded");
+        AutomationLog.info("Multiple iamge files uploaded successfully");
+        media.deleteUploadedfiles();
     }
 
     public SubmitListingContactsFormPage moveToContactsForm(HashMap<String, HashMap<String, String>> data) throws Exception

@@ -15,9 +15,9 @@ public class HowItWorks extends Page
         super(driver);
     }
 
-    public String howItWorksPageUrl()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/tips/";
+        return applicationUrl();
     }
 
     public WebElement pageHeadingElement() throws Exception

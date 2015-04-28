@@ -181,9 +181,9 @@ public class Dashboard extends Page
         return element;
     }
 
-    public String getURL()
+    public String getApplicationURL()
     {
-        return applicationUrl() + "/manage/dashboard";
+        return applicationUrl();
     }
 
     public String pageHeading() throws Exception

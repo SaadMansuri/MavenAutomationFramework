@@ -90,7 +90,7 @@ public class SearchProfessionalsPage extends Page
         try
         {
             enterSearchTextInAgentCompanySearchTextBox(name);
-            WaitFor.sleepFor(1000);
+            WaitFor.sleepFor(2000);
             btn_AgentCompanySearch().click();
             AutomationLog.info("Clicked on AgentCompanySearch button");
         }
@@ -825,9 +825,9 @@ public class SearchProfessionalsPage extends Page
         return heading_SearchProfessionalPage().getText();
     }
 
-    public String getURL()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/search/agent";
+        return applicationUrl();
     }
 
     public boolean lazyLoadingStatus() 
@@ -852,6 +852,20 @@ public class SearchProfessionalsPage extends Page
             AutomationLog.error("Falied to get lazy loading status");
         }
         return lazyLoadingStatus;
+    }
+
+    public WebElement link_LatestAgentsTab() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.linkText("Latest Agents"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find tab Latest Agents");
+            throw(e);
+        }
+        return element;
     }
 
 }

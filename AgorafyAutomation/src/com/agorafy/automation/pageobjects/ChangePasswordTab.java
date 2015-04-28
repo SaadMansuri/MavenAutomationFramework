@@ -118,7 +118,7 @@ public class ChangePasswordTab extends Page
     {
        try
        {
-           element=driver.findElement(By.xpath(".//*[@id='changePasswordForm']/div[2]/div/div/div"));
+           element = driver.findElement(By.className("oldPasswordformError")).findElement(By.className("formErrorContent"));
        }
        catch(Exception e)
        {
@@ -132,7 +132,7 @@ public class ChangePasswordTab extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='changePasswordForm']/div[3]/div/div/div"));
+            element = driver.findElement(By.className("password1formError")).findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
         {
@@ -146,7 +146,7 @@ public class ChangePasswordTab extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='changePasswordForm']/div[4]/div/div/div"));
+             element = driver.findElement(By.className("password2formError")).findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
         {
@@ -160,7 +160,7 @@ public class ChangePasswordTab extends Page
     {
         try
         {
-            element=driver.findElement(By.xpath(".//*[@id='changePasswordMessage']"));
+            element = driver.findElement(By.id("changePasswordMessage"));
         }
         catch(Exception e)
         {

@@ -29,7 +29,8 @@ public class FooterPrivacyPolicyAction extends ContentPagesVerification
         PrivacyPolicy privacyPolicy = legalLinks.clickOnPrivacyPolicyLink();
 
         HashMap<String, String> expectedPrivacyPolicyData = testCaseData.get("PrivacyPolicy");
-        expectedPrivacyPolicyData.put("url", privacyPolicy.privacyPolicyPageUrl());
+        String url = privacyPolicy.getApplicationUrl() + expectedPrivacyPolicyData.get("privacyPolicyPageUrl");
+        expectedPrivacyPolicyData.put("url", url);
         verifyLink(privacyPolicy, expectedPrivacyPolicyData);
 
         AutomationLog.info("Privacy Policy Page is correctly loaded");

@@ -1,3 +1,3 @@
 SearchCommercial,borough="Manhattan";searchTerm="10001";searchText="Results for Retail in ";size="1000-2000";price="5000-10000"
-SearchResidential,borough1="Manhattan";borough2="Bronx";searchTerm1="Sales in 10001";searchTerm2="Coops in 10010";searchTerm3="Condos in 10011";searchTerm4="Apartments in 10010";searchTerm5="Townhouses in 10011";searchText="Results for "
+SearchResidential,borough1="Manhattan";borough2="Bronx";searchTerm1="Sales in 10001";searchTerm2="Coops in 10010";searchTerm3="Condos in 10011";searchTerm4="Townhouses in 10011";searchTerm5="Apartments in 10010";searchText="Results for "
 ListingType,listType1="All Listing Type";listType2="Lease";listType3="Sub-lease";listType4="Sale"

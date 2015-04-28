@@ -41,7 +41,8 @@ public class SubnavigationHowItWorksAction extends ContentPagesVerification
             howItWorks = subnavigation.clickLinkHowitWorks();
 
             expectedHowItWorksData  = testCaseData.get("HowItWorks");
-            expectedHowItWorksData.put("url", howItWorks.howItWorksPageUrl());
+            String url = howItWorks.getApplicationUrl() + expectedHowItWorksData.get("howItWorksPageUrl");
+            expectedHowItWorksData.put("url", url);
 
             leftMenu = Page.contentPagesLeftMenu();
             AutomationLog.info("Redirection to How it works passed");

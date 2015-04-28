@@ -29,7 +29,8 @@ public class FooterTermsAndConditionAction extends ContentPagesVerification
         TermsAndConditions termsAndConditions = legalLinks.clickOnTermsAndConditionsLink();;
 
         HashMap<String, String> expectedTermsData = testCaseData.get("Terms");
-        expectedTermsData.put("url", termsAndConditions.termsAndConditionsPageUrl());
+        String url = termsAndConditions.getApplicationUrl() + expectedTermsData.get("termsAndConditionsPageUrl");
+        expectedTermsData.put("url", url);
         verifyLink(termsAndConditions, expectedTermsData);
 
         AutomationLog.info("Terms And Conditions Page is correctly loaded");

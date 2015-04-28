@@ -20,11 +20,10 @@ import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 public class AdvancedSearchPageAction extends AutomationTestCaseVerification
 {
     private AdvancedSearchPage advancedsearch = null;
-    private SearchResultsPage propsearch = null;
     private ListingDetailPage listingdetail = null;
     private SubNavigation subnavigation = null;
     private List<String> list = new ArrayList<String>();
-
+    private SearchResultsPage searchresult;
 
     public AdvancedSearchPageAction() 
     {
@@ -110,7 +109,12 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         HashMap<String, String> searchData = testCaseData.get("SearchResidential");
         verifyIfListingTypeDropdownResetsAfterTogglingBoroughs(searchData);
         verifySearchByPropertyTypes(searchData);
-        Page.navigateToPreviousPage();
+        verifyIfSearchByBedsShowsPropertiesWithNoOfBeds();
+        verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations();
+        verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound();
+        verifyIfSearchByBathsShowsPropertiesWithNoOfBaths();
+        /*Page.navigateToPreviousPage();*/
+        
     }
 
     public void searchByAddress(HashMap<String, String> searchData) throws Exception
@@ -118,9 +122,9 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         advancedsearch.selectBorough(searchData.get("borough"));
         advancedsearch.txtbx_SearchInput().clear();
         advancedsearch.txtbx_SearchInput().sendKeys(searchData.get("searchTerm"));
-        propsearch = advancedsearch.clickOnSearchButton();
+        searchresult = advancedsearch.clickOnSearchButton();
         String titleText = searchData.get("searchText") + searchData.get("searchTerm");
-        Assert.assertEquals(propsearch.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
+        Assert.assertEquals(searchresult.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
         AutomationLog.info("Search Result page title is same as search term ");
         Page.driver.navigate().back();
     }
@@ -131,9 +135,9 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         for(int i=1;i<(list.size());i++)
         {
             advancedsearch.selectListingType(list.get(i));
-            propsearch = advancedsearch.clickOnSearchButton();
+            searchresult = advancedsearch.clickOnSearchButton();
             String curHandle = Page.driver.getWindowHandle();
-            listingdetail = propsearch.clickSearchResult();
+            listingdetail = searchresult.clickSearchResult();
             Set<String> handleset = Page.driver.getWindowHandles();
             for(String handle : handleset)
             {
@@ -160,8 +164,8 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         advancedsearch.txtbx_SizeInput().clear();
         advancedsearch.txtbx_SizeInput().sendKeys(searchData.get("size"));
         String expectedSize = searchData.get("size")+"sqft";
-        propsearch = advancedsearch.clickOnSearchButton();
-        String actualSize = propsearch.FilterText_Size().getText().replaceAll("[,\\s]", "");
+        searchresult = advancedsearch.clickOnSearchButton();
+        String actualSize = searchresult.FilterText_Size().getText().replaceAll("[,\\s]", "");
         Assert.assertEquals(actualSize, expectedSize, "Expected search size is not shown");
         AutomationLog.info("Search by Filter size is Successfull ");
         Page.driver.navigate().back();
@@ -174,8 +178,8 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         advancedsearch.txtbx_Price().sendKeys(searchData.get("price"));
         advancedsearch.selectPriceType(list.get(0));
         String expectedSize = searchData.get("price")+"/mo";
-        propsearch = advancedsearch.clickOnSearchButton();
-        String actualSize = propsearch.FilterText_Price().getText().replaceAll("[$,\\s]", "");
+        searchresult = advancedsearch.clickOnSearchButton();
+        String actualSize = searchresult.FilterText_Price().getText().replaceAll("[$,\\s]", "");
         Assert.assertEquals(actualSize, expectedSize, "Expected search size is not shown");
         AutomationLog.info("Search by Filter price is Successfull ");
         Page.driver.navigate().back();
@@ -194,6 +198,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         Assert.assertEquals(searchterm, "", "Expected SearchInput text box is not cleared");
         Assert.assertEquals(proptype, defaultproptype, "Expected proprty type drop down does not resets after toggling boroughs");
         AutomationLog.info("Switching borough resets search form fields ");
+        advancedsearch.selectBorough(searchData.get("borough1"));
     }
 
     public void verifySearchByPropertyTypes(HashMap<String, String> searchData) throws Exception
@@ -204,15 +209,66 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
             String text = searchData.get(searchterm);
             advancedsearch.txtbx_SearchInput().clear();
             advancedsearch.txtbx_SearchInput().sendKeys(text);
-            advancedsearch.clickOnSearchButton();
+            WaitFor.sleepFor(10000);
+            searchresult = advancedsearch.clickOnSearchButton();
+            WaitFor.sleepFor(20000);
             String titleText = searchData.get("searchText") + searchData.get(searchterm);
-            WaitFor.sleepFor(2000);
-            Assert.assertEquals(propsearch.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
+            Assert.assertEquals(searchresult.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
             AutomationLog.info("Search Result page title is same as search term ");
             Page.driver.navigate().back();
         }
         AutomationLog.info("Successfully performed search By Property Types");
     }
+
+    public void verifyIfSearchByBedsShowsPropertiesWithNoOfBeds() throws Exception
+    {
+        String result = null;
+        advancedsearch.searchByNoOfBeds("2");
+        searchresult = advancedsearch.clickOnSearchButton();
+        WaitFor.sleepFor(2000);
+        result = searchresult.NoOfBedsInPropertiesSearch();
+        Assert.assertEquals(result, "2", "Expected Properties with specified beds is not shown");
+        AutomationLog.info("Successfully shown Properties with x beds");
+        Page.driver.navigate().back();
+    }
+
+    public void verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations() throws Exception
+    {
+        advancedsearch.searchByNoOfBeds("3");
+        advancedsearch.searchByNoOfBaths("3");
+        searchresult = advancedsearch.clickOnSearchButton();
+        WaitFor.sleepFor(2000);
+        Assert.assertEquals(searchresult.NoOfBedsInPropertiesSearch(), "3", "Expected Properties with specified beds is not shown");
+        Assert.assertEquals(searchresult.NoOfBathsInPropertiesSearch(), "3", "Expected Properties with specified bath is not shown");
+        AutomationLog.info("Properties with X baths And Y Beds And Different Combinations is verified");
+        Page.driver.navigate().back();
+    }
+    
+    public void verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound() throws Exception
+    {
+        advancedsearch.searchByNoOfBeds("0");
+        advancedsearch.searchByNoOfBaths("0");
+        WaitFor.sleepFor(2000);
+        searchresult = advancedsearch.clickOnSearchButton();
+        WaitFor.sleepFor(20000);
+        Assert.assertEquals(searchresult.loadingMessage().getText(), "NO RESULTS FOUND.", "Expected message is Not Shown");
+        AutomationLog.info("Successfully verified that by searching with 0 bath and 0 bed, appropiate message comes up");
+        Page.driver.navigate().back();
+    }
+
+    
+    public void verifyIfSearchByBathsShowsPropertiesWithNoOfBaths() throws Exception
+    {
+        String result = null;
+        advancedsearch.searchByNoOfBaths("2");
+        searchresult = advancedsearch.clickOnSearchButton();
+        WaitFor.sleepFor(2000);
+        result = searchresult.NoOfBathsInPropertiesSearch();
+        Assert.assertEquals(result, "2", "Expected Properties with specified baths is not shown");
+        AutomationLog.info("Successfully shown Properties with x baths");
+        Page.driver.navigate().back();
+    }
+
 
     @Override
     protected String successMessage() 

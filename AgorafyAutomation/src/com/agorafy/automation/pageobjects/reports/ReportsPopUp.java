@@ -20,7 +20,7 @@ public class ReportsPopUp extends Page
     {
         try
         {
-            element = driver.findElement(By.id("crName"));
+            element = popup_Reports().findElement(By.id("crName"));
         }
         catch(Exception e)
         {
@@ -34,7 +34,7 @@ public class ReportsPopUp extends Page
     {
         try
         {
-            element = driver.findElement(By.name("crContact[company]"));
+            element = popup_Reports().findElement(By.name("crContact[company]"));
         }
         catch(Exception e)
         {
@@ -48,7 +48,7 @@ public class ReportsPopUp extends Page
     {
         try
         {
-            element = driver.findElement(By.id("crPhone"));
+            element = popup_Reports().findElement(By.id("crPhone"));
         }
         catch(Exception e)
         {
@@ -62,7 +62,7 @@ public class ReportsPopUp extends Page
     {
         try
         {
-            element = driver.findElement(By.id("crEmail"));
+            element = popup_Reports().findElement(By.id("crEmail"));
         }
         catch(Exception e)
         {
@@ -119,7 +119,7 @@ public class ReportsPopUp extends Page
     {
         try
         {
-            element = driver.findElement(By.id("generateReportCustom")).findElement(By.className("generateReportButton"));
+            element = popup_Reports().findElement(By.id("generateReportCustom")).findElement(By.className("generateReportButton"));
         }
         catch(Exception e)
         {
@@ -147,7 +147,7 @@ public class ReportsPopUp extends Page
     {
         try
         {
-            element = driver.findElement(By.className("crNameformError")).findElement(By.className("formErrorContent"));
+            element = popup_Reports().findElement(By.className("crNameformError")).findElement(By.className("formErrorContent"));
             AutomationLog.info("Error Message for Name field Found ");
         }
         catch(Exception e)
@@ -169,7 +169,7 @@ public class ReportsPopUp extends Page
     {
         try
         {
-            element = driver.findElement(By.className("crEmailformError")).findElement(By.className("formErrorContent"));
+            element = popup_Reports().findElement(By.className("crEmailformError")).findElement(By.className("formErrorContent"));
             AutomationLog.info("Error message for Invalid Email found");
         }
         catch(Exception e)
@@ -184,7 +184,7 @@ public class ReportsPopUp extends Page
     {
        try
        {
-            element = driver.findElement(By.className("crPhoneformError")).findElement(By.className("formErrorContent"));
+            element = popup_Reports().findElement(By.className("crPhoneformError")).findElement(By.className("formErrorContent"));
             AutomationLog.info("Error message for Invalid Phone found");
        }
        catch(Exception e)

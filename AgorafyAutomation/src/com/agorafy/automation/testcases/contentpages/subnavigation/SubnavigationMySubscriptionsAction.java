@@ -55,7 +55,8 @@ public class SubnavigationMySubscriptionsAction extends ContentPagesVerification
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             mySubscriptionsPage = subnavigation.clickLinkMySubscriptions(); 
             expectedMySubscriptionsData = testCaseData.get("MySubscriptions");
-            expectedMySubscriptionsData.put("url", mySubscriptionsPage.getURL());
+            String url = mySubscriptionsPage.getApplicationUrl() + expectedMySubscriptionsData.get("mySubscriptionsPageUrl");
+            expectedMySubscriptionsData.put("url", url);
             AutomationLog.info("Redirection to My Subscriptions page passed");
         }
         catch (Exception e) 

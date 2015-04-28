@@ -44,7 +44,8 @@ public class SubnavigationContactAction extends ContentPagesVerification
             dropdownMoreOption = "Contact";
             contactPage = (Contact) subnavigation.selectDropdownMoreOption(dropdownMoreOption);
             expectedContactData = testCaseData.get("Contact");
-            expectedContactData.put("url", contactPage.contactPageUrl());
+            String url = contactPage.getApplicationUrl() + expectedContactData.get("contactsUrl");
+            expectedContactData.put("url", url);
 
             AutomationLog.info("Redirection to Contact page passed");
         }

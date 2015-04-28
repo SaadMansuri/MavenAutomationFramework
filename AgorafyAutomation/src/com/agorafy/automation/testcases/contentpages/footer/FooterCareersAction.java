@@ -31,7 +31,8 @@ public class FooterCareersAction extends ContentPagesVerification
         Careers career = companyLinks.clickOnCareersLink();
 
         HashMap<String, String> expectedCareersData = testCaseData.get("Careers");
-        expectedCareersData.put("url", career.careersPageUrl());
+        String url = career.getApplicationUrl() + expectedCareersData.get("careersUrl");
+        expectedCareersData.put("url", url);
         verifyLink(career, expectedCareersData);
 
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();

@@ -40,9 +40,10 @@ public class SubnavigationCareersAction extends ContentPagesVerification
         try 
         {
             subnavigation = Page.subNavigation();
-            expectedCareersData = testCaseData.get("More->CareersPageData");
+            expectedCareersData = testCaseData.get("Careers");
             careerPage = (Careers) subnavigation.selectDropdownMoreOption("Careers");
-            expectedCareersData.put("url", careerPage.careersPageUrl());
+            String url = careerPage.getApplicationUrl() + expectedCareersData.get("careersUrl");
+            expectedCareersData.put("url", url);
 
             AutomationLog.info("Redirection to Career page passed");
         } 

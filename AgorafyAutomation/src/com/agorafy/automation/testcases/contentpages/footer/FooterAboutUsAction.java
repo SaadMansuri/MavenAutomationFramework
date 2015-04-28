@@ -33,7 +33,8 @@ public class FooterAboutUsAction extends ContentPagesVerification
         AboutUs aboutUs = companyLinks.clickOnAboutUsLink();
 
         HashMap<String, String> expectedAboutUsData = testCaseData.get("AboutUs");
-        expectedAboutUsData.put("url", aboutUs.aboutUsPageUrl());
+        String url = aboutUs.getApplicationUrl() + expectedAboutUsData.get("aboutUsUrl");
+        expectedAboutUsData.put("url", url);
         verifyLink(aboutUs, expectedAboutUsData);
 
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();

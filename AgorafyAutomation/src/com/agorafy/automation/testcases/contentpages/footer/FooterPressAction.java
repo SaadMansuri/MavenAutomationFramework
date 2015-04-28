@@ -32,7 +32,8 @@ public class FooterPressAction extends ContentPagesVerification
         Press press = supportLinks.clickOnPressLink();
 
         HashMap<String, String> expectedPressData = testCaseData.get("Press");
-        expectedPressData.put("url", press.pressPageUrl());
+        String url = press.getApplicationUrl() + expectedPressData.get("pressPageUrl");
+        expectedPressData.put("url", url);
         verifyLink(press, expectedPressData);
 
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();

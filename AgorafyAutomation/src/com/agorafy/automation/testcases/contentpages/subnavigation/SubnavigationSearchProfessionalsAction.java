@@ -37,7 +37,8 @@ public class SubnavigationSearchProfessionalsAction extends ContentPagesVerifica
              searchProfessionals = subnavigation.clickLinkSearchProfessionals();
 
              expectedSearchProfData  = testCaseData.get("SearchProfessionals");
-             expectedSearchProfData.put("url", searchProfessionals.getURL());
+             String url = searchProfessionals.getApplicationUrl() + expectedSearchProfData.get("searchProfessionalPageUrl");
+             expectedSearchProfData.put("url", url);
 
             AutomationLog.info("Redirection to Search Professionals page passed");
          }

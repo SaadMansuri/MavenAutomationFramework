@@ -15,9 +15,9 @@ public class PrivacyPolicy extends Page
         super(driver);
     }
 
-    public String privacyPolicyPageUrl()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/privacy/";
+        return applicationUrl();
     }
 
     public WebElement pageHeadingElement() throws Exception

@@ -15,9 +15,9 @@ public class Team extends Page
         super(driver);
     }
 
-    public String teamPageUrl()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/team/";
+        return applicationUrl();
     }
 
     public WebElement pageHeadingElement() throws Exception

@@ -15,9 +15,9 @@ public class Careers extends Page
         super(driver);
     }
 
-    public String careersPageUrl()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/careers/";
+        return applicationUrl() ;
     }
 
     public WebElement pageHeadingElement() throws Exception
