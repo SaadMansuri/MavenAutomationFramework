@@ -1,7 +1,14 @@
 package com.agorafy.automation.pageobjects;
 
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver.Window;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -10,6 +17,7 @@ import com.agorafy.automation.pageobjects.reports.Reports;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingLocationFormPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
+
 
 public class Header extends Page
 {
@@ -402,7 +410,7 @@ public class Header extends Page
     {
         try
         {
-            element = driver.findElement(getProfileNameLocator());
+            element = driver.findElement(By.className("profile-name"));
         }
         catch(Exception e)
         {
@@ -414,7 +422,7 @@ public class Header extends Page
 
     public Homepage logout() throws Exception
     {
-    	Homepage homepage = null;
+        Homepage homepage = null;
         try
         {
             header().link_profileNameDropdown().click();
@@ -552,6 +560,8 @@ public class Header extends Page
     {
         try
         {
+        	//driver.manage().window().setSize(new Dimension(1920,1080));
+        	driver.manage().window().maximize();
             link_profileNameDropdown().click();
             AutomationLog.info("Successfully clicked on Profile name dropdown Arrow");
         }

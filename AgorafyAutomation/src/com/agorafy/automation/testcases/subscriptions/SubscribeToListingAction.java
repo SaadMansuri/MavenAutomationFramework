@@ -128,8 +128,10 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
     {
         header.clickOnProfileNameDropdownArrow();
         mySubscriptions = header.clickSubscriptionsLinkBelowProfilePic();
+        WaitFor.sleepFor(1000);
         String subscribeToRespectiveListingTextOnListingDetailsPage = listingDetailPage.txt_listingTitle();
         subscribeToRespectiveListingTextOnListingDetailsPage = subscribeToRespectiveListingTextOnListingDetailsPage.replaceAll("Property Details", "");
+        WaitFor.sleepFor(1000);
         String subscribeToRespectiveListingTextInSubscriptionWindow = mySubscriptions.txt_SubscribeToRespectiveListingInSubscriptionWindow();
         subscribeToRespectiveListingTextOnListingDetailsPage = "Subscribe to " + subscribeToRespectiveListingTextOnListingDetailsPage;
         Assert.assertEquals(subscribeToRespectiveListingTextInSubscriptionWindow, subscribeToRespectiveListingTextOnListingDetailsPage, "listing title on listing details page and in subscription window below profile pic does not match");
@@ -169,7 +171,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         try 
         {
             listingDetailPage.clickOnSubscribeToListingLink(loginStatus);
-            WaitFor.sleepFor(1000);
+            WaitFor.sleepFor(2000);
             String actualSubscribeStatus = listingDetailPage.link_UnsubscribeListing().getText();
             dataFromCSV = testCaseData.get("ExpectedUnsubscribeToListingText");
             String expectedSubscriptionStatus = dataFromCSV.get("ExpectedText");
