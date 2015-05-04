@@ -66,6 +66,8 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
 
         preconditionForNextTest();
         verifyAddToReportLinkUpsell(listingDetailPage,validCredentials);
+
+        verifySessionExpireTestCases();
     }
 
     public void verifySubscribeToListingLinkUpsell(ListingDetailPage subscribeListingPopup, Credentials getValidCredentials) throws Exception
@@ -113,7 +115,21 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
         Page.header().logout();
         Page.driver.get(currentUrl);
     }
-@Override
+
+    public void verifySessionExpireTestCases() throws Exception 
+    {
+        verifyIfClickedOnSubscribeToListingLinkAfterSessionExpire(); 
+    }
+
+    public void verifyIfClickedOnSubscribeToListingLinkAfterSessionExpire() throws Exception
+    {
+        Page.driver.manage().deleteAllCookies();
+        listingDetailPage.link_SubscribeToListing().click();
+        Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Add To Report");
+        AutomationLog.info("Clicking SubscribeToListing after session expire shows login PopUp");
+    }
+
+    @Override
     protected String successMessage()
      {
         return "Test for verifying login pop-ups on listing detail page has Passed";
