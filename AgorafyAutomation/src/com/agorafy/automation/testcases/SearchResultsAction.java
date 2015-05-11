@@ -284,6 +284,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         verifyIfClickingOnPinCushionAfterSessionExpire();
         verifyIfClickingRemovefromReportPinCushionAfterSessionExpire();
         verifyIfClickingCreateYourProfileButtonAfterSessionExpire();
+        verifyIfClickingReportsLinkInProfileNameDropdownAfterSessionExpire();
     }
 
     public void verifyIfClickingOnPinCushionAfterSessionExpire() throws Exception 
@@ -303,7 +304,6 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     public void verifyIfClickingRemovefromReportPinCushionAfterSessionExpire() throws Exception
     {
         int i = 0;
-        //String pageurl = Page.driver.getCurrentUrl();
         searchresult.hoverOnSearchResult(i);
         searchresult.hoverAndClickOnPincushionIcon(i);
         Page.driver.manage().deleteAllCookies();
@@ -337,6 +337,17 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         AutomationLog.info("Expiring Session on list view page redirects to Login page");
         Login.doSuccessfullLoginFromHeaderLoginForm();
         Page.driver.get(pageurl);
+    }
+
+    public void verifyIfClickingReportsLinkInProfileNameDropdownAfterSessionExpire() throws Exception
+    {
+        Page.driver.manage().deleteAllCookies();
+        header.clickOnProfileNameDropdownArrow();
+        header.clickOnReportsLink();
+        WaitFor.sleepFor(5000);
+        Assert.assertTrue(searchresult.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
+        AutomationLog.info("Login PopUp is shown on Clicking Reports Link After session expire");
+        searchresult.closeLoginPoPup(loginpopup);
     }
 
     @Override
