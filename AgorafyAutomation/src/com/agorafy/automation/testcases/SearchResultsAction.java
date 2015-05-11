@@ -289,42 +289,43 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     public void verifyIfClickingOnPinCushionAfterSessionExpire() throws Exception 
     {
         int i = 0;
-        String pageurl = Page.driver.getCurrentUrl();
-        Login.doSuccessfullLoginFromHeaderLoginForm();
         Page.driver.manage().deleteAllCookies();
         searchresult.hoverOnSearchResult(i);
         searchresult.hoverAndClickOnPincushionIcon(i);
+        WaitFor.sleepFor(5000);
         Assert.assertTrue(searchresult.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
         AutomationLog.info("Login PopUp is shown on Clicking Pincushion icon After session expire");
         searchresult.closeLoginPoPup(loginpopup);
+        Page.driver.navigate().refresh();
         Login.doSuccessfullLoginFromHeaderLoginForm();
-        Page.driver.get(pageurl);
     }
 
     public void verifyIfClickingRemovefromReportPinCushionAfterSessionExpire() throws Exception
     {
         int i = 0;
-        Page.driver.manage().deleteAllCookies();
-        String pageurl = Page.driver.getCurrentUrl();
+        //String pageurl = Page.driver.getCurrentUrl();
         searchresult.hoverOnSearchResult(i);
         searchresult.hoverAndClickOnPincushionIcon(i);
         Page.driver.manage().deleteAllCookies();
+        searchresult.hoverAndClickOnPincushionIcon(i);
+        WaitFor.sleepFor(5000);
         Assert.assertTrue(searchresult.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
         AutomationLog.info("Login PopUp is shown on Clicking Pincushion icon After session expire");
         searchresult.closeLoginPoPup(loginpopup);
+        Page.driver.navigate().refresh();
         Login.doSuccessfullLoginFromHeaderLoginForm();
-        Page.driver.get(pageurl);
-        
     }
 
     public void verifyIfClickingSubscribeToThisSearchLinkAfterSessionExpire() throws Exception 
     {
         Page.driver.manage().deleteAllCookies();
-        Page.driver.navigate().refresh();
         loginpopup = (LoginPopUp) searchresult.clickOnSubscribeToThisSearchLink(false);
+        WaitFor.sleepFor(5000);
         Assert.assertTrue(searchresult.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
         AutomationLog.info("Login PopUp is shown on Clicking Pincushion icon After session expire");
         searchresult.closeLoginPoPup(loginpopup);
+        Page.driver.navigate().refresh();
+        Login.doSuccessfullLoginFromHeaderLoginForm();
     }
 
     public void verifyIfClickingCreateYourProfileButtonAfterSessionExpire() throws Exception
