@@ -5,9 +5,12 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 
 public class FrontEndShowings extends Page
 {
@@ -171,9 +174,63 @@ public class FrontEndShowings extends Page
         return element;
     }
 
+    public List<WebElement> editDeleteShowingsIcons() throws Exception
+    {
+        return getFirstUpcomingShowing().findElements(By.tagName("i"));
+    }
+
+    public void hoverOnShowing() throws Exception
+    {
+        Actions builder = new Actions(driver);
+        Action hover = builder.moveToElement(getFirstUpcomingShowing()).build();
+        WaitFor.sleepFor(1000);
+        hover.perform();
+    }
+
+    public WebElement icon_DeleteShowing() throws Exception 
+    {
+        try
+        {
+            element = editDeleteShowingsIcons().get(0);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find delete icon");
+        }
+        return element;
+    }
+
+    public void clickOnDeleteShowingIcon() throws Exception 
+    {
+        try
+        {
+            icon_DeleteShowing().click();
+            AutomationLog.info("Successfully clicked on delete showing icon");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on delete showing icon");
+            throw(e);
+        }
+    }
+
     public int getNoOfAddedShowings() throws Exception
     {
         return getUpcomingShowingsList().size();
+    }
+
+    public WebElement text_MessageBar() throws Exception 
+    {
+        try
+        {
+            element = driver.findElement(By.id("messageBar"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Message bar text");
+            throw(e);
+        }
+        return element;
     }
 
 }

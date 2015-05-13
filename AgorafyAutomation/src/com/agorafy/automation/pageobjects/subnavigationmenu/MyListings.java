@@ -140,20 +140,54 @@ public class MyListings extends Page
         return listingrow;
     }
 
-    public WebElement getShowingsLink(String listingName) throws Exception
+    public WebElement div_showing(String listingName) throws Exception 
     {
-        element = getListingName(listingName).findElements(By.tagName("td")).get(2);
-        WebElement showing = null;
-        showing = element.findElement(By.tagName("a"));
-        return showing;
+        try
+        {
+            element = getListingName(listingName).findElements(By.tagName("td")).get(2);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Showing div");
+            throw(e);
+        }
+        return element;
     }
 
-    public FrontEndShowings clickOnShowingsLink(String listingName) throws Exception 
+    public WebElement link_ScheduleNow(String listingName) throws Exception
+    {
+        try
+        {
+            element = div_showing(listingName).findElement(By.tagName("a"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Schedule Now link");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement txt_UpcomingShowings(String listingName) throws Exception 
+    {
+        try
+        {
+            element = div_showing(listingName).findElement(By.tagName("span"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not find Upcoming showings text");
+            throw(e);
+        }
+        return element;
+    }
+
+    public FrontEndShowings clickOnScheduleNowLink(String listingName) throws Exception 
     {
         FrontEndShowings frontendshowing = null;
         try
         {
-            getShowingsLink(listingName).click();
+            link_ScheduleNow(listingName).click();
             WaitFor.sleepFor(2000);
             frontendshowing = new FrontEndShowings(driver);
             AutomationLog.info("Successfully clicked on Showings link");

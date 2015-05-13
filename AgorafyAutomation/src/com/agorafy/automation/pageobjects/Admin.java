@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 
 public class Admin extends Page 
@@ -302,6 +301,5 @@ public class Admin extends Page
         String str3 = str2[4];
         return str3;
     }
-
 
 }
