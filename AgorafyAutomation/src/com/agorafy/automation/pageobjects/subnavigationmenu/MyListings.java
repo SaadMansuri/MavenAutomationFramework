@@ -11,6 +11,7 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.FrontEndShowings;
 import com.agorafy.automation.pageobjects.Page;
+import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 
 
 public class MyListings extends Page 
@@ -116,6 +117,42 @@ public class MyListings extends Page
             throw(e);
         }
         return element;
+    }
+
+    public WebElement link_ListingName(String listingName) throws Exception 
+    {
+        WebElement listingLink = null;
+        List<WebElement> list = new ArrayList<WebElement>();
+        List<WebElement> list1 = new ArrayList<WebElement>();
+        list = listingsContainer().findElements(By.tagName("tr"));
+        for(WebElement opt : list)
+        {
+            list1 = opt.findElements(By.tagName("td"));
+            element = list1.get(0).findElement(By.className("listing-details")).findElement(By.tagName("a"));
+            if(element.getText().equals(listingName))
+            {
+                listingLink = element;
+                break;
+            }
+        }
+        return listingLink;
+    }
+
+    public ListingDetailPage clickOnListingNameLink(String listingName) throws Exception
+    {
+        ListingDetailPage listingdetail = null;
+        try
+        {
+            link_ListingName(listingName).click();
+            listingdetail = new ListingDetailPage(driver);
+            AutomationLog.info("Successfully clicked on ListingName link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on listing name link");
+            throw(e);
+        }
+        return listingdetail;
     }
 
     public WebElement getListingName(String listingName) throws Exception
