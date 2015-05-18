@@ -1,6 +1,9 @@
 package com.agorafy.automation.pageobjects;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -175,6 +178,23 @@ public class AdminShowings extends Page
             throw(e);
         }
         return element;
+    }
+
+    public List<String> startTimeList() throws Exception
+    {
+        List<String> times = new ArrayList<String>();
+        Select select = new Select(dropdown_StartTime());
+        for(WebElement option : select.getOptions())
+        {
+            times.add(option.getText());
+        }
+        return times;
+    }
+
+    public String getFirstStartTime() throws Exception 
+    {
+        String t= startTimeList().get(0);
+        return t;
     }
 
 }

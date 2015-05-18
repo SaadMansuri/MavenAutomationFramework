@@ -73,6 +73,7 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
         verifyIfEditIconIsClicked();
         verifyIfAddedShowingIsSeenOnShowingPopUpOnMyListingsPage();
         verifyIfAddingShowingsFromFrontEndReflectsOnAdminEnd();
+        admin.deleteAllShowings();
         verifyIfShowingsShowsSameStartAndEndTimeAfterEdit(); 
     }
 
@@ -102,6 +103,40 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
         Date date = cal.getTime();
         String nextdate = simpledateformat.format(date);
         return nextdate;
+    }
+
+    public String getNextDate(int index) throws Exception
+    {
+        DateFormat simpledateformat = new SimpleDateFormat("MM/dd/yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE,index);
+        Date date = cal.getTime();
+        String nextdate = simpledateformat.format(date);
+        return nextdate;
+   }
+
+    public String enterStartTime() throws Exception 
+    {
+        String time = validateTime();
+        if(time.equalsIgnoreCase(adminshowings.getFirstStartTime()))
+        {
+            adminshowings.enterDateInDatePickerTextBox(getNextDate(1));
+        }
+        WaitFor.sleepFor(2000);
+        return time;
+    }
+
+    public String validateTime() throws Exception 
+    {
+        String realtime = getCurrentTime();
+        if(adminshowings.startTimeList().contains(realtime))
+        {
+            return realtime;
+        }
+        else
+        {
+            return adminshowings.getFirstStartTime();
+        }
     }
 
     public String getCurrentTime() throws Exception
@@ -151,7 +186,7 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
         adminshowings = admin.clickOnAddShowingLink();
         WaitFor.sleepFor(2000);
         adminshowings.enterDateInDatePickerTextBox(getCurrentDate());
-        adminshowings.selectStartTime(getCurrentTime());
+        adminshowings.selectStartTime(enterStartTime());
         adminshowings.clickOnCloseButton();
         Assert.assertFalse(admin.isShowingPresent(0), "Expected Showing not to be added is failed");
         AutomationLog.info("Closing AdminShowingsPopUp without save does not add Showing");
@@ -161,7 +196,7 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
     {
         adminshowings = admin.clickOnAddShowingLink();
         WaitFor.sleepFor(2000);
-        adminshowings.selectStartTime(getCurrentTime());
+        adminshowings.selectStartTime(enterStartTime());
         adminshowings.clickOnSaveButton();
         Assert.assertEquals(adminshowings.text_MessageBar().getText(), "Please enter date.", "Expected text message is not shown");
         AutomationLog.info("Clicking save button without selecting date shows Error Message");
@@ -181,7 +216,7 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
         adminshowings = admin.clickOnAddShowingLink();
         WaitFor.sleepFor(2000);
         adminshowings.enterDateInDatePickerTextBox(getCurrentDate());
-        adminshowings.selectStartTime(getCurrentTime());
+        adminshowings.selectStartTime(enterStartTime());
         adminshowings.clickOnSaveButton();
         admin.clickOnSaveButton();
         String expected = admin.getFirstShowing(0).getText();
@@ -215,7 +250,7 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
         adminshowings = admin.clickOnAddShowingLink();
         WaitFor.sleepFor(2000);
         adminshowings.enterDateInDatePickerTextBox(getCurrentDate());
-        adminshowings.selectStartTime(getCurrentTime());
+        adminshowings.selectStartTime(enterStartTime());
         adminshowings.clickOnSaveButton();
         admin.clickOnSaveButton();
     }
@@ -223,10 +258,11 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
     public void verifyIfDuplicateShowingsCanBeAdded() throws Exception 
     {
         addShowing();
+        WaitFor.sleepFor(1000);
         adminshowings = admin.clickOnAddShowingLink();
         WaitFor.sleepFor(2000);
         adminshowings.enterDateInDatePickerTextBox(getCurrentDate());
-        adminshowings.selectStartTime(getCurrentTime());
+        adminshowings.selectStartTime(enterStartTime());
         adminshowings.clickOnSaveButton();
         WaitFor.sleepFor(1000);
         Assert.assertEquals(adminshowings.text_MessageBar().getText(), "Showing already scheduled on given time", "Expected text message is not shown");
@@ -249,7 +285,7 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
         adminshowings = admin.clickOnAddShowingLink();
         WaitFor.sleepFor(2000);
         adminshowings.enterDateInDatePickerTextBox(getCurrentDate());
-        adminshowings.selectStartTime(getCurrentTime());
+        adminshowings.selectStartTime(enterStartTime());
         adminshowings.clickOnSaveButton();
         admin.clickOnSaveButton();
         String expected = admin.getFirstShowing(0).getText();
@@ -274,7 +310,7 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
     public void verifyIfAddingShowingsFromFrontEndReflectsOnAdminEnd() throws Exception
     {
         frontendshowings.enterDateInDatePickerTextBox(getNextDate());
-        frontendshowings.selectStartTime(getCurrentTime());
+        frontendshowings.selectStartTime(enterStartTime());
         frontendshowings.clickOnSaveButton();
         WaitFor.sleepFor(2000);
         mylistings.clickOnUpcomingShowingsLink();
@@ -289,7 +325,7 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
         WaitFor.sleepFor(2000);
         int actual = admin.list_Showings().size();
         Assert.assertEquals(actual, expected, "Expected showings count is not same ");
-        AutomationLog.info("showings count is same");
+        AutomationLog.info("Adding showings from frontend reflects on admin end");
     }
 
     public void verifyIfDeleteShowingIsConfirmed() throws Exception

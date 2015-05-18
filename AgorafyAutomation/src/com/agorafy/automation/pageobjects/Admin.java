@@ -3,11 +3,13 @@ package com.agorafy.automation.pageobjects;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 
 public class Admin extends Page 
@@ -300,6 +302,19 @@ public class Admin extends Page
         String[] str2 = str1[2].split(" ");
         String str3 = str2[4];
         return str3;
+    }
+
+    public void deleteAllShowings() throws Exception 
+    {
+        for(int i=0;i<list_Showings().size();i++)
+        {
+            list_Showings().get(i).findElement(By.className("fa-trash-o")).click();
+            Alert alert = Page.driver.switchTo().alert();
+            alert.accept();
+            WaitFor.sleepFor(2000);
+        }
+        clickOnSaveButton();
+        AutomationLog.info("Successfully deleted all showings");
     }
 
 }
