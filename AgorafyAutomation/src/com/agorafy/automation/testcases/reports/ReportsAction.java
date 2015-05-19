@@ -173,6 +173,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         WaitFor.sleepFor(2000);
         header.clickOnProfileNameDropdownArrow();
         reports = header.clickOnReportsLink();
+        WaitFor.sleepFor(2000);
         WaitFor.presenceOfTheElement(Page.driver, reports.getReportBoxLocator());
         Assert.assertEquals(reports.reportBox().isDisplayed(), true, "Expected reports Box is not shown");
         AutomationLog.info("Clicking On Reports Link In Profile Name DropDown Shows Reports Box");
@@ -365,7 +366,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         int index = 0;
         header.clickOnProfileNameDropdownArrow();
         reports = header.clickOnReportsLink();
-        WaitFor.sleepFor(2000);
+        WaitFor.sleepFor(5000);
         reports.hoverOnFirstDeleteListingIcon();
         reports.clickOnFirstDeleteListingIcon();
         Assert.assertFalse(searchresult.icon_PinCushion(index).isDisplayed(), "Expected AddToReport icon for first listingd is not unFixed");

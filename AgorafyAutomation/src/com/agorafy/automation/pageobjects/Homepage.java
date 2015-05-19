@@ -270,6 +270,7 @@ public class Homepage extends Page
             txtbx_SearchTerm().sendKeys(searchstring);
             WaitFor.sleepFor(2000);
             clickOnSearchButtton();
+            WaitFor.sleepFor(2000);
             searchresult = new SearchResultsPage(driver);
             AutomationLog.info("Search is performed successfully");
         }

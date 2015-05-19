@@ -731,7 +731,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("personalDetailsChangedMessage"));
+            element = driver.findElement(By.id("personalDetailsChangedMessage")).findElement(By.className("alert-success"));
         }
         catch(Exception e)
         {

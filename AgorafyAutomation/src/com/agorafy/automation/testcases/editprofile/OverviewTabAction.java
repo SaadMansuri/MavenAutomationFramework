@@ -126,8 +126,8 @@ public class OverviewTabAction extends AutomationTestCaseVerification
 
     private void verifyIfEmailFieldIsEditable() throws Exception
     {
-        Assert.assertEquals(overviewTab.default_Email().isEnabled(), false, "Field is editable");
-        AutomationLog.info("Email field is not editable is Successful");
+        Assert.assertEquals(overviewTab.default_Email().isEnabled(), true, "Email field is not editable");
+        AutomationLog.info("Expected Email field is editable ");
     }
 
     private void verifyUpdatedOverviewTabForm(OverviewTab overviewTab, UserProfile overviewData) throws Exception

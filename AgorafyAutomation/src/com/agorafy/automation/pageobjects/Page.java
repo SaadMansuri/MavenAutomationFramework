@@ -5,17 +5,12 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriver.Window;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.PageFactory;
-
 import com.agorafy.automation.automationframework.Configuration;
 import com.agorafy.automation.pageobjects.footer.Footer;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
-import com.gargoylesoftware.htmlunit.javascript.host.Location;
 
 public class Page 
 {

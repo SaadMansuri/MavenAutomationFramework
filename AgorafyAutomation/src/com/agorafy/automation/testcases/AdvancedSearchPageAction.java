@@ -73,9 +73,8 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     {
         advancedsearch.clickOnResidentialRadioButton();
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Assert.assertEquals(advancedsearch.dropdown_PropertyType().isDisplayed(), true, "Expected residential only drop down not shown");
         Assert.assertEquals(advancedsearch.txtboxes_BedsNBaths().isDisplayed(), true, "Expected residential only textboxes not shown");
-        AutomationLog.info("Clicking on Residential radio button shows PropertyType drop down and Beds and Baths textboxes");
+        AutomationLog.info("Clicking on Residential radio button shows Beds and Baths textboxes");
     }
 
     public void verifyIfEmptySearchPerformed() throws Exception
@@ -89,9 +88,8 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     {
         advancedsearch.clickOnCommercialRadioButton();
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        Assert.assertEquals(advancedsearch.dropdown_PropertyType().isDisplayed(), false, "Expected residential only drop down not shown");
         Assert.assertEquals(advancedsearch.txtboxes_BedsNBaths().isDisplayed(), false, "Expected residential only textboxes not shown");
-        AutomationLog.info("Clicking on commercial radio button hides PropertyType drop down and Beds and Baths textboxes");
+        AutomationLog.info("Clicking on commercial radio button hides Beds and Baths textboxes");
     }
 
     public void verifySearchByCommercial() throws Exception
@@ -122,7 +120,9 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         advancedsearch.selectBorough(searchData.get("borough"));
         advancedsearch.txtbx_SearchInput().clear();
         advancedsearch.txtbx_SearchInput().sendKeys(searchData.get("searchTerm"));
+        WaitFor.sleepFor(2000);
         searchresult = advancedsearch.clickOnSearchButton();
+        WaitFor.sleepFor(2000);
         String titleText = searchData.get("searchText") + searchData.get("searchTerm");
         Assert.assertEquals(searchresult.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
         AutomationLog.info("Search Result page title is same as search term ");
@@ -132,7 +132,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     public void searchByListingtype() throws Exception
     {
         list.addAll(advancedsearch.listingType());
-        for(int i=1;i<(list.size());i++)
+        for(int i=1;i<(list.size()-1);i++)
         {
             advancedsearch.selectListingType(list.get(i));
             searchresult = advancedsearch.clickOnSearchButton();
@@ -149,14 +149,13 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
             }
             String expected  = "Retail for " + list.get(i).replace("-","");
             String actual = listingdetail.getTitleOfListingTypeSearched();
-            list.clear();
             Assert.assertEquals(actual, expected,"Expected title is not shown");
             AutomationLog.info("Search is Successfull");
             Page.driver.close();
             Page.driver.switchTo().window(curHandle);
             Page.driver.navigate().back();
         }
-        
+        list.clear();
     }
 
     public void searchBySize(HashMap<String, String> searchData) throws Exception

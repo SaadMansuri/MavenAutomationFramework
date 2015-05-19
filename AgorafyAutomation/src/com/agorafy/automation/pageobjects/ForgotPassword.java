@@ -15,6 +15,12 @@ public class ForgotPassword extends Page
         super(driver);
     }
 
+    protected boolean isSecured()
+    {
+        return true;
+    }
+
+
     public WebElement txtbox_EmailAddress() throws Exception
     {
         try
@@ -170,5 +176,10 @@ public class ForgotPassword extends Page
     public By validEmailNotRegistered()
     {
         return By.xpath(".//*[@id='forgot_confirm_error']/h5");
+    }
+
+    public String getApplicationUrl() throws Exception 
+    {
+        return applicationUrl();
     }
 }

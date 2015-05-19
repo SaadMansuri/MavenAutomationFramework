@@ -214,7 +214,7 @@ public class SubmitListingMediaFormPage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='file-upload-cont']/div/div/div/ul/li/div/div/p/img"));
+            element = driver.findElement(By.className("uploaded-image")).findElement(By.tagName("img"));
             AutomationLog.info("image found");
         }
         catch(Exception e)

@@ -62,7 +62,8 @@ public class ForgotPasswordAction extends AutomationTestCaseVerification
         expectedEmailData = testCaseData.get("UnRegisteredValidEmail");
         verifyIfTheUserEnteredValidEmailAddress(forgotPassword, expectedEmailData);
 
-        verifyBackToLoginLinkInForgotPasswordPage();
+        expectedEmailData = testCaseData.get("BackToLoginUrl");
+        verifyBackToLoginLinkInForgotPasswordPage(expectedEmailData);
 
     }
 
@@ -101,10 +102,13 @@ public class ForgotPasswordAction extends AutomationTestCaseVerification
         AutomationLog.info("Expected error message for valid email is displayed in Forgot Password page");
     }
     
-    public void verifyBackToLoginLinkInForgotPasswordPage() throws Exception
+    public void verifyBackToLoginLinkInForgotPasswordPage(HashMap<String, String> expectedEmailData) throws Exception
     {
-    	LoginPage BackToLogin = forgotPassword.clickOnBackToLoginLink();
-        Assert.assertEquals(BackToLogin.currentURL(),"https://www.agorafy.com/login","The CurrentURL is not been not found");
+        LoginPage BackToLogin = forgotPassword.clickOnBackToLoginLink();
+        WaitFor.sleepFor(2000);
+        String ExpectedUrl = forgotPassword.getApplicationUrl() + expectedEmailData.get("url");
+
+        Assert.assertEquals(BackToLogin.currentURL(),ExpectedUrl,"The CurrentURL is not been not found");
         AutomationLog.info("The CurrentURL is been found");
 
         Assert.assertEquals(loginPage.LoginPageFormId_BackToLoginLink().isDisplayed(),true, "After cliking BackToLoginLink, Agorafy forgotpassword page not found the form id");
