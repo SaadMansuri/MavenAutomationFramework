@@ -91,7 +91,8 @@ public class MyListings extends Page
         WebElement child;
         try 
         {
-           parent = driver.findElement(By.id("DataTables_Table_0")).findElement(By.tagName("tbody"));
+           //parent = driver.findElement(By.id("DataTables_Table_0")).findElement(By.tagName("tbody"));
+           parent = getVisibleElement(By.className("dataTable")).findElement(By.tagName("tbody"));
            child = parent.findElements(By.tagName("tr")).get(0);
            element = child.findElements(By.tagName("td")).get(0);
            AutomationLog.info("first On Market Listing found");

@@ -232,7 +232,6 @@ public class ListingDetailPage extends LoginPopUp
     {
         try
         {
-            //element = driver.findElement(By.xpath("html/body/div[2]/div/div[1]/div[1]/div[1]/div[3]/h2"));
             element = driver.findElement(By.xpath(" html/body/div[2]/div/div/div[2]/div[1]/div[3]/h2"));
         }
         catch (Exception e)
@@ -256,13 +255,11 @@ public class ListingDetailPage extends LoginPopUp
             return false;
     }
 
-    /*change page object element*/
     public WebElement listingDetailsPageContainer() throws Exception
     {
         try
         {
             element = driver.findElement(By.className("listing-details-page"));
-            //element = element.findElement(By.className("listing-address"));
         }
         catch(Exception e)
         {

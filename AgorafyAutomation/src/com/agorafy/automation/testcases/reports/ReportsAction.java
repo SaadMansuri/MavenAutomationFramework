@@ -247,6 +247,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         listingdetail.clickOnAddToReportLink(isLoggedIn);
         header.clickOnProfileNameDropdownArrow();
         header.clickOnReportsLink();
+        WaitFor.sleepFor(2000);
         WaitFor.presenceOfTheElement(Page.driver, reports.getReportBoxLocator());
         Assert.assertEquals(reports.reportBox().isDisplayed(), true, "Expected reports Box is not shown");
         AutomationLog.info("Clicking On Reports Link In Profile Name DropDown Shows Reports Box");
@@ -261,6 +262,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         header.clickOnProfileNameDropdownArrow();
         header.clickOnReportsLink();
         WaitFor.sleepFor(2000);
+        WaitFor.presenceOfTheElement(Page.driver, reports.getReportBoxLocator());
         reports.hoverOnFirstDeleteListingIcon();
         reports.clickOnFirstDeleteListingIcon();
         WaitFor.sleepFor(2000);
@@ -317,6 +319,8 @@ public class ReportsAction extends AutomationTestCaseVerification
         Assert.assertEquals(listingpagecount, searchpagecount, "Expected Reports Count is not increased on both windows ");
         header.clickOnProfileNameDropdownArrow();
         reports = header.clickOnReportsLink();
+        WaitFor.sleepFor(2000);
+        WaitFor.presenceOfTheElement(Page.driver, reports.getReportBoxLocator());
         reports.clickOnClearLink();
         reports.clickOnReportWindowCloseIcon();
         AutomationLog.info("Adding report increase Count in both windows");
@@ -367,6 +371,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         header.clickOnProfileNameDropdownArrow();
         reports = header.clickOnReportsLink();
         WaitFor.sleepFor(5000);
+        WaitFor.presenceOfTheElement(Page.driver, reports.getReportBoxLocator());
         reports.hoverOnFirstDeleteListingIcon();
         reports.clickOnFirstDeleteListingIcon();
         Assert.assertFalse(searchresult.icon_PinCushion(index).isDisplayed(), "Expected AddToReport icon for first listingd is not unFixed");
