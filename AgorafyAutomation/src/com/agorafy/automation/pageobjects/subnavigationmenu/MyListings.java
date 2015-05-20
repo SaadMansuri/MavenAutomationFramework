@@ -12,16 +12,28 @@ import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.updatelisting.*;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingMediaFormPage;
-
+import com.agorafy.automation.pageobjects.showings.FrontEndShowings;
+import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 
 public class MyListings extends Page 
 {
-    WebElement element;
+    private WebElement element;
+    private int count;
 
     public MyListings(WebDriver driver) 
     {
         super(driver);
     }	
+
+    public void setCount(int cnt)
+    {
+        count = cnt;
+    }
+
+    public int getCount()
+    {
+        return count;
+    }
 
     public WebElement MyListingsContentBlock() throws Exception
     {
@@ -407,6 +419,147 @@ public class MyListings extends Page
     public String pageHeading() throws Exception
     {
         return element_PageHeading().getText();
+    }
+
+    //Showings on my listings
+    public WebElement listingsContainer() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("DataTables_Table_0")).findElement(By.tagName("tbody"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Couid not find listing container");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement link_ListingName(String listingName) throws Exception 
+    {
+        WebElement listingLink = null;
+        List<WebElement> list = new ArrayList<WebElement>();
+        List<WebElement> list1 = new ArrayList<WebElement>();
+        list = listingsContainer().findElements(By.tagName("tr"));
+        for(WebElement opt : list)
+        {
+            list1 = opt.findElements(By.tagName("td"));
+            element = list1.get(0).findElement(By.className("listing-details")).findElement(By.tagName("a"));
+            if(element.getText().equals(listingName))
+            {
+                listingLink = element;
+                break;
+            }
+        }
+        return listingLink;
+    }
+
+    public ListingDetailPage clickOnListingNameLink(String listingName) throws Exception
+    {
+        ListingDetailPage listingdetail = null;
+        try
+        {
+            link_ListingName(listingName).click();
+            listingdetail = new ListingDetailPage(driver);
+            AutomationLog.info("Successfully clicked on ListingName link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on listing name link");
+            throw(e);
+        }
+        return listingdetail;
+    }
+
+    public WebElement getListingName(String listingName) throws Exception
+    {
+        int cnt = -1;
+        List<WebElement> list = new ArrayList<WebElement>();
+        List<WebElement> list1 = new ArrayList<WebElement>();
+        WebElement listingrow = null;
+        list = listingsContainer().findElements(By.tagName("tr"));
+        for(WebElement opt : list)
+        {
+            cnt++;
+            list1 = opt.findElements(By.tagName("td"));
+            element = list1.get(0).findElement(By.className("listing-details")).findElement(By.tagName("a"));
+            if(element.getText().equals(listingName))
+            {
+                listingrow = opt;
+                break;
+            }
+        }
+        setCount(cnt);
+        return listingrow;
+    }
+
+    public WebElement div_showing(String listingName) throws Exception 
+    {
+        try
+        {
+            element = getListingName(listingName).findElements(By.tagName("td")).get(2);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Showing div");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement link_ScheduleNow(String listingName) throws Exception
+    {
+        try
+        {
+            element = div_showing(listingName).findElement(By.tagName("a"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Schedule Now link");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement txt_UpcomingShowings(String listingName) throws Exception 
+    {
+        try
+        {
+            element = div_showing(listingName).findElement(By.tagName("span"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not find Upcoming showings text");
+            throw(e);
+        }
+        return element;
+    }
+
+    public FrontEndShowings clickOnScheduleNowLink(String listingName) throws Exception 
+    {
+        FrontEndShowings frontendshowing = null;
+        try
+        {
+            link_ScheduleNow(listingName).click();
+            WaitFor.sleepFor(2000);
+            frontendshowing = new FrontEndShowings(driver);
+            AutomationLog.info("Successfully clicked on Showings link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Showings link");
+            throw(e);
+        }
+        return frontendshowing;
+    }
+
+    public void clickOnUpcomingShowingsLink() throws Exception
+    {
+        element = listingsContainer().findElements(By.tagName("tr")).get(getCount());
+        WebElement showing = element.findElements(By.tagName("td")).get(2).findElement(By.tagName("a"));
+        showing.click();
+        AutomationLog.info("Succesfully clicked on upcoming showings link");
     }
 
 }
