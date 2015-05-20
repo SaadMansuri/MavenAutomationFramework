@@ -1,4 +1,4 @@
-package com.agorafy.automation.pageobjects;
+package com.agorafy.automation.pageobjects.showings;
 
 
 import java.text.SimpleDateFormat;
@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.Page;
 
 public class FrontEndShowings extends Page
 {

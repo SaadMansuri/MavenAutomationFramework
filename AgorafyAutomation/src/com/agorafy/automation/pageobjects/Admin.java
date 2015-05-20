@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.showings.AdminShowings;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 
 public class Admin extends Page 

@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
-import com.agorafy.automation.pageobjects.FrontEndShowings;
+import com.agorafy.automation.pageobjects.showings.FrontEndShowings;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
 

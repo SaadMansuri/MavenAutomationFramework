@@ -4,10 +4,10 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
-import com.agorafy.automation.testcases.AdminShowingsAction;
-import com.agorafy.automation.testcases.FrontEndShowingsAction;
+import com.agorafy.automation.testcases.showings.AdminShowingsAction;
+import com.agorafy.automation.testcases.showings.FrontEndShowingsAction;
 
-public class AdminShowingsTest 
+public class ShowingsTest 
 {
     @BeforeSuite
     public void Init()
