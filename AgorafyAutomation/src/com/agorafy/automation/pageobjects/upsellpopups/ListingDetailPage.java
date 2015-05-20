@@ -303,7 +303,7 @@ public class ListingDetailPage extends LoginPopUp
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div/div[1]/div[1]/div[2]/h2"));
+            element = driver.findElement(By.xpath("html/body/div[2]/div/div[1]/div[2]/div[1]/div[2]/h2"));
         }
         catch(Exception e)
         {

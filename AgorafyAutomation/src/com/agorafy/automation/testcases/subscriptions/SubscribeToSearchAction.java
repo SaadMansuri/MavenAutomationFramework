@@ -171,6 +171,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
     private void verifySubscriptionBoxDisplay() throws Exception 
     {
             mySubscriptions = (MySubscriptions) propertySearch.clickOnSubscribeToThisSearchLink(status);
+            WaitFor.sleepFor(2000);
             actualStatusOfElement = false;
             actualStatusOfElement = mySubscriptions.SubscriptionWindow().isDisplayed();
             Assert.assertEquals(actualStatusOfElement, true, "Subscription Box under user's Avatar is not displayed");

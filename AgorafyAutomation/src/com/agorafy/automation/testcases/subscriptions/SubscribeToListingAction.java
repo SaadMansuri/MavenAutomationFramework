@@ -128,6 +128,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
     {
         header.clickOnProfileNameDropdownArrow();
         mySubscriptions = header.clickSubscriptionsLinkBelowProfilePic();
+        WaitFor.sleepFor(2000);
         String subscribeToRespectiveListingTextOnListingDetailsPage = listingDetailPage.txt_listingTitle();
         subscribeToRespectiveListingTextOnListingDetailsPage = subscribeToRespectiveListingTextOnListingDetailsPage.replaceAll("Property Details", "");
         String subscribeToRespectiveListingTextInSubscriptionWindow = mySubscriptions.txt_SubscribeToRespectiveListingInSubscriptionWindow();
