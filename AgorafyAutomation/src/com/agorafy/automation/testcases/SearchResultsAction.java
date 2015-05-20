@@ -13,7 +13,7 @@ import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
-import com.agorafy.automation.pageobjects.reports.Reports;
+/*import com.agorafy.automation.pageobjects.reports.Reports;*/
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 import com.agorafy.automation.utilities.Login;
 
@@ -32,7 +32,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     private LoginPopUp loginpopup;
     private Header header = Header.header();
     private HashMap<String, String> dataFromCSV = new HashMap<>();
-    private Reports reports = null;
+/*    private Reports reports = null;*/
     HashMap<String, String> searchdata; 
 
     public SearchResultsAction()
@@ -64,7 +64,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         verifySessionExpireTestcases();
 
         
-/*        verifySizeInAdvanceSearch();
+        verifySizeInAdvanceSearch();
         verifyPriseInAdvanceSearch();
 
         AutomationLog.info("Verification of search results page after entering pin code which is less 5 digits");
@@ -75,7 +75,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
 
         AutomationLog.info("Verification of search result page after entering special character in search criteria");
         verifySpecialCharacterInSearch();
-*/
+
     }
 
     public void verifyIfAnalyticsViewButtonIsHiddenForShortSearchTerm() throws Exception 
@@ -232,24 +232,38 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         AutomationLog.info("Exports button is enabled ");
     }
 
-    public void verifyIfExportsButtonIsClickedAfterExpiringSession() throws Exception
+    public void verifySessionExpireTestcases() throws Exception
+    {
+        HashMap<String, String> loginurl= testCaseData.get("LoginUrl");
+        verifyIfExportsButtonIsClickedAfterExpiringSession(loginurl);
+        verifyIfExpiringSessionOnListViewPage(loginurl); 
+        verifyIfClickingSubscribeToThisSearchLinkAfterSessionExpire();
+        verifyIfClickingOnPinCushionAfterSessionExpire();
+        verifyIfClickingRemovefromReportPinCushionAfterSessionExpire();
+        verifyIfClickingCreateYourProfileButtonAfterSessionExpire(loginurl);
+        verifyIfClickingReportsLinkInProfileNameDropdownAfterSessionExpire();
+    }
+
+    public void verifyIfExportsButtonIsClickedAfterExpiringSession(HashMap<String, String> loginurl) throws Exception
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteAllCookies();
         searchresult.clickOnExportsButton();
-        Assert.assertEquals(searchresult.getCurrentUrl(), "https://beta.agorafy.com/login", "Expected page is not shown");
+        String expectedUrl = searchresult.getApplicationUrl() + loginurl.get("url");
+        Assert.assertEquals(searchresult.getCurrentUrl(), expectedUrl, "Expected page is not shown");
         AutomationLog.info("Expiring Session on Analytics view page redirects to Login page");
         Login.doSuccessfullLoginFromHeaderLoginForm();
         Page.driver.get(pageurl);
         searchresult.clickOnListViewButton();
     }
 
-    public void verifyIfExpiringSessionOnListViewPage() throws Exception 
+    public void verifyIfExpiringSessionOnListViewPage(HashMap<String, String> loginurl) throws Exception 
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteAllCookies();
         searchresult.btn_AnalyticsView().click();
-        Assert.assertEquals(searchresult.getCurrentUrl(), "https://beta.agorafy.com/login", "Expected page is not shown");
+        String expectedUrl = searchresult.getApplicationUrl() + loginurl.get("url");
+        Assert.assertEquals(searchresult.getCurrentUrl(), expectedUrl, "Expected page is not shown");
         AutomationLog.info("Expiring Session on list view page redirects to Login page");
         Login.doSuccessfullLoginFromHeaderLoginForm();
         Page.driver.get(pageurl);
@@ -274,17 +288,6 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         Assert.assertTrue(searchresult.div_Advertisement().isDisplayed(), "Expected Advertisement div is not present");
         Assert.assertTrue(searchresult.btn_CreateYourProfile().isDisplayed(), "Expected CreateYourProfile button not present");
         AutomationLog.info("Analytics view page contains Advertisement div and Create your profile button");
-    }
-
-    public void verifySessionExpireTestcases() throws Exception
-    {
-        verifyIfExportsButtonIsClickedAfterExpiringSession();
-        verifyIfExpiringSessionOnListViewPage(); 
-        verifyIfClickingSubscribeToThisSearchLinkAfterSessionExpire();
-        verifyIfClickingOnPinCushionAfterSessionExpire();
-        verifyIfClickingRemovefromReportPinCushionAfterSessionExpire();
-        verifyIfClickingCreateYourProfileButtonAfterSessionExpire();
-        verifyIfClickingReportsLinkInProfileNameDropdownAfterSessionExpire();
     }
 
     public void verifyIfClickingOnPinCushionAfterSessionExpire() throws Exception 
@@ -328,12 +331,13 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         Login.doSuccessfullLoginFromHeaderLoginForm();
     }
 
-    public void verifyIfClickingCreateYourProfileButtonAfterSessionExpire() throws Exception
+    public void verifyIfClickingCreateYourProfileButtonAfterSessionExpire(HashMap<String, String> loginurl) throws Exception
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteAllCookies();
         searchresult.btn_CreateYourProfile().click();
-        Assert.assertEquals(searchresult.getCurrentUrl(), "https://beta.agorafy.com/login", "Expected page is not shown");
+        String expectedUrl = searchresult.getApplicationUrl() + loginurl.get("url");
+        Assert.assertEquals(searchresult.getCurrentUrl(), expectedUrl, "Expected page is not shown");
         AutomationLog.info("Expiring Session on list view page redirects to Login page");
         Login.doSuccessfullLoginFromHeaderLoginForm();
         Page.driver.get(pageurl);

@@ -29,6 +29,12 @@ public class SearchResultsPage extends Page
         super(driver);
     }
 
+    protected boolean isSecured()
+    {
+        return true;
+    }
+
+
     public WebElement link_SubscribeToThisSearch() throws Exception
     {
         try
@@ -822,6 +828,11 @@ public class SearchResultsPage extends Page
             throw(e);
         }
         return element;
+    }
+
+    public String getApplicationUrl() throws Exception 
+    {
+        return applicationUrl();
     }
 
 }
