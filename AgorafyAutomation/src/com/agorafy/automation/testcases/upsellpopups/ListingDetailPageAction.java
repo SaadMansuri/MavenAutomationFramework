@@ -8,6 +8,7 @@ import org.testng.Assert;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.Credentials;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
@@ -24,6 +25,7 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
 {
     private ListingDetailPage listingDetailPage = null;
     private SearchResultsPage searchResultsPage = null;
+    private LoginPopUp loginpopup = null;
 
     public ListingDetailPageAction()
     {
@@ -58,7 +60,8 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception
     {
         Credentials validCredentials = userCredentials();
-        verifySubscribeToListingLinkUpsell(listingDetailPage,validCredentials);
+        /*verifySubscribeToListingLinkUpsell(listingDetailPage,validCredentials);*/
+        verifySubscribeToListingLinkUpsell(validCredentials);
 
         preconditionForNextTest();
 
@@ -66,18 +69,37 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
 
         preconditionForNextTest();
         verifyAddToReportLinkUpsell(listingDetailPage,validCredentials);
+
+        verifySessionExpireTestCases(validCredentials);
     }
 
-    public void verifySubscribeToListingLinkUpsell(ListingDetailPage subscribeListingPopup, Credentials getValidCredentials) throws Exception
+/*    public void verifySubscribeToListingLinkUpsell(ListingDetailPage subscribeListingPopup, Credentials getValidCredentials) throws Exception
     {
         ListingDetailPage listingDetailPage;
         try
         {
             boolean loginStatus = false;
-            LoginPopUp loginpopup = (LoginPopUp) subscribeListingPopup.clickOnSubscribeToListingLink(loginStatus);
+            loginpopup = (LoginPopUp) subscribeListingPopup.clickOnSubscribeToListingLink(loginStatus);
             Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Subscribe to Listing");
             loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
             listingDetailPage = (ListingDetailPage) loginpopup.clickLoginButtonOnUpsell();
+            Assert.assertEquals(listingDetailPage.isUpdateListingLinkPresent(), true, "Login action was unsuccessful");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not send credentials to login pop up of ListingDetailPage");
+        }
+    }*/
+
+    public void verifySubscribeToListingLinkUpsell(Credentials getValidCredentials) throws Exception
+    {
+        try
+        {
+            boolean loginStatus = false;
+            loginpopup = (LoginPopUp) listingDetailPage.clickOnSubscribeToListingLink(loginStatus);
+            Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Subscribe to Listing");
+            loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
+            loginpopup.btn_LogIntoMyAccount().click();
             Assert.assertEquals(listingDetailPage.isUpdateListingLinkPresent(), true, "Login action was unsuccessful");
         }
         catch(Exception e)
@@ -88,7 +110,7 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
 
     public void verifySendEmailLinkUpsell(ListingDetailPage subscribeListingPopup, Credentials getValidCredentials)throws Exception
     {
-        LoginPopUp loginpopup = subscribeListingPopup.clickSendEmailLink();
+        loginpopup = subscribeListingPopup.clickSendEmailLink();
         Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on send email");
         loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
         listingDetailPage = (ListingDetailPage) loginpopup.clickLoginButtonOnUpsell();
@@ -99,21 +121,106 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
     public void verifyAddToReportLinkUpsell(ListingDetailPage subscribeListingPopup, Credentials getValidCredentials)throws Exception
     {
         boolean isLoggedIn = false;
-        LoginPopUp loginpopup = (LoginPopUp) subscribeListingPopup.clickOnAddToReportLink(isLoggedIn);
+        loginpopup = (LoginPopUp) subscribeListingPopup.clickOnAddToReportLink(isLoggedIn);
         Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Add To Report");
         loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
         listingDetailPage = (ListingDetailPage) loginpopup.clickLoginButtonOnUpsell();
         Assert.assertEquals(listingDetailPage.isUpdateListingLinkPresent(), true, "Login action was unsuccessful");
         AutomationLog.info("Test for Add To Report link Upsell is successful");
-
     }
+
     public void preconditionForNextTest() throws Exception
     {
         String currentUrl = listingDetailPage.currentURL();
         Page.header().logout();
         Page.driver.get(currentUrl);
     }
-@Override
+
+    public void verifySessionExpireTestCases(Credentials getValidCredentials) throws Exception 
+    {
+        verifyIfClickedOnSubscribeToListingLinkAfterSessionExpire(getValidCredentials); 
+        verifyIfClickedOnUnsubscribeToListingLinkAfterSessionExpire(getValidCredentials);
+        verifyIfClickedOnUpdateListingLinkAfterSessionExpire(getValidCredentials);
+        verifyIfClickedOnAddToReportLinkAfterSessionExpire(getValidCredentials);
+        verifyIfClickedOnRemoveFromReportLinkAfterSessionExpire(getValidCredentials);
+        verifyIfClickedOnSendEmailLinkAfteSessionExpire(getValidCredentials);
+    }
+
+    public void verifyIfClickedOnSubscribeToListingLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception
+    {
+        Page.driver.manage().deleteAllCookies();
+        listingDetailPage.link_SubscribeToListing().click();
+        WaitFor.sleepFor(5000);
+        Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Add To Report");
+        AutomationLog.info("Clicking SubscribeToListing after session expire shows login PopUp");
+        loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
+        loginpopup.btn_LogIntoMyAccount().click();
+    }
+
+    public void verifyIfClickedOnUnsubscribeToListingLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception 
+    {
+        boolean status = true;
+        Page.driver.navigate().refresh();
+        listingDetailPage.clickOnSubscribeToListingLink(status);
+        Assert.assertTrue(listingDetailPage.link_SubscribeToListing().isDisplayed(), "Expected UnsubscribeToListing Link is not Shown after clicking SubscribeToListing Link");
+        Page.driver.manage().deleteAllCookies();
+        listingDetailPage.clickOnUnsubscribeListingLink();
+        WaitFor.sleepFor(5000);
+        Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Unsubscribe To Listing Link");
+        AutomationLog.info("Clicking UnsubscribeToListing link after session expire shows login PopUp");
+        loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
+        loginpopup.btn_LogIntoMyAccount().click();
+    }
+
+    public void verifyIfClickedOnUpdateListingLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception
+    {
+        Page.driver.manage().deleteAllCookies();
+        listingDetailPage.link_UpdateListing().click();
+        WaitFor.sleepFor(5000);
+        Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Add To Report");
+        AutomationLog.info("Clicking UpdateListing after session expire shows login PopUp");
+        loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
+        loginpopup.btn_LogIntoMyAccount().click();
+    }
+
+    public void verifyIfClickedOnAddToReportLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception
+    {
+        Page.driver.manage().deleteAllCookies();
+        listingDetailPage.link_addToReport().click();
+        WaitFor.sleepFor(5000);
+        Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Add To Report");
+        AutomationLog.info("Clicking AddToReport after session expire shows login PopUp");
+        loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
+        loginpopup.btn_LogIntoMyAccount().click();
+    }
+
+    public void verifyIfClickedOnRemoveFromReportLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception 
+    {
+        boolean isLoggedIn = true;
+        Page.driver.navigate().refresh();
+        listingDetailPage.clickOnAddToReportLink(isLoggedIn);
+        Assert.assertTrue(listingDetailPage.link_removeFromReport().isDisplayed(), "Expected RemoveFromReport link is not shown after clicking AddToReport link ");
+        Page.driver.manage().deleteAllCookies();
+        listingDetailPage.clickOnRemoveFromReportLink();
+        WaitFor.sleepFor(5000);
+        Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Remove From Report Link");
+        AutomationLog.info("Clicking RemoveFromReport link after session expire shows login PopUp");
+        loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
+        loginpopup.btn_LogIntoMyAccount().click();
+    }
+
+    public void verifyIfClickedOnSendEmailLinkAfteSessionExpire(Credentials getValidCredentials) throws Exception 
+    {
+        Page.driver.manage().deleteAllCookies();
+        listingDetailPage.link_sendEmailContactSection().get(0).click();
+        WaitFor.sleepFor(5000);
+        Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Add To Report");
+        AutomationLog.info("Clicking AddToReport after session expire shows login PopUp");
+        loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
+        loginpopup.btn_LogIntoMyAccount().click();
+    }
+
+    @Override
     protected String successMessage()
      {
         return "Test for verifying login pop-ups on listing detail page has Passed";
