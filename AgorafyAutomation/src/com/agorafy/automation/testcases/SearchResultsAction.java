@@ -13,7 +13,9 @@ import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
+/*import com.agorafy.automation.pageobjects.reports.Reports;*/
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
+import com.agorafy.automation.utilities.Login;
 
 /**
  * Precondition:Do search for property 
@@ -30,6 +32,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     private LoginPopUp loginpopup;
     private Header header = Header.header();
     private HashMap<String, String> dataFromCSV = new HashMap<>();
+/*    private Reports reports = null;*/
     HashMap<String, String> searchdata; 
 
     public SearchResultsAction()
@@ -50,10 +53,17 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         verifyIfAnalyticsViewButtonIsDisplayedForLongSearchTerm();
         HashMap<String, String> viewtype = testCaseData.get("ViewType");
         verifyIfMapViewButtonIsClicked(viewtype);
+        verifyIfMapViewPageContents();
         verifyIfListViewButtonIsClicked(viewtype);
+        verifyIfListViewPageContents();
         verifyLoginOnAnalyticsButtonClick(viewtype);
         verifyLoginOnCreateYourProfileButtonClick();
+        verifyAnalyticsViewPageContents();
         verifyAnalyticsClickInLoggedInState(viewtype);
+        verifyIfExportsButtonIsEnabled();
+        verifySessionExpireTestcases();
+
+        
         verifySizeInAdvanceSearch();
         verifyPriseInAdvanceSearch();
 
@@ -73,7 +83,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         searchdata = testCaseData.get("SearchData");
         searchresult = homepage.populateSearchTermTextBox(searchdata.get("borough"),searchdata.get("listingcategory"),searchdata.get("searchterm"));
         AutomationLog.info("Successfully Redirected to Property Search page ");
-        WaitFor.sleepFor(10000);
+        WaitFor.sleepFor(5000);
         Assert.assertFalse(searchresult.isAnalyticsViewButtonPresent(), "Expected Analytics view button is not hidden ");
         AutomationLog.info("Short searchterm does not show analytics view button");
     }
@@ -82,9 +92,9 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     {
         header.txtbx_SearchInput().clear();
         header.enterSearchTextInSearchInputTextBox(searchdata.get("longsearchterm"));
-        WaitFor.sleepFor(10000);
+        WaitFor.sleepFor(5000);
         header.clickOnSearchFormButton();
-        WaitFor.sleepFor(20000);
+        WaitFor.sleepFor(10000);
         Assert.assertTrue(searchresult.isAnalyticsViewButtonPresent(), "Expected Analytics view button is not displayed");
         AutomationLog.info("Long searchterm shown analytics view button");
     }
@@ -102,7 +112,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     public void verifyAnalyticsClickInLoggedInState(HashMap<String, String> viewtype) throws Exception 
     {
         boolean isloggedIn = true;
-        searchresult.scrollPage(700, 0);
+       // searchresult.scrollPage(700, 0);
         searchresult = (SearchResultsPage) searchresult.clickOnAnalyticsViewButton(isloggedIn);
         String url = searchresult.getCurrentUrl();
         Map<String, String> params=searchresult.getQueryMap(url);
@@ -126,7 +136,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     public void verifyIfListViewButtonIsClicked(HashMap<String, String> viewtype) throws Exception 
     {
         searchresult.clickOnListViewButton();
-        WaitFor.sleepFor(20000);
+        WaitFor.sleepFor(10000);
         String url = searchresult.getCurrentUrl();
         Map<String, String> params=searchresult.getQueryMap(url);
         String actualviewtype =(String)params.get("view");
@@ -201,16 +211,147 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     {
         String beforURL = searchresult.currentURL();
         searchresult.scrollPage(0, 700);
+        Page.driver.navigate().refresh();
         loginpopup = searchresult.clickOnCreateProfileButton();
         WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());
         Assert.assertEquals(searchresult.loginPopUpIsDisplayed(loginpopup),true,"Expected login pop up could not found");
         Assert.assertEquals(searchresult.getTitleForLoginPopUp(loginpopup), "Log in", "Could not Get login pop up title");
         Credentials ValidCredentials = userCredentials();
         loginpopup.populateLoginPopUpData(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-        searchresult = (SearchResultsPage) loginpopup.clickLoginButtonOnUpsell();
+        //searchresult = (SearchResultsPage) loginpopup.clickLoginButtonOnUpsell();
+        loginpopup.btn_LogIntoMyAccount().click();
+        WaitFor.sleepFor(20000);
         String afterURL = searchresult.currentURL();
         Assert.assertEquals(beforURL, afterURL, "Expected url match failed");
         AutomationLog.info("Clicking on Create Your Profile button displays Login popup and when logged in using valid credentials same page is shown");
+    }
+
+    public void verifyIfExportsButtonIsEnabled() throws Exception
+    {
+        Assert.assertTrue(searchresult.btn_Exports().isEnabled(), "Expected button is not enabled");
+        AutomationLog.info("Exports button is enabled ");
+    }
+
+    public void verifySessionExpireTestcases() throws Exception
+    {
+        HashMap<String, String> loginurl= testCaseData.get("LoginUrl");
+        verifyIfExportsButtonIsClickedAfterExpiringSession(loginurl);
+        verifyIfExpiringSessionOnListViewPage(loginurl); 
+        verifyIfClickingSubscribeToThisSearchLinkAfterSessionExpire();
+        verifyIfClickingOnPinCushionAfterSessionExpire();
+        verifyIfClickingRemovefromReportPinCushionAfterSessionExpire();
+        verifyIfClickingCreateYourProfileButtonAfterSessionExpire(loginurl);
+        verifyIfClickingReportsLinkInProfileNameDropdownAfterSessionExpire();
+    }
+
+    public void verifyIfExportsButtonIsClickedAfterExpiringSession(HashMap<String, String> loginurl) throws Exception
+    {
+        String pageurl = Page.driver.getCurrentUrl();
+        Page.driver.manage().deleteAllCookies();
+        searchresult.clickOnExportsButton();
+        String expectedUrl = searchresult.getApplicationUrl() + loginurl.get("url");
+        Assert.assertEquals(searchresult.getCurrentUrl(), expectedUrl, "Expected page is not shown");
+        AutomationLog.info("Expiring Session on Analytics view page redirects to Login page");
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
+        searchresult.clickOnListViewButton();
+    }
+
+    public void verifyIfExpiringSessionOnListViewPage(HashMap<String, String> loginurl) throws Exception 
+    {
+        String pageurl = Page.driver.getCurrentUrl();
+        Page.driver.manage().deleteAllCookies();
+        searchresult.btn_AnalyticsView().click();
+        String expectedUrl = searchresult.getApplicationUrl() + loginurl.get("url");
+        Assert.assertEquals(searchresult.getCurrentUrl(), expectedUrl, "Expected page is not shown");
+        AutomationLog.info("Expiring Session on list view page redirects to Login page");
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
+    }
+
+    public void verifyIfMapViewPageContents() throws Exception
+    {
+        Assert.assertTrue(searchresult.div_Advertisement().isDisplayed(), "Expected Advertisement div is not present");
+        Assert.assertFalse(searchresult.isCreateYourProfileButtonPresent(), "Expected CreateYourProfile button not present");
+        AutomationLog.info("Map view page contains Advertisement div and not Create your profile button");
+    }
+
+    public void verifyIfListViewPageContents() throws Exception 
+    {
+        Assert.assertTrue(searchresult.div_Advertisement().isDisplayed(), "Expected Advertisement div is not present");
+        Assert.assertTrue(searchresult.btn_CreateYourProfile().isDisplayed(), "Expected CreateYourProfile button not present");
+        AutomationLog.info("List view page contains Advertisement div and Create your profile button");
+    }
+
+    public void verifyAnalyticsViewPageContents() throws Exception 
+    {
+        Assert.assertTrue(searchresult.div_Advertisement().isDisplayed(), "Expected Advertisement div is not present");
+        Assert.assertTrue(searchresult.btn_CreateYourProfile().isDisplayed(), "Expected CreateYourProfile button not present");
+        AutomationLog.info("Analytics view page contains Advertisement div and Create your profile button");
+    }
+
+    public void verifyIfClickingOnPinCushionAfterSessionExpire() throws Exception 
+    {
+        int i = 0;
+        Page.driver.manage().deleteAllCookies();
+        searchresult.hoverOnSearchResult(i);
+        searchresult.hoverAndClickOnPincushionIcon(i);
+        WaitFor.sleepFor(5000);
+        Assert.assertTrue(searchresult.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
+        AutomationLog.info("Login PopUp is shown on Clicking Pincushion icon After session expire");
+        searchresult.closeLoginPoPup(loginpopup);
+        Page.driver.navigate().refresh();
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+    }
+
+    public void verifyIfClickingRemovefromReportPinCushionAfterSessionExpire() throws Exception
+    {
+        int i = 0;
+        searchresult.hoverOnSearchResult(i);
+        searchresult.hoverAndClickOnPincushionIcon(i);
+        Page.driver.manage().deleteAllCookies();
+        searchresult.hoverAndClickOnPincushionIcon(i);
+        WaitFor.sleepFor(5000);
+        Assert.assertTrue(searchresult.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
+        AutomationLog.info("Login PopUp is shown on Clicking Pincushion icon After session expire");
+        searchresult.closeLoginPoPup(loginpopup);
+        Page.driver.navigate().refresh();
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+    }
+
+    public void verifyIfClickingSubscribeToThisSearchLinkAfterSessionExpire() throws Exception 
+    {
+        Page.driver.manage().deleteAllCookies();
+        loginpopup = (LoginPopUp) searchresult.clickOnSubscribeToThisSearchLink(false);
+        WaitFor.sleepFor(5000);
+        Assert.assertTrue(searchresult.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
+        AutomationLog.info("Login PopUp is shown on Clicking Pincushion icon After session expire");
+        searchresult.closeLoginPoPup(loginpopup);
+        Page.driver.navigate().refresh();
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+    }
+
+    public void verifyIfClickingCreateYourProfileButtonAfterSessionExpire(HashMap<String, String> loginurl) throws Exception
+    {
+        String pageurl = Page.driver.getCurrentUrl();
+        Page.driver.manage().deleteAllCookies();
+        searchresult.btn_CreateYourProfile().click();
+        String expectedUrl = searchresult.getApplicationUrl() + loginurl.get("url");
+        Assert.assertEquals(searchresult.getCurrentUrl(), expectedUrl, "Expected page is not shown");
+        AutomationLog.info("Expiring Session on list view page redirects to Login page");
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
+    }
+
+    public void verifyIfClickingReportsLinkInProfileNameDropdownAfterSessionExpire() throws Exception
+    {
+        Page.driver.manage().deleteAllCookies();
+        header.clickOnProfileNameDropdownArrow();
+        header.clickOnReportsLink();
+        WaitFor.sleepFor(5000);
+        Assert.assertTrue(searchresult.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
+        AutomationLog.info("Login PopUp is shown on Clicking Reports Link After session expire");
+        searchresult.closeLoginPoPup(loginpopup);
     }
 
     @Override

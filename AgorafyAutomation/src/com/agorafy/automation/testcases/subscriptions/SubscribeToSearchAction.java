@@ -2,8 +2,10 @@ package com.agorafy.automation.testcases.subscriptions;
 
 import java.util.HashMap;
 import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.Credentials;
@@ -15,6 +17,7 @@ import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.utilities.Login;
 /**
  * Precondition:Do valid login
  * Search for a particular criteria
@@ -44,11 +47,12 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         try 
         {
             super.setup();
-            header = Header.header();
+            homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
+/*            header = Header.header();
             headerLoginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();
             homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+*/            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             dataFromCSV = testCaseData.get("SearchInputCombination");
             propertySearch = homePage.populateSearchTermTextBox(dataFromCSV.get("boroughname"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchstring"));
             AutomationLog.info("Setup for Subscribe to search passed");

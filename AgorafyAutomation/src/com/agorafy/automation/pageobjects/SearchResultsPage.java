@@ -29,6 +29,12 @@ public class SearchResultsPage extends Page
         super(driver);
     }
 
+    protected boolean isSecured()
+    {
+        return true;
+    }
+
+
     public WebElement link_SubscribeToThisSearch() throws Exception
     {
         try
@@ -71,6 +77,13 @@ public class SearchResultsPage extends Page
             throw(e);
         }
         return element;
+    }
+
+    public boolean isCreateYourProfileButtonPresent() throws Exception
+    {
+        boolean val = false;
+        val = driver.findElements(By.id("createProfileButton")).size() > 0;
+        return val;
     }
 
     public WebElement FilterText_Size() throws Exception
@@ -772,5 +785,54 @@ public class SearchResultsPage extends Page
            }   
        }  
        return map;  
-   } 
+   }
+
+    public WebElement btn_Exports() throws Exception 
+    {
+        try
+        {
+            element = driver.findElement(By.id("exportAnalytics"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Exports button");
+            throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnExportsButton() throws Exception 
+    {
+        try
+        {
+            btn_Exports().click();
+            AutomationLog.info("Successfully clicked on Exports button");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Exports button");
+            throw(e);
+        }
+    }
+
+    public WebElement div_Advertisement() throws Exception 
+    {
+        try
+        {
+            element = driver.findElement(By.id("advDiv")).findElement(By.className("adDescriptor"));
+            AutomationLog.info("Advertisement div found");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Advertisement div");
+            throw(e);
+        }
+        return element;
+    }
+
+    public String getApplicationUrl() throws Exception 
+    {
+        return applicationUrl();
+    }
+
 }

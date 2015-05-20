@@ -32,7 +32,7 @@ public class AutomationTestCase
         testCaseData = TestDataProvider.getTestData(executingTestCaseFileName);
     }
 
-    public Credentials userCredentials()
+    public static Credentials userCredentials()
     {
         String email = Configuration.getConfigurationValueForProperty("email");
         String password = Configuration.getConfigurationValueForProperty("password");

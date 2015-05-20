@@ -1,6 +1,6 @@
 package com.agorafy.automation.testcases.reports;
 
-import java.util.HashMap;
+ import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -9,24 +9,22 @@ import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
-import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Header;
-import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.reports.ReportsPopUp;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.reports.Reports;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
+import com.agorafy.automation.utilities.Login;
 
 
 public class ReportsAction extends AutomationTestCaseVerification
 {
     private Reports reports = new Reports(Page.driver);
-    private Header header = Page.header();
+    private Header header = null;
     private Homepage homePage = null;
-    private HeaderLoginForm headerLoginForm =null;
     private SearchResultsPage searchresult = null;
     private ListingDetailPage listingdetail = null;
     private ReportsPopUp reportspopup = null;
@@ -44,10 +42,8 @@ public class ReportsAction extends AutomationTestCaseVerification
         super.setup();
         try
         {
+            homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
             header = Header.header();
-            headerLoginForm = header.openHeaderLoginForm();
-            Credentials ValidCredentials = userCredentials();
-            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             HashMap<String, String> search = testCaseData.get("SearchData");
             searchresult = homePage.populateSearchTermTextBox(search.get("borough"), search.get("listingcategory"), search.get("searchterm"));
@@ -177,14 +173,13 @@ public class ReportsAction extends AutomationTestCaseVerification
         WaitFor.presenceOfTheElement(Page.driver, reports.getReportBoxLocator());
         Assert.assertEquals(reports.reportBox().isDisplayed(), true, "Expected reports Box is not shown");
         AutomationLog.info("Clicking On Reports Link In Profile Name DropDown Shows Reports Box");
-        
     }
 
     public void verifyIfClickingOnClearLinkOnReportsBoxClearsReportsList() throws Exception
     {
         String text = null;
         reports.clickOnClearLink();
-        WaitFor.sleepFor(2000);
+        WaitFor.sleepFor(5000);
         for(WebElement ele : reports.resultsetReportList())
         {
            text = ele.getText();

@@ -12,6 +12,7 @@ import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
+import com.agorafy.automation.utilities.Login;
 
 public abstract class AccountSettingsBaseAction extends AutomationTestCaseVerification
 {
@@ -33,11 +34,12 @@ public abstract class AccountSettingsBaseAction extends AutomationTestCaseVerifi
         super.setup();
         try
         {
-            header = Header.header();
+             homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
+/*            header = Header.header();
             loginForm = header.openHeaderLoginForm();
             Credentials ValidCredentials = userCredentials();
             homePage = loginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+*/            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             header = Header.header();
             subnavigation = Page.subNavigation();
             dashboard = subnavigation.clickLinkMyDashboard();

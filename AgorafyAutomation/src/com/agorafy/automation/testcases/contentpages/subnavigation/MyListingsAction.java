@@ -1,15 +1,12 @@
 package com.agorafy.automation.testcases.contentpages.subnavigation;
 
-import java.util.HashMap;
+ import java.util.HashMap;
 
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
-import com.agorafy.automation.pageobjects.Header;
-import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.updatelisting.*;
@@ -18,6 +15,7 @@ import com.agorafy.automation.pageobjects.subnavigationmenu.MyListings;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
 import com.agorafy.automation.utilities.HandlingWindows;
+import com.agorafy.automation.utilities.Login;
 /**
  * Test whether 'My Listings' link appears in the subnavigation bar
  * Test whether it gets clicked
@@ -30,13 +28,11 @@ public class MyListingsAction extends ContentPagesVerification
 {
 
     private Homepage homePage;
-    private HeaderLoginForm headerLoginForm;
     private HashMap<String, String> expectedmyListingsData;
     private SubNavigation subnavigation;
     private ContentPagesLeftMenu leftMenu;
     private String actualActiveLeftMenu;
     private String expectedActiveLeftMenu;
-    private Header header;
     private MyListings myListings;
     private AvailabilityAndDetailsForm updateListingPage;
     private SubmitListingMediaFormPage mediaPage;
@@ -53,10 +49,7 @@ public class MyListingsAction extends ContentPagesVerification
         try 
         {
         subnavigation = Page.subNavigation();
-        header = Header.header();
-        headerLoginForm = header.openHeaderLoginForm();
-        Credentials ValidCredentials = userCredentials();
-        homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
+        homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
         WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
         myListings = subnavigation.clickLinkMyListings(); 
         expectedmyListingsData = testCaseData.get("MyListings");
