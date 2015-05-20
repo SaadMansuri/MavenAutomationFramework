@@ -60,7 +60,6 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception
     {
         Credentials validCredentials = userCredentials();
-        /*verifySubscribeToListingLinkUpsell(listingDetailPage,validCredentials);*/
         verifySubscribeToListingLinkUpsell(validCredentials);
 
         preconditionForNextTest();
@@ -72,24 +71,6 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
 
         verifySessionExpireTestCases(validCredentials);
     }
-
-/*    public void verifySubscribeToListingLinkUpsell(ListingDetailPage subscribeListingPopup, Credentials getValidCredentials) throws Exception
-    {
-        ListingDetailPage listingDetailPage;
-        try
-        {
-            boolean loginStatus = false;
-            loginpopup = (LoginPopUp) subscribeListingPopup.clickOnSubscribeToListingLink(loginStatus);
-            Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Subscribe to Listing");
-            loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
-            listingDetailPage = (ListingDetailPage) loginpopup.clickLoginButtonOnUpsell();
-            Assert.assertEquals(listingDetailPage.isUpdateListingLinkPresent(), true, "Login action was unsuccessful");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("could not send credentials to login pop up of ListingDetailPage");
-        }
-    }*/
 
     public void verifySubscribeToListingLinkUpsell(Credentials getValidCredentials) throws Exception
     {
