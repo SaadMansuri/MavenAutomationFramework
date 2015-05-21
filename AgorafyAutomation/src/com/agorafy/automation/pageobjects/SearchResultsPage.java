@@ -481,7 +481,7 @@ public class SearchResultsPage extends Page
     {
         try
         {
-            element = driver.findElement(By.className("errorDialog"));
+            element = driver.findElement(By.id("errorDialog"));
         }
         catch(Exception e)
         {

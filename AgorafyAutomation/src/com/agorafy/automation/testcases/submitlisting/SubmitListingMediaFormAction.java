@@ -166,6 +166,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         media.clickOnStartUploadButton();
         WaitFor.sleepFor(10000);
         contacts = media.clickOnSaveAndContinueButton();
+        WaitFor.sleepFor(2000);
         Assert.assertTrue(contacts.form_Contacts().isDisplayed(), "Expected contacts form is not displayed");
         AutomationLog.info("Adding Image file uploads pdf file successfully");
         contacts.clickOnBackButton();
