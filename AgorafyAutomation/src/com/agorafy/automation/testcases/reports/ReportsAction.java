@@ -193,6 +193,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     {
         listingdetail = searchresult.clickSearchResult();
         SwitchToNextWindow();
+        WaitFor.sleepFor(2000);
         Assert.assertEquals(listingdetail.link_addToReport().isDisplayed(), true, "Expected Add to Report link is not displayed");
         AutomationLog.info("Add to Report link is present on listing detail page");
     }
@@ -264,7 +265,6 @@ public class ReportsAction extends AutomationTestCaseVerification
         int afterCount = Integer.parseInt(reports.getReportCount());
         Assert.assertEquals(afterCount, beforeCount-1, "Expected reports count in not decremented");
         AutomationLog.info("Clicking On Delete Listing icon decrements the reports count and Removes listing from Reports box  ");
-        
     }
 
     public void verifyIfRemoveFromReportLinkIsShownWhenListingIsAddedFromSearchResultsPage() throws Exception
@@ -274,8 +274,10 @@ public class ReportsAction extends AutomationTestCaseVerification
         Page.driver.navigate().refresh();
         WaitFor.waitForPageToLoad(Page.driver);
         addReportUsingPinCushionReportIcon();
+        WaitFor.sleepFor(1000);
         listingdetail = searchresult.clickSearchResult();
         SwitchToNextWindow();
+        WaitFor.sleepFor(5000);
         Assert.assertEquals(listingdetail.link_removeFromReport().isDisplayed(), true, "Expected Remove From Report Link is Not shown");
         AutomationLog.info("Remove From report Link is shown When ListingIsAddedFromSearchResultsPage");
         listingdetail.clickOnRemoveFromReportLink();
@@ -355,6 +357,7 @@ public class ReportsAction extends AutomationTestCaseVerification
                 ++count;
             }
         }
+        WaitFor.sleepFor(2000);
         Assert.assertTrue(searchresult.popup_ErrorDialog().isDisplayed(), "Expected Error dialog pop up is not shown");
         searchresult.clickCloseIconOnErrorDialogPopUp();
         AutomationLog.info("Error Dialog is shown if more than fifteen listings tried to add ");
@@ -369,6 +372,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         WaitFor.presenceOfTheElement(Page.driver, reports.getReportBoxLocator());
         reports.hoverOnFirstDeleteListingIcon();
         reports.clickOnFirstDeleteListingIcon();
+        WaitFor.sleepFor(1000);
         Assert.assertFalse(searchresult.icon_PinCushion(index).isDisplayed(), "Expected AddToReport icon for first listingd is not unFixed");
         AutomationLog.info("On Removing First listing by clicking close icon in Reports List unfix AddToReport icon for the first Listing in Search Results");
     }
@@ -381,6 +385,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     public void verifyIfClickingPrintLinkOpensPopUp() throws Exception 
     {
         reportspopup = reports.clickOnPrintLink();
+        WaitFor.sleepFor(1000);
         Assert.assertTrue(reportspopup.popup_Reports().isDisplayed(), "Expected popup is not shown");
         reportspopup.clickOnCloseButton();
         reports.clickOnReportWindowCloseIcon();

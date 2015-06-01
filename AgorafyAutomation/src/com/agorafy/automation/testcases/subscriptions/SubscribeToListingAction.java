@@ -116,9 +116,9 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         header.clickOnProfileNameDropdownArrow();
         mySubscriptions = header.clickSubscriptionsLinkBelowProfilePic();
         mySubscriptions.clickSubscribeToRespectiveListingInSubscriptionWindow();
+        WaitFor.sleepFor(2000);
         dataFromCSV = testCaseData.get("ExpectedUnsubscribeToListingText");
         String expectedString = dataFromCSV.get("ExpectedText");
-        WaitFor.sleepFor(1000);
         String actualStringAfterSubscribeListing = listingDetailPage.link_UnsubscribeListing().getText();
         Assert.assertEquals(actualStringAfterSubscribeListing, expectedString, "After performing click operation on Subscribe to respective listing in subscription window, Subscribe to listing does not change to unsubscribe listing on listing details page");
         AutomationLog.info("After performing click operation on Subscribe to respective listing in subscription window, Subscribe to listing changes to unsubscribe listing on listing details page");

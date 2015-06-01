@@ -15,6 +15,7 @@ import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 public class Page 
 {
     public static WebDriver driver;
+    public static boolean urlStatus = false;
 
     public Page(WebDriver driver)
     {
@@ -33,7 +34,7 @@ public class Page
 
     protected boolean isSecured()
     {
-        return false;
+        return urlStatus;
     }
 
     public static Header header()

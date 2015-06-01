@@ -37,7 +37,7 @@ SuccessMsg,SuccessMsgForFeedbackForm="Thank you! Your feedback has been submitte
 MyDashboard,title="AGORAFY - My Profile";heading="My Dashboard";myDashboardPageUrl="/manage/dashboard"
 
 #data for My Listings verification
-MyListings,title="AGORAFY - Manage My Listings";heading="My Listings";myListingsPageUrl="/manage/listings/"
+MyListings,title="AGORAFY - Manage My Listings";heading="My Listings";myListingsPageUrl="/manage/listings/";loginUrl="/login"
 
 #data for My Subscriptions verification
 MySubscriptions,title="AGORAFY - Manage My Subscriptions";heading="My Subscriptions";mySubscriptionsPageUrl="/manage/subscriptions/"

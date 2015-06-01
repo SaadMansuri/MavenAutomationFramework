@@ -88,6 +88,7 @@ public class AddToReportsAction extends AutomationTestCaseVerification
                 }
             }
         }
+        WaitFor.sleepFor(2000);
         Assert.assertTrue(searchresult.popup_ErrorDialog().isDisplayed(), "Expected Error dialog pop up is not shown");
         AutomationLog.info("Error Dialog is shown if more than fifteen listings tried to add ");
     }

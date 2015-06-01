@@ -40,12 +40,8 @@ public abstract class LoginBaseAction extends AutomationTestCaseVerification
         super.setup();
         try 
         {
-             homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
-/*            header = Header.header();
-            headerLoginForm = header.openHeaderLoginForm();
-            AutomationLog.info("Log In link is clicked");
-            Credentials ValidCredentials = userCredentials();
-            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());*/
+            homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
+            header = Header.header();
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
         }
         catch (Exception e)

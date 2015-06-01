@@ -32,7 +32,6 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     private LoginPopUp loginpopup;
     private Header header = Header.header();
     private HashMap<String, String> dataFromCSV = new HashMap<>();
-/*    private Reports reports = null;*/
     HashMap<String, String> searchdata; 
 
     public SearchResultsAction()
@@ -112,7 +111,6 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     public void verifyAnalyticsClickInLoggedInState(HashMap<String, String> viewtype) throws Exception 
     {
         boolean isloggedIn = true;
-       // searchresult.scrollPage(700, 0);
         searchresult = (SearchResultsPage) searchresult.clickOnAnalyticsViewButton(isloggedIn);
         String url = searchresult.getCurrentUrl();
         Map<String, String> params=searchresult.getQueryMap(url);
@@ -218,7 +216,6 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         Assert.assertEquals(searchresult.getTitleForLoginPopUp(loginpopup), "Log in", "Could not Get login pop up title");
         Credentials ValidCredentials = userCredentials();
         loginpopup.populateLoginPopUpData(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-        //searchresult = (SearchResultsPage) loginpopup.clickLoginButtonOnUpsell();
         loginpopup.btn_LogIntoMyAccount().click();
         WaitFor.sleepFor(20000);
         String afterURL = searchresult.currentURL();
@@ -241,7 +238,8 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         verifyIfClickingOnPinCushionAfterSessionExpire();
         verifyIfClickingRemovefromReportPinCushionAfterSessionExpire();
         verifyIfClickingCreateYourProfileButtonAfterSessionExpire(loginurl);
-        verifyIfClickingReportsLinkInProfileNameDropdownAfterSessionExpire();
+        verifyIfClickingReportsLinkInProfileNameDropdownAfterSessionExpire(); 
+        verifyIfClickongSubscriptionLinkInProfileNameDropdownAfterSessionExpire();
     }
 
     public void verifyIfExportsButtonIsClickedAfterExpiringSession(HashMap<String, String> loginurl) throws Exception
@@ -251,7 +249,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         searchresult.clickOnExportsButton();
         String expectedUrl = searchresult.getApplicationUrl() + loginurl.get("url");
         Assert.assertEquals(searchresult.getCurrentUrl(), expectedUrl, "Expected page is not shown");
-        AutomationLog.info("Expiring Session on Analytics view page redirects to Login page");
+        AutomationLog.info("Clicking Exports button after Expiring Session redirects to Login page");
         Login.doSuccessfullLoginFromHeaderLoginForm();
         Page.driver.get(pageurl);
         searchresult.clickOnListViewButton();
@@ -351,6 +349,18 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         WaitFor.sleepFor(5000);
         Assert.assertTrue(searchresult.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
         AutomationLog.info("Login PopUp is shown on Clicking Reports Link After session expire");
+        searchresult.closeLoginPoPup(loginpopup);
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+    }
+
+    public void verifyIfClickongSubscriptionLinkInProfileNameDropdownAfterSessionExpire() throws Exception 
+    {
+        Page.driver.manage().deleteAllCookies();
+        header.clickOnProfileNameDropdownArrow();
+        header.clickSubscriptionsLinkBelowProfilePic();
+        WaitFor.sleepFor(5000);
+        Assert.assertTrue(searchresult.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
+        AutomationLog.info("Login PopUp is shown on Clicking Subscriptions Link After session expire");
         searchresult.closeLoginPoPup(loginpopup);
     }
 

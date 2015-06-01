@@ -36,16 +36,14 @@ public class ReportsPopUpAction extends AutomationTestCaseVerification
         super.setup();
         try
         {
+            int i = 0;
             homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
             header = Header.header();
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             HashMap<String, String> search = testCaseData.get("SearchData");
             searchresult = homePage.populateSearchTermTextBox(search.get("borough"), search.get("listingcategory"), search.get("searchterm"));
-            for(int i=0;i<3;i++)
-            {
-                searchresult.hoverOnSearchResult(i);
-                searchresult.hoverAndClickOnPincushionIcon(i);
-            }
+            searchresult.hoverOnSearchResult(i);
+            searchresult.hoverAndClickOnPincushionIcon(i);
             header.clickOnProfileNameDropdownArrow();
             reports = header.clickOnReportsLink();
             WaitFor.sleepFor(2000);

@@ -3,10 +3,12 @@ package com.agorafy.automation.pageobjects.subnavigationmenu;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
@@ -14,6 +16,7 @@ import com.agorafy.automation.pageobjects.updatelisting.*;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingMediaFormPage;
 import com.agorafy.automation.pageobjects.showings.FrontEndShowings;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
+import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
 public class MyListings extends Page 
 {
@@ -23,7 +26,7 @@ public class MyListings extends Page
     public MyListings(WebDriver driver) 
     {
         super(driver);
-    }	
+    }
 
     public void setCount(int cnt)
     {
@@ -103,7 +106,6 @@ public class MyListings extends Page
         WebElement child;
         try 
         {
-           //parent = driver.findElement(By.id("DataTables_Table_0")).findElement(By.tagName("tbody"));
            parent = getVisibleElement(By.className("dataTable")).findElement(By.tagName("tbody"));
            child = parent.findElements(By.tagName("tr")).get(0);
            element = child.findElements(By.tagName("td")).get(0);
@@ -138,7 +140,6 @@ public class MyListings extends Page
     {
         try
         {
-           
            Actions actions = new Actions(driver);
            element = firstOnMarketListing();
            actions.moveToElement(element).build().perform();;
@@ -411,9 +412,14 @@ public class MyListings extends Page
         return updateListingPage;
     }
 
-    public String getApplicationUrl()
+    public String getApplicationurl()
     {
-        return applicationUrl();
+    	return applicationUrl();
+    }
+
+    public String getCurrentUrl() throws Exception
+    {
+        return driver.getCurrentUrl();
     }
 
     public String pageHeading() throws Exception
@@ -422,11 +428,25 @@ public class MyListings extends Page
     }
 
     //Showings on my listings
-    public WebElement listingsContainer() throws Exception
+    public WebElement listingsContainerOnMarket() throws Exception
     {
         try
         {
             element = driver.findElement(By.id("DataTables_Table_0")).findElement(By.tagName("tbody"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Couid not find listing container");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement listingsContainerOffMarket() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("DataTables_Table_1")).findElement(By.tagName("tbody"));
         }
         catch(Exception e)
         {
@@ -441,7 +461,7 @@ public class MyListings extends Page
         WebElement listingLink = null;
         List<WebElement> list = new ArrayList<WebElement>();
         List<WebElement> list1 = new ArrayList<WebElement>();
-        list = listingsContainer().findElements(By.tagName("tr"));
+        list = listingsContainerOnMarket().findElements(By.tagName("tr"));
         for(WebElement opt : list)
         {
             list1 = opt.findElements(By.tagName("td"));
@@ -478,7 +498,7 @@ public class MyListings extends Page
         List<WebElement> list = new ArrayList<WebElement>();
         List<WebElement> list1 = new ArrayList<WebElement>();
         WebElement listingrow = null;
-        list = listingsContainer().findElements(By.tagName("tr"));
+        list = listingsContainerOnMarket().findElements(By.tagName("tr"));
         for(WebElement opt : list)
         {
             cnt++;
@@ -556,10 +576,78 @@ public class MyListings extends Page
 
     public void clickOnUpcomingShowingsLink() throws Exception
     {
-        element = listingsContainer().findElements(By.tagName("tr")).get(getCount());
+        element = listingsContainerOnMarket().findElements(By.tagName("tr")).get(getCount());
         WebElement showing = element.findElements(By.tagName("td")).get(2).findElement(By.tagName("a"));
         showing.click();
         AutomationLog.info("Succesfully clicked on upcoming showings link");
+    }
+
+    public boolean loginPopUpIsDisplayed(LoginPopUp loginpopup) throws Exception
+    {
+        boolean val;
+        try
+        {
+            val = loginpopup.popUp_Login().isDisplayed();
+            AutomationLog.info("login pop up is displayed");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Login pop up is not displayed");
+            throw(e);
+        }
+        return val;
+    }
+
+    public void closeLoginPoPup(LoginPopUp loginpopup) throws Exception
+    {
+        try
+        {
+            element = loginpopup.icon_CloseOnLoginPopUp();
+            element.click();
+            AutomationLog.info("Successfully closed Login Pop up");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not close Login Pop up ");
+            throw(e);
+        }
+    }
+
+    public WebElement link_Scheduled() throws Exception 
+    {
+        List<WebElement> list = new ArrayList<WebElement>();
+        List<WebElement> list2 = new ArrayList<WebElement>();
+        WebElement option;
+        list = listingsContainerOffMarket().findElements(By.tagName("tr"));
+        for(WebElement ele : list)
+        {
+            list2 = ele.findElements(By.tagName("td"));
+            option = list2.get(2);
+            if(option.findElements(By.tagName("a")).size() > 0)
+            {
+                element = option.findElement(By.tagName("a"));
+                break;
+            }
+        }
+        if(element == null)
+        {
+            AutomationLog.info("Scheduled link not found on Off Market Listings");
+        }
+        return element;
+    }
+
+    public void ClickOnScheduledLink() throws Exception 
+    {
+        try
+        {
+            link_Scheduled().click();
+            AutomationLog.info("Successfully clicked on Scheduled link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Scheduled link");
+            throw(e);
+        }
     }
 
 }
