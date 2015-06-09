@@ -4,13 +4,6 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
-
-import org.apache.bcel.generic.IREM;
-import org.testng.IReporter;
-import org.testng.ISuite;
-import org.testng.ISuiteListener;
-import org.testng.xml.XmlSuite;
-
 import java.util.*;
 /*This file is used for sending the report after execution of all suites using email*/
 public class SendMailClass 

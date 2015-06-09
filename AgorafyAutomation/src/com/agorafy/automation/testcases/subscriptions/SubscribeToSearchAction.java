@@ -8,10 +8,7 @@ import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
-import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
-import com.agorafy.automation.pageobjects.Header;
-import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
@@ -27,14 +24,12 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
 {
 
     private Homepage homePage;
-    private HeaderLoginForm headerLoginForm;
     private HashMap<String, String> dataFromCSV = new HashMap<>();
     private SearchResultsPage propertySearch;
     private boolean actualStatusOfElement;
     private MySubscriptions mySubscriptions; 
     private SubNavigation subNavigation;
     private boolean status = true;
-	private Header header;
 
     public SubscribeToSearchAction() 
     {
@@ -48,11 +43,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         {
             super.setup();
             homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
-/*            header = Header.header();
-            headerLoginForm = header.openHeaderLoginForm();
-            Credentials ValidCredentials = userCredentials();
-            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-*/            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             dataFromCSV = testCaseData.get("SearchInputCombination");
             propertySearch = homePage.populateSearchTermTextBox(dataFromCSV.get("boroughname"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchstring"));
             AutomationLog.info("Setup for Subscribe to search passed");

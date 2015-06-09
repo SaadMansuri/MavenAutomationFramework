@@ -19,39 +19,40 @@ public class PropertyDetailPage extends Page
         super(driver);
     }
 
-    public WebElement link_propertyRecords() throws Exception
+    public WebElement link_PropertyRecordsSignIn() throws Exception
     {
         try 
         {
-            element = driver.findElement(By.xpath("//a[@class='upsell ga-track'][@data-ga-label='ViewPropertyRecords']"));
+            element = driver.findElement(By.id("property_records")).findElement(By.tagName("a"));
+            AutomationLog.info("Sign in link found in property records");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Signup link found was not found on the Property Detail Page");
+            AutomationLog.error("Could not found Sign in link on the Property Detail Page");
             throw(e);
         }
 
         return element;
     }
-    
-    public PropertyDetailPage clickOnPropertyRecordsLink() throws Exception
+
+    public LoginPopUp clickOnPropertyRecordsSignInLink() throws Exception
     {
-        PropertyDetailPage propertydetail = null;
+        LoginPopUp loginpopup;
         try
         {
-            link_propertyRecords().click();
-            propertydetail = new PropertyDetailPage(driver);
-            AutomationLog.info("Clicked on Property Signin link from property record section");
+            link_PropertyRecordsSignIn().click();
+            loginpopup = new LoginPopUp(driver);
+            AutomationLog.info("Successfully clicked on PropertyRecords Signin link");
         }
         catch(Exception e)
         {
-            AutomationLog.error("Failed to clicked on signUp link from property record section");
+            AutomationLog.error("Could not click on PropertyRecords Signin link");
             throw(e);
         }
-            return propertydetail;
+        return loginpopup;
     }
-    
-    public WebElement getLoginPopUp_element() throws Exception
+
+/*    public WebElement getLoginPopUp_element() throws Exception
     {
         try 
         {
@@ -177,7 +178,7 @@ public class PropertyDetailPage extends Page
         }
             return propertydetail;
     }
-    
+    */
     public WebElement propertyRecordSection_element() throws Exception
     {
         try 
@@ -207,26 +208,28 @@ public class PropertyDetailPage extends Page
         return bool;
      }
     
-    public WebElement link_signInToContactInformation() throws Exception
+    public WebElement link_ContactInformationSignIn() throws Exception
     {
         try 
         {
-            element = driver.findElement(By.xpath("//a[@data-ga-label='ViewContactInformation']"));
+            //element = driver.findElement(By.xpath("//a[@data-ga-label='ViewContactInformation']"));
+            element = driver.findElement(By.id("owner-box")).findElement(By.tagName("a"));
+            AutomationLog.info("Sign In link found under Contact Information");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Sign in to contact information is not found");
+            AutomationLog.error("Could not find Sign In link under Contact Information");
             throw(e);
         }
         return element;
     }
     
-    public LoginPopUp clickOnContactInformation() throws Exception
+    public LoginPopUp clickOnContactInformationSignInLink() throws Exception
     {
         LoginPopUp loginpopup = null;
         try
         {
-            link_signInToContactInformation().click();
+            link_ContactInformationSignIn().click();
             loginpopup = new LoginPopUp(driver);
             AutomationLog.info("Clicked on 'Sign in to see contact information' link");
         }
@@ -238,7 +241,7 @@ public class PropertyDetailPage extends Page
         return loginpopup;
     }
 
-    public WebElement userNameElementAfterLogIn_element() throws Exception
+/*    public WebElement userNameElementAfterLogIn_element() throws Exception
     {
         try 
         {
@@ -267,6 +270,6 @@ public class PropertyDetailPage extends Page
         }
         return username;
      }
-
+*/
    
 }

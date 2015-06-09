@@ -252,6 +252,20 @@ public class LoginPopUp extends Page
         return bool;
      }
 
+    public void closeLoginPopUp() throws Exception
+    {
+        try
+        {
+            icon_CloseOnLoginPopUp().click();
+            AutomationLog.info("Successfully closed login popup");
+        }
+        catch(Exception e)
+        {
+           AutomationLog.error("Could not close login popup");
+           throw(e);
+        }
+    }
+
     public By getCloseIconLocator()
     {
         return By.className("ui-icon-closethick");

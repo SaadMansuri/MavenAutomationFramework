@@ -34,14 +34,14 @@ FeedbackFormTotalData,Name="Kevin";Email="kevin@gmail.com";SubjectDropdown="Ask 
 SuccessMsg,SuccessMsgForFeedbackForm="Thank you! Your feedback has been submitted."
 
 #data for My Dashboard verification
-MyDashboard,title="AGORAFY - My Profile";heading="My Dashboard";myDashboardPageUrl="/manage/dashboard"
+MyDashboard,title="AGORAFY - My Profile";heading="My Dashboard";myDashboardPageUrl="/manage/dashboard";loginUrl="/login"
 
 #data for My Listings verification
 MyListings,title="AGORAFY - Manage My Listings";heading="My Listings";myListingsPageUrl="/manage/listings/";loginUrl="/login"
 
 #data for My Subscriptions verification
-MySubscriptions,title="AGORAFY - Manage My Subscriptions";heading="My Subscriptions";mySubscriptionsPageUrl="/manage/subscriptions/"
+MySubscriptions,title="AGORAFY - Manage My Subscriptions";heading="My Subscriptions";mySubscriptionsPageUrl="/manage/subscriptions/";loginUrl="/login"
 
 #data for Edit Profiles verification
-EditProfile,title="AGORAFY - Manage My Profile";heading="Edit / View My Profile";editProfilePageUrl="/manage/profile"
+EditProfile,title="AGORAFY - Manage My Profile";heading="Edit / View My Profile";editProfilePageUrl="/manage/profile";loginUrl="/login"
 

@@ -5,11 +5,8 @@ import java.util.concurrent.TimeUnit;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
-import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Dashboard;
-import com.agorafy.automation.pageobjects.Header;
-import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingDetailsFormBasePage;
@@ -21,11 +18,9 @@ public abstract class SubmitListingBaseAction extends AutomationTestCaseVerifica
 {
     private Homepage homePage = null;
     private Dashboard dashboard = null;
-    private HeaderLoginForm headerLoginForm = null;
     protected SubmitListingLocationFormPage locationPage;
     protected SubmitListingDetailsFormBasePage detailsBasePage;
     HashMap<String, String> dataFromCSV;
-	private Header header;
 
     public SubmitListingBaseAction()
     {
@@ -39,11 +34,7 @@ public abstract class SubmitListingBaseAction extends AutomationTestCaseVerifica
         try
         {
             homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
-/*            header = Header.header();
-            headerLoginForm = header.openHeaderLoginForm();
-            Credentials ValidCredentials = userCredentials();
-            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-*/            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             dashboard = homePage.clickOnMyDashboardLink();
             Page.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
             locationPage = dashboard.clickOnSubmitListingButton();

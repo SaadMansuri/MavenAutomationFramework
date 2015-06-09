@@ -8,11 +8,13 @@ import org.testng.Assert;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.Credentials;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SearchResultsPage;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
+import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 import com.agorafy.automation.pageobjects.upsellpopups.PropertyDetailPage;
 
 /**
@@ -22,10 +24,11 @@ import com.agorafy.automation.pageobjects.upsellpopups.PropertyDetailPage;
 
 public class PropertyDetailAction extends AutomationTestCaseVerification
 {
-    ListingDetailPage listingDetailPage;
-    SearchResultsPage searchResultsPage;
-    PropertyDetailPage propertydetails;
-    Header header=Homepage.header();
+    private ListingDetailPage listingDetailPage;
+    private SearchResultsPage searchResultsPage;
+    private PropertyDetailPage propertydetails;
+    private LoginPopUp loginpopup = null;
+    Header header = Homepage.header();
 
     public PropertyDetailAction()
     {
@@ -35,7 +38,6 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
     @Override
     public void setup()
     {
-        listingDetailPage = ListingDetailPage.listingDetailPage();
         try
         {
             super.setup();
@@ -44,7 +46,6 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
             searchResultsPage = homepage.populateSearchTermTextBox("Manhattan","Commercial","Retail in 10010");
             String handle = Page.driver.getWindowHandle();
             listingDetailPage = searchResultsPage.clickSearchResult();
-            
 
             Set<String> numbers = Page.driver.getWindowHandles();
             numbers.remove(handle);
@@ -65,24 +66,23 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
     {
         verifyLoginPopupOnPropertyRecords(propertydetails);
 
-        Credentials ValidCredentials = userCredentials();
+      /*  Credentials ValidCredentials = userCredentials();
         verifyPageAfterLogin(propertydetails,ValidCredentials);
 
-        preconditionForNextTest();
-        verifyLoginPopupOnContactInformation(propertydetails, ValidCredentials);
+        preconditionForNextTest();*/
+        verifyLoginPopupOnContactInformation(propertydetails/*, ValidCredentials*/);
     }
 
     public void verifyLoginPopupOnPropertyRecords(PropertyDetailPage propertydetails) throws Exception
     {
-        propertydetails.clickOnPropertyRecordsLink();
-        AutomationLog.info("Signin Link Clicked Successfully");
-        Page.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        Assert.assertEquals(propertydetails.checkingLogInPopUpUpsell(),true,"Expected form is not present");
-        AutomationLog.info("Login popup form is present on page");
-        Assert.assertEquals(propertydetails.getTitleOfLogInPopUp(),"Log in","Expected Title is not present on Login Pop-Up");
-        AutomationLog.info("Login Title on Pop-up is verified");
+        loginpopup = propertydetails.clickOnPropertyRecordsSignInLink();
+        WaitFor.sleepFor(2000);
+        Assert.assertTrue(loginpopup.checkingLogInPopUp(), "Expected LoginPopUp is not shown");
+        Assert.assertEquals(loginpopup.title_LoginPopUp().getText(),"Log in","Expected Title is not present on Login Pop-Up");
+        AutomationLog.info("Clicking Sign in link under Property records shows login Popup");
+        loginpopup.closeLoginPopUp();
     }
-
+/*
     public void verifyPageAfterLogin(PropertyDetailPage propertydetails,Credentials validCredentials) throws Exception
     {
         String beforeloginUrl=Page.driver.getCurrentUrl();
@@ -99,18 +99,21 @@ public class PropertyDetailAction extends AutomationTestCaseVerification
         header.logout();
         Page.driver.get(currentUrl);
     }
-
-    public void verifyLoginPopupOnContactInformation(PropertyDetailPage propertydetails,Credentials validCredentials) throws Exception
+*/
+    public void verifyLoginPopupOnContactInformation(PropertyDetailPage propertydetails/*,Credentials validCredentials*/) throws Exception
     {
-        String beforeloginUrl=Page.driver.getCurrentUrl();
-        propertydetails.clickOnContactInformation();
-        Assert.assertEquals(propertydetails.checkingLogInPopUpUpsell(),true,"Expected Login Pop form is not present");
-        AutomationLog.info("Login pop-up is displayed");
-        Assert.assertEquals(propertydetails.getTitleOfLogInPopUp(),"Log in","Expected Title is not present on Login Pop-Up");
+     /*   String beforeloginUrl=Page.driver.getCurrentUrl();*/
+        loginpopup = propertydetails.clickOnContactInformationSignInLink();
+        WaitFor.sleepFor(2000);
+        Assert.assertTrue(loginpopup.checkingLogInPopUp(), "Expected LoginPopUp is not shown");
+        Assert.assertEquals(loginpopup.title_LoginPopUp().getText(),"Log in","Expected Title is not present on Login Pop-Up");
+        AutomationLog.info("Clicking Sign in link under Property records shows login Popup");
+        loginpopup.closeLoginPopUp();
+        /*Assert.assertEquals(propertydetails.getTitleOfLogInPopUp(),"Log in","Expected Title is not present on Login Pop-Up");
         AutomationLog.info("Login Title on Pop-up is found successfully");
         propertydetails.loginProcess(validCredentials.getEmail(), validCredentials.getPassword());
         Assert.assertEquals(Page.driver.getCurrentUrl(),beforeloginUrl,"Expected Url is differnt then expected Url");
-        AutomationLog.info("User after login stays on a same page");
+        AutomationLog.info("User after login stays on a same page");*/
     }
 
     @Override

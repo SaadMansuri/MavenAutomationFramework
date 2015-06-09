@@ -22,6 +22,21 @@ public class ProfessionalProfilePage extends Page
             return PageFactory.initElements(driver, ProfessionalProfilePage.class);
         }
 
+        public WebElement txt_ProfileName() throws Exception 
+        {
+            try
+            {
+                element = driver.findElement(By.className("profile-content")).findElement(By.tagName("h2"));
+                AutomationLog.info("Profile name found");
+            }
+            catch(Exception e)
+            {
+                AutomationLog.error("Could not find profile name ");
+                throw(e);
+            }
+            return element;
+        }
+
         public WebElement btn_SendEmail() throws Exception
         {
             try

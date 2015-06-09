@@ -47,6 +47,7 @@ public class MyDashboardAction extends ContentPagesVerification
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             myDashboardPage = subnavigation.clickLinkMyDashboard(); 
             expectedMyDashboardData = testCaseData.get("MyDashboard");
+            Page.urlStatus = false;
             String url = myDashboardPage.getApplicationURL() + expectedMyDashboardData.get("myDashboardPageUrl");
             expectedMyDashboardData.put("url", url);
             AutomationLog.info("Redirecting to My Dashboard page sucessfull");
@@ -64,6 +65,8 @@ public class MyDashboardAction extends ContentPagesVerification
 
         AutomationLog.info("Testing whether My Dashboard link is active in left side started...");
         verifyLeftMenu();
+
+        verifyLeftMenuSessionExpireTestCases();
     }
 
     private void verifyLeftMenu() throws Exception 
@@ -73,6 +76,90 @@ public class MyDashboardAction extends ContentPagesVerification
         expectedActiveLeftMenu = leftMenu.MyDashboardLinkText();  
         Assert.assertEquals(actualActiveLeftMenu, expectedActiveLeftMenu,"Left menu does not show My Dashboard link as Active Link");
         AutomationLog.info("Left menu shows My Dashboard link as Active Link");
+    }
+
+    public void verifyLeftMenuSessionExpireTestCases() throws Exception 
+    {
+        verifyIfClickedOnMyListingsLinkAfterSessionExpire();
+        verifyIfClickedOnMySubscriptionsLinkAfterSessionExpire();
+        verifyIfClickedOnEditProfileLinkAfterSessionExpire();
+        verifyIfClickedOnAccountSettingsLinkAfterSessionExpire();
+        verifyIfClickedOnSubmitListingLinkAfterSessionExpire();
+    }
+
+    public void verifyIfClickedOnMyListingsLinkAfterSessionExpire() throws Exception
+    {
+        String pageurl = Page.driver.getCurrentUrl();
+        Page.driver.manage().deleteCookieNamed("PHPSESSID");
+        myDashboardPage.clickOnMyListingsLink();
+        WaitFor.sleepFor(2000);
+        Page.urlStatus = true;
+        String expectedUrl = myDashboardPage.getApplicationurl() + expectedMyDashboardData.get("loginUrl");
+        Assert.assertEquals(myDashboardPage.getCurrentUrl(), expectedUrl, "Expected page is not shown");
+        AutomationLog.info("Clicking My Listings link After Session Expire redirects to Login page");
+        WaitFor.sleepFor(2000);
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
+    }
+
+    public void verifyIfClickedOnMySubscriptionsLinkAfterSessionExpire() throws Exception
+    {
+        String pageurl = Page.driver.getCurrentUrl();
+        Page.driver.manage().deleteCookieNamed("PHPSESSID");
+        myDashboardPage.clickOnMyListingsLink();
+        WaitFor.sleepFor(2000);
+        Page.urlStatus = true;
+        String expectedUrl = myDashboardPage.getApplicationurl() + expectedMyDashboardData.get("loginUrl");
+        Assert.assertEquals(myDashboardPage.getCurrentUrl(), expectedUrl, "Expected page is not shown");
+        AutomationLog.info("Clicking My Listings link After Session Expire redirects to Login page");
+        WaitFor.sleepFor(2000);
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
+    }
+
+    public void verifyIfClickedOnEditProfileLinkAfterSessionExpire() throws Exception
+    {
+        String pageurl = Page.driver.getCurrentUrl();
+        Page.driver.manage().deleteCookieNamed("PHPSESSID");
+        myDashboardPage.link_EditProfile().click();
+        WaitFor.sleepFor(2000);
+        Page.urlStatus = true;
+        String expectedUrl = myDashboardPage.getApplicationurl() + expectedMyDashboardData.get("loginUrl");
+        Assert.assertEquals(myDashboardPage.getCurrentUrl(), expectedUrl, "Expected page is not shown");
+        AutomationLog.info("Clicking Edit Profile link After Session Expire redirects to Login page");
+        WaitFor.sleepFor(2000);
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
+    }
+
+    public void verifyIfClickedOnAccountSettingsLinkAfterSessionExpire() throws Exception 
+    {
+        String pageurl = Page.driver.getCurrentUrl();
+        Page.driver.manage().deleteCookieNamed("PHPSESSID");
+        myDashboardPage.link_AccountSettings().click();
+        WaitFor.sleepFor(2000);
+        Page.urlStatus = true;
+        String expectedUrl = myDashboardPage.getApplicationurl() + expectedMyDashboardData.get("loginUrl");
+        Assert.assertEquals(myDashboardPage.getCurrentUrl(), expectedUrl, "Expected page is not shown");
+        AutomationLog.info("Clicking Account Settings link After Session Expire redirects to Login page");
+        WaitFor.sleepFor(2000);
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
+    }
+
+    public void verifyIfClickedOnSubmitListingLinkAfterSessionExpire() throws Exception
+    {
+        String pageurl = Page.driver.getCurrentUrl();
+        Page.driver.manage().deleteCookieNamed("PHPSESSID");
+        myDashboardPage.clickOnSubmitListingButton();
+        WaitFor.sleepFor(2000);
+        Page.urlStatus = true;
+        String expectedUrl = myDashboardPage.getApplicationurl() + expectedMyDashboardData.get("loginUrl");
+        Assert.assertEquals(myDashboardPage.getCurrentUrl(), expectedUrl, "Expected page is not shown");
+        AutomationLog.info("Clicking Submit Listing link After Session Expire redirects to Login page");
+        WaitFor.sleepFor(2000);
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
     }
 
     @Override

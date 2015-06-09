@@ -7,7 +7,6 @@ import com.agorafy.automation.automationframework.AutomationTestCaseVerification
 import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
-import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SignUp;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 
@@ -20,10 +19,10 @@ import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
  */
 public class SignupPageLoginAction extends AutomationTestCaseVerification
 {
-    private SignUp signup=null;
-    private Header header=null;
-    private Homepage homepage=null;
-    private LoginPopUp loginpopup=null;
+    private SignUp signup = null;
+    private Header header = null;
+    private Homepage homepage = null;
+    private LoginPopUp loginpopup = null;
 
     public SignupPageLoginAction()  
     {
@@ -57,14 +56,14 @@ public class SignupPageLoginAction extends AutomationTestCaseVerification
     {
         try
         {
-            String Url = Page.driver.getCurrentUrl();
+            
             loginpopup = signup.clickOnLoginLink();
             Thread.sleep(7000);
             Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Subscribe to Listing");
             loginpopup.populateLoginPopUpData(credentials.getEmail(),credentials.getPassword());
             homepage = (Homepage) loginpopup.clickLoginButtonOnUpsell();
-
-            //Assert.assertEquals(homepage.currentURL(),Url,"unsuccessfull login" );
+            String expectedUrl = homepage.homepageUrl();
+            Assert.assertEquals(homepage.currentURL(), expectedUrl, "Expected home page is not shown");
             AutomationLog.info("expected page is loaded after login");
         }
         catch(Exception e)

@@ -50,7 +50,7 @@ public class CompanyProfilePage extends Page
     {
         try
         {
-            element =  driver.findElement(By.className("profile-content")).findElement(By.tagName("h2"));
+            element = driver.findElement(By.className("profile-content")).findElement(By.tagName("h2"));
             AutomationLog.info("compny name is found on copmany profile page");
         }
         catch (Exception e)

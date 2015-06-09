@@ -11,7 +11,10 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
+import com.agorafy.automation.pageobjects.CompanyProfilePage;
 import com.agorafy.automation.pageobjects.Page;
+import com.agorafy.automation.pageobjects.SendEmailPopUp;
+import com.agorafy.automation.pageobjects.UpdateListingPopUp;
 
 public class ListingDetailPage extends LoginPopUp
 {
@@ -115,6 +118,98 @@ public class ListingDetailPage extends LoginPopUp
         return element;
     }
 
+    public List<WebElement> brokerContacts() throws Exception
+    {
+        List<WebElement> brokers = new ArrayList<WebElement>();
+        try
+        {
+            WebElement parent = brokerInformationSection().findElement(By.tagName("ul"));
+            brokers = parent.findElements(By.tagName("li"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find BrokersContacts");
+            throw(e);
+        }
+        return brokers;
+    }
+
+    public WebElement link_brokerProfileName(int index) throws Exception 
+    {
+        try
+        {
+            WebElement parent = brokerContacts().get(index).findElement(By.className("contact-details")).findElement(By.tagName("h6"));
+            element = parent.findElement(By.tagName("a"));
+            AutomationLog.info("Broker Profile name link found");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find broker Profile Name link");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement link_companyProfileName(int index) throws Exception 
+    {
+        try
+        {
+            WebElement parent = brokerContacts().get(index).findElement(By.className("contact-details")).findElement(By.tagName("span"));
+            element = parent.findElement(By.tagName("a"));
+            AutomationLog.info("Company Profile name link found");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Company Profile Name link");
+            throw(e);
+        }
+        return element;
+    }
+ 
+    public String getFirstBrokerProfileName() throws Exception
+    {
+        return link_brokerProfileName(0).getText();
+    }
+
+    public ProfessionalProfilePage clickOnFirstBrokerProfileNameLink() throws Exception
+    {
+        ProfessionalProfilePage profilepage = null;
+        try
+        {
+            link_brokerProfileName(0).click();
+            profilepage = new ProfessionalProfilePage(driver);
+            AutomationLog.info("Successfully clicked on first Broker Profile Name link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on first Broker Profile Name link");
+            throw(e);
+        }
+        return profilepage;
+    }
+
+    public CompanyProfilePage clickOnFirstCompanyProfileNameLink() throws Exception
+    {
+        CompanyProfilePage companyprofile = null;
+        try
+        {
+            link_companyProfileName(0).click();
+            companyprofile = new CompanyProfilePage(driver);
+            AutomationLog.info("Successfully clicked on first Company profile name link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on first Company Profile Name link");
+            throw(e);
+        }
+        return companyprofile;
+    }
+
+    public String getFirstCompanyProfileName() throws Exception
+    {
+        return link_companyProfileName(0).getText();
+    }
+
     public List<WebElement> link_sendEmailContactSection() throws Exception
     {
         List<WebElement> elements = null;
@@ -130,21 +225,28 @@ public class ListingDetailPage extends LoginPopUp
         return elements;
     }
 
-    public LoginPopUp clickSendEmailLink() throws Exception
+    public Page clickSendEmailLink(boolean status) throws Exception
     {
-        LoginPopUp loginpopup = null;
+        Page page = null;
         try
         {
             link_sendEmailContactSection().get(0).click();
-            WaitFor.ElementToBeDisplayed(driver, getLoginPopUpLocator());
-            loginpopup = new LoginPopUp(driver);
+            if(status)
+            {
+                page = new SendEmailPopUp(driver);
+            }
+            else
+            {
+                WaitFor.ElementToBeDisplayed(driver, getLoginPopUpLocator());
+                page = new LoginPopUp(driver);
+            }
             AutomationLog.info("Send Email link is clicked");
         }
         catch (Exception e)
         {
             AutomationLog.error("Could not click Send email link");
         }
-        return loginpopup;
+        return page;
     }
 
     public WebElement link_UpdateListing() throws Exception
@@ -227,6 +329,23 @@ public class ListingDetailPage extends LoginPopUp
             AutomationLog.error("Unable to click Add to Report");
         }
         return page;
+    }
+
+    public UpdateListingPopUp clickUpdateListingLink() throws Exception
+    {
+        UpdateListingPopUp updatelisting = null;
+        try
+        {
+            link_UpdateListing().click();
+            updatelisting = new UpdateListingPopUp(driver);
+            AutomationLog.info("Successfully clicked on update listing link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on update listing link");
+            throw(e);
+        }
+        return updatelisting;
     }
 
     public WebElement title_ListingTypeSearched() throws Exception

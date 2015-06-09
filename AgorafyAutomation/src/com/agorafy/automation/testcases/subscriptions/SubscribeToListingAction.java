@@ -8,10 +8,8 @@ import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
-import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Header;
-import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.IntermidiatePage;
 import com.agorafy.automation.pageobjects.Page;
@@ -32,7 +30,6 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
 {
 
     private Homepage homePage;
-    private HeaderLoginForm headerLoginForm;
     private HashMap<String, String> dataFromCSV = new HashMap<> ();
     private SearchResultsPage propertySearch;
     private IntermidiatePage intermidiatePage = null;
@@ -48,11 +45,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         try 
         {
             homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
-/*            header = Header.header();
-            headerLoginForm = header.openHeaderLoginForm();
-            Credentials ValidCredentials = userCredentials();
-            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-*/            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             dataFromCSV = testCaseData.get("SearchInputCombination");
             propertySearch = homePage.populateSearchTermTextBox(dataFromCSV.get("boroughname"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchstring"));
             setupToReachListingDetailsPage();

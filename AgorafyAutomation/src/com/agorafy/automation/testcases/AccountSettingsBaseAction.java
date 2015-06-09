@@ -3,7 +3,6 @@ package com.agorafy.automation.testcases;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
-import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.AccountSettings;
 import com.agorafy.automation.pageobjects.Dashboard;
@@ -34,12 +33,8 @@ public abstract class AccountSettingsBaseAction extends AutomationTestCaseVerifi
         super.setup();
         try
         {
-             homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
-/*            header = Header.header();
-            loginForm = header.openHeaderLoginForm();
-            Credentials ValidCredentials = userCredentials();
-            homePage = loginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-*/            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+            homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
+            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             header = Header.header();
             subnavigation = Page.subNavigation();
             dashboard = subnavigation.clickLinkMyDashboard();

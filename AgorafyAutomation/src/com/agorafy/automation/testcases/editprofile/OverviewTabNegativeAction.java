@@ -6,11 +6,8 @@ import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
-import com.agorafy.automation.automationframework.Credentials;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Dashboard;
-import com.agorafy.automation.pageobjects.Header;
-import com.agorafy.automation.pageobjects.HeaderLoginForm;
 import com.agorafy.automation.pageobjects.Homepage;
 import com.agorafy.automation.pageobjects.editprofile.OverviewTab;
 import com.agorafy.automation.pageobjects.Page;
@@ -55,12 +52,10 @@ import com.agorafy.automation.utilities.Login;
 public class OverviewTabNegativeAction extends AutomationTestCaseVerification
 {
     private Homepage homePage = null;
-    private HeaderLoginForm headerLoginForm = null;
     private Dashboard dashboard = null;
     private OverviewTab overviewTab = null;
     private HashMap<String, String> invalidTestData = null;
-	private SubNavigation subnavigation = null;
-	private Header header;
+    private SubNavigation subnavigation = null;
     static HashMap<String,String> stateAbbMap;
 
     public OverviewTabNegativeAction()
@@ -75,12 +70,7 @@ public class OverviewTabNegativeAction extends AutomationTestCaseVerification
         try
         {
             homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
-/*            header = Header.header();
-            headerLoginForm = header.openHeaderLoginForm();
-            Credentials ValidCredentials = userCredentials();
-            homePage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
-*/            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
-
+            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             subnavigation  = Page.subNavigation();
             dashboard = subnavigation.clickLinkMyDashboard();
             overviewTab = dashboard.editProfile();

@@ -2,9 +2,11 @@ package com.agorafy.automation.testcases.upsellpopups;
 
 
 import org.testng.Assert;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.Credentials;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.upsellpopups.LoginPopUp;
 import com.agorafy.automation.pageobjects.upsellpopups.ProfessionalProfilePage;
@@ -36,25 +38,23 @@ public class ProfessionalProfileLoginUpsellAction extends AutomationTestCaseVeri
     }
 
 @Override
-     protected void verifyTestCases() throws Exception
-     {
-            Credentials validCredentials = userCredentials();
-            //HashMap<String, String> getvalidcrendial = testCaseData.get("validCredential");
-            verifysendEmailLinkLoginUpsell(professionalProfilePage,validCredentials);
-     }
+    protected void verifyTestCases() throws Exception
+    {
+        Credentials validCredentials = userCredentials();
+        verifysendEmailLinkLoginUpsell(validCredentials);
+        verifyIfClickingSendEmailLinkAfterSessionExpire();
+    }
 
-    public void verifysendEmailLinkLoginUpsell(ProfessionalProfilePage professionalPopUp, Credentials getvalidcrendial) throws Exception
+    public void verifysendEmailLinkLoginUpsell(Credentials getvalidcrendial) throws Exception
     {
         try
         {
-            loginpopup = professionalProfilePage.clickSendEmailbtnOnProfessionalProfile();
             String Url = Page.driver.getCurrentUrl();
-            Thread.sleep(5000);
+            loginpopup = professionalProfilePage.clickSendEmailbtnOnProfessionalProfile();
+            WaitFor.sleepFor(5000);
             Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Upsell Login popup Not found");
             loginpopup.populateLoginPopUpData(getvalidcrendial.getEmail(), getvalidcrendial.getPassword());
             professionalProfilePage = (ProfessionalProfilePage) loginpopup.clickLoginButtonOnUpsell();
-
-            //professionalPopUp.populateLoginPopUpDataForProfessionalPage(getvalidcrendial.get("username"),getvalidcrendial.get("password"));
             Assert.assertEquals(professionalProfilePage.currentURL(),Url,"unsuccessfull login after entering valid credentials for Professional Page" );
             AutomationLog.info("successfull login after entering valid credentials for Professional Page");
         }
@@ -62,6 +62,16 @@ public class ProfessionalProfileLoginUpsellAction extends AutomationTestCaseVeri
         {
             AutomationLog.error("could not send credentials to login pop up of Professional Page");
         }
+    }
+
+    public void verifyIfClickingSendEmailLinkAfterSessionExpire() throws Exception
+    {
+        Page.driver.manage().deleteCookieNamed("PHPSESSID");
+        professionalProfilePage.clickSendEmailbtnOnProfessionalProfile();
+        WaitFor.sleepFor(2000);
+        Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Upsell Login popup Not found");
+        AutomationLog.info("Login PopUp is shown on Clicking Send Email Link After session expire");
+        loginpopup.icon_CloseOnLoginPopUp().click();
     }
 
     @Override

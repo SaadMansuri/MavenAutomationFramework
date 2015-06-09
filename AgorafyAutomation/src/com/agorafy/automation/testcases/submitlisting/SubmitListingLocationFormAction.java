@@ -1,5 +1,5 @@
 package com.agorafy.automation.testcases.submitlisting;
-import java.util.Collection;
+
 import java.util.HashMap;
 import org.testng.Assert;
 import com.agorafy.automation.automationframework.AutomationLog;

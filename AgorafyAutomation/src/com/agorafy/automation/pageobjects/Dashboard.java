@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.editprofile.OverviewTab;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingLocationFormPage;
+import com.agorafy.automation.pageobjects.subnavigationmenu.MyListings;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MySubscriptions;
 
 public class Dashboard extends Page
@@ -18,11 +19,22 @@ public class Dashboard extends Page
         super(driver);
     }
 
+    public String getApplicationurl()
+    {
+    	return applicationUrl();
+    }
+
+    public String getCurrentUrl() throws Exception
+    {
+        return driver.getCurrentUrl();
+    }
+
+
     public WebElement link_EditProfile() throws Exception
     {
         try
         {
-            element = driver.findElement(By.linkText("Edit / View My Profile"));
+            element = leftMenuLinks().findElement(By.linkText("Edit / View My Profile"));
             AutomationLog.info("Edit/View profile link found");
         }
         catch (Exception e)
@@ -37,7 +49,7 @@ public class Dashboard extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Account Settings"));
+            element = leftMenuLinks().findElement(By.linkText("Account Settings"));
             AutomationLog.info("AccountSetting link found on the Dashboard");
         }
         catch (Exception e)
@@ -52,7 +64,7 @@ public class Dashboard extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/a"));
+            element = leftMenuLinks().findElement(By.linkText("Submit Listing"));
             AutomationLog.info("Submit Listing button found");
         }
         catch (Exception e)
@@ -134,7 +146,7 @@ public class Dashboard extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul"));
+            element = driver.findElement(By.className("menu-list-left"));
             AutomationLog.info("Left Menu found on Dashboard");
         }
         catch (Exception e)
@@ -195,7 +207,7 @@ public class Dashboard extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("My Subscriptions"));
+            element = leftMenuLinks().findElement(By.linkText("My Subscriptions"));
             AutomationLog.info("My Subscriptions link found");
         }
         catch (Exception e)
@@ -221,5 +233,37 @@ public class Dashboard extends Page
             throw(e);
         }
         return mySubscriptions;
+    }
+
+    public WebElement link_MyListings() throws Exception
+    {
+        try
+        {
+            element = leftMenuLinks().findElement(By.linkText("My Listings"));
+            AutomationLog.info("My Listings link found");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("My Listings link Not found the Home Page");
+            throw (e);
+        }
+        return element;
+    }
+
+    public MyListings clickOnMyListingsLink() throws Exception 
+    {
+        MyListings myListings = null;
+                try
+        {
+            link_MyListings().click();
+            myListings = new MyListings(driver);
+            AutomationLog.info("Successfully clicked on My Listings Link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not clicked on My Listings Link");
+            throw(e);
+        }
+        return myListings;
     }
 }
