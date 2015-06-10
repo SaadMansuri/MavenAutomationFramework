@@ -236,14 +236,14 @@ public class SubmitListingDetailsFormBasePage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='ls_space_name_chzn']/a/div/b"));
-            return element;
+            element = driver.findElement(By.className("chzn-single"));
         }
         catch(Exception e)
         {
             AutomationLog.error("Space Name dropdown not found");
             throw e;
         }
+        return element;
     }
 
     public void selectSpaceName() throws Exception
@@ -254,7 +254,6 @@ public class SubmitListingDetailsFormBasePage extends Page
             WebElement parentElement = driver.findElement(By.className("chzn-results"));
             element = parentElement.findElement(By.id("ls_space_name_chzn_o_2"));
             element.click();
-            //driver.findElement(By.xpath(".//*[@id='ls_space_name_chzn_o_2']")).click();
             AutomationLog.info("selected one of the space name");
         }
         catch (Exception e) 
@@ -268,14 +267,14 @@ public class SubmitListingDetailsFormBasePage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='ls_space_name_chzn']/a/span"));
-            return element;
+            element = dropdown_SpaceName().findElement(By.tagName("span"));
         }
         catch(Exception e)
         {
             AutomationLog.error("Space Name txt not found");
             throw e;
         }
+        return element;
     }	
 
     public String getSpaceName() throws Exception
@@ -631,14 +630,15 @@ public class SubmitListingDetailsFormBasePage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='property']/div[18]/div/button[1]"));
-            return element;
+            element = form_Property().findElement(By.className("back-step"));
+            AutomationLog.info("Back button found");
         }
         catch(Exception e)
         {
             AutomationLog.error("btn back not found");
             throw e;
         }
+        return element;
     }
 
     public void clickBack() throws Exception

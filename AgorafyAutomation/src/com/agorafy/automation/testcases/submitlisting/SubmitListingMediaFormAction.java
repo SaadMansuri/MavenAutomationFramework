@@ -209,6 +209,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
            media.clickOnStartUploadButton();
            WaitFor.presenceOfTheElement(Page.driver, media.uploadImagelocator());
            media.clickOnSaveAndContinueButton();
+           WaitFor.sleepFor(5000);
            Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
            contact = new SubmitListingContactsFormPage(Page.driver);
        }

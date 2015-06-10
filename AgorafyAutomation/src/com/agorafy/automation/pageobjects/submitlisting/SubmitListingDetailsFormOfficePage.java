@@ -49,9 +49,7 @@ public class SubmitListingDetailsFormOfficePage extends SubmitListingDetailsForm
         String spaceType= null;
         try 
         {
-            element =  dropdown_SpaceType();
-            spaceType = element.findElement(By.xpath("//*[@id='space-form']/div[1]/div/span/span")).getText();
-            //spaceType = element.findElement(By.cssSelector("selected")).getText();
+            spaceType = new Select(dropdown_SpaceType()).getFirstSelectedOption().getText();
         }
         catch (Exception e) 
         {

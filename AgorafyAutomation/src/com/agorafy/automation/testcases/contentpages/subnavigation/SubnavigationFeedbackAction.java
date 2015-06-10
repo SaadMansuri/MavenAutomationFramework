@@ -7,6 +7,7 @@ import java.util.HashMap;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.ContentPagesLeftMenu;
 import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.footer.support.Feedback;
@@ -132,6 +133,7 @@ public class SubnavigationFeedbackAction extends ContentPagesVerification
         expectedFeedbackData = testCaseData.get("IfEmailEmpty");
         fillFeedbackForm(expectedFeedbackData);
         feedback.clickSubmitFeedback();
+        WaitFor.sleepFor(2000);
         String errorForEmail = feedback.string_ErrorForEmail();
         errorForEmail = errorForEmail.replace("\n", " ");
         expectedFeedbackData = testCaseData.get("ErrorMessages");
@@ -146,6 +148,7 @@ public class SubnavigationFeedbackAction extends ContentPagesVerification
         expectedFeedbackData = testCaseData.get("IfNameEmpty");
         fillFeedbackForm(expectedFeedbackData);
         feedback.clickSubmitFeedback();
+        WaitFor.sleepFor(2000);
         String errorForName = feedback.string_ErrorForName();
         expectedFeedbackData = testCaseData.get("ErrorMessages");
         Assert.assertEquals(errorForName, expectedFeedbackData.get("ErrorForName"), "Error msg for Name is not displayed as expected:");

@@ -2,6 +2,8 @@ package com.agorafy.automation.testcases;
 
 import java.util.HashMap;
 
+import com.agorafy.automation.pageobjects.Page;
+
 /**
  * Precondition: home page is loaded
  * Test negative test cases of LOGIN form on Login page for
@@ -25,12 +27,14 @@ public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
     protected void verifyTestCases() throws Exception
     {
         verifyUrlAndErrorMessage(loginPage);
+        Page.urlStatus = true;
         testWrongEmailRightPassword();
         testRightEmailWrongPassword();
         testWrongEmailPassword();
         testEmptyEmail();
         testEmptyEmailPassword();
         testMismatchValidCredentials();
+        Page.urlStatus = false;
     }
 
     public void testWrongEmailRightPassword() throws Exception

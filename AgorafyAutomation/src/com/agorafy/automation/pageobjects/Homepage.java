@@ -282,23 +282,6 @@ public class Homepage extends Page
         return searchresult;
     }
 
-/*    public HeaderLoginForm openHeaderLoginForm() throws Exception
-    {
-        HeaderLoginForm element = null;
-        try
-        {
-            link_Login().click();
-            element = new HeaderLoginForm(driver);
-            AutomationLog.info("Header login form appears");
-        }
-        catch (Exception e)
-        {
-            AutomationLog.error("Header login form does Not appear");
-            throw(e);
-        }
-        return element;
-    }
-*/
     public WebElement dropdown_LoginAvatar() throws Exception
     {
         try

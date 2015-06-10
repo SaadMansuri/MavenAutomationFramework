@@ -17,14 +17,15 @@ public class SubmitListingDetailsFormRetailPage extends SubmitListingDetailsForm
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='space-form']/div[4]/div/label[1]/input"));
-            return element;
+            WebElement parent = driver.findElement(By.className("combinable"));
+            element = parent.findElements(By.name("ls_space_combinable")).get(0);
         }
         catch(Exception e)
         {
             AutomationLog.error("radio btn CombinableYes not found");
             throw e;
         }
+        return element;
     }
 
     public void setCombinableYes() throws Exception
@@ -45,14 +46,15 @@ public class SubmitListingDetailsFormRetailPage extends SubmitListingDetailsForm
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='space-form']/div[4]/div/label[2]"));
-            return element;
+            WebElement parent = driver.findElement(By.className("combinable"));
+            element = parent.findElements(By.name("ls_space_combinable")).get(1);
         }
         catch(Exception e)
         {
             AutomationLog.error("radio btn CombinableNo not found");
             throw e;
         }
+        return element;
     }
 
     public void setCombinableNo() throws Exception
@@ -133,14 +135,14 @@ public class SubmitListingDetailsFormRetailPage extends SubmitListingDetailsForm
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='property']/div[11]/div/p[1]/label[2]/input"));
-            return element;
+            element = driver.findElements(By.name("ls_food_allowed")).get(0);
         }
         catch(Exception e)
         {
             AutomationLog.error("radio btn Food Yes not found");
             throw e;
         }
+        return element;
     }
 
     public void setFoodYes() throws Exception
@@ -161,14 +163,14 @@ public class SubmitListingDetailsFormRetailPage extends SubmitListingDetailsForm
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='property']/div[11]/div/p[1]/label[3]/input"));
-            return element;
+            element = driver.findElements(By.name("ls_food_allowed")).get(1);
         }
         catch(Exception e)
         {
             AutomationLog.error("radio btn Food No not found");
             throw e;
         }
+        return element;
     }
 
     public void setFoodNo() throws Exception
@@ -189,14 +191,14 @@ public class SubmitListingDetailsFormRetailPage extends SubmitListingDetailsForm
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='property']/div[11]/div/p[2]/label[2]/input"));
-            return element;
+            element = driver.findElements(By.name("ls_cooking_allowed")).get(0);
         }
         catch(Exception e)
         {
             AutomationLog.error("radio btn Cooking Yes not found");
             throw e;
         }
+        return element;
     }
 
     public void setCookingYes() throws Exception
@@ -217,14 +219,14 @@ public class SubmitListingDetailsFormRetailPage extends SubmitListingDetailsForm
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='property']/div[11]/div/p[2]/label[3]/input"));
-            return element;
+            element = driver.findElements(By.name("ls_cooking_allowed")).get(1);
         }
         catch(Exception e)
         {
             AutomationLog.error("radio btn Cooking No not found");
             throw e;
         }
+        return element;
     }
 
     public void setCookingNo() throws Exception

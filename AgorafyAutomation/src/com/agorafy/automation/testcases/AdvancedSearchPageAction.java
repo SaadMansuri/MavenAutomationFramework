@@ -211,7 +211,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
             WaitFor.sleepFor(10000);
             searchresult = advancedsearch.clickOnSearchButton();
             WaitFor.sleepFor(20000);
-            String titleText = searchData.get("searchText") + searchData.get(searchterm);
+            String titleText = searchData.get(searchterm);
             Assert.assertEquals(searchresult.title_SearchResult().getText(), titleText, "Expected search Result title is not same");
             AutomationLog.info("Search Result page title is same as search term ");
             Page.driver.navigate().back();

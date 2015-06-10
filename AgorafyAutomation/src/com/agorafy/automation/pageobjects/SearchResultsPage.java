@@ -54,7 +54,8 @@ public class SearchResultsPage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div/div/ul/li[1]/div/h2"));
+            //element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div/div/ul/li[1]/div/h2"));
+            element = driver.findElement(By.className("page-header-section")).findElement(By.className("page-title"));
             AutomationLog.info("title found on Search Result page");
         }
         catch (Exception e)

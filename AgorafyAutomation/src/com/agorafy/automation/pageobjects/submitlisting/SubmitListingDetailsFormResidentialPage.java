@@ -119,8 +119,7 @@ public class SubmitListingDetailsFormResidentialPage extends SubmitListingDetail
         String noOfUnits;
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='property']/div[2]/div/div/div/span/span"));  
-            noOfUnits = element.getText();
+            noOfUnits = new Select(dropdown_NoOfUnits()).getFirstSelectedOption().getText();
         }
         catch(Exception e)
         {

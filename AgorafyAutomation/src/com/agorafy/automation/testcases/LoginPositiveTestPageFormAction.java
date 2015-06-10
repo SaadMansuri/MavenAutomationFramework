@@ -23,6 +23,7 @@ public class LoginPositiveTestPageFormAction extends NegativeLoginBaseAction
         verifyUrlAndErrorMessage(loginPage);
 
         Credentials ValidCredentials = userCredentials();
+        Page.urlStatus = false;
         homePage = loginPage.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());
 
         WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());

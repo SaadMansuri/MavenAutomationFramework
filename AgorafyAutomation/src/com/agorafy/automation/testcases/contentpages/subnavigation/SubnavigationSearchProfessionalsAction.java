@@ -37,6 +37,7 @@ public class SubnavigationSearchProfessionalsAction extends ContentPagesVerifica
              searchProfessionals = subnavigation.clickLinkSearchProfessionals();
 
              expectedSearchProfData  = testCaseData.get("SearchProfessionals");
+             Page.urlStatus = false;
              String url = searchProfessionals.getApplicationUrl() + expectedSearchProfData.get("searchProfessionalPageUrl");
              expectedSearchProfData.put("url", url);
 
@@ -51,6 +52,7 @@ public class SubnavigationSearchProfessionalsAction extends ContentPagesVerifica
     @Override
     protected void verifyTestCases() throws Exception
     {
+        Page.urlStatus = true;
         verifyLink(searchProfessionals, expectedSearchProfData);
 
         AutomationLog.info("Search Professionals Page is correctly loaded");

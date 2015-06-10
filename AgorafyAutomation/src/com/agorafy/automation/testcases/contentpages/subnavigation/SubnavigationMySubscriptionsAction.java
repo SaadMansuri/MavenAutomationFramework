@@ -48,6 +48,7 @@ public class SubnavigationMySubscriptionsAction extends ContentPagesVerification
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             mySubscriptionsPage = subnavigation.clickLinkMySubscriptions(); 
             expectedMySubscriptionsData = testCaseData.get("MySubscriptions");
+            Page.urlStatus = false;
             String url = mySubscriptionsPage.getApplicationUrl() + expectedMySubscriptionsData.get("mySubscriptionsPageUrl");
             expectedMySubscriptionsData.put("url", url);
             AutomationLog.info("Redirection to My Subscriptions page passed");
@@ -61,6 +62,7 @@ public class SubnavigationMySubscriptionsAction extends ContentPagesVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
+        Page.urlStatus = true;
         verifyLink(mySubscriptionsPage, expectedMySubscriptionsData);
         AutomationLog.info("verification of whether My Subscription link is active in left side started...");
         verifyLeftMenu();
