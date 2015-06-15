@@ -228,6 +228,7 @@ public class LoginPopUp extends Page
             case "profile":
                 pageObject = new ProfessionalProfilePage(driver);
 
+                break;
             case "home":
                 pageObject = new Homepage();
 

@@ -208,7 +208,8 @@ public class MySubscriptions extends Page
     {
         try 
         {
-            element = subscribeToSearchLink.findElement(By.tagName("i"));
+            element = subscribeToSearchLink.findElement(By.className("fa-times"));//findElement(By.tagName("i"));
+            WaitFor.sleepFor(2000);
             element.click();
             AutomationLog.info("Sucessfully deleted subscribed search on RHS of My Subscriptions page");
         }

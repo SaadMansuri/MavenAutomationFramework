@@ -74,6 +74,7 @@ public class HeaderAction extends AutomationTestCaseVerification
     {
         header.clickOnCloseLoginPopUp();
         header.clickOnSearchFormButton();
+        WaitFor.sleepFor(1000);
         Assert.assertEquals(header.msg_ZebraTooltip().isDisplayed(), true, "Expected tooltip is not shown when empty search is performed");
         AutomationLog.info("Tool Tip is Shown when clicked on search button with empty text");
     }

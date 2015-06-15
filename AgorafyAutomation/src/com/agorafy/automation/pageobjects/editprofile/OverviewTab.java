@@ -532,7 +532,7 @@ public class OverviewTab extends Page
         String nameTextBox = "";
         try
         {
-            nameTextBox = txtbx_Name().getAttribute("value");
+            nameTextBox = (txtbx_Name().getAttribute("value")).trim();
         }
         catch (Exception e)
         {

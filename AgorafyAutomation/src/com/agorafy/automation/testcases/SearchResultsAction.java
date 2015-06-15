@@ -357,8 +357,9 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     {
         Page.driver.manage().deleteAllCookies();
         header.clickOnProfileNameDropdownArrow();
+        WaitFor.sleepFor(1000);
         header.clickSubscriptionsLinkBelowProfilePic();
-        WaitFor.sleepFor(5000);
+        WaitFor.sleepFor(2000);
         Assert.assertTrue(searchresult.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
         AutomationLog.info("Login PopUp is shown on Clicking Subscriptions Link After session expire");
         searchresult.closeLoginPoPup(loginpopup);

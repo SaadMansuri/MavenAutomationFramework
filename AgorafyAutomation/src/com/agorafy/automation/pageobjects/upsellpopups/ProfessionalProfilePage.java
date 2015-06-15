@@ -84,4 +84,9 @@ public class ProfessionalProfilePage extends Page
              }
              return element;
         }
+
+        public String getApplicationUrl() throws Exception 
+        {
+            return applicationUrl();
+        }
 }

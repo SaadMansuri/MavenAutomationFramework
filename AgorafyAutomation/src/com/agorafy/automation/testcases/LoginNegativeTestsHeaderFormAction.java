@@ -68,6 +68,7 @@ public class LoginNegativeTestsHeaderFormAction extends NegativeLoginBaseAction
     public void testEmptyEmail() throws Exception
     {
         HashMap<String, String> loginData =  testCaseData.get("testEmptyEmail");
+        loginData.put("username", "");
         header.link_Login().click();
         loginPage = headerLogin.doInvalidLogin(loginData.get("username"), loginData.get("password"));
         verifyUrlAndErrorMessage(loginPage);

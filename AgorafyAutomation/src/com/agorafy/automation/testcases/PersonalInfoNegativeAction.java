@@ -52,7 +52,7 @@ public class PersonalInfoNegativeAction extends AccountSettingsBaseAction
         HashMap<String, String> errors = testCaseData.get("WrongAddressData");
         HashMap<String, String> data = new HashMap<String, String>();
         data.putAll(addressdata);
-        data.remove("address");
+        data.put("address", "");
         fillAddressFields(data);
         personalInfo.clickOnSaveChangesBtn();
         String errmsg1 = errors.get("errorMsg1");
@@ -78,7 +78,7 @@ public class PersonalInfoNegativeAction extends AccountSettingsBaseAction
         HashMap<String, String> errors = testCaseData.get("WrongCityData");
         HashMap<String, String> data = new HashMap<String, String>();
         data.putAll(addressdata);
-        data.remove("city");
+        data.put("city", "");
         fillAddressFields(data);
         personalInfo.clickOnSaveChangesBtn();
         String errmsg1 = errors.get("errorMsg1");
@@ -117,7 +117,7 @@ public class PersonalInfoNegativeAction extends AccountSettingsBaseAction
         HashMap<String, String> errors = testCaseData.get("WrongZipCodeData");
         HashMap<String, String> data = new HashMap<String, String>();
         data.putAll(addressdata);
-        data.remove("zipcode");
+        data.put("zipcode", "");
         fillAddressFields(data);
         personalInfo.clickOnSaveChangesBtn();
         String errmsg1 = errors.get("errorMsg1");

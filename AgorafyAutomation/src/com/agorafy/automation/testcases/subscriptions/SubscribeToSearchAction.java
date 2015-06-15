@@ -92,6 +92,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
             if(actualSubscribedSearch.equals(expectedSubscribedSearch))
             {
                 AutomationLog.info("Already subscribed search found on RHS of My Subscription page");
+                WaitFor.sleepFor(5000);
                 mySubscriptions.deleteSubscribedSearchOnRHS(singleSubscription);
                 break;
             }

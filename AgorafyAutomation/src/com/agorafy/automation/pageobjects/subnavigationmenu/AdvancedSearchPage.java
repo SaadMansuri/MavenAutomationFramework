@@ -90,7 +90,7 @@ public class AdvancedSearchPage extends Page
     {
         try 
         {
-            element = driver.findElement(By.xpath(".//*[@id='advancedSearchFormContainer']/div[2]/label[1]/input"));
+            element = driver.findElements(By.name("listingCategoryRadio")).get(0);
         } 
         catch (Exception e) 
         {
@@ -104,7 +104,7 @@ public class AdvancedSearchPage extends Page
     {
         try 
         {
-            element = driver.findElement(By.xpath(".//*[@id='advancedSearchFormContainer']/div[2]/label[2]/input"));
+            element = driver.findElements(By.name("listingCategoryRadio")).get(1);
         } 
         catch (Exception e) 
         {
@@ -146,7 +146,7 @@ public class AdvancedSearchPage extends Page
     {
         try 
         {
-            element = driver.findElement(By.xpath(".//*[@id='advancedSearchFormContainer']/div[5]"));
+            element = driver.findElement(By.id("propertyType"));
             AutomationLog.info("PropertyType drop down is found");
         }
         catch (Exception e)
@@ -310,7 +310,7 @@ public class AdvancedSearchPage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='advancedSearchFormContainer']/div[5]/span/span"));
+            element = new Select(dropdown_PropertyType()).getFirstSelectedOption();
         }
         catch(Exception e)
         {
@@ -318,34 +318,6 @@ public class AdvancedSearchPage extends Page
            throw(e);
         }
         return element;
-    }
-
-    public WebElement selected_Borough() throws Exception
-    {
-    	try
-        {
-            element = driver.findElement(By.xpath(".//*[@id='advancedSearchFormContainer']/div[1]/span/span"));
-        }
-        catch(Exception e)
-        {
-           AutomationLog.error("Could not find selected borough");
-           throw(e);
-        }
-        return element;
-    }
-
-    public WebElement selected_ListingType() throws Exception 
-    {
-    	 try
-         {
-             element = driver.findElement(By.xpath(".//*[@id='advancedSearchFormContainer']/div[4]/span/span"));
-         }
-         catch(Exception e)
-         {
-            AutomationLog.error("Could not find selected Listing type");
-            throw(e);
-         }
-         return element;
     }
 
     public List<WebElement> list_AutoCompleteSearch() throws Exception 

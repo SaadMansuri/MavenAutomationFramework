@@ -49,6 +49,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
             dataFromCSV = testCaseData.get("SearchInputCombination");
             propertySearch = homePage.populateSearchTermTextBox(dataFromCSV.get("boroughname"), dataFromCSV.get("listingcategory"), dataFromCSV.get("searchstring"));
             setupToReachListingDetailsPage();
+            WaitFor.waitForPageToLoad(Page.driver);
             AutomationLog.info("Subscribe To Listing Action setup sucessfull");
         }
         catch (Exception e) 

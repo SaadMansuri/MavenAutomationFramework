@@ -40,7 +40,7 @@ public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
     public void testWrongEmailRightPassword() throws Exception
     {
         HashMap<String, String> logindata = testCaseData.get("testWrongEmailRightPassword");
-        loginPage = loginPage.doInvalidLogin(logindata.get("username1"), logindata.get("password1"));
+        loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
         verifyUrlAndErrorMessage(loginPage);
     }
 
@@ -67,6 +67,7 @@ public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
     public void testEmptyEmail() throws Exception
     {
         HashMap<String, String> logindata = testCaseData.get("testEmptyEmail");
+        logindata.put("username", "");
         loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
         verifyUrlAndErrorMessage(loginPage);
     }

@@ -27,7 +27,8 @@ public class ProfessionalProfileLoginUpsellAction extends AutomationTestCaseVeri
         try
         {
             super.setup();
-            Page.driver.get("http://www.agorafy.com/profile/44386");
+            String url = professionalProfilePage.getApplicationUrl() + "/profile/44386";
+            Page.driver.get(url);
             AutomationLog.info("Able to Navigate to Professional Page popup");
             
         }

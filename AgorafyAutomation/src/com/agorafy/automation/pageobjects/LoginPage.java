@@ -136,7 +136,7 @@ public class LoginPage extends Page
         Boolean bool = null;
         try
         {
-            bool = driver.findElement(By.id("recaptcha_challenge_image")).isDisplayed();
+            bool = driver.findElement(By.id("recaptcha_widget")).isDisplayed();
         }
         catch(Exception e)
         {

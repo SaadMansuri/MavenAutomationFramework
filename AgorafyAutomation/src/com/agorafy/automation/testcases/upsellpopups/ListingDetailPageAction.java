@@ -93,9 +93,13 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
             Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Subscribe to Listing");
             loginpopup.populateLoginPopUpData(getValidCredentials.getEmail(),getValidCredentials.getPassword());
             loginpopup.btn_LogIntoMyAccount().click();
+            WaitFor.sleepFor(1000);
             Assert.assertEquals(listingDetailPage.isUpdateListingLinkPresent(), true, "Login action was unsuccessful");
             AutomationLog.info("Test for SubscribeToListing link Upsell is successfull");
             listingDetailPage.clickOnUnsubscribeListingLink();
+            WaitFor.sleepFor(1000);
+            Assert.assertTrue(listingDetailPage.link_SubscribeToListing().isDisplayed(), "Expected SubscribeToListing link not shown");
+            AutomationLog.info("Clicking UnsubscribeToListing toggles to SubscribeToListing");
         }
         catch(Exception e)
         {

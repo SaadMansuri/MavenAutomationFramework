@@ -1,7 +1,9 @@
 package com.agorafy.automation.testcases.submitlisting;
 
 import java.util.HashMap;
+
 import org.testng.Assert;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.pageobjects.Header;
@@ -23,6 +25,7 @@ public class SubmitListingLocationFormAction extends SubmitListingBaseAction
     public String getCombination;
     public Integer noOfSpacesAddedSeenInSpaceHeader;
     public Integer noOfSpacesAddedSeenInSpaceList;
+    HashMap<String, String> csvEntries = new HashMap<String, String>();
 
     public SubmitListingLocationFormAction() 
     {
@@ -46,6 +49,7 @@ public class SubmitListingLocationFormAction extends SubmitListingBaseAction
 
     public void verifyNegativeLocationCombinations() throws Exception
     {
+
         try
         {
              /*Since, we can't add empty values in CSV file, 
@@ -67,10 +71,13 @@ public class SubmitListingLocationFormAction extends SubmitListingBaseAction
                 getCombination = "LocationCombination"+combinationNo ;
                 /*We use para to locate location combination no in CSV file, 
                  * see CSV file for more info*/ 
-                dataFromCSV = testCaseData.get(getCombination);
-                setValuesOfDataFromCSV(dataFromCSV);
+                csvEntries = testCaseData.get(getCombination);
+                setkeysOfDataFromCSV();
+                //Map<String, String> temp = new HashMap<String, String>(dataFromCSV);
+                dataFromCSV.keySet().removeAll(csvEntries.keySet());
+                csvEntries.putAll(dataFromCSV);
                 clearCurrentForm();
-                locationPage.fillLocationFormAndClickSaveAndContinue(dataFromCSV);
+                locationPage.fillLocationFormAndClickSaveAndContinue(csvEntries);
                 //We are not catching the returned object, because we don't need that
                 Assert.assertEquals(locationPage.form_Location().isDisplayed(), true, "Location form with following combination should not navigate to next page"+ dataFromCSV);
                 AutomationLog.info("Location form with following combination stays on same page" + dataFromCSV);
@@ -87,16 +94,15 @@ public class SubmitListingLocationFormAction extends SubmitListingBaseAction
     {
         try
         {
-             /*Since, we can't add empty values in CSV file, 
-              * we have to set key's in hashmap for all fields*/
-            setkeysOfDataFromCSV();
             for(Integer combinationNo=15; combinationNo<17; combinationNo++)
             {
                 getCombination = "LocationCombination"+combinationNo;
-                dataFromCSV = testCaseData.get(getCombination);
-                setValuesOfDataFromCSV(dataFromCSV);
+                csvEntries = testCaseData.get(getCombination);
+                setkeysOfDataFromCSV();
+                dataFromCSV.keySet().removeAll(csvEntries.keySet());
+                csvEntries.putAll(dataFromCSV);
                 clearCurrentForm();
-                nextPage = (SubmitListingDetailsFormBasePage) locationPage.fillLocationFormAndClickSaveAndContinue(dataFromCSV);
+                nextPage = (SubmitListingDetailsFormBasePage) locationPage.fillLocationFormAndClickSaveAndContinue(csvEntries);
                 Assert.assertEquals(nextPage.form_Property().isDisplayed(), true, "Location form with following combination should navigate to details page"+ dataFromCSV);
                 nextPage.clickBack();
                 AutomationLog.info("Location form with following combination navigates to details page" + dataFromCSV);
@@ -112,18 +118,10 @@ public class SubmitListingLocationFormAction extends SubmitListingBaseAction
 
     public void setkeysOfDataFromCSV()
     {
-        dataFromCSV.put("address"," ");
-        dataFromCSV.put("city"," ");
-        dataFromCSV.put("state"," ");
-        dataFromCSV.put("zipcode"," ");
-    }
-
-    public void setValuesOfDataFromCSV(HashMap<String, String> dummyLocationDataFromCSV) 
-    {
-        dataFromCSV.put("address", dummyLocationDataFromCSV.get("address"));
-        dataFromCSV.put("city", dummyLocationDataFromCSV.get("city"));
-        dataFromCSV.put("state", dummyLocationDataFromCSV.get("state"));
-        dataFromCSV.put("zipcode", dummyLocationDataFromCSV.get("zipcode"));
+        dataFromCSV.put("address","");
+        dataFromCSV.put("city","");
+        dataFromCSV.put("state","");
+        dataFromCSV.put("zipcode","");
     }
 
     public void clearCurrentForm() throws Exception
