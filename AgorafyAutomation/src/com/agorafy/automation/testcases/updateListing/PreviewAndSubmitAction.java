@@ -121,7 +121,7 @@ public class PreviewAndSubmitAction extends AutomationTestCaseVerification
             availabilityForm.txt_AskingPrice().clear();
             availabilityForm.txt_AskingPrice().sendKeys(dataFromCSV.get("AskingPrice2"));
             dataFromCSV = testCaseData.get("ListingLinkUrls");
-            availabilityForm.txt_ListingLink().click();
+            availabilityForm.txt_ListingLink().clear();
             availabilityForm.txt_ListingLink().sendKeys(dataFromCSV.get("ListingLinkUrl2"));
             dataFromCSV = testCaseData.get("DetailsDescription");
             availabilityForm.txt_Description().clear();

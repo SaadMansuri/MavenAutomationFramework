@@ -191,7 +191,8 @@ public class MyListingsAction extends ContentPagesVerification
         String curHandle = Page.driver.getWindowHandle();
         Page.driver.manage().deleteAllCookies();
         myListings.hoverOverFirstListing();
-        myListings.updateListing().click();
+        myListings.clickUpdateOfFirstListing();
+        //myListings.updateListing().click();
         Page.driver.close();
         for(String handle : Page.driver.getWindowHandles())
         {
@@ -205,17 +206,20 @@ public class MyListingsAction extends ContentPagesVerification
         Page.urlStatus = true;
         String expectedUrl = myListings.getApplicationurl() + expectedmyListingsData.get("loginUrl");
         Assert.assertEquals(myListings.getCurrentUrl(), expectedUrl, "Expected page is not shown");
-        AutomationLog.info("Expiring Session on Analytics view page redirects to Login page");
+        AutomationLog.info("Clicking Update link on MyListing page after Expiring Session redirects to Login page");
         Login.doSuccessfullLoginFromHeaderLoginForm();
         Page.driver.get(pageurl);
     }
 
     public void verifyIfClickedOnAddMediaLinkAfterSessionExpire() throws Exception
     {
+        myListings.scrollPage(0, 300);
         String pageurl = Page.driver.getCurrentUrl();
         String curHandle = Page.driver.getWindowHandle();
         Page.driver.manage().deleteAllCookies();
         myListings.hoverOverFirstListing();
+        myListings.hoverOverAddMedia();
+        //myListings.clickAddMediaOfFirstListing();
         myListings.addMedia().click();
         Page.driver.close();
         for(String handle : Page.driver.getWindowHandles())
@@ -230,15 +234,17 @@ public class MyListingsAction extends ContentPagesVerification
         Page.urlStatus = true;
         String expectedUrl = myListings.getApplicationurl() + expectedmyListingsData.get("loginUrl");
         Assert.assertEquals(myListings.getCurrentUrl(), expectedUrl, "Expected page is not shown");
-        AutomationLog.info("Expiring Session on Analytics view page redirects to Login page");
+        AutomationLog.info("Clicking AddMedia link on MyListing page after Expiring Session redirects to Login page");
         Login.doSuccessfullLoginFromHeaderLoginForm();
         Page.driver.get(pageurl);
     }
 
     public void verifyIfClickedOnReportLeasedLinkAfterSessionExpire() throws Exception 
     {
+        myListings.scrollPage(0, 300);
         Page.driver.manage().deleteAllCookies();
         myListings.hoverOverFirstListing();
+        myListings.hoverOverReportLeased();
         myListings.reportLeased().click();
         WaitFor.sleepFor(5000);
         Assert.assertTrue(myListings.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
@@ -249,6 +255,7 @@ public class MyListingsAction extends ContentPagesVerification
     public void verifyIfClickedOnRenewLinkAfterSessionExpire() throws Exception 
     {
         myListings.hoverOverFirstListing();
+        myListings.hoverOverRenew();
         myListings.renew().click();
         WaitFor.sleepFor(5000);
         Assert.assertTrue(myListings.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
@@ -273,6 +280,7 @@ public class MyListingsAction extends ContentPagesVerification
 
     public void verifyIfClickedOnOffMarketScheduledLinkAfterSessionExpire() throws Exception
     {
+         myListings.scrollPage(0, 300);
          String pageurl = Page.driver.getCurrentUrl();
          Page.driver.manage().deleteAllCookies();
          myListings.link_OffMarket().click();
@@ -289,13 +297,57 @@ public class MyListingsAction extends ContentPagesVerification
 
     public void verifyIfClickedOnUpdateLinkOnOffMarketAfterSessionExpire() throws Exception 
     {
-        verifyIfClickedOnUpdateLinkAfterSessionExpire();
+        myListings.link_OffMarket().click();
+        myListings.scrollPage(0, 300);
+        String pageurl = Page.driver.getCurrentUrl();
+        String curHandle = Page.driver.getWindowHandle();
+        Page.driver.manage().deleteAllCookies();
+        myListings.hoverOverFirstOffMarketListing();
+        myListings.clickUpdateOfFirstListingOffMarket();
+        //myListings.updateListing().click();
+        Page.driver.close();
+        for(String handle : Page.driver.getWindowHandles())
+        {
+            if(!handle.equals(curHandle))
+            {
+                Page.driver.switchTo().window(handle);
+                break;
+            }
+        }
+        WaitFor.sleepFor(2000);
+        Page.urlStatus = true;
+        String expectedUrl = myListings.getApplicationurl() + expectedmyListingsData.get("loginUrl");
+        Assert.assertEquals(myListings.getCurrentUrl(), expectedUrl, "Expected page is not shown");
+        AutomationLog.info("Clicking First off market Update link after Expiring Session redirects to Login page");
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
     }
 
     public void verifyIfClickedOnMediaLinkOnOffMarketAfterSessionExpire() throws Exception 
     {
         myListings.link_OffMarket().click();
-        verifyIfClickedOnAddMediaLinkAfterSessionExpire();
+        myListings.scrollPage(0, 300);
+        String pageurl = Page.driver.getCurrentUrl();
+        String curHandle = Page.driver.getWindowHandle();
+        Page.driver.manage().deleteAllCookies();
+        myListings.hoverOverFirstOffMarketListing();
+        myListings.clickAddMediaOfFirstListingOffMarket();
+        Page.driver.close();
+        for(String handle : Page.driver.getWindowHandles())
+        {
+            if(!handle.equals(curHandle))
+            {
+                Page.driver.switchTo().window(handle);
+                break;
+            }
+        }
+        WaitFor.sleepFor(2000);
+        Page.urlStatus = true;
+        String expectedUrl = myListings.getApplicationurl() + expectedmyListingsData.get("loginUrl");
+        Assert.assertEquals(myListings.getCurrentUrl(), expectedUrl, "Expected page is not shown");
+        AutomationLog.info("Clicking AddMedia link on MyListing page after Expiring Session redirects to Login page");
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
     }
 
     @Override

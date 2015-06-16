@@ -72,17 +72,17 @@ public class DetailsFormAction extends AutomationTestCaseVerification
         AutomationLog.info("Verify all test cases for details form of Single Family Listing");
         verifySingleFamilyListingForm();
 
-        AutomationLog.info("Verify all test cases for details form of Hotel For Sale Listing");
+ /*       AutomationLog.info("Verify all test cases for details form of Hotel For Sale Listing");
         verifyHotelForSaleListingForm();
-
+*/
         AutomationLog.info("Verify all test cases for details form of Office For Sublease Listing");
         verifyOfficeForSubleaseListingForm();
 
-        AutomationLog.info("Verify all test cases for details form of Condo For Sale Listing");
+ /*       AutomationLog.info("Verify all test cases for details form of Condo For Sale Listing");
         verifyCondoForSaleListingForm();
 
         AutomationLog.info("Verify all test cases for details form of Retail For Lease Listing");
-        verifyRetailForLeaseListingForm();
+        verifyRetailForLeaseListingForm();*/
     }
 
     private void setupToReachRetailForLeaseListingForm() throws Exception 
