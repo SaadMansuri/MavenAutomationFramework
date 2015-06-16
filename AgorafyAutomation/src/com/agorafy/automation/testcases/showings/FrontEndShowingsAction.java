@@ -76,7 +76,8 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
 
     public void verifyIfClickingScheduleNowLinkShowsShowingsPopUp() throws Exception
     {
-        frontendshowings = myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+        //frontendshowings = myListings.clickOnScheduleNowLink("149 Kingsland Avenue");
+        frontendshowings = myListings.clickOnFirstListingScheduleNowLink();
         Assert.assertTrue(frontendshowings.popup_FrontEndShowings().isDisplayed(), "Expected FrontEnd Showings PopUp not shown");
         AutomationLog.info("Clicking schedule now link show Showings Popup");
         
@@ -178,7 +179,8 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
 
     public void addShowing() throws Exception
     {
-        myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+        //myListings.clickOnScheduleNowLink("149 Kingsland Avenue");
+        myListings.clickOnFirstListingScheduleNowLink();
         WaitFor.sleepFor(2000);
         frontendshowings.enterDateInDatePickerTextBox(getCurrentDate());
         WaitFor.sleepFor(1000);
@@ -191,23 +193,27 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
         frontendshowings.enterDateInDatePickerTextBox(getCurrentDate());
         frontendshowings.selectStartTime(enterStartTime());
         frontendshowings.clickOnCloseButton();
-        Assert.assertEquals(myListings.txt_UpcomingShowings("100 Maspeth Avenue").getText(), "None scheduled","Expected text not found" );
+        //Assert.assertEquals(myListings.txt_UpcomingShowings("149 Kingsland Avenue").getText(), "None scheduled","Expected text not found" );
+        Assert.assertEquals(myListings.txt_FirstListingUpcomingShowing().getText(), "None scheduled","Expected text not found" );
         AutomationLog.info("Closing FrontEndShowingsPopUp without save does not add Showing");
     }
 
     public void verifyIfSaveButtonClickedWithoutSelectingDateForShowing() throws Exception 
     {
-        myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+        //myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+        frontendshowings = myListings.clickOnFirstListingScheduleNowLink();
         WaitFor.sleepFor(2000);
         frontendshowings.selectStartTime(frontendshowings.getFirstStartTime());
         frontendshowings.clickOnSaveButton();
-        Assert.assertEquals(myListings.txt_UpcomingShowings("100 Maspeth Avenue").getText(), "None scheduled","Expected text not found" );
+        Assert.assertEquals(myListings.txt_FirstListingUpcomingShowing().getText(), "None scheduled","Expected text not found" );
+        //Assert.assertEquals(myListings.txt_UpcomingShowings("149 Kingsland Avenue").getText(), "None scheduled","Expected text not found" );
         AutomationLog.info("Clicking save button without selecting date does not add Showing");
     }
 
     public void verifyIfInvalidDateIsEntered() throws Exception 
     {
-        myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+        //myListings.clickOnScheduleNowLink("149 Kingsland Avenue");
+        frontendshowings = myListings.clickOnFirstListingScheduleNowLink();
         WaitFor.sleepFor(2000);
         frontendshowings.enterDateInDatePickerTextBox("1234");
         frontendshowings.clickOnSaveButton();
@@ -229,7 +235,8 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
 
     public void verifyIfPastDateIsEntered() throws Exception 
     {
-        myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+        //myListings.clickOnScheduleNowLink("149 Kingsland Avenue");
+        myListings.clickOnFirstListingScheduleNowLink();
         frontendshowings.enterDateInDatePickerTextBox(getPrevDate());
         frontendshowings.selectStartTime(frontendshowings.getFirstStartTime());
         frontendshowings.clickOnSaveButton();
@@ -240,7 +247,8 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
 
     public void verifyIfEditIconClicked() throws Exception 
     {
-        myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+        //myListings.clickOnScheduleNowLink("149 Kingsland Avenue");
+        myListings.clickOnFirstListingScheduleNowLink();
         frontendshowings.hoverOnShowing(0);
         frontendshowings.clickOnEditShowingIcon(0);
         String expectedDate = frontendshowings.changeDateFormat();
@@ -255,12 +263,14 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
 
     public void verifyIfShowingIsDeleted() throws Exception
     {
-        myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+        //myListings.clickOnScheduleNowLink("149 Kingsland Avenue");
+        myListings.clickOnFirstListingScheduleNowLink();
         frontendshowings.hoverOnShowing(0);
         frontendshowings.clickOnDeleteShowingIcon(0);
         frontendshowings.clickOnSaveButton();
         WaitFor.sleepFor(2000);
-        Assert.assertEquals(myListings.txt_UpcomingShowings("100 Maspeth Avenue").getText(), "None scheduled", "Expected showing is not deleted ");
+        //Assert.assertEquals(myListings.txt_UpcomingShowings("100 Maspeth Avenue").getText(), "None scheduled", "Expected showing is not deleted ");
+        Assert.assertEquals(myListings.txt_FirstListingUpcomingShowing().getText(), "None scheduled","Expected text not found" );
         AutomationLog.info("Clicking delete icon removes showing from upcoming showing");
     }
 
@@ -271,7 +281,8 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
         int count = 0;
         for(int i = 1; i <= 3 ; i++)
         {
-            myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+            //myListings.clickOnScheduleNowLink("149 Kingsland Avenue");
+            myListings.clickOnFirstListingScheduleNowLink();
             WaitFor.sleepFor(2000);
             frontendshowings.enterDateInDatePickerTextBox(getNextDate(i));
             WaitFor.sleepFor(2000);
@@ -281,7 +292,8 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
             count++;
         }
         String expected = count + " upcoming";
-        Assert.assertEquals(myListings.txt_UpcomingShowings("100 Maspeth Avenue").getText(), expected, "Expected count is not same");
+        //Assert.assertEquals(myListings.txt_UpcomingShowings("149 Kingsland Avenue").getText(), expected, "Expected count is not same");
+        Assert.assertEquals(myListings.txt_FirstListingUpcomingShowing().getText(), expected, "Expected count is not same");
         AutomationLog.info("Adding Showings increments upcoming showings count");
     }
 
@@ -290,7 +302,8 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
         frontendshowings.enterDateInDatePickerTextBox(getNextDate(1));
         frontendshowings.clickOnSaveButton();
         WaitFor.sleepFor(2000);
-        myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+        //myListings.clickOnScheduleNowLink("149 Kingsland Avenue");
+        myListings.clickOnFirstListingScheduleNowLink();
         frontendshowings.hoverOnShowing(0);
         frontendshowings.clickOnEditShowingIcon(0);
         String expectedDate = frontendshowings.changeDateFormat();
@@ -302,13 +315,15 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
 
     public void verifyIfDeletingShowingsDecrementsUpcomingShowingsCount() throws Exception 
     {
-        myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+        //myListings.clickOnScheduleNowLink("149 Kingsland Avenue");
+        myListings.clickOnFirstListingScheduleNowLink();
         int showingsCount = frontendshowings.getUpcomingShowingsList().size();
         int deletedCount = 2;
         frontendshowings.deleteUpcomingShowings(deletedCount);
         frontendshowings.clickOnSaveButton();
         WaitFor.sleepFor(2000);
-        String actual = myListings.txt_UpcomingShowings("100 Maspeth Avenue").getText();
+        //String actual = myListings.txt_UpcomingShowings("149 Kingsland Avenue").getText();
+        String actual = myListings.txt_FirstListingUpcomingShowing().getText();
         String expected = (showingsCount-deletedCount) + " upcoming";
         Assert.assertEquals(actual, expected, "Expected showings not deleted");
         AutomationLog.info("Deleting showings decrements upcoming showings count");
@@ -318,13 +333,16 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
     {
         addShowing();
         WaitFor.sleepFor(2000);
-        Assert.assertEquals(myListings.txt_UpcomingShowings("100 Maspeth Avenue").getText(), "1 upcoming", "Expected showing is not added ");
+        //Assert.assertEquals(myListings.txt_UpcomingShowings("149 Kingsland Avenue").getText(), "1 upcoming", "Expected showing is not added ");
+        Assert.assertEquals(myListings.txt_FirstListingUpcomingShowing().getText(), "1 upcoming", "Expected showing is not added ");
         //AutomationLog.info("Entering valid schedule time adds upcoming showing");
-        myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+        //myListings.clickOnScheduleNowLink("149 Kingsland Avenue");
+        myListings.clickOnFirstListingScheduleNowLink();
         String expected = frontendshowings.getFirstUpcomingShowing().getText();
         frontendshowings.clickOnCloseButton();
         curHandle = Page.driver.getWindowHandle();
-        listingdetail  = myListings.clickOnListingNameLink("100 Maspeth Avenue");
+        //listingdetail  = myListings.clickOnListingNameLink("149 Kingsland Avenue");
+        listingdetail = myListings.clickFirstListingNameLink();
         Set<String> handles = Page.driver.getWindowHandles();
         for(String handle : handles)
         {
@@ -342,7 +360,8 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
 
     public void deleteShowings() throws Exception
     {
-        myListings.clickOnScheduleNowLink("100 Maspeth Avenue");
+        //myListings.clickOnScheduleNowLink("149 Kingsland Avenue");
+        frontendshowings = myListings.clickOnFirstListingScheduleNowLink();
         frontendshowings.clearAllUpcomingShowings(); 
     }
 
