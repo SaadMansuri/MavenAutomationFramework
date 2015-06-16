@@ -64,9 +64,9 @@ public class AddToReportsAction extends AutomationTestCaseVerification
                 {
                     if((searchresult.getListingBadgeCount(i))>reportcount)
                     {
-                        if(++licount >=6*count)
+                        if(++licount >=3*count)
                         {
-                            searchresult.scrollPage(0, 700);
+                            searchresult.scrollPage(0, 300);
                             ++count;
                         }
                         continue;
@@ -81,9 +81,9 @@ public class AddToReportsAction extends AutomationTestCaseVerification
                     searchresult.hoverAndClickOnPincushionIcon(i);
                     --reportcount;
                 }
-                if(++licount >=6*count)
+                if(++licount >=3*count)
                 {
-                    searchresult.scrollPage(0, 700);
+                    searchresult.scrollPage(0, 300);
                     ++count;
                 }
             }

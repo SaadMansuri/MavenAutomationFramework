@@ -44,10 +44,13 @@ public class ReportsPopUpAction extends AutomationTestCaseVerification
             searchresult = homePage.populateSearchTermTextBox(search.get("borough"), search.get("listingcategory"), search.get("searchterm"));
             searchresult.hoverOnSearchResult(i);
             searchresult.hoverAndClickOnPincushionIcon(i);
+            WaitFor.sleepFor(2000);
             header.clickOnProfileNameDropdownArrow();
             reports = header.clickOnReportsLink();
+            WaitFor.ElementToBeDisplayed(Page.driver, reports.getReportBoxLocator());
             WaitFor.sleepFor(2000);
             reportspopup = reports.clickOnPrintLink();
+            WaitFor.ElementToBeDisplayed(Page.driver, reportspopup.getReportsPopUpLocator());
             AutomationLog.info("Successfully navigated to Reports PopUp ");
         }
         catch(Exception e)

@@ -351,9 +351,9 @@ public class ReportsAction extends AutomationTestCaseVerification
             searchresult.hoverAndClickOnPincushionIcon(i);
             --reportcount;
             
-            if(++licount >=6*count)
+            if(++licount >=3*count)
             {
-                searchresult.scrollPage(0, 700);
+                searchresult.scrollPage(0, 300);
                 ++count;
             }
         }
@@ -385,7 +385,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     public void verifyIfClickingPrintLinkOpensPopUp() throws Exception 
     {
         reportspopup = reports.clickOnPrintLink();
-        WaitFor.sleepFor(1000);
+        WaitFor.sleepFor(2000);
         Assert.assertTrue(reportspopup.popup_Reports().isDisplayed(), "Expected popup is not shown");
         reportspopup.clickOnCloseButton();
         reports.clickOnReportWindowCloseIcon();
