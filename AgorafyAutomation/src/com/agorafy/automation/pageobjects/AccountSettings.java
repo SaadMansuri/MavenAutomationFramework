@@ -27,7 +27,7 @@ public class AccountSettings extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
+            element = driver.findElements(By.className("content-block")).get(0);
             AutomationLog.info("Account Settings page Heading found");
         }
         catch (Exception e)
