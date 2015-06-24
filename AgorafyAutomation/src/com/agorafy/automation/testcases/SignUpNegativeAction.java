@@ -9,7 +9,6 @@ import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.datamodel.profile.EmailData;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.Homepage;
-import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.SignUp;
 
 /**
@@ -103,7 +102,7 @@ public class SignUpNegativeAction extends AutomationTestCaseVerification
         signup.populateSignUpData(signupdata);
 
         signup = signup.clickOnSignUpAccountButton();
-        WaitFor.waitForPageToLoad(Page.driver, ValidEmailData.get("validMsg"), signup.emailAlreadyRegisteredLink());
+        WaitFor.sleepFor(2000);
 
         String validEmailAddress = signup.getMessageForAlreadyRegEmail();
         Assert.assertEquals(validEmailAddress, ValidEmailData.get("validMsg"), "Expected error message for valid registered email is not displayed in SignUp page");

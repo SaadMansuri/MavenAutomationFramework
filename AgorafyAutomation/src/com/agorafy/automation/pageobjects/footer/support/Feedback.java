@@ -25,11 +25,26 @@ public class Feedback extends Page
         return applicationUrl();
     }
 
+    public WebElement pageHeadingSection() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("page-column")).findElement(By.className("page-desc"));
+            AutomationLog.info("Page Heading Section found");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Page Heading Section");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement pageHeadingElement() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
+            element = pageHeadingSection().findElement(By.tagName("h2"));
             AutomationLog.info("Feedback Page Heading found on page");
         }
         catch(Exception e)
@@ -46,11 +61,25 @@ public class Feedback extends Page
         return pageHeadingElement().getText();
     }
 
+    public WebElement form_Feedback() throws Exception 
+    {
+        try
+        {
+            element = driver.findElement(By.id("feedback_form"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find feedback form");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement textBox_Name() throws Exception
     {
         try
         {
-            element = driver.findElement(By.id("name"));
+            element = form_Feedback().findElement(By.id("name"));
         }
         catch(Exception e)
         {
@@ -94,7 +123,7 @@ public class Feedback extends Page
     {
         try
         {
-            element = driver.findElement(By.id("exampleInputEmail1"));
+            element = form_Feedback().findElement(By.id("exampleInputEmail1"));
         }
         catch(Exception e)
         {
@@ -138,7 +167,7 @@ public class Feedback extends Page
     {
         try
         {
-            element = driver.findElement(By.id("subject"));
+            element = form_Feedback().findElement(By.id("subject"));
             AutomationLog.info("Subject Dropdown found on Feedback form");
         }
         catch(Exception e)
@@ -185,7 +214,7 @@ public class Feedback extends Page
     {
         try
         {
-            element = driver.findElement(By.id("feedback_form_msg"));
+            element = form_Feedback().findElement(By.id("feedback_form_msg"));
         }
         catch(Exception e)
         {
@@ -214,7 +243,7 @@ public class Feedback extends Page
     {
         try
         {
-            element = driver.findElement(By.id("submitFeedback"));
+            element = form_Feedback().findElement(By.id("submitFeedback"));
         }
         catch(Exception e)
         {
@@ -243,7 +272,7 @@ public class Feedback extends Page
         WebElement parentElement;
         try
         {
-            parentElement = driver.findElement(By.className("nameformError"));
+            parentElement = form_Feedback().findElement(By.className("nameformError"));
             element = parentElement.findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
@@ -274,7 +303,7 @@ public class Feedback extends Page
         WebElement parentElement;
         try
         {
-            parentElement = driver.findElement(By.className("exampleInputEmail1formError"));
+            parentElement = form_Feedback().findElement(By.className("exampleInputEmail1formError"));
             element = parentElement.findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
@@ -305,7 +334,7 @@ public class Feedback extends Page
         WebElement parentElement;
         try
         {
-            parentElement = driver.findElement(By.className("subjectformError"));
+            parentElement = form_Feedback().findElement(By.className("subjectformError"));
             element = parentElement.findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
@@ -336,7 +365,7 @@ public class Feedback extends Page
         WebElement parentElement;
         try
         {
-            parentElement = driver.findElement(By.className("feedback_form_msgformError"));
+            parentElement = form_Feedback().findElement(By.className("feedback_form_msgformError"));
             element = parentElement.findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
@@ -366,7 +395,7 @@ public class Feedback extends Page
     {
         try
         {
-            element = driver.findElement(By.id("sendFeedbackErrorMessage"));
+            element = form_Feedback().findElement(By.id("sendFeedbackErrorMessage"));
         }
         catch(Exception e)
         {

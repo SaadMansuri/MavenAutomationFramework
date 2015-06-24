@@ -52,11 +52,25 @@ public class FooterCompanyLinks extends Page
         return aboutUs;
     }
 
+    public WebElement footer_CompanyLinks() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("footer-left-section")).findElements(By.tagName("div")).get(0);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find FooterCompanyLinks");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement link_MembershipBenefit() throws Exception
     {
         try
         {
-            element = driver.findElement(By.linkText("Members' Benefits"));
+            element = footer_CompanyLinks().findElement(By.linkText("Members' Benefits"));
             AutomationLog.info("Members' Benefits link found on Footer");
         }
         catch(Exception e)
@@ -88,7 +102,7 @@ public class FooterCompanyLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Team"));
+            element = footer_CompanyLinks().findElement(By.linkText("Team"));
             AutomationLog.info("Team link found on Footer");
         }
         catch(Exception e)
@@ -120,7 +134,7 @@ public class FooterCompanyLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Careers"));
+            element = footer_CompanyLinks().findElement(By.linkText("Careers"));
             AutomationLog.info("Careers link found on Footer");
         }
         catch(Exception e)
@@ -152,7 +166,7 @@ public class FooterCompanyLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Contact"));
+            element = footer_CompanyLinks().findElement(By.linkText("Contact"));
             AutomationLog.info("Contact link found on Footer");
         }
         catch(Exception e)

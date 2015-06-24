@@ -22,11 +22,25 @@ public class ProfessionalProfilePage extends Page
             return PageFactory.initElements(driver, ProfessionalProfilePage.class);
         }
 
+        public WebElement ProfileContent() throws Exception
+        {
+            try
+            {
+                element = driver.findElement(By.className("profile-content"));
+            }
+            catch(Exception e)
+            {
+                AutomationLog.error("Could not find profile contents");
+                throw(e);
+            }
+            return element;
+        }
+
         public WebElement txt_ProfileName() throws Exception 
         {
             try
             {
-                element = driver.findElement(By.className("profile-content")).findElement(By.tagName("h2"));
+                element = ProfileContent().findElement(By.tagName("h2"));
                 AutomationLog.info("Profile name found");
             }
             catch(Exception e)
@@ -41,8 +55,7 @@ public class ProfessionalProfilePage extends Page
         {
             try
             {
-                element = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div[2]/div/div/div/a"));
-                //element = driver.findElement(By.className("upsell btn"));
+                element = ProfileContent().findElement(By.className("actions")).findElement(By.tagName("a"));
                 AutomationLog.info("Send Email button found on Professional Profile Page");
             }
             catch(Exception e)
@@ -68,21 +81,6 @@ public class ProfessionalProfilePage extends Page
                 throw(e);
              }
             return loginpopup;
-        }
-
-        public WebElement btnLoginToMyAccountInPopup() throws Exception
-        {
-            try
-            {
-                element = driver.findElement(By.xpath("//*[@id='upsellPopup']/form/div[3]/input"));
-                AutomationLog.info("LoginToMyAccount button found on Login popup in Professional Profile Page");
-            }
-            catch(Exception e)
-            {
-                AutomationLog.error("LoginToMyAccount button did not found on Login popup in Professional Profile Page");
-                throw(e);
-             }
-             return element;
         }
 
         public String getApplicationUrl() throws Exception 

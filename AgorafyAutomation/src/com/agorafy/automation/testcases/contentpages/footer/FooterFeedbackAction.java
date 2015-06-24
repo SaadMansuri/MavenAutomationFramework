@@ -36,12 +36,21 @@ public class FooterFeedbackAction extends ContentPagesVerification
         expectedFeedbackData.put("url", url);
         verifyLink(feedback, expectedFeedbackData);
 
-        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        verifyActiveLeftMenu();
+/*        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.feedbackLinkText(), "Left menu does not show Feedback link as Active Link");
-        AutomationLog.info("Left menu shows Feedback link as Active Link");
+        AutomationLog.info("Left menu shows Feedback link as Active Link");*/
 
         AutomationLog.info("Feedback page is correctly loaded");
     }
+
+    public void verifyActiveLeftMenu() throws Exception
+    {
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.feedbackLinkText(), "Left menu does not show Feedback link as Active Link");
+        AutomationLog.info("Left menu shows Feedback link as Active Link");
+    }
+
 
     @Override
     protected String successMessage()

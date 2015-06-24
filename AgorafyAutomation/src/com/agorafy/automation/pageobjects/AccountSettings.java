@@ -18,12 +18,12 @@ public class AccountSettings extends Page
         return true;
     }
 
-    public String accountSettingsPageUrl()
+    public String getApplicationUrl()
     {
-        return applicationUrl() + "/account/";
+        return applicationUrl();
     }
 
-    public WebElement pageHeadingElement() throws Exception
+    public WebElement page_Heading() throws Exception
     {
         try
         {
@@ -41,7 +41,7 @@ public class AccountSettings extends Page
     @Override
     public String pageHeading() throws Exception
     {
-        return pageHeadingElement().getText();
+        return page_Heading().getText();
     }
 
     public WebElement link_personalInfo() throws Exception
@@ -49,11 +49,10 @@ public class AccountSettings extends Page
         try
         {
             element = driver.findElement(By.id("personalInfoLink"));
-            AutomationLog.info("Personal Information tab found on Account Settings");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Personal Information tab Not found on Account Settings");
+            AutomationLog.error("Personal Information tab Not found on Account Settings page");
             throw (e);
         }
         return element;
@@ -81,7 +80,6 @@ public class AccountSettings extends Page
         try
         {
             element = driver.findElement(By.id("changePasswordLink"));
-            AutomationLog.info("Change Password tab found in Account Settings Page");
         }
         catch (Exception e)
         {

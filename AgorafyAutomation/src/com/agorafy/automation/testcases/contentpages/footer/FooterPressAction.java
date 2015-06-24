@@ -36,12 +36,21 @@ public class FooterPressAction extends ContentPagesVerification
         expectedPressData.put("url", url);
         verifyLink(press, expectedPressData);
 
-        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        verifyActiveLeftMenu();
+/*        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.pressLinkText(), "Left menu does not show Press link as Active Link");
-        AutomationLog.info("Left menu shows Press link as Active Link");
+        AutomationLog.info("Left menu shows Press link as Active Link");*/
 
         AutomationLog.info("Press page is correctly loaded");
     }
+
+    public void verifyActiveLeftMenu() throws Exception
+    {
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.pressLinkText(), "Left menu does not show Press link as Active Link");
+        AutomationLog.info("Left menu shows Press link as Active Link");
+    }
+
 
     @Override
     protected String successMessage()

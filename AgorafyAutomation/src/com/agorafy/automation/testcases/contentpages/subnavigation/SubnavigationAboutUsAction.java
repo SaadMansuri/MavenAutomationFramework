@@ -56,9 +56,16 @@ public class SubnavigationAboutUsAction extends ContentPagesVerification
     protected void verifyTestCases() throws Exception
     {
         verifyLink(aboutUs, expectedAboutUsData);
+        verifyLeftMenuActiveLink();
+/*        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.aboutUsLinkText(),"Left menu does not show About Us link as Active Link");
+        AutomationLog.info("Left menu shows About Us link as Active Link");*/
+        AutomationLog.info("AboutUs page is correctly loaded");
+    }
+
+    public void verifyLeftMenuActiveLink() throws Exception
+    {
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.aboutUsLinkText(),"Left menu does not show About Us link as Active Link");
         AutomationLog.info("Left menu shows About Us link as Active Link");
-        AutomationLog.info("AboutUs page is correctly loaded");
     }
 
     @Override

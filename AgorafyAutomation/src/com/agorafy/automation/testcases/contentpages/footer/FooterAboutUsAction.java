@@ -36,12 +36,20 @@ public class FooterAboutUsAction extends ContentPagesVerification
         String url = aboutUs.getApplicationUrl() + expectedAboutUsData.get("aboutUsUrl");
         expectedAboutUsData.put("url", url);
         verifyLink(aboutUs, expectedAboutUsData);
+        verifyActiveLeftMenu();
 
+/*        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.aboutUsLinkText(),"Left menu does not show About Us link as Active Link");
+        AutomationLog.info("Left menu shows About Us link as Active Link");*/
+
+        AutomationLog.info("AboutUs page is correctly loaded");
+    }
+
+    public void verifyActiveLeftMenu() throws Exception
+    {
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.aboutUsLinkText(),"Left menu does not show About Us link as Active Link");
         AutomationLog.info("Left menu shows About Us link as Active Link");
-
-        AutomationLog.info("AboutUs page is correctly loaded");
     }
 
     @Override

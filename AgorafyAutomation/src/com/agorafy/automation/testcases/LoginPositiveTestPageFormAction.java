@@ -3,6 +3,7 @@ package com.agorafy.automation.testcases;
 import java.util.HashMap;
 
 
+
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -22,6 +23,12 @@ public class LoginPositiveTestPageFormAction extends NegativeLoginBaseAction
     {
         verifyUrlAndErrorMessage(loginPage);
 
+        verifyHomePagePrimaryContents();
+
+    }
+
+    public void verifyHomePagePrimaryContents() throws Exception
+    {
         Credentials ValidCredentials = userCredentials();
         Page.urlStatus = false;
         homePage = loginPage.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());

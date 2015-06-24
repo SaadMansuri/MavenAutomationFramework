@@ -63,7 +63,7 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("How It Works"));
+            element = leftMenuLinks().findElement(By.linkText("How It Works"));
             AutomationLog.info("How It Works link found on Content Pages Left Menu");
         }
         catch(Exception e)
@@ -100,7 +100,7 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Members' Benefits"));
+            element = leftMenuLinks().findElement(By.linkText("Members' Benefits"));
             AutomationLog.info("Members' Benefits link found on Content Pages Left Menu");
         }
         catch(Exception e)
@@ -137,7 +137,7 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Press"));
+            element = leftMenuLinks().findElement(By.linkText("Press"));
             AutomationLog.info("Press link found on Content Pages Left Menu");
         }
         catch(Exception e)
@@ -174,7 +174,7 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Team"));
+            element = leftMenuLinks().findElement(By.linkText("Team"));
             AutomationLog.info("Team link found on Content Pages Left Menu");
         }
         catch(Exception e)
@@ -211,7 +211,7 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Careers"));
+            element = leftMenuLinks().findElement(By.linkText("Careers"));
             AutomationLog.info("Careers link found on Content Pages Left Menu");
         }
         catch(Exception e)
@@ -248,7 +248,7 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Feedback"));
+            element = leftMenuLinks().findElement(By.linkText("Feedback"));
             AutomationLog.info("Feedback link found on Content Pages Left Menu");
         }
         catch(Exception e)
@@ -285,7 +285,7 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Contact"));
+            element = leftMenuLinks().findElement(By.linkText("Contact"));
             AutomationLog.info("Contact link found on Content Pages Left Menu");
         }
         catch(Exception e)
@@ -318,11 +318,12 @@ public class ContentPagesLeftMenu extends Page
         return contact;
     }
 
-    public WebElement leftMenuLinks() throws Exception
+    @SuppressWarnings("static-access")
+	public WebElement leftMenuLinks() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul"));
+            element = driver.findElement(By.className("fixed-column")).findElement(By.className("menu-list-left").tagName("ul"));
         }
         catch (Exception e)
         {
@@ -332,13 +333,12 @@ public class ContentPagesLeftMenu extends Page
         return element;
     }
 
-    @SuppressWarnings("static-access")
     public String getCurrentlyActiveLink()
     {
         String activeLinkText = "";
         try
         {
-            element = leftMenuLinks().findElement(By.tagName("li").className("active"));
+            element = leftMenuLinks().findElement(By.className("active"));
             activeLinkText = element.getText();
         }
         catch (Exception e)
@@ -352,7 +352,8 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[4]/a"));
+            //element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[4]/a"));
+            element = leftMenuLinks().findElement(By.linkText("Edit / View My Profile"));
         }
         catch (Exception e)
         {
@@ -371,7 +372,8 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[3]/a"));
+            //element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[3]/a"));
+            element = leftMenuLinks().findElement(By.linkText("My Subscriptions"));
         }
         catch (Exception e)
         {
@@ -390,7 +392,8 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[2]/a"));
+            //element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[2]/a"));
+            element = leftMenuLinks().findElement(By.linkText("My Listings"));
         }
         catch (Exception e)
         {
@@ -409,7 +412,8 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[1]/a"));
+            //element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[1]/a"));
+            element = leftMenuLinks().findElement(By.linkText("My Dashboard"));
         }
         catch (Exception e)
         {

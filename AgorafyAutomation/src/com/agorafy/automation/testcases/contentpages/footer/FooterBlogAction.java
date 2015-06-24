@@ -18,6 +18,7 @@ import com.agorafy.automation.testcases.contentpages.ContentPagesVerification;
  */
 public class FooterBlogAction extends ContentPagesVerification
 {
+    FooterSupportLinks supportLinks = Page.footer().supportLinks();
     public FooterBlogAction()
     {
         super();
@@ -26,9 +27,20 @@ public class FooterBlogAction extends ContentPagesVerification
     @Override
 	protected void verifyTestCases() throws Exception
     {
-        FooterSupportLinks supportLinks = Page.footer().supportLinks();
-        Blog blog = supportLinks.clickOnBlogLink();;
+        Blog blog = supportLinks.clickOnBlogLink();
+        verifyBlogPagePrimaryContents(blog);
+/*        HashMap<String, String> expectedBlogData = testCaseData.get("Blog");
+        Assert.assertEquals(blog.currentURL(), expectedBlogData.get("blogUrl"), "Link did not redirect to correct Page Url");
+        AutomationLog.info("Link redirects to correct Page Url");
 
+        Assert.assertEquals(blog.currentPageTitle(), expectedBlogData.get("title"), "Page does not show correct PageTitle");
+        AutomationLog.info("Page shows correct Page Title");
+*/
+        AutomationLog.info("Blog Page is correctly loaded");
+    }
+
+    public void verifyBlogPagePrimaryContents(Blog blog) throws Exception 
+    {
         HashMap<String, String> expectedBlogData = testCaseData.get("Blog");
         Assert.assertEquals(blog.currentURL(), expectedBlogData.get("blogUrl"), "Link did not redirect to correct Page Url");
         AutomationLog.info("Link redirects to correct Page Url");
@@ -36,7 +48,6 @@ public class FooterBlogAction extends ContentPagesVerification
         Assert.assertEquals(blog.currentPageTitle(), expectedBlogData.get("title"), "Page does not show correct PageTitle");
         AutomationLog.info("Page shows correct Page Title");
 
-        AutomationLog.info("Blog Page is correctly loaded");
     }
 
     @Override

@@ -76,7 +76,6 @@ public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
 
     private void verifyHeaderProfileName() throws Exception
     {
-        //String nameOnHeader = header.profileName();
         String nameOnHeader = header.greeting();
         Assert.assertEquals(nameOnHeader, expectedpersonalInfoData.get("headerProfileName"), "Name does not get reflected on header");
         AutomationLog.info("Name in Personal Information form gets reflected on header");

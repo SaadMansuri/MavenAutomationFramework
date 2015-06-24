@@ -9,17 +9,32 @@ import com.agorafy.automation.pageobjects.Page;
 
 public class SearchPropertiesPage extends Page
 {
+    private WebElement element = null;
+
     public SearchPropertiesPage(WebDriver driver)
     {
         super(driver);
     }
 
-    public WebElement pageHeadingElement() throws Exception
+    public WebElement pageHeadingSection() throws Exception
     {
-        WebElement element;
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div/div/div[1]/h2"));
+            element = driver.findElements(By.className("content-block")).get(0);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Page heading section");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement pageHeadingElement() throws Exception
+    {
+        try
+        {
+            element = pageHeadingSection().findElement(By.tagName("h2"));
             AutomationLog.info("Search Properties page Heading is found");
         }
         catch(Exception e)

@@ -75,10 +75,10 @@ public class OverviewTabAction extends AutomationTestCaseVerification
 
         overviewTab.populateOverviewDetails(userData);
         overviewTab = overviewTab.saveOverviewDetails();
-        WaitFor.waitForPageToLoad(Page.driver, overviewTab.msg_SuccessAfterSave().getText(), overviewTab.neighborhoodlocator());
+        WaitFor.sleepFor(2000);
 
         pageBanner = dashboard.pageBanner();
-        WaitFor.waitForPageToLoad(Page.driver, userData.getName(),pageBanner.getBannerTextLocater());
+        WaitFor.sleepFor(2000);
 
         verifyUpdatedOverviewBanner(pageBanner, userData);
         verifyUpdatedOverviewTabForm(overviewTab, userData);
@@ -113,8 +113,9 @@ public class OverviewTabAction extends AutomationTestCaseVerification
     {
         verifyBannerDetails(banner, overviewData);
         testBannerAddressDetails(banner, overviewData);
-        testBannerPhoneDetails(banner, overviewData);
         testBannerMobileDetails(banner, overviewData);
+        testBannerPhoneDetails(banner, overviewData);
+
     }
 
     private void verifyIfEmailFieldIsEditable() throws Exception

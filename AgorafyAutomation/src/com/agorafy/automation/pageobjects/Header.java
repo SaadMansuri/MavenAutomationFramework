@@ -600,6 +600,7 @@ public class Header extends Page
         {
             link_Login().click();
             headerloginform = new HeaderLoginForm(driver);
+            AutomationLog.info("Successfully clicked on Login link in the Header");
         }
         catch(Exception e)
         {

@@ -19,7 +19,7 @@ public class Login
         {
             Header header = Header.header();
             HeaderLoginForm headerLoginForm = header.openHeaderLoginForm();
-            AutomationLog.info("Log In link is clicked");
+            AutomationLog.info("Header login Form is Opened");
             WaitFor.sleepFor(2000);
             Credentials ValidCredentials = AutomationTestCase.userCredentials();
             homepage = headerLoginForm.doSuccessfulLogin(ValidCredentials.getEmail(), ValidCredentials.getPassword());

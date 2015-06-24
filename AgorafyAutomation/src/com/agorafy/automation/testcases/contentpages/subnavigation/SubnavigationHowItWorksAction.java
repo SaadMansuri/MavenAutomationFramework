@@ -57,11 +57,18 @@ public class SubnavigationHowItWorksAction extends ContentPagesVerification
     protected void verifyTestCases() throws Exception
     {
         verifyLink(howItWorks, expectedHowItWorksData);
+        verifyLeftMenuActiveLink(); 
 
+/*        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.howItWorksLinkText(),"Left menu does not show How It Works link as Active Link");
+        AutomationLog.info("Left menu shows How It Works link as Active Link");
+*/
+        AutomationLog.info("How It Works Page is correctly loaded");
+    }
+
+    public void verifyLeftMenuActiveLink() throws Exception 
+    {
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.howItWorksLinkText(),"Left menu does not show How It Works link as Active Link");
         AutomationLog.info("Left menu shows How It Works link as Active Link");
-
-        AutomationLog.info("How It Works Page is correctly loaded");
     }
 
     @Override

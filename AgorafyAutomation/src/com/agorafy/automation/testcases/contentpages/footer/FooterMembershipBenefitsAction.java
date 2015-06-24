@@ -36,12 +36,22 @@ public class FooterMembershipBenefitsAction extends ContentPagesVerification
         expectedMembershipBenefitData.put("url", url);
         verifyLink(membershipBenefit, expectedMembershipBenefitData);
 
+        verifyActiveLeftMenu();
+/*
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.membershipBenefitLinkText(), "Left menu does not show Members' Benefits link as Active Link");
         AutomationLog.info("Left menu shows Members' Benefits link as Active Link");
 
-        AutomationLog.info("Members' Benefits Page is correctly loaded");
+*/        AutomationLog.info("Members' Benefits Page is correctly loaded");
     }
+
+    public void verifyActiveLeftMenu() throws Exception
+    {
+        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.membershipBenefitLinkText(), "Left menu does not show Members' Benefits link as Active Link");
+        AutomationLog.info("Left menu shows Members' Benefits link as Active Link");
+    }
+
 
     @Override
     protected String successMessage()

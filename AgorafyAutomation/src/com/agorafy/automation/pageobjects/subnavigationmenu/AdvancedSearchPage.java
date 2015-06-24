@@ -40,6 +40,7 @@ public class AdvancedSearchPage extends Page
     {
         Select boroughs = new Select(driver.findElement(By.id("borough")));
         boroughs.selectByVisibleText(boroughname);
+        AutomationLog.info("Borough Selected successfully");
     }
 
     public List<String> listingType() throws Exception
@@ -59,18 +60,21 @@ public class AdvancedSearchPage extends Page
     {
         Select type = new Select(driver.findElement(By.id("offeringType")));
         type.selectByVisibleText(listingtype);
+        AutomationLog.info("Listing type Selected successfully");
     }
 
     public void selectPropertyType(String propertytype) throws Exception
     {
         Select type = new Select(driver.findElement(By.id("propertyType")));
         type.selectByVisibleText(propertytype);
+        AutomationLog.info("Property type Selected successfully");
     }
 
     public void selectPriceType(String pricetype) throws Exception
     {
-         Select type = new Select(driver.findElement(By.id("priceType")));
+        Select type = new Select(driver.findElement(By.id("priceType")));
         type.selectByVisibleText(pricetype);
+        AutomationLog.info("Price type Selected successfully");
     }
 
     public List<String> priceType() throws Exception
@@ -91,6 +95,7 @@ public class AdvancedSearchPage extends Page
         try 
         {
             element = driver.findElements(By.name("listingCategoryRadio")).get(0);
+            AutomationLog.info("Commercial radio button found");
         } 
         catch (Exception e) 
         {
@@ -105,6 +110,7 @@ public class AdvancedSearchPage extends Page
         try 
         {
             element = driver.findElements(By.name("listingCategoryRadio")).get(1);
+            AutomationLog.info("Residential radio button found");
         } 
         catch (Exception e) 
         {
@@ -119,7 +125,7 @@ public class AdvancedSearchPage extends Page
         try 
         {
             radiobtn_Commercial().click();
-            AutomationLog.info("Successfully clicked on Commercial radio butoon");
+            AutomationLog.info("Successfully clicked on Commercial radio button");
         }
         catch (Exception e)
         {
@@ -133,7 +139,7 @@ public class AdvancedSearchPage extends Page
         try 
         {
             radiobtn_Residential().click();
-            AutomationLog.info("Successfully clicked on Residential radio butoon");
+            AutomationLog.info("Successfully clicked on Residential radio button");
         }
         catch (Exception e)
         {
@@ -204,7 +210,6 @@ public class AdvancedSearchPage extends Page
         try 
         {
             element = driver.findElement(By.cssSelector(".row.clearfix.residential-only"));
-            AutomationLog.info("Text boxes for Beds and Baths found");
         }
         catch (Exception e)
         {
@@ -311,10 +316,11 @@ public class AdvancedSearchPage extends Page
         try
         {
             element = new Select(dropdown_PropertyType()).getFirstSelectedOption();
+            AutomationLog.info("Selected Property Type found");
         }
         catch(Exception e)
         {
-           AutomationLog.error("Could not find selected property type");
+           AutomationLog.error("Could not find Selected Property type");
            throw(e);
         }
         return element;
@@ -330,6 +336,7 @@ public class AdvancedSearchPage extends Page
         try
         {
             element = list_AutoCompleteSearch().get(0).findElement(By.tagName("a"));
+            AutomationLog.info("First Search suggestion from Autocomplete list found");
         }
         catch(Exception e)
         {
@@ -343,7 +350,6 @@ public class AdvancedSearchPage extends Page
     {
         try
         {
-            
             getFirstSearchSuggestionFromAutoCompleteList().click();
             AutomationLog.info("Successfully clicked on First Search Suggestion From AutoComplete List");
         }

@@ -16,16 +16,15 @@ public class EditProfile extends Page
         super(driver);
     }
 
-    public WebElement EditProfileMainBlock() throws Exception
+    public WebElement EditProfileHeadingSection() throws Exception
     {
         try 
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[2]"));
-            AutomationLog.info("edit profile main block found");
+            element = driver.findElement(By.className("page-column")).findElement(By.className("content-block"));
         }
         catch (Exception e) 
         {
-            AutomationLog.error("failed to find edit profile main block");
+            AutomationLog.error("failed to find edit profile Heading section");
             throw (e);
         }
         return element;
@@ -35,12 +34,13 @@ public class EditProfile extends Page
     {
         try 
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
-            AutomationLog.info("edit profile page title found");
+            //element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
+            element = EditProfileHeadingSection().findElement(By.tagName("h2"));
+            AutomationLog.info("edit profile page heading found");
         }
         catch (Exception e) 
         {
-            AutomationLog.error("failed to find edit profile title");
+            AutomationLog.error("failed to find edit profile heading");
             throw (e);
         }
         return element;

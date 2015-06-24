@@ -240,7 +240,7 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
     public void verifyPhoneField() throws  Exception
     {
          String actualPhone = contacts.txtbx_Phone().getAttribute("value").replaceAll("\\D", "");
-         String expectedPhone = (pagebanner.getBannerWorkPhoneText() + pagebanner.getBannerMobilePhoneText()).replaceAll("\\D", "");
+         String expectedPhone = (pagebanner.getBannerMobilePhoneText() + pagebanner.getBannerWorkPhoneText()).replaceAll("\\D", "");
          Assert.assertEquals(actualPhone, expectedPhone, "Expected phone in not shown");
     }
 

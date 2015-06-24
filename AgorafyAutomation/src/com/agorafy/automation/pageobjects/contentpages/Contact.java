@@ -21,11 +21,26 @@ public class Contact extends Page
         return applicationUrl();
     }
 
+    public WebElement pageHeadingSection() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("page-column")).findElement(By.className("page-desc"));
+            AutomationLog.info("Page Heading Section found");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Page Heading Section");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement pageHeadingElement() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
+            element = pageHeadingSection().findElement(By.tagName("h2"));
             AutomationLog.info("Contact Page Heading found on page");
         }
         catch(Exception e)

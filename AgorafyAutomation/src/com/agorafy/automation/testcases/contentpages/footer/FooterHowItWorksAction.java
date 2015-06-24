@@ -36,11 +36,19 @@ public class FooterHowItWorksAction extends ContentPagesVerification
         expectedHowItWorksData.put("url", url);
         verifyLink(howItWorks, expectedHowItWorksData);
 
+        verifyActiveLeftMenu();
+/*        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
+        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.howItWorksLinkText(), "Left menu does not show How It Works link as Active Link");
+        AutomationLog.info("Left menu shows How It Works link as Active Link");*/
+
+        AutomationLog.info("How It Works Page is correctly loaded");
+    }
+
+    public void verifyActiveLeftMenu() throws Exception
+    {
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.howItWorksLinkText(), "Left menu does not show How It Works link as Active Link");
         AutomationLog.info("Left menu shows How It Works link as Active Link");
-
-        AutomationLog.info("How It Works Page is correctly loaded");
     }
 
     @Override

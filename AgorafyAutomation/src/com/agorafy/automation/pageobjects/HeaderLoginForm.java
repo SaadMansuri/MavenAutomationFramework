@@ -51,11 +51,11 @@ public class HeaderLoginForm extends Page
         try
         {
             element = driver.findElement(By.id("headerLoginForm")).findElement(By.className("btn-primary"));
-            AutomationLog.info("Submit button found on Header Login Form");
+            AutomationLog.info("Login button found on Header Login Form");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Submit button was Not found on Header Login Form");
+            AutomationLog.error("Login button was Not found on Header Login Form");
             throw(e);
         }
         return element;
@@ -136,10 +136,12 @@ public class HeaderLoginForm extends Page
             WebElement userNameTextBox = txtbx_UserNameInHeaderDropdown();
             userNameTextBox.clear();
             userNameTextBox.sendKeys(username);
+            AutomationLog.info("Username entered Successfully");
             WaitFor.sleepFor(1000);
             WebElement passwordTextBox = txtbx_PasswordInHeaderDropdown();
             passwordTextBox.clear();
             passwordTextBox.sendKeys(password);
+            AutomationLog.info("Password entered Successfully");
             WaitFor.sleepFor(1000);
             btn_LogInHeaderDropdown().click();
         }
