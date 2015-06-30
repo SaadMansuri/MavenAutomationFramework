@@ -58,10 +58,6 @@ public class SubnavigationHowItWorksAction extends ContentPagesVerification
     {
         verifyLink(howItWorks, expectedHowItWorksData);
         verifyLeftMenuActiveLink(); 
-
-/*        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.howItWorksLinkText(),"Left menu does not show How It Works link as Active Link");
-        AutomationLog.info("Left menu shows How It Works link as Active Link");
-*/
         AutomationLog.info("How It Works Page is correctly loaded");
     }
 

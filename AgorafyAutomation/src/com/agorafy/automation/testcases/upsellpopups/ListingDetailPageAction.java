@@ -79,7 +79,7 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
         verifySendEmailLinkInLoggedInState();
 
         verifyIfClickedFirstContactNameInDirectContacts();
-        verifyIfClickedFirstCompabyNameInDirectContacts();
+        verifyIfClickedFirstCompanyNameInDirectContacts();
 
         verifySessionExpireTestCases(validCredentials);
     }
@@ -138,15 +138,15 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
 
     public void verifySessionExpireTestCases(Credentials getValidCredentials) throws Exception 
     {
-        verifyIfClickedOnSubscribeToListingLinkAfterSessionExpire(getValidCredentials); 
-        verifyIfClickedOnUnsubscribeToListingLinkAfterSessionExpire(getValidCredentials);
-        verifyIfClickedOnUpdateListingLinkAfterSessionExpire(getValidCredentials);
-        verifyIfClickedOnAddToReportLinkAfterSessionExpire(getValidCredentials);
-        verifyIfClickedOnRemoveFromReportLinkAfterSessionExpire(getValidCredentials);
-        verifyIfClickedOnSendEmailLinkAfteSessionExpire(getValidCredentials);
+        verifySubscribeToListingLinkAfterSessionExpire(getValidCredentials); 
+        verifyUnsubscribeToListingLinkAfterSessionExpire(getValidCredentials);
+        verifyUpdateListingLinkAfterSessionExpire(getValidCredentials);
+        verifyAddToReportLinkAfterSessionExpire(getValidCredentials);
+        verifyRemoveFromReportLinkAfterSessionExpire(getValidCredentials);
+        verifySendEmailLinkAfteSessionExpire(getValidCredentials);
     }
 
-    public void verifyIfClickedOnSubscribeToListingLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception
+    public void verifySubscribeToListingLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception
     {
         Page.driver.manage().deleteAllCookies();
         listingDetailPage.link_SubscribeToListing().click();
@@ -157,7 +157,7 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
         loginpopup.btn_LogIntoMyAccount().click();
     }
 
-    public void verifyIfClickedOnUnsubscribeToListingLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception 
+    public void verifyUnsubscribeToListingLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception 
     {
         boolean status = true;
         Page.driver.navigate().refresh();
@@ -174,7 +174,7 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
         listingDetailPage.clickOnUnsubscribeListingLink();
     }
 
-    public void verifyIfClickedOnUpdateListingLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception
+    public void verifyUpdateListingLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception
     {
         Page.driver.manage().deleteAllCookies();
         listingDetailPage.link_UpdateListing().click();
@@ -185,7 +185,7 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
         loginpopup.btn_LogIntoMyAccount().click();
     }
 
-    public void verifyIfClickedOnAddToReportLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception
+    public void verifyAddToReportLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception
     {
         Page.driver.manage().deleteAllCookies();
         listingDetailPage.link_addToReport().click();
@@ -196,7 +196,7 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
         loginpopup.btn_LogIntoMyAccount().click();
     }
 
-    public void verifyIfClickedOnRemoveFromReportLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception 
+    public void verifyRemoveFromReportLinkAfterSessionExpire(Credentials getValidCredentials) throws Exception 
     {
         boolean isLoggedIn = true;
         Page.driver.navigate().refresh();
@@ -211,7 +211,7 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
         loginpopup.btn_LogIntoMyAccount().click();
     }
 
-    public void verifyIfClickedOnSendEmailLinkAfteSessionExpire(Credentials getValidCredentials) throws Exception 
+    public void verifySendEmailLinkAfteSessionExpire(Credentials getValidCredentials) throws Exception 
     {
         Page.driver.manage().deleteAllCookies();
         listingDetailPage.link_sendEmailContactSection().get(0).click();
@@ -251,7 +251,7 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
         Page.navigateToPreviousPage();
     }
 
-    public void verifyIfClickedFirstCompabyNameInDirectContacts() throws Exception
+    public void verifyIfClickedFirstCompanyNameInDirectContacts() throws Exception
     {
         String curHandle = Page.driver.getWindowHandle();
         String expectedProfileName = listingDetailPage.getFirstCompanyProfileName();

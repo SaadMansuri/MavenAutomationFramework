@@ -34,12 +34,9 @@ public class FooterFeedbackAction extends ContentPagesVerification
         HashMap<String, String> expectedFeedbackData = testCaseData.get("Feedback");
         String url = feedback.getApplicationUrl() + expectedFeedbackData.get("feedbackUrl");
         expectedFeedbackData.put("url", url);
-        verifyLink(feedback, expectedFeedbackData);
 
+        verifyLink(feedback, expectedFeedbackData);
         verifyActiveLeftMenu();
-/*        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
-        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.feedbackLinkText(), "Left menu does not show Feedback link as Active Link");
-        AutomationLog.info("Left menu shows Feedback link as Active Link");*/
 
         AutomationLog.info("Feedback page is correctly loaded");
     }

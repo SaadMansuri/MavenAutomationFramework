@@ -57,8 +57,6 @@ public class SubnavigationAboutUsAction extends ContentPagesVerification
     {
         verifyLink(aboutUs, expectedAboutUsData);
         verifyLeftMenuActiveLink();
-/*        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.aboutUsLinkText(),"Left menu does not show About Us link as Active Link");
-        AutomationLog.info("Left menu shows About Us link as Active Link");*/
         AutomationLog.info("AboutUs page is correctly loaded");
     }
 

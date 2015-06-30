@@ -28,14 +28,9 @@ public class FooterBlogAction extends ContentPagesVerification
 	protected void verifyTestCases() throws Exception
     {
         Blog blog = supportLinks.clickOnBlogLink();
-        verifyBlogPagePrimaryContents(blog);
-/*        HashMap<String, String> expectedBlogData = testCaseData.get("Blog");
-        Assert.assertEquals(blog.currentURL(), expectedBlogData.get("blogUrl"), "Link did not redirect to correct Page Url");
-        AutomationLog.info("Link redirects to correct Page Url");
 
-        Assert.assertEquals(blog.currentPageTitle(), expectedBlogData.get("title"), "Page does not show correct PageTitle");
-        AutomationLog.info("Page shows correct Page Title");
-*/
+        verifyBlogPagePrimaryContents(blog);
+
         AutomationLog.info("Blog Page is correctly loaded");
     }
 

@@ -34,12 +34,9 @@ public class FooterPressAction extends ContentPagesVerification
         HashMap<String, String> expectedPressData = testCaseData.get("Press");
         String url = press.getApplicationUrl() + expectedPressData.get("pressPageUrl");
         expectedPressData.put("url", url);
-        verifyLink(press, expectedPressData);
 
+        verifyLink(press, expectedPressData);
         verifyActiveLeftMenu();
-/*        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
-        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.pressLinkText(), "Left menu does not show Press link as Active Link");
-        AutomationLog.info("Left menu shows Press link as Active Link");*/
 
         AutomationLog.info("Press page is correctly loaded");
     }

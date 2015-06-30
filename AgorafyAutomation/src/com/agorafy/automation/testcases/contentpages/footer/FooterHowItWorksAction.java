@@ -34,12 +34,9 @@ public class FooterHowItWorksAction extends ContentPagesVerification
         HashMap<String, String> expectedHowItWorksData = testCaseData.get("HowItWorks");
         String url = howItWorks.getApplicationUrl() + expectedHowItWorksData.get("howItWorksPageUrl");
         expectedHowItWorksData.put("url", url);
-        verifyLink(howItWorks, expectedHowItWorksData);
 
+        verifyLink(howItWorks, expectedHowItWorksData);
         verifyActiveLeftMenu();
-/*        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
-        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.howItWorksLinkText(), "Left menu does not show How It Works link as Active Link");
-        AutomationLog.info("Left menu shows How It Works link as Active Link");*/
 
         AutomationLog.info("How It Works Page is correctly loaded");
     }

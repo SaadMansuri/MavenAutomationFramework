@@ -24,7 +24,7 @@ public class FooterCompanyLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("About Us"));
+            element = footer_CompanyLinks().findElement(By.linkText("About Us"));
             AutomationLog.info(" About Us link found on Footer");
         }
         catch(Exception e)

@@ -25,7 +25,6 @@ public class HowItWorks extends Page
         try
         {
             element = driver.findElement(By.className("page-column")).findElements(By.className("content-block")).get(0);
-            AutomationLog.info("Page Heading Section found");
         }
         catch(Exception e)
         {

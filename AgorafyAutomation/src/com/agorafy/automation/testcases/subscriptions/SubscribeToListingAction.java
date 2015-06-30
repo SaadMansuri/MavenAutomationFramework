@@ -66,13 +66,13 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         verifySubscribeToListingOption();
 
         AutomationLog.info("Verify whether listing name sholud be reflected in subscribe to respective listing in subscription window started...");
-        verifyListingNameInSubscribeToRespectiveListingOptionInSubscriptionWindow();
+        verifyListingNameInSubscriptionWindow();
 
         AutomationLog.info("Verify whether Subscribe To respective listing option in subscriptions window below profile pic changes to Unsubscribe To respective Listing option started...");
-        verifySubscribeToRespectiveListingOptionInSubscriptionWindow();
+        verifySubscribeToListingOptionInSubscriptionWindow();
 
         AutomationLog.info("Verify whether Subscribe To respective listing option in listing details page changes to Unsubscribe To respective Listing option started...");
-        verifyListingDetailsPageAfterClickSubscribeToListingInSubscriptionWindow();
+        verifyIfClickedOnSubscribeToListingLinkInSubscriptionWindow();
 
         AutomationLog.info("Verify whether subscribed listing in listing details page reflects in My subscriptions page started...");
         verifySubscribedListingInMySubscriptionsPage();
@@ -105,7 +105,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         Page.navigateToPreviousPage();
     }
 
-    private void verifyListingDetailsPageAfterClickSubscribeToListingInSubscriptionWindow() throws Exception 
+    private void verifyIfClickedOnSubscribeToListingLinkInSubscriptionWindow() throws Exception 
     {
         header.clickOnProfileNameDropdownArrow();
         mySubscriptions = header.clickSubscriptionsLinkBelowProfilePic();
@@ -120,7 +120,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         mySubscriptions.closeSubscriptionWindow();
     }
 
-    private void verifyListingNameInSubscribeToRespectiveListingOptionInSubscriptionWindow() throws Exception 
+    private void verifyListingNameInSubscriptionWindow() throws Exception 
     {
         header.clickOnProfileNameDropdownArrow();
         mySubscriptions = header.clickSubscriptionsLinkBelowProfilePic();
@@ -134,7 +134,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         mySubscriptions.closeSubscriptionWindow();
     }
 
-    private void verifySubscribeToRespectiveListingOptionInSubscriptionWindow() throws Exception 
+    private void verifySubscribeToListingOptionInSubscriptionWindow() throws Exception 
     {
         try 
         {

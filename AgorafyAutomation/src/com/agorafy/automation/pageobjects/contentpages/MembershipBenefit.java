@@ -25,7 +25,6 @@ public class MembershipBenefit extends Page
         try
         {
             element = driver.findElement(By.className("page-column")).findElements(By.className("content-block")).get(0);
-            AutomationLog.info("Page Heading Section found");
         }
         catch(Exception e)
         {
@@ -40,7 +39,7 @@ public class MembershipBenefit extends Page
         try
         {
             element = pageHeadingSection().findElement(By.tagName("h2"));
-            AutomationLog.info("Members' Benefit Page Heading found on the page");
+            AutomationLog.info("Members' Benefit Page Heading found");
         }
         catch(Exception e)
         {

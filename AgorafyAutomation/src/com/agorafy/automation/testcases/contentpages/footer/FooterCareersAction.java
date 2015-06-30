@@ -33,12 +33,9 @@ public class FooterCareersAction extends ContentPagesVerification
         HashMap<String, String> expectedCareersData = testCaseData.get("Careers");
         String url = career.getApplicationUrl() + expectedCareersData.get("careersUrl");
         expectedCareersData.put("url", url);
+ 
         verifyLink(career, expectedCareersData);
-
         verifyActiveLeftMenu();
-/*        ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
-        Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.careersLinkText(), "Left menu does not show Careers link as Active Link");
-        AutomationLog.info("Left menu shows Careers link as Active Link");*/
 
         AutomationLog.info("Careers page is correctly loaded");
     }

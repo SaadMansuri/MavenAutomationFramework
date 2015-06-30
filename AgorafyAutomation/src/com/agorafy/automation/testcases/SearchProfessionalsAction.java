@@ -63,22 +63,22 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception 
     {
 
-        verifyIfLatestAgentsTabIsShown();
+        verifyLatestAgentsTab();
 
     	AutomationLog.info("Verify whether empty agent search results in same page, by checking URL");
         verifyEmptyAgentSearch();
 
         HashMap<String, String> agentCompanySearch = testCaseData.get("agentCompanySearch");
-        verifyIfRandomAgentCompanySearchShowsAppropriateMessage(searchprofessional,agentCompanySearch);
+        verifyRandomAgentCompanySearch(searchprofessional,agentCompanySearch);
 
         HashMap<String, String> agentName = testCaseData.get("agentName");
-        verifyIfAgentSearchShowsExcusiveListingsCount(searchprofessional,agentName);
+        verifyAgentExcusiveListingsCount(searchprofessional,agentName);
 
         HashMap<String, String> companyName = testCaseData.get("companySearch");
-        verifyIfCompanySearchShowsExclusivesListingCount(searchprofessional, companyName);
+        verifyCompanyExclusivesListingCount(searchprofessional, companyName);
 
         HashMap<String, String> search = testCaseData.get("agentName");
-        verifyIfSearchByExpertiseClearsAgentCompanySearchText(searchprofessional,search);
+        verifyIfExpertiseSearchClearsAgentCompanySearchText(searchprofessional,search);
 
         AutomationLog.info("Verify whether after performing click operation on company name in compnies tab, it redirects to company profile page by checking company name");
         verifyCompanyProfilePage();
@@ -90,22 +90,22 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         verifyLazyLoadingCompnies();
 
         HashMap<String, String> neighborName = testCaseData.get("Neighborhoods");
-        verifyIfNeighborHoodDropBoxDoNotAddMoreThan5Neighborhoods(searchprofessional,neighborName);
+        verifyNeighborHoodDropBox(searchprofessional,neighborName);
 
-        verifyIfuserSwitchBackFromSearchingExpertiseToAgentAndCompanySearch(searchprofessional,agentName);
+        verifySwitchingSearchFromExpertiseToAgentAndCompanySearch(searchprofessional,agentName);
 
         HashMap<String, String> neighbor = testCaseData.get("Neighborhoods");
-        verifyIfClickingOnClearButtonClearsFieldsOnExpertiseSearchPanel(searchprofessional,neighbor);
+        verifyIfClearButtonIsClicked(searchprofessional,neighbor);
 
         HashMap<String, String> propertyType = testCaseData.get("propertyType");
-        verifyDetailsEnteredShouldNotPersist(searchprofessional,propertyType);
+        verifyTogglingExpertiseSearchPropertyTypes(searchprofessional,propertyType);
 
-        verifyNeighborhoodsEnteredShouldNotPersist(searchprofessional,neighborName,propertyType);
+        verifyNeighborhoodsEnteredPersist(searchprofessional,neighborName,propertyType);
 
-        verifyIfNeighborhoodCanBeAddedAfterRemovefromNeighborhoodsDropbox(searchprofessional, neighborName);
+        verifyRemovefromNeighborhoodsDropbox(searchprofessional, neighborName);
     }
 
-    public void verifyIfLatestAgentsTabIsShown() throws Exception
+    public void verifyLatestAgentsTab() throws Exception
     {
         Assert.assertTrue(searchprofessional.link_LatestAgentsTab().isDisplayed(), "Expected Latest Agents tab is not shown");
         AutomationLog.info("Latest Agents tab is shown when SearchProfessionals page is loaded first time");
@@ -162,7 +162,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         AutomationLog.info("After performing empty search, page URL is found same as expected");
     }
 
-	public void verifyIfAgentSearchShowsExcusiveListingsCount(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentName) throws Exception
+	public void verifyAgentExcusiveListingsCount(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentName) throws Exception
     {
         String name = agentName.get("name");
         searchprofessional.searchByAgentOrCompanyName(name);
@@ -171,7 +171,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         AutomationLog.info("Agent Search is successful and its Exclusive Count = "+searchprofessional.agentExclusivesCount(name).getText());
     }
 
-    public void verifyIfCompanySearchShowsExclusivesListingCount(SearchProfessionalsPage searchprofessional,HashMap<String, String> companyName) throws Exception
+    public void verifyCompanyExclusivesListingCount(SearchProfessionalsPage searchprofessional,HashMap<String, String> companyName) throws Exception
     {
         String name = companyName.get("name");
         searchprofessional.txtbx_AgentCompanySearch().clear();
@@ -182,7 +182,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         AutomationLog.info("Company Search is successful and its Exclusive Count = "+searchprofessional.companyExclusiveCount(name).getText());
     }
 
-    public void verifyIfRandomAgentCompanySearchShowsAppropriateMessage(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentCompanySearch) throws Exception
+    public void verifyRandomAgentCompanySearch(SearchProfessionalsPage searchprofessional,HashMap<String, String> agentCompanySearch) throws Exception
     {
         WebElement element=null;
         searchprofessional.txtbx_AgentCompanySearch().clear();
@@ -213,7 +213,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         AutomationLog.info("Successfully added Neighborhoods");
      }
 
-    public void verifyIfNeighborHoodDropBoxDoNotAddMoreThan5Neighborhoods(SearchProfessionalsPage searchprofessional, HashMap<String, String> neighborName) throws Exception
+    public void verifyNeighborHoodDropBox(SearchProfessionalsPage searchprofessional, HashMap<String, String> neighborName) throws Exception
     {
         addNeighborhoods(neighborName);
         searchprofessional.clickOnNeighborhoodsSearchDropBox();
@@ -248,7 +248,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         AutomationLog.info("neighborhoods Search DropBox all text gets removed successfully");
     }
 
-    public void verifyIfuserSwitchBackFromSearchingExpertiseToAgentAndCompanySearch(SearchProfessionalsPage searchprofessional, HashMap<String, String> agentName) throws Exception
+    public void verifySwitchingSearchFromExpertiseToAgentAndCompanySearch(SearchProfessionalsPage searchprofessional, HashMap<String, String> agentName) throws Exception
     {
         clickCheckboxesUnderExpertiseAndConcentration();
         Page.driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
@@ -258,7 +258,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         AutomationLog.info("Switching from Expertise search to Agent/Company Search unmarks checkbox in Expertise search");
     }
 
-    public void verifyIfSearchByExpertiseClearsAgentCompanySearchText(SearchProfessionalsPage searchprofessional,HashMap<String, String> search) throws Exception
+    public void verifyIfExpertiseSearchClearsAgentCompanySearchText(SearchProfessionalsPage searchprofessional,HashMap<String, String> search) throws Exception
     {
         WebElement element=null;
         searchprofessional.enterSearchTextInAgentCompanySearchTextBox(search.get("name"));
@@ -268,7 +268,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         AutomationLog.info("Switching from agent /company search to expertise search clears agent/company search text ");
     }
 
-    public void verifyIfClickingOnClearButtonClearsFieldsOnExpertiseSearchPanel(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighbor) throws Exception
+    public void verifyIfClearButtonIsClicked(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighbor) throws Exception
     {
        searchProfessional.clearNeighorhoods();
        searchprofessional.markCheckboxesInExpertiseAndConcentration();
@@ -278,7 +278,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
        AutomationLog.info("Clicking clear button clears checkboxes and boroughs");
     }
     
-    public void verifyDetailsEnteredShouldNotPersist(SearchProfessionalsPage searchProfessional, HashMap<String, String> propertyType) throws Exception
+    public void verifyTogglingExpertiseSearchPropertyTypes(SearchProfessionalsPage searchProfessional, HashMap<String, String> propertyType) throws Exception
     {
         clickCheckboxesUnderExpertiseAndConcentration();
         searchprofessional.clickOnSelectOptions(propertyType.get("res"));
@@ -286,7 +286,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         verifyIfCheckboxesUnderExpertiseNConcentrationAreCleared();
     }
     
-    public void verifyNeighborhoodsEnteredShouldNotPersist(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighborName, HashMap<String, String> propertyType) throws Exception
+    public void verifyNeighborhoodsEnteredPersist(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighborName, HashMap<String, String> propertyType) throws Exception
     {
         addNeighborhoods(neighborName);
         searchprofessional.clickOnSelectOptions(propertyType.get("res"));
@@ -294,7 +294,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         verifyIfNeighborhoodsDropboxIsCleared();
     }
     
-    public void verifyIfNeighborhoodCanBeAddedAfterRemovefromNeighborhoodsDropbox(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighborName) throws Exception
+    public void verifyRemovefromNeighborhoodsDropbox(SearchProfessionalsPage searchProfessional, HashMap<String, String> neighborName) throws Exception
     {
         addNeighborhoods(neighborName);
         int beforeCount = searchProfessional.getNeighborhoodsDropboxCount();

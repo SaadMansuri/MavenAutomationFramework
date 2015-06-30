@@ -85,8 +85,8 @@ public class OverviewTabAction extends AutomationTestCaseVerification
 
         verifyIfEmailFieldIsEditable(); 
 
-        verifyIfClickingSpecializedNeighborhoodsShowsDropDownToSelectNeighborhoods();
-        verifyIfMoreThanFiveNeighborhoodsCanBeAddedInSpecializedNeighborhoods();
+        verifyIfClickedOnSpecializedNeighborhoods();
+        verifyIfMoreThanFiveNeighborhoodsAdded();
     }
 
     private UserProfile getTestOverviewData()
@@ -290,7 +290,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         return "(" +phoneNumber.substring(0, 3) +") "+phoneNumber.substring(3, 6)+"-"+phoneNumber.substring(6,10);
     }
 
-    public void verifyIfClickingSpecializedNeighborhoodsShowsDropDownToSelectNeighborhoods() throws Exception
+    public void verifyIfClickedOnSpecializedNeighborhoods() throws Exception
     {
         HashMap<String, String> getNeighborhood = testCaseData.get("NeighborHoods");
         overviewTab.clearSpecializedNeighborhoodsTextBox();
@@ -307,7 +307,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         AutomationLog.info("Clicking Specialized neighborhoods shows drop down to selects neighborhoods successfully");
     }
 
-    public void verifyIfMoreThanFiveNeighborhoodsCanBeAddedInSpecializedNeighborhoods() throws Exception
+    public void verifyIfMoreThanFiveNeighborhoodsAdded() throws Exception
     {
         overviewTab.clickOnNeighborhoodDropdown();
         Assert.assertEquals(overviewTab.msg_SelectionLimit().getText(), "You can only select 5 items", "Expected message is not shown");

@@ -38,7 +38,6 @@ public class FooterSocialLinks extends Page
     {
         try
         {
-            //element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[5]/a[1]"));
             element = footer_SocialLinks().findElement(By.className("tw"));
             AutomationLog.info("Twitter Logo found on footer");
         }
@@ -71,7 +70,6 @@ public class FooterSocialLinks extends Page
     {
         try
         {
-            //element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[5]/a[2]"));
             element = footer_SocialLinks().findElement(By.className("fb"));
             AutomationLog.info("Facebook Logo found on footer");
         }
@@ -104,7 +102,6 @@ public class FooterSocialLinks extends Page
     {
         try
         {
-            //element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[5]/a[3]"));
             element = footer_SocialLinks().findElement(By.className("yt"));
             AutomationLog.info("Youtube Logo found on footer");
         }
@@ -137,7 +134,6 @@ public class FooterSocialLinks extends Page
     {
         try
         {
-            //element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[5]/a[4]"));
             element = footer_SocialLinks().findElement(By.className("gp"));
             AutomationLog.info("GooglePlus Logo found on footer");
         }
@@ -170,7 +166,6 @@ public class FooterSocialLinks extends Page
     {
         try
         {
-            //element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[5]/a[5]"));
             element = footer_SocialLinks().findElement(By.className("in"));
             AutomationLog.info("LinkedIn Logo found on footer");
         }

@@ -34,21 +34,21 @@ public class SocialMediaTabAction extends OverviewTabAction
     @Override
     protected void verifyTestCases() throws Exception
     {
-        verifyIfTweeterProfileTextBoxAcceptAllCharactersAsInput();
-        verifyIfSuccessMessageShownOnEnteringTwitterProfileAndClickedOnSaveButton();
+        verifyIfTweeterProfileTextBoxAcceptAllCharacters();
+        verifyIfValidTwitterProfileNameEntered();
     }
 
-    public void verifyIfSuccessMessageShownOnEnteringTwitterProfileAndClickedOnSaveButton() throws Exception
+    public void verifyIfValidTwitterProfileNameEntered() throws Exception
     {
         HashMap<String, String> profile = testCaseData.get("validTwitterProfile");
         socialmedia.validTwitterProfileName(profile.get("profileName"));
         socialmedia.clickOnSaveButton();
         String msg = socialmedia.msg_Success().getText();
         Assert.assertEquals(msg, "Success!", "Expected Success Message is not shown");
-        AutomationLog.info("Success message is shown on entering twitter profile and clicked on save button ");
+        AutomationLog.info("Success message is shown on entering valid twitter profile and clicked on save button ");
     }
 
-    public void verifyIfTweeterProfileTextBoxAcceptAllCharactersAsInput() throws Exception
+    public void verifyIfTweeterProfileTextBoxAcceptAllCharacters() throws Exception
     {
     	HashMap<String, String> profile = testCaseData.get("TweeterInput");
         socialmedia.validTwitterProfileName(profile.get("username"));

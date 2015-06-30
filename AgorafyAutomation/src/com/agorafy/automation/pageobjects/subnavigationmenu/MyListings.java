@@ -592,20 +592,6 @@ public class MyListings extends Page
         return element;
     }
 
-    public WebElement txt_UpcomingShowings(String listingName) throws Exception 
-    {
-        try
-        {
-            element = div_showing(listingName).findElement(By.tagName("span"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("could not find Upcoming showings text");
-            throw(e);
-        }
-        return element;
-    }
-
     public FrontEndShowings clickOnScheduleNowLink(String listingName) throws Exception 
     {
         FrontEndShowings frontendshowing = null;

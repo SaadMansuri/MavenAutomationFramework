@@ -43,12 +43,6 @@ public class SubnavigationFaqAction extends ContentPagesVerification
     protected void verifyTestCases() throws Exception
     {
         verifyFAQPagePrimaryContents();
-/*        Assert.assertEquals(faqs.currentURL(),expectedFAQsData.get("faqsPageUrl"), "Link did not redirect to correct PageUrl ");
-        AutomationLog.info("Link redirects to correct PageUrl");
-
-        Assert.assertEquals(faqs.currentPageTitle(), expectedFAQsData.get("title"), "Page does not show correct Page Title");
-        AutomationLog.info("Page shows correct page Title");*/
-
         AutomationLog.info("FAQ Page is correctly loaded");
     }
 

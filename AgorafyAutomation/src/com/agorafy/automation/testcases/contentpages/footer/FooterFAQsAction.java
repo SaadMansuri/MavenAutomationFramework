@@ -31,14 +31,7 @@ public class FooterFAQsAction extends ContentPagesVerification
         FAQs fAQs = supportLinks.clickOnFAQsLink();
 
         verifyFAQPagePrimaryContents(fAQs);
-/*        HashMap<String, String> expectedFAQsData = testCaseData.get("FAQ");
-        Assert.assertEquals(fAQs.currentURL(),expectedFAQsData.get("faqsPageUrl"), "Link did not redirect to correct Page Url");
-        AutomationLog.info("Page redirects to correct Page Url");
 
-
-        Assert.assertEquals(fAQs.currentPageTitle(), expectedFAQsData.get("title"), "Page does not show correct PageTitle");
-        AutomationLog.info("Page shows correct Page Title");
-*/
         AutomationLog.info("FAQ Page is correctly loaded");
     }
 

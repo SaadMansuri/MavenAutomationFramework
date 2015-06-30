@@ -26,7 +26,6 @@ public class Contact extends Page
         try
         {
             element = driver.findElement(By.className("page-column")).findElement(By.className("page-desc"));
-            AutomationLog.info("Page Heading Section found");
         }
         catch(Exception e)
         {

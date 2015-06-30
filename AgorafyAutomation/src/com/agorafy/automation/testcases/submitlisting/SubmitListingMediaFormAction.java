@@ -50,21 +50,21 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         String highResFile = exefilepath + mediadata.get("highResFile");
         String lowResFile = exefilepath + mediadata.get("lowResFile");
         String pdffile = exefilepath + mediadata.get("pdfupload");
-        verifyIfClickingAddfilesAddImageToUpload(highResFile); 
-        verifyIfClickingCancelButtonRemovesAddedImage();
-        verifyIfClickingStartUpdateUploadsTheImage(highResFile);
-        verifyIfclickingDeleteButtonRemoveUploadedImage();
-        verifyIfErrorMessageShownIfOnlyPDFIsUploadedAndClickedOnSaveAndContinueButton(pdffile);
-        verifyIfPdfIsUploadedSuccessFullyAfterHighResolutionImageAdded(highResFile);
+        verifyIfClickedOnAddfilesButton(highResFile); 
+        verifyIfClickedOnCancelButtonForAddedImage();
+        verifyIfClickedOnStartUpload(highResFile);
+        verifyIfClickedOnDeleteButtonOnUploadedImage();
+        verifyIfOnlyPDFIsUploaded(pdffile);
+        verifyIfPdfIsUploadedWithHighResolutionImage(highResFile);
         HashMap<String, String> upload = testCaseData.get("MultipleImageUpload");
         verifyIfmultipleImageFilesCanBeUploaded(upload);
         verifyIfLowResolutionImageCantBeUploaded(lowResFile);
-        verifyIfErrorMessageShownOnClickingSaveAndContinueWithoutUploadingImage();
-        verifyIfClickingOnBackButtonRedirectsToDetailsForm();
-        verifyIfclickingOnSaveAndContinueRedirectsToContactsPage();
+        verifyIfClickedOnSaveAndContinueWithNoImage();
+        verifyIfClickedOnBackButton();
+        verifyIfClickedOnSaveAndContinueAfterValidImageUpload();
     }
 
-    public void verifyIfClickingAddfilesAddImageToUpload(String highResFile) throws Exception
+    public void verifyIfClickedOnAddfilesButton(String highResFile) throws Exception
     {
         try
         {
@@ -81,7 +81,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         }
     }
 
-    public void verifyIfClickingCancelButtonRemovesAddedImage() throws Exception
+    public void verifyIfClickedOnCancelButtonForAddedImage() throws Exception
     {
         try
         {
@@ -99,16 +99,16 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
        
     }
 
-    public void verifyIfClickingStartUpdateUploadsTheImage(String highResFile) throws Exception
+    public void verifyIfClickedOnStartUpload(String highResFile) throws Exception
     {
-        verifyIfClickingAddfilesAddImageToUpload(highResFile); 
+    	verifyIfClickedOnAddfilesButton(highResFile); 
         media.clickOnStartUploadButton();
         WaitFor.ElementToBeDisplayed(Page.driver, media.uploadImagelocator());
         Assert.assertEquals(media.img_Uploaded().isDisplayed(), true, "Expected image is not uploaded");
         AutomationLog.info("Image Uploaded successfully");
     }
 
-    public void verifyIfclickingDeleteButtonRemoveUploadedImage() throws Exception
+    public void verifyIfClickedOnDeleteButtonOnUploadedImage() throws Exception
     {
         WaitFor.ElementToBeDisplayed(Page.driver, media.uploadImagelocator());
         media.clickOnDeleteButton();
@@ -129,14 +129,14 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         	
     }
 
-    public void verifyIfclickingOnSaveAndContinueRedirectsToContactsPage() throws Exception
+    public void verifyIfClickedOnSaveAndContinueAfterValidImageUpload() throws Exception
     {
         contacts = moveToContactsForm(testCaseData);
         Assert.assertEquals(contacts.form_Contacts().isDisplayed(), true, "Expected contacts form is not shown");
         AutomationLog.info("Contacts form is shown after clicking save and continue button with valid media form  input ");
     }
 
-    public void verifyIfErrorMessageShownOnClickingSaveAndContinueWithoutUploadingImage() throws Exception
+    public void verifyIfClickedOnSaveAndContinueWithNoImage() throws Exception
     {
         media.clickOnSaveAndContinueButton();
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -145,7 +145,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         AutomationLog.info("Media Error message is shown if clicked on save without uploading an Image");
     }
 
-    public void verifyIfErrorMessageShownIfOnlyPDFIsUploadedAndClickedOnSaveAndContinueButton(String pdffile) throws Exception
+    public void verifyIfOnlyPDFIsUploaded(String pdffile) throws Exception
     {
         media.clickOnAddFilesButton();
         Runtime.getRuntime().exec(pdffile);
@@ -158,7 +158,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         AutomationLog.info("Low resolution image cant be uploaded");
     }
 
-    public void verifyIfPdfIsUploadedSuccessFullyAfterHighResolutionImageAdded(String highResFile) throws Exception 
+    public void verifyIfPdfIsUploadedWithHighResolutionImage(String highResFile) throws Exception 
     {
         media.clickOnAddFilesButton();
         Runtime.getRuntime().exec(highResFile);
@@ -222,7 +222,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
        
    }
 
-    public void verifyIfClickingOnBackButtonRedirectsToDetailsForm() throws Exception
+    public void verifyIfClickedOnBackButton() throws Exception
     {
         details = media.clickOnBackButton();
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

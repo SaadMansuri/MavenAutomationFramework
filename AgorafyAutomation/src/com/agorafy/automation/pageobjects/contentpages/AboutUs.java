@@ -39,7 +39,7 @@ public class AboutUs extends Page
         try
         {
             element = page_HeadingSection().findElement(By.tagName("h2"));
-            AutomationLog.info("About Us Page Heading found on page");
+            AutomationLog.info("About Us Page Heading found");
         }
         catch(Exception e)
         {
@@ -52,7 +52,6 @@ public class AboutUs extends Page
     @Override
     public String pageHeading() throws Exception
     {
-    System.out.println(pageHeadingElement().getText());
         return pageHeadingElement().getText();
     }
 }

@@ -85,10 +85,10 @@ public class ContactsFormAction extends AutomationTestCaseVerification
 
         AutomationLog.info("Verification of Add contact started...");
         contactinfo = testCaseData.get("ContactOwner");
-        verifyIfClickingAddContactWithFormDataAddsContact();
+        verifyIfValidContactInfoEntered();
 
         AutomationLog.info("Verification of Edit option on contacts form started...");
-        verifyAfterClickingEditIconSameNameGetsReflected();
+        verifyIfClickedOnEditOptionOnAddedContacts();
 
         AutomationLog.info("Verify that after performing click operation on cancel btn it clears form");
         verifyIfCancelButtonIsClickedAfterEdit();
@@ -100,10 +100,10 @@ public class ContactsFormAction extends AutomationTestCaseVerification
         verifyDeletionOfAllContacts();
 
         AutomationLog.info("Verify that no of added contacts matches with count of added contacts");
-        verifyIfAddedContactsShowsTotalNoOfContactsAdded();
+        verifyTotalNoOfContactsAdded();
 
         AutomationLog.info("Verify after performing click operation on back btn it navigates to media form");
-        verifyIfClickingBackButtonRedirectsToMediaForm();
+        verifyIfClickedOnBackButton();
 
         AutomationLog.info("Verify representing as options started...");
         verifyRepresentingAsOptions();
@@ -121,7 +121,7 @@ public class ContactsFormAction extends AutomationTestCaseVerification
         verifyEmptyFormFillUp();
 
         AutomationLog.info("Verify that after performing click operation on save and continue btn on contacts form it navigates to preview and submit form");
-        verifyIfClickingSaveAndContinueRedirectsToPreviewAndSubmitForm();
+        verifyIfClickedOnSaveAndContinueAfterAddingContact();
 
     }
 
@@ -202,7 +202,7 @@ public class ContactsFormAction extends AutomationTestCaseVerification
         AutomationLog.info("Name field is required");
     }
 
-    public void verifyIfClickingBackButtonRedirectsToMediaForm() throws Exception
+    public void verifyIfClickedOnBackButton() throws Exception
     {
         MediaForm media = contacts.clickOnBackButton();
         Assert.assertEquals(media.form_Media().isDisplayed(), true, "Expected media form is not shown");
@@ -210,7 +210,7 @@ public class ContactsFormAction extends AutomationTestCaseVerification
         media.clickOnSaveAndContinueButton();
     }
 
-    public void verifyIfClickingAddContactWithFormDataAddsContact() throws Exception
+    public void verifyIfValidContactInfoEntered() throws Exception
     {
         addContactFormFill(contacts,contactinfo);
         contacts.clickOnAddContactsButton();
@@ -223,7 +223,7 @@ public class ContactsFormAction extends AutomationTestCaseVerification
         AutomationLog.info("Clicking Add Contact with form data shows added contacts successfullys");
     }
 
-    public void verifyAfterClickingEditIconSameNameGetsReflected() throws Exception
+    public void verifyIfClickedOnEditOptionOnAddedContacts() throws Exception
     {
         List<WebElement> allAddedContacts = contacts.element_AllAddedContacts();
         String expectedContactName = contacts.getContactName(allAddedContacts.get(0));
@@ -274,7 +274,7 @@ public class ContactsFormAction extends AutomationTestCaseVerification
         AutomationLog.info("Clicking Delete option on added contacts removes contact successfully");
     }
 
-    public void verifyIfClickingSaveAndContinueRedirectsToPreviewAndSubmitForm() throws Exception
+    public void verifyIfClickedOnSaveAndContinueAfterAddingContact() throws Exception
     {
         previewAndSubmitForm = contacts.clickOnSaveAndContinueButton();
         Assert.assertEquals(previewAndSubmitForm.form_PreviewAndSubmit().isDisplayed(), true, "Expected Preview and Submit form is not shown");
@@ -288,7 +288,7 @@ public class ContactsFormAction extends AutomationTestCaseVerification
         AutomationLog.info("Delete option on added contacts multiple contacts Removed successfully");
     }
 
-    public void verifyIfAddedContactsShowsTotalNoOfContactsAdded() throws Exception
+    public void verifyTotalNoOfContactsAdded() throws Exception
     {
         contacts.deleteAllAddedContacts();
         HashMap<String, String > addcontact = testCaseData.get("ContactOwner");

@@ -99,14 +99,14 @@ public class MyListingsAction extends ContentPagesVerification
 
     public void verifySessionExpireTestCases() throws Exception
     {
-        verifyIfClickedOnUpdateLinkAfterSessionExpire();
-        verifyIfClickedOnAddMediaLinkAfterSessionExpire();
-        verifyIfClickedOnReportLeasedLinkAfterSessionExpire();
-        verifyIfClickedOnRenewLinkAfterSessionExpire();
-        verifyIfClickedOnScheduleNowLinkAfterSessionExpire();
-        verifyIfClickedOnOffMarketScheduledLinkAfterSessionExpire();
-        verifyIfClickedOnUpdateLinkOnOffMarketAfterSessionExpire();
-        verifyIfClickedOnMediaLinkOnOffMarketAfterSessionExpire();
+        verifySessionExpireOnUpdateLink();
+        verifySessionExpireOnAddMediaLink();
+        verifySessionExpireOnReportLeasedLink();
+        verifySessionExpireOnRenewLink();
+        verifySessionExpireOnScheduleNowLink();
+        verifySessionExpireOnOffMarketScheduledLink();
+        verifySessionExpireOnOffMarketUpdateLink();
+        verifySessionExpireOnOffMarketMediaLink();
     }
 
     private void verifyAddMediaLink() throws Exception 
@@ -185,14 +185,13 @@ public class MyListingsAction extends ContentPagesVerification
         AutomationLog.info("Left menu shows My Listings link as Active Link");
     }
 
-    public void verifyIfClickedOnUpdateLinkAfterSessionExpire() throws Exception 
+    public void verifySessionExpireOnUpdateLink() throws Exception 
     {
         String pageurl = Page.driver.getCurrentUrl();
         String curHandle = Page.driver.getWindowHandle();
         Page.driver.manage().deleteAllCookies();
         myListings.hoverOverFirstListing();
         myListings.clickUpdateOfFirstListing();
-        //myListings.updateListing().click();
         Page.driver.close();
         for(String handle : Page.driver.getWindowHandles())
         {
@@ -211,7 +210,7 @@ public class MyListingsAction extends ContentPagesVerification
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnAddMediaLinkAfterSessionExpire() throws Exception
+    public void verifySessionExpireOnAddMediaLink() throws Exception
     {
         myListings.scrollPage(0, 300);
         String pageurl = Page.driver.getCurrentUrl();
@@ -219,7 +218,6 @@ public class MyListingsAction extends ContentPagesVerification
         Page.driver.manage().deleteAllCookies();
         myListings.hoverOverFirstListing();
         myListings.hoverOverAddMedia();
-        //myListings.clickAddMediaOfFirstListing();
         myListings.addMedia().click();
         Page.driver.close();
         for(String handle : Page.driver.getWindowHandles())
@@ -239,7 +237,7 @@ public class MyListingsAction extends ContentPagesVerification
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnReportLeasedLinkAfterSessionExpire() throws Exception 
+    public void verifySessionExpireOnReportLeasedLink() throws Exception 
     {
         myListings.scrollPage(0, 300);
         Page.driver.manage().deleteAllCookies();
@@ -252,7 +250,7 @@ public class MyListingsAction extends ContentPagesVerification
         myListings.closeLoginPoPup(loginpopup);
     }
 
-    public void verifyIfClickedOnRenewLinkAfterSessionExpire() throws Exception 
+    public void verifySessionExpireOnRenewLink() throws Exception 
     {
         myListings.hoverOverFirstListing();
         myListings.hoverOverRenew();
@@ -263,7 +261,7 @@ public class MyListingsAction extends ContentPagesVerification
         myListings.closeLoginPoPup(loginpopup);
     }
 
-    public void verifyIfClickedOnScheduleNowLinkAfterSessionExpire() throws Exception 
+    public void verifySessionExpireOnScheduleNowLink() throws Exception 
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteAllCookies();
@@ -278,7 +276,7 @@ public class MyListingsAction extends ContentPagesVerification
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnOffMarketScheduledLinkAfterSessionExpire() throws Exception
+    public void verifySessionExpireOnOffMarketScheduledLink() throws Exception
     {
          myListings.scrollPage(0, 300);
          String pageurl = Page.driver.getCurrentUrl();
@@ -295,7 +293,7 @@ public class MyListingsAction extends ContentPagesVerification
          Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnUpdateLinkOnOffMarketAfterSessionExpire() throws Exception 
+    public void verifySessionExpireOnOffMarketUpdateLink() throws Exception 
     {
         myListings.link_OffMarket().click();
         myListings.scrollPage(0, 300);
@@ -304,7 +302,6 @@ public class MyListingsAction extends ContentPagesVerification
         Page.driver.manage().deleteAllCookies();
         myListings.hoverOverFirstOffMarketListing();
         myListings.clickUpdateOfFirstListingOffMarket();
-        //myListings.updateListing().click();
         Page.driver.close();
         for(String handle : Page.driver.getWindowHandles())
         {
@@ -323,7 +320,7 @@ public class MyListingsAction extends ContentPagesVerification
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnMediaLinkOnOffMarketAfterSessionExpire() throws Exception 
+    public void verifySessionExpireOnOffMarketMediaLink() throws Exception 
     {
         myListings.link_OffMarket().click();
         myListings.scrollPage(0, 300);

@@ -105,14 +105,12 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     {
         advancedsearch.clickOnResidentialRadioButton();
         HashMap<String, String> searchData = testCaseData.get("SearchResidential");
-        verifyIfListingTypeDropdownResetsAfterTogglingBoroughs(searchData);
+        verifyIfTogglingBoroughsResetsSearchFormFields(searchData);
         verifySearchByPropertyTypes(searchData);
-        verifyIfSearchByBedsShowsPropertiesWithNoOfBeds();
-        verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations();
-        verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound();
-        verifyIfSearchByBathsShowsPropertiesWithNoOfBaths();
-        /*Page.navigateToPreviousPage();*/
-        
+        verifySearchByBeds();
+        verifyCombinationOfBedsAndBathsSearch();
+        verifySearchByZeroBedsAndBaths();
+        verifySearchByBaths();
     }
 
     public void searchByAddress(HashMap<String, String> searchData) throws Exception
@@ -184,7 +182,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         Page.driver.navigate().back();
     }
 
-    public void verifyIfListingTypeDropdownResetsAfterTogglingBoroughs(HashMap<String, String> searchData) throws Exception
+    public void verifyIfTogglingBoroughsResetsSearchFormFields(HashMap<String, String> searchData) throws Exception
     {
         String defaultproptype = advancedsearch.selected_PropertyType().getText();
         advancedsearch.txtbx_SearchInput().clear();
@@ -219,7 +217,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         AutomationLog.info("Successfully performed search By Property Types");
     }
 
-    public void verifyIfSearchByBedsShowsPropertiesWithNoOfBeds() throws Exception
+    public void verifySearchByBeds() throws Exception
     {
         String result = null;
         advancedsearch.searchByNoOfBeds("2");
@@ -231,7 +229,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         Page.driver.navigate().back();
     }
 
-    public void verifyPropertiesWithXBathsAndYBedsAndDifferentCombinations() throws Exception
+    public void verifyCombinationOfBedsAndBathsSearch() throws Exception
     {
         advancedsearch.searchByNoOfBeds("3");
         advancedsearch.searchByNoOfBaths("3");
@@ -243,7 +241,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
         Page.driver.navigate().back();
     }
     
-    public void verifyUserSearchesforZeroBathsAndZerobedsShowsNoResultsFound() throws Exception
+    public void verifySearchByZeroBedsAndBaths() throws Exception
     {
         advancedsearch.searchByNoOfBeds("0");
         advancedsearch.searchByNoOfBaths("0");
@@ -256,7 +254,7 @@ public class AdvancedSearchPageAction extends AutomationTestCaseVerification
     }
 
     
-    public void verifyIfSearchByBathsShowsPropertiesWithNoOfBaths() throws Exception
+    public void verifySearchByBaths() throws Exception
     {
         String result = null;
         advancedsearch.searchByNoOfBaths("2");
