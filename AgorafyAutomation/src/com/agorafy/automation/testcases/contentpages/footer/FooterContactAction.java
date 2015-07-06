@@ -34,14 +34,18 @@ public class FooterContactAction extends ContentPagesVerification
         HashMap<String, String> expectedContactData = testCaseData.get("Contact");
         String url = contact.getApplicationUrl() + expectedContactData.get("contactsUrl");
         expectedContactData.put("url", url);
-        verifyLink(contact, expectedContactData);
 
+        verifyLink(contact, expectedContactData);
+        verifyActiveLeftMenu();
+
+        AutomationLog.info("Contact page is correctly loaded");
+    }
+
+    public void verifyActiveLeftMenu() throws Exception
+    {
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.contactLinkText(), "Left menu does not show Contact link as Active Link");
         AutomationLog.info("Left menu shows Contact link as Active Link");
-
-        //verifyContactPage(contact);
-        AutomationLog.info("Contact page is correctly loaded");
     }
 
     @Override

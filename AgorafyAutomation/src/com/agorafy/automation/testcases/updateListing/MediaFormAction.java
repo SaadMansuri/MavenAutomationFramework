@@ -82,22 +82,22 @@ public class MediaFormAction extends AutomationTestCaseVerification
         String highResFile = exefilepath + mediadata.get("highResFile");
         String lowResFile = exefilepath + mediadata.get("lowResFile");
 
-        verifyIfClickingAddfilesAddImageToUpload(highResFile); 
+        verifyIfClickedOnAddfilesButton(highResFile); 
 
-        verifyIfClickingCancelButtonRemovesAddedImage();
+        verifyIfClickedOnCancelButtonForAddedImage();
 
-        verifyIfClickingStartUpdateUploadsTheImage(highResFile);
+        verifyIfClickedOnStartUpload(highResFile);
 
-        verifyIfclickingDeleteButtonRemoveUploadedImage();
+        verifyIfClickedOnDeleteButtonOnUploadedImage();
 
         verifyIfLowResolutionImageCantBeUploaded(lowResFile);
 
-        verifyIfClickingOnBackButtonRedirectsToDetailsForm();
+        verifyIfClickedOnBackButton();
 
-        verifyIfclickingOnSaveAndContinueRedirectsToContactsPage();
+        verifyIfClickedOnSaveAndContinueAfterValidImageUpload();
     }
 
-    public void verifyIfClickingAddfilesAddImageToUpload(String highResFile) throws Exception
+    public void verifyIfClickedOnAddfilesButton(String highResFile) throws Exception
     {
         try
         {
@@ -114,7 +114,7 @@ public class MediaFormAction extends AutomationTestCaseVerification
         }
     }
 
-    public void verifyIfClickingCancelButtonRemovesAddedImage() throws Exception
+    public void verifyIfClickedOnCancelButtonForAddedImage() throws Exception
     {
         try
         {
@@ -130,16 +130,16 @@ public class MediaFormAction extends AutomationTestCaseVerification
         }
     }
 
-    public void verifyIfClickingStartUpdateUploadsTheImage(String highResFile) throws Exception
+    public void verifyIfClickedOnStartUpload(String highResFile) throws Exception
     {
-        verifyIfClickingAddfilesAddImageToUpload(highResFile); 
+    	verifyIfClickedOnAddfilesButton(highResFile); 
         media.clickOnStartUploadButton();
         WaitFor.ElementToBeDisplayed(Page.driver, media.uploadImagelocator());
         Assert.assertEquals(media.img_Uploaded().isDisplayed(), true, "Expected image is not uploaded");
         AutomationLog.info("Image Uploaded successfully");
     }
 
-    public void verifyIfclickingDeleteButtonRemoveUploadedImage() throws Exception
+    public void verifyIfClickedOnDeleteButtonOnUploadedImage() throws Exception
     {
         WaitFor.ElementToBeDisplayed(Page.driver, media.uploadImagelocator());
         media.clickOnDeleteButton();
@@ -159,7 +159,7 @@ public class MediaFormAction extends AutomationTestCaseVerification
         AutomationLog.info("Low resolution image cant be uploaded");
     }
 
-    public void verifyIfclickingOnSaveAndContinueRedirectsToContactsPage() throws Exception
+    public void verifyIfClickedOnSaveAndContinueAfterValidImageUpload() throws Exception
     {
         contactsPage = media.clickOnSaveAndContinueButton();;
         Assert.assertEquals(contactsPage.form_Contacts().isDisplayed(), true, "Expected contacts form is not shown");
@@ -196,7 +196,7 @@ public class MediaFormAction extends AutomationTestCaseVerification
        return contacts;
     }
 
-    public void verifyIfClickingOnBackButtonRedirectsToDetailsForm() throws Exception
+    public void verifyIfClickedOnBackButton() throws Exception
     {
         details = media.clickOnBackButtonOnMediaPage();
         Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

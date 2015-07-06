@@ -50,7 +50,12 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         super();
     }
 
-    @Override
+    public OverviewTabAction(String testcasename)
+    {
+        super(testcasename);
+    }
+
+	@Override
     public void setup()
     {
         super.setup();
@@ -72,24 +77,23 @@ public class OverviewTabAction extends AutomationTestCaseVerification
     protected void verifyTestCases() throws Exception
     {
         UserProfile userData = getTestOverviewData();
-
-        overviewTab.populateOverviewDetails(userData);
+        populateOverivewData(userData);
+/*        overviewTab.populateOverviewDetails(userData);
         overviewTab = overviewTab.saveOverviewDetails();
-        WaitFor.waitForPageToLoad(Page.driver, overviewTab.msg_SuccessAfterSave().getText(), overviewTab.neighborhoodlocator());
+*/        WaitFor.sleepFor(5000);
 
         pageBanner = dashboard.pageBanner();
-        WaitFor.waitForPageToLoad(Page.driver, userData.getName(),pageBanner.getBannerTextLocater());
 
         verifyUpdatedOverviewBanner(pageBanner, userData);
-        verifyUpdatedOverviewTabForm(overviewTab, userData);
+        verifyUpdatedOverviewTabForm(userData);
 
         verifyIfEmailFieldIsEditable(); 
 
-        verifyIfClickingSpecializedNeighborhoodsShowsDropDownToSelectNeighborhoods();
-        verifyIfMoreThanFiveNeighborhoodsCanBeAddedInSpecializedNeighborhoods();
+        verifyIfClickedOnSpecializedNeighborhoods();
+        verifyIfMoreThanFiveNeighborhoodsAdded();
     }
 
-    private UserProfile getTestOverviewData()
+    public UserProfile getTestOverviewData()
     {
         HashMap<String, String> overviewTestData = testCaseData.get("OverviewData");
 
@@ -109,34 +113,41 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         return userData;
     }
 
-    private void verifyUpdatedOverviewBanner(PageBanner banner, UserProfile overviewData) throws Exception
+    public void verifyUpdatedOverviewBanner(PageBanner banner, UserProfile overviewData) throws Exception
     {
         verifyBannerDetails(banner, overviewData);
         testBannerAddressDetails(banner, overviewData);
-        testBannerPhoneDetails(banner, overviewData);
         testBannerMobileDetails(banner, overviewData);
+        testBannerPhoneDetails(banner, overviewData);
+
     }
 
-    private void verifyIfEmailFieldIsEditable() throws Exception
+    public void verifyIfEmailFieldIsEditable() throws Exception
     {
         Assert.assertEquals(overviewTab.default_Email().isEnabled(), true, "Email field is not editable");
         AutomationLog.info("Expected Email field is editable ");
     }
 
-    private void verifyUpdatedOverviewTabForm(OverviewTab overviewTab, UserProfile overviewData) throws Exception
+    public void verifyUpdatedOverviewTabForm(UserProfile overviewData) throws Exception
     {
-        verifyTextBoxName(overviewTab, overviewData);
-        verifyTextBoxComapnyName(overviewTab, overviewData);
-        verifyTextBoxMobilePhoneNumber(overviewTab, overviewData);
-        verifyTextBoxWorkPhoneNumber(overviewTab, overviewData);
-        verifyTextBoxAddress1(overviewTab, overviewData);
-        verifyTextBoxAddress2(overviewTab, overviewData);
-        verifyTextBoxCity(overviewTab, overviewData);
-        verifyTextBoxState(overviewTab, overviewData);
-        verifyTextBoxZip(overviewTab, overviewData);
-        verifyTextBoxDescribeYourself(overviewTab, overviewData);
+        verifyTextBoxName(overviewData);
+        verifyTextBoxComapnyName(overviewData);
+        verifyTextBoxMobilePhoneNumber(overviewData);
+        verifyTextBoxWorkPhoneNumber(overviewData);
+        verifyTextBoxAddress1(overviewData);
+        verifyTextBoxAddress2(overviewData);
+        verifyTextBoxCity(overviewData);
+        verifyTextBoxState(overviewData);
+        verifyTextBoxZip(overviewData);
+        verifyTextBoxDescribeYourself(overviewData);
         // TODO: Add test to verify neighborhood as it is a complex ui
         //verifyTextBoxNeigborhood(overviewTab, overviewData);
+    }
+
+    public void populateOverivewData(UserProfile userData) throws Exception 
+    {
+        overviewTab.populateOverviewDetails(userData);
+        overviewTab = overviewTab.saveOverviewDetails();
     }
 
     public void verifyBannerDetails(PageBanner banner, UserProfile overviewData) throws Exception
@@ -146,21 +157,21 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         AutomationLog.info("Updated Name displayed on Banner");
     }
 
-    public void verifyTextBoxName(OverviewTab overviewTab,UserProfile overviewData) throws Exception
+    public void verifyTextBoxName(UserProfile overviewData) throws Exception
     {
         String verifyNamePresentInTextBox = overviewTab.getTextBoxName();
         Assert.assertEquals(verifyNamePresentInTextBox, overviewData.getName(), "Expected name not found");
         AutomationLog.info("Expected Name found As per the Text Box");
     }
 
-    public void verifyTextBoxComapnyName(OverviewTab overviewTab,UserProfile overviewData) throws Exception
+    public void verifyTextBoxComapnyName(UserProfile overviewData) throws Exception
     {
         String verifyComapnyNamePresentInTextBox = overviewTab.getTextBoxCompanyName();
         Assert.assertEquals(verifyComapnyNamePresentInTextBox, overviewData.getCompanyName(), "company name not found");
         AutomationLog.info("Expected Company Name found As per the Text Box");
     }
 
-    public void verifyTextBoxMobilePhoneNumber(OverviewTab overviewTab,UserProfile overviewData) throws Exception
+    public void verifyTextBoxMobilePhoneNumber(UserProfile overviewData) throws Exception
     {
         String mobile = overviewTab.getTextBoxMobileNumber();
         String verifyWorkMobileNumberPresentInTextBox = mobile.replaceAll("-", "");
@@ -168,7 +179,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         AutomationLog.info("Expected Mobile Number found As per the Text Box");
     }
 
-    public void verifyTextBoxWorkPhoneNumber(OverviewTab overviewTab,UserProfile overviewData) throws Exception
+    public void verifyTextBoxWorkPhoneNumber(UserProfile overviewData) throws Exception
     {
         String work = overviewTab.getTextBoxWorkPhoneNumber();
         String verifyWorkPhoneNumberPresentInTextBox = work.replaceAll("-", "");
@@ -176,42 +187,42 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         AutomationLog.info("Expected Work Phone number found As per the Text Box");
     }
 
-    public void verifyTextBoxAddress1(OverviewTab overviewTab,UserProfile overviewData) throws Exception
+    public void verifyTextBoxAddress1(UserProfile overviewData) throws Exception
     {
         String verifyAddress1PresentInTextBox = overviewTab.getTextBoxAddress1();
         Assert.assertEquals(verifyAddress1PresentInTextBox, overviewData.getAddress1(), "Address1 not found");
         AutomationLog.info("Expected Address1 found As per the Text Box");
     }
 
-    public void verifyTextBoxAddress2(OverviewTab overviewTab,UserProfile overviewData) throws Exception
+    public void verifyTextBoxAddress2(UserProfile overviewData) throws Exception
     {
         String verifyAddress2PresentInTextBox = overviewTab.getTextBoxAddress2();
         Assert.assertEquals(verifyAddress2PresentInTextBox, overviewData.getAddress2(), "Address2 not found");
         AutomationLog.info("Expected Address2 found As per the Text Box");
     }
 
-    public void verifyTextBoxCity(OverviewTab overviewTab,UserProfile overviewData) throws Exception
+    public void verifyTextBoxCity(UserProfile overviewData) throws Exception
     {
         String verifyCityPresentInTextBox = overviewTab.getTextBoxCity();
         Assert.assertEquals(verifyCityPresentInTextBox, overviewData.getCity(), "City not found");
         AutomationLog.info("Expected City found As per the Text Box");
     }
 
-    public void verifyTextBoxState(OverviewTab overviewTab,UserProfile overviewData) throws Exception
+    public void verifyTextBoxState(UserProfile overviewData) throws Exception
     {
         String verifyStatePresentInTextBox = overviewTab.getDropdownState();
         Assert.assertEquals(verifyStatePresentInTextBox, overviewData.getState(), "State not found");
         AutomationLog.info("Expected State found As per the Text Box");
     }
 
-    public void verifyTextBoxZip(OverviewTab overviewTab,UserProfile overviewData) throws Exception
+    public void verifyTextBoxZip(UserProfile overviewData) throws Exception
     {
         String verifyZipPresentInTextBox = overviewTab.getTextBoxZip();
         Assert.assertEquals(verifyZipPresentInTextBox, overviewData.getZipCode(), "Zip not found");
         AutomationLog.info("Expected Zip found As per the Text Box");
     }
 
-    public void verifyTextBoxDescribeYourself(OverviewTab overviewTab,UserProfile overviewData) throws Exception
+    public void verifyTextBoxDescribeYourself(UserProfile overviewData) throws Exception
     {
         String verifydescribeYourselfPresentInTextBox = overviewTab.getTextBoxDescribeYorself();
         Assert.assertEquals(verifydescribeYourselfPresentInTextBox, overviewData.getDescribe(), "Describe yourself not found");
@@ -289,7 +300,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         return "(" +phoneNumber.substring(0, 3) +") "+phoneNumber.substring(3, 6)+"-"+phoneNumber.substring(6,10);
     }
 
-    public void verifyIfClickingSpecializedNeighborhoodsShowsDropDownToSelectNeighborhoods() throws Exception
+    public void verifyIfClickedOnSpecializedNeighborhoods() throws Exception
     {
         HashMap<String, String> getNeighborhood = testCaseData.get("NeighborHoods");
         overviewTab.clearSpecializedNeighborhoodsTextBox();
@@ -306,7 +317,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         AutomationLog.info("Clicking Specialized neighborhoods shows drop down to selects neighborhoods successfully");
     }
 
-    public void verifyIfMoreThanFiveNeighborhoodsCanBeAddedInSpecializedNeighborhoods() throws Exception
+    public void verifyIfMoreThanFiveNeighborhoodsAdded() throws Exception
     {
         overviewTab.clickOnNeighborhoodDropdown();
         Assert.assertEquals(overviewTab.msg_SelectionLimit().getText(), "You can only select 5 items", "Expected message is not shown");

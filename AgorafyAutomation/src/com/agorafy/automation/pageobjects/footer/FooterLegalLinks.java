@@ -17,11 +17,26 @@ public class FooterLegalLinks extends Page
         super(driver);
     }
 
+
+    public WebElement footer_LegalLinks() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("footer-left-section")).findElements(By.tagName("div")).get(2);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find FooterCompanyLinks");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement link_TermsAndConditions() throws Exception
     {
         try
         {
-            element = driver.findElement(By.linkText("Terms and Conditions"));
+            element = footer_LegalLinks().findElement(By.linkText("Terms and Conditions"));
             AutomationLog.info("Terms And Conditions link found on Footer");
         }
         catch(Exception e)
@@ -53,7 +68,7 @@ public class FooterLegalLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Privacy Policy"));
+            element = footer_LegalLinks().findElement(By.linkText("Privacy Policy"));
             AutomationLog.info("Privacy Policy link found on Footer");
         }
         catch(Exception e)

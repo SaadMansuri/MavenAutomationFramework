@@ -15,11 +15,25 @@ public class ChangePasswordTab extends Page
         super(driver);
     }
 
+    public WebElement form_ChangePassword() throws Exception 
+    {
+        try
+        {
+            element = driver.findElement(By.id("changePasswordForm"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Change Password form");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement txtBox_OldPassword() throws Exception
     {
         try
         { 
-            element = driver.findElement(By.id("oldPassword"));
+            element = form_ChangePassword().findElement(By.id("oldPassword"));
             AutomationLog.info("Old Password text box found");
         }
         catch (Exception e)
@@ -34,7 +48,7 @@ public class ChangePasswordTab extends Page
     {
         try
         { 
-            element = driver.findElement(By.id("password1"));
+            element = form_ChangePassword().findElement(By.id("password1"));
             AutomationLog.info("New Password text box found");
         }
         catch (Exception e)
@@ -49,7 +63,7 @@ public class ChangePasswordTab extends Page
     { 
         try
         { 
-            element = driver.findElement(By.id("password2"));
+            element = form_ChangePassword().findElement(By.id("password2"));
             AutomationLog.info("Retype New Password text box found");
         }
         catch (Exception e)
@@ -64,7 +78,7 @@ public class ChangePasswordTab extends Page
     {
         try
         { 
-            element = driver.findElement(By.id("passwordChangeSubmit"));
+            element = form_ChangePassword().findElement(By.id("passwordChangeSubmit"));
             AutomationLog.info("ChangePassword button found");
         }
         catch (Exception e)
@@ -118,7 +132,7 @@ public class ChangePasswordTab extends Page
     {
        try
        {
-           element = driver.findElement(By.className("oldPasswordformError")).findElement(By.className("formErrorContent"));
+           element = form_ChangePassword().findElement(By.className("oldPasswordformError")).findElement(By.className("formErrorContent"));
        }
        catch(Exception e)
        {
@@ -132,7 +146,7 @@ public class ChangePasswordTab extends Page
     {
         try
         {
-            element = driver.findElement(By.className("password1formError")).findElement(By.className("formErrorContent"));
+            element = form_ChangePassword().findElement(By.className("password1formError")).findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
         {
@@ -146,7 +160,7 @@ public class ChangePasswordTab extends Page
     {
         try
         {
-             element = driver.findElement(By.className("password2formError")).findElement(By.className("formErrorContent"));
+             element = form_ChangePassword().findElement(By.className("password2formError")).findElement(By.className("formErrorContent"));
         }
         catch(Exception e)
         {
@@ -160,7 +174,7 @@ public class ChangePasswordTab extends Page
     {
         try
         {
-            element = driver.findElement(By.id("changePasswordMessage"));
+            element = form_ChangePassword().findElement(By.id("changePasswordMessage"));
         }
         catch(Exception e)
         {

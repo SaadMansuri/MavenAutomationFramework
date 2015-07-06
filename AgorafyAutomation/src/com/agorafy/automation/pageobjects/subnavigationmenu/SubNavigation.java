@@ -355,7 +355,7 @@ public class SubNavigation extends Page
         }
         catch (Exception e)
         {
-            AutomationLog.error("Advanced Search link click operation not successful");
+            AutomationLog.error("Advanced Search link click operation not successfull");
             throw(e);
         }
         return advancedSearch;

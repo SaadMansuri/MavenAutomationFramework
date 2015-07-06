@@ -123,17 +123,15 @@ public class MySubscriptions extends Page
         }
         return element;
     }
-
-    public WebElement TitleElement() throws Exception
+    public WebElement pageHeadingSection() throws Exception
     {
         try 
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
-            AutomationLog.info("Title element found");
+            element = driver.findElement(By.className("page-column")).findElement(By.className("content-block"));
         }
         catch (Exception e) 
         {
-            AutomationLog.error("failed to find Title element");
+            AutomationLog.error("failed to find page Heading section");
             throw (e);
         }
         return element;
@@ -143,12 +141,12 @@ public class MySubscriptions extends Page
     {
         try 
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
-            AutomationLog.info("Page heading found");
+            element = pageHeadingSection().findElement(By.tagName("h2"));
+            AutomationLog.info("My subscriptions page heading found");
         }
         catch (Exception e) 
         {
-            AutomationLog.error("failed to find Page heading");
+            AutomationLog.error("failed to find My subscriptions page heading");
             throw (e);
         }
         return element;

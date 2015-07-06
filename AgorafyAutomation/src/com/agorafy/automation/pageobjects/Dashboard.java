@@ -50,11 +50,11 @@ public class Dashboard extends Page
         try
         {
             element = leftMenuLinks().findElement(By.linkText("Account Settings"));
-            AutomationLog.info("AccountSetting link found on the Dashboard");
+            AutomationLog.info("AccountSettings link found on the Dashboard");
         }
         catch (Exception e)
         {
-            AutomationLog.error("AccountSetting link not found on the Dashboard");
+            AutomationLog.error("AccountSettings link not found on the Dashboard");
             throw (e);
         }
         return element;
@@ -146,24 +146,22 @@ public class Dashboard extends Page
     {
         try
         {
-            element = driver.findElement(By.className("menu-list-left"));
-            AutomationLog.info("Left Menu found on Dashboard");
+            element = driver.findElement(By.className("fixed-column")).findElements(By.className("menu-list-left")).get(0);
         }
         catch (Exception e)
         {
-            AutomationLog.error("Could not find Left Menu on Dashboard");
+            AutomationLog.error("Could not find Left Menu links on Dashboard");
             throw(e);
         }
         return element;
     }
 
-    @SuppressWarnings("static-access")
-    public String getCurrentlyActiveLink()
+    public String getCurrentlyActiveLinkInLeftMenuLinks()
     {
         String activeLinkText = "";
         try
         {
-            element = leftMenuLinks().findElement(By.tagName("li").className("active"));
+            element = leftMenuLinks().findElement(By.className("active"));
             activeLinkText = element.getText();
         }
         catch (Exception e)
@@ -178,16 +176,30 @@ public class Dashboard extends Page
         return PageFactory.initElements(driver, PageBanner.class);
     }
 
-    public WebElement element_PageHeading() throws Exception
+    public WebElement page_HeadingSection() throws Exception 
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
-            AutomationLog.info("Page heading found on My Dashboard");
+            element = driver.findElement(By.className("page-column")).findElements(By.className("content-block")).get(0);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find MyDashboard page Heading Section");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement text_PageHeading() throws Exception
+    {
+        try
+        {
+            element = page_HeadingSection().findElement(By.tagName("h2"));
+            AutomationLog.info("Page Heading text found on My Dashboard");
         }
         catch (Exception e)
         {
-            AutomationLog.error("Could not find Page heading on My Dashboard");
+            AutomationLog.error("Could not find Page Heading text on My Dashboard");
             throw(e);
         }
         return element;
@@ -200,7 +212,7 @@ public class Dashboard extends Page
 
     public String pageHeading() throws Exception
     {
-        return element_PageHeading().getText();
+        return text_PageHeading().getText();
     }
 
     public WebElement link_MySubscriptions() throws Exception

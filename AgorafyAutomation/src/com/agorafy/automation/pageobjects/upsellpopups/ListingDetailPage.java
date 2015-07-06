@@ -33,6 +33,20 @@ public class ListingDetailPage extends LoginPopUp
         return PageFactory.initElements(driver, ListingDetailPage.class);
     }
 
+    public WebElement page_TitleSection() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("page-title-section"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Page title Section");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement link_SubscribeToListing() throws Exception
     {
         try
@@ -352,11 +366,12 @@ public class ListingDetailPage extends LoginPopUp
     {
         try
         {
-            element = driver.findElement(By.xpath(" html/body/div[2]/div/div/div[2]/div[1]/div[3]/h2"));
+            element = page_TitleSection().findElement(By.className("hidden-xs")).findElement(By.tagName("h2"));
+            AutomationLog.info("Title of ListingType searched found");
         }
         catch (Exception e)
         {
-            AutomationLog.info("Could not found Title of Listing Type Searched");
+            AutomationLog.info("Could not find Title of Listing Type Searched");
             throw(e);
         }
         return element;
@@ -420,7 +435,7 @@ public class ListingDetailPage extends LoginPopUp
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[1]/div[2]/div[1]/div[2]/h2"));
+            element = page_TitleSection().findElement(By.className("listing-address")).findElement(By.tagName("h2"));
         }
         catch(Exception e)
         {

@@ -58,11 +58,14 @@ public class SubnavigationMemberBenefitAction extends ContentPagesVerification
     protected void verifyTestCases() throws Exception
     {
         verifyLink(memberBenefit, expectedMembershipBenefitData);
+        verifyLeftMenuActiveLink();
+        AutomationLog.info("Membership Benefit is correctly loaded");
+    }
 
+    public void verifyLeftMenuActiveLink() throws Exception 
+    {
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.membershipBenefitLinkText(),"Left menu does not show Membership Benefit link as Active Link");
         AutomationLog.info("Left menu shows Membership Benefit link as Active Link");
-
-        AutomationLog.info("Membership Benefit is correctly loaded");
     }
 
     @Override

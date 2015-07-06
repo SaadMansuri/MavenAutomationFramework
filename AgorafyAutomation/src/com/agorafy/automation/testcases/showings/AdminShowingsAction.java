@@ -196,7 +196,7 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
     {
         adminshowings = admin.clickOnAddShowingLink();
         WaitFor.sleepFor(2000);
-        adminshowings.selectStartTime(enterStartTime());
+        adminshowings.selectStartTime(adminshowings.getFirstStartTime());
         adminshowings.clickOnSaveButton();
         Assert.assertEquals(adminshowings.text_MessageBar().getText(), "Please enter date.", "Expected text message is not shown");
         AutomationLog.info("Clicking save button without selecting date shows Error Message");
@@ -282,12 +282,12 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
 
     public void verifyIfAddedShowingIsSeenOnShowingPopUpOnMyListingsPage() throws Exception 
     {
-        adminshowings = admin.clickOnAddShowingLink();
+        /*adminshowings = admin.clickOnAddShowingLink();
         WaitFor.sleepFor(2000);
         adminshowings.enterDateInDatePickerTextBox(getCurrentDate());
         adminshowings.selectStartTime(enterStartTime());
         adminshowings.clickOnSaveButton();
-        admin.clickOnSaveButton();
+        admin.clickOnSaveButton();*/
         String expected = admin.getFirstShowing(0).getText();
         String listingname = admin.txt_DisplayAddress().getAttribute("value");
         String curHandle = Page.driver.getWindowHandle();

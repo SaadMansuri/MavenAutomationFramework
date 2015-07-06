@@ -20,11 +20,25 @@ public class FooterSupportLinks extends Page
         super(driver);
     }
 
+    public WebElement footer_SupportLinks() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("footer-left-section")).findElements(By.tagName("div")).get(1);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find FooterCompanyLinks");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement link_HowItWorks() throws Exception
     {
         try
         {
-            element = driver.findElement(By.linkText("How It Works"));
+            element = footer_SupportLinks().findElement(By.linkText("How It Works"));
             AutomationLog.info("How It Works link found on Footer");
         }
         catch(Exception e)
@@ -56,7 +70,7 @@ public class FooterSupportLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Blog"));
+            element = footer_SupportLinks().findElement(By.linkText("Blog"));
             AutomationLog.info("Blog link found on Footer");
         }
         catch(Exception e)
@@ -88,7 +102,7 @@ public class FooterSupportLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Press"));
+            element = footer_SupportLinks().findElement(By.linkText("Press"));
             AutomationLog.info("Press link found on Footer");
         }
         catch(Exception e)
@@ -120,7 +134,7 @@ public class FooterSupportLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("FAQs"));
+            element = footer_SupportLinks().findElement(By.linkText("FAQs"));
             AutomationLog.info("FAQs link found on Footer");
         }
         catch(Exception e)
@@ -152,7 +166,7 @@ public class FooterSupportLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.linkText("Feedback"));
+            element = footer_SupportLinks().findElement(By.linkText("Feedback"));
             AutomationLog.info("Feedback link found on Footer");
         }
         catch(Exception e)

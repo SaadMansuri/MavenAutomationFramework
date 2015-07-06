@@ -99,17 +99,17 @@ public class MyListingsAction extends ContentPagesVerification
 
     public void verifySessionExpireTestCases() throws Exception
     {
-        verifyIfClickedOnUpdateLinkAfterSessionExpire();
-        verifyIfClickedOnAddMediaLinkAfterSessionExpire();
-        verifyIfClickedOnReportLeasedLinkAfterSessionExpire();
-        verifyIfClickedOnRenewLinkAfterSessionExpire();
-        verifyIfClickedOnScheduleNowLinkAfterSessionExpire();
-        verifyIfClickedOnOffMarketScheduledLinkAfterSessionExpire();
-        verifyIfClickedOnUpdateLinkOnOffMarketAfterSessionExpire();
-        verifyIfClickedOnMediaLinkOnOffMarketAfterSessionExpire();
+        verifySessionExpireOnUpdateLink();
+        verifySessionExpireOnAddMediaLink();
+        verifySessionExpireOnReportLeasedLink();
+        verifySessionExpireOnRenewLink();
+        verifySessionExpireOnScheduleNowLink();
+        verifySessionExpireOnOffMarketScheduledLink();
+        verifySessionExpireOnOffMarketUpdateLink();
+        verifySessionExpireOnOffMarketMediaLink();
     }
 
-    private void verifyAddMediaLink() throws Exception 
+    public void verifyAddMediaLink() throws Exception 
     {
         myListings.hoverOverFirstListing();
         mediaPage = myListings.clickAddMediaOfFirstListing();
@@ -123,10 +123,11 @@ public class MyListingsAction extends ContentPagesVerification
         HandlingWindows.switchToWindow(Page.driver, 1);
     }
 
-	private void verifyUpdateListingLink() throws Exception
+    public void verifyUpdateListingLink() throws Exception
     {
         String txtFirstListingOnMyListingsPage;
         txtFirstListingOnMyListingsPage = myListings.txt_FirstListing();
+        myListings.scrollPage(0, 300);
         myListings.hoverOverFirstListing();
         myListings.hoverOverUpdate();
         updateListingPage = myListings.clickUpdateOfFirstListing();
@@ -139,7 +140,7 @@ public class MyListingsAction extends ContentPagesVerification
         HandlingWindows.switchToWindow(Page.driver, 1);
     }
 
-	private void verifyAddMediaLinkAfterMouseHover() throws Exception 
+    public void verifyAddMediaLinkAfterMouseHover() throws Exception 
     {
         boolean actualAddMediaLinkStatus = false;
         myListings.hoverOverFirstListing();
@@ -148,7 +149,7 @@ public class MyListingsAction extends ContentPagesVerification
         AutomationLog.info("After performing hover operation over first listing Add Media link is displayed successfully");
     }
 
-	private void verifyRenewLinkAfterMouseHover() throws Exception 
+    public void verifyRenewLinkAfterMouseHover() throws Exception 
     {
         myListings.hoverOverFirstListing();
         boolean actualRenewLinkStatus = false;
@@ -157,7 +158,7 @@ public class MyListingsAction extends ContentPagesVerification
         AutomationLog.info("After performing hover operation over first listing Renew link is displayed successfully");
     }
 
-    private void verifyReportLeasedLinkAfterMouseHover() throws Exception 
+    public void verifyReportLeasedLinkAfterMouseHover() throws Exception 
     {
         boolean actualReportLeasedLinkStatus = false;
         myListings.hoverOverFirstListing();
@@ -166,7 +167,7 @@ public class MyListingsAction extends ContentPagesVerification
         AutomationLog.info("After performing hover operation over first listing Report Leased link is displayed successfully");    	
     }
 
-    private void verifyUpdateLinkAfterMouseHover() throws Exception 
+    public void verifyUpdateLinkAfterMouseHover() throws Exception 
     {
         boolean actualUpdateListingLinkStatus = false;
         myListings.scrollPage(0, 300);
@@ -176,7 +177,7 @@ public class MyListingsAction extends ContentPagesVerification
         AutomationLog.info("After performing hover operation over first listing update link is displayed successfully");
     }
 
-    private void verifyLeftMenu() throws Exception 
+    public void verifyLeftMenu() throws Exception 
     {
         leftMenu = Page.contentPagesLeftMenu();
         actualActiveLeftMenu = leftMenu.getCurrentlyActiveLink();
@@ -185,13 +186,13 @@ public class MyListingsAction extends ContentPagesVerification
         AutomationLog.info("Left menu shows My Listings link as Active Link");
     }
 
-    public void verifyIfClickedOnUpdateLinkAfterSessionExpire() throws Exception 
+    public void verifySessionExpireOnUpdateLink() throws Exception 
     {
         String pageurl = Page.driver.getCurrentUrl();
         String curHandle = Page.driver.getWindowHandle();
         Page.driver.manage().deleteAllCookies();
         myListings.hoverOverFirstListing();
-        myListings.updateListing().click();
+        myListings.clickUpdateOfFirstListing();
         Page.driver.close();
         for(String handle : Page.driver.getWindowHandles())
         {
@@ -205,17 +206,19 @@ public class MyListingsAction extends ContentPagesVerification
         Page.urlStatus = true;
         String expectedUrl = myListings.getApplicationurl() + expectedmyListingsData.get("loginUrl");
         Assert.assertEquals(myListings.getCurrentUrl(), expectedUrl, "Expected page is not shown");
-        AutomationLog.info("Expiring Session on Analytics view page redirects to Login page");
+        AutomationLog.info("Clicking Update link on MyListing page after Expiring Session redirects to Login page");
         Login.doSuccessfullLoginFromHeaderLoginForm();
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnAddMediaLinkAfterSessionExpire() throws Exception
+    public void verifySessionExpireOnAddMediaLink() throws Exception
     {
+        myListings.scrollPage(0, 300);
         String pageurl = Page.driver.getCurrentUrl();
         String curHandle = Page.driver.getWindowHandle();
         Page.driver.manage().deleteAllCookies();
         myListings.hoverOverFirstListing();
+        myListings.hoverOverAddMedia();
         myListings.addMedia().click();
         Page.driver.close();
         for(String handle : Page.driver.getWindowHandles())
@@ -230,15 +233,17 @@ public class MyListingsAction extends ContentPagesVerification
         Page.urlStatus = true;
         String expectedUrl = myListings.getApplicationurl() + expectedmyListingsData.get("loginUrl");
         Assert.assertEquals(myListings.getCurrentUrl(), expectedUrl, "Expected page is not shown");
-        AutomationLog.info("Expiring Session on Analytics view page redirects to Login page");
+        AutomationLog.info("Clicking AddMedia link on MyListing page after Expiring Session redirects to Login page");
         Login.doSuccessfullLoginFromHeaderLoginForm();
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnReportLeasedLinkAfterSessionExpire() throws Exception 
+    public void verifySessionExpireOnReportLeasedLink() throws Exception 
     {
+        myListings.scrollPage(0, 300);
         Page.driver.manage().deleteAllCookies();
         myListings.hoverOverFirstListing();
+        myListings.hoverOverReportLeased();
         myListings.reportLeased().click();
         WaitFor.sleepFor(5000);
         Assert.assertTrue(myListings.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
@@ -246,9 +251,10 @@ public class MyListingsAction extends ContentPagesVerification
         myListings.closeLoginPoPup(loginpopup);
     }
 
-    public void verifyIfClickedOnRenewLinkAfterSessionExpire() throws Exception 
+    public void verifySessionExpireOnRenewLink() throws Exception 
     {
         myListings.hoverOverFirstListing();
+        myListings.hoverOverRenew();
         myListings.renew().click();
         WaitFor.sleepFor(5000);
         Assert.assertTrue(myListings.loginPopUpIsDisplayed(loginpopup), "Expected Login PopUp is not Displayed");
@@ -256,7 +262,7 @@ public class MyListingsAction extends ContentPagesVerification
         myListings.closeLoginPoPup(loginpopup);
     }
 
-    public void verifyIfClickedOnScheduleNowLinkAfterSessionExpire() throws Exception 
+    public void verifySessionExpireOnScheduleNowLink() throws Exception 
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteAllCookies();
@@ -271,8 +277,9 @@ public class MyListingsAction extends ContentPagesVerification
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnOffMarketScheduledLinkAfterSessionExpire() throws Exception
+    public void verifySessionExpireOnOffMarketScheduledLink() throws Exception
     {
+         myListings.scrollPage(0, 300);
          String pageurl = Page.driver.getCurrentUrl();
          Page.driver.manage().deleteAllCookies();
          myListings.link_OffMarket().click();
@@ -287,15 +294,58 @@ public class MyListingsAction extends ContentPagesVerification
          Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnUpdateLinkOnOffMarketAfterSessionExpire() throws Exception 
-    {
-        verifyIfClickedOnUpdateLinkAfterSessionExpire();
-    }
-
-    public void verifyIfClickedOnMediaLinkOnOffMarketAfterSessionExpire() throws Exception 
+    public void verifySessionExpireOnOffMarketUpdateLink() throws Exception 
     {
         myListings.link_OffMarket().click();
-        verifyIfClickedOnAddMediaLinkAfterSessionExpire();
+        myListings.scrollPage(0, 300);
+        String pageurl = Page.driver.getCurrentUrl();
+        String curHandle = Page.driver.getWindowHandle();
+        Page.driver.manage().deleteAllCookies();
+        myListings.hoverOverFirstOffMarketListing();
+        myListings.clickUpdateOfFirstListingOffMarket();
+        Page.driver.close();
+        for(String handle : Page.driver.getWindowHandles())
+        {
+            if(!handle.equals(curHandle))
+            {
+                Page.driver.switchTo().window(handle);
+                break;
+            }
+        }
+        WaitFor.sleepFor(2000);
+        Page.urlStatus = true;
+        String expectedUrl = myListings.getApplicationurl() + expectedmyListingsData.get("loginUrl");
+        Assert.assertEquals(myListings.getCurrentUrl(), expectedUrl, "Expected page is not shown");
+        AutomationLog.info("Clicking First off market Update link after Expiring Session redirects to Login page");
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
+    }
+
+    public void verifySessionExpireOnOffMarketMediaLink() throws Exception 
+    {
+        myListings.link_OffMarket().click();
+        myListings.scrollPage(0, 300);
+        String pageurl = Page.driver.getCurrentUrl();
+        String curHandle = Page.driver.getWindowHandle();
+        Page.driver.manage().deleteAllCookies();
+        myListings.hoverOverFirstOffMarketListing();
+        myListings.clickAddMediaOfFirstListingOffMarket();
+        Page.driver.close();
+        for(String handle : Page.driver.getWindowHandles())
+        {
+            if(!handle.equals(curHandle))
+            {
+                Page.driver.switchTo().window(handle);
+                break;
+            }
+        }
+        WaitFor.sleepFor(2000);
+        Page.urlStatus = true;
+        String expectedUrl = myListings.getApplicationurl() + expectedmyListingsData.get("loginUrl");
+        Assert.assertEquals(myListings.getCurrentUrl(), expectedUrl, "Expected page is not shown");
+        AutomationLog.info("Clicking AddMedia link on MyListing page after Expiring Session redirects to Login page");
+        Login.doSuccessfullLoginFromHeaderLoginForm();
+        Page.driver.get(pageurl);
     }
 
     @Override

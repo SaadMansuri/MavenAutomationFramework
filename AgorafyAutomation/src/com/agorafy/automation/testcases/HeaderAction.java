@@ -48,10 +48,10 @@ public class HeaderAction extends AutomationTestCaseVerification
     {
         verifyIFAdvancedSearchFormPresent();
         verifyIfLoginPopUpIsDisplayed();
-        verifyIfTooltipIsShownWhenEmptySearchIsPerformed();
+        verifyIfEmptySearchIsPerformed();
 
-        HashMap<String, String> searchinput = testCaseData.get("searchData");
-        verifyIfAutoCompleteMenuComesAfterTypingTextInSearchInputTextBox(searchinput);
+        HashMap<String, String> searchterm = testCaseData.get("searchData");
+        verifySearchInputBoxAutoCompleteMenu(searchterm);
     }
 
     public void verifyIfLoginPopUpIsDisplayed() throws Exception
@@ -70,7 +70,7 @@ public class HeaderAction extends AutomationTestCaseVerification
         AutomationLog.info("Advanced Search Form is Visible");
     }
 
-    public void verifyIfTooltipIsShownWhenEmptySearchIsPerformed() throws Exception
+    public void verifyIfEmptySearchIsPerformed() throws Exception
     {
         header.clickOnCloseLoginPopUp();
         header.clickOnSearchFormButton();
@@ -79,9 +79,9 @@ public class HeaderAction extends AutomationTestCaseVerification
         AutomationLog.info("Tool Tip is Shown when clicked on search button with empty text");
     }
 
-    public void verifyIfAutoCompleteMenuComesAfterTypingTextInSearchInputTextBox(HashMap<String, String> searchinput) throws Exception
+    public void verifySearchInputBoxAutoCompleteMenu(HashMap<String, String> searchterm) throws Exception
     {
-        header.enterSearchTextInSearchInputTextBox(searchinput.get("data"));
+        header.enterSearchTextInSearchInputTextBox(searchterm.get("data"));
         WaitFor.ElementToBeDisplayed(Page.driver, header.getAutoCompleteMenuDropboxLoactor());
         Assert.assertEquals(header.searchBox_AutoCompleteMenu().isDisplayed(), true, "Expected AutoCompleteMenu dropbox is not Show when Text is entered in SearchInput textbox");
         AutomationLog.info("Sucessfully found AutoCompleteMenu dropbox which Comes After Typing Text in SearchInput Textbox");

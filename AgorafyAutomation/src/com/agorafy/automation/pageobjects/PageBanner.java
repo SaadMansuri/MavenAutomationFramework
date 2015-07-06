@@ -1,20 +1,33 @@
 package com.agorafy.automation.pageobjects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 
 public class PageBanner extends Page
 {
+    private WebElement element = null;
     public PageBanner(WebDriver driver) 
     {
         super(driver);
     }
 
-    public By getBannerTextLocater()
+    public WebElement profile_Content() throws Exception
     {
-        return By.xpath("html/body/div[2]/div/div[1]/div/div[2]/div/h2");
+        try
+        {
+            element = driver.findElement(By.className("profile-content"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Profile Contents");
+        }
+        return element;
     }
 
     public String getBannerText() throws Exception
@@ -22,7 +35,7 @@ public class PageBanner extends Page
         String bannerText="";
         try
         {
-            bannerText= driver.findElement(getBannerTextLocater()).getText();
+            bannerText= profile_Content().findElement(By.tagName("h2")).getText();
         }
         catch(Exception e)
         {
@@ -37,7 +50,7 @@ public class PageBanner extends Page
         String companyText="";
         try
         {
-            companyText =driver.findElement(By.xpath("html/body/div[2]/div/div[1]/div/div[2]/div/p")).getText();
+            companyText =profile_Content().findElement(By.tagName("p")).getText();
         }
         catch(Exception e)
         {
@@ -47,12 +60,28 @@ public class PageBanner extends Page
         return companyText;
     }
 
+    public List<WebElement> ContactDetails() throws Exception
+    {
+        List<WebElement> list = new ArrayList<WebElement>();
+        try
+        {
+            list = driver.findElement(By.className("contact-details")).findElements(By.tagName("p"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not Contact details Section");
+            throw(e);
+        }
+        return list;
+    }
+
     public String getBannerWorkPhoneText() throws Exception
     {
         String workPhoneText="";
         try
         {
-            workPhoneText= driver.findElement(By.xpath("html/body/div[2]/div/div[1]/div/div[2]/div/div/p[1]/span[1]")).getText();
+            element = phoneDetails().get(1);
+            workPhoneText = element.getText();
         }
         catch(Exception e)
         {
@@ -62,12 +91,28 @@ public class PageBanner extends Page
         return workPhoneText;
     }
 
+    public List<WebElement> phoneDetails() throws Exception
+    {
+        List<WebElement> list = new ArrayList<WebElement>();
+        try
+        {
+            list = driver.findElement(By.className("contact-details")).findElements(By.tagName("span"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find phoneDeatails on Page Banner");
+            throw(e);
+        }
+        return list;
+    }
+
     public String getBannerMobilePhoneText() throws Exception
     {
         String mobileText="";
         try
         {
-        mobileText= driver.findElement(By.xpath("html/body/div[2]/div/div[1]/div/div[2]/div/div/p[1]/span[2]")).getText();
+            element = phoneDetails().get(0);
+            mobileText = element.getText();
         }
         catch(Exception e)
         {
@@ -82,7 +127,8 @@ public class PageBanner extends Page
         String addressText="";
         try
         {
-            addressText= driver.findElement(By.xpath("html/body/div[2]/div/div[1]/div/div[2]/div/div/p[2]")).getText();
+            element = ContactDetails().get(1);
+            addressText= element.getText();
         }
         catch(Exception e)
         {
@@ -97,7 +143,8 @@ public class PageBanner extends Page
         String emailText="";
         try
         {
-            emailText= driver.findElement(By.xpath("html/body/div[2]/div/div[1]/div/div[2]/div/div/p[3]")).getText();
+            element = ContactDetails().get(2);
+            emailText= element.getText();
         }
         catch(Exception e)
         {

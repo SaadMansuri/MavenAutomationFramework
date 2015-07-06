@@ -2,6 +2,7 @@ package com.agorafy.automation.testcases;
 
 import java.util.HashMap;
 
+import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
 
 /**
@@ -32,6 +33,7 @@ public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
         testRightEmailWrongPassword();
         testWrongEmailPassword();
         testEmptyEmail();
+        testEmptyPassword();
         testEmptyEmailPassword();
         testMismatchValidCredentials();
         Page.urlStatus = false;
@@ -70,6 +72,15 @@ public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
         logindata.put("username", "");
         loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
         verifyUrlAndErrorMessage(loginPage);
+    }
+
+    public void testEmptyPassword() throws Exception
+    {
+        HashMap<String, String> logindata =  testCaseData.get("testEmptyPassword");
+        logindata.put("password", "");
+        loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
+        verifyUrlAndErrorMessage(loginPage);
+        AutomationLog.info("Test for Empty email performed and passed");
     }
 
     public void testMismatchValidCredentials() throws Exception

@@ -36,17 +36,30 @@ public class SubnavigationEditProfileAction extends ContentPagesVerification
     }
 
     @Override
+    public void setup() 
+    {
+        super.setup();
+        try 
+        {
+            subnavigation = Page.subNavigation();
+            homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
+            WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
+            editProfilePage = subnavigation.clickLinkEditProfile(); 
+            expectedEditProfileData = testCaseData.get("EditProfile");
+            String url = editProfilePage.getApplicationUrl() + expectedEditProfileData.get("editProfilePageUrl");
+            expectedEditProfileData.put("url", url);
+            AutomationLog.info("Redirection to Edit Profile page is successfull");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Redirection to Edit Profile page failed");
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception 
     {
-        subnavigation = Page.subNavigation();
-        homePage = Login.doSuccessfullLoginFromHeaderLoginForm();
-        WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
-        editProfilePage = subnavigation.clickLinkEditProfile(); 
-        expectedEditProfileData = testCaseData.get("EditProfile");
-        String url = editProfilePage.getApplicationUrl() + expectedEditProfileData.get("editProfilePageUrl");
-        expectedEditProfileData.put("url", url);
         verifyLink(editProfilePage, expectedEditProfileData);
-
         AutomationLog.info("Testing whether same link is active in left side started...");
         verifyLeftMenu();
     }

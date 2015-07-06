@@ -20,12 +20,26 @@ public class AboutUs extends Page
         return applicationUrl();
     }
 
+    public WebElement page_HeadingSection() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.className("page-column")).findElement(By.className("page-desc"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Page Heading Section");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement pageHeadingElement() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
-            AutomationLog.info("About Us Page Heading found on page");
+            element = page_HeadingSection().findElement(By.tagName("h2"));
+            AutomationLog.info("About Us Page Heading found");
         }
         catch(Exception e)
         {

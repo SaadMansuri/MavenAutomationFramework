@@ -16,11 +16,25 @@ public class PersonalInfo extends Page
         super(driver);
     }
 
+    public WebElement form_PersonalInfo() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.id("userEditForm"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Personal Information Form");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement textBox_Name() throws Exception
     {
         try
         {
-            element = driver.findElement(By.id("name"));
+            element = form_PersonalInfo().findElement(By.id("name"));
             AutomationLog.info("Name Text field found on Personal Information form");
         }
         catch(Exception e)
@@ -51,7 +65,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("email"));
+            element = form_PersonalInfo().findElement(By.id("email"));
             AutomationLog.info("Email Id Text field found on Personal Information form");
         }
         catch(Exception e)
@@ -87,7 +101,8 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("company"));
+            element = form_PersonalInfo().findElement(By.id("company"));
+            AutomationLog.info("Company Text field found on Personal Information form");
         }
         catch(Exception e)
         {
@@ -117,7 +132,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("address1"));
+            element = form_PersonalInfo().findElement(By.id("address1"));
         }
         catch(Exception e)
         {
@@ -147,7 +162,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("address2"));
+            element = form_PersonalInfo().findElement(By.id("address2"));
             AutomationLog.info("Address2 Text field found on Personal Information form");
         }
         catch(Exception e)
@@ -178,7 +193,8 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("city"));
+            element = form_PersonalInfo().findElement(By.id("city"));
+            AutomationLog.info("City Text field found on Personal Information form");
         }
         catch(Exception e)
         {
@@ -208,7 +224,7 @@ public class PersonalInfo extends Page
     {
         try 
         {
-            element = driver.findElement(By.id("state"));
+            element = form_PersonalInfo().findElement(By.id("state"));
             AutomationLog.info("State Dropdown found on Personal Information form");
         } 
         catch (Exception e)
@@ -255,7 +271,8 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("zip"));
+            element = form_PersonalInfo().findElement(By.id("zip"));
+            AutomationLog.info("Zip Text field found on Personal Information form");
         }
         catch(Exception e)
         {
@@ -285,7 +302,7 @@ public class PersonalInfo extends Page
     {
         try 
         {
-            element = driver.findElement(By.id("phoneNumber1Type"));
+            element = form_PersonalInfo().findElement(By.id("phoneNumber1Type"));
             AutomationLog.info("PhoneNumber1 Type Dropdown found on Personal Information form");
         } 
         catch (Exception e)
@@ -317,7 +334,7 @@ public class PersonalInfo extends Page
     {
         try 
         {
-            element = driver.findElement(By.id("phoneNumber2Type"));
+            element = form_PersonalInfo().findElement(By.id("phoneNumber2Type"));
             AutomationLog.info("PhoneNumber2 Type Dropdown found on Personal Information form");
         } 
         catch (Exception e)
@@ -349,7 +366,7 @@ public class PersonalInfo extends Page
     {
         try 
         {
-            element = driver.findElement(By.id("phoneNumber3Type"));
+            element = form_PersonalInfo().findElement(By.id("phoneNumber3Type"));
             AutomationLog.info("PhoneNumber3 Type Dropdown found on Personal Information form");
         } 
         catch (Exception e)
@@ -381,7 +398,7 @@ public class PersonalInfo extends Page
     {
         try 
         {
-            element = driver.findElement(By.id("phoneNumber4Type"));
+            element = form_PersonalInfo().findElement(By.id("phoneNumber4Type"));
             AutomationLog.info("PhoneNumber4 Type Dropdown found on Personal Information form");
         } 
         catch (Exception e)
@@ -413,7 +430,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("phoneNumber1"));
+            element = form_PersonalInfo().findElement(By.id("phoneNumber1"));
             AutomationLog.info("Phone Number 1 Text field found on Personal Information form");
         }
         catch(Exception e)
@@ -444,7 +461,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("phoneNumber2"));
+            element = form_PersonalInfo().findElement(By.id("phoneNumber2"));
             AutomationLog.info("Phone Number 2 Text field found on Personal Information form");
         }
         catch(Exception e)
@@ -475,7 +492,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("phoneNumber3"));
+            element = form_PersonalInfo().findElement(By.id("phoneNumber3"));
             AutomationLog.info("Phone Number 3 Text field found on Personal Information form");
         }
         catch(Exception e)
@@ -506,7 +523,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("phoneNumber4"));
+            element = form_PersonalInfo().findElement(By.id("phoneNumber4"));
             AutomationLog.info("Phone Number 4 Text field found on Personal Information form");
         }
         catch(Exception e)
@@ -537,7 +554,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("submit-info"));
+            element = form_PersonalInfo().findElement(By.id("submit-info"));
             AutomationLog.info("Save Changes button found on Personal Information form");
         }
         catch(Exception e)
@@ -569,7 +586,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.className("nameformError")).findElement(By.className("formErrorContent")); 
+            element = form_PersonalInfo().findElement(By.className("nameformError")).findElement(By.className("formErrorContent")); 
         }
         catch(Exception e)
         {
@@ -599,7 +616,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.className("address1formError")).findElement(By.className("formErrorContent")); 
+            element = form_PersonalInfo().findElement(By.className("address1formError")).findElement(By.className("formErrorContent")); 
         }
         catch (Exception e)
         {
@@ -628,7 +645,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.className("cityformError")).findElement(By.className("formErrorContent"));
+            element = form_PersonalInfo().findElement(By.className("cityformError")).findElement(By.className("formErrorContent"));
         }
         catch (Exception e)
         {
@@ -688,7 +705,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.className("stateformError")).findElement(By.className("formErrorContent"));
+            element = form_PersonalInfo().findElement(By.className("stateformError")).findElement(By.className("formErrorContent"));
         }
         catch (Exception e)
         {
@@ -731,7 +748,7 @@ public class PersonalInfo extends Page
     {
         try
         {
-            element = driver.findElement(By.id("personalDetailsChangedMessage")).findElement(By.className("alert-success"));
+            element = form_PersonalInfo().findElement(By.id("personalDetailsChangedMessage")).findElement(By.className("alert-success"));
         }
         catch(Exception e)
         {

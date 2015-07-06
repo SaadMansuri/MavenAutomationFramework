@@ -29,6 +29,12 @@ public class FooterCompanyInfoAction extends ContentPagesVerification
         FooterCompanyInfo companyInfo = Page.footer().companyInfo();
         HashMap<String, String> expectedCompanyInfoData = testCaseData.get("CompanyInfo");
 
+        verifyFooterCompanyInfo(companyInfo, expectedCompanyInfoData);
+
+    }
+
+    public void verifyFooterCompanyInfo(FooterCompanyInfo companyInfo, HashMap<String, String> expectedCompanyInfoData) throws Exception
+    {
         Assert.assertEquals(companyInfo.companyName(), expectedCompanyInfoData.get("companyname"), "Company Name on Footer is not valid");
         AutomationLog.info("CompanyName on footer is valid");
 

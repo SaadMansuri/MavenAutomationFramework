@@ -34,13 +34,18 @@ public class FooterTeamAction extends ContentPagesVerification
         HashMap<String, String> expectedTeamData = testCaseData.get("Team");
         String url = team.getApplicationUrl() + expectedTeamData.get("teamurl");
         expectedTeamData.put("url", url);
-        verifyLink(team, expectedTeamData);
 
+        verifyLink(team, expectedTeamData);
+        verifyActiveLeftMenu();
+
+        AutomationLog.info("Team page is correctly loaded");
+    }
+
+    public void verifyActiveLeftMenu() throws Exception
+    {
         ContentPagesLeftMenu leftMenu = Page.contentPagesLeftMenu();
         Assert.assertEquals(leftMenu.getCurrentlyActiveLink(), leftMenu.teamLinkText(), "Left menu does not show Team link as Active Link");
         AutomationLog.info("Left menu shows Team link as Active Link");
-
-        AutomationLog.info("Team page is correctly loaded");
     }
 
     @Override

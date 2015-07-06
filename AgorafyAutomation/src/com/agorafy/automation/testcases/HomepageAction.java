@@ -22,6 +22,11 @@ public class HomepageAction extends LoginBaseAction
     @Override
     protected void verifyTestCases() throws Exception
     {
+        verifyHomePagePrimaryContents();
+    }
+
+    public void verifyHomePagePrimaryContents() throws Exception
+    {
         HashMap<String, String> homepageData =  testCaseData.get("homepageData");
         Assert.assertEquals(homePage.currentPageTitle(), homepageData.get("homepageTitle"), "This is not the correct home page after login. Home Page title is Not as Expected");
         AutomationLog.info("Home Page title is as Expected");

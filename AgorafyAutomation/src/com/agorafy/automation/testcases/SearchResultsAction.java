@@ -39,7 +39,12 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         super();
     }
 
-    @Override
+    public SearchResultsAction(String testcasename)
+    {
+        super(testcasename);
+    }
+
+	@Override
     public void setup() 
     {
         super.setup();
@@ -48,13 +53,13 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        verifyIfAnalyticsViewButtonIsHiddenForShortSearchTerm();
-        verifyIfAnalyticsViewButtonIsDisplayedForLongSearchTerm();
+        verifySearchResultsForShortSearchTerm();
+        verifySearchResultsForLongSearchTerm();
         HashMap<String, String> viewtype = testCaseData.get("ViewType");
         verifyIfMapViewButtonIsClicked(viewtype);
-        verifyIfMapViewPageContents();
+        verifyMapViewPageContents();
         verifyIfListViewButtonIsClicked(viewtype);
-        verifyIfListViewPageContents();
+        verifyListViewPageContents();
         verifyLoginOnAnalyticsButtonClick(viewtype);
         verifyLoginOnCreateYourProfileButtonClick();
         verifyAnalyticsViewPageContents();
@@ -77,7 +82,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
 
     }
 
-    public void verifyIfAnalyticsViewButtonIsHiddenForShortSearchTerm() throws Exception 
+    public void verifySearchResultsForShortSearchTerm() throws Exception 
     {
         searchdata = testCaseData.get("SearchData");
         searchresult = homepage.populateSearchTermTextBox(searchdata.get("borough"),searchdata.get("listingcategory"),searchdata.get("searchterm"));
@@ -87,7 +92,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         AutomationLog.info("Short searchterm does not show analytics view button");
     }
 
-    public void verifyIfAnalyticsViewButtonIsDisplayedForLongSearchTerm() throws Exception 
+    public void verifySearchResultsForLongSearchTerm() throws Exception 
     {
         header.txtbx_SearchInput().clear();
         header.enterSearchTextInSearchInputTextBox(searchdata.get("longsearchterm"));
@@ -232,17 +237,17 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     public void verifySessionExpireTestcases() throws Exception
     {
         HashMap<String, String> loginurl= testCaseData.get("LoginUrl");
-        verifyIfExportsButtonIsClickedAfterExpiringSession(loginurl);
-        verifyIfExpiringSessionOnListViewPage(loginurl); 
-        verifyIfClickingSubscribeToThisSearchLinkAfterSessionExpire();
-        verifyIfClickingOnPinCushionAfterSessionExpire();
-        verifyIfClickingRemovefromReportPinCushionAfterSessionExpire();
-        verifyIfClickingCreateYourProfileButtonAfterSessionExpire(loginurl);
-        verifyIfClickingReportsLinkInProfileNameDropdownAfterSessionExpire(); 
-        verifyIfClickongSubscriptionLinkInProfileNameDropdownAfterSessionExpire();
+        verifyExportsButtonAfterExpiringSession(loginurl);
+        verifyListViewPageAfterSessionExpire(loginurl); 
+        verifySubscribeToThisSearchLinkAfterSessionExpire();
+        verifyPinCushionAfterSessionExpire();
+        verifyRemovefromReportPinCushionAfterSessionExpire();
+        verifyCreateYourProfileButtonAfterSessionExpire(loginurl);
+        verifyReportsLinkInProfileNameDropdownAfterSessionExpire(); 
+        verifySubscriptionLinkInProfileNameDropdownAfterSessionExpire();
     }
 
-    public void verifyIfExportsButtonIsClickedAfterExpiringSession(HashMap<String, String> loginurl) throws Exception
+    public void verifyExportsButtonAfterExpiringSession(HashMap<String, String> loginurl) throws Exception
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteAllCookies();
@@ -255,7 +260,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         searchresult.clickOnListViewButton();
     }
 
-    public void verifyIfExpiringSessionOnListViewPage(HashMap<String, String> loginurl) throws Exception 
+    public void verifyListViewPageAfterSessionExpire(HashMap<String, String> loginurl) throws Exception 
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteAllCookies();
@@ -267,14 +272,14 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfMapViewPageContents() throws Exception
+    public void verifyMapViewPageContents() throws Exception
     {
         Assert.assertTrue(searchresult.div_Advertisement().isDisplayed(), "Expected Advertisement div is not present");
         Assert.assertFalse(searchresult.isCreateYourProfileButtonPresent(), "Expected CreateYourProfile button not present");
         AutomationLog.info("Map view page contains Advertisement div and not Create your profile button");
     }
 
-    public void verifyIfListViewPageContents() throws Exception 
+    public void verifyListViewPageContents() throws Exception 
     {
         Assert.assertTrue(searchresult.div_Advertisement().isDisplayed(), "Expected Advertisement div is not present");
         Assert.assertTrue(searchresult.btn_CreateYourProfile().isDisplayed(), "Expected CreateYourProfile button not present");
@@ -288,7 +293,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         AutomationLog.info("Analytics view page contains Advertisement div and Create your profile button");
     }
 
-    public void verifyIfClickingOnPinCushionAfterSessionExpire() throws Exception 
+    public void verifyPinCushionAfterSessionExpire() throws Exception 
     {
         int i = 0;
         Page.driver.manage().deleteAllCookies();
@@ -302,7 +307,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         Login.doSuccessfullLoginFromHeaderLoginForm();
     }
 
-    public void verifyIfClickingRemovefromReportPinCushionAfterSessionExpire() throws Exception
+    public void verifyRemovefromReportPinCushionAfterSessionExpire() throws Exception
     {
         int i = 0;
         searchresult.hoverOnSearchResult(i);
@@ -317,7 +322,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         Login.doSuccessfullLoginFromHeaderLoginForm();
     }
 
-    public void verifyIfClickingSubscribeToThisSearchLinkAfterSessionExpire() throws Exception 
+    public void verifySubscribeToThisSearchLinkAfterSessionExpire() throws Exception 
     {
         Page.driver.manage().deleteAllCookies();
         loginpopup = (LoginPopUp) searchresult.clickOnSubscribeToThisSearchLink(false);
@@ -329,7 +334,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         Login.doSuccessfullLoginFromHeaderLoginForm();
     }
 
-    public void verifyIfClickingCreateYourProfileButtonAfterSessionExpire(HashMap<String, String> loginurl) throws Exception
+    public void verifyCreateYourProfileButtonAfterSessionExpire(HashMap<String, String> loginurl) throws Exception
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteAllCookies();
@@ -341,7 +346,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickingReportsLinkInProfileNameDropdownAfterSessionExpire() throws Exception
+    public void verifyReportsLinkInProfileNameDropdownAfterSessionExpire() throws Exception
     {
         Page.driver.manage().deleteAllCookies();
         header.clickOnProfileNameDropdownArrow();
@@ -353,7 +358,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         Login.doSuccessfullLoginFromHeaderLoginForm();
     }
 
-    public void verifyIfClickongSubscriptionLinkInProfileNameDropdownAfterSessionExpire() throws Exception 
+    public void verifySubscriptionLinkInProfileNameDropdownAfterSessionExpire() throws Exception 
     {
         Page.driver.manage().deleteAllCookies();
         header.clickOnProfileNameDropdownArrow();

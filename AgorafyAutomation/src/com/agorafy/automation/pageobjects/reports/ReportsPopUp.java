@@ -16,6 +16,11 @@ public class ReportsPopUp extends Page
        super(driver);
     }
 
+    public By getReportsPopUpLocator() throws Exception 
+    {
+        return By.id("customizeReport");
+    }
+
     public WebElement txtbx_Name() throws Exception 
     {
         try
@@ -76,7 +81,7 @@ public class ReportsPopUp extends Page
     {
         try
         {
-            element = driver.findElement(By.id("customizeReport"));
+            element = driver.findElement(getReportsPopUpLocator());
             AutomationLog.info("Reports PopUP found");
         }
         catch(Exception e)
@@ -119,7 +124,7 @@ public class ReportsPopUp extends Page
     {
         try
         {
-            element = popup_Reports().findElement(By.id("generateReportCustom")).findElement(By.className("generateReportButton"));
+            element = popup_Reports().findElement(By.id("generateReportCustom")).findElement(By.className("generate-btn"));
         }
         catch(Exception e)
         {

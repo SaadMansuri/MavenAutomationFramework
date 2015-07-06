@@ -80,14 +80,14 @@ public class MyDashboardAction extends ContentPagesVerification
 
     public void verifyLeftMenuSessionExpireTestCases() throws Exception 
     {
-        verifyIfClickedOnMyListingsLinkAfterSessionExpire();
-        verifyIfClickedOnMySubscriptionsLinkAfterSessionExpire();
-        verifyIfClickedOnEditProfileLinkAfterSessionExpire();
-        verifyIfClickedOnAccountSettingsLinkAfterSessionExpire();
-        verifyIfClickedOnSubmitListingLinkAfterSessionExpire();
+        verifySessionExpireOnMyListingsLink();
+        verifySessionExpireOnMySubscriptionsLink();
+        verifySessionExpireOnEditProfileLink();
+        verifySessionExpireOnAccountSettingsLink();
+        verifyOnSubmitListingLinkSessionExpire();
     }
 
-    public void verifyIfClickedOnMyListingsLinkAfterSessionExpire() throws Exception
+    public void verifySessionExpireOnMyListingsLink() throws Exception
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteCookieNamed("PHPSESSID");
@@ -102,22 +102,22 @@ public class MyDashboardAction extends ContentPagesVerification
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnMySubscriptionsLinkAfterSessionExpire() throws Exception
+    public void verifySessionExpireOnMySubscriptionsLink() throws Exception
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteCookieNamed("PHPSESSID");
-        myDashboardPage.clickOnMyListingsLink();
+        myDashboardPage.clickOnMySubscriptionsLink();
         WaitFor.sleepFor(2000);
         Page.urlStatus = true;
         String expectedUrl = myDashboardPage.getApplicationurl() + expectedMyDashboardData.get("loginUrl");
         Assert.assertEquals(myDashboardPage.getCurrentUrl(), expectedUrl, "Expected page is not shown");
-        AutomationLog.info("Clicking My Listings link After Session Expire redirects to Login page");
+        AutomationLog.info("Clicking My Subscription link After Session Expire redirects to Login page");
         WaitFor.sleepFor(2000);
         Login.doSuccessfullLoginFromHeaderLoginForm();
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnEditProfileLinkAfterSessionExpire() throws Exception
+    public void verifySessionExpireOnEditProfileLink() throws Exception
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteCookieNamed("PHPSESSID");
@@ -132,7 +132,7 @@ public class MyDashboardAction extends ContentPagesVerification
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnAccountSettingsLinkAfterSessionExpire() throws Exception 
+    public void verifySessionExpireOnAccountSettingsLink() throws Exception 
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteCookieNamed("PHPSESSID");
@@ -147,7 +147,7 @@ public class MyDashboardAction extends ContentPagesVerification
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfClickedOnSubmitListingLinkAfterSessionExpire() throws Exception
+    public void verifyOnSubmitListingLinkSessionExpire() throws Exception
     {
         String pageurl = Page.driver.getCurrentUrl();
         Page.driver.manage().deleteCookieNamed("PHPSESSID");

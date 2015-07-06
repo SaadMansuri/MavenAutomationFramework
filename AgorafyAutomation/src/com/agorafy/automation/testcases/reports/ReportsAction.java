@@ -36,7 +36,12 @@ public class ReportsAction extends AutomationTestCaseVerification
         super();
     }
 
-    @Override
+    public ReportsAction(String string) 
+    {
+        super(string);
+	}
+
+	@Override
     public void setup()
     {
         super.setup();
@@ -65,19 +70,19 @@ public class ReportsAction extends AutomationTestCaseVerification
 
     public void verifySearchResultPageTestCases() throws Exception
     {
-        verifyIfMouseHoverOnTileShowsPinCushionReportIcon();
-        veifyIfMouseHoverOnPinCushionReportIconShowsToolTip();
-        verifyIfClickingOnPinCushionReportIconIncrementsReportsCount();
+        verifyIfMouseHoverOnTile();
+        veifyIfMouseHoverOnPinCushionReportIcon();
+        verifyIfClickedOnPinCushionReportIcon();
         verifyIfPinCushionReportIconIsFixed();
-        verifyIfMouseHoverOnFixedPinCushionReportIconShowsToolTip();
-        verifyIfClickingOnFixedPinCushionReportIconDecrementsReportsCount();
-        verifyIfClickingOnReportsLinkInProfileNameDropDownShowsReportsBox ();
-        verifyIfClickingOnClearLinkOnReportsBoxClearsReportsList();
+        verifyIfMouseHoverOnFixedPinCushionReportIcon();
+        verifyIfClickedOnFixedPinCushionReportIcon();
+        verifyIfClickedOnReportsLinkInProfileNameDropDown();
+        verifyIfClickedOnClearLinkOnReportsBox();
         verifyIfClickedOnCloseIconForIndividualListingInReportsBox();
 
         verifyIfReportsCountIsSameOnBothWindows();
-        verifyIfAddingMoreThanFifteenListingShowsErrorDialog();
-        verifyIfClickingCloseIconOnReportsListRemovesThatListing();
+        verifyIfMoreThanFifteenListingAdded();
+        verifyIfClickedOnCloseIconOnReportsList();
 
         verifyIfPrintLinkIsShownOnReportsBox();
         verifyIfClickingPrintLinkOpensPopUp();
@@ -86,23 +91,23 @@ public class ReportsAction extends AutomationTestCaseVerification
     public void verifyListingDetailPageTestCases() throws Exception
     {
         verifyIfAddToReportLinkIsPresent();
-        verifyIfClickingAddToReportLinkIncrementsReportsCount();
-        verifyIfClickingRemoveFromReportLinkDecrementsReportsCount();
-        verifyIfClickingOnReportsLinkInProfileNameDropDownShowsListOfAddedListing();
-        verifyIfClickingOnClearLinkOnReportsBoxClearsReportsList();
-        verifyIfClickingCloseIconForIndividualListingRemovesthatListingFromReportsList();
-        verifyIfRemoveFromReportLinkIsShownWhenListingIsAddedFromSearchResultsPage();
-        verifyIfPinCushionReportIconIsFixedAfterAddToReportLinkIsClicked();
+        verifyIfClickedAddToReportLink();
+        verifyIfClickedRemoveFromReportLink();
+        verifyIfClickedOnReportsLink();
+        verifyIfClickedOnClearLinkOnReportsBox();
+        verifyIfClickedCloseIconForIndividualListing();
+        verifyIfListingIsAddedFromSearchResultsPage();
+        verifyIfAddToReportLinkIsClicked();
     }
 
-    public void verifyIfMouseHoverOnTileShowsPinCushionReportIcon() throws Exception
+    public void verifyIfMouseHoverOnTile() throws Exception
     {
         searchresult.hoverOnFirstSearchResultTile();
         Assert.assertEquals(searchresult.icon_PinCushionReport().isDisplayed(), true, "Expected icon is not displayed");
         AutomationLog.info("On Mouse hover tile PinCushionReport icon is shown");
     }
 
-    public void veifyIfMouseHoverOnPinCushionReportIconShowsToolTip() throws Exception
+    public void veifyIfMouseHoverOnPinCushionReportIcon() throws Exception
     {
         searchresult.hoverOnPinCushionReportIcon();
         WaitFor.presenceOfTheElement(Page.driver, searchresult.Tooltiplocator());
@@ -110,7 +115,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         AutomationLog.info("On mouse hover PinCushionReport icon tooltip is shown");
     }
 
-    public void verifyIfClickingOnPinCushionReportIconIncrementsReportsCount() throws Exception
+    public void verifyIfClickedOnPinCushionReportIcon() throws Exception
     {
         int beforeCount = Integer.parseInt(reports.getReportCount());
         addReportUsingPinCushionReportIcon();
@@ -127,7 +132,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         AutomationLog.info("PinCushionReport icon is Fixed");
     }
 
-    public void verifyIfMouseHoverOnFixedPinCushionReportIconShowsToolTip() throws Exception 
+    public void verifyIfMouseHoverOnFixedPinCushionReportIcon() throws Exception 
     {
         searchresult.hoverOnPinCushionReportIcon();
         WaitFor.presenceOfTheElement(Page.driver, searchresult.Tooltiplocator());
@@ -135,7 +140,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         AutomationLog.info("On mouse hover fixed PinCushionReport icon, Remove from Report tooltip is shown");
     }
 
-    public void verifyIfClickingOnFixedPinCushionReportIconDecrementsReportsCount() throws Exception
+    public void verifyIfClickedOnFixedPinCushionReportIcon() throws Exception
     {
         int beforeCount = Integer.parseInt(reports.getReportCount());
         removeReportUsingPinCushionReportIcon();
@@ -163,7 +168,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         searchresult.clickOnPinCushionReportIcon();
     }
 
-    public void verifyIfClickingOnReportsLinkInProfileNameDropDownShowsReportsBox() throws Exception
+    public void verifyIfClickedOnReportsLinkInProfileNameDropDown() throws Exception
     {
         addReportUsingPinCushionReportIcon();
         WaitFor.sleepFor(2000);
@@ -175,7 +180,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         AutomationLog.info("Clicking On Reports Link In Profile Name DropDown Shows Reports Box");
     }
 
-    public void verifyIfClickingOnClearLinkOnReportsBoxClearsReportsList() throws Exception
+    public void verifyIfClickedOnClearLinkOnReportsBox() throws Exception
     {
         String text = null;
         reports.clickOnClearLink();
@@ -198,7 +203,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         AutomationLog.info("Add to Report link is present on listing detail page");
     }
 
-    public void verifyIfClickingAddToReportLinkIncrementsReportsCount() throws Exception
+    public void verifyIfClickedAddToReportLink() throws Exception
     {
         boolean isLoggedIn = true;
         int beforcount = Integer.parseInt(reports.getReportCount());
@@ -210,7 +215,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         AutomationLog.info("Clicking AddToReport link increaments Reports count by 1 and RemoveFromReport link displayed");
     }
 
-    public void verifyIfClickingRemoveFromReportLinkDecrementsReportsCount() throws Exception
+    public void verifyIfClickedRemoveFromReportLink() throws Exception
     {
         int beforcount = Integer.parseInt(reports.getReportCount());
         listingdetail.clickOnRemoveFromReportLink();
@@ -224,7 +229,7 @@ public class ReportsAction extends AutomationTestCaseVerification
 
     public void verifyIfClickedOnCloseIconForIndividualListingInReportsBox() throws Exception
     {
-        verifyIfClickingOnReportsLinkInProfileNameDropDownShowsReportsBox();
+    	verifyIfClickedOnClearLinkOnReportsBox();
         int beforeCount = Integer.parseInt(reports.getReportCount());
         reports.hoverOnFirstDeleteListingIcon();
         reports.clickOnFirstDeleteListingIcon();
@@ -237,7 +242,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         reports.clickOnReportWindowCloseIcon();
     }
 
-    public void verifyIfClickingOnReportsLinkInProfileNameDropDownShowsListOfAddedListing() throws Exception
+    public void verifyIfClickedOnReportsLink() throws Exception
     {
         boolean isLoggedIn = true;
         listingdetail.clickOnAddToReportLink(isLoggedIn);
@@ -249,7 +254,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         AutomationLog.info("Clicking On Reports Link In Profile Name DropDown Shows Reports Box");
     }
 
-    public void verifyIfClickingCloseIconForIndividualListingRemovesthatListingFromReportsList() throws Exception
+    public void verifyIfClickedCloseIconForIndividualListing() throws Exception
     {
         boolean isLoggedIn = true;
         listingdetail.clickOnAddToReportLink(isLoggedIn);
@@ -267,7 +272,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         AutomationLog.info("Clicking On Delete Listing icon decrements the reports count and Removes listing from Reports box  ");
     }
 
-    public void verifyIfRemoveFromReportLinkIsShownWhenListingIsAddedFromSearchResultsPage() throws Exception
+    public void verifyIfListingIsAddedFromSearchResultsPage() throws Exception
     {
         Page.driver.close();
         Page.driver.switchTo().window(curHandle);
@@ -287,7 +292,7 @@ public class ReportsAction extends AutomationTestCaseVerification
 
     }
 
-    public void verifyIfPinCushionReportIconIsFixedAfterAddToReportLinkIsClicked() throws Exception
+    public void verifyIfAddToReportLinkIsClicked() throws Exception
     {
         boolean isLoggedIn = true;
         listingdetail = searchresult.clickSearchResult();
@@ -336,7 +341,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         }
     }
 
-    public void verifyIfAddingMoreThanFifteenListingShowsErrorDialog() throws Exception
+    public void verifyIfMoreThanFifteenListingAdded() throws Exception
     {
         int licount = 0;
         int count = 1;
@@ -351,9 +356,9 @@ public class ReportsAction extends AutomationTestCaseVerification
             searchresult.hoverAndClickOnPincushionIcon(i);
             --reportcount;
             
-            if(++licount >=6*count)
+            if(++licount >=3*count)
             {
-                searchresult.scrollPage(0, 700);
+                searchresult.scrollPage(0, 300);
                 ++count;
             }
         }
@@ -363,7 +368,7 @@ public class ReportsAction extends AutomationTestCaseVerification
         AutomationLog.info("Error Dialog is shown if more than fifteen listings tried to add ");
     }
 
-    public void verifyIfClickingCloseIconOnReportsListRemovesThatListing() throws Exception
+    public void verifyIfClickedOnCloseIconOnReportsList() throws Exception
     {
         int index = 0;
         header.clickOnProfileNameDropdownArrow();
@@ -385,7 +390,7 @@ public class ReportsAction extends AutomationTestCaseVerification
     public void verifyIfClickingPrintLinkOpensPopUp() throws Exception 
     {
         reportspopup = reports.clickOnPrintLink();
-        WaitFor.sleepFor(1000);
+        WaitFor.sleepFor(2000);
         Assert.assertTrue(reportspopup.popup_Reports().isDisplayed(), "Expected popup is not shown");
         reportspopup.clickOnCloseButton();
         reports.clickOnReportWindowCloseIcon();

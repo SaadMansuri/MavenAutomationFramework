@@ -34,11 +34,11 @@ public class ResidentialTabAction extends OverviewTabAction
     @Override
     protected void verifyTestCases() throws Exception
     {
-        verifyIfSuccessMessageShownOnMarkingCheckboxesInAreasOfExpertiseAndClickedOnSaveButton();  
-        verifyIfSuccessMessageShownOnMarkingCheckboxesInAreasOfFocusAndClickedOnSaveButton();
+        verifyCheckboxesInAreasOfExpertise();  
+        verifyCheckboxesInAreasOfFocus();
     }
 
-    public void verifyIfSuccessMessageShownOnMarkingCheckboxesInAreasOfExpertiseAndClickedOnSaveButton() throws Exception
+    public void verifyCheckboxesInAreasOfExpertise() throws Exception
     {
         residential.markAllCheckboxesInAreasofExpertise();
         residential.clickOnSaveButton();
@@ -46,7 +46,7 @@ public class ResidentialTabAction extends OverviewTabAction
         Assert.assertEquals(msg, "Success!", "Expected Success Message is not shown");
         AutomationLog.info("Success message is shown After marking checkboxes in areas of expertise and clicked on save button ");
     }
-    public void verifyIfSuccessMessageShownOnMarkingCheckboxesInAreasOfFocusAndClickedOnSaveButton() throws Exception
+    public void verifyCheckboxesInAreasOfFocus() throws Exception
     {
         residential.markAllCheckboxesInAreasofFocus();
         residential.clickOnSaveButton();

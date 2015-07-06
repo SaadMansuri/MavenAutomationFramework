@@ -119,6 +119,23 @@ public class MyListings extends Page
         return element;
     }
 
+    public WebElement firstOffMarketListing() throws Exception
+    {
+        WebElement child;
+        try 
+        {
+           child = listingsContainerOffMarket().findElements(By.tagName("tr")).get(0);
+           element = child.findElements(By.tagName("td")).get(0);
+           AutomationLog.info("first Off Market Listing found");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("failed to find first Off Market Listing");
+            throw (e);
+        }
+        return element;
+    }
+
     public String txt_FirstListing() throws Exception
     {
         String firstListing = null;
@@ -189,6 +206,38 @@ public class MyListings extends Page
         return element;
     }
 
+    public void hoverOverAddMedia() throws Exception
+    {
+        try
+        {
+           Actions actions = new Actions(driver);
+           WaitFor.sleepFor(2000);
+           actions.moveToElement(addMedia()).build().perform();
+           AutomationLog.info("Sucessfully performed mouse hovering over Add media");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("failed to perform mouse hovering over Add media");
+            throw (e);
+        }
+    }
+
+    public void hoverOverRenew() throws Exception
+    {
+        try
+        {
+           Actions actions = new Actions(driver);
+           WaitFor.sleepFor(2000);
+           actions.moveToElement(renew()).build().perform();
+           AutomationLog.info("Sucessfully performed mouse hovering over Renew");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("failed to perform mouse hovering over Renew");
+            throw (e);
+        }
+    }
+
     public WebElement updateListing() throws Exception
     {
         WebElement parent;
@@ -246,7 +295,8 @@ public class MyListings extends Page
         try
         {
            parent = firstOnMarketListing().findElement(By.className("listing-details")).findElement(By.className("listing-actions"));
-           element = parent.findElement(By.className("add-media"));
+           //element = parent.findElement(By.className("add-media"));
+           element = parent.findElements(By.tagName("a")).get(3);
            AutomationLog.info("Sucessfully found Add Media link on first listing");
         }
         catch (Exception e)
@@ -542,20 +592,6 @@ public class MyListings extends Page
         return element;
     }
 
-    public WebElement txt_UpcomingShowings(String listingName) throws Exception 
-    {
-        try
-        {
-            element = div_showing(listingName).findElement(By.tagName("span"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("could not find Upcoming showings text");
-            throw(e);
-        }
-        return element;
-    }
-
     public FrontEndShowings clickOnScheduleNowLink(String listingName) throws Exception 
     {
         FrontEndShowings frontendshowing = null;
@@ -648,6 +684,190 @@ public class MyListings extends Page
             AutomationLog.error("Could not click on Scheduled link");
             throw(e);
         }
+    }
+
+    public WebElement FirstListingShowings() throws Exception
+    { 
+        List<WebElement> list = new ArrayList<WebElement>();
+        List<WebElement> list2 = new ArrayList<WebElement>();
+        try
+        {
+            list = listingsContainerOnMarket().findElements(By.tagName("tr"));
+            list2 = list.get(0).findElements(By.tagName("td"));
+            element = list2.get(2);
+            AutomationLog.info("First listing Showings found");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find First Listing Showings");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement FirstListingScheduleNowLink() throws Exception 
+    {
+        try
+        {
+            element = FirstListingShowings().findElement(By.tagName("a"));
+            AutomationLog.info("First listing Schedule now link found");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find First Listing Schedule Noe link");
+            throw(e);
+        }
+        return element;
+    }
+
+    public FrontEndShowings clickOnFirstListingScheduleNowLink() throws Exception 
+    {
+        FrontEndShowings frontendshowing = null;
+        try
+        {
+            FirstListingScheduleNowLink().click();
+            WaitFor.sleepFor(2000);
+            frontendshowing = new FrontEndShowings(driver);
+            AutomationLog.info("Successfully clicked on schedule now link of First listing");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Schedule now link of first Listing");
+            throw(e);
+        }
+        return frontendshowing;
+    }
+
+    public WebElement txt_FirstListingUpcomingShowing() throws Exception
+    {
+        try
+        {
+            element = FirstListingShowings().findElement(By.tagName("span"));
+            AutomationLog.info("First Listing Upcoming Showings text found");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find First Listing Upcoming showings text");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement txt_FirstListingName() throws Exception
+    {
+        try
+        {
+            element = firstOnMarketListing().findElement(By.className("listing-details")).findElement(By.tagName("a"));
+            AutomationLog.info("FirstListing Name found");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find first Listing name");
+            throw(e);
+        }
+        return element;
+    }
+
+    public ListingDetailPage clickFirstListingNameLink() throws Exception
+    {
+        ListingDetailPage listingdetail = null;
+        try
+        {
+            txt_FirstListingName().click();
+            listingdetail = new ListingDetailPage(driver);
+            AutomationLog.info("Successfully clicked on ListingName link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on listing name link");
+            throw(e);
+        }
+        return listingdetail;
+    }
+
+    public void hoverOverFirstOffMarketListing() throws Exception 
+    {
+        try
+        {
+           Actions actions = new Actions(driver);
+           actions.moveToElement(firstOffMarketListing()).build().perform();;
+           AutomationLog.info("Sucessfully performed mouse hovering over first listing");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("failed to perform mouse hovering over first listing");
+            throw (e);
+        }
+    }
+
+    public WebElement updateListing_OffMarket() throws Exception
+    {
+        WebElement parent;
+        try
+        {
+           parent = firstOffMarketListing().findElement(By.className("listing-details")).findElement(By.className("listing-actions"));
+           element = parent.findElements(By.tagName("a")).get(0);
+           AutomationLog.info("Sucessfully found update link on first off market listing");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("failed to found update link on first off market listing");
+            throw (e);
+        }
+        return element;
+    }
+
+
+    public AvailabilityAndDetailsForm clickUpdateOfFirstListingOffMarket() throws Exception 
+    {
+        AvailabilityAndDetailsForm updateListingPage = null;
+        try 
+        {
+             Actions actions = new Actions(driver);
+             actions.moveToElement(updateListing_OffMarket()).click().build().perform();
+             updateListingPage = new AvailabilityAndDetailsForm(driver);
+             AutomationLog.info("Sucessfully clicked update link found after hovering over first listing");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to click update link found after hovering over first listing");
+        }
+        return updateListingPage;
+    }
+
+    public WebElement addMedia_OffMarket() throws Exception
+    {
+        WebElement parent;
+        try
+        {
+           parent = firstOffMarketListing().findElement(By.className("listing-details")).findElement(By.className("listing-actions"));
+           //element = parent.findElement(By.className("add-media"));
+           element = parent.findElements(By.tagName("a")).get(1);
+           AutomationLog.info("Sucessfully found Add Media link on first off market listing");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("failed to found Add Media link on first off market listing");
+            throw (e);
+        }
+        return element;
+    }
+
+    public SubmitListingMediaFormPage clickAddMediaOfFirstListingOffMarket() throws Exception 
+    {
+        SubmitListingMediaFormPage mediaPage = null;
+        try 
+        {
+             Actions actions = new Actions(driver);
+             actions.moveToElement(addMedia_OffMarket()).click().build().perform();
+             mediaPage = new SubmitListingMediaFormPage(driver);
+             AutomationLog.info("Sucessfully clicked Add Media link found after hovering over first off market listing");
+        }
+        catch (Exception e) 
+        {
+            AutomationLog.error("Failed to click Add Media link found after hovering over first off market listing");
+        }
+        return mediaPage;
     }
 
 }

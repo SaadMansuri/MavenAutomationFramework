@@ -45,22 +45,22 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
     protected void verifyTestCases() throws Exception 
     {
 
-        verifyIfErrorMessageShownOnClickingSaveAndContinueButtonWithEmptyForm(); 
+        verifyIfClickedSaveAndContinueButtonWithEmptyForm(); 
         verifyIfNameFieldIsRequired();
-        verifyIfClickingAddContactWithFormDataAddsContact(contactinfo);
-        verifyIfClickingEditOptionOnAddedContactsEditFormData(contactinfo); 
+        verifyIfValidContactInfoEntered(contactinfo);
+        verifyIfClickedOnEditOptionOnAddedContacts(contactinfo); 
         verifyIfCancelButtonIsClickedAfterEdit();
         verifyIfSaveButtonIsClickedAfterEdit();
-        verifyIfClickingDeleteOptionOnAddedContactRemovesContact();
-        verifyIfAddedContactsShowsTotalNoOfContactsAdded();
-        verifyIfClickingBackButtonRedirectsToMediaForm();
+        verifyIfClickedOnDeleteOptionOnAddedContact();
+        verifyTotalNoOfContactsAdded();
+        verifyIfClickedOnBackButton();
         verifyIfMultipleContactsCanBeRemoved();
-        verifyIfClickingUseMyContactInformationButtonContactsFormIsFilledWithPageBannerData();
-        verifyIfClickingAddToContactAfterClickingUseMyContactInformationButton();
-        verifyIfClickingSaveAndContinueRedirectsToPreviewAndSubmitForm();
+        verifyIfClickedOnUseMyContactInformation();
+        verifyIfClickedOnAddToContact();
+        verifyIfClickedOnSaveAndContinueAfterAddingContact();
     }
 
-    public void verifyIfErrorMessageShownOnClickingSaveAndContinueButtonWithEmptyForm() throws Exception
+    public void verifyIfClickedSaveAndContinueButtonWithEmptyForm() throws Exception
     {
         contacts.clickOnSaveAndContinueButton();
         Assert.assertEquals(contacts.msg_ContactsError().getText(), "Minimum one contact should be added", "Expected error message is not shown");
@@ -75,7 +75,7 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
         AutomationLog.info("Name field is required");
     }
 
-    public void verifyIfClickingBackButtonRedirectsToMediaForm() throws Exception
+    public void verifyIfClickedOnBackButton() throws Exception
     {
         SubmitListingMediaFormPage media = contacts.clickOnBackButton();
         Assert.assertEquals(media.form_Media().isDisplayed(), true, "Expected media form is not shown");
@@ -83,7 +83,7 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
         media.clickOnSaveAndContinueButton();
     }
 
-    public void verifyIfClickingAddContactWithFormDataAddsContact(HashMap<String, String> contactinfo) throws Exception
+    public void verifyIfValidContactInfoEntered(HashMap<String, String> contactinfo) throws Exception
     {
         addContactFormFill(contacts,contactinfo);
         contacts.clickOnAddContactsButton();
@@ -92,7 +92,7 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
         AutomationLog.info("Clicking Add Contact with form data shows added contacts successfullys");
     }
 
-    public void verifyIfClickingEditOptionOnAddedContactsEditFormData(HashMap<String, String> contactinfo) throws Exception
+    public void verifyIfClickedOnEditOptionOnAddedContacts(HashMap<String, String> contactinfo) throws Exception
     {
         contacts.clickEditIconOnAddedContact();
         Assert.assertEquals(contacts.txtbx_Name().getAttribute("value"), contactinfo.get("Name"), "Expected Contact is not Edited");
@@ -118,14 +118,14 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
         AutomationLog.info("Clickin Cancel button clears form data from edit successfully ");
     }
 
-    public void verifyIfClickingDeleteOptionOnAddedContactRemovesContact() throws Exception
+    public void verifyIfClickedOnDeleteOptionOnAddedContact() throws Exception
     {
         contacts.clickDeleteIconOnAddedContact();
         Assert.assertEquals(contacts.added_Contacts().isDisplayed(), false, "Expected Contact is not removed");
         AutomationLog.info("Clicking Delete option on added contacts removes contact successfully");
     }
 
-    public void verifyIfClickingSaveAndContinueRedirectsToPreviewAndSubmitForm() throws Exception
+    public void verifyIfClickedOnSaveAndContinueAfterAddingContact() throws Exception
     {
         preview = moveToPreviewAndSubmitForm(testCaseData);
         Assert.assertEquals(preview.form_PreviewAndSubmit().isDisplayed(), true, "Expected Preview and Submit form is not shown");
@@ -136,7 +136,7 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
     {
         contacts.deleteAllAddedContacts();
         Assert.assertEquals(contacts.added_Contacts().isDisplayed(), false, "Expected Contacts are not removed");
-        AutomationLog.info("Delete option on added contacts multiple contacts Removed successfully");
+        AutomationLog.info("Clicking Delete option for added contacts Removes Multiple contacts successfully");
     }
 
     public SubmitListingPreviewAndSubmitPage moveToPreviewAndSubmitForm(HashMap<String, HashMap<String, String>> data) throws Exception
@@ -161,7 +161,7 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
         return previewnsubmit;
     }
 
-    public void verifyIfAddedContactsShowsTotalNoOfContactsAdded() throws Exception
+    public void verifyTotalNoOfContactsAdded() throws Exception
     {
         HashMap<String, String > addcontact = testCaseData.get("ContactOwner");
         addContactFormFill(contacts,addcontact);
@@ -195,10 +195,11 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
         AutomationLog.info("Form data added successfully");
     }
 
-    public void verifyIfClickingUseMyContactInformationButtonContactsFormIsFilledWithPageBannerData() throws Exception
+    public void verifyIfClickedOnUseMyContactInformation() throws Exception
     {
         contacts.clickOnUseMyContactInformationbutton();
         verifyContactForm();
+        AutomationLog.info("Clicking Use My Contact Information fills contacts form with profile data");
     }
 
     public void verifyContactForm() throws Exception
@@ -210,7 +211,7 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
         verifyAddressField();
     }
 
-    public void verifyIfClickingAddToContactAfterClickingUseMyContactInformationButton() throws Exception
+    public void verifyIfClickedOnAddToContact() throws Exception
     {
         contacts.clickOnAddContactsButton();
         Assert.assertEquals(contacts.added_Contacts().isDisplayed(), true, "Expected added contacts is not shown");
@@ -240,7 +241,7 @@ public class SubmitListingContactsFormAction extends SubmitListingBaseAction
     public void verifyPhoneField() throws  Exception
     {
          String actualPhone = contacts.txtbx_Phone().getAttribute("value").replaceAll("\\D", "");
-         String expectedPhone = (pagebanner.getBannerWorkPhoneText() + pagebanner.getBannerMobilePhoneText()).replaceAll("\\D", "");
+         String expectedPhone = (pagebanner.getBannerMobilePhoneText() + pagebanner.getBannerWorkPhoneText()).replaceAll("\\D", "");
          Assert.assertEquals(actualPhone, expectedPhone, "Expected phone in not shown");
     }
 

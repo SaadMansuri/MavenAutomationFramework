@@ -39,7 +39,7 @@ public class PersonalInfoNegativeAction extends AccountSettingsBaseAction
         verifyIfCityFieldTakesNumbersAsInput();
         verifyIFStateFieldIsNotSelected(addressdata);
         verifyIfZipCodeFieldLeftBlank(addressdata);
-        verifyIfZipFieldAcceptsCharctersOtherThanNumbersAsInput();
+        verifyIfInvalidCharactersEnteredInZipField();
     }
 
     private void verifyIfNameFieldLeftBlank() throws Exception
@@ -128,7 +128,7 @@ public class PersonalInfoNegativeAction extends AccountSettingsBaseAction
         AutomationLog.info("Empty ZipCode field shows error message");
     }
 
-    public void verifyIfZipFieldAcceptsCharctersOtherThanNumbersAsInput() throws Exception
+    public void verifyIfInvalidCharactersEnteredInZipField() throws Exception
     {
         HashMap<String, String> data = testCaseData.get("WrongZipCodeData");
         personalInfo.textBox_Zip().clear();

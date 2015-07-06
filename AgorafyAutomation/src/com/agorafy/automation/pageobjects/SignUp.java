@@ -149,19 +149,6 @@ public class SignUp extends Page
         }
     }
 
-    public WebElement emailAlreadyRegistered() throws Exception
-    {
-        try
-        {
-            element=driver.findElement(emailAlreadyRegisteredLink());
-        }
-        catch(Exception e)
-        {
-            throw(e);
-        }
-        return element;
-    }
-
     public String getMessageForAlreadyRegEmail() throws Exception
     {
         String regEmail = "";
@@ -177,9 +164,19 @@ public class SignUp extends Page
         return regEmail;
      }
 
-    @SuppressWarnings("static-access")
-    public By emailAlreadyRegisteredLink()
+    public WebElement emailAlreadyRegistered() throws Exception
     {
-        return By.className("row-container").tagName("p");
+        try
+        {
+            element =  driver.findElement(By.className("row-container")).findElements(By.tagName("p")).get(0);
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Already Registered email message");
+            throw(e);
+            
+        }
+        return element;
     }
+
 }

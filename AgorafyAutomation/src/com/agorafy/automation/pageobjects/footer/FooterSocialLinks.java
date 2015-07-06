@@ -20,11 +20,25 @@ public class FooterSocialLinks extends Page
         super(driver);
     }
 
+    public WebElement footer_SocialLinks() throws Exception 
+    {
+        try
+        {
+            element = driver.findElement(By.className("footer-right-section")).findElement(By.className("follow-us"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find footer Social links");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement link_TwitterLogo() throws Exception
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[5]/a[1]"));
+            element = footer_SocialLinks().findElement(By.className("tw"));
             AutomationLog.info("Twitter Logo found on footer");
         }
         catch(Exception e)
@@ -56,7 +70,7 @@ public class FooterSocialLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[5]/a[2]"));
+            element = footer_SocialLinks().findElement(By.className("fb"));
             AutomationLog.info("Facebook Logo found on footer");
         }
         catch(Exception e)
@@ -88,7 +102,7 @@ public class FooterSocialLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[5]/a[3]"));
+            element = footer_SocialLinks().findElement(By.className("yt"));
             AutomationLog.info("Youtube Logo found on footer");
         }
         catch(Exception e)
@@ -120,7 +134,7 @@ public class FooterSocialLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[5]/a[4]"));
+            element = footer_SocialLinks().findElement(By.className("gp"));
             AutomationLog.info("GooglePlus Logo found on footer");
         }
         catch(Exception e)
@@ -152,7 +166,7 @@ public class FooterSocialLinks extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='footer']/div/div[1]/div[2]/div/div[5]/a[5]"));
+            element = footer_SocialLinks().findElement(By.className("in"));
             AutomationLog.info("LinkedIn Logo found on footer");
         }
         catch(Exception e)

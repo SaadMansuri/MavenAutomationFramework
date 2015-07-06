@@ -6,6 +6,7 @@ public class ChangePasswordData
     private String oldPassword;
     private String newPassword;
     private String retypeNewPassword;
+
     @SuppressWarnings("unused")
     private String passwordChangedSuccesfully;
 
@@ -41,7 +42,7 @@ public class ChangePasswordData
     {
         this.changePassword = changePassword;
     }
-    public void  setPasswordChangedSuccesfully(String passwordChangedSuccesfully)
+    public void setPasswordChangedSuccesfully(String passwordChangedSuccesfully)
     {
         this.passwordChangedSuccesfully = passwordChangedSuccesfully;
     }
