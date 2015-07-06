@@ -173,8 +173,7 @@ public class LoginPopUp extends Page
             email.sendKeys(Email);
             pass.clear();
             pass.sendKeys(Password);
-            clickLoginButtonOnUpsell();
-            homepage=new Homepage(driver);
+            homepage = (Homepage) clickLoginButtonOnUpsell();
             AutomationLog.info("Successfully populated data in login pop up");
         }
         catch(Exception e)

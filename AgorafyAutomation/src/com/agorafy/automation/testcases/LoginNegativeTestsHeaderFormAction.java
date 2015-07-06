@@ -35,6 +35,7 @@ public class LoginNegativeTestsHeaderFormAction extends NegativeLoginBaseAction
         testRightEmailWrongPassword();
         testWrongEmailPassword();
         testEmptyEmail();
+        testEmptyPassword();
         testMismatchValidCredentials();
     }
 
@@ -69,6 +70,16 @@ public class LoginNegativeTestsHeaderFormAction extends NegativeLoginBaseAction
     {
         HashMap<String, String> loginData =  testCaseData.get("testEmptyEmail");
         loginData.put("username", "");
+        header.link_Login().click();
+        loginPage = headerLogin.doInvalidLogin(loginData.get("username"), loginData.get("password"));
+        verifyUrlAndErrorMessage(loginPage);
+        AutomationLog.info("Test for Empty email performed and passed");
+    }
+
+    public void testEmptyPassword() throws Exception
+    {
+        HashMap<String, String> loginData =  testCaseData.get("testEmptyPassword");
+        loginData.put("password", "");
         header.link_Login().click();
         loginPage = headerLogin.doInvalidLogin(loginData.get("username"), loginData.get("password"));
         verifyUrlAndErrorMessage(loginPage);

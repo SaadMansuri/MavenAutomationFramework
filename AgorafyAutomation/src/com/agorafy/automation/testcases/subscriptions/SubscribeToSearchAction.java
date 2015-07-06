@@ -36,6 +36,11 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         super();
     }
 
+    public SubscribeToSearchAction(String testcasename)
+    {
+        super(testcasename);
+    }
+
     @Override
     public void setup()
     {
@@ -77,7 +82,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
 
     }
 
-    private void verifyAlreadySubscribedInMySubscriptionsPage() throws Exception 
+    public void verifyAlreadySubscribedInMySubscriptionsPage() throws Exception 
     {
         dataFromCSV = testCaseData.get("SearchInputCombination");
         String expectedSubscribedSearch = dataFromCSV.get("searchstring");
@@ -107,7 +112,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         }
     }
 
-    private void verifyViewMoreSubscriptionsLink() throws Exception 
+    public void verifyViewMoreSubscriptionsLink() throws Exception 
     {
         propertySearch.refreshPage();
         propertySearch.clickOnSubscribeToThisSearchLink(status);
@@ -125,7 +130,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         mySubscriptions.closeSubscriptionWindow();
     }
 
-	private void verifyPopUpAlreadySubscribed() throws Exception 
+    public void verifyPopUpAlreadySubscribed() throws Exception 
     {
         propertySearch.refreshPage();
         propertySearch.clickOnSubscribeToThisSearchLink(status);
@@ -142,7 +147,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         mySubscriptions.closeSubscriptionWindow();
     }
 
-    private void verifySearchTerm() throws Exception 
+    public void verifySearchTerm() throws Exception 
     {
         mySubscriptions = (MySubscriptions) propertySearch.clickOnSubscribeToThisSearchLink(status);
         String actualSearchText = mySubscriptions.getSearchStringInSubscriptionWindow();
@@ -153,7 +158,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         mySubscriptions.closeSubscriptionWindow();
     }
 
-    private void verifySubscriptionTextVanishing() throws Exception 
+    public void verifySubscriptionTextVanishing() throws Exception 
     {
         mySubscriptions = (MySubscriptions) propertySearch.clickOnSubscribeToThisSearchLink(status);
         mySubscriptions.clickSubscribeInSubscriptionWindow();
@@ -164,7 +169,7 @@ public class SubscribeToSearchAction extends AutomationTestCaseVerification
         mySubscriptions.closeSubscriptionWindow();
     }
 
-    private void verifySubscriptionBoxDisplay() throws Exception 
+    public void verifySubscriptionBoxDisplay() throws Exception 
     {
             mySubscriptions = (MySubscriptions) propertySearch.clickOnSubscribeToThisSearchLink(status);
             WaitFor.sleepFor(2000);

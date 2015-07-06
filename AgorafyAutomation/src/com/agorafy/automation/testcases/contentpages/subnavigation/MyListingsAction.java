@@ -109,7 +109,7 @@ public class MyListingsAction extends ContentPagesVerification
         verifySessionExpireOnOffMarketMediaLink();
     }
 
-    private void verifyAddMediaLink() throws Exception 
+    public void verifyAddMediaLink() throws Exception 
     {
         myListings.hoverOverFirstListing();
         mediaPage = myListings.clickAddMediaOfFirstListing();
@@ -123,10 +123,11 @@ public class MyListingsAction extends ContentPagesVerification
         HandlingWindows.switchToWindow(Page.driver, 1);
     }
 
-	private void verifyUpdateListingLink() throws Exception
+    public void verifyUpdateListingLink() throws Exception
     {
         String txtFirstListingOnMyListingsPage;
         txtFirstListingOnMyListingsPage = myListings.txt_FirstListing();
+        myListings.scrollPage(0, 300);
         myListings.hoverOverFirstListing();
         myListings.hoverOverUpdate();
         updateListingPage = myListings.clickUpdateOfFirstListing();
@@ -139,7 +140,7 @@ public class MyListingsAction extends ContentPagesVerification
         HandlingWindows.switchToWindow(Page.driver, 1);
     }
 
-	private void verifyAddMediaLinkAfterMouseHover() throws Exception 
+    public void verifyAddMediaLinkAfterMouseHover() throws Exception 
     {
         boolean actualAddMediaLinkStatus = false;
         myListings.hoverOverFirstListing();
@@ -148,7 +149,7 @@ public class MyListingsAction extends ContentPagesVerification
         AutomationLog.info("After performing hover operation over first listing Add Media link is displayed successfully");
     }
 
-	private void verifyRenewLinkAfterMouseHover() throws Exception 
+    public void verifyRenewLinkAfterMouseHover() throws Exception 
     {
         myListings.hoverOverFirstListing();
         boolean actualRenewLinkStatus = false;
@@ -157,7 +158,7 @@ public class MyListingsAction extends ContentPagesVerification
         AutomationLog.info("After performing hover operation over first listing Renew link is displayed successfully");
     }
 
-    private void verifyReportLeasedLinkAfterMouseHover() throws Exception 
+    public void verifyReportLeasedLinkAfterMouseHover() throws Exception 
     {
         boolean actualReportLeasedLinkStatus = false;
         myListings.hoverOverFirstListing();
@@ -166,7 +167,7 @@ public class MyListingsAction extends ContentPagesVerification
         AutomationLog.info("After performing hover operation over first listing Report Leased link is displayed successfully");    	
     }
 
-    private void verifyUpdateLinkAfterMouseHover() throws Exception 
+    public void verifyUpdateLinkAfterMouseHover() throws Exception 
     {
         boolean actualUpdateListingLinkStatus = false;
         myListings.scrollPage(0, 300);
@@ -176,7 +177,7 @@ public class MyListingsAction extends ContentPagesVerification
         AutomationLog.info("After performing hover operation over first listing update link is displayed successfully");
     }
 
-    private void verifyLeftMenu() throws Exception 
+    public void verifyLeftMenu() throws Exception 
     {
         leftMenu = Page.contentPagesLeftMenu();
         actualActiveLeftMenu = leftMenu.getCurrentlyActiveLink();

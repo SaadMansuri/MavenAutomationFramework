@@ -435,7 +435,7 @@ public class ListingDetailPage extends LoginPopUp
     {
         try
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div[1]/div[2]/div[1]/div[2]/h2"));
+            element = page_TitleSection().findElement(By.className("listing-address")).findElement(By.tagName("h2"));
         }
         catch(Exception e)
         {

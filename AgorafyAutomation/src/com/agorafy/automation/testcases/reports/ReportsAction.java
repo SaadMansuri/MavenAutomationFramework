@@ -36,7 +36,12 @@ public class ReportsAction extends AutomationTestCaseVerification
         super();
     }
 
-    @Override
+    public ReportsAction(String string) 
+    {
+        super(string);
+	}
+
+	@Override
     public void setup()
     {
         super.setup();

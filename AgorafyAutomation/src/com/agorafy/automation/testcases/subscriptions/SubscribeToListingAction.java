@@ -38,7 +38,17 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
     private MySubscriptions mySubscriptions;
     private boolean loginStatus;
 
-	@Override
+    public SubscribeToListingAction()
+    {
+        super();
+    }
+
+    public SubscribeToListingAction(String testcasename)
+    {
+        super(testcasename);
+    }
+
+    @Override
     public void setup() 
     {
         super.setup();
@@ -78,7 +88,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         verifySubscribedListingInMySubscriptionsPage();
     }
 
-    private void verifySubscribedListingInMySubscriptionsPage() throws Exception 
+    public void verifySubscribedListingInMySubscriptionsPage() throws Exception 
     {
         loginStatus = true;
         WaitFor.sleepFor(1000);
@@ -105,7 +115,7 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         Page.navigateToPreviousPage();
     }
 
-    private void verifyIfClickedOnSubscribeToListingLinkInSubscriptionWindow() throws Exception 
+    public void verifyIfClickedOnSubscribeToListingLinkInSubscriptionWindow() throws Exception 
     {
         header.clickOnProfileNameDropdownArrow();
         mySubscriptions = header.clickSubscriptionsLinkBelowProfilePic();
@@ -120,21 +130,21 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         mySubscriptions.closeSubscriptionWindow();
     }
 
-    private void verifyListingNameInSubscriptionWindow() throws Exception 
+    public void verifyListingNameInSubscriptionWindow() throws Exception 
     {
         header.clickOnProfileNameDropdownArrow();
         mySubscriptions = header.clickSubscriptionsLinkBelowProfilePic();
         WaitFor.sleepFor(2000);
-        String subscribeToRespectiveListingTextOnListingDetailsPage = listingDetailPage.txt_listingTitle();
-        subscribeToRespectiveListingTextOnListingDetailsPage = subscribeToRespectiveListingTextOnListingDetailsPage.replaceAll("Property Details", "");
-        String subscribeToRespectiveListingTextInSubscriptionWindow = mySubscriptions.txt_SubscribeToRespectiveListingInSubscriptionWindow();
-        subscribeToRespectiveListingTextOnListingDetailsPage = "Subscribe to " + subscribeToRespectiveListingTextOnListingDetailsPage;
-        Assert.assertEquals(subscribeToRespectiveListingTextInSubscriptionWindow, subscribeToRespectiveListingTextOnListingDetailsPage, "listing title on listing details page and in subscription window below profile pic does not match");
+        String listingdetailspagetitle = listingDetailPage.txt_listingTitle();
+        listingdetailspagetitle = listingdetailspagetitle.replaceAll("Property Details", "");
+        String subscriptionlinkinsubscriptionWindow = mySubscriptions.txt_SubscribeToRespectiveListingInSubscriptionWindow();
+        listingdetailspagetitle = "Subscribe to " + listingdetailspagetitle;
+        Assert.assertEquals(subscriptionlinkinsubscriptionWindow, listingdetailspagetitle, "listing title on listing details page and in subscription window below profile pic does not match");
         AutomationLog.info("listing title on listing details page and in subscription window below profile pic match perfectly");
         mySubscriptions.closeSubscriptionWindow();
     }
 
-    private void verifySubscribeToListingOptionInSubscriptionWindow() throws Exception 
+    public void verifySubscribeToListingOptionInSubscriptionWindow() throws Exception 
     {
         try 
         {
@@ -160,13 +170,13 @@ public class SubscribeToListingAction extends AutomationTestCaseVerification
         }
     }
 
-    private void verifySubscribeToListingOption() throws Exception
+    public void verifySubscribeToListingOption() throws Exception
     {
         loginStatus = true;
         try 
         {
             listingDetailPage.clickOnSubscribeToListingLink(loginStatus);
-            WaitFor.sleepFor(1000);
+            WaitFor.sleepFor(3000);
             String actualSubscribeStatus = listingDetailPage.link_UnsubscribeListing().getText();
             dataFromCSV = testCaseData.get("ExpectedUnsubscribeToListingText");
             String expectedSubscriptionStatus = dataFromCSV.get("ExpectedText");

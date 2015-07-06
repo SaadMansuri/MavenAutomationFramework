@@ -40,7 +40,12 @@ public class ListingDetailPageAction extends AutomationTestCaseVerification
         super();
     }
 
-    public void setup()
+    public ListingDetailPageAction(String testcasename)
+    {
+        super(testcasename);
+    }
+
+	public void setup()
     {
         listingDetailPage = ListingDetailPage.listingDetailPage();
         try

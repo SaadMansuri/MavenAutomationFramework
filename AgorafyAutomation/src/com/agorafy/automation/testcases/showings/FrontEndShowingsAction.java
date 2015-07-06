@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
+
 import org.testng.Assert;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.Credentials;
@@ -36,7 +38,12 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
         super();
     }
 
-    @Override
+    public FrontEndShowingsAction(String testcasename)
+    {
+        super(testcasename);
+    }
+
+	@Override
     public void setup()
     {
         super.setup();
@@ -79,6 +86,7 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
         frontendshowings = myListings.clickOnFirstListingScheduleNowLink();
         Assert.assertTrue(frontendshowings.popup_FrontEndShowings().isDisplayed(), "Expected FrontEnd Showings PopUp not shown");
         AutomationLog.info("Clicking schedule now link show Showings Popup");
+        frontendshowings.clickOnSaveButton();
     }
 
     public String getCurrentDate() throws Exception 
@@ -187,6 +195,8 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
 
     public void verifyIfShowingsPopUpClosedWithoutSaving() throws Exception
     {
+        frontendshowings = myListings.clickOnFirstListingScheduleNowLink();
+        Assert.assertTrue(frontendshowings.popup_FrontEndShowings().isDisplayed(), "Expected FrontEnd Showings PopUp not shown");
         frontendshowings.enterDateInDatePickerTextBox(getCurrentDate());
         frontendshowings.selectStartTime(enterStartTime());
         frontendshowings.clickOnCloseButton();

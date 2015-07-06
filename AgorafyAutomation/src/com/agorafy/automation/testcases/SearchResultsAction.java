@@ -39,7 +39,12 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         super();
     }
 
-    @Override
+    public SearchResultsAction(String testcasename)
+    {
+        super(testcasename);
+    }
+
+	@Override
     public void setup() 
     {
         super.setup();
@@ -48,13 +53,13 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        verifyIfAnalyticsViewButtonIsHiddenForShortSearchTerm();
-        verifyIfAnalyticsViewButtonIsDisplayedForLongSearchTerm();
+        verifySearchResultsForShortSearchTerm();
+        verifySearchResultsForLongSearchTerm();
         HashMap<String, String> viewtype = testCaseData.get("ViewType");
         verifyIfMapViewButtonIsClicked(viewtype);
-        verifyIfMapViewPageContents();
+        verifyMapViewPageContents();
         verifyIfListViewButtonIsClicked(viewtype);
-        verifyIfListViewPageContents();
+        verifyListViewPageContents();
         verifyLoginOnAnalyticsButtonClick(viewtype);
         verifyLoginOnCreateYourProfileButtonClick();
         verifyAnalyticsViewPageContents();
@@ -77,7 +82,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
 
     }
 
-    public void verifyIfAnalyticsViewButtonIsHiddenForShortSearchTerm() throws Exception 
+    public void verifySearchResultsForShortSearchTerm() throws Exception 
     {
         searchdata = testCaseData.get("SearchData");
         searchresult = homepage.populateSearchTermTextBox(searchdata.get("borough"),searchdata.get("listingcategory"),searchdata.get("searchterm"));
@@ -87,7 +92,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         AutomationLog.info("Short searchterm does not show analytics view button");
     }
 
-    public void verifyIfAnalyticsViewButtonIsDisplayedForLongSearchTerm() throws Exception 
+    public void verifySearchResultsForLongSearchTerm() throws Exception 
     {
         header.txtbx_SearchInput().clear();
         header.enterSearchTextInSearchInputTextBox(searchdata.get("longsearchterm"));
@@ -267,14 +272,14 @@ public class SearchResultsAction extends AutomationTestCaseVerification
         Page.driver.get(pageurl);
     }
 
-    public void verifyIfMapViewPageContents() throws Exception
+    public void verifyMapViewPageContents() throws Exception
     {
         Assert.assertTrue(searchresult.div_Advertisement().isDisplayed(), "Expected Advertisement div is not present");
         Assert.assertFalse(searchresult.isCreateYourProfileButtonPresent(), "Expected CreateYourProfile button not present");
         AutomationLog.info("Map view page contains Advertisement div and not Create your profile button");
     }
 
-    public void verifyIfListViewPageContents() throws Exception 
+    public void verifyListViewPageContents() throws Exception 
     {
         Assert.assertTrue(searchresult.div_Advertisement().isDisplayed(), "Expected Advertisement div is not present");
         Assert.assertTrue(searchresult.btn_CreateYourProfile().isDisplayed(), "Expected CreateYourProfile button not present");

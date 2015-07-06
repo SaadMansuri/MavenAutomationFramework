@@ -26,7 +26,7 @@ public class Header extends Page
         {
             element = driver.findElement(By.linkText("Log In"));
             AutomationLog.info("Login link found in the Header");
-            }
+        }
         catch (Exception e)
         {
             AutomationLog.error("Login link was not found in the Header");

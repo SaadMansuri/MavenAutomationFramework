@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.datamodel.profile.UserProfile;
@@ -29,14 +30,28 @@ public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
     }
 
     @Override
+    public void setup()
+    {
+        super.setup();
+        try
+        {
+            personalInfo =  accountSettings.clickOnPersonalInfoTab();
+            expectedpersonalInfoData = testCaseData.get("PersonalInfo");
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Could not redirect to Personal Info tab");
+            e.getMessage();
+        }
+    }
+
+    @Override
     protected void verifyTestCases() throws Exception
     {
-        personalInfo =  accountSettings.clickOnPersonalInfoTab();
-        expectedpersonalInfoData = testCaseData.get("PersonalInfo");
         verifyIfNameFieldEditable();
 
         UserProfile profileData = getUserProfileData();
-        populateFields(personalInfo, profileData);
+        populateFields( profileData);
 
         verifyNameAfterSavingForm(profileData);
         verifyHeaderProfileName();
@@ -61,7 +76,7 @@ public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
         AutomationLog.info("Email Text Field is not editable");
     }
 
-    private void verifyNameAfterSavingForm(UserProfile profileData) throws Exception
+    public void verifyNameAfterSavingForm(UserProfile profileData) throws Exception
     {
         Assert.assertEquals(personalInfo.nameTextValue(), profileData.getName(), "Name in Personal Info form did not get replaced with the new name");
         AutomationLog.info("Name in Personal Information form gets replaced with the new name");
@@ -81,7 +96,7 @@ public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
         AutomationLog.info("Name in Personal Information form gets reflected on header");
     }
 
-    private void populateFields(PersonalInfo personalInfo, UserProfile profileData) throws Exception
+    public void populateFields(UserProfile profileData) throws Exception
     {
         personalInfo.populateData(profileData);
         personalInfo = personalInfo.clickOnSaveChangesBtn();
@@ -90,7 +105,7 @@ public class PersonalInfoPositiveAction extends AccountSettingsBaseAction
         AutomationLog.info("Success Message is shown after valid changes have been made");
     }
 
-    private UserProfile getUserProfileData()
+    public UserProfile getUserProfileData()
     {
         UserProfile profile = new UserProfile();
         profile.setName(expectedpersonalInfoData.get("name"));

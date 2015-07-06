@@ -80,7 +80,7 @@ public class PageBanner extends Page
         String workPhoneText="";
         try
         {
-            element = phoneDetails().get(7);
+            element = phoneDetails().get(1);
             workPhoneText = element.getText();
         }
         catch(Exception e)
