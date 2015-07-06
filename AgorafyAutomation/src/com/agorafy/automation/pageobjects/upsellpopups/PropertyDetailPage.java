@@ -1,6 +1,9 @@
 package com.agorafy.automation.pageobjects.upsellpopups;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -101,7 +104,10 @@ public class PropertyDetailPage extends Page
         LoginPopUp loginpopup = null;
         try
         {
-            link_ContactInformationSignIn().click();
+            Page.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+            WebElement mapObject = link_ContactInformationSignIn();
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", mapObject);
+            Page.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             loginpopup = new LoginPopUp(driver);
             AutomationLog.info("Clicked on 'Sign in to see contact information' link");
         }
