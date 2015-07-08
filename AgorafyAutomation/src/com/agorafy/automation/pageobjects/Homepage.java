@@ -42,7 +42,6 @@ public class Homepage extends Page
     {
         try
         {
-             //element = driver.findElement(By.xpath(".//*[@id='mainNav']/li[3]/a/span"));
              element = driver.findElement(By.className("user-dropdown")).findElement(By.tagName("a"));
              AutomationLog.info("Log In link found on the Home Page");
         }
@@ -120,35 +119,6 @@ public class Homepage extends Page
             AutomationLog.error("Could not click on Select Listing Category Icon");
         }
     }
-
-    public WebElement dropdown_SelectListingCategory() throws Exception 
-    {
-        try
-        {
-            element = driver.findElement(By.id("listingCategorySelect"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not found Select Listing Catrgory Icon ");
-            throw(e);
-        }
-        return element;
-    }
-
-    public WebElement dropdown_Borough() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.id("boroughSelect"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not found Boroughs dropdown");
-            throw(e);
-        }
-        return element;
-    }
-
 
     public WebElement btn_Search() throws Exception 
     {

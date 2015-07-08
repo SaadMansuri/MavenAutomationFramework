@@ -392,7 +392,6 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            //element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[2]/a"));
             element = leftMenuLinks().findElement(By.linkText("My Listings"));
         }
         catch (Exception e)
@@ -412,7 +411,6 @@ public class ContentPagesLeftMenu extends Page
     {
         try
         {
-            //element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[1]/div/ul/li[1]/a"));
             element = leftMenuLinks().findElement(By.linkText("My Dashboard"));
         }
         catch (Exception e)

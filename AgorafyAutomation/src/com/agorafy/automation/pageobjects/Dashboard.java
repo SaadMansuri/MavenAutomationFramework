@@ -265,7 +265,7 @@ public class Dashboard extends Page
     public MyListings clickOnMyListingsLink() throws Exception 
     {
         MyListings myListings = null;
-                try
+        try
         {
             link_MyListings().click();
             myListings = new MyListings(driver);

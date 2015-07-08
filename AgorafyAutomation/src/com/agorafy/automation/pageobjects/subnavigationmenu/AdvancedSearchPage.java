@@ -53,7 +53,6 @@ public class AdvancedSearchPage extends Page
              list.add(opt.getText());
         }
         return list;
-        
     }
 
     public void selectListingType(String listingtype) throws Exception

@@ -1,8 +1,12 @@
 package com.agorafy.automation.pageobjects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
@@ -186,34 +190,6 @@ public class Header extends Page
         return greeting;
     }
 
-    public WebElement dropbox_navigateArrowsearchInputBox() throws Exception
-    {
-        try
-        {
-            element = driver.findElement(By.id("advancedSearch"));
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Search Input dropbox is not present");
-            throw(e);
-        }
-        return element;
-    }
-    
-    public void clickOndropbox_searchInputBox() throws Exception
-    {
-        try
-        {
-            dropbox_navigateArrowsearchInputBox().click();
-            AutomationLog.info("Successfully clicked on navigate arrow of dropbox_searchInputBox");
-        }
-        catch(Exception e)
-        {
-            AutomationLog.error("Could not clicked on navigate arrow of dropbox_searchInputBox ");
-            throw(e);
-        }
-    }
-    
     public WebElement form_AdvancedSearch() throws Exception
     {
         try
@@ -609,5 +585,224 @@ public class Header extends Page
         }
         return headerloginform;
     }
-    
+
+    public WebElement dropdown_SelectBoroughIcon() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='boroughSelect']/div/span"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Select Borough Icon ");
+        }
+        return element;
+    }
+
+    public void clickOnSelectBoroughIcon() throws Exception
+    {
+        try
+        {
+            dropdown_SelectBoroughIcon().click();
+            AutomationLog.info("Successfully clicked on Select Borough Icon");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Select Borough Icon");
+        }
+    }
+
+    public WebElement dropdown_SelectListingCategoryIcon() throws Exception
+    {
+        try
+        {
+            element = driver.findElement(By.xpath(".//*[@id='listingCategorySelect']/div/span"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Select Borough Icon ");
+        }
+        return element;
+    }
+
+    public void clickOnSelectListingCategoryIcon() throws Exception
+    {
+        try
+        {
+            dropdown_SelectListingCategoryIcon().click();
+            AutomationLog.info("Successfully clicked on Select Listing CategoryIcon");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Select Listing Category Icon");
+        }
+    }
+
+
+    public void selectListingCategory(String selectcategory) throws Exception
+    {
+        try
+        {
+            WebElement select = driver.findElement(By.id("listingCategorySelect"));
+            List<WebElement> listingcategories = select.findElements(By.className("dd-option-text"));
+            for(WebElement listingcategory:listingcategories)
+            {
+                if((listingcategory.getText()).equalsIgnoreCase(selectcategory))
+                {
+                    listingcategory.click();
+                    break;
+                }
+            }
+            AutomationLog.info("Successfully selected listing category");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("could not select listing category");
+            throw(e);
+        }
+    }
+
+    public void selectBorough(String selectborough) throws Exception
+    {
+        try
+        {
+            WebElement select = driver.findElement(By.id("boroughSelect"));
+            List<WebElement> boroughs = select.findElements(By.className("dd-option-text"));
+            for(WebElement borough:boroughs)
+            {
+                if((borough.getText()).equalsIgnoreCase(selectborough))
+                {
+                    borough.click();
+                    break;
+                }
+            }
+            AutomationLog.info("Successfully selected borough");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not select borough");
+            throw(e);
+        }
+    }
+
+    public WebElement dropdrow_OfferingType() throws Exception
+    {
+        try
+        {
+             element = driver.findElement(By.id("offeringType"));
+             AutomationLog.info("Successfully found offering type dropdown");
+        }
+        catch(Exception e)
+        {
+             AutomationLog.error("Could not find offering type dropdown");
+             throw(e);
+        }
+        return element;
+    }
+
+    public WebElement dropdown_PropertyType() throws Exception
+    {
+        try
+        {
+             element = driver.findElement(By.id("propertyType"));
+             AutomationLog.info("Successfully found Property type dropdown");
+        }
+        catch(Exception e)
+        {
+             AutomationLog.error("Could not find Property type dropdown");
+             throw(e);
+        }
+        return element;
+    }
+
+    public void clickOnPropertyTypeDropdown() throws Exception
+    {
+        try
+        {
+            dropdown_PropertyType().click();
+            AutomationLog.info("Successfully clicked on Property type dropdown");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Property type dropdown");
+        }
+    }
+
+    public void clickOnOfferingTypeDropdown() throws Exception
+    {
+        try
+        {
+            dropdrow_OfferingType().click();
+            AutomationLog.info("Successfully clicked on Offering type dropdown");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on Offering type dropdown");
+        }
+    }
+
+    public void selectListingType(String listingtype) throws Exception
+    {
+        Select type = new Select(dropdrow_OfferingType());
+        type.selectByVisibleText(listingtype);
+        AutomationLog.info("Listing type Selected successfully");
+    }
+
+    public void selectPropertyType(String propertytype) throws Exception
+    {
+        Select type = new Select(dropdown_PropertyType());
+        WaitFor.sleepFor(1000);
+        type.selectByValue(propertytype.toLowerCase());
+        AutomationLog.info("Property type Selected successfully");
+    }
+
+    public String getSelectedPropertyType() throws Exception
+    {
+        String selectedproperty = null;
+        try
+        {
+            element = new Select(dropdown_PropertyType()).getFirstSelectedOption();
+            AutomationLog.info("Selected Property Type found");
+            selectedproperty = element.getText();
+        }
+        catch(Exception e)
+        {
+           AutomationLog.error("Could not find Selected Property type");
+           throw(e);
+        }
+        return selectedproperty;
+    }
+
+    public List<String> getListingTypesList() throws Exception
+    {
+        List<String> offeringlist = new ArrayList<String>();
+        Select type = new Select(dropdrow_OfferingType());
+        List<WebElement> offeringTypes = type.getOptions();
+        for(WebElement offerType : offeringTypes)
+        {
+            offeringlist.add(offerType.getText());
+        }
+        return offeringlist;
+    }
+
+    public List<String> getPropertyTypeList() throws Exception
+    {
+        int positionToBeDiscarded = 0;
+        List<String> propertylist = new ArrayList<String>();
+        Select type = new Select(dropdown_PropertyType());
+        List<WebElement> propertyTypes = type.getOptions();
+        for(WebElement property : propertyTypes)
+        {
+            if(property.getAttribute("style").equalsIgnoreCase("display: block;"))
+           {
+                if(positionToBeDiscarded!=0 )
+                {
+                   propertylist.add(property.getText());
+                }
+           }
+            positionToBeDiscarded++;
+        }
+        return propertylist;
+    }
+
 }

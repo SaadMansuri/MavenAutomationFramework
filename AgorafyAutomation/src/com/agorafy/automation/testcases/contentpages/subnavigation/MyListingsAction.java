@@ -127,7 +127,6 @@ public class MyListingsAction extends ContentPagesVerification
     {
         String txtFirstListingOnMyListingsPage;
         txtFirstListingOnMyListingsPage = myListings.txt_FirstListing();
-        myListings.scrollPage(0, 300);
         myListings.hoverOverFirstListing();
         myListings.hoverOverUpdate();
         updateListingPage = myListings.clickUpdateOfFirstListing();
