@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
+import com.agorafy.automation.automationframework.Init;
 import com.agorafy.automation.testcases.contentpages.subnavigation.MyDashboardAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.MyListingsAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationAboutUsAction;
@@ -29,10 +30,9 @@ import com.agorafy.automation.testcases.contentpages.subnavigation.Subnavigation
 public class SubNavigationTest
 {
     @BeforeSuite
-    public void Init() throws Exception
+    public void Init()
     {
-        String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
-        AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
+        Init.globalConfiguration();
     }
 
     @Test

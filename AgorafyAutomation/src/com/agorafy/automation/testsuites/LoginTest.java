@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
+import com.agorafy.automation.automationframework.Init;
 import com.agorafy.automation.testcases.HomepageAction;
 import com.agorafy.automation.testcases.LoginNegativeTestsHeaderFormAction;
 import com.agorafy.automation.testcases.LoginNegativeTestsPageFormAction;
@@ -12,12 +13,9 @@ import com.agorafy.automation.testcases.LoginPositiveTestPageFormAction;
 public class LoginTest 
 {
     @BeforeSuite
-    public void Init() throws Exception
+    public void Init()
     {
-        // TODO: Move this to some TestNg XML configuration file, so that we can set config file path
-        // when running in headless mode.
-        String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
-        AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
+        Init.globalConfiguration();
     }
 
     @Test(priority = 3)

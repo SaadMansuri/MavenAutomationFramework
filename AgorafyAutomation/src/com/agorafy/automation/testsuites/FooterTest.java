@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
+import com.agorafy.automation.automationframework.Init;
 import com.agorafy.automation.testcases.contentpages.footer.FooterAboutUsAction;
 import com.agorafy.automation.testcases.contentpages.footer.FooterBlogAction;
 import com.agorafy.automation.testcases.contentpages.footer.FooterCareersAction;
@@ -24,12 +25,7 @@ public class FooterTest
     @BeforeSuite
     public void Init()
     {
-        // TODO: Move this to some TestNg XML configuration file, so that we can set config file path
-        // when running in headless mode.
-        String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
-        AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
-        /*String browserToUse = Configuration.getConfigurationValueForProperty("browser");
-        new Page(AppDriver.getDriver(browserToUse));*/
+        Init.globalConfiguration();
     }
 
     @Test

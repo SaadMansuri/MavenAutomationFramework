@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
+import com.agorafy.automation.automationframework.Init;
 import com.agorafy.automation.testcases.reports.AddToReportsAction;
 import com.agorafy.automation.testcases.reports.ReportsAction;
 import com.agorafy.automation.testcases.reports.ReportsPopUpAction;
@@ -14,8 +15,7 @@ public class ReportsTest
     @BeforeSuite
     public void Init()
     {
-        String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
-        AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
+        Init.globalConfiguration();
     }
 
     @Test(priority = 1)

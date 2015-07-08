@@ -5,18 +5,15 @@ import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.AutomationFramework;
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.automationframework.Init;
 import com.agorafy.automation.testcases.updateListing.*;
 
 public class UpdateListingSuite 
 {
-
     @BeforeSuite
-    public void Init() throws Exception
+    public void Init()
     {
-        //  Move this to some TestNg XML configuration file, so that we can set config file path
-        // when running in headless mode.
-        String globalConfigureationFileWithPath = "src/com/agorafy/automation/configuration/config.properties";
-        AutomationFramework.initWithGlobalConfiguration(globalConfigureationFileWithPath);
+        Init.globalConfiguration();
     }
 
     @Test(priority = 1)
