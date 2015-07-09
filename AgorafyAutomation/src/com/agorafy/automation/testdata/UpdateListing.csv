@@ -21,7 +21,7 @@ Placeholders,ListingLinkPlaceholder="URL"
 
 #Media form data
 
-MediaFormData,imageName="image.jpg";highResFile="upload.exe";lowResFile="lowresupload.exe"
+MediaFormData,imageName="image.jpg";highResImage="image.jpg";lowResImage="lowres.jpg"
 
 #Contacts Page Data
 

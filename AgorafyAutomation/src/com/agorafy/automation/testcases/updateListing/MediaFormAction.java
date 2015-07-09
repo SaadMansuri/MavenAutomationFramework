@@ -31,7 +31,7 @@ public class MediaFormAction extends AutomationTestCaseVerification
     private AvailabilityAndDetailsForm updateListingPage;
     private MediaForm media; 
     private AvailabilityAndDetailsForm details ;
-    public String exefilepath = Configuration.getConfigurationValueForProperty("exe-path-to-upload");
+    public String exefilepath = System.getProperty("user.dir") + Configuration.getConfigurationValueForProperty("image-path-to-upload");
     HashMap<String, String> mediadata = new HashMap<>();
     ContactsForm contactsPage;
 
@@ -79,8 +79,8 @@ public class MediaFormAction extends AutomationTestCaseVerification
         verifyEmailAddress();
 
         mediadata = testCaseData.get("MediaFormData");
-        String highResFile = exefilepath + mediadata.get("highResFile");
-        String lowResFile = exefilepath + mediadata.get("lowResFile");
+        String highResFile = exefilepath + mediadata.get("highResImage");
+        String lowResFile = exefilepath + mediadata.get("lowResImage");
 
         verifyIfClickedOnAddfilesButton(highResFile); 
 
@@ -101,8 +101,7 @@ public class MediaFormAction extends AutomationTestCaseVerification
     {
         try
         {
-            media.clickOnAddFilesButton();
-            Runtime.getRuntime().exec(highResFile);
+            media.btn_AddFiles().sendKeys(highResFile);
             WaitFor.presenceOfTheElement(Page.driver, media.listingImageLocator()); 
             Assert.assertEquals(media.img_Listing().isDisplayed(), true, "Expected AddFiles button does not add image for upload");
             AutomationLog.info("Clicking AddFiles adds image to be uploaded successfully");
@@ -150,8 +149,7 @@ public class MediaFormAction extends AutomationTestCaseVerification
 
     public void verifyIfLowResolutionImageCantBeUploaded(String lowResFile) throws Exception
     {
-        media.clickOnAddFilesButton();
-        Runtime.getRuntime().exec(lowResFile);
+        media.btn_AddFiles().sendKeys(lowResFile);
         WaitFor.presenceOfTheElement(Page.driver, media.listingImageLocator()); 
         media.clickOnStartUploadButton();
         Thread.sleep(10000);
@@ -165,35 +163,6 @@ public class MediaFormAction extends AutomationTestCaseVerification
         Assert.assertEquals(contactsPage.form_Contacts().isDisplayed(), true, "Expected contacts form is not shown");
         AutomationLog.info("Contacts form is shown after clicking save and continue button with valid media form  input ");
         contactsPage.clickOnBackButton();
-    }
-
-    public ContactsForm  moveToContactsForm(HashMap<String, HashMap<String, String>> data) throws Exception
-   {
-       ContactsForm contacts = null;
-       mediadata = data.get("MediaFormData");
-       String highResFile = exefilepath + mediadata.get("highResFile");
-       try
-       {
-           if(!(media.form_Media().isDisplayed()))
-           {
-               //detailsRetailAction.fillDetailsFormAndMoveToMediaForm(data);
-               
-           }
-           media.clickOnAddFilesButton();
-           Runtime.getRuntime().exec(highResFile);
-           WaitFor.presenceOfTheElement(Page.driver, media.listingImageLocator()); 
-           media.clickOnStartUploadButton();
-           WaitFor.presenceOfTheElement(Page.driver, media.uploadImagelocator());
-           media.clickOnSaveAndContinueButton();
-           Page.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-           contacts = new ContactsForm(Page.driver);
-       }
-       catch(Exception e)
-       {
-           AutomationLog.error("Could not go to Contacts form ");
-           throw(e);
-       }
-       return contacts;
     }
 
     public void verifyIfClickedOnBackButton() throws Exception
