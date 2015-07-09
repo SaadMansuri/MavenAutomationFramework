@@ -1,5 +1,5 @@
 Headings,PageHeading="Submit a listing update"
-EmailIdOnlistingUpdatePage,EmailId="chandrani.bhagat@cuelogic.co.in"
+EmailIdOnlistingUpdatePage,EmailId="test.agorafy@gmail.com"
 ReasonDropdownOptions,Option1="Space was leased";Option2="Space is off market";Option3="Other"
 ListingTypes,ListingType1="Single-Family for Sale";ListingType2="Hotel for Sale";ListingType3="Office for Sublease";ListingType4="Condo for Sale";ListingType5="Retail for Lease"
 AskingPrices,AskingPrice1="1000";AskingPriceMin="1000";AskingPriceMax="10000";AskingPrice2="10"

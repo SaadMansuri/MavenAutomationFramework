@@ -75,8 +75,8 @@ NegativeResidentialFormDataWithoutCompulsoryFields,PropertyName="Lucy's Villa";D
 
 #Media Page Data
 
-MediaFormData,imageName="image.jpg";highResFile="upload.exe";lowResFile="lowresupload.exe";pdfupload="pdfupload.exe"
-MultipleImageUpload,image1="upload.exe";image2="upload1.exe";image3="upload2.exe"
+MediaFormData,imageName="image.jpg";highResImage="image.jpg";lowResImage="lowres.jpg";pdfupload="document.pdf"
+MultipleImageUpload,image1="image.jpg";image2="Desert.jpg";image3="Lighthouse.jpg"
 
 #Contacts Page Data
 

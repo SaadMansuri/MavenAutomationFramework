@@ -213,7 +213,7 @@ public class SearchResultsAction extends AutomationTestCaseVerification
     public void verifyLoginOnCreateYourProfileButtonClick() throws Exception
     {
         String beforURL = searchresult.currentURL();
-        searchresult.scrollPage(0, 700);
+        Page.scrollPage(0, 700);
         Page.driver.navigate().refresh();
         loginpopup = searchresult.clickOnCreateProfileButton();
         WaitFor.ElementToBeDisplayed(Page.driver, loginpopup.getLoginPopUpLocator());

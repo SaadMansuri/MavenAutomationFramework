@@ -229,8 +229,12 @@ public class ReportsAction extends AutomationTestCaseVerification
 
     public void verifyIfClickedOnCloseIconForIndividualListingInReportsBox() throws Exception
     {
-    	verifyIfClickedOnClearLinkOnReportsBox();
+        addReportUsingPinCushionReportIcon();
         int beforeCount = Integer.parseInt(reports.getReportCount());
+        header.clickOnProfileNameDropdownArrow();
+        reports = header.clickOnReportsLink();
+        WaitFor.sleepFor(2000);
+        WaitFor.presenceOfTheElement(Page.driver, reports.getReportBoxLocator());
         reports.hoverOnFirstDeleteListingIcon();
         reports.clickOnFirstDeleteListingIcon();
         WaitFor.sleepFor(2000);
@@ -358,7 +362,7 @@ public class ReportsAction extends AutomationTestCaseVerification
             
             if(++licount >=3*count)
             {
-                searchresult.scrollPage(0, 300);
+                Page.scrollPage(0, 300);
                 ++count;
             }
         }

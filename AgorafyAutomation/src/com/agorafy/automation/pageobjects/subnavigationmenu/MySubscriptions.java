@@ -223,7 +223,6 @@ public class MySubscriptions extends Page
         {
             /*Wait until subscription window under user name displays*/
             WaitFor.waitUntilElementIsLoaded(driver, subscriptionsWindow());
-            //element = subscriptionsWindow().findElement(By.linkText("View More Subscriptions"));
             WaitFor.sleepFor(1000);
             element = subscriptionsWindow().findElement(By.linkText("View More Subscriptions"));
         }

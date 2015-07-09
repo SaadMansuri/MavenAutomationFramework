@@ -1,2 +1,2 @@
-VerifyEmailDetails,invalidEmail="rtyu";validEmail="chandrani.bhagat@cuelogic.co.in";invalidEmailErrorMsg="* Invalid email address";validMsg="That email is already registered.";emptyEmailErrorMsg="* This field is required\n* Invalid email address"
+VerifyEmailDetails,invalidEmail="rtyu";validEmail="test.agorafy@gmail.com";invalidEmailErrorMsg="* Invalid email address";validMsg="That email is already registered.";emptyEmailErrorMsg="* This field is required\n* Invalid email address"
 SignUp,title="AGORAFY"

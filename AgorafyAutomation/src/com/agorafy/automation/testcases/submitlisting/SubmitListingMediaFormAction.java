@@ -18,7 +18,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
     private SubmitListingDetailsFormBasePage details ;
     private SubmitListingDetailsFormRetailAction detailsRetailAction = new SubmitListingDetailsFormRetailAction();
     private SubmitListingContactsFormPage contacts = null;
-    public String exefilepath = Configuration.getConfigurationValueForProperty("exe-path-to-upload");
+    public String exefilepath = System.getProperty("user.dir") + Configuration.getConfigurationValueForProperty("image-path-to-upload");
     HashMap<String, String> mediadata; 
 
     public SubmitListingMediaFormAction()
@@ -36,7 +36,6 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
             media = detailsRetailAction.fillDetailsFormAndMoveToMediaForm(testCaseData);
             mediadata = testCaseData.get("MediaFormData");
             AutomationLog.info("Successfully reached to Media form");
-            
         }
         catch(Exception e)
         {
@@ -47,29 +46,29 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
     @Override
     protected void verifyTestCases() throws Exception 
     {
-        String highResFile = exefilepath + mediadata.get("highResFile");
-        String lowResFile = exefilepath + mediadata.get("lowResFile");
-        String pdffile = exefilepath + mediadata.get("pdfupload");
-        verifyIfClickedOnAddfilesButton(highResFile); 
+        String highResImagePath = exefilepath + mediadata.get("highResImage");
+        String lowResImagePath = exefilepath + mediadata.get("lowResImage");
+        String pdfFilePath = exefilepath + mediadata.get("pdfupload");
+
+        verifyIfClickedOnAddfilesButton(highResImagePath); 
         verifyIfClickedOnCancelButtonForAddedImage();
-        verifyIfClickedOnStartUpload(highResFile);
+        verifyIfClickedOnStartUpload(highResImagePath);
         verifyIfClickedOnDeleteButtonOnUploadedImage();
-        verifyIfOnlyPDFIsUploaded(pdffile);
-        verifyIfPdfIsUploadedWithHighResolutionImage(highResFile);
+        verifyIfOnlyPDFIsUploaded(pdfFilePath);
+        verifyIfPdfIsUploadedWithHighResolutionImage(highResImagePath);
         HashMap<String, String> upload = testCaseData.get("MultipleImageUpload");
         verifyIfmultipleImageFilesCanBeUploaded(upload);
-        verifyIfLowResolutionImageCantBeUploaded(lowResFile);
+        verifyIfLowResolutionImageCantBeUploaded(lowResImagePath);
         verifyIfClickedOnSaveAndContinueWithNoImage();
         verifyIfClickedOnBackButton();
         verifyIfClickedOnSaveAndContinueAfterValidImageUpload();
     }
 
-    public void verifyIfClickedOnAddfilesButton(String highResFile) throws Exception
+    public void verifyIfClickedOnAddfilesButton(String highResImagePath) throws Exception
     {
         try
         {
-            media.clickOnAddFilesButton();
-            Runtime.getRuntime().exec(highResFile);
+            media.btn_AddFiles().sendKeys(highResImagePath);
             WaitFor.presenceOfTheElement(Page.driver, media.listingImageLocator()); 
             Assert.assertEquals(media.img_Listing().isDisplayed(), true, "Expected AddFiles button does not add image for upload");
             AutomationLog.info("Clicking AddFiles adds image to be uploaded successfully");
@@ -94,14 +93,12 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         {
             AutomationLog.error("Could not open windows file upload");
             throw(e);
-            
         }
-       
     }
 
-    public void verifyIfClickedOnStartUpload(String highResFile) throws Exception
+    public void verifyIfClickedOnStartUpload(String highResImagePath) throws Exception
     {
-    	verifyIfClickedOnAddfilesButton(highResFile); 
+        verifyIfClickedOnAddfilesButton(highResImagePath); 
         media.clickOnStartUploadButton();
         WaitFor.ElementToBeDisplayed(Page.driver, media.uploadImagelocator());
         Assert.assertEquals(media.img_Uploaded().isDisplayed(), true, "Expected image is not uploaded");
@@ -117,16 +114,14 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         AutomationLog.info("Clicking delete button removes uploaded image");
     }
 
-    public void verifyIfLowResolutionImageCantBeUploaded(String lowResFile) throws Exception
+    public void verifyIfLowResolutionImageCantBeUploaded(String lowResImagePath) throws Exception
     {
-        media.clickOnAddFilesButton();
-        Runtime.getRuntime().exec(lowResFile);
+        media.btn_AddFiles().sendKeys(lowResImagePath);
         WaitFor.presenceOfTheElement(Page.driver, media.listingImageLocator()); 
         media.clickOnStartUploadButton();
         Thread.sleep(10000);
         Assert.assertEquals(media.template_Upload(), false, "Low resolution image can be uploaded");
         AutomationLog.info("Low resolution image cant be uploaded");
-        	
     }
 
     public void verifyIfClickedOnSaveAndContinueAfterValidImageUpload() throws Exception
@@ -145,10 +140,9 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         AutomationLog.info("Media Error message is shown if clicked on save without uploading an Image");
     }
 
-    public void verifyIfOnlyPDFIsUploaded(String pdffile) throws Exception
+    public void verifyIfOnlyPDFIsUploaded(String pdfFilePath) throws Exception
     {
-        media.clickOnAddFilesButton();
-        Runtime.getRuntime().exec(pdffile);
+        media.btn_AddFiles().sendKeys(pdfFilePath);
         WaitFor.sleepFor(10000);
         media.clickOnStartUploadButton();
         Thread.sleep(10000);
@@ -158,10 +152,9 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         AutomationLog.info("Low resolution image cant be uploaded");
     }
 
-    public void verifyIfPdfIsUploadedWithHighResolutionImage(String highResFile) throws Exception 
+    public void verifyIfPdfIsUploadedWithHighResolutionImage(String highResImagePath) throws Exception 
     {
-        media.clickOnAddFilesButton();
-        Runtime.getRuntime().exec(highResFile);
+        media.btn_AddFiles().sendKeys(highResImagePath);
         WaitFor.sleepFor(10000);
         media.clickOnStartUploadButton();
         WaitFor.sleepFor(10000);
@@ -181,8 +174,7 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
         {
             String filename ="image"+i;
             String uploadfile = exefilepath + upload.get(filename);
-            media.clickOnAddFilesButton();
-            Runtime.getRuntime().exec(uploadfile);
+            media.btn_AddFiles().sendKeys(uploadfile);
             WaitFor.sleepFor(10000);
         }
         media.clickOnStartUploadButton();
@@ -196,15 +188,14 @@ public class SubmitListingMediaFormAction extends SubmitListingBaseAction
    {
        SubmitListingContactsFormPage contact = null;
        mediadata = data.get("MediaFormData");
-       String highResFile = exefilepath + mediadata.get("highResFile");
+       String highResFile = exefilepath + mediadata.get("highResImage");
        try
        {
            if(!(media.form_Media().isDisplayed()))
            {
                detailsRetailAction.fillDetailsFormAndMoveToMediaForm(data);
            }
-           media.clickOnAddFilesButton();
-           Runtime.getRuntime().exec(highResFile);
+           media.btn_AddFiles().sendKeys(highResFile);
            WaitFor.presenceOfTheElement(Page.driver, media.listingImageLocator()); 
            media.clickOnStartUploadButton();
            WaitFor.presenceOfTheElement(Page.driver, media.uploadImagelocator());

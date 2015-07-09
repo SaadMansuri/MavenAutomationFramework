@@ -34,7 +34,6 @@ public class EditProfile extends Page
     {
         try 
         {
-            //element = driver.findElement(By.xpath("html/body/div[2]/div/div[2]/div[2]/div[1]/h2"));
             element = EditProfileHeadingSection().findElement(By.tagName("h2"));
             AutomationLog.info("edit profile page heading found");
         }
