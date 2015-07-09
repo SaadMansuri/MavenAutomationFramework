@@ -51,7 +51,7 @@ public class DetailsFormAction extends AutomationTestCaseVerification
             WaitFor.presenceOfTheElement(Page.driver, homePage.getHomepageGreetingsLocator());
             subNavigation = SubNavigation.subNavigation();
             myListings = subNavigation.clickLinkMyListings();
-            myListings.scrollPage(0, 300);
+            Page.scrollPage(0, 300);
             myListings.hoverOverFirstListing();
             myListings.hoverOverUpdate();
             updateListingPage = myListings.clickUpdateOfFirstListing();

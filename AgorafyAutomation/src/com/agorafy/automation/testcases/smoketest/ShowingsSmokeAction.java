@@ -22,5 +22,6 @@ public class ShowingsSmokeAction extends FrontEndShowingsAction
         verifyIfAddedShowingIsSeenOnListingDetailsPage();
         verifyUpcomingShowingsCountOnAddingShowing();
         verifyUpcomingShowingsCountOnDeletingShowings();
+        deleteShowings();
     }
 }

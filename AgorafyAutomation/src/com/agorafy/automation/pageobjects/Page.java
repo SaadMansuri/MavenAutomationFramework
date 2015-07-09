@@ -98,7 +98,7 @@ public class Page
         driver.navigate().back();
     }
 
-    public void scrollPage(int x, int y) 
+    public static void scrollPage(int x, int y) 
     {
          JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
          jsExecutor.executeScript("window.scrollBy("+x+","+y+")", "");

@@ -169,7 +169,7 @@ public class MyListingsAction extends ContentPagesVerification
     public void verifyUpdateLinkAfterMouseHover() throws Exception 
     {
         boolean actualUpdateListingLinkStatus = false;
-        myListings.scrollPage(0, 300);
+        Page.scrollPage(0, 300);
         myListings.hoverOverFirstListing();
         actualUpdateListingLinkStatus = myListings.updateListing().isDisplayed();
         Assert.assertEquals(actualUpdateListingLinkStatus, true, "After performing hover operation over first listing update link is not displayed");
@@ -212,7 +212,7 @@ public class MyListingsAction extends ContentPagesVerification
 
     public void verifySessionExpireOnAddMediaLink() throws Exception
     {
-        myListings.scrollPage(0, 300);
+        Page.scrollPage(0, 300);
         String pageurl = Page.driver.getCurrentUrl();
         String curHandle = Page.driver.getWindowHandle();
         Page.driver.manage().deleteAllCookies();
@@ -239,7 +239,7 @@ public class MyListingsAction extends ContentPagesVerification
 
     public void verifySessionExpireOnReportLeasedLink() throws Exception 
     {
-        myListings.scrollPage(0, 300);
+        Page.scrollPage(0, 300);
         Page.driver.manage().deleteAllCookies();
         myListings.hoverOverFirstListing();
         myListings.hoverOverReportLeased();
@@ -278,7 +278,7 @@ public class MyListingsAction extends ContentPagesVerification
 
     public void verifySessionExpireOnOffMarketScheduledLink() throws Exception
     {
-         myListings.scrollPage(0, 300);
+         Page.scrollPage(0, 300);
          String pageurl = Page.driver.getCurrentUrl();
          Page.driver.manage().deleteAllCookies();
          myListings.link_OffMarket().click();
@@ -296,7 +296,7 @@ public class MyListingsAction extends ContentPagesVerification
     public void verifySessionExpireOnOffMarketUpdateLink() throws Exception 
     {
         myListings.link_OffMarket().click();
-        myListings.scrollPage(0, 300);
+        Page.scrollPage(0, 300);
         String pageurl = Page.driver.getCurrentUrl();
         String curHandle = Page.driver.getWindowHandle();
         Page.driver.manage().deleteAllCookies();
@@ -323,7 +323,7 @@ public class MyListingsAction extends ContentPagesVerification
     public void verifySessionExpireOnOffMarketMediaLink() throws Exception 
     {
         myListings.link_OffMarket().click();
-        myListings.scrollPage(0, 300);
+        Page.scrollPage(0, 300);
         String pageurl = Page.driver.getCurrentUrl();
         String curHandle = Page.driver.getWindowHandle();
         Page.driver.manage().deleteAllCookies();

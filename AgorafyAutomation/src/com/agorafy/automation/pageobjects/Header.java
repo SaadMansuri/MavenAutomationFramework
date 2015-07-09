@@ -744,17 +744,12 @@ public class Header extends Page
     public void selectListingType(String listingtype) throws Exception
     {
         Select type = new Select(dropdrow_OfferingType());
+        WaitFor.sleepFor(5000);
+        type.deselectAll();
         type.selectByVisibleText(listingtype);
         AutomationLog.info("Listing type Selected successfully");
     }
 
-    public void selectPropertyType(String propertytype) throws Exception
-    {
-        Select type = new Select(dropdown_PropertyType());
-        WaitFor.sleepFor(1000);
-        type.selectByValue(propertytype.toLowerCase());
-        AutomationLog.info("Property type Selected successfully");
-    }
 
     public String getSelectedPropertyType() throws Exception
     {
@@ -785,10 +780,10 @@ public class Header extends Page
         return offeringlist;
     }
 
-    public List<String> getPropertyTypeList() throws Exception
+    public List<WebElement> getPropertyTypeList() throws Exception
     {
         int positionToBeDiscarded = 0;
-        List<String> propertylist = new ArrayList<String>();
+        List<WebElement> propertylist = new ArrayList<WebElement>();
         Select type = new Select(dropdown_PropertyType());
         List<WebElement> propertyTypes = type.getOptions();
         for(WebElement property : propertyTypes)
@@ -797,7 +792,7 @@ public class Header extends Page
            {
                 if(positionToBeDiscarded!=0 )
                 {
-                   propertylist.add(property.getText());
+                   propertylist.add(property);
                 }
            }
             positionToBeDiscarded++;

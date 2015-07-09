@@ -321,7 +321,7 @@ public class AdminShowingsAction extends AutomationTestCaseVerification
         Page.driver.close();
         Page.driver.switchTo().window(curHandle);
         admin.clickOnSaveButton();
-        admin.scrollPage(0, 250);
+        Page.scrollPage(0, 250);
         WaitFor.sleepFor(2000);
         int actual = admin.list_Showings().size();
         Assert.assertEquals(actual, expected, "Expected showings count is not same ");

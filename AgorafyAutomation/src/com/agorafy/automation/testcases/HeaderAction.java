@@ -2,6 +2,7 @@ package com.agorafy.automation.testcases;
 
 import java.util.HashMap;
 
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
@@ -68,20 +69,15 @@ public class HeaderAction extends AutomationTestCaseVerification
         String expectedText = null; 
         String actualText = null;
         header.clickOnSelectBoroughIcon();
-        WaitFor.sleepFor(1000);
         header.selectBorough(testdata.get("borough1"));
-        WaitFor.sleepFor(1000);
         header.clickOnSelectListingCategoryIcon();
         header.selectListingCategory(testdata.get("listingCategory1"));
-        WaitFor.sleepFor(1000);
         header.enterSearchTextInSearchInputTextBox(searchText);
-        WaitFor.sleepFor(1000);
         header.clickOnAdvanceSearchDropDownIcon();
-        WaitFor.sleepFor(1000);
         header.clickOnPropertyTypeDropdown();
-        for(String property : header.getPropertyTypeList())
+        for(WebElement property : header.getPropertyTypeList())
         {
-            header.selectPropertyType(property);
+            header.dropdown_PropertyType().sendKeys(property.getText());
             actualText = header.getSelectedPropertyType() + searchterm;
             WaitFor.sleepFor(2000);
             expectedText = header.txtbx_SearchInput().getAttribute("value");
