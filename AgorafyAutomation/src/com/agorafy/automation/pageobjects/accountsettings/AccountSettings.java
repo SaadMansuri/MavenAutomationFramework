@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.Page;
+import com.agorafy.automation.pageobjects.subnavigationmenu.EditProfile;
 
 public class AccountSettings extends Page
 {
@@ -117,4 +118,36 @@ public class AccountSettings extends Page
     {
         return link_ChangePasswordTab().getAttribute("class");
     }
+
+    public WebElement link_here() throws Exception 
+    {
+        try
+        {
+            element = driver.findElement(By.cssSelector(".content-block.padding-none")).findElement(By.tagName("p")).findElement(By.tagName("a"));
+        }
+        catch(Exception e)
+        {
+           AutomationLog.error("Could not find here link");
+           throw(e);
+        }
+        return element;
+    }
+
+    public EditProfile clickOnHereLink() throws Exception 
+    {
+    	EditProfile editprofile = null;
+        try
+        {
+           link_here().click();
+           editprofile = new EditProfile(driver);
+           AutomationLog.info("Here link is clicked successfully");
+        }
+        catch(Exception e)
+        {
+           AutomationLog.error("Could not click on here link");
+           throw(e);
+        }
+        return editprofile;
+    }
+
 }

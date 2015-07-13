@@ -3,10 +3,10 @@ package com.agorafy.automation.testcases.accountsettings;
 import java.util.HashMap;
 
 import org.testng.Assert;
-
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.pageobjects.accountsettings.ChangePasswordTab;
 import com.agorafy.automation.pageobjects.accountsettings.PersonalInfo;
+import com.agorafy.automation.pageobjects.subnavigationmenu.EditProfile;
 
 /**
  * To Test Account Settings Page
@@ -20,6 +20,7 @@ public class AccountSettingAction extends AccountSettingsBaseAction
 {
     PersonalInfo personalInfo = null;
     ChangePasswordTab changePasswordTab = null;
+    EditProfile editprofile = null;
 
     public AccountSettingAction()
     {
@@ -35,6 +36,11 @@ public class AccountSettingAction extends AccountSettingsBaseAction
         verifyPersonalInformationtab(expectedAccountSettingsData);
 
         verifyChangePasswordTab(expectedAccountSettingsData);
+
+        HashMap<String, String> editprofiledata = testCaseData.get("EditProfileData");
+
+        verifyIfClickedOnHereLink(editprofiledata);
+
     }
 
     public void verifyAccountSettingsPagePrimaryContents(HashMap<String, String> expectedAccountSettingsData) throws Exception 
@@ -74,6 +80,17 @@ public class AccountSettingAction extends AccountSettingsBaseAction
         Assert.assertEquals(actualActiveElementCssClass, expectedActiveElementCssClass, "Clicking Change Password Tab did not show Change Password Tab active");
         Assert.assertTrue(changePasswordTab.form_ChangePassword().isDisplayed(), "Expected Change Pasword form not shown");
         AutomationLog.info("Clicking Change Password Tab opened Change Password Form");
+    }
+
+    public void verifyIfClickedOnHereLink(HashMap<String, String> editprofiledata) throws Exception 
+    {
+        editprofile  = accountSettings.clickOnHereLink();
+        String url = editprofile.getApplicationUrl() + editprofiledata.get("editProfilePageUrl");
+        editprofiledata.put("url", url);
+        Assert.assertEquals(editprofile.currentURL(), editprofiledata.get("url"), "Expected page url is not found");
+        Assert.assertEquals(editprofile.currentPageTitle(), editprofiledata.get("title"), "Expected page title not found");
+        Assert.assertEquals(editprofile.pageHeading(), editprofiledata.get("heading"), "Expected page heading not found");
+        AutomationLog.info("Clicking here link redirects to Edit profile page");
     }
 
     @Override
