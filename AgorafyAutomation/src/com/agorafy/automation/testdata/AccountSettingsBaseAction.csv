@@ -1,5 +1,6 @@
 # Account Settings TestData
 AccountSettings,title="AGORAFY";heading="Account Settings";status="active";pageUrl="/account/"
+EditProfileData,title="AGORAFY - Manage My Profile";heading="Edit / View My Profile";editProfilePageUrl="/manage/profile"
 
 # Personal Information TestData
 PersonalInfo,name="Chandrani Bhagat";successMessage="Your personal details has been changed.";failureMessage="* This field is required";headerProfileName="Hello,\nChandrani!"

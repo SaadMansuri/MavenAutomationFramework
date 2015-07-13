@@ -70,7 +70,7 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
 
         verifyLatestAgentsTab();
 
-    	AutomationLog.info("Verify whether empty agent search results in same page, by checking URL");
+        AutomationLog.info("Verify whether empty agent search results in same page, by checking URL");
         verifyEmptyAgentSearch();
 
         HashMap<String, String> agentCompanySearch = testCaseData.get("agentCompanySearch");
@@ -164,7 +164,8 @@ public class SearchProfessionalsAction extends AutomationTestCaseVerification
         String expectedURL = searchprofessional.getApplicationUrl() + dataFromCSV.get("EmptyAgentSearchURL");
         expectedURL = expectedURL.concat("=1&fT=ag&name=");//CSV parser ignores data after = therefore we have to concat this string in expected string part
         Assert.assertEquals(actualURL, expectedURL, "After performing empty search page URL is not found as expected");
-        AutomationLog.info("After performing empty search, page URL is found same as expected");
+        Assert.assertFalse(searchprofessional.isLatestAgentsTabDisplayed(), "Expected Latest agents tab is not hidden after search is performed");
+        AutomationLog.info("After performing empty search, page URL is found same as expected and Latest agents tab is hidden");
     }
 
 	public void verifyAgentExcusiveListingsCount(HashMap<String, String> agentName) throws Exception

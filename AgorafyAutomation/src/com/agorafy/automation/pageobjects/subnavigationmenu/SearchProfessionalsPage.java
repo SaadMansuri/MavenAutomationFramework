@@ -868,4 +868,17 @@ public class SearchProfessionalsPage extends Page
         return element;
     }
 
+    public boolean isLatestAgentsTabDisplayed() throws Exception 
+    {
+        boolean value = false;
+        if(driver.findElements(By.linkText("Latest Agents")).size() > 0)
+        {
+            value = true;
+        }
+        else
+        {
+            value = false;
+        }
+        return value;
+    }
 }
