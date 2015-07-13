@@ -1,10 +1,10 @@
-package com.agorafy.automation.testcases;
+package com.agorafy.automation.testcases.accountsettings;
 
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.AutomationTestCaseVerification;
 import com.agorafy.automation.automationframework.WaitFor;
-import com.agorafy.automation.pageobjects.AccountSettings;
+import com.agorafy.automation.pageobjects.accountsettings.AccountSettings;
 import com.agorafy.automation.pageobjects.Dashboard;
 import com.agorafy.automation.pageobjects.Header;
 import com.agorafy.automation.pageobjects.HeaderLoginForm;

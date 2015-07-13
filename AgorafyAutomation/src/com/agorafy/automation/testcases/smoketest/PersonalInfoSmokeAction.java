@@ -1,7 +1,7 @@
 package com.agorafy.automation.testcases.smoketest;
 
 import com.agorafy.automation.datamodel.profile.UserProfile;
-import com.agorafy.automation.testcases.PersonalInfoPositiveAction;
+import com.agorafy.automation.testcases.accountsettings.PersonalInfoPositiveAction;
 
 public class PersonalInfoSmokeAction extends PersonalInfoPositiveAction
 {

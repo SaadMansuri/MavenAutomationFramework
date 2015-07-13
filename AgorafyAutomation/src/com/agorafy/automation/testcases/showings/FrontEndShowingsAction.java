@@ -20,7 +20,6 @@ import com.agorafy.automation.pageobjects.Page;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MyListings;
 import com.agorafy.automation.pageobjects.subnavigationmenu.SubNavigation;
 import com.agorafy.automation.pageobjects.upsellpopups.ListingDetailPage;
-
 public class FrontEndShowingsAction extends AutomationTestCaseVerification
 {
 
@@ -79,6 +78,7 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
        verifyUpcomingShowingsCountOnAddingShowing();
        verifyUpcomingShowingsCountOnDeletingShowings();
        deleteShowings();
+       verifyOffMarketScheduledLink();
     }
 
     public void verifyIfClickedOnScheduleNowLink() throws Exception
@@ -354,15 +354,24 @@ public class FrontEndShowingsAction extends AutomationTestCaseVerification
         frontendshowings.clearAllUpcomingShowings(); 
     }
 
+    public void verifyOffMarketScheduledLink() throws Exception
+    {
+        myListings.link_OffMarket().click();
+        myListings.ClickOnScheduledLink();
+        WaitFor.sleepFor(2000);
+        Assert.assertTrue(frontendshowings.getShowingsPopUpLocator().isDisplayed(), "Expected showings popup is not shown on clicking Scheduled link in off market");
+        AutomationLog.info("Showings popup is shown on clicking Scheduled link on off market");
+    }
+
     @Override
     protected String successMessage()
     {
-        return "passed";
+        return "FrontEnd Showings test cases passed";
     }
 
     @Override
     protected String failureMessage()
     {
-        return "failed";
+        return "FrontEnd Showings test cases failed";
     }
 }

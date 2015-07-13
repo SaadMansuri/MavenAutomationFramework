@@ -1,4 +1,4 @@
-package com.agorafy.automation.testcases;
+package com.agorafy.automation.testcases.accountsettings;
 
 import java.util.HashMap;
 
@@ -6,7 +6,7 @@ import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.datamodel.profile.ChangePasswordData;
-import com.agorafy.automation.pageobjects.ChangePasswordTab;
+import com.agorafy.automation.pageobjects.accountsettings.ChangePasswordTab;
 
 /**
  * Precondition:Open header login form and Naviagte to Account Setting Page

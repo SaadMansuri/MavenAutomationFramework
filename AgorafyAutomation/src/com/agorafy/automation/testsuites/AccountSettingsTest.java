@@ -3,11 +3,11 @@ package com.agorafy.automation.testsuites;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import com.agorafy.automation.automationframework.Init;
-import com.agorafy.automation.testcases.AccountSettingAction;
-import com.agorafy.automation.testcases.ChangePasswordNegativeAction;
-import com.agorafy.automation.testcases.ChangePasswordPositiveAction;
-import com.agorafy.automation.testcases.PersonalInfoNegativeAction;
-import com.agorafy.automation.testcases.PersonalInfoPositiveAction;
+import com.agorafy.automation.testcases.accountsettings.AccountSettingAction;
+import com.agorafy.automation.testcases.accountsettings.ChangePasswordNegativeAction;
+import com.agorafy.automation.testcases.accountsettings.ChangePasswordPositiveAction;
+import com.agorafy.automation.testcases.accountsettings.PersonalInfoNegativeAction;
+import com.agorafy.automation.testcases.accountsettings.PersonalInfoPositiveAction;
 
 public class AccountSettingsTest
 {

@@ -1,12 +1,12 @@
-package com.agorafy.automation.testcases;
+package com.agorafy.automation.testcases.accountsettings;
 
 import java.util.HashMap;
 
 import org.testng.Assert;
 
 import com.agorafy.automation.automationframework.AutomationLog;
-import com.agorafy.automation.pageobjects.ChangePasswordTab;
-import com.agorafy.automation.pageobjects.PersonalInfo;
+import com.agorafy.automation.pageobjects.accountsettings.ChangePasswordTab;
+import com.agorafy.automation.pageobjects.accountsettings.PersonalInfo;
 
 /**
  * To Test Account Settings Page

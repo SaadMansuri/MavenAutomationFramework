@@ -1,4 +1,4 @@
-package com.agorafy.automation.testcases;
+package com.agorafy.automation.testcases.accountsettings;
 
 import java.util.HashMap;
 
@@ -8,7 +8,7 @@ import com.agorafy.automation.automationframework.AutomationLog;
 import com.agorafy.automation.automationframework.WaitFor;
 import com.agorafy.automation.datamodel.profile.UserProfile;
 import com.agorafy.automation.pageobjects.Page;
-import com.agorafy.automation.pageobjects.PersonalInfo;
+import com.agorafy.automation.pageobjects.accountsettings.PersonalInfo;
 
 /**
  * Test Personal Information Tab for Negative Test Cases

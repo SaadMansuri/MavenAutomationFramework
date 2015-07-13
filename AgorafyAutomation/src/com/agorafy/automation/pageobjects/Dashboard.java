@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.accountsettings.AccountSettings;
 import com.agorafy.automation.pageobjects.editprofile.OverviewTab;
 import com.agorafy.automation.pageobjects.submitlisting.SubmitListingLocationFormPage;
 import com.agorafy.automation.pageobjects.subnavigationmenu.MyListings;

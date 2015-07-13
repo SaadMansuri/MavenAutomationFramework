@@ -1,9 +1,11 @@
-package com.agorafy.automation.pageobjects;
+package com.agorafy.automation.pageobjects.accountsettings;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import com.agorafy.automation.automationframework.AutomationLog;
+import com.agorafy.automation.pageobjects.Page;
 
 public class AccountSettings extends Page
 {
