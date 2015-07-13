@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 
 import com.agorafy.automation.automationframework.Init;
 import com.agorafy.automation.testcases.contentpages.subnavigation.MyDashboardAction;
-import com.agorafy.automation.testcases.contentpages.subnavigation.MyListingsAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationAboutUsAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationAdvancedSearchAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationBlogAction;
@@ -16,6 +15,7 @@ import com.agorafy.automation.testcases.contentpages.subnavigation.Subnavigation
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationFeedbackAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationHowItWorksAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationMemberBenefitAction;
+import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationMyListingAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationMySubscriptionsAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationPressAction;
 import com.agorafy.automation.testcases.contentpages.subnavigation.SubnavigationSearchProfessionalsAction;
@@ -173,7 +173,7 @@ public class SubNavigationTest
     {
         try
         {
-            new MyListingsAction().Execute();
+            new SubnavigationMyListingAction().Execute();
         }
         catch(Exception e)
         {
