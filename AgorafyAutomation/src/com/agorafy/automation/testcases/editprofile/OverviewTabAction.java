@@ -67,6 +67,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
             subnavigation = Page.subNavigation();
             dashboard = subnavigation.clickLinkMyDashboard();
             overviewTab = dashboard.editProfile();
+            pageBanner = dashboard.pageBanner();
         }
         catch(Exception e)
         {
@@ -79,13 +80,9 @@ public class OverviewTabAction extends AutomationTestCaseVerification
     {
         UserProfile userData = getTestOverviewData();
         populateOverivewData(userData);
-/*        overviewTab.populateOverviewDetails(userData);
-        overviewTab = overviewTab.saveOverviewDetails();
-*/        WaitFor.sleepFor(5000);
+        WaitFor.sleepFor(5000);
 
-        pageBanner = dashboard.pageBanner();
-
-        verifyUpdatedOverviewBanner(pageBanner, userData);
+        verifyUpdatedOverviewBanner(userData);
         verifyUpdatedOverviewTabForm(userData);
 
         verifyIfEmailFieldIsEditable(); 
@@ -100,6 +97,7 @@ public class OverviewTabAction extends AutomationTestCaseVerification
 
         UserProfile userData = new UserProfile();
         userData.setName(overviewTestData.get("validName"));
+        userData.setEmail(overviewTestData.get("validEmail"));
         userData.setCompanyName(overviewTestData.get("companyName"));
         userData.setWorkPhone(overviewTestData.get("validWorkPhone"));
         userData.setMobilePhone(overviewTestData.get("validMobileNumber"));
@@ -114,24 +112,25 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         return userData;
     }
 
-    public void verifyUpdatedOverviewBanner(PageBanner banner, UserProfile overviewData) throws Exception
+    public void verifyUpdatedOverviewBanner(UserProfile overviewData) throws Exception
     {
-        verifyBannerDetails(banner, overviewData);
-        testBannerAddressDetails(banner, overviewData);
-        testBannerMobileDetails(banner, overviewData);
-        testBannerPhoneDetails(banner, overviewData);
+        verifyBannerDetails(overviewData);
+        testBannerAddressDetails(overviewData);
+        testBannerMobileDetails(overviewData);
+        testBannerPhoneDetails(overviewData);
 
     }
 
     public void verifyIfEmailFieldIsEditable() throws Exception
     {
-        Assert.assertEquals(overviewTab.default_Email().isEnabled(), true, "Email field is not editable");
+        Assert.assertEquals(overviewTab.txtbx_Email().isEnabled(), true, "Email field is not editable");
         AutomationLog.info("Expected Email field is editable ");
     }
 
     public void verifyUpdatedOverviewTabForm(UserProfile overviewData) throws Exception
     {
         verifyTextBoxName(overviewData);
+        verifyTextBoxEmail(overviewData);
         verifyTextBoxComapnyName(overviewData);
         verifyTextBoxMobilePhoneNumber(overviewData);
         verifyTextBoxWorkPhoneNumber(overviewData);
@@ -151,18 +150,47 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         overviewTab = overviewTab.saveOverviewDetails();
     }
 
-    public void verifyBannerDetails(PageBanner banner, UserProfile overviewData) throws Exception
+    public void verifyBannerDetails(UserProfile overviewData) throws Exception
     {
-        String newBannerNameAfterSavingOverviewData = banner.getBannerText();
+        verifyBannerNameDetails(overviewData);
+        verifyBannerCompanyDetails(overviewData);
+        verifyBannerEmailDetails(overviewData);
+    }
+
+    public void verifyBannerNameDetails(UserProfile overviewData) throws Exception
+    {
+        String newBannerNameAfterSavingOverviewData = pageBanner.getBannerText();
         Assert.assertEquals(newBannerNameAfterSavingOverviewData, overviewData.getName(), "Expected name is not displayed in banner");
         AutomationLog.info("Updated Name displayed on Banner");
     }
+
+    public void verifyBannerCompanyDetails(UserProfile overviewData) throws Exception
+    {
+        String newBannerNameAfterSavingOverviewData = pageBanner.getBannerCompanyText();
+        Assert.assertEquals(newBannerNameAfterSavingOverviewData, overviewData.getCompanyName(), "Expected CompanyName is not displayed in banner");
+        AutomationLog.info("Updated CompanyName displayed on Banner");
+    }
+
+    public void verifyBannerEmailDetails(UserProfile overviewData) throws Exception
+    {
+        String newBannerNameAfterSavingOverviewData = pageBanner.getBannerEmailText();
+        Assert.assertEquals(newBannerNameAfterSavingOverviewData, overviewData.getEmail(), "Expected Email is not displayed in banner");
+        AutomationLog.info("Updated Email displayed on Banner");
+    }
+
 
     public void verifyTextBoxName(UserProfile overviewData) throws Exception
     {
         String verifyNamePresentInTextBox = overviewTab.getTextBoxName();
         Assert.assertEquals(verifyNamePresentInTextBox, overviewData.getName(), "Expected name not found");
         AutomationLog.info("Expected Name found As per the Text Box");
+    }
+
+    public void verifyTextBoxEmail(UserProfile overviewData) throws Exception
+    {
+        String verifyEmailPresentInTextBox = overviewTab.getTextBoxEmail();
+        Assert.assertEquals(verifyEmailPresentInTextBox, overviewData.getEmail(), "Expected email not found");
+        AutomationLog.info("Expected Email found As per the Text Box");
     }
 
     public void verifyTextBoxComapnyName(UserProfile overviewData) throws Exception
@@ -237,9 +265,9 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         AutomationLog.info("Expected Neighborhood found As per the Text Box");
     }
 
-    public void testBannerAddressDetails(PageBanner banner, UserProfile overviewData) throws Exception
+    public void testBannerAddressDetails(UserProfile overviewData) throws Exception
     {
-        String addressDetails = banner.getBannerAddressText();
+        String addressDetails = pageBanner.getBannerAddressText();
         String addressToken[] = addressDetails.split(", ");
         Assert.assertEquals(addressToken[0], overviewData.getAddress1(), "The correct Address1 is not displayed in banner");
         AutomationLog.info("Updated address1 found in banner");
@@ -261,18 +289,18 @@ public class OverviewTabAction extends AutomationTestCaseVerification
         AutomationLog.info("Updated Zip found in banner");
     }
 
-    public void testBannerPhoneDetails(PageBanner banner, UserProfile overviewData) throws Exception
+    public void testBannerPhoneDetails(UserProfile overviewData) throws Exception
     {
-        String phoneDetails = banner.getBannerWorkPhoneText();
+        String phoneDetails = pageBanner.getBannerWorkPhoneText();
         String phoneToken[] = phoneDetails.split(": ");
         String formattedPhoneNumber = formatPhoneNumber(overviewData.getWorkPhone());
         Assert.assertEquals(phoneToken[1], formattedPhoneNumber, "The correct Workphone is not displayed in banner");
         AutomationLog.info("Updated WorkPhone found in banner");
     }
 
-    public void testBannerMobileDetails(PageBanner banner,UserProfile overviewData) throws Exception
+    public void testBannerMobileDetails(UserProfile overviewData) throws Exception
     {
-        String mobileDetails = banner.getBannerMobilePhoneText();
+        String mobileDetails = pageBanner.getBannerMobilePhoneText();
         String mobileToken[] = mobileDetails.split(": ");
         String formattedMobileNumber=formatPhoneNumber(overviewData.getMobilePhone());
         Assert.assertEquals(mobileToken[1], formattedMobileNumber, "The correct Mobile number is not displayed in banner");

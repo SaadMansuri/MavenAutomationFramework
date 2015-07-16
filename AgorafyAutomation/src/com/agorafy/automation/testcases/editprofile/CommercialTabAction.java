@@ -46,18 +46,15 @@ public class CommercialTabAction extends OverviewTabAction
         HashMap<String, String> tenantText = testCaseData.get("TenantText");
         verifyCheckboxesInAreasOfExpertise();
         verifyCheckboxesInAreasOfFocus();
-        verifyExclusiveTenantTextBox(commercial,tenantText);
-        verifyCharactersRemainingForExclusiveTenantTextBox(commercial,tenantText);
-        verifyTenantRequirementsTextBox(commercial,tenantText);
-        verifyCharactersRemainingForTenantRequirementsTextBox(commercial,tenantText);
-        verifyCharactersRemainingCountForExclusiveTenantRepresentationTextBox(commercial,tenantText);
-        verifyCharactersRemainingCountForTenantRequirementsTextBox(commercial,tenantText);
-        verifyCharacterRemainingForExclusiveTenantAfterSave(commercial,tenantText);
-        verifyCharacterRemainingForTenantRequirementAfterSave(commercial,tenantText);
-        
+        verifyExclusiveTenantTextBox(tenantText);
+        verifyCharactersRemainingForExclusiveTenantTextBox(tenantText);
+        verifyTenantRequirementsTextBox(tenantText);
+        verifyCharactersRemainingForTenantRequirementsTextBox(tenantText);
+        verifyCharacterRemainingForExclusiveTenantAfterSave(tenantText);
+        verifyCharacterRemainingForTenantRequirementAfterSave(tenantText);
     }
 
-    public void verifyExclusiveTenantTextBox(CommercialTab commercial,HashMap<String, String> tenantText) throws Exception
+    public void verifyExclusiveTenantTextBox(HashMap<String, String> tenantText) throws Exception
     {
         commercial.txtbx_ExclusiveTenantRepresentation().clear();
         commercial.enterTextInExclusiveTenantRepresentationTextBox(tenantText.get("text"));
@@ -71,7 +68,13 @@ public class CommercialTabAction extends OverviewTabAction
         
     }
 
-    public void verifyCharactersRemainingForExclusiveTenantTextBox(CommercialTab commercial,HashMap<String, String> tenantText) throws Exception
+    public void verifyCharactersRemainingForExclusiveTenantTextBox(HashMap<String, String> tenantText) throws Exception
+    {
+        verifyCharactersRemainingTextForExclusiveTenant(tenantText);
+        verifyCharactersRemainingCountForExclusiveTenantRepresentationTextBox(commercial,tenantText);
+    }
+
+    public void verifyCharactersRemainingTextForExclusiveTenant(HashMap<String, String> tenantText) throws Exception
     {
         commercial.txtbx_ExclusiveTenantRepresentation().clear();
         commercial.enterTextInExclusiveTenantRepresentationTextBox(tenantText.get("text").substring(0, 990));
@@ -84,7 +87,7 @@ public class CommercialTabAction extends OverviewTabAction
         AutomationLog.info("Check for If no of characters remaining accepts same no of characters  is Successfull");
     }
 
-    public void verifyTenantRequirementsTextBox(CommercialTab commercial,HashMap<String, String> tenantText) throws Exception
+    public void verifyTenantRequirementsTextBox(HashMap<String, String> tenantText) throws Exception
     {
         commercial.txtbx_TenantRequirements().clear();
         commercial.enterTextInTenantRequirementsTextBox(tenantText.get("text"));
@@ -98,7 +101,13 @@ public class CommercialTabAction extends OverviewTabAction
         
     }
 
-    public void verifyCharactersRemainingForTenantRequirementsTextBox(CommercialTab commercial,HashMap<String, String> tenantText) throws Exception
+    public void verifyCharactersRemainingForTenantRequirementsTextBox(HashMap<String, String> tenantText) throws Exception 
+    {
+        verifyCharactersRemainingTextForTenantRequirements(tenantText);
+        verifyCharactersRemainingCountForTenantRequirementsTextBox(tenantText);
+    }
+
+    public void verifyCharactersRemainingTextForTenantRequirements(HashMap<String, String> tenantText) throws Exception
     {
         commercial.txtbx_TenantRequirements().clear();
         commercial.enterTextInTenantRequirementsTextBox(tenantText.get("text").substring(0, 990));
@@ -113,7 +122,7 @@ public class CommercialTabAction extends OverviewTabAction
 
     public void verifyCharactersRemainingCountForExclusiveTenantRepresentationTextBox(CommercialTab commercial,HashMap<String, String> tenantText) throws Exception
     {
-    	commercial.txtbx_ExclusiveTenantRepresentation().clear();
+        commercial.txtbx_ExclusiveTenantRepresentation().clear();
         commercial.enterTextInExclusiveTenantRepresentationTextBox(tenantText.get("text").substring(0,100));
         String charsRemaining = commercial.txt_CharactersRemainingExclusiveTenant().getText();
         Assert.assertEquals(charsRemaining, "900", "Expected characters remaining decrease is failed");
@@ -124,7 +133,7 @@ public class CommercialTabAction extends OverviewTabAction
         AutomationLog.info("Check for If removing charactes increase no of characters remaining is Successfull");
     }
 
-    public void verifyCharactersRemainingCountForTenantRequirementsTextBox(CommercialTab commercial,HashMap<String, String> tenantText) throws Exception
+    public void verifyCharactersRemainingCountForTenantRequirementsTextBox(HashMap<String, String> tenantText) throws Exception
     {
     	commercial.txtbx_TenantRequirements().clear();
         commercial.enterTextInTenantRequirementsTextBox(tenantText.get("text").substring(0,100));
@@ -137,7 +146,7 @@ public class CommercialTabAction extends OverviewTabAction
         AutomationLog.info("Check for If removing charactes increase no of characters remaining is Successfull");
     }
 
-    public void verifyCharacterRemainingForExclusiveTenantAfterSave(CommercialTab commercial,HashMap<String, String> tenantText) throws Exception
+    public void verifyCharacterRemainingForExclusiveTenantAfterSave(HashMap<String, String> tenantText) throws Exception
     {
     	commercial.txtbx_ExclusiveTenantRepresentation().clear();
         commercial.enterTextInExclusiveTenantRepresentationTextBox(tenantText.get("text").substring(0,100));
@@ -151,7 +160,7 @@ public class CommercialTabAction extends OverviewTabAction
         AutomationLog.info("Success message is shown After save ");
     }
 
-    public void verifyCharacterRemainingForTenantRequirementAfterSave(CommercialTab commercial,HashMap<String, String> tenantText) throws Exception
+    public void verifyCharacterRemainingForTenantRequirementAfterSave(HashMap<String, String> tenantText) throws Exception
     {
     	commercial.txtbx_TenantRequirements().clear();
         commercial.enterTextInTenantRequirementsTextBox(tenantText.get("text").substring(0,100));

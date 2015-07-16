@@ -36,7 +36,7 @@ public class OverviewTab extends Page
         return element;
     }
 
-    public WebElement default_Email() throws Exception
+    public WebElement txtbx_Email() throws Exception
     {
         try
         {
@@ -462,7 +462,7 @@ public class OverviewTab extends Page
 
     public void populateOverviewDetails(UserProfile data) throws Exception
     {
-        WebElement name, companyName, mobileNum, workNum, address1, address2, city, zipCode, describe;
+        WebElement name, companyName, email, mobileNum, workNum, address1, address2, city, zipCode, describe;
         try
         {
             name = txtbx_Name();
@@ -472,6 +472,10 @@ public class OverviewTab extends Page
             companyName = txtbx_CompanyName();
             companyName.clear();
             companyName.sendKeys(data.getCompanyName());
+
+            email = txtbx_Email();
+            email.clear();
+            email.sendKeys(data.getEmail());
 
             mobileNum = txtbx_MobilenNum();
             mobileNum.clear();
@@ -539,6 +543,20 @@ public class OverviewTab extends Page
             AutomationLog.error("Name not found in Text Box");
         }
         return nameTextBox;
+    }
+
+    public String getTextBoxEmail() throws Exception
+    {
+        String emailTextBox = "";
+        try
+        {
+            emailTextBox = (txtbx_Email().getAttribute("value"));
+        }
+        catch (Exception e)
+        {
+            AutomationLog.error("Name not found in Text Box");
+        }
+        return emailTextBox;
     }
 
     public String getTextBoxCompanyName() throws Exception
@@ -686,7 +704,6 @@ public class OverviewTab extends Page
     {
        try
        {
-           //element=driver.findElement(By.xpath(".//*[@id='overviewForm']/div[2]/div[1]/div[1]/div/div"));
            element = driver.findElement(By.className("nameformError")).findElement(By.className("formErrorContent"));
        }
        catch(Exception e)

@@ -80,8 +80,19 @@ public class PageBanner extends Page
         String workPhoneText="";
         try
         {
-            element = phoneDetails().get(1);
-            workPhoneText = element.getText();
+            for(int i=0; i<=1; i++)
+            {
+                element = phoneDetails().get(i);
+                if(element.getText().contains("Work"))
+                {
+                    workPhoneText = element.getText();
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+            }
         }
         catch(Exception e)
         {
@@ -111,8 +122,19 @@ public class PageBanner extends Page
         String mobileText="";
         try
         {
-            element = phoneDetails().get(0);
-            mobileText = element.getText();
+            for(int i=0; i<=1; i++)
+            {
+                element = phoneDetails().get(i);
+                if(element.getText().contains("Mobile"))
+                {
+                    mobileText = element.getText();
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+            }
         }
         catch(Exception e)
         {

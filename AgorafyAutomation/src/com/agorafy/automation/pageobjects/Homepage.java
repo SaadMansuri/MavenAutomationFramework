@@ -35,7 +35,7 @@ public class Homepage extends Page
 
     public By getHomepageGreetingsLocator()
     {
-        return By.xpath(".//*[@id='mainNav']/li[3]/a[1]/span[2]");
+        return By.className("profile-name");
     }
 
     public WebElement link_Login() throws Exception

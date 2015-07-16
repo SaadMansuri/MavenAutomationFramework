@@ -51,7 +51,5 @@ public abstract class NegativeLoginBaseAction extends AutomationTestCaseVerifica
         Assert.assertEquals(loginPage.currentURL(), loginPage.getPageUrl(), "Login page not seen after failed attempt");
         AutomationLog.info("Login Page is seen after failed login attempt");
         Assert.assertEquals(loginPage.message_InvalidEmailPassword().getText(), loginData.get("message"), "Error message displayed is Not as Expected");
-
-        // TODO: Check for login attempts before captcha appears         
     }
 }
