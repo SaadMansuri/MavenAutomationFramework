@@ -113,7 +113,7 @@ public class ForgotPasswordAction extends AutomationTestCaseVerification
         Assert.assertEquals(BackToLogin.currentURL(),ExpectedUrl,"The CurrentURL is not been not found");
         AutomationLog.info("The CurrentURL is been found");
 
-        Assert.assertEquals(loginPage.LoginPageFormId_BackToLoginLink().isDisplayed(),true, "After cliking BackToLoginLink, Agorafy forgotpassword page not found the form id");
+        Assert.assertEquals(loginPage.form_LoginPage().isDisplayed(),true, "After cliking BackToLoginLink, Agorafy forgotpassword page not found the form id");
         AutomationLog.info("After cliking BackToLoginLink, Agorafy forgotpassword page found the form id");
 
         Assert.assertEquals(loginPage.LoginPageHeading_BackToLoginLink(),"Log in", "After clicking BackToLoginLink ,Agorafy Password Page does not show correct page title");

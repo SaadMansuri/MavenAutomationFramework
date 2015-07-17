@@ -62,7 +62,7 @@ public class SignupPageLoginAction extends AutomationTestCaseVerification
             Assert.assertEquals(loginpopup.checkingLogInPopUp(), true, "Login pop up is not seen after clicking on Subscribe to Listing");
             loginpopup.populateLoginPopUpData(credentials.getEmail(),credentials.getPassword());
             homepage = (Homepage) loginpopup.clickLoginButtonOnUpsell();
-            String expectedUrl = homepage.homepageUrl();
+            String expectedUrl = homepage.getApplicationURL() + "/home/";
             Assert.assertEquals(homepage.currentURL(), expectedUrl, "Expected home page is not shown");
             AutomationLog.info("expected page is loaded after login");
         }

@@ -23,9 +23,9 @@ public class Homepage extends Page
     	super(driver);
 	}
 
-	public String homepageUrl()
+	public String getApplicationURL()
     {
-        return applicationUrl() + "/home/";
+        return applicationUrl();
     }
 
     public static Homepage homePage()

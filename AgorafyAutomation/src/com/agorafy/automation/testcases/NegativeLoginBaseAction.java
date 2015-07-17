@@ -44,7 +44,7 @@ public abstract class NegativeLoginBaseAction extends AutomationTestCaseVerifica
         }
     }
 
-    public void verifyUrlAndErrorMessage(LoginPage loginPage) throws Exception
+    public void verifyUrlAndErrorMessage() throws Exception
     {
         WaitFor.waitForPageToLoad(Page.driver);
         HashMap<String, String> loginData =  testCaseData.get("verifyUrlAndErrorMessage");

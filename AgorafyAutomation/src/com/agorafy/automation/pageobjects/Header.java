@@ -36,8 +36,24 @@ public class Header extends Page
             AutomationLog.error("Login link was not found in the Header");
             throw(e);
         }
-
         return element;
+    }
+
+    public HeaderLoginForm clickOnLoginLinkInTheHeader() throws Exception 
+    {
+        HeaderLoginForm headeform = null;
+        try
+        {
+            link_Login().click();
+            headeform = new HeaderLoginForm(driver);
+            AutomationLog.info("Successfully clicked on Login link in Header");
+        }
+        catch(Exception e)
+        {
+             AutomationLog.error("Could not link Login link in header");
+             throw(e);
+        }
+        return headeform;
     }
 
     public WebElement link_SignUp() throws Exception

@@ -27,7 +27,7 @@ public class FooterAboutUsAction extends ContentPagesVerification
     }
 
     @Override
-	protected void verifyTestCases() throws Exception
+    protected void verifyTestCases() throws Exception
     {
         FooterCompanyLinks companyLinks = Page.footer().companyLinks();
         AboutUs aboutUs = companyLinks.clickOnAboutUsLink();

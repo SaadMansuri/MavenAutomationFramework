@@ -28,10 +28,12 @@ public class HomepageAction extends LoginBaseAction
     public void verifyHomePagePrimaryContents() throws Exception
     {
         HashMap<String, String> homepageData =  testCaseData.get("homepageData");
+        String url = homePage.getApplicationURL() + homepageData.get("homePageUrl");
+        homepageData.put("url", url);
         Assert.assertEquals(homePage.currentPageTitle(), homepageData.get("homepageTitle"), "This is not the correct home page after login. Home Page title is Not as Expected");
         AutomationLog.info("Home Page title is as Expected");
 
-        Assert.assertEquals(homePage.currentURL(), homePage.homepageUrl(), "This is not the correct home page after login. Homepage url is Not as Expected");
+        Assert.assertEquals(homePage.currentURL(), homepageData.get("url"), "This is not the correct home page after login. Homepage url is Not as Expected");
         AutomationLog.info("Homepage url is as Expected");
 
         Assert.assertEquals(header.greeting(), homepageData.get("greeting"),"This is not the correct home page after login. Home Page Greeting Text is Not as Expected");

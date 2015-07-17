@@ -16,11 +16,25 @@ public class HeaderLoginForm extends Page
         super(driver);
     }
 
+    public WebElement form_HeaderLogin() throws Exception 
+    {
+        try
+        {
+            element = driver.findElement(getHeaderLoginFormLocator());
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Header Login form ");
+            throw(e);
+        }
+        return element;
+    }
+
     public WebElement txtbx_UserNameInHeaderDropdown() throws Exception
     {
         try
         {
-            element = driver.findElement(By.name("_username"));
+            element = form_HeaderLogin().findElement(By.name("_username"));
             AutomationLog.info("Username text box found on Header Login Form");
         }
         catch (Exception e)
@@ -35,7 +49,7 @@ public class HeaderLoginForm extends Page
     {
         try
         {
-            element = driver.findElement(By.name("_password"));
+            element = form_HeaderLogin().findElement(By.name("_password"));
             AutomationLog.info("Password text box found on Header Login Form");
         }
         catch (Exception e)
@@ -50,7 +64,7 @@ public class HeaderLoginForm extends Page
     {
         try
         {
-            element = driver.findElement(By.id("headerLoginForm")).findElement(By.className("btn-primary"));
+            element = form_HeaderLogin().findElement(By.className("btn-primary"));
             AutomationLog.info("Login button found on Header Login Form");
         }
         catch (Exception e)
@@ -65,7 +79,7 @@ public class HeaderLoginForm extends Page
     {
         try
         {
-            element = driver.findElement(By.id("remember_me"));
+            element = form_HeaderLogin().findElement(By.id("remember_me"));
             AutomationLog.info("Checkbox for 'Stay logged in' found");
         }
         catch (Exception e)
@@ -151,4 +165,67 @@ public class HeaderLoginForm extends Page
             throw(e);
         }
     }
+
+    public WebElement link_Facebook() throws Exception
+    {
+        try
+        {
+            element = form_HeaderLogin().findElement(By.linkText("Facebook"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Facebook link");
+            throw(e);
+        }
+        return element;
+    }
+
+    public WebElement link_GooglePlus() throws Exception
+    {
+        try
+        {
+            element = form_HeaderLogin().findElement(By.linkText("Google+"));
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not find Google+ link");
+            throw(e);
+        }
+        return element;
+    }
+
+    public FacebookLogin clickOnFacebookLinkInHeaderLoginForm() throws Exception
+    {
+        FacebookLogin facebooklogin = null;
+        try
+        {
+            link_Facebook().click();
+            facebooklogin = new FacebookLogin(driver);
+            AutomationLog.info("Successfully clicked facebook link in headerloginform");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could click on facebook link in headerLoginform");
+            throw(e);
+        }
+        return facebooklogin;
+    }
+
+    public GooglePlusLogin clickOnGooglePlusLinkInHeaderLoginForm() throws Exception
+    {
+    	GooglePlusLogin googlelogin = null;
+        try
+        {
+            link_GooglePlus().click();
+            googlelogin = new GooglePlusLogin(driver);
+            AutomationLog.info("Successfully clicked GooglePlus link in headerloginform");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could click on GooglePlus link in headerLoginform");
+            throw(e);
+        }
+        return googlelogin;
+    }
+
 }

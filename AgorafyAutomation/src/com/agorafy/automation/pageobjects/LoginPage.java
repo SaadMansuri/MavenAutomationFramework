@@ -75,7 +75,7 @@ public class LoginPage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='LoginPageForm']/div[1]/input"));
+            element = form_LoginPage().findElement(By.name("_username"));
             AutomationLog.info("Username text box found on the Login Page");
         }
         catch (Exception e)
@@ -90,7 +90,7 @@ public class LoginPage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='LoginPageForm']/div[2]/input"));
+            element = form_LoginPage().findElement(By.name("_password"));
             AutomationLog.info("Password text box found on the Login Page");
         }
         catch (Exception e)
@@ -105,7 +105,7 @@ public class LoginPage extends Page
     {
         try
         {
-            element = driver.findElement(By.xpath(".//*[@id='LoginPageForm']/div[5]/input"));
+            element = form_LoginPage().findElement(By.className("btn-primary"));
             AutomationLog.info("Login to Account button found on the Login Page");
         }
         catch (Exception e)
@@ -223,7 +223,7 @@ public class LoginPage extends Page
     {
         try 
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div/div/div[2]/ul/li[1]/a"));
+            element = driver.findElement(By.className("connect-us")).findElement(By.className("fb"));
         }
         catch (Exception e)
         {
@@ -232,11 +232,11 @@ public class LoginPage extends Page
         return element;
     }
 
-    public WebElement link_Twitter() throws Exception
+    public WebElement link_GooglePlus() throws Exception
     {
         try 
         {
-            element = driver.findElement(By.xpath("html/body/div[2]/div/div/div/div[2]/ul/li[2]/a"));
+            element = driver.findElement(By.className("connect-us")).findElement(By.className("gp"));
         }
         catch (Exception e)
         {
@@ -267,7 +267,7 @@ public class LoginPage extends Page
         String PageHeader="";
         try
         {
-            PageHeader =driver.findElement(By.xpath("//*[@id='page-title']")).getText();
+            PageHeader =driver.findElement(By.id("page-title")).getText();
         }
         catch(Exception e)
         {
@@ -276,11 +276,11 @@ public class LoginPage extends Page
         }
         return PageHeader;
     }
-    public WebElement LoginPageFormId_BackToLoginLink() throws Exception
+    public WebElement form_LoginPage() throws Exception
     {
         try
         {
-        	element =driver.findElement(By.id("login_form"));
+            element =driver.findElement(By.id("login_form"));
         }
         catch(Exception e)
         {
@@ -289,6 +289,41 @@ public class LoginPage extends Page
         }
         return element;
     }
+
+    public FacebookLogin clickOnFacebookLink() throws Exception
+    {
+        FacebookLogin facebooklogin = null;
+        try
+        {
+            link_Facebook().click();
+            facebooklogin = new FacebookLogin(driver);
+            AutomationLog.info("Successfully clicked on facebook link");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on facebook link");
+            throw(e);
+        }
+        return facebooklogin;
+    }
+
+    public GooglePlusLogin clickOnGooglePlusLink() throws Exception
+    {
+        GooglePlusLogin googlepluslogin = null;
+        try
+        {
+            link_GooglePlus().click();
+            googlepluslogin = new GooglePlusLogin(driver);
+            AutomationLog.info("Successfully clicked on GooglePluslink");
+        }
+        catch(Exception e)
+        {
+            AutomationLog.error("Could not click on GooglePluslogin link");
+            throw(e);
+        }
+        return googlepluslogin;
+    }
+
 
     public String getPageUrl()
     {

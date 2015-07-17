@@ -27,7 +27,7 @@ public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
     @Override
     protected void verifyTestCases() throws Exception
     {
-        verifyUrlAndErrorMessage(loginPage);
+        verifyUrlAndErrorMessage();
         Page.urlStatus = true;
         testWrongEmailRightPassword();
         testRightEmailWrongPassword();
@@ -43,27 +43,27 @@ public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
     {
         HashMap<String, String> logindata = testCaseData.get("testWrongEmailRightPassword");
         loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
-        verifyUrlAndErrorMessage(loginPage);
+        verifyUrlAndErrorMessage();
     }
 
     public void testRightEmailWrongPassword() throws Exception
     {
         HashMap<String, String> logindata = testCaseData.get("testRightEmailWrongPassword");
         loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
-        verifyUrlAndErrorMessage(loginPage);
+        verifyUrlAndErrorMessage();
     }
 
     public void testWrongEmailPassword() throws Exception
     {
         HashMap<String, String> logindata = testCaseData.get("testWrongEmailPassword");
         loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
-        verifyUrlAndErrorMessage(loginPage);
+        verifyUrlAndErrorMessage();
     }
 
     public void testEmptyEmailPassword() throws Exception
     {
         loginPage = loginPage.doInvalidLogin("", "");
-        verifyUrlAndErrorMessage(loginPage);
+        verifyUrlAndErrorMessage();
     }
 
     public void testEmptyEmail() throws Exception
@@ -71,7 +71,7 @@ public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
         HashMap<String, String> logindata = testCaseData.get("testEmptyEmail");
         logindata.put("username", "");
         loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
-        verifyUrlAndErrorMessage(loginPage);
+        verifyUrlAndErrorMessage();
     }
 
     public void testEmptyPassword() throws Exception
@@ -79,7 +79,7 @@ public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
         HashMap<String, String> logindata =  testCaseData.get("testEmptyPassword");
         logindata.put("password", "");
         loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
-        verifyUrlAndErrorMessage(loginPage);
+        verifyUrlAndErrorMessage();
         AutomationLog.info("Test for Empty email performed and passed");
     }
 
@@ -87,7 +87,7 @@ public class LoginNegativeTestsPageFormAction extends NegativeLoginBaseAction
     {
         HashMap<String, String> logindata = testCaseData.get("testMismatchValidCredentials");
         loginPage = loginPage.doInvalidLogin(logindata.get("username"), logindata.get("password"));
-        verifyUrlAndErrorMessage(loginPage);
+        verifyUrlAndErrorMessage();
     }
 
     @Override
